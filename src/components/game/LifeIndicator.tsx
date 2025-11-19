@@ -6,7 +6,7 @@ interface LifeIndicatorProps {
   maxLives?: number;
 }
 
-export function LifeIndicator({ currentLives, maxLives = 5 }: LifeIndicatorProps) {
+export function LifeIndicator({ currentLives, maxLives = 6 }: LifeIndicatorProps) {
   return (
     <View style={styles.container}>
       <Text style={styles.heartIcon}>❤️</Text>

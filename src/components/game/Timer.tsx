@@ -6,9 +6,12 @@ interface TimerProps {
   duration: number; // in seconds
   onTimeUp?: () => void;
   isPaused?: boolean;
+  isActive?: boolean;
 }
 
-export function Timer({ duration, onTimeUp, isPaused = false }: TimerProps) {
+export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerProps) {
+  // If isActive is provided, it overrides isPaused (isActive = !isPaused)
+  const paused = isActive !== undefined ? !isActive : isPaused;
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progressAnim] = useState(new Animated.Value(100));
 
@@ -18,32 +21,38 @@ export function Timer({ duration, onTimeUp, isPaused = false }: TimerProps) {
   }, [duration]);
 
   useEffect(() => {
-    if (isPaused || timeLeft <= 0) return;
+    if (paused || timeLeft <= 0) return;
 
     const interval = setInterval(() => {
       setTimeLeft((prev) => {
         const newTime = prev - 0.1;
-        
         if (newTime <= 0) {
-          clearInterval(interval);
-          onTimeUp?.();
           return 0;
         }
-
-        // Animate progress
-        const progress = (newTime / duration) * 100;
-        Animated.timing(progressAnim, {
-          toValue: progress,
-          duration: 100,
-          useNativeDriver: false,
-        }).start();
-
         return newTime;
       });
     }, 100);
 
     return () => clearInterval(interval);
-  }, [timeLeft, isPaused, duration, onTimeUp]);
+  }, [paused, timeLeft > 0]); // Only re-run if paused changes or timer status changes
+
+  // Handle progress animation
+  useEffect(() => {
+    const progress = (timeLeft / duration) * 100;
+    Animated.timing(progressAnim, {
+      toValue: progress,
+      duration: 100,
+      useNativeDriver: false,
+    }).start();
+  }, [timeLeft, duration]);
+
+  // Handle time up
+  useEffect(() => {
+    if (timeLeft <= 0 && !paused && onTimeUp) {
+      // Ensure we only call this once when time hits 0
+      onTimeUp();
+    }
+  }, [timeLeft, paused]);
 
   const getProgressColor = () => {
     const percentage = (timeLeft / duration) * 100;
@@ -70,7 +79,7 @@ export function Timer({ duration, onTimeUp, isPaused = false }: TimerProps) {
           ]}
         />
       </View>
-      
+
       {isUrgent && (
         <Text style={[styles.timerText, styles.urgentText]}>
           {Math.ceil(timeLeft)}s

@@ -1,110 +1,326 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
-import { useStore } from '@store';
+import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
-import { QUESTION_TIME_LIMITS, REINFORCEMENT_DURATION } from '@constants/game';
+import { database } from '@/lib/supabase/database';
 
 export default function VocabularyGamePlayScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { currentLives } = useStore();
+  const { currentLives, maxLives, removeLives, addXP } = useStore();
+  const { isAuthenticated, user } = useAuth();
 
-  // Mock questions
-  const mockQuestions = [
+  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [isGameComplete, setIsGameComplete] = useState(false);
+
+  // Mock questions - 20 total, 10 will be randomly selected
+  const allMockQuestions = [
     {
       id: '1',
-      questionText: 'Kitap',
-      questionType: 'tr_to_ar', // First 10: Turkish to Arabic
+      question: 'Kitap',
+      questionType: 'tr_to_ar',
       correctAnswer: 'كِتَاب',
       options: ['كِتَاب', 'قَلَم', 'دَرْس', 'مَدْرَسَة'],
     },
     {
+      id: '2',
+      question: 'Kalem',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'قَلَم',
+      options: ['قَلَم', 'كِتَاب', 'دَفْتَر', 'مِفْتَاح'],
+    },
+    {
+      id: '3',
+      question: 'Ders',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'دَرْس',
+      options: ['دَرْس', 'مَدْرَسَة', 'مُعَلِّم', 'طَالِب'],
+    },
+    {
+      id: '4',
+      question: 'Okul',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'مَدْرَسَة',
+      options: ['مَدْرَسَة', 'بَيْت', 'مَسْجِد', 'سُوق'],
+    },
+    {
+      id: '5',
+      question: 'Öğretmen',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'مُعَلِّم',
+      options: ['مُعَلِّم', 'طَالِب', 'طَبِيب', 'مُهَنْدِس'],
+    },
+    {
+      id: '6',
+      question: 'Öğrenci',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'طَالِب',
+      options: ['طَالِب', 'مُعَلِّم', 'وَالِد', 'أَخ'],
+    },
+    {
+      id: '7',
+      question: 'Ev',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'بَيْت',
+      options: ['بَيْت', 'مَدْرَسَة', 'مَسْجِد', 'حَدِيقَة'],
+    },
+    {
+      id: '8',
+      question: 'Cami',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'مَسْجِد',
+      options: ['مَسْجِد', 'كَنِيسَة', 'بَيْت', 'مَدْرَسَة'],
+    },
+    {
+      id: '9',
+      question: 'Su',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'مَاء',
+      options: ['مَاء', 'حَلِيب', 'عَصِير', 'شَاي'],
+    },
+    {
+      id: '10',
+      question: 'Ekmek',
+      questionType: 'tr_to_ar',
+      correctAnswer: 'خُبْز',
+      options: ['خُبْز', 'لَحْم', 'أَرُزّ', 'فَاكِهَة'],
+    },
+    {
       id: '11',
-      questionText: 'صَلَاة',
-      questionType: 'ar_to_tr', // Last 10: Arabic to Turkish
+      question: 'صَلَاة',
+      questionType: 'ar_to_tr',
       correctAnswer: 'Namaz',
       options: ['Namaz', 'Oruç', 'Zekât', 'Hac'],
     },
+    {
+      id: '12',
+      question: 'صَوْم',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Oruç',
+      options: ['Oruç', 'Namaz', 'Dua', 'Tesbih'],
+    },
+    {
+      id: '13',
+      question: 'زَكَاة',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Zekât',
+      options: ['Zekât', 'Sadaka', 'Hac', 'Umre'],
+    },
+    {
+      id: '14',
+      question: 'حَجّ',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Hac',
+      options: ['Hac', 'Umre', 'Ziyaret', 'Seyahat'],
+    },
+    {
+      id: '15',
+      question: 'قُرْآن',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Kuran',
+      options: ['Kuran', 'Tevrat', 'İncil', 'Zebur'],
+    },
+    {
+      id: '16',
+      question: 'نَبِيّ',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Peygamber',
+      options: ['Peygamber', 'Melek', 'İnsan', 'Sahabe'],
+    },
+    {
+      id: '17',
+      question: 'مَلَك',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Melek',
+      options: ['Melek', 'Peygamber', 'Cin', 'İnsan'],
+    },
+    {
+      id: '18',
+      question: 'جَنَّة',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Cennet',
+      options: ['Cennet', 'Cehennem', 'Dünya', 'Ahiret'],
+    },
+    {
+      id: '19',
+      question: 'نَار',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'Cehennem',
+      options: ['Cehennem', 'Cennet', 'Ateş', 'Azap'],
+    },
+    {
+      id: '20',
+      question: 'إِيمَان',
+      questionType: 'ar_to_tr',
+      correctAnswer: 'İman',
+      options: ['İman', 'İslam', 'İhsan', 'İbadet'],
+    },
   ];
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [showReinforcement, setShowReinforcement] = useState(false);
+  // Select 10 random questions on component mount
+  const [mockQuestions] = useState(() => {
+    const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
+    return shuffled.slice(0, 10);
+  });
 
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = mockQuestions[currentQuestionIndex];
-  const isFirstHalf = currentQuestionIndex < 10;
+
+  useEffect(() => {
+    // Check lives
+    if (currentLives <= 0) {
+      Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.', [
+        {
+          text: 'Tamam', onPress: () => {
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.replace('/');
+            }
+          }
+        }
+      ]);
+      return;
+    }
+
+    // Deduct life
+    removeLives(1);
+  }, []);
 
   const handleTimeUp = () => {
     handleAnswer(currentQuestion.options[0], 0);
   };
 
-  const handleAnswer = (answer: string, timeTaken: number) => {
-    if (showReinforcement) return;
+  const handleAnswer = async (answer: string, timeTaken: number) => {
+    if (isAnswered) return;
 
     setSelectedOption(answer);
     const correct = answer === currentQuestion.correctAnswer;
     setIsCorrect(correct);
+    setIsAnswered(true);
 
-    setShowReinforcement(true);
-    setTimeout(() => {
-      setShowReinforcement(false);
-      setSelectedOption(null);
-      setIsCorrect(null);
-      
-      if (currentQuestionIndex < mockQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-      } else {
-        router.push('/games/vocabulary/result');
+    if (correct) {
+      setCorrectAnswersCount(prev => prev + 1);
+    }
+  };
+
+  const handleNext = () => {
+    setIsAnswered(false);
+    setSelectedOption(null);
+    setIsCorrect(null);
+
+    if (currentQuestionIndex < mockQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setIsGameComplete(true);
+    }
+  };
+
+  const handleExit = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/');
+    }
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleComplete = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    // Add XP locally
+    if (correctAnswersCount > 0) {
+      addXP(correctAnswersCount);
+
+      // Sync with DB if authenticated
+      if (isAuthenticated && user?.id) {
+        try {
+          console.log('🔄 Syncing Vocabulary XP to DB:', correctAnswersCount);
+          await database.users.updateXP(user.id, correctAnswersCount);
+        } catch (error) {
+          console.error('❌ Failed to sync XP:', error);
+        }
       }
-    }, REINFORCEMENT_DURATION * 1000);
+    }
+    handleExit();
   };
 
   const getOptionState = (option: string) => {
-    if (!showReinforcement) {
+    if (!isAnswered) {
       return selectedOption === option ? 'selected' : 'default';
     }
-    
+
     if (option === currentQuestion.correctAnswer) {
       return 'correct';
     }
-    
+
     if (option === selectedOption && !isCorrect) {
       return 'incorrect';
     }
-    
+
     return 'default';
   };
 
+  if (isGameComplete) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.completeContainer}>
+          <Text style={styles.completeTitle}>Tebrikler!</Text>
+          <Text style={styles.completeText}>Dersi başarıyla tamamladın.</Text>
+
+          <View style={styles.statsContainer}>
+            <Text style={styles.statText}>Doğru Cevap: {correctAnswersCount}/{mockQuestions.length}</Text>
+            <Text style={styles.statText}>Kazanılan XP: +{correctAnswersCount}</Text>
+          </View>
+
+          <Pressable
+            style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
+            onPress={handleComplete}
+            disabled={isSubmitting}
+          >
+            <Text style={styles.completeButtonText}>
+              {isSubmitting ? 'Kaydediliyor...' : 'Tamamla!'}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
+      {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()}>
+        <Pressable onPress={handleExit}>
           <Text style={styles.backButton}>✕</Text>
         </Pressable>
-        <View style={styles.phaseIndicator}>
-          <Text style={styles.phaseText}>
-            {isFirstHalf ? 'Türkçe → Arapça' : 'Arapça → Türkçe'}
-          </Text>
-        </View>
-        <LifeIndicator currentLives={currentLives} maxLives={5} />
+        <LifeIndicator currentLives={currentLives} maxLives={maxLives} />
       </View>
 
+      {/* Timer - Key forces reset on question change */}
       <Timer
-        duration={QUESTION_TIME_LIMITS.VOCABULARY}
+        key={currentQuestionIndex}
+        duration={10}
         onTimeUp={handleTimeUp}
-        isActive={!showReinforcement}
+        isActive={!isAnswered}
       />
 
       <ScrollView style={styles.content}>
+        {/* Question */}
         <QuestionCard
           questionNumber={currentQuestionIndex + 1}
-          totalQuestions={20}
-          questionText={currentQuestion.questionText}
+          totalQuestions={10}
+          question={currentQuestion.question}
         />
 
+        {/* Options */}
         <View style={styles.options}>
           {currentQuestion.options.map((option) => (
             <OptionButton
@@ -112,22 +328,22 @@ export default function VocabularyGamePlayScreen() {
               option={option}
               state={getOptionState(option)}
               onPress={() => handleAnswer(option, 0)}
-              disabled={showReinforcement}
+              disabled={isAnswered}
             />
           ))}
         </View>
-
-        {showReinforcement && (
-          <View style={[styles.reinforcement, isCorrect ? styles.correct : styles.incorrect]}>
-            <Text style={styles.reinforcementIcon}>
-              {isCorrect ? '✓' : '✗'}
-            </Text>
-            <Text style={styles.reinforcementText}>
-              {isCorrect ? 'Mükemmel!' : `Doğru cevap: ${currentQuestion.correctAnswer}`}
-            </Text>
-          </View>
-        )}
       </ScrollView>
+
+      {/* Next Button Footer */}
+      {isAnswered && (
+        <View style={styles.footer}>
+          <Pressable style={styles.nextButton} onPress={handleNext}>
+            <Text style={styles.nextButtonText}>
+              {currentQuestionIndex < mockQuestions.length - 1 ? 'Sonraki Soru' : 'Bitir'}
+            </Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }
@@ -150,45 +366,82 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontWeight: '600',
   },
-  phaseIndicator: {
-    backgroundColor: colors.primary,
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 12,
-  },
-  phaseText: {
-    fontSize: 12,
-    fontWeight: '600',
-    color: colors.textLight,
-  },
   content: {
     flex: 1,
     paddingHorizontal: 16,
   },
   options: {
     marginTop: 16,
+    paddingBottom: 100, // Space for footer
   },
-  reinforcement: {
-    marginTop: 24,
-    padding: 20,
+  footer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    padding: 16,
+    backgroundColor: colors.background,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  nextButton: {
+    backgroundColor: colors.success,
+    paddingVertical: 16,
     borderRadius: 16,
     alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: colors.successDark,
+    marginHorizontal: 20,
   },
-  correct: {
-    backgroundColor: `${colors.correct}20`,
+  nextButtonText: {
+    color: colors.textOnPrimary,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  incorrect: {
-    backgroundColor: `${colors.incorrect}20`,
+  completeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
-  reinforcementIcon: {
-    fontSize: 48,
-    marginBottom: 8,
+  completeTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
+    marginBottom: 16,
   },
-  reinforcementText: {
+  completeText: {
+    fontSize: 18,
+    color: colors.textSecondary,
+    marginBottom: 32,
+  },
+  statsContainer: {
+    backgroundColor: colors.surface,
+    padding: 20,
+    borderRadius: 16,
+    width: '100%',
+    marginBottom: 32,
+    alignItems: 'center',
+    gap: 12,
+  },
+  statText: {
     fontSize: 18,
     fontWeight: '600',
-    textAlign: 'center',
     color: colors.textPrimary,
   },
+  completeButton: {
+    backgroundColor: colors.success,
+    paddingVertical: 16,
+    paddingHorizontal: 48,
+    borderRadius: 16,
+    width: '100%',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: colors.successDark,
+  },
+  completeButtonText: {
+    color: colors.textOnPrimary,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
-

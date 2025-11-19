@@ -20,7 +20,7 @@ export function OptionButton({
         styles.button,
         styles[`button_${state}`],
         pressed && !disabled && styles.pressed,
-        disabled && styles.disabled,
+        disabled && state === 'default' && styles.disabled, // Only dim if default state
       ]}
       onPress={onPress}
       disabled={disabled}
@@ -47,16 +47,18 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
   button_correct: {
-    borderColor: colors.correct,
-    backgroundColor: `${colors.correct}15`,
+    borderColor: colors.successDark,
+    backgroundColor: colors.success,
+    borderBottomWidth: 4, // Add 3D effect
   },
   button_incorrect: {
-    borderColor: colors.incorrect,
-    backgroundColor: `${colors.incorrect}15`,
+    borderColor: colors.errorDark,
+    backgroundColor: colors.error,
+    borderBottomWidth: 4, // Add 3D effect
   },
   button_selected: {
     borderColor: colors.primary,
-    backgroundColor: `${colors.primary}10`,
+    backgroundColor: `${colors.primary}20`,
   },
   text: {
     fontSize: 18,
@@ -67,10 +69,12 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   text_correct: {
-    color: colors.correct,
+    color: colors.textOnPrimary,
+    fontWeight: 'bold',
   },
   text_incorrect: {
-    color: colors.incorrect,
+    color: colors.textOnPrimary,
+    fontWeight: 'bold',
   },
   text_selected: {
     color: colors.primary,

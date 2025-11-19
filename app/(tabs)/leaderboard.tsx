@@ -25,12 +25,12 @@ export default function LeaderboardScreen() {
   const { isAuthenticated, user } = useAuth();
   const { totalXP } = useUser();
   const { activeTheme, themeVersion } = useTheme(); // Force re-render on theme change
-  
+
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
-  
+
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
@@ -50,11 +50,11 @@ export default function LeaderboardScreen() {
         setLoading(true);
       }
       setError(null);
-      
+
       console.log('📊 Fetching leaderboard from database...');
-      
+
       const { data, error: fetchError } = await database.users.getLeaderboard(50);
-      
+
       if (fetchError) {
         console.error('❌ Leaderboard fetch error:', fetchError);
         setError('Liderlik tablosu yüklenemedi');
@@ -130,17 +130,7 @@ export default function LeaderboardScreen() {
         <View style={styles.titleContainer}>
           <HugeiconsIcon icon={Award01Icon} size={32} color={colors.warning} />
           <Text style={styles.title}>Liderlik Tablosu</Text>
-          <Pressable 
-            onPress={() => fetchLeaderboard(true)} 
-            style={styles.refreshButton}
-            disabled={refreshing}
-          >
-            <HugeiconsIcon 
-              icon={Refresh01Icon} 
-              size={24} 
-              color={refreshing ? colors.textDisabled : colors.secondary} 
-            />
-          </Pressable>
+
         </View>
         <View style={styles.leagueCard}>
           <HugeiconsIcon icon={Medal01Icon} size={20} color={colors.primary} />
@@ -178,8 +168,8 @@ export default function LeaderboardScreen() {
 
         {/* Leaderboard Data */}
         {!loading && !error && leaderboardData.map((item) => (
-          <View 
-            key={item.rank} 
+          <View
+            key={item.rank}
             style={[
               styles.item,
               item.isYou && styles.itemYou,

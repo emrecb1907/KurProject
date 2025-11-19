@@ -49,7 +49,9 @@ export interface LeaderboardEntry {
   id: string;
   user_id: string;
   username: string;
+  email?: string;
   total_score: number;
+  total_xp: number;
   current_level: number;
   league: League;
   rank: number;

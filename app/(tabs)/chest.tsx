@@ -1,28 +1,105 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import React, { useMemo, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useUser } from '@/store';
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import { FavouriteIcon, AlertCircleIcon, BulbIcon, Video01Icon, ArrowLeft01Icon } from '@hugeicons/core-free-icons';
 
 export default function ChestScreen() {
   const router = useRouter();
   const { themeVersion } = useTheme();
-  
+  const { currentLives, maxLives, watchAd, adWatchTimes, lastReplenishTime, checkLifeRegeneration } = useUser();
+
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(), [themeVersion]);
-  
-  // Temporary mock data - AdMob requires dev build
-  const currentLives = 5;
-  const maxLives = 5;
-  const livesPerAd = 1;
 
-  const adSlots = [
-    { id: 1, title: '❤️ Can Kazan', description: 'Reklam izle, +1 can kazan' },
-    { id: 2, title: '❤️ Can Kazan', description: 'Reklam izle, +1 can kazan' },
-    { id: 3, title: '❤️ Can Kazan', description: 'Reklam izle, +1 can kazan' },
-  ];
+  const [now, setNow] = useState(Date.now());
+
+  // Update timer every minute
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(Date.now());
+      checkLifeRegeneration(); // Check for regeneration every minute
+    }, 1000); // Update every second for smooth countdown
+    return () => clearInterval(interval);
+  }, []);
+
+  const getNextLifeTime = () => {
+    if (!lastReplenishTime || currentLives >= maxLives) return '';
+
+    const nextReplenishTime = lastReplenishTime + (4 * 60 * 60 * 1000);
+    const diff = nextReplenishTime - now;
+
+    if (diff <= 0) return '00:00:00';
+
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleWatchAd = () => {
+    const success = watchAd();
+    if (success) {
+      // In a real app, we would show the ad here
+      alert('Reklam izlendi! +1 Can kazandın.');
+    } else {
+      alert('Şu an reklam izleyemezsin.');
+    }
+  };
+
+  const getSlotStatus = (index: number) => {
+    // Sort watches descending (newest first)
+    const sortedWatches = [...adWatchTimes].sort((a, b) => b - a);
+    // Get the watch for this "slot" (0, 1, 2)
+    // Since we want 3 slots, we check if there are active cooldowns
+    // Actually, the requirement is "limit to 3 times per day".
+    // So we just check if we have 3 valid watches in the last 24h.
+    // But for UI, we want to show 3 slots.
+    // If we have 0 watches in last 24h -> 3 open slots.
+    // If we have 1 watch in last 24h -> 1 used slot (showing countdown), 2 open.
+
+    // Let's map the last 3 watches to the slots.
+    // But we need to know WHICH slot corresponds to which watch? 
+    // Not necessarily. We can just say:
+    // Slot 1: Shows oldest active watch (or open if < 1 active watch)
+    // Slot 2: Shows 2nd oldest active watch (or open if < 2 active watches)
+    // Slot 3: Shows newest active watch (or open if < 3 active watches)
+
+    // Let's filter valid watches first
+    const validWatches = sortedWatches.filter(t => now - t < 24 * 60 * 60 * 1000);
+
+    // We want to display them. Let's say we fill from left to right or top to bottom.
+    // If we have 1 valid watch, Slot 1 is used (countdown), Slot 2 & 3 are open.
+    // Wait, usually you want the available ones first? Or used ones?
+    // Let's say:
+    // Slot 1: If validWatches[0] exists, show countdown. Else Open.
+    // Slot 2: If validWatches[1] exists, show countdown. Else Open.
+    // Slot 3: If validWatches[2] exists, show countdown. Else Open.
+
+    // But validWatches are sorted Newest first.
+    // So validWatches[0] is the one that will take the LONGEST to expire.
+    // validWatches[2] is the one that will expire soonest.
+
+    const watchTime = validWatches[index];
+
+    if (watchTime) {
+      const msRemaining = (watchTime + 24 * 60 * 60 * 1000) - now;
+      const hours = Math.floor(msRemaining / (1000 * 60 * 60));
+      const minutes = Math.floor((msRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      return {
+        status: 'cooldown',
+        timeLeft: `${hours}s ${minutes}dk`
+      };
+    }
+
+    return { status: 'available' };
+  };
+
+  const adSlots = [0, 1, 2];
 
   return (
     <View style={styles.container}>
@@ -48,9 +125,14 @@ export default function ChestScreen() {
           {currentLives >= maxLives ? (
             <Text style={styles.statusSubtext}>Can sayın maksimumda! 🎉</Text>
           ) : (
-            <Text style={styles.statusSubtext}>
-              Reklam izleyerek can kazanabilirsin
-            </Text>
+            <View style={styles.timerContainer}>
+              <Text style={styles.statusSubtext}>
+                Sonraki can:
+              </Text>
+              <Text style={styles.timerText}>
+                {getNextLifeTime()}
+              </Text>
+            </View>
           )}
         </View>
 
@@ -58,7 +140,7 @@ export default function ChestScreen() {
         <View style={styles.infoBanner}>
           <HugeiconsIcon icon={AlertCircleIcon} size={24} color={colors.backgroundDarker} />
           <Text style={styles.infoBannerText}>
-            AdMob geliştirme derlemesi gerektirir. Özellik yakında!
+            Her reklam izlediğinde +1 can kazanırsın.
           </Text>
         </View>
 
@@ -69,30 +151,47 @@ export default function ChestScreen() {
             <Text style={styles.infoTitle}>Nasıl Çalışır?</Text>
           </View>
           <Text style={styles.infoText}>
-            • Her reklam izlediğinde +{livesPerAd} can kazanırsın{'\n'}
+            • Her reklam izlediğinde +1 can kazanırsın{'\n'}
             • Günde maksimum 3 reklam izleyebilirsin{'\n'}
             • Canların maksimuma ulaştığında reklam izleyemezsin{'\n'}
-            • Reklam izlemeden de oyuna devam edebilirsin!
+            • Kullanılan haklar 24 saat sonra yenilenir
           </Text>
         </View>
 
         {/* Ad Slots */}
         <Text style={styles.sectionTitle}>Reklam Slotları</Text>
-        
-        {adSlots.map((slot) => (
-          <View key={slot.id} style={styles.adCard}>
-            <View style={styles.adCardIcon}>
-              <HugeiconsIcon icon={Video01Icon} size={24} color={colors.textPrimary} />
+
+        {adSlots.map((index) => {
+          const { status, timeLeft } = getSlotStatus(index);
+          const isLocked = status === 'cooldown' || currentLives >= maxLives;
+
+          return (
+            <View key={index} style={styles.adCard}>
+              <View style={styles.adCardIcon}>
+                <HugeiconsIcon icon={Video01Icon} size={24} color={colors.textPrimary} />
+              </View>
+              <View style={styles.adCardInfo}>
+                <Text style={styles.adCardTitle}>
+                  {status === 'cooldown' ? 'Bekleme Süresi' : 'Can Kazan'}
+                </Text>
+                <Text style={styles.adCardDescription}>
+                  {status === 'cooldown'
+                    ? `${timeLeft} sonra tekrar izleyebilirsin`
+                    : 'Reklam izle, +1 can kazan'}
+                </Text>
+              </View>
+              <Pressable
+                style={[styles.adButton, isLocked && styles.adButtonDisabled]}
+                onPress={handleWatchAd}
+                disabled={isLocked}
+              >
+                <Text style={styles.adButtonText}>
+                  {status === 'cooldown' ? timeLeft : 'İzle'}
+                </Text>
+              </Pressable>
             </View>
-            <View style={styles.adCardInfo}>
-              <Text style={styles.adCardTitle}>{slot.title}</Text>
-              <Text style={styles.adCardDescription}>{slot.description}</Text>
-            </View>
-            <Pressable style={[styles.adButton, styles.adButtonDisabled]} disabled>
-              <Text style={styles.adButtonText}>Yakında</Text>
-            </Pressable>
-          </View>
-        ))}
+          );
+        })}
 
         {/* Bottom Spacing */}
         <View style={{ height: 40 }} />
@@ -263,5 +362,15 @@ const getStyles = () => StyleSheet.create({
     fontSize: 13,
     fontWeight: 'bold',
     color: colors.textOnPrimary,
+  },
+  timerContainer: {
+    alignItems: 'center',
+    marginTop: 8,
+  },
+  timerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.primary,
+    fontFamily: 'monospace', // For fixed width numbers
   },
 });

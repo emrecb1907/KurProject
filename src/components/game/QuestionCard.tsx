@@ -3,6 +3,8 @@ import { colors } from '@constants/colors';
 
 interface QuestionCardProps {
   question: string;
+  questionNumber?: number;
+  totalQuestions?: number;
   questionArabic?: string;
   showArabic?: boolean;
   onToggleFormat?: () => void;
@@ -12,6 +14,8 @@ interface QuestionCardProps {
 
 export function QuestionCard({
   question,
+  questionNumber,
+  totalQuestions,
   questionArabic,
   showArabic = false,
   onToggleFormat,
@@ -19,6 +23,23 @@ export function QuestionCard({
 }: QuestionCardProps) {
   return (
     <View style={styles.container}>
+      {/* Progress Indicator */}
+      {questionNumber && totalQuestions && (
+        <View style={styles.progressContainer}>
+          <Text style={styles.progressText}>
+            Soru {questionNumber} / {totalQuestions}
+          </Text>
+          <View style={styles.progressBar}>
+            <View
+              style={[
+                styles.progressFill,
+                { width: `${(questionNumber / totalQuestions) * 100}%` }
+              ]}
+            />
+          </View>
+        </View>
+      )}
+
       {/* Format Toggle Button */}
       {questionArabic && onToggleFormat && (
         <Pressable style={styles.toggleButton} onPress={onToggleFormat}>
@@ -109,5 +130,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '700',
     color: colors.textOnPrimary,
+  },
+  progressContainer: {
+    width: '100%',
+    marginBottom: 20,
+    gap: 8,
+  },
+  progressText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textSecondary,
+    textAlign: 'center',
+  },
+  progressBar: {
+    height: 8,
+    backgroundColor: colors.border,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: '100%',
+    backgroundColor: colors.primary,
+    borderRadius: 4,
   },
 });

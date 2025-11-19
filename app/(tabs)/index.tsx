@@ -7,14 +7,14 @@ import { StatusBar } from 'expo-status-bar';
 import { colors } from '@constants/colors';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { HugeiconsIcon } from '@hugeicons/react-native';
-import { 
-  Flag01Icon, 
-  FavouriteIcon, 
-  AlphabetArabicIcon, 
-  Book01Icon, 
-  Book02Icon, 
-  LockIcon, 
-  StarIcon 
+import {
+  Flag01Icon,
+  FavouriteIcon,
+  AlphabetArabicIcon,
+  Book01Icon,
+  Book02Icon,
+  LockIcon,
+  StarIcon
 } from '@hugeicons/core-free-icons';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth, useStore } from '@/store';
@@ -27,9 +27,9 @@ export default function HomePage() {
   const { statusBarStyle, activeTheme, themeVersion } = useStatusBar(); // Include themeVersion to trigger re-render
 
   // Get user data from Zustand store
-  const { totalXP, currentLives, addXP, setTotalXP, resetUserData } = useUser();
+  const { totalXP, currentLives, addXP, setTotalXP, resetUserData, addLives, removeLives } = useUser();
   const { isAuthenticated, user } = useAuth();
-  
+
   // 🔄 Sync XP from database for authenticated users (on focus)
   useFocusEffect(
     useCallback(() => {
@@ -39,9 +39,11 @@ export default function HomePage() {
             console.log('🔄 Fetching latest XP from database...');
             const { data: userData } = await database.users.getById(user.id);
             if (userData) {
-              if (userData.total_xp !== totalXP) {
+              if (userData.total_xp > totalXP) {
                 console.log('🔄 XP updated from DB:', totalXP, '→', userData.total_xp);
                 setTotalXP(userData.total_xp);
+              } else if (userData.total_xp < totalXP) {
+                console.log('⏳ Local XP is ahead of DB (pending sync):', totalXP, '>', userData.total_xp);
               } else {
                 console.log('✅ XP already in sync:', userData.total_xp);
               }
@@ -53,14 +55,14 @@ export default function HomePage() {
           console.log('ℹ️ Anonymous user - using local XP:', totalXP);
         }
       }
-      
+
       syncXPFromDB();
     }, [isAuthenticated, user?.id, totalXP])
   );
-  
+
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
-  
+
   // Debug: Log auth state
   console.log('🏠 Home Auth State:', {
     isAuthenticated,
@@ -74,7 +76,7 @@ export default function HomePage() {
   // 🧪 TEST: Add 100 XP
   const handleAddXP = async () => {
     addXP(100);
-    
+
     // If authenticated, sync to database
     if (isAuthenticated && user?.id) {
       try {
@@ -84,14 +86,14 @@ export default function HomePage() {
         console.error('❌ Failed to sync XP to database:', error);
       }
     }
-    
+
     Alert.alert('✅ XP Eklendi!', `+100 XP kazandın!\n\nYeni Toplam: ${formatXP(totalXP + 100)} XP`);
   };
 
   // 🧪 TEST: Add 1000 XP
   const handleAdd1000XP = async () => {
     addXP(1000);
-    
+
     // If authenticated, sync to database
     if (isAuthenticated && user?.id) {
       try {
@@ -101,7 +103,7 @@ export default function HomePage() {
         console.error('❌ Failed to sync XP to database:', error);
       }
     }
-    
+
     Alert.alert('⚡ Büyük XP Bonusu!', `+1000 XP kazandın!\n\nYeni Toplam: ${formatXP(totalXP + 1000)} XP`);
   };
 
@@ -114,21 +116,21 @@ export default function HomePage() {
 
     try {
       const { database } = await import('@/lib/supabase/database');
-      
+
       // Get current database XP
       const { data: userData } = await database.users.getById(user.id);
       const dbXP = userData?.total_xp || 0;
       const localXP = totalXP;
-      
+
       console.log('🔄 Syncing XP:', { dbXP, localXP });
-      
+
       if (localXP > dbXP) {
         // Update database with local XP
         await database.users.update(user.id, {
           total_xp: localXP,
           total_score: localXP,
         });
-        
+
         Alert.alert(
           '✅ XP Senkronize Edildi!',
           `Database güncellendi:\n\nEski: ${formatXP(dbXP)} XP\nYeni: ${formatXP(localXP)} XP\n\nLeaderboard'a git ve yenileme butonuna bas!`
@@ -188,7 +190,7 @@ export default function HomePage() {
           onPress: async () => {
             try {
               console.log('🗑️ Resetting user progress...');
-              
+
               // 1. Reset database user data (if authenticated) - BEFORE sign out!
               if (isAuthenticated && user?.id) {
                 console.log('🔄 Resetting database progress for user:', user.id);
@@ -202,21 +204,21 @@ export default function HomePage() {
                 });
                 console.log('✅ Database progress reset');
               }
-              
+
               // 2. Sign out from Supabase Auth
               const { logout } = useStore.getState();
               await supabase.auth.signOut();
               console.log('✅ Signed out from Supabase');
-              
+
               // 3. Clear AsyncStorage
               await AsyncStorage.clear();
               console.log('✅ AsyncStorage cleared');
-              
+
               // 4. Reset Zustand store
               logout();
               resetUserData();
               console.log('✅ Zustand store reset');
-              
+
               Alert.alert('✅ Sıfırlandı!', 'İlerleme sıfırlandı. Hesabın korundu. Tekrar giriş yapabilirsin!', [
                 {
                   text: 'Tamam',
@@ -246,6 +248,7 @@ export default function HomePage() {
       color: colors.primary,
       borderColor: colors.buttonOrangeBorder,
       icon: AlphabetArabicIcon,
+      route: '/games/letters/1',
     },
     {
       id: 2,
@@ -256,6 +259,7 @@ export default function HomePage() {
       color: colors.secondary,
       borderColor: colors.buttonBlueBorder,
       icon: Book01Icon,
+      route: '/games/vocabulary/1',
     },
     {
       id: 3,
@@ -266,9 +270,21 @@ export default function HomePage() {
       color: colors.success,
       borderColor: colors.buttonGreenBorder,
       icon: Book02Icon,
+      route: '/games/verses/1',
     },
     {
       id: 4,
+      title: 'İslami Soru-Cevap',
+      description: 'İslami bilgini test et',
+      level: 1,
+      unlocked: true,
+      color: colors.pink,
+      borderColor: colors.buttonPinkBorder,
+      icon: Book02Icon,
+      route: '/games/quiz/1',
+    },
+    {
+      id: 5,
       title: 'Hızlı Tur',
       description: 'Karışık sorularla hızlı pratik',
       level: 10,
@@ -610,30 +626,30 @@ export default function HomePage() {
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <StatusBar style={statusBarStyle} backgroundColor={colors.backgroundDarker} />
-        {/* Top Stats Bar */}
-        <View style={styles.topBar}>
-          {/* Level Badge */}
-          <View style={styles.statBadge}>
-            <HugeiconsIcon icon={Flag01Icon} size={20} color={colors.textPrimary} />
-            <Text style={styles.statValue}>{xpProgress.currentLevel}</Text>
-          </View>
+      {/* Top Stats Bar */}
+      <View style={styles.topBar}>
+        {/* Level Badge */}
+        <View style={styles.statBadge}>
+          <HugeiconsIcon icon={Flag01Icon} size={20} color={colors.textPrimary} />
+          <Text style={styles.statValue}>{xpProgress.currentLevel}</Text>
+        </View>
 
-          {/* XP Progress Bar */}
-          <View style={styles.xpContainer}>
-            <View style={styles.xpBarBackground}>
-              <View style={[styles.xpBarFill, { width: `${xpProgress.progressPercentage}%` }]} />
-              <Text style={styles.xpText}>
-                {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
-              </Text>
-            </View>
-          </View>
-
-          {/* Lives Badge */}
-          <View style={styles.statBadge}>
-            <HugeiconsIcon icon={FavouriteIcon} size={20} color={colors.error} variant="solid" />
-            <Text style={styles.statValue}>{currentLives}</Text>
+        {/* XP Progress Bar */}
+        <View style={styles.xpContainer}>
+          <View style={styles.xpBarBackground}>
+            <View style={[styles.xpBarFill, { width: `${xpProgress.progressPercentage}%` }]} />
+            <Text style={styles.xpText}>
+              {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
+            </Text>
           </View>
         </View>
+
+        {/* Lives Badge */}
+        <View style={styles.statBadge}>
+          <HugeiconsIcon icon={FavouriteIcon} size={20} color={colors.error} variant="solid" />
+          <Text style={styles.statValue}>{currentLives}</Text>
+        </View>
+      </View>
 
       {/* Content Wrapper */}
       <View style={styles.contentWrapper}>
@@ -643,141 +659,182 @@ export default function HomePage() {
         </View>
 
         {/* Lesson Cards Carousel */}
-        <ScrollView 
-          horizontal 
+        <ScrollView
+          horizontal
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.carouselContent}
           style={styles.carousel}
         >
-        {lessons.map((lesson) => (
-          <Pressable
-            key={lesson.id}
-            style={[
-              styles.lessonCard,
-              {
-                backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
-                borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
-              },
-              !lesson.unlocked && styles.lessonCardLocked,
-            ]}
-            onPress={() => lesson.unlocked && router.push('/games/letters')}
-            disabled={!lesson.unlocked}
-          >
-            {/* Card Header */}
-            <View style={styles.cardHeader}>
-              <View style={styles.cardIconContainer}>
-                <HugeiconsIcon 
-                  icon={lesson.icon} 
-                  size={32} 
-                  color={colors.textOnPrimary} 
-                />
-              </View>
-              {!lesson.unlocked && (
-                <View style={styles.levelBadge}>
-                  <Text style={styles.levelBadgeText}>Lvl {lesson.level}</Text>
+          {lessons.map((lesson) => (
+            <Pressable
+              key={lesson.id}
+              style={[
+                styles.lessonCard,
+                {
+                  backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
+                  borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
+                },
+                !lesson.unlocked && styles.lessonCardLocked,
+              ]}
+              onPress={() => {
+                if (!lesson.unlocked) return;
+
+                if (currentLives <= 0) {
+                  Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.');
+                  return;
+                }
+
+                router.push((lesson.route || '/games/letters') as any);
+              }}
+              disabled={!lesson.unlocked}
+            >
+              {/* Card Header */}
+              <View style={styles.cardHeader}>
+                <View style={styles.cardIconContainer}>
+                  <HugeiconsIcon
+                    icon={lesson.icon}
+                    size={32}
+                    color={colors.textOnPrimary}
+                  />
                 </View>
-              )}
-            </View>
-
-            {/* Card Content */}
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>{lesson.title}</Text>
-              <Text style={styles.cardDescription}>{lesson.description}</Text>
-            </View>
-
-            {/* Card Footer - Progress or Status */}
-            <View style={styles.cardFooter}>
-              {lesson.unlocked ? (
-                <View style={styles.progressContainer}>
-                  <View style={styles.progressBar}>
-                    <View style={[styles.progressFill, { width: '30%' }]} />
+                {!lesson.unlocked && (
+                  <View style={styles.levelBadge}>
+                    <Text style={styles.levelBadgeText}>Lvl {lesson.level}</Text>
                   </View>
-                  <Text style={styles.progressText}>3/10 Ders</Text>
-                </View>
-              ) : (
-                <View style={styles.lockedBadge}>
-                  <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
-                  <Text style={styles.lockedBadgeText}>Kilitli</Text>
-                </View>
-              )}
-            </View>
-          </Pressable>
-        ))}
+                )}
+              </View>
+
+              {/* Card Content */}
+              <View style={styles.cardContent}>
+                <Text style={styles.cardTitle}>{lesson.title}</Text>
+                <Text style={styles.cardDescription}>{lesson.description}</Text>
+              </View>
+
+              {/* Card Footer - Progress or Status */}
+              <View style={styles.cardFooter}>
+                {lesson.unlocked ? (
+                  <View style={styles.progressContainer}>
+                    <View style={styles.progressBar}>
+                      <View style={[styles.progressFill, { width: '30%' }]} />
+                    </View>
+                    <Text style={styles.progressText}>3/10 Ders</Text>
+                  </View>
+                ) : (
+                  <View style={styles.lockedBadge}>
+                    <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
+                    <Text style={styles.lockedBadgeText}>Kilitli</Text>
+                  </View>
+                )}
+              </View>
+            </Pressable>
+          ))}
         </ScrollView>
 
-           {/* Bottom Section */}
-           <ScrollView style={styles.content} contentContainerStyle={styles.bottomContent}>
-             {/* Info Card */}
-             <View style={styles.infoCard}>
-               <View style={styles.infoCardIcon}>
-                 <Text style={styles.infoCardIconText}>🎯</Text>
-               </View>
-               <View style={styles.infoCardContent}>
-                 <Text style={styles.infoCardTitle}>Günlük Hedef</Text>
-                 <Text style={styles.infoCardText}>Bugün henüz ders tamamlamadın!</Text>
-               </View>
-             </View>
+        {/* Bottom Section */}
+        <ScrollView style={styles.content} contentContainerStyle={styles.bottomContent}>
+          {/* Info Card */}
+          <View style={styles.infoCard}>
+            <View style={styles.infoCardIcon}>
+              <Text style={styles.infoCardIconText}>🎯</Text>
+            </View>
+            <View style={styles.infoCardContent}>
+              <Text style={styles.infoCardTitle}>Günlük Hedef</Text>
+              <Text style={styles.infoCardText}>Bugün henüz ders tamamlamadın!</Text>
+            </View>
+          </View>
 
-              {/* 🧪 TEST BUTTONS - Remove in production */}
-              <View style={styles.testContainer}>
-                <Text style={styles.testTitle}>🧪 Geliştirici Araçları</Text>
-                
-                {/* Add XP Buttons */}
-                <View style={styles.testButtonRow}>
-                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                    <Text style={styles.testButtonText}>➕ +100 XP</Text>
-                  </Pressable>
-                  
-                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                    <Text style={styles.testButtonText}>⚡ +1000 XP</Text>
-                  </Pressable>
-                </View>
+          {/* 🧪 TEST BUTTONS - Remove in production */}
+          <View style={styles.testContainer}>
+            <Text style={styles.testTitle}>🧪 Geliştirici Araçları</Text>
 
-                {/* ✅ XP artık otomatik senkronize ediliyor! "Senkronize Et" butonu gereksiz */}
-                {/* Acil durumlar için burada tutuluyor, gerekirse yorum satırından çıkar */}
-                {/* {isAuthenticated && (
-                  <Pressable style={styles.testButtonSync} onPress={handleSyncXP}>
-                    <Text style={styles.testButtonText}>🔄 XP'yi Senkronize Et (Otomatik)</Text>
-                  </Pressable>
-                )} */}
+            {/* Add XP Buttons */}
+            <View style={styles.testButtonRow}>
+              <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
+                <Text style={styles.testButtonText}>➕ +100 XP</Text>
+              </Pressable>
 
-                {/* Clear Theme Cache Button */}
-                <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
-                  <Text style={styles.testButtonText}>🎨 Tema Cache Temizle</Text>
-                </Pressable>
+              <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
+                <Text style={styles.testButtonText}>⚡ +1000 XP</Text>
+              </Pressable>
+            </View>
 
-                {/* Reset Progress Button */}
-                <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-                  <Text style={styles.testButtonText}>🔄 İlerlemeyi Sıfırla</Text>
-                </Pressable>
+            {/* Lives Debug Buttons */}
+            <View style={styles.testButtonRow}>
+              <Pressable
+                style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
+                onPress={() => removeLives(1)}
+              >
+                <Text style={styles.testButtonText}>❤️ -1 Can</Text>
+              </Pressable>
 
-                {/* Current Stats Display */}
-                <View style={styles.testStats}>
-                  <Text style={[styles.testStatsText, styles.testStatsHighlight]}>
-                    💎 Kümülatif XP: {formatXP(totalXP)} XP
-                  </Text>
-                  <Text style={styles.testStatsText}>
-                    📊 Level: {xpProgress.currentLevel}
-                  </Text>
-                  <Text style={styles.testStatsText}>
-                    📈 Bu seviye: {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
-                  </Text>
-                  <Text style={styles.testStatsText}>
-                    🎯 Sonraki seviyeye: {formatXP(xpProgress.xpToNextLevel)} XP
-                  </Text>
-                  <Text style={styles.testStatsText}>
-                    🔐 Durum: {isAuthenticated ? '✅ Giriş Yapılmış' : '❌ Anonim'}
-                  </Text>
-                  {user && (
-                    <Text style={styles.testStatsText}>
-                      👤 {user.username || user.email || 'N/A'}
-                    </Text>
-                  )}
-                </View>
-              </View>
+              <Pressable
+                style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
+                onPress={() => addLives(1)}
+              >
+                <Text style={styles.testButtonText}>❤️ +1 Can</Text>
+              </Pressable>
+            </View>
 
-             <View style={{ height: 40 }} />
-           </ScrollView>
+            {/* Clear Theme Cache Button */}
+            <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
+              <Text style={styles.testButtonText}>🎨 Tema Cache Temizle</Text>
+            </Pressable>
+
+            {/* Reset Progress Button */}
+            <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
+              <Text style={styles.testButtonText}>🔄 İlerlemeyi Sıfırla (Her Şey)</Text>
+            </Pressable>
+
+            {/* Reset XP Only Button */}
+            <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
+              try {
+                // Reset local store
+                setTotalXP(0);
+                // Reset DB if authenticated
+                if (isAuthenticated && user?.id) {
+                  await database.users.update(user.id, {
+                    total_xp: 0,
+                    current_level: 1,
+                    total_score: 0,
+                    updated_at: new Date().toISOString(),
+                  });
+                }
+                Alert.alert('✅ Sıfırlandı', 'XP ve Level sıfırlandı.');
+              } catch (e) {
+                console.error(e);
+                Alert.alert('Hata', 'Sıfırlama başarısız.');
+              }
+            }}>
+              <Text style={styles.testButtonText}>⭐ Sadece XP/Level Sıfırla</Text>
+            </Pressable>
+
+            {/* Current Stats Display */}
+            <View style={styles.testStats}>
+              <Text style={[styles.testStatsText, styles.testStatsHighlight]}>
+                💎 Kümülatif XP: {formatXP(totalXP)} XP
+              </Text>
+              <Text style={styles.testStatsText}>
+                📊 Level: {xpProgress.currentLevel}
+              </Text>
+              <Text style={styles.testStatsText}>
+                📈 Bu seviye: {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
+              </Text>
+              <Text style={styles.testStatsText}>
+                🎯 Sonraki seviyeye: {formatXP(xpProgress.xpToNextLevel)} XP
+              </Text>
+              <Text style={styles.testStatsText}>
+                🔐 Durum: {isAuthenticated ? '✅ Giriş Yapılmış' : '❌ Anonim'}
+              </Text>
+              {user && (
+                <Text style={styles.testStatsText}>
+                  👤 {user.username || user.email || 'N/A'}
+                </Text>
+              )}
+            </View>
+          </View>
+
+          <View style={{ height: 40 }} />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );

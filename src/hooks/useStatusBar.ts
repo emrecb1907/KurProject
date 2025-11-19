@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { StatusBarStyle } from 'expo-status-bar';
 import { useTheme } from '@/contexts/ThemeContext';
 
 /**
@@ -8,10 +7,10 @@ import { useTheme } from '@/contexts/ThemeContext';
  */
 export function useStatusBar() {
   const { activeTheme, themeVersion } = useTheme();
-  
+
   // StatusBar style: 'light' for dark theme, 'dark' for light theme
-  const statusBarStyle = activeTheme === 'dark' ? 'light' : 'dark';
-  
+  const statusBarStyle: StatusBarStyle = activeTheme === 'dark' ? 'light' : 'dark';
+
   return { statusBarStyle, activeTheme, themeVersion };
 }
 

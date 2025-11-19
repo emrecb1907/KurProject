@@ -1,35 +1,34 @@
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
-import { Button } from '@components/ui';
-import { useGameSession } from '@hooks';
-import { useStore } from '@store';
+import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
-import { QUESTION_TIME_LIMITS, REINFORCEMENT_DURATION } from '@constants/game';
+import { database } from '@/lib/supabase/database';
 
 export default function LettersGamePlayScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { gameState, isAnswering, startGameSession, answerQuestion, completeGame } = useGameSession();
-  const { currentLives } = useStore();
+  const { currentLives, maxLives, removeLives, addXP } = useStore();
+  const { isAuthenticated, user } = useAuth();
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [showReinforcement, setShowReinforcement] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(QUESTION_TIME_LIMITS.LETTERS);
+  const [isAnswered, setIsAnswered] = useState(false);
+  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
+  const [isGameComplete, setIsGameComplete] = useState(false);
 
-  // Mock questions - Bu gerçek Supabase'den gelecek
+  // Mock questions
   const mockQuestions = [
     {
       id: '1',
-      questionText: '🔊 Dinle',
+      question: '🔊 Dinle',
       correctAnswer: 'أ',
       options: ['أ', 'ب', 'ت', 'ث'],
     },
     {
       id: '2',
-      questionText: '🔊 Dinle',
+      question: '🔊 Dinle',
       correctAnswer: 'ب',
       options: ['أ', 'ب', 'ت', 'ث'],
     },
@@ -39,8 +38,24 @@ export default function LettersGamePlayScreen() {
   const currentQuestion = mockQuestions[currentQuestionIndex];
 
   useEffect(() => {
-    // Initialize game
-    // startGameSession(id as string);
+    // Check lives
+    if (currentLives <= 0) {
+      Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.', [
+        {
+          text: 'Tamam', onPress: () => {
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.replace('/');
+            }
+          }
+        }
+      ]);
+      return;
+    }
+
+    // Deduct life
+    removeLives(1);
   }, []);
 
   const handleTimeUp = () => {
@@ -49,63 +64,119 @@ export default function LettersGamePlayScreen() {
   };
 
   const handleAnswer = async (answer: string, timeTaken: number) => {
-    if (isAnswering || showReinforcement) return;
+    if (isAnswered) return;
 
     setSelectedOption(answer);
     const correct = answer === currentQuestion.correctAnswer;
     setIsCorrect(correct);
+    setIsAnswered(true);
 
-    // Save answer
-    // await answerQuestion(currentQuestion.id, answer, currentQuestion.correctAnswer, timeTaken);
+    if (correct) {
+      setCorrectAnswersCount(prev => prev + 1);
+    }
+  };
 
-    // Show reinforcement
-    setShowReinforcement(true);
-    setTimeout(() => {
-      setShowReinforcement(false);
-      setSelectedOption(null);
-      setIsCorrect(null);
-      
-      // Next question or complete
-      if (currentQuestionIndex < mockQuestions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setTimeLeft(QUESTION_TIME_LIMITS.LETTERS);
-      } else {
-        router.push('/games/letters/result');
+  const handleNext = () => {
+    setIsAnswered(false);
+    setSelectedOption(null);
+    setIsCorrect(null);
+
+    if (currentQuestionIndex < mockQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setIsGameComplete(true);
+    }
+  };
+
+  const handleExit = () => {
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace('/');
+    }
+  };
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleComplete = async () => {
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    // Add XP locally
+    if (correctAnswersCount > 0) {
+      addXP(correctAnswersCount);
+
+      // Sync with DB if authenticated
+      if (isAuthenticated && user?.id) {
+        try {
+          console.log('🔄 Syncing Letters XP to DB:', correctAnswersCount);
+          await database.users.updateXP(user.id, correctAnswersCount);
+        } catch (error) {
+          console.error('❌ Failed to sync XP:', error);
+        }
       }
-    }, REINFORCEMENT_DURATION * 1000);
+    }
+    handleExit();
   };
 
   const getOptionState = (option: string) => {
-    if (!showReinforcement) {
+    if (!isAnswered) {
       return selectedOption === option ? 'selected' : 'default';
     }
-    
+
     if (option === currentQuestion.correctAnswer) {
       return 'correct';
     }
-    
+
     if (option === selectedOption && !isCorrect) {
       return 'incorrect';
     }
-    
+
     return 'default';
   };
+
+  if (isGameComplete) {
+    return (
+      <View style={styles.container}>
+        <View style={styles.completeContainer}>
+          <Text style={styles.completeTitle}>Tebrikler!</Text>
+          <Text style={styles.completeText}>Dersi başarıyla tamamladın.</Text>
+
+          <View style={styles.statsContainer}>
+            <Text style={styles.statText}>Doğru Cevap: {correctAnswersCount}/{mockQuestions.length}</Text>
+            <Text style={styles.statText}>Kazanılan XP: +{correctAnswersCount}</Text>
+          </View>
+
+          <Pressable
+            style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
+            onPress={handleComplete}
+            disabled={isSubmitting}
+          >
+            <Text style={styles.completeButtonText}>
+              {isSubmitting ? 'Kaydediliyor...' : 'Tamamla!'}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()}>
+        <Pressable onPress={handleExit}>
           <Text style={styles.backButton}>✕</Text>
         </Pressable>
-        <LifeIndicator currentLives={currentLives} maxLives={5} />
+        <LifeIndicator currentLives={currentLives} maxLives={maxLives} />
       </View>
 
-      {/* Timer */}
+      {/* Timer - Key forces reset on question change */}
       <Timer
-        duration={timeLeft}
+        key={currentQuestionIndex}
+        duration={10}
         onTimeUp={handleTimeUp}
-        isActive={!showReinforcement}
+        isActive={!isAnswered}
       />
 
       <ScrollView style={styles.content}>
@@ -113,7 +184,7 @@ export default function LettersGamePlayScreen() {
         <QuestionCard
           questionNumber={currentQuestionIndex + 1}
           totalQuestions={mockQuestions.length}
-          questionText={currentQuestion.questionText}
+          question={currentQuestion.question}
         />
 
         {/* Options */}
@@ -123,24 +194,23 @@ export default function LettersGamePlayScreen() {
               key={option}
               option={option}
               state={getOptionState(option)}
-              onPress={() => handleAnswer(option, QUESTION_TIME_LIMITS.LETTERS - timeLeft)}
-              disabled={showReinforcement}
+              onPress={() => handleAnswer(option, 0)}
+              disabled={isAnswered}
             />
           ))}
         </View>
-
-        {/* Reinforcement Message */}
-        {showReinforcement && (
-          <View style={[styles.reinforcement, isCorrect ? styles.correct : styles.incorrect]}>
-            <Text style={styles.reinforcementIcon}>
-              {isCorrect ? '✓' : '✗'}
-            </Text>
-            <Text style={styles.reinforcementText}>
-              {isCorrect ? 'Doğru!' : `Yanlış! Doğru cevap: ${currentQuestion.correctAnswer}`}
-            </Text>
-          </View>
-        )}
       </ScrollView>
+
+      {/* Next Button Footer */}
+      {isAnswered && (
+        <View style={styles.footer}>
+          <Pressable style={styles.nextButton} onPress={handleNext}>
+            <Text style={styles.nextButtonText}>
+              {currentQuestionIndex < mockQuestions.length - 1 ? 'Sonraki Soru' : 'Bitir'}
+            </Text>
+          </Pressable>
+        </View>
+      )}
     </View>
   );
 }
@@ -169,28 +239,76 @@ const styles = StyleSheet.create({
   },
   options: {
     marginTop: 16,
+    paddingBottom: 100, // Space for footer
   },
-  reinforcement: {
-    marginTop: 24,
-    padding: 20,
+  footer: {
+    position: 'absolute',
+    bottom: 20,
+    left: 0,
+    right: 0,
+    padding: 16,
+    backgroundColor: colors.background,
+    borderTopWidth: 1,
+    borderTopColor: colors.border,
+  },
+  nextButton: {
+    backgroundColor: colors.success,
+    paddingVertical: 16,
     borderRadius: 16,
     alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: colors.successDark,
+    marginHorizontal: 20,
   },
-  correct: {
-    backgroundColor: `${colors.correct}20`,
+  nextButtonText: {
+    color: colors.textOnPrimary,
+    fontSize: 18,
+    fontWeight: 'bold',
   },
-  incorrect: {
-    backgroundColor: `${colors.incorrect}20`,
+  completeContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
   },
-  reinforcementIcon: {
-    fontSize: 48,
-    marginBottom: 8,
+  completeTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
+    marginBottom: 16,
   },
-  reinforcementText: {
+  completeText: {
+    fontSize: 18,
+    color: colors.textSecondary,
+    marginBottom: 32,
+  },
+  statsContainer: {
+    backgroundColor: colors.surface,
+    padding: 20,
+    borderRadius: 16,
+    width: '100%',
+    marginBottom: 32,
+    alignItems: 'center',
+    gap: 12,
+  },
+  statText: {
     fontSize: 18,
     fontWeight: '600',
-    textAlign: 'center',
     color: colors.textPrimary,
   },
+  completeButton: {
+    backgroundColor: colors.success,
+    paddingVertical: 16,
+    paddingHorizontal: 48,
+    borderRadius: 16,
+    width: '100%',
+    alignItems: 'center',
+    borderBottomWidth: 4,
+    borderBottomColor: colors.successDark,
+  },
+  completeButtonText: {
+    color: colors.textOnPrimary,
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
 });
-

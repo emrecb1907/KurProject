@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { ThemeProvider } from '@/contexts/ThemeContext';
+import { useUser } from '@/store';
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
@@ -13,10 +14,13 @@ export default function RootLayout() {
     // 'Arabic-Regular': require('../assets/fonts/Arabic-Regular.ttf'),
   });
 
+  const { checkLifeRegeneration } = useUser();
+
   useEffect(() => {
     if (fontsLoaded) {
       SplashScreen.hideAsync();
     }
+    checkLifeRegeneration();
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {
