@@ -1,18 +1,23 @@
 import { View, StyleSheet, ViewProps, ViewStyle } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface CardProps extends ViewProps {
   variant?: 'default' | 'elevated' | 'outlined';
   padding?: number;
 }
 
-export function Card({ 
-  variant = 'default', 
+export function Card({
+  variant = 'default',
   padding = 16,
   style,
   children,
-  ...props 
+  ...props
 }: CardProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const cardStyle: ViewStyle[] = [
     styles.card,
     styles[`card_${variant}`],
@@ -27,7 +32,7 @@ export function Card({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   card: {
     borderRadius: 16,
     backgroundColor: colors.surface,
@@ -51,4 +56,3 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
   },
 });
-

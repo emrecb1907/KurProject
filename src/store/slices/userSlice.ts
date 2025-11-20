@@ -31,6 +31,10 @@ export interface UserSlice {
   // New Actions
   checkLifeRegeneration: () => void;
   watchAd: () => boolean; // Returns true if successful
+
+  // Security
+  boundUserId: string | null;
+  setBoundUserId: (id: string | null) => void;
 }
 
 const initialState = {
@@ -44,6 +48,7 @@ const initialState = {
   streakData: null,
   lastReplenishTime: Date.now(),
   adWatchTimes: [],
+  boundUserId: null,
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -138,5 +143,7 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
     return true;
   },
+
+  setBoundUserId: (id) => set({ boundUserId: id }),
 });
 

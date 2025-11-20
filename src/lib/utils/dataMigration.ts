@@ -23,7 +23,14 @@ export async function migrateLocalDataToDatabase(userId: string): Promise<void> 
 
     // Get current local data from Zustand store
     const store = useStore.getState();
-    const { totalXP, currentLives, streak, badges } = store;
+    const { totalXP, currentLives, streak, badges, boundUserId } = store;
+
+    // SECURITY: Do not migrate if bound to a different user
+    if (boundUserId && boundUserId !== userId) {
+      console.warn('🔒 Security: Attempted to migrate data bound to different user. Aborting.');
+      console.warn(`🔒 Bound: ${boundUserId}, Target: ${userId}`);
+      return;
+    }
 
     // Check if there's any local data to migrate
     const hasLocalData = totalXP > 0 || currentLives < 5 || streak > 0 || (badges && badges.length > 0);

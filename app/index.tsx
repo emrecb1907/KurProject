@@ -41,23 +41,23 @@ export default function SplashScreen() {
   };
 
   return (
-      <View style={styles.container}>
-        {/* Logo/Icon */}
-        <View style={styles.logoContainer}>
-          <HugeiconsIcon icon={Book01Icon} size={60} color={colors.textOnPrimary} />
-        </View>
+    <View style={styles.container}>
+      {/* Logo/Icon */}
+      <View style={styles.logoContainer}>
+        <HugeiconsIcon icon={Book01Icon} size={60} color={colors.textOnPrimary} />
+      </View>
 
       {/* Title */}
       <Text style={styles.title}>QuranLearn</Text>
       <Text style={styles.subtitle}>Eğlenceli Kuran Öğrenme</Text>
-      
+
       {/* Loading or Error */}
       {error ? (
         <View style={styles.errorBox}>
           <Text style={styles.errorIcon}>⚠️</Text>
           <Text style={styles.errorText}>{error}</Text>
-          <Pressable 
-            style={styles.button} 
+          <Pressable
+            style={styles.button}
             onPress={handleSkip}
           >
             <Text style={styles.buttonText}>Devam Et</Text>

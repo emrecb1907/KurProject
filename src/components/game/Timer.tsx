@@ -1,6 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface TimerProps {
   duration: number; // in seconds
@@ -10,6 +11,9 @@ interface TimerProps {
 }
 
 export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   // If isActive is provided, it overrides isPaused (isActive = !isPaused)
   const paused = isActive !== undefined ? !isActive : isPaused;
   const [timeLeft, setTimeLeft] = useState(duration);
@@ -89,7 +93,7 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     marginBottom: 16,
   },

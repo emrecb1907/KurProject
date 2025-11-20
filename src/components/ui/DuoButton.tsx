@@ -61,7 +61,7 @@ export function DuoButton({
     if (variant === 'outline') {
       return { ...base, color: colors.textPrimary };
     }
-    
+
     if (variant === 'ghost') {
       return { ...base, color: colors.textSecondary };
     }

@@ -9,13 +9,13 @@ interface SkeletonProps extends ViewProps {
   variant?: 'text' | 'rectangular' | 'circular';
 }
 
-export function Skeleton({ 
+export function Skeleton({
   width = '100%',
   height = 20,
   borderRadius = 8,
   variant = 'rectangular',
   style,
-  ...props 
+  ...props
 }: SkeletonProps) {
   const animatedValue = useRef(new Animated.Value(0)).current;
 
@@ -50,10 +50,10 @@ export function Skeleton({
       case 'text':
         return { height: 16, borderRadius: 4 };
       case 'circular':
-        return { 
-          width: height, 
-          height, 
-          borderRadius: height / 2 
+        return {
+          width: height,
+          height,
+          borderRadius: height / 2
         };
       case 'rectangular':
       default:

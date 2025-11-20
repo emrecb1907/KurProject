@@ -41,6 +41,7 @@ export const useStore = create<StoreState>()(
         streakData: state.streakData,
         lastReplenishTime: state.lastReplenishTime,
         adWatchTimes: state.adWatchTimes,
+        boundUserId: state.boundUserId,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
@@ -89,6 +90,8 @@ export const useUser = () => useStore(
     resetUserData: state.resetUserData,
     checkLifeRegeneration: state.checkLifeRegeneration,
     watchAd: state.watchAd,
+    boundUserId: state.boundUserId,
+    setBoundUserId: state.setBoundUserId,
   }))
 );
 

@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface ScoreDisplayProps {
   currentQuestion: number;
@@ -12,6 +14,9 @@ export function ScoreDisplay({
   totalQuestions,
   score,
 }: ScoreDisplayProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   return (
     <View style={styles.container}>
       <View style={styles.progressInfo}>
@@ -19,7 +24,7 @@ export function ScoreDisplay({
           {currentQuestion} / {totalQuestions}
         </Text>
       </View>
-      
+
       <View style={styles.scoreBox}>
         <Text style={styles.scoreLabel}>Puan</Text>
         <Text style={styles.scoreValue}>{score}</Text>
@@ -28,7 +33,7 @@ export function ScoreDisplay({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { HugeiconsIcon } from '@hugeicons/react-native';
@@ -25,11 +25,13 @@ export default function LeaderboardScreen() {
   const { isAuthenticated, user } = useAuth();
   const { totalXP } = useUser();
   const { activeTheme, themeVersion } = useTheme(); // Force re-render on theme change
+  const scrollViewRef = useRef<ScrollView>(null);
 
   const [leaderboardData, setLeaderboardData] = useState<LeaderboardItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+  const [userRankData, setUserRankData] = useState<{ rank: number; item: LeaderboardItem } | null>(null);
 
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(), [themeVersion]);
@@ -83,6 +85,38 @@ export default function LeaderboardScreen() {
       console.log('✅ Leaderboard loaded:', items.length, 'users');
       console.log('📊 Your XP in leaderboard:', items.find(i => i.isYou)?.totalXP || 'N/A');
       setLeaderboardData(items);
+
+      // Check if user is in top 50
+      const userInTop50 = items.some(i => i.isYou);
+
+      // If user is authenticated and NOT in top 50, fetch their rank
+      if (user?.id && !userInTop50) {
+        const { data: rankData, error: rankError } = await database.users.getUserRank(user.id);
+
+        if (!rankError && rankData) {
+          const userItem: LeaderboardItem = {
+            rank: rankData.rank,
+            id: rankData.user.id,
+            username: rankData.user.username || rankData.user.email?.split('@')[0] || 'Kullanıcı',
+            totalXP: rankData.user.total_xp,
+            league: rankData.user.league,
+            isYou: true,
+            isGold: false,
+            isSilver: false,
+            isBronze: false,
+          };
+
+          setUserRankData({ rank: rankData.rank, item: userItem });
+          console.log('📊 Your rank:', rankData.rank);
+        }
+      } else {
+        setUserRankData(null);
+      }
+
+      // Auto-scroll to user's position after data loads
+      setTimeout(() => {
+        scrollToUserPosition(items, userInTop50);
+      }, 300); // Small delay to ensure rendering is complete
     } catch (err) {
       console.error('❌ Unexpected leaderboard error:', err);
       setError('Bir hata oluştu');
@@ -91,6 +125,27 @@ export default function LeaderboardScreen() {
       setRefreshing(false);
     }
   }
+
+  const scrollToUserPosition = (items: LeaderboardItem[], userInTop50: boolean) => {
+    if (!scrollViewRef.current || !user?.id) return;
+
+    const userIndex = items.findIndex(i => i.isYou);
+
+    if (userIndex !== -1) {
+      // User is in top 50, scroll to their position
+      // Each item is approximately 76px tall (padding + content)
+      const itemHeight = 76;
+      const scrollPosition = userIndex * itemHeight;
+
+      scrollViewRef.current.scrollTo({
+        y: scrollPosition,
+        animated: true,
+      });
+    } else if (!userInTop50) {
+      // User is not in top 50, scroll to bottom to show their rank
+      scrollViewRef.current.scrollToEnd({ animated: true });
+    }
+  };
 
   const getRankColor = (rank: number) => {
     if (rank === 1) return colors.xpGold;
@@ -139,7 +194,7 @@ export default function LeaderboardScreen() {
       </View>
 
       {/* Leaderboard List */}
-      <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
+      <ScrollView ref={scrollViewRef} style={styles.list} contentContainerStyle={styles.listContent}>
         {/* Loading State - Skeleton */}
         {loading && (
           <>
@@ -208,6 +263,50 @@ export default function LeaderboardScreen() {
             </View>
           </View>
         ))}
+
+        {/* User's Rank (if not in top 50) */}
+        {!loading && !error && userRankData && (
+          <>
+            <View style={styles.separator}>
+              <View style={styles.separatorLine} />
+              <Text style={styles.separatorText}>Senin Sıralaman</Text>
+              <View style={styles.separatorLine} />
+            </View>
+
+            <View
+              style={[
+                styles.item,
+                styles.itemYou,
+                styles.userRankCard,
+              ]}
+            >
+              {/* Rank */}
+              <View style={styles.rankContainer}>
+                <Text style={[styles.rank, { color: colors.secondary }]}>
+                  {userRankData.rank}
+                </Text>
+              </View>
+
+              {/* Avatar */}
+              <View style={styles.avatar}>
+                <HugeiconsIcon icon={UserAccountIcon} size={24} color={colors.secondary} />
+              </View>
+
+              {/* Username */}
+              <View style={styles.userInfo}>
+                <Text style={[styles.username, styles.usernameYou]}>
+                  {userRankData.item.username}
+                </Text>
+              </View>
+
+              {/* Total XP */}
+              <View style={styles.scoreContainer}>
+                <Text style={styles.score}>{userRankData.item.totalXP.toLocaleString()}</Text>
+                <Text style={styles.scoreLabel}>XP</Text>
+              </View>
+            </View>
+          </>
+        )}
       </ScrollView>
 
       {/* Info Banner - Only show if not authenticated */}
@@ -418,6 +517,29 @@ const getStyles = () => StyleSheet.create({
   },
   skeletonScore: {
     alignItems: 'flex-end',
+  },
+  separator: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 20,
+    gap: 12,
+  },
+  separatorLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: colors.border,
+  },
+  separatorText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: colors.textSecondary,
+  },
+  userRankCard: {
+    shadowColor: colors.shadowStrong,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.4,
+    shadowRadius: 8,
+    elevation: 8,
   },
 });
 

@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface QuestionCardProps {
   question: string;
@@ -21,6 +23,9 @@ export function QuestionCard({
   onToggleFormat,
   onPlayAudio,
 }: QuestionCardProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   return (
     <View style={styles.container}>
       {/* Progress Indicator */}
@@ -67,7 +72,7 @@ export function QuestionCard({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     marginBottom: 24,
     alignItems: 'center',

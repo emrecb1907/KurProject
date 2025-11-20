@@ -1,7 +1,8 @@
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useMemo } from 'react';
 import { DuoButton } from '@components/ui';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -26,6 +27,9 @@ export function ResultModal({
   timeSpent,
   onContinue,
 }: ResultModalProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const scaleAnim = useRef(new Animated.Value(0)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -128,7 +132,7 @@ export function ResultModal({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   overlay: {
     position: 'absolute',
     top: 0,
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
   statBox: {
     flex: 1,
     alignItems: 'center',
-    backgroundColor: colors.backgroundGray,
+    backgroundColor: colors.surface, // Replaced backgroundGray
     padding: 16,
     borderRadius: 16,
     marginHorizontal: 4,
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
   },
   scoreCard: {
     width: '100%',
-    backgroundColor: colors.cardGreen,
+    backgroundColor: colors.successGlow, // Replaced cardGreen
     padding: 20,
     borderRadius: 16,
     alignItems: 'center',

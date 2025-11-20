@@ -15,7 +15,13 @@ export default function VocabularyGameScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()}>
+        <Pressable onPress={() => {
+          if (router.canGoBack()) {
+            router.back();
+          } else {
+            router.replace('/');
+          }
+        }}>
           <Text style={styles.backButton}>← Geri</Text>
         </Pressable>
         <Text style={styles.title}>Kavram Kartları</Text>
@@ -35,7 +41,7 @@ export default function VocabularyGameScreen() {
                   {lesson.words} kelime • Level {lesson.level}
                 </Text>
               </View>
-              
+
               {lesson.locked ? (
                 <View style={styles.lockedBadge}>
                   <Text style={styles.lockedText}>🔒</Text>

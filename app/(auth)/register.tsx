@@ -1,14 +1,17 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Card } from '@components/ui';
+import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function RegisterScreen() {
   const router = useRouter();
-  const { signUp } = useAuthHook();
-  
+  const { signUp, signInWithGoogle, signInWithApple } = useAuthHook();
+  const { themeVersion } = useTheme();
+
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,7 +19,11 @@ export default function RegisterScreen() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Re-calculate styles when theme changes
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const handleRegister = async () => {
+    console.log('🔵 RegisterScreen.handleRegister called');
     // Validation
     if (!username || !email || !password || !confirmPassword) {
       setError('Lütfen tüm alanları doldurun');
@@ -39,7 +46,20 @@ export default function RegisterScreen() {
     const { error: signUpError } = await signUp(email, password, username);
 
     if (signUpError) {
-      setError(signUpError.message || 'Kayıt başarısız');
+      // Translate error messages to user-friendly Turkish
+      let errorMessage = 'Kayıt başarısız';
+
+      if (signUpError.message.includes('User already registered')) {
+        errorMessage = 'Bu email adresi zaten kayıtlı';
+      } else if (signUpError.message.includes('kullanıcı adı zaten kullanılıyor')) {
+        errorMessage = signUpError.message; // Already in Turkish
+      } else if (signUpError.message.includes('Password should be at least')) {
+        errorMessage = 'Şifre en az 6 karakter olmalı';
+      } else if (signUpError.message.includes('Invalid email')) {
+        errorMessage = 'Geçersiz email adresi';
+      }
+
+      setError(errorMessage);
       setLoading(false);
     } else {
       // Success! User is automatically logged in
@@ -67,7 +87,13 @@ export default function RegisterScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.header}>
-          <Pressable onPress={() => router.back()}>
+          <Pressable onPress={() => {
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.replace('/(auth)/login');
+            }
+          }}>
             <Text style={styles.backButton}>← Geri</Text>
           </Pressable>
         </View>
@@ -84,6 +110,7 @@ export default function RegisterScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Kullanıcı adın"
+                placeholderTextColor={colors.textDisabled}
                 value={username}
                 onChangeText={setUsername}
                 autoCapitalize="none"
@@ -96,6 +123,7 @@ export default function RegisterScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="ornek@email.com"
+                placeholderTextColor={colors.textDisabled}
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
@@ -109,6 +137,7 @@ export default function RegisterScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="En az 6 karakter"
+                placeholderTextColor={colors.textDisabled}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -121,6 +150,7 @@ export default function RegisterScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="Şifreni tekrar gir"
+                placeholderTextColor={colors.textDisabled}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
                 secureTextEntry
@@ -142,6 +172,16 @@ export default function RegisterScreen() {
               style={styles.submitButton}
             />
           </Card>
+
+          <SocialLoginButtons
+            onGooglePress={() => {
+              Alert.alert('Yakında', 'Google ile giriş özelliği çok yakında eklenecek!');
+            }}
+            onApplePress={() => {
+              Alert.alert('Yakında', 'Apple ile giriş özelliği çok yakında eklenecek!');
+            }}
+            loading={loading}
+          />
 
           <View style={styles.infoBox}>
             <Text style={styles.infoText}>
@@ -165,7 +205,8 @@ export default function RegisterScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+// Styles are defined in a function to be re-evaluated when theme changes
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -268,4 +309,3 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
 });
-

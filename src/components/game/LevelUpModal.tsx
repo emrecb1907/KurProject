@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { Modal } from '@components/ui/Modal';
 import { Button } from '@components/ui/Button';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const { width } = Dimensions.get('window');
 
@@ -21,6 +22,9 @@ export function LevelUpModal({
   xpEarned,
   totalXP,
 }: LevelUpModalProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const [scaleAnim] = useState(new Animated.Value(0));
   const [rotateAnim] = useState(new Animated.Value(0));
   const [fadeAnim] = useState(new Animated.Value(0));
@@ -128,7 +132,7 @@ export function LevelUpModal({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     alignItems: 'center',
     paddingVertical: 20,

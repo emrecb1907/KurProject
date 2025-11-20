@@ -4,14 +4,11 @@ import { useMemo } from 'react';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HugeiconsIcon } from '@hugeicons/react-native';
-import { Home01Icon, Award01Icon, FavouriteIcon, UserAccountIcon } from '@hugeicons/core-free-icons';
+import { Home01Icon, Award01Icon, FavouriteIcon, UserAccountIcon, GiftIcon } from '@hugeicons/core-free-icons';
 
 export default function TabLayout() {
   const { activeTheme, themeVersion } = useTheme();
-  
-  console.log('📱 TabLayout render - activeTheme:', activeTheme, 'themeVersion:', themeVersion);
-  console.log('📱 TabBar colors - backgroundDarker:', colors.backgroundDarker, 'textPrimary:', colors.textPrimary);
-  
+
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => StyleSheet.create({
     tabBar: {
@@ -56,7 +53,7 @@ export default function TabLayout() {
       color: colors.textPrimary,
     },
   }), [themeVersion]); // Use themeVersion to capture color changes
-  
+
   // Capture color values at render time with themeVersion dependency
   const screenOptions = useMemo(() => ({
     headerShown: false,
@@ -66,10 +63,9 @@ export default function TabLayout() {
     tabBarLabelStyle: styles.tabBarLabel,
     tabBarItemStyle: styles.tabBarItem,
   }), [themeVersion, styles]);
-  
+
   return (
     <Tabs
-      key={activeTheme} // Force re-render when theme changes
       screenOptions={screenOptions}
     >
       <Tabs.Screen
@@ -78,9 +74,9 @@ export default function TabLayout() {
           title: 'Ana',
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
-              <HugeiconsIcon 
-                icon={Home01Icon} 
-                size={18} 
+              <HugeiconsIcon
+                icon={Home01Icon}
+                size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
               <Text style={[styles.label, focused && styles.labelActive]}>Ana</Text>
@@ -95,9 +91,9 @@ export default function TabLayout() {
           title: 'Liderlik',
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
-              <HugeiconsIcon 
-                icon={Award01Icon} 
-                size={18} 
+              <HugeiconsIcon
+                icon={Award01Icon}
+                size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
               <Text style={[styles.label, focused && styles.labelActive]}>Liderlik</Text>
@@ -109,15 +105,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="chest"
         options={{
-          title: 'Can',
+          title: 'Ödüller',
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
-              <HugeiconsIcon 
-                icon={FavouriteIcon} 
-                size={18} 
-                color={focused ? colors.error : colors.textDisabled}
+              <HugeiconsIcon
+                icon={GiftIcon}
+                size={18}
+                color={focused ? colors.textPrimary : colors.textDisabled}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>Can</Text>
+              <Text style={[styles.label, focused && styles.labelActive]}>Ödüller</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -129,9 +125,9 @@ export default function TabLayout() {
           title: 'Profil',
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
-              <HugeiconsIcon 
-                icon={UserAccountIcon} 
-                size={18} 
+              <HugeiconsIcon
+                icon={UserAccountIcon}
+                size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
               <Text style={[styles.label, focused && styles.labelActive]}>Profil</Text>
@@ -143,4 +139,3 @@ export default function TabLayout() {
     </Tabs>
   );
 }
-

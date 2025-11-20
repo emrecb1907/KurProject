@@ -2,11 +2,20 @@ import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
+import { LogBox } from 'react-native';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
+
+// Ignore auth error logs in LogBox (these are expected user errors, not bugs)
+LogBox.ignoreLogs([
+  'SignIn Error',
+  'SignUp Error',
+  'AuthApiError',
+  'Invalid login credentials',
+]);
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({

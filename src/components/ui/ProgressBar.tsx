@@ -8,34 +8,34 @@ interface ProgressBarProps extends ViewProps {
   height?: number;
 }
 
-export function ProgressBar({ 
-  progress, 
+export function ProgressBar({
+  progress,
   color = colors.primary,
   backgroundColor = colors.surfaceVariant,
   height = 8,
   style,
-  ...props 
+  ...props
 }: ProgressBarProps) {
   const clampedProgress = Math.max(0, Math.min(100, progress));
 
   return (
-    <View 
+    <View
       style={[
-        styles.container, 
+        styles.container,
         { backgroundColor, height, borderRadius: height / 2 },
         style
-      ]} 
+      ]}
       {...props}
     >
-      <View 
+      <View
         style={[
-          styles.fill, 
-          { 
-            width: `${clampedProgress}%`, 
+          styles.fill,
+          {
+            width: `${clampedProgress}%`,
             backgroundColor: color,
             borderRadius: height / 2,
           }
-        ]} 
+        ]}
       />
     </View>
   );

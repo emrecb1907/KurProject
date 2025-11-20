@@ -21,6 +21,7 @@ import { useUser, useAuth, useStore } from '@/store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/lib/supabase/client';
 import { database } from '@/lib/supabase/database';
+import { WeeklyActivity } from '@/components/home/WeeklyActivity';
 
 export default function HomePage() {
   const router = useRouter();
@@ -57,21 +58,12 @@ export default function HomePage() {
       }
 
       syncXPFromDB();
+
     }, [isAuthenticated, user?.id, totalXP])
   );
 
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
-
-  // Debug: Log auth state
-  console.log('🏠 Home Auth State:', {
-    isAuthenticated,
-    hasUser: !!user,
-    username: user?.username,
-    email: user?.email,
-    totalXP,
-    source: isAuthenticated ? 'Database' : 'Local',
-  });
 
   // 🧪 TEST: Add 100 XP
   const handleAddXP = async () => {
@@ -474,41 +466,7 @@ export default function HomePage() {
       paddingHorizontal: 16,
       paddingTop: 24,
     },
-    infoCard: {
-      flexDirection: 'row',
-      backgroundColor: colors.surface,
-      padding: 16,
-      borderRadius: 16,
-      marginBottom: 20,
-      gap: 12,
-      borderBottomWidth: 4,
-      borderBottomColor: colors.border,
-    },
-    infoCardIcon: {
-      width: 48,
-      height: 48,
-      borderRadius: 24,
-      backgroundColor: colors.backgroundLighter,
-      justifyContent: 'center',
-      alignItems: 'center',
-    },
-    infoCardIconText: {
-      fontSize: 24,
-    },
-    infoCardContent: {
-      flex: 1,
-      justifyContent: 'center',
-    },
-    infoCardTitle: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: colors.textPrimary,
-      marginBottom: 2,
-    },
-    infoCardText: {
-      fontSize: 13,
-      color: colors.textSecondary,
-    },
+
     loginPrompt: {
       backgroundColor: colors.surface,
       padding: 20,
@@ -653,6 +611,8 @@ export default function HomePage() {
 
       {/* Content Wrapper */}
       <View style={styles.contentWrapper}>
+
+
         {/* Section Title */}
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Dersler</Text>
@@ -732,16 +692,8 @@ export default function HomePage() {
 
         {/* Bottom Section */}
         <ScrollView style={styles.content} contentContainerStyle={styles.bottomContent}>
-          {/* Info Card */}
-          <View style={styles.infoCard}>
-            <View style={styles.infoCardIcon}>
-              <Text style={styles.infoCardIconText}>🎯</Text>
-            </View>
-            <View style={styles.infoCardContent}>
-              <Text style={styles.infoCardTitle}>Günlük Hedef</Text>
-              <Text style={styles.infoCardText}>Bugün henüz ders tamamlamadın!</Text>
-            </View>
-          </View>
+          {/* Weekly Activity / Daily Goal Card */}
+          <WeeklyActivity />
 
           {/* 🧪 TEST BUTTONS - Remove in production */}
           <View style={styles.testContainer}>
@@ -799,41 +751,31 @@ export default function HomePage() {
                     updated_at: new Date().toISOString(),
                   });
                 }
-                Alert.alert('✅ Sıfırlandı', 'XP ve Level sıfırlandı.');
-              } catch (e) {
-                console.error(e);
-                Alert.alert('Hata', 'Sıfırlama başarısız.');
+                Alert.alert('✅ Sıfırlandı', 'XP sıfırlandı.');
+              } catch (error) {
+                console.error('❌ Reset XP error:', error);
               }
             }}>
-              <Text style={styles.testButtonText}>⭐ Sadece XP/Level Sıfırla</Text>
+              <Text style={styles.testButtonText}>🔄 Sadece XP Sıfırla</Text>
             </Pressable>
 
-            {/* Current Stats Display */}
-            <View style={styles.testStats}>
-              <Text style={[styles.testStatsText, styles.testStatsHighlight]}>
-                💎 Kümülatif XP: {formatXP(totalXP)} XP
-              </Text>
-              <Text style={styles.testStatsText}>
-                📊 Level: {xpProgress.currentLevel}
-              </Text>
-              <Text style={styles.testStatsText}>
-                📈 Bu seviye: {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
-              </Text>
-              <Text style={styles.testStatsText}>
-                🎯 Sonraki seviyeye: {formatXP(xpProgress.xpToNextLevel)} XP
-              </Text>
-              <Text style={styles.testStatsText}>
-                🔐 Durum: {isAuthenticated ? '✅ Giriş Yapılmış' : '❌ Anonim'}
-              </Text>
-              {user && (
-                <Text style={styles.testStatsText}>
-                  👤 {user.username || user.email || 'N/A'}
-                </Text>
-              )}
-            </View>
+            {/* Logout Button */}
+            <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
+              try {
+                const { logout } = useStore.getState();
+                await supabase.auth.signOut();
+                logout();
+                resetUserData();
+                Alert.alert('✅ Çıkış Yapıldı', 'Başarıyla çıkış yapıldı.');
+                router.replace('/(auth)/login');
+              } catch (error) {
+                console.error('❌ Logout error:', error);
+                Alert.alert('Hata', 'Çıkış yapılırken bir hata oluştu.');
+              }
+            }}>
+              <Text style={styles.testButtonText}>🚪 Çıkış Yap</Text>
+            </Pressable>
           </View>
-
-          <View style={{ height: 40 }} />
         </ScrollView>
       </View>
     </SafeAreaView>

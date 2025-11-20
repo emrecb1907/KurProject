@@ -139,7 +139,7 @@ const lightThemeColors = {
   backgroundLighter: '#FAFAF7', // Açık bej
 
   // Surface & Cards
-  surface: '#FFFFFF', // Beyaz card
+  surface: '#FFF9F0', // Bej card
   surfaceDark: '#F5F5F0', // Hafif bej
   surfaceLight: '#FAFAF7', // Çok açık bej
 

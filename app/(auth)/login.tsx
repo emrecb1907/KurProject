@@ -1,20 +1,27 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Card } from '@components/ui';
+import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function LoginScreen() {
   const router = useRouter();
-  const { signIn } = useAuthHook();
-  
+  const { signIn, signInWithGoogle, signInWithApple } = useAuthHook();
+  const { themeVersion } = useTheme(); // Trigger re-render on theme change
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  // Re-calculate styles when theme changes
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const handleLogin = async () => {
+    console.log('🔵 LoginScreen.handleLogin called');
     if (!email || !password) {
       setError('Lütfen tüm alanları doldurun');
       return;
@@ -26,7 +33,18 @@ export default function LoginScreen() {
     const { error: signInError } = await signIn(email, password);
 
     if (signInError) {
-      setError(signInError.message || 'Giriş başarısız');
+      // Translate error messages to user-friendly Turkish
+      let errorMessage = 'Giriş başarısız';
+
+      if (signInError.message.includes('Invalid login credentials')) {
+        errorMessage = 'Email veya şifre hatalı';
+      } else if (signInError.message.includes('Email not confirmed')) {
+        errorMessage = 'Lütfen email adresinizi onaylayın';
+      } else if (signInError.message.includes('User not found')) {
+        errorMessage = 'Kullanıcı bulunamadı';
+      }
+
+      setError(errorMessage);
       setLoading(false);
     } else {
       router.replace('/(tabs)');
@@ -43,7 +61,13 @@ export default function LoginScreen() {
         keyboardShouldPersistTaps="handled"
       >
         <View style={styles.header}>
-          <Pressable onPress={() => router.back()}>
+          <Pressable onPress={() => {
+            if (router.canGoBack()) {
+              router.back();
+            } else {
+              router.replace('/(tabs)');
+            }
+          }}>
             <Text style={styles.backButton}>← Geri</Text>
           </Pressable>
         </View>
@@ -60,6 +84,7 @@ export default function LoginScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="ornek@email.com"
+                placeholderTextColor={colors.textDisabled}
                 value={email}
                 onChangeText={setEmail}
                 autoCapitalize="none"
@@ -73,6 +98,7 @@ export default function LoginScreen() {
               <TextInput
                 style={styles.input}
                 placeholder="••••••••"
+                placeholderTextColor={colors.textDisabled}
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
@@ -95,6 +121,16 @@ export default function LoginScreen() {
             />
           </Card>
 
+          <SocialLoginButtons
+            onGooglePress={() => {
+              Alert.alert('Yakında', 'Google ile giriş özelliği çok yakında eklenecek!');
+            }}
+            onApplePress={() => {
+              Alert.alert('Yakında', 'Apple ile giriş özelliği çok yakında eklenecek!');
+            }}
+            loading={loading}
+          />
+
           <View style={styles.footer}>
             <Text style={styles.footerText}>Hesabın yok mu?</Text>
             <Pressable onPress={() => router.push('/(auth)/register')}>
@@ -111,7 +147,8 @@ export default function LoginScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+// Styles are defined in a function to be re-evaluated when theme changes
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -202,4 +239,3 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
 });
-

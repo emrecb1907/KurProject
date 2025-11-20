@@ -2,9 +2,13 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card, Button } from '@components/ui';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 export default function VersesGameScreen() {
   const router = useRouter();
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
 
   const lessons = [
     { id: '1', title: 'Kısa Sureler 1', verses: 5, level: 2, completed: false },
@@ -35,7 +39,7 @@ export default function VersesGameScreen() {
                   {lesson.verses} ayet • Level {lesson.level}
                 </Text>
               </View>
-              
+
               {lesson.locked ? (
                 <View style={styles.lockedBadge}>
                   <Text style={styles.lockedText}>🔒</Text>
@@ -68,7 +72,7 @@ export default function VersesGameScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surfaceLight, // Replaced surfaceVariant
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -146,7 +150,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   infoBox: {
-    backgroundColor: '#e8f5e9',
+    backgroundColor: colors.successGlow, // Replaced #e8f5e9
     padding: 16,
     margin: 16,
     borderRadius: 12,
@@ -154,12 +158,12 @@ const styles = StyleSheet.create({
   infoTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#2e7d32',
+    color: colors.successDark, // Replaced #2e7d32
     marginBottom: 8,
   },
   infoText: {
     fontSize: 14,
-    color: '#2e7d32',
+    color: colors.successDark, // Replaced #2e7d32
     lineHeight: 22,
   },
 });

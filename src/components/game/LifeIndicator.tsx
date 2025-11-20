@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface LifeIndicatorProps {
   currentLives: number;
@@ -7,6 +9,9 @@ interface LifeIndicatorProps {
 }
 
 export function LifeIndicator({ currentLives, maxLives = 6 }: LifeIndicatorProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   return (
     <View style={styles.container}>
       <Text style={styles.heartIcon}>❤️</Text>
@@ -17,7 +22,7 @@ export function LifeIndicator({ currentLives, maxLives = 6 }: LifeIndicatorProps
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',

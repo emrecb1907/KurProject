@@ -1,22 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
 import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function VocabularyGamePlayScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { currentLives, maxLives, removeLives, addXP } = useStore();
   const { isAuthenticated, user } = useAuth();
+  const { themeVersion } = useTheme();
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [isAnswered, setIsAnswered] = useState(false);
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [isGameComplete, setIsGameComplete] = useState(false);
+
+  // Dynamic styles
+  const styles = useMemo(() => getStyles(), [themeVersion]);
 
   // Mock questions - 20 total, 10 will be randomly selected
   const allMockQuestions = [
@@ -348,7 +353,7 @@ export default function VocabularyGamePlayScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,

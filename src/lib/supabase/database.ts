@@ -87,8 +87,42 @@ export const database = {
         .eq('is_anonymous', false) // Only show authenticated users
         .order('total_xp', { ascending: false })
         .limit(limit);
-      
+
       return { data: data as LeaderboardEntry[] | null, error };
+    },
+
+    async getUserRank(userId: string) {
+      // Get user's data
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('id, username, email, total_xp, current_level, league')
+        .eq('id', userId)
+        .single();
+
+      if (userError || !userData) {
+        return { data: null, error: userError };
+      }
+
+      // Count how many users have more XP (to get rank)
+      const { count, error: countError } = await supabase
+        .from('users')
+        .select('*', { count: 'exact', head: true })
+        .eq('is_anonymous', false)
+        .gt('total_xp', userData.total_xp);
+
+      if (countError) {
+        return { data: null, error: countError };
+      }
+
+      const rank = (count || 0) + 1;
+
+      return {
+        data: {
+          rank,
+          user: userData as LeaderboardEntry,
+        },
+        error: null,
+      };
     },
   },
 
@@ -216,6 +250,22 @@ export const database = {
         .limit(limit);
       return { data: data as UserAnswer[] | null, error };
     },
+
+    async getWeeklyActivity(userId: string) {
+      // Get activity for the last 7 days
+      const today = new Date();
+      const sevenDaysAgo = new Date(today);
+      sevenDaysAgo.setDate(today.getDate() - 7);
+
+      const { data, error } = await supabase
+        .from('user_answers')
+        .select('answered_at')
+        .eq('user_id', userId)
+        .gte('answered_at', sevenDaysAgo.toISOString())
+        .order('answered_at', { ascending: false });
+
+      return { data: data as { answered_at: string }[] | null, error };
+    },
   },
 
   // ==================== LEADERBOARD ====================
@@ -307,5 +357,96 @@ export const database = {
       return { data, error };
     },
   },
-};
 
+  // ==================== DAILY ACTIVITY (Zero Bloat) ====================
+  dailyActivity: {
+    async record(userId: string) {
+      const today = new Date();
+      const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
+      // Get current user data
+      const { data: user, error: fetchError } = await supabase
+        .from('users')
+        .select('streak, last_activity_date, weekly_activity')
+        .eq('id', userId)
+        .single();
+
+      if (fetchError || !user) return { error: fetchError };
+
+      const lastActivityDate = user.last_activity_date ? new Date(user.last_activity_date) : null;
+      const lastActivityStr = user.last_activity_date;
+
+      // 1. Calculate Streak
+      let newStreak = user.streak || 0;
+
+      if (lastActivityStr === todayStr) {
+        // Already active today, do nothing to streak
+      } else if (lastActivityDate) {
+        const yesterday = new Date(today);
+        yesterday.setDate(yesterday.getDate() - 1);
+        const yesterdayStr = yesterday.toISOString().split('T')[0];
+
+        if (lastActivityStr === yesterdayStr) {
+          // Active yesterday, increment streak
+          newStreak += 1;
+        } else {
+          // Missed a day (or more), reset streak to 1
+          newStreak = 1;
+        }
+      } else {
+        // First ever activity
+        newStreak = 1;
+      }
+
+      // 2. Update Weekly Activity
+      let weeklyActivity: string[] = [];
+      if (Array.isArray(user.weekly_activity)) {
+        weeklyActivity = user.weekly_activity as string[];
+      }
+
+      // Check if we need to reset for a new week
+      const getMonday = (d: Date) => {
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
+        const monday = new Date(d.setDate(diff));
+        monday.setHours(0, 0, 0, 0);
+        return monday;
+      };
+
+      const thisMonday = getMonday(new Date(today));
+
+      // Filter out dates that are older than this week's Monday
+      weeklyActivity = weeklyActivity.filter(dateStr => {
+        const date = new Date(dateStr);
+        return date >= thisMonday;
+      });
+
+      // Add today if not present
+      if (!weeklyActivity.includes(todayStr)) {
+        weeklyActivity.push(todayStr);
+      }
+
+      // 3. Save to DB
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({
+          streak: newStreak,
+          last_activity_date: todayStr,
+          weekly_activity: weeklyActivity,
+          updated_at: new Date().toISOString(),
+        })
+        .eq('id', userId);
+
+      return { error: updateError };
+    },
+
+    async getStats(userId: string) {
+      const { data, error } = await supabase
+        .from('users')
+        .select('streak, weekly_activity')
+        .eq('id', userId)
+        .single();
+      return { data, error };
+    }
+  },
+};

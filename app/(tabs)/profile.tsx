@@ -3,25 +3,26 @@ import { useMemo } from 'react';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { HugeiconsIcon } from '@hugeicons/react-native';
-import { 
-  DiamondIcon, 
-  FireIcon, 
-  Tick01Icon, 
-  Book02Icon, 
-  Award01Icon, 
-  StarIcon, 
-  Target01Icon, 
-  Rocket01Icon, 
-  UserAccountIcon, 
-  Medal01Icon, 
-  BulbIcon, 
+import {
+  DiamondIcon,
+  FireIcon,
+  Tick01Icon,
+  Book02Icon,
+  Award01Icon,
+  StarIcon,
+  Target01Icon,
+  Rocket01Icon,
+  UserAccountIcon,
+  Medal01Icon,
+  BulbIcon,
   LockIcon,
   Sun03Icon,
   Moon02Icon,
-  ComputerIcon 
+  ComputerIcon
 } from '@hugeicons/core-free-icons';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
+import { useAuthHook } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 
 export default function ProfileScreen() {
@@ -30,25 +31,17 @@ export default function ProfileScreen() {
   // Get user data from Zustand store
   const { totalXP, streak } = useUser();
   const { isAuthenticated, user } = useAuth();
+  const { signOut } = useAuthHook();
   const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
   const currentStreak = streak;
-  
+
   // Debug theme
-  console.log('🎨 Profile - themeMode:', themeMode, 'activeTheme:', activeTheme);
   const successRate = 0; // TODO: Calculate from user_answers
   const completedLessons = 0; // TODO: Calculate from user_progress
-  
+
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || 'Anonim Kullanıcı';
-  
-  // Debug: Log auth state
-  console.log('🔐 Auth State:', {
-    isAuthenticated,
-    hasUser: !!user,
-    username,
-    email: user?.email,
-  });
-  
+
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
 
@@ -298,6 +291,20 @@ export default function ProfileScreen() {
       fontSize: 16,
       fontWeight: 'bold',
     },
+    logoutButton: {
+      backgroundColor: colors.error,
+      paddingVertical: 14,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      alignItems: 'center',
+      borderBottomWidth: 4,
+      borderBottomColor: colors.errorDark,
+    },
+    logoutButtonText: {
+      color: colors.textOnPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
@@ -309,9 +316,9 @@ export default function ProfileScreen() {
             <View style={styles.avatar}>
               <HugeiconsIcon icon={UserAccountIcon} size={50} color={colors.textPrimary} />
             </View>
-             <View style={styles.levelBadge}>
-               <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
-             </View>
+            <View style={styles.levelBadge}>
+              <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
+            </View>
           </View>
           <Text style={styles.username}>{username}</Text>
           <Text style={styles.subtitle}>
@@ -354,25 +361,24 @@ export default function ProfileScreen() {
             <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textPrimary} />
             <Text style={styles.sectionTitle}>Ayarlar</Text>
           </View>
-          
+
           {/* Theme Selector */}
           <View style={styles.themeContainer}>
             <Text style={styles.themeLabel}>Tema</Text>
             <View style={styles.themeButtons}>
-              <Pressable 
+              <Pressable
                 style={[
-                  styles.themeButton, 
+                  styles.themeButton,
                   themeMode === 'light' && styles.themeButtonActive
                 ]}
                 onPress={() => {
-                  console.log('🎨 Switching to LIGHT theme');
                   setThemeMode('light');
                 }}
               >
-                <HugeiconsIcon 
-                  icon={Sun03Icon} 
-                  size={20} 
-                  color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary} 
+                <HugeiconsIcon
+                  icon={Sun03Icon}
+                  size={20}
+                  color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary}
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -381,21 +387,20 @@ export default function ProfileScreen() {
                   Açık
                 </Text>
               </Pressable>
-              
-              <Pressable 
+
+              <Pressable
                 style={[
-                  styles.themeButton, 
+                  styles.themeButton,
                   themeMode === 'dark' && styles.themeButtonActive
                 ]}
                 onPress={() => {
-                  console.log('🎨 Switching to DARK theme');
                   setThemeMode('dark');
                 }}
               >
-                <HugeiconsIcon 
-                  icon={Moon02Icon} 
-                  size={20} 
-                  color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary} 
+                <HugeiconsIcon
+                  icon={Moon02Icon}
+                  size={20}
+                  color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary}
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -404,18 +409,18 @@ export default function ProfileScreen() {
                   Koyu
                 </Text>
               </Pressable>
-              
-              <Pressable 
+
+              <Pressable
                 style={[
-                  styles.themeButton, 
+                  styles.themeButton,
                   themeMode === 'system' && styles.themeButtonActive
                 ]}
                 onPress={() => setThemeMode('system')}
               >
-                <HugeiconsIcon 
-                  icon={ComputerIcon} 
-                  size={20} 
-                  color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary} 
+                <HugeiconsIcon
+                  icon={ComputerIcon}
+                  size={20}
+                  color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary}
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -426,11 +431,26 @@ export default function ProfileScreen() {
               </Pressable>
             </View>
             <Text style={styles.themeHint}>
-              {themeMode === 'system' 
-                ? `Aktif tema: ${activeTheme === 'light' ? 'Açık' : 'Koyu'} (sistem ayarları)` 
+              {themeMode === 'system'
+                ? `Aktif tema: ${activeTheme === 'light' ? 'Açık' : 'Koyu'} (sistem ayarları)`
                 : `Aktif tema: ${themeMode === 'light' ? 'Açık' : 'Koyu'}`}
             </Text>
           </View>
+
+          {/* Logout Button - Only show if authenticated */}
+          {isAuthenticated && (
+            <View style={{ marginTop: 24 }}>
+              <Pressable
+                style={styles.logoutButton}
+                onPress={async () => {
+                  await signOut();
+                  router.replace('/(auth)/login');
+                }}
+              >
+                <Text style={styles.logoutButtonText}>Çıkış Yap</Text>
+              </Pressable>
+            </View>
+          )}
         </View>
 
         {/* Achievements Section */}
@@ -449,7 +469,7 @@ export default function ProfileScreen() {
               <Text style={styles.progressText}>0/1</Text>
             </View>
           </View>
-          
+
           <View style={styles.achievementCard}>
             <HugeiconsIcon icon={FireIcon} size={36} color={colors.primary} />
             <View style={styles.achievementInfo}>
@@ -470,7 +490,7 @@ export default function ProfileScreen() {
             <Text style={styles.promptText}>
               İlerlemeni kaydet, liderlik tablosuna katıl ve tüm özelliklerin kilidini aç!
             </Text>
-            <Pressable 
+            <Pressable
               style={styles.loginButton}
               onPress={() => router.push('/(auth)/login')}
             >

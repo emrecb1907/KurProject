@@ -1,5 +1,5 @@
 import { supabase } from './client';
-import { User } from '@types/user.types';
+import { User } from '../../types/user.types';
 
 export interface AuthResponse {
   user: User | null;
@@ -10,6 +10,27 @@ export const authService = {
   // Sign up with email
   async signUp(email: string, password: string, username?: string): Promise<AuthResponse> {
     try {
+      // Check if username already exists
+      if (username) {
+        const { data: existingUser, error: checkError } = await supabase
+          .from('users')
+          .select('username')
+          .eq('username', username)
+          .single();
+
+        if (existingUser) {
+          return {
+            user: null,
+            error: new Error('Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.'),
+          };
+        }
+
+        // Ignore error if no user found (that's what we want)
+        if (checkError && checkError.code !== 'PGRST116') {
+          console.error('❌ Error checking username:', checkError);
+        }
+      }
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -25,7 +46,7 @@ export const authService = {
       // Create user record in users table
       if (data.user) {
         console.log('📝 Creating user record in users table...');
-        
+
         const { error: dbError } = await supabase.from('users').insert({
           id: data.user.id,
           email: data.user.email,
@@ -119,6 +140,69 @@ export const authService = {
   // Listen to auth state changes
   onAuthStateChange(callback: (event: string, session: any) => void) {
     return supabase.auth.onAuthStateChange(callback);
+  },
+
+  async signInWithGoogle() {
+    try {
+      // This will be imported dynamically to avoid issues in Expo Go if not available
+      // but since we installed it, we can try to use it.
+      // However, for safety in this environment, we'll assume the user will build the app.
+      const { GoogleSignin, statusCodes } = require('@react-native-google-signin/google-signin');
+
+      // Configure Google Sign-In
+      // You need to get these IDs from Google Cloud Console
+      GoogleSignin.configure({
+        scopes: ['email', 'profile'],
+        webClientId: process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID, // From .env
+        iosClientId: process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID, // Optional
+      });
+
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+
+      if (userInfo.idToken) {
+        const { data, error } = await supabase.auth.signInWithIdToken({
+          provider: 'google',
+          token: userInfo.idToken,
+        });
+
+        if (error) throw error;
+        return { user: data.user as unknown as User, error: null };
+      } else {
+        throw new Error('No ID token present!');
+      }
+    } catch (error: any) {
+      console.error('Google Sign-In Error:', error);
+      return { user: null, error: error as Error };
+    }
+  },
+
+  async signInWithApple() {
+    try {
+      const AppleAuth = require('expo-apple-authentication');
+
+      const credential = await AppleAuth.signInAsync({
+        requestedScopes: [
+          AppleAuth.AppleAuthenticationScope.FULL_NAME,
+          AppleAuth.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      if (credential.identityToken) {
+        const { data, error } = await supabase.auth.signInWithIdToken({
+          provider: 'apple',
+          token: credential.identityToken,
+        });
+
+        if (error) throw error;
+        return { user: data.user as unknown as User, error: null };
+      } else {
+        throw new Error('No identity token present!');
+      }
+    } catch (error: any) {
+      console.error('Apple Sign-In Error:', error);
+      return { user: null, error: error as Error };
+    }
   },
 };
 

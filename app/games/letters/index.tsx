@@ -2,9 +2,13 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card, Button } from '@components/ui';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 export default function LettersGameScreen() {
   const router = useRouter();
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
 
   const lessons = [
     { id: '1', title: 'Temel Harfler 1', level: 1, completed: false },
@@ -34,7 +38,7 @@ export default function LettersGameScreen() {
                 <Text style={styles.lessonTitle}>{lesson.title}</Text>
                 <Text style={styles.lessonLevel}>Level {lesson.level}</Text>
               </View>
-              
+
               {lesson.locked ? (
                 <View style={styles.lockedBadge}>
                   <Text style={styles.lockedText}>🔒</Text>
@@ -64,7 +68,7 @@ export default function LettersGameScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -121,7 +125,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surfaceLight, // Replaced surfaceVariant
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -142,14 +146,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   infoBox: {
-    backgroundColor: '#e3f2fd',
+    backgroundColor: colors.secondaryGlow, // Replaced #e3f2fd
     padding: 16,
     margin: 16,
     borderRadius: 12,
   },
   infoText: {
     fontSize: 14,
-    color: '#1565c0',
+    color: colors.secondaryDark, // Replaced #1565c0
     lineHeight: 20,
   },
 });

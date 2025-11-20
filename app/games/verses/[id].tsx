@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
@@ -6,12 +6,14 @@ import { Button } from '@components/ui';
 import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function VersesGamePlayScreen() {
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { currentLives, maxLives, removeLives, addXP } = useStore();
   const { isAuthenticated, user } = useAuth();
+  const { themeVersion } = useTheme();
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -19,6 +21,9 @@ export default function VersesGamePlayScreen() {
   const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
   const [isGameComplete, setIsGameComplete] = useState(false);
   const [showLatin, setShowLatin] = useState(false);
+
+  // Dynamic styles
+  const styles = useMemo(() => getStyles(), [themeVersion]);
 
   // Mock questions - 20 total, 10 will be randomly selected
   const allMockQuestions = [
@@ -288,6 +293,19 @@ export default function VersesGamePlayScreen() {
         try {
           console.log('🔄 Syncing Verses XP to DB:', correctAnswersCount);
           await database.users.updateXP(user.id, correctAnswersCount);
+
+          // Save progress to enable weekly activity tracking
+          await database.progress.updateCompletion(
+            user.id,
+            id as string, // lesson_id
+            correctAnswersCount,
+            mockQuestions.length
+          );
+
+          // Record daily activity (optimized)
+          await database.dailyActivity.record(user.id);
+
+          console.log('✅ Verses game progress saved');
         } catch (error) {
           console.error('❌ Failed to sync XP:', error);
         }
@@ -414,7 +432,7 @@ export default function VersesGamePlayScreen() {
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,

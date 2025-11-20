@@ -40,7 +40,7 @@ export function Modal({
     >
       <View style={styles.overlay}>
         <Pressable style={styles.backdrop} onPress={onClose} />
-        
+
         {Platform.OS === 'ios' && transparent ? (
           <BlurView intensity={80} tint="dark" style={styles.modalContainer}>
             <View style={styles.content}>

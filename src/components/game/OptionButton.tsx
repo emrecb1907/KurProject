@@ -1,5 +1,7 @@
 import { Pressable, Text, StyleSheet } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface OptionButtonProps {
   option: string;
@@ -14,6 +16,9 @@ export function OptionButton({
   state = 'default',
   disabled = false,
 }: OptionButtonProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   return (
     <Pressable
       style={({ pressed }) => [
@@ -30,14 +35,14 @@ export function OptionButton({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   button: {
     padding: 20,
     borderRadius: 16,
     marginBottom: 12,
     borderWidth: 2,
     backgroundColor: colors.surface,
-    shadowColor: colors.shadowLight,
+    shadowColor: colors.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
     shadowRadius: 4,

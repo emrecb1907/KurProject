@@ -1,5 +1,7 @@
 import { Pressable, Text, StyleSheet, PressableProps, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '@constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useMemo } from 'react';
 
 interface ButtonProps extends PressableProps {
   title: string;
@@ -9,15 +11,18 @@ interface ButtonProps extends PressableProps {
   disabled?: boolean;
 }
 
-export function Button({ 
-  title, 
-  variant = 'primary', 
+export function Button({
+  title,
+  variant = 'primary',
   size = 'medium',
   fullWidth = false,
   disabled = false,
   style,
-  ...props 
+  ...props
 }: ButtonProps) {
+  const { themeVersion } = useTheme();
+  const styles = useMemo(() => getStyles(), [themeVersion]);
+
   const buttonStyle: ViewStyle[] = [
     styles.button,
     styles[`button_${size}`],
@@ -48,7 +53,7 @@ export function Button({
   );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
   button: {
     borderRadius: 12,
     alignItems: 'center',
@@ -59,7 +64,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 3,
   },
-  
+
   // Sizes
   button_small: {
     paddingHorizontal: 16,
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     paddingVertical: 16,
   },
-  
+
   // Variants
   button_primary: {
     backgroundColor: colors.primary,
@@ -92,7 +97,7 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.primary,
   },
-  
+
   // Text
   text: {
     fontWeight: '600',
@@ -121,7 +126,7 @@ const styles = StyleSheet.create({
   text_outline: {
     color: colors.primary,
   },
-  
+
   // States
   pressed: {
     opacity: 0.8,
@@ -138,4 +143,3 @@ const styles = StyleSheet.create({
     width: '100%',
   },
 });
-

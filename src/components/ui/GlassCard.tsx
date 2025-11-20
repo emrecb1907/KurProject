@@ -8,23 +8,23 @@ interface GlassCardProps extends ViewProps {
   padding?: number;
 }
 
-export function GlassCard({ 
+export function GlassCard({
   intensity = 20,
   tint = 'light',
   padding = 16,
   style,
   children,
-  ...props 
+  ...props
 }: GlassCardProps) {
   if (Platform.OS === 'web') {
     // Fallback for web - use semi-transparent background
     return (
-      <View 
+      <View
         style={[
           styles.webFallback,
           { padding },
           style
-        ]} 
+        ]}
         {...props}
       >
         {children}
