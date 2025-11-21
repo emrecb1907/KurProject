@@ -7,7 +7,10 @@ import { useUser } from '@/store';
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import { FavouriteIcon, AlertCircleIcon, BulbIcon, Video01Icon, ArrowLeft01Icon } from '@hugeicons/core-free-icons';
 
+import { useTranslation } from 'react-i18next';
+
 export default function ChestScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { themeVersion } = useTheme();
   const { currentLives, maxLives, watchAd, adWatchTimes, lastReplenishTime, checkLifeRegeneration } = useUser();
@@ -45,9 +48,9 @@ export default function ChestScreen() {
     const success = watchAd();
     if (success) {
       // In a real app, we would show the ad here
-      alert('Reklam izlendi! +1 Can kazandın.');
+      alert(t('rewards.alerts.adWatched'));
     } else {
-      alert('Şu an reklam izleyemezsin.');
+      alert(t('rewards.alerts.cantWatch'));
     }
   };
 
@@ -108,7 +111,7 @@ export default function ChestScreen() {
         <Pressable onPress={() => router.back()} style={styles.backButtonContainer}>
           <HugeiconsIcon icon={ArrowLeft01Icon} size={24} color={colors.secondary} />
         </Pressable>
-        <Text style={styles.headerTitle}>Sandık</Text>
+        <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
         <View style={{ width: 40 }} />
       </View>
 
@@ -121,13 +124,13 @@ export default function ChestScreen() {
           <Text style={styles.statusText}>
             {currentLives} / {maxLives}
           </Text>
-          <Text style={styles.statusLabel}>Can</Text>
+          <Text style={styles.statusLabel}>{t('rewards.lives')}</Text>
           {currentLives >= maxLives ? (
-            <Text style={styles.statusSubtext}>Can sayın maksimumda! 🎉</Text>
+            <Text style={styles.statusSubtext}>{t('rewards.livesMax')}</Text>
           ) : (
             <View style={styles.timerContainer}>
               <Text style={styles.statusSubtext}>
-                Sonraki can:
+                {t('rewards.nextLife')}
               </Text>
               <Text style={styles.timerText}>
                 {getNextLifeTime()}
@@ -140,7 +143,7 @@ export default function ChestScreen() {
         <View style={styles.infoBanner}>
           <HugeiconsIcon icon={AlertCircleIcon} size={24} color={colors.backgroundDarker} />
           <Text style={styles.infoBannerText}>
-            Her reklam izlediğinde +1 can kazanırsın.
+            {t('rewards.infoBanner')}
           </Text>
         </View>
 
@@ -148,18 +151,15 @@ export default function ChestScreen() {
         <View style={styles.infoCard}>
           <View style={styles.infoTitleContainer}>
             <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textPrimary} />
-            <Text style={styles.infoTitle}>Nasıl Çalışır?</Text>
+            <Text style={styles.infoTitle}>{t('rewards.howItWorks.title')}</Text>
           </View>
           <Text style={styles.infoText}>
-            • Her reklam izlediğinde +1 can kazanırsın{'\n'}
-            • Günde maksimum 3 reklam izleyebilirsin{'\n'}
-            • Canların maksimuma ulaştığında reklam izleyemezsin{'\n'}
-            • Kullanılan haklar 24 saat sonra yenilenir
+            {t('rewards.howItWorks.text')}
           </Text>
         </View>
 
         {/* Ad Slots */}
-        <Text style={styles.sectionTitle}>Reklam Slotları</Text>
+        <Text style={styles.sectionTitle}>{t('rewards.adSlots')}</Text>
 
         {adSlots.map((index) => {
           const { status, timeLeft } = getSlotStatus(index);
@@ -172,12 +172,12 @@ export default function ChestScreen() {
               </View>
               <View style={styles.adCardInfo}>
                 <Text style={styles.adCardTitle}>
-                  {status === 'cooldown' ? 'Bekleme Süresi' : 'Can Kazan'}
+                  {status === 'cooldown' ? t('rewards.cooldown') : t('rewards.earnLife')}
                 </Text>
                 <Text style={styles.adCardDescription}>
                   {status === 'cooldown'
-                    ? `${timeLeft} sonra tekrar izleyebilirsin`
-                    : 'Reklam izle, +1 can kazan'}
+                    ? t('rewards.cooldownDesc', { time: timeLeft })
+                    : t('rewards.watchAdDesc')}
                 </Text>
               </View>
               <Pressable
@@ -186,7 +186,7 @@ export default function ChestScreen() {
                 disabled={isLocked}
               >
                 <Text style={styles.adButtonText}>
-                  {status === 'cooldown' ? timeLeft : 'İzle'}
+                  {status === 'cooldown' ? timeLeft : t('rewards.watchAd')}
                 </Text>
               </Pressable>
             </View>

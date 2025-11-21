@@ -2,11 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
+import { LoadingDots } from '@components/ui/LoadingDots';
 import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
 
 export default function LettersGamePlayScreen() {
   const { t } = useTranslation();
@@ -26,7 +28,7 @@ export default function LettersGamePlayScreen() {
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
   // Mock questions
-  const mockQuestions = [
+  const initialQuestions = [
     {
       id: '1',
       question: '🔊 Dinle',
@@ -40,6 +42,8 @@ export default function LettersGamePlayScreen() {
       options: ['أ', 'ب', 'ت', 'ث'],
     },
   ];
+
+  const [mockQuestions, setMockQuestions] = useState(initialQuestions);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const currentQuestion = mockQuestions[currentQuestionIndex];
@@ -79,11 +83,15 @@ export default function LettersGamePlayScreen() {
     setIsAnswered(true);
 
     if (correct) {
+      hapticSuccess();
       setCorrectAnswersCount(prev => prev + 1);
+    } else {
+      hapticError();
     }
   };
 
   const handleNext = () => {
+    hapticLight();
     setIsAnswered(false);
     setSelectedOption(null);
     setIsCorrect(null);
@@ -103,10 +111,24 @@ export default function LettersGamePlayScreen() {
     }
   };
 
+  const handleRetry = () => {
+    hapticLight();
+    setCurrentQuestionIndex(0);
+    setCorrectAnswersCount(0);
+    setIsGameComplete(false);
+    setIsAnswered(false);
+    setSelectedOption(null);
+    setIsCorrect(null);
+    // Shuffle questions for variety if we had more
+    const shuffled = [...initialQuestions].sort(() => Math.random() - 0.5);
+    setMockQuestions(shuffled);
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleComplete = async () => {
     if (isSubmitting) return;
+    hapticLight();
     setIsSubmitting(true);
     console.log('🏁 Letters handleComplete called');
 
@@ -217,6 +239,17 @@ export default function LettersGamePlayScreen() {
           >
             <Text style={styles.completeButtonText}>
               {isSubmitting ? t('common.loading') : t('common.finish')}
+            </Text>
+            {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
+          </Pressable>
+
+          <Pressable
+            style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
+            onPress={handleRetry}
+            disabled={isSubmitting}
+          >
+            <Text style={styles.completeButtonText}>
+              {t('gameUI.playAgain').toUpperCase()}
             </Text>
           </Pressable>
         </View>
@@ -366,6 +399,8 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 16,
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
     borderBottomWidth: 4,
     borderBottomColor: colors.successDark,
   },

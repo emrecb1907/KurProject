@@ -2,14 +2,16 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Card, Button } from '@components/ui';
 import { colors } from '@constants/colors';
+import { useTranslation } from 'react-i18next';
 
 export default function VocabularyGameScreen() {
   const router = useRouter();
+  const { t } = useTranslation();
 
   const lessons = [
-    { id: '1', title: 'Temel Kelimeler', words: 20, level: 1, completed: false },
-    { id: '2', title: 'İslami Terimler 1', words: 20, level: 2, completed: false, locked: true },
-    { id: '3', title: 'İslami Terimler 2', words: 20, level: 3, completed: false, locked: true },
+    { id: '1', title: t('games.vocabulary.lessons.1'), words: 20, level: 1, completed: false },
+    { id: '2', title: t('games.vocabulary.lessons.2'), words: 20, level: 2, completed: false, locked: true },
+    { id: '3', title: t('games.vocabulary.lessons.3'), words: 20, level: 3, completed: false, locked: true },
   ];
 
   return (
@@ -22,13 +24,13 @@ export default function VocabularyGameScreen() {
             router.replace('/');
           }
         }}>
-          <Text style={styles.backButton}>← Geri</Text>
+          <Text style={styles.backButton}>{t('games.common.back')}</Text>
         </Pressable>
-        <Text style={styles.title}>Kavram Kartları</Text>
+        <Text style={styles.title}>{t('games.vocabulary.title')}</Text>
       </View>
 
       <Text style={styles.subtitle}>
-        İslami anahtar kelimeleri öğren (Türkçe ↔ Arapça)
+        {t('games.vocabulary.description')}
       </Text>
 
       <View style={styles.lessonsList}>
@@ -38,7 +40,7 @@ export default function VocabularyGameScreen() {
               <View style={styles.lessonInfo}>
                 <Text style={styles.lessonTitle}>{lesson.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {lesson.words} kelime • Level {lesson.level}
+                  {lesson.words} kelime • {t('games.common.level')} {lesson.level}
                 </Text>
               </View>
 
@@ -52,7 +54,7 @@ export default function VocabularyGameScreen() {
                 </View>
               ) : (
                 <Button
-                  title="Başla"
+                  title={t('games.common.start')}
                   size="small"
                   onPress={() => router.push(`/games/vocabulary/${lesson.id}`)}
                 />
@@ -65,9 +67,7 @@ export default function VocabularyGameScreen() {
       <View style={styles.infoBox}>
         <Text style={styles.infoTitle}>📚 Oyun Formatı:</Text>
         <Text style={styles.infoText}>
-          • İlk 10 soru: Türkçe → Arapça{'\n'}
-          • Son 10 soru: Arapça → Türkçe{'\n'}
-          • Her soru için 10 saniye süre
+          {t('games.common.tip')}
         </Text>
       </View>
     </View>
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surfaceLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -169,4 +169,3 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 });
-

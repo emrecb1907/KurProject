@@ -2,11 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
+import { LoadingDots } from '@components/ui/LoadingDots';
 import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
 
 export default function QuizGameScreen() {
     const { t } = useTranslation();
@@ -27,7 +29,7 @@ export default function QuizGameScreen() {
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
     // Mock Islamic Questions
-    const mockQuestions = [
+    const initialQuestions = [
         {
             id: '1',
             question: 'İslam\'ın şartı kaçtır?',
@@ -59,6 +61,8 @@ export default function QuizGameScreen() {
             options: ['3', '4', '5', '6'],
         },
     ];
+
+    const [mockQuestions, setMockQuestions] = useState(initialQuestions);
 
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const currentQuestion = mockQuestions[currentQuestionIndex];
@@ -98,11 +102,15 @@ export default function QuizGameScreen() {
         setIsAnswered(true);
 
         if (correct) {
+            hapticSuccess();
             setCorrectAnswersCount(prev => prev + 1);
+        } else {
+            hapticError();
         }
     };
 
     const handleNext = () => {
+        hapticLight();
         setIsAnswered(false);
         setSelectedOption(null);
         setIsCorrect(null);
@@ -123,10 +131,25 @@ export default function QuizGameScreen() {
         }
     };
 
+    const handleRetry = () => {
+        hapticLight();
+        setCurrentQuestionIndex(0);
+        setCorrectAnswersCount(0);
+        setIsGameComplete(false);
+        setIsAnswered(false);
+        setSelectedOption(null);
+        setIsCorrect(null);
+        setTimeLeft(10);
+        // Shuffle questions
+        const shuffled = [...initialQuestions].sort(() => Math.random() - 0.5);
+        setMockQuestions(shuffled);
+    };
+
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleComplete = async () => {
         if (isSubmitting) return;
+        hapticLight();
         setIsSubmitting(true);
         console.log('🏁 Quiz handleComplete called');
 
@@ -227,7 +250,7 @@ export default function QuizGameScreen() {
 
                     <View style={styles.statsContainer}>
                         <Text style={styles.statText}>{t('gameUI.correctAnswers')}: {correctAnswersCount}/{mockQuestions.length}</Text>
-                        <Text style={styles.statText}>Kazanılan XP: +{correctAnswersCount}</Text>
+                        <Text style={styles.statText}>{t('common.xpAdded')}: +{correctAnswersCount}</Text>
                     </View>
 
                     <Pressable
@@ -237,6 +260,17 @@ export default function QuizGameScreen() {
                     >
                         <Text style={styles.completeButtonText}>
                             {isSubmitting ? t('common.loading') : t('common.finish')}
+                        </Text>
+                        {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
+                    </Pressable>
+
+                    <Pressable
+                        style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
+                        onPress={handleRetry}
+                        disabled={isSubmitting}
+                    >
+                        <Text style={styles.completeButtonText}>
+                            {t('gameUI.playAgain').toUpperCase()}
                         </Text>
                     </Pressable>
                 </View>
@@ -289,7 +323,7 @@ export default function QuizGameScreen() {
                 <View style={styles.footer}>
                     <Pressable style={styles.nextButton} onPress={handleNext}>
                         <Text style={styles.nextButtonText}>
-                            {currentQuestionIndex < mockQuestions.length - 1 ? 'Sonraki Soru' : 'Bitir'}
+                            {currentQuestionIndex < mockQuestions.length - 1 ? t('common.nextQuestion') : t('common.finish')}
                         </Text>
                     </Pressable>
                 </View>
@@ -386,6 +420,8 @@ const getStyles = () => StyleSheet.create({
         borderRadius: 16,
         width: '100%',
         alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
         borderBottomWidth: 4,
         borderBottomColor: colors.successDark,
     },

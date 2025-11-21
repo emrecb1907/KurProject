@@ -4,29 +4,31 @@ import { Card, Button } from '@components/ui';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export default function VersesGameScreen() {
   const router = useRouter();
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
+  const { t } = useTranslation();
 
   const lessons = [
-    { id: '1', title: 'Kısa Sureler 1', verses: 5, level: 2, completed: false },
-    { id: '2', title: 'Kısa Sureler 2', verses: 5, level: 3, completed: false, locked: true },
-    { id: '3', title: 'Namaz Duaları', verses: 10, level: 2, completed: false },
+    { id: '1', title: t('games.verses.lessons.1'), verses: 5, level: 2, completed: false },
+    { id: '2', title: t('games.verses.lessons.2'), verses: 5, level: 3, completed: false, locked: true },
+    { id: '3', title: t('games.verses.lessons.3'), verses: 10, level: 2, completed: false },
   ];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.backButton}>← Geri</Text>
+          <Text style={styles.backButton}>{t('games.common.back')}</Text>
         </Pressable>
-        <Text style={styles.title}>Ayet Tamamlama</Text>
+        <Text style={styles.title}>{t('games.verses.title')}</Text>
       </View>
 
       <Text style={styles.subtitle}>
-        Eksik kelimeleri bularak ayetleri tamamla
+        {t('games.verses.description')}
       </Text>
 
       <View style={styles.lessonsList}>
@@ -36,7 +38,7 @@ export default function VersesGameScreen() {
               <View style={styles.lessonInfo}>
                 <Text style={styles.lessonTitle}>{lesson.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {lesson.verses} ayet • Level {lesson.level}
+                  {lesson.verses} {t('games.common.verse')} • {t('games.common.level')} {lesson.level}
                 </Text>
               </View>
 
@@ -50,7 +52,7 @@ export default function VersesGameScreen() {
                 </View>
               ) : (
                 <Button
-                  title="Başla"
+                  title={t('games.common.start')}
                   size="small"
                   onPress={() => router.push(`/games/verses/${lesson.id}`)}
                 />
@@ -61,11 +63,9 @@ export default function VersesGameScreen() {
       </View>
 
       <View style={styles.infoBox}>
-        <Text style={styles.infoTitle}>📖 Özellikler:</Text>
+        <Text style={styles.infoTitle}>{t('games.verses.features.title')}</Text>
         <Text style={styles.infoText}>
-          • Hem Arapça hem Latin transkripsiyon{'\n'}
-          • Formatlar arası geçiş yapabilirsiniz{'\n'}
-          • Her soru için 10 saniye süre
+          {t('games.verses.features.text')}
         </Text>
       </View>
     </View>
@@ -129,7 +129,7 @@ const getStyles = () => StyleSheet.create({
     width: 40,
     height: 40,
     borderRadius: 20,
-    backgroundColor: colors.surfaceLight, // Replaced surfaceVariant
+    backgroundColor: colors.surfaceLight,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -150,7 +150,7 @@ const getStyles = () => StyleSheet.create({
     fontWeight: 'bold',
   },
   infoBox: {
-    backgroundColor: colors.successGlow, // Replaced #e8f5e9
+    backgroundColor: colors.successGlow,
     padding: 16,
     margin: 16,
     borderRadius: 12,
@@ -158,13 +158,12 @@ const getStyles = () => StyleSheet.create({
   infoTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: colors.successDark, // Replaced #2e7d32
+    color: colors.successDark,
     marginBottom: 8,
   },
   infoText: {
     fontSize: 14,
-    color: colors.successDark, // Replaced #2e7d32
+    color: colors.successDark,
     lineHeight: 22,
   },
 });
-

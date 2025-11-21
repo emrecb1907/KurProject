@@ -5,29 +5,32 @@ import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useMemo } from 'react';
 
+import { useTranslation } from 'react-i18next';
+
 export default function LettersGameScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
   const lessons = [
-    { id: '1', title: 'Temel Harfler 1', level: 1, completed: false },
-    { id: '2', title: 'Temel Harfler 2', level: 1, completed: false },
-    { id: '3', title: 'İleri Harfler 1', level: 2, completed: false, locked: true },
-    { id: '4', title: 'İleri Harfler 2', level: 3, completed: false, locked: true },
+    { id: '1', title: t('games.letters.lessons.1'), level: 1, completed: false },
+    { id: '2', title: t('games.letters.lessons.2'), level: 1, completed: false },
+    { id: '3', title: t('games.letters.lessons.3'), level: 2, completed: false, locked: true },
+    { id: '4', title: t('games.letters.lessons.4'), level: 3, completed: false, locked: true },
   ];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.backButton}>← Geri</Text>
+          <Text style={styles.backButton}>{t('games.common.back')}</Text>
         </Pressable>
-        <Text style={styles.title}>Arapça Harfler</Text>
+        <Text style={styles.title}>{t('games.letters.title')}</Text>
       </View>
 
       <Text style={styles.subtitle}>
-        Harf seslerini dinleyerek doğru harfi seç
+        {t('games.letters.description')}
       </Text>
 
       <View style={styles.lessonsList}>
@@ -36,7 +39,7 @@ export default function LettersGameScreen() {
             <View style={styles.lessonContent}>
               <View style={styles.lessonInfo}>
                 <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                <Text style={styles.lessonLevel}>Level {lesson.level}</Text>
+                <Text style={styles.lessonLevel}>{t('games.common.level')} {lesson.level}</Text>
               </View>
 
               {lesson.locked ? (
@@ -49,7 +52,7 @@ export default function LettersGameScreen() {
                 </View>
               ) : (
                 <Button
-                  title="Başla"
+                  title={t('games.common.start')}
                   size="small"
                   onPress={() => router.push(`/games/letters/${lesson.id}`)}
                 />
@@ -61,7 +64,7 @@ export default function LettersGameScreen() {
 
       <View style={styles.infoBox}>
         <Text style={styles.infoText}>
-          💡 İpucu: Son 20 soruda %90 başarı ile bu bölüm "pekiştirildi" olarak işaretlenir
+          {t('games.common.tip')}
         </Text>
       </View>
     </View>

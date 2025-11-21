@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { useEffect, useRef, useMemo } from 'react';
 import { DuoButton } from '@components/ui';
+import { LoadingDots } from '@components/ui/LoadingDots';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const { width } = Dimensions.get('window');
 
@@ -15,6 +17,8 @@ interface ResultModalProps {
   xpEarned: number;
   timeSpent: string;
   onContinue: () => void;
+  onRetry?: () => void;
+  isLoading?: boolean;
 }
 
 export function ResultModal({
@@ -26,7 +30,10 @@ export function ResultModal({
   xpEarned,
   timeSpent,
   onContinue,
+  onRetry,
+  isLoading = false,
 }: ResultModalProps) {
+  const { t } = useTranslation();
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
@@ -82,50 +89,65 @@ export function ResultModal({
 
         {/* Title */}
         <Text style={styles.title}>
-          {success ? 'Alıştırmayı tamamladın!' : 'İyi Deneme!'}
+          {success ? t('gameUI.gameComplete') : t('gameUI.goodJob')}
         </Text>
 
         {/* Stats Grid */}
         <View style={styles.statsContainer}>
           <View style={styles.statBox}>
             <Text style={styles.statValue}>+{xpEarned}</Text>
-            <Text style={styles.statLabel}>⚡ XP</Text>
+            <Text style={styles.statLabel}>⚡ {t('home.xp')}</Text>
           </View>
 
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{accuracy}%</Text>
-            <Text style={styles.statLabel}>🎯 Doğruluk</Text>
+            <Text style={styles.statLabel}>🎯 {t('gameUI.accuracy')}</Text>
           </View>
 
           <View style={styles.statBox}>
             <Text style={styles.statValue}>{timeSpent}</Text>
-            <Text style={styles.statLabel}>⏱️ Süre</Text>
+            <Text style={styles.statLabel}>⏱️ {t('gameUI.timeSpent')}</Text>
           </View>
         </View>
 
         {/* Score Display */}
         <View style={styles.scoreCard}>
-          <Text style={styles.scoreLabel}>Toplam Puan</Text>
+          <Text style={styles.scoreLabel}>{t('gameUI.totalScore')}</Text>
           <Text style={styles.scoreValue}>{score}</Text>
           <Text style={styles.scoreSubtext}>
-            {correctAnswers}/{totalQuestions} doğru cevap
+            {correctAnswers}/{totalQuestions} {t('gameUI.correctAnswers')}
           </Text>
         </View>
 
         {/* Continue Button */}
         <DuoButton
-          title="DEVAM ET"
+          title={isLoading ? t('common.loading') : t('common.continue').toUpperCase()}
           onPress={onContinue}
           variant="success"
           fullWidth
           size="large"
+          disabled={isLoading}
+          rightIcon={isLoading ? <LoadingDots style={{ color: 'white', marginLeft: 4 }} /> : undefined}
         />
+
+        {/* Retry Button */}
+        {onRetry && (
+          <DuoButton
+            title={t('gameUI.playAgain').toUpperCase()}
+            onPress={onRetry}
+            variant="primary"
+            fullWidth
+            size="large"
+            style={{ marginTop: 12 }}
+            disabled={isLoading}
+          />
+        )}
 
         {/* Encouragement Text */}
         <Text style={styles.encouragement}>
           {success
-            ? '🎉 Harika! Devam et!'
-            : '💪 Bir dahaki sefere daha iyi olacak!'}
+            ? `🎉 ${t('gameUI.congratulations')}`
+            : `💪 ${t('gameUI.tryAgainMessage')}`}
         </Text>
       </Animated.View>
     </Animated.View>
@@ -233,4 +255,3 @@ const getStyles = () => StyleSheet.create({
     fontWeight: '600',
   },
 });
-

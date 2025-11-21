@@ -2,11 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
+import { LoadingDots } from '@components/ui/LoadingDots';
 import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
 
 export default function VocabularyGamePlayScreen() {
   const { t } = useTranslation();
@@ -170,7 +172,7 @@ export default function VocabularyGamePlayScreen() {
   ];
 
   // Select 10 random questions on component mount
-  const [mockQuestions] = useState(() => {
+  const [mockQuestions, setMockQuestions] = useState(() => {
     const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 10);
   });
@@ -212,11 +214,15 @@ export default function VocabularyGamePlayScreen() {
     setIsAnswered(true);
 
     if (correct) {
+      hapticSuccess();
       setCorrectAnswersCount(prev => prev + 1);
+    } else {
+      hapticError();
     }
   };
 
   const handleNext = () => {
+    hapticLight();
     setIsAnswered(false);
     setSelectedOption(null);
     setIsCorrect(null);
@@ -236,10 +242,24 @@ export default function VocabularyGamePlayScreen() {
     }
   };
 
+  const handleRetry = () => {
+    hapticLight();
+    setCurrentQuestionIndex(0);
+    setCorrectAnswersCount(0);
+    setIsGameComplete(false);
+    setIsAnswered(false);
+    setSelectedOption(null);
+    setIsCorrect(null);
+    // Reshuffle and pick new 10
+    const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
+    setMockQuestions(shuffled.slice(0, 10));
+  };
+
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleComplete = async () => {
     if (isSubmitting) return;
+    hapticLight();
     setIsSubmitting(true);
     console.log('🏁 Vocabulary handleComplete called');
 
@@ -334,14 +354,40 @@ export default function VocabularyGamePlayScreen() {
   if (isGameComplete) {
     return (
       <View style={styles.container}>
-        disabled={isSubmitting}
+        <View style={styles.completeContainer}>
+          <Text style={styles.completeTitle}>{t('gameUI.gameComplete')}</Text>
+          <Text style={styles.completeText}>
+            {correctAnswersCount >= 8 ? t('gameUI.congratulations') : t('gameUI.goodJob')}
+          </Text>
+
+          <View style={styles.statsContainer}>
+            <Text style={styles.statText}>{t('gameUI.question')}: {mockQuestions.length}</Text>
+            <Text style={styles.statText}>{t('gameUI.correctAnswers')}: {correctAnswersCount}</Text>
+            <Text style={styles.statText}>XP: +{correctAnswersCount}</Text>
+          </View>
+
+          <Pressable
+            style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
+            onPress={handleComplete}
+            disabled={isSubmitting}
           >
-        <Text style={styles.completeButtonText}>
-          {isSubmitting ? t('common.loading') : t('common.finish')}
-        </Text>
-      </Pressable>
-        </View >
-      </View >
+            <Text style={styles.completeButtonText}>
+              {isSubmitting ? t('common.loading') : t('common.finish')}
+            </Text>
+            {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
+          </Pressable>
+
+          <Pressable
+            style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
+            onPress={handleRetry}
+            disabled={isSubmitting}
+          >
+            <Text style={styles.completeButtonText}>
+              {t('gameUI.playAgain').toUpperCase()}
+            </Text>
+          </Pressable>
+        </View>
+      </View>
     );
   }
 
@@ -390,7 +436,7 @@ export default function VocabularyGamePlayScreen() {
         <View style={styles.footer}>
           <Pressable style={styles.nextButton} onPress={handleNext}>
             <Text style={styles.nextButtonText}>
-              {currentQuestionIndex < mockQuestions.length - 1 ? 'Sonraki Soru' : 'Bitir'}
+              {currentQuestionIndex < mockQuestions.length - 1 ? t('common.nextQuestion') : t('common.finish')}
             </Text>
           </Pressable>
         </View>
@@ -487,6 +533,8 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 16,
     width: '100%',
     alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row',
     borderBottomWidth: 4,
     borderBottomColor: colors.successDark,
   },

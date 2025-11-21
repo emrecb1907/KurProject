@@ -1,6 +1,6 @@
 {
     "common": {
-        "loading": "Loading...",
+        "loading": "Loading",
         "error": "Error",
         "success": "Success",
         "cancel": "Cancel",
@@ -14,7 +14,33 @@
         "user": "User",
         "continue": "Continue",
         "mainMenu": "Main Menu",
-        "tryAgain": "Try Again"
+        "tryAgain": "Try Again",
+        "xp": "XP",
+        "lives": "Lives",
+        "locked": "Locked",
+        "startLesson": "Start Lesson",
+        "devTools": "Developer Tools",
+        "resetProgress": "Reset Progress",
+        "logout": "Log Out",
+        "themeCache": "Clear Theme Cache",
+        "xpSynced": "XP Synced",
+        "xpAdded": "XP Added",
+        "timeLeft": "Time Left",
+        "question": "Question",
+        "congratulations": "Congratulations!",
+        "gameComplete": "Game Complete!",
+        "wellDone": "Well Done!",
+        "tryAgainMessage": "You can do better!",
+        "perfectScore": "Perfect! You got them all right!",
+        "goodJob": "Good job!",
+        "level": "Level",
+        "tip": "💡 Tip: Achieve 90% success in the last 20 questions to mark this section as 'mastered'",
+        "completed": "Completed",
+        "word": "word",
+        "verse": "verse",
+        "nextQuestion": "Next Question",
+        "showArabic": "Show Arabic",
+        "showLatin": "Show Latin"
     },
     "home": {
         "welcome": "Welcome",
@@ -26,30 +52,64 @@
         "startLesson": "Start Lesson",
         "devTools": "Developer Tools",
         "resetProgress": "Reset Progress",
-        "logout": "Logout",
+        "logout": "Log Out",
         "themeCache": "Clear Theme Cache",
-        "xpSynced": "XP Synchronized",
-        "xpAdded": "XP Added"
+        "xpSynced": "XP Synced",
+        "xpAdded": "XP Added",
+        "timeLeft": "Time Left",
+        "question": "Question",
+        "congratulations": "Congratulations!",
+        "gameComplete": "Game Complete!",
+        "wellDone": "Well Done!",
+        "tryAgainMessage": "You can do better!",
+        "perfectScore": "Perfect! You got them all right!",
+        "goodJob": "Good job!"
     },
     "games": {
         "letters": {
             "title": "Arabic Letters",
-            "description": "Listen to letter sounds and choose the correct letter"
+            "description": "Listen to letter sounds and choose the correct letter",
+            "lessons": {
+                "1": "Basic Letters 1",
+                "2": "Basic Letters 2",
+                "3": "Advanced Letters 1",
+                "4": "Advanced Letters 2"
+            }
         },
         "vocabulary": {
             "title": "Vocabulary Cards",
-            "description": "Learn Islamic key terms"
+            "description": "Learn Islamic keywords",
+            "lessons": {
+                "1": "Basic Concepts",
+                "2": "Worship Terms",
+                "3": "Moral Terms",
+                "4": "Belief Terms"
+            },
+            "format": {
+                "title": "📚 Game Format:",
+                "text": "• First 10 questions: Turkish → Arabic\n• Last 10 questions: Arabic → Turkish\n• 10 seconds per question"
+            }
         },
         "verses": {
             "title": "Verse Completion",
-            "description": "Complete verses by finding missing words"
+            "description": "Complete verses by finding missing words",
+            "lessons": {
+                "1": "Short Surahs 1",
+                "2": "Short Surahs 2",
+                "3": "Prayer Duas",
+                "4": "Amenerrasulü"
+            },
+            "features": {
+                "title": "📖 Features:",
+                "text": "• Both Arabic and Latin transcription\n• Switch between formats\n• 10 seconds per question"
+            }
         },
         "quiz": {
-            "title": "Islamic Q&A",
+            "title": "Islamic Quiz",
             "description": "Test your Islamic knowledge"
         },
         "speed": {
-            "title": "Quick Round",
+            "title": "Speed Round",
             "description": "Quick practice with mixed questions"
         }
     },
@@ -65,11 +125,14 @@
         "wellDone": "Well Done!",
         "tryAgainMessage": "You can do better!",
         "perfectScore": "Perfect! You got them all right!",
-        "goodJob": "Good job!"
+        "goodJob": "Good job!",
+        "accuracy": "Accuracy",
+        "timeSpent": "Time Spent",
+        "playAgain": "Play Again"
     },
     "errors": {
         "insufficientLives": "Insufficient Lives",
-        "insufficientLivesDesc": "You're out of lives! You can earn lives by watching ads or waiting.",
+        "insufficientLivesDesc": "You ran out of lives! Watch an ad or wait to regain lives.",
         "authRequired": "Login Required",
         "generic": "An error occurred",
         "tryAgainLater": "Please try again later"
@@ -102,7 +165,7 @@
             "totalXP": "Total XP",
             "streak": "Daily Streak",
             "successRate": "Success Rate",
-            "completedLessons": "Completed Lessons"
+            "completedLessons": "Lessons Completed"
         },
         "sections": {
             "badges": "Badges",
@@ -118,7 +181,7 @@
             "activeTheme": "Active theme",
             "systemSettings": "system settings"
         },
-        "logout": "Logout",
+        "logout": "Log Out",
         "achievements": {
             "firstStep": {
                 "title": "First Step",
@@ -131,7 +194,7 @@
         },
         "loginPrompt": {
             "title": "Create Account",
-            "description": "Save your progress, join the leaderboard and unlock all features!",
+            "description": "Save your progress, join the leaderboard, and unlock all features!",
             "button": "Login / Register"
         }
     },
@@ -149,20 +212,20 @@
     },
     "auth": {
         "login": {
-            "title": "Welcome Back! 👋",
-            "subtitle": "Login to your account and save your progress",
+            "title": "Welcome! 👋",
+            "subtitle": "Log in to your account and save your progress",
             "email": "Email",
             "emailPlaceholder": "example@email.com",
             "password": "Password",
             "passwordPlaceholder": "••••••••",
-            "loginButton": "Login",
+            "loginButton": "Log In",
             "loggingIn": "Logging in...",
             "noAccount": "Don't have an account?",
             "register": "Register",
             "skipForNow": "Skip for Now →",
             "comingSoon": "Coming Soon",
-            "googleComingSoon": "Google login feature coming very soon!",
-            "appleComingSoon": "Apple login feature coming very soon!"
+            "googleComingSoon": "Google login coming soon!",
+            "appleComingSoon": "Apple login coming soon!"
         },
         "register": {
             "title": "Create Account 🎉",
@@ -178,23 +241,44 @@
             "registerButton": "Register",
             "registering": "Registering...",
             "hasAccount": "Already have an account?",
-            "login": "Login",
+            "login": "Log In",
             "skipForNow": "Skip for Now →",
             "successTitle": "🎉 Welcome!",
-            "successMessage": "Your account has been created and you're logged in. You can start learning now!",
-            "successButton": "Let's Get Started!"
+            "successMessage": "Account created and logged in. You can start learning now!",
+            "successButton": "Let's Start!"
         },
         "errors": {
             "fillAllFields": "Please fill in all fields",
-            "passwordMismatch": "Passwords don't match",
+            "passwordMismatch": "Passwords do not match",
             "passwordTooShort": "Password must be at least 6 characters",
             "loginFailed": "Login failed",
-            "invalidCredentials": "Invalid email or password",
+            "invalidCredentials": "Email or password incorrect",
             "emailNotConfirmed": "Please confirm your email address",
             "userNotFound": "User not found",
             "registerFailed": "Registration failed",
             "emailAlreadyExists": "This email address is already registered",
             "invalidEmail": "Invalid email address"
+        }
+    },
+    "rewards": {
+        "title": "Chest",
+        "lives": "Lives",
+        "livesMax": "Lives are full! 🎉",
+        "nextLife": "Next life:",
+        "infoBanner": "Earn +1 life every time you watch an ad.",
+        "howItWorks": {
+            "title": "How It Works?",
+            "text": "• Earn +1 life every time you watch an ad\n• Watch up to 3 ads per day\n• Cannot watch ads when lives are full\n• Used slots refresh after 24 hours"
+        },
+        "adSlots": "Ad Slots",
+        "watchAd": "Watch",
+        "cooldown": "Cooldown",
+        "earnLife": "Earn Life",
+        "watchAdDesc": "Watch ad, earn +1 life",
+        "cooldownDesc": "You can watch again in {{time}}",
+        "alerts": {
+            "adWatched": "Ad watched! +1 Life earned.",
+            "cantWatch": "You cannot watch ads right now."
         }
     }
 }

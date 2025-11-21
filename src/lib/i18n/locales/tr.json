@@ -1,6 +1,6 @@
 {
     "common": {
-        "loading": "Yükleniyor...",
+        "loading": "Yükleniyor",
         "error": "Hata",
         "success": "Başarılı",
         "cancel": "Vazgeç",
@@ -14,10 +14,36 @@
         "user": "Kullanıcı",
         "continue": "Devam Et",
         "mainMenu": "Ana Menü",
-        "tryAgain": "Tekrar Dene"
+        "tryAgain": "Tekrar Dene",
+        "xp": "XP",
+        "lives": "Can",
+        "locked": "Kilitli",
+        "startLesson": "Dersi Başlat",
+        "devTools": "Geliştirici Araçları",
+        "resetProgress": "İlerlemeyi Sıfırla",
+        "logout": "Çıkış Yap",
+        "themeCache": "Tema Cache Temizle",
+        "xpSynced": "XP Senkronize Edildi",
+        "xpAdded": "XP Eklendi",
+        "timeLeft": "Kalan Süre",
+        "question": "Soru",
+        "congratulations": "Tebrikler!",
+        "gameComplete": "Oyun Tamamlandı!",
+        "wellDone": "Aferin!",
+        "tryAgainMessage": "Daha iyi yapabilirsin!",
+        "perfectScore": "Mükemmel! Hepsini doğru bildin!",
+        "goodJob": "İyi iş çıkardın!",
+        "level": "Seviye",
+        "tip": "💡 İpucu: Bu bölümü 'tamamlandı' olarak işaretlemek için son 20 soruda %90 başarı sağla",
+        "completed": "Tamamlandı",
+        "word": "kelime",
+        "verse": "ayet",
+        "nextQuestion": "Sonraki Soru",
+        "showArabic": "Arapça Göster",
+        "showLatin": "Okunuşu Göster"
     },
     "home": {
-        "welcome": "Hoşgeldin",
+        "welcome": "Hoş Geldin",
         "lessons": "Dersler",
         "level": "Seviye",
         "xp": "XP",
@@ -29,20 +55,54 @@
         "logout": "Çıkış Yap",
         "themeCache": "Tema Cache Temizle",
         "xpSynced": "XP Senkronize Edildi",
-        "xpAdded": "XP Eklendi"
+        "xpAdded": "XP Eklendi",
+        "timeLeft": "Kalan Süre",
+        "question": "Soru",
+        "congratulations": "Tebrikler!",
+        "gameComplete": "Oyun Tamamlandı!",
+        "wellDone": "Aferin!",
+        "tryAgainMessage": "Daha iyi yapabilirsin!",
+        "perfectScore": "Mükemmel! Hepsini doğru bildin!",
+        "goodJob": "İyi iş çıkardın!"
     },
     "games": {
         "letters": {
             "title": "Arapça Harfler",
-            "description": "Harf seslerini dinle ve doğru harfi seç"
+            "description": "Harf seslerini dinle ve doğru harfi seç",
+            "lessons": {
+                "1": "Temel Harfler 1",
+                "2": "Temel Harfler 2",
+                "3": "İleri Harfler 1",
+                "4": "İleri Harfler 2"
+            }
         },
         "vocabulary": {
             "title": "Kavram Kartları",
-            "description": "İslami anahtar kelimeleri öğren"
+            "description": "İslami anahtar kelimeleri öğren",
+            "lessons": {
+                "1": "Temel Kavramlar",
+                "2": "İbadet Terimleri",
+                "3": "Ahlak Terimleri",
+                "4": "İtikat Terimleri"
+            },
+            "format": {
+                "title": "📚 Oyun Formatı:",
+                "text": "• İlk 10 soru: Türkçe → Arapça\n• Son 10 soru: Arapça → Türkçe\n• Her soru için 10 saniye süre"
+            }
         },
         "verses": {
             "title": "Ayet Tamamlama",
-            "description": "Eksik kelimeleri bularak ayetleri tamamla"
+            "description": "Eksik kelimeleri bularak ayetleri tamamla",
+            "lessons": {
+                "1": "Kısa Sureler 1",
+                "2": "Kısa Sureler 2",
+                "3": "Namaz Duaları",
+                "4": "Amenerrasulü"
+            },
+            "features": {
+                "title": "📖 Özellikler:",
+                "text": "• Hem Arapça hem Latin transkripsiyon\n• Formatlar arası geçiş yapabilirsiniz\n• Her soru için 10 saniye süre"
+            }
         },
         "quiz": {
             "title": "İslami Soru-Cevap",
@@ -61,18 +121,8 @@
         "timeLeft": "Kalan Süre",
         "question": "Soru",
         "congratulations": "Tebrikler!",
-        "gameComplete": "Oyun Tamamlandı!",
-        "wellDone": "Aferin!",
-        "tryAgainMessage": "Daha iyi yapabilirsin!",
-        "perfectScore": "Mükemmel! Hepsini doğru bildin!",
-        "goodJob": "İyi iş çıkardın!"
-    },
-    "errors": {
-        "insufficientLives": "Yetersiz Can",
-        "insufficientLivesDesc": "Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.",
-        "authRequired": "Giriş Yapmalısın",
-        "generic": "Bir hata oluştu",
-        "tryAgainLater": "Lütfen daha sonra tekrar deneyin"
+        "tryAgainLater": "Lütfen daha sonra tekrar deneyin",
+        "playAgain": "Tekrar Oyna"
     },
     "weeklyActivity": {
         "title": "Günlük Hedef",
@@ -195,6 +245,27 @@
             "registerFailed": "Kayıt başarısız",
             "emailAlreadyExists": "Bu email adresi zaten kayıtlı",
             "invalidEmail": "Geçersiz email adresi"
+        }
+    },
+    "rewards": {
+        "title": "Sandık",
+        "lives": "Can",
+        "livesMax": "Can sayın maksimumda! 🎉",
+        "nextLife": "Sonraki can:",
+        "infoBanner": "Her reklam izlediğinde +1 can kazanırsın.",
+        "howItWorks": {
+            "title": "Nasıl Çalışır?",
+            "text": "• Her reklam izlediğinde +1 can kazanırsın\n• Günde maksimum 3 reklam izleyebilirsin\n• Canların maksimuma ulaştığında reklam izleyemezsin\n• Kullanılan haklar 24 saat sonra yenilenir"
+        },
+        "adSlots": "Reklam Slotları",
+        "watchAd": "İzle",
+        "cooldown": "Bekleme Süresi",
+        "earnLife": "Can Kazan",
+        "watchAdDesc": "Reklam izle, +1 can kazan",
+        "cooldownDesc": "{{time}} sonra tekrar izleyebilirsin",
+        "alerts": {
+            "adWatched": "Reklam izlendi! +1 Can kazandın.",
+            "cantWatch": "Şu an reklam izleyemezsin."
         }
     }
 }

@@ -1,4 +1,4 @@
-import { Pressable, Text, StyleSheet, ViewStyle, TextStyle, ActivityIndicator } from 'react-native';
+import { Pressable, Text, StyleSheet, ViewStyle, TextStyle, ActivityIndicator, View } from 'react-native';
 import { colors } from '@constants/colors';
 
 interface DuoButtonProps {
@@ -10,6 +10,7 @@ interface DuoButtonProps {
   loading?: boolean;
   fullWidth?: boolean;
   style?: ViewStyle;
+  rightIcon?: React.ReactNode;
 }
 
 export function DuoButton({
@@ -21,6 +22,7 @@ export function DuoButton({
   loading = false,
   fullWidth = false,
   style,
+  rightIcon,
 }: DuoButtonProps) {
   const getButtonStyle = (): ViewStyle => {
     const base: ViewStyle = {
@@ -82,7 +84,10 @@ export function DuoButton({
       {loading ? (
         <ActivityIndicator color={colors.textOnPrimary} />
       ) : (
-        <Text style={getTextStyle()}>{title}</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 8 }}>
+          <Text style={getTextStyle()}>{title}</Text>
+          {rightIcon}
+        </View>
       )}
     </Pressable>
   );
