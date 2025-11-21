@@ -246,7 +246,7 @@ MIT
 
 ## 👨‍💻 Geliştirici
 
-Developed with ❤️ for the Muslim community
+Emre Can Biçici
 
 ## 📞 İletişim
 
@@ -255,4 +255,3 @@ Developed with ❤️ for the Muslim community
 
 ---
 
-**Not**: AdMob App ID'lerini production'a geçmeden önce değiştirmeyi unutmayın!
