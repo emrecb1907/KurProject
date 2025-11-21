@@ -1,9 +1,18 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, Alert } from 'react-native';
-import { useEffect, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, LayoutAnimation, Dimensions } from 'react-native';
+import { useEffect, useCallback, useMemo, useState, useRef } from 'react';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+  withTiming,
+  Easing,
+  FadeInUp,
+  FadeOutDown
+} from 'react-native-reanimated';
 import { colors } from '@constants/colors';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { HugeiconsIcon } from '@hugeicons/react-native';
@@ -22,6 +31,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/lib/supabase/client';
 import { database } from '@/lib/supabase/database';
 import { WeeklyActivity } from '@/components/home/WeeklyActivity';
+import { HoverCard } from '@/components/ui/HoverCard';
+import * as Haptics from 'expo-haptics';
 
 export default function HomePage() {
   const router = useRouter();
@@ -62,11 +73,39 @@ export default function HomePage() {
     }, [isAuthenticated, user?.id, totalXP])
   );
 
+  // 🔄 Close lesson card when leaving the tab
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        // When screen loses focus (navigating to another tab)
+        setSelectedLesson(null);
+      };
+    }, [])
+  );
+
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
 
+  // Animated XP bar width
+  const animatedXPWidth = useSharedValue(xpProgress.progressPercentage);
+
+  // Update animated width when XP changes
+  useEffect(() => {
+    animatedXPWidth.value = withTiming(xpProgress.progressPercentage, {
+      duration: 300,
+      easing: Easing.out(Easing.quad),
+    });
+  }, [xpProgress.progressPercentage]);
+
+  const animatedXPStyle = useAnimatedStyle(() => {
+    return {
+      width: `${animatedXPWidth.value}%`,
+    };
+  });
+
   // 🧪 TEST: Add 100 XP
   const handleAddXP = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     addXP(100);
 
     // If authenticated, sync to database
@@ -84,6 +123,7 @@ export default function HomePage() {
 
   // 🧪 TEST: Add 1000 XP
   const handleAdd1000XP = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     addXP(1000);
 
     // If authenticated, sync to database
@@ -148,6 +188,7 @@ export default function HomePage() {
 
   // 🎨 TEST: Clear theme cache (reset to system default)
   const handleClearThemeCache = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     try {
       await AsyncStorage.removeItem('quranlearn-theme');
       console.log('✅ Theme cache cleared');
@@ -171,6 +212,7 @@ export default function HomePage() {
 
   // 🧹 TEST: Clear all user progress (keep account, reset XP/Level/Lives)
   const handleClearData = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
     Alert.alert(
       '⚠️ İlerlemeyi Sıfırla',
       'Tüm ilerleme sıfırlanacak (XP, Level, Canlar, Streak). Hesap bilgilerin korunur. Emin misin?',
@@ -287,12 +329,151 @@ export default function HomePage() {
     },
   ];
 
+  const scrollViewRef = useRef<ScrollView>(null);
+  const [selectedLesson, setSelectedLesson] = useState<typeof lessons[0] | null>(null);
+  const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
+  const [showDevTools, setShowDevTools] = useState(false);
+
+  const handleLessonSelect = (lesson: typeof lessons[0]) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    if (selectedLesson?.id === lesson.id) {
+      // If already selected, deselect
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setSelectedLesson(null);
+    } else {
+      // Select new lesson
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setSelectedLesson(lesson);
+
+      // Calculate card position for overlay alignment
+      const index = lessons.findIndex(l => l.id === lesson.id);
+      if (index !== -1) {
+        const cardWidth = 280;
+        const gap = 16;
+        const padding = 16;
+        const screenWidth = Dimensions.get('window').width;
+
+        // Calculate position to center the card on screen
+        const cardCenter = padding + (index * (cardWidth + gap)) + (cardWidth / 2);
+        const targetScrollX = Math.max(0, cardCenter - (screenWidth / 2));
+
+        // Calculate where the card will actually be on screen after scrolling
+        // If we can scroll to center it, it will be at screen center
+        // If we can't (first/last cards), calculate actual position
+        let confirmationLeft;
+        if (targetScrollX === 0) {
+          // Can't scroll left - card is at its natural position
+          confirmationLeft = padding + (index * (cardWidth + gap));
+        } else {
+          // Card will be centered
+          confirmationLeft = (screenWidth - cardWidth) / 2;
+        }
+
+        setCardPosition({
+          left: confirmationLeft,
+          top: 10 // Keep same top position
+        });
+
+        // Scroll to center the selected lesson
+        if (scrollViewRef.current) {
+          scrollViewRef.current.scrollTo({
+            x: targetScrollX,
+            animated: true
+          });
+        }
+      }
+    }
+  };
+
+  const handleStartLesson = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    if (!selectedLesson) return;
+
+    if (currentLives <= 0) {
+      Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.');
+      return;
+    }
+
+    router.push((selectedLesson.route || '/games/letters') as any);
+    setSelectedLesson(null);
+  };
+
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: colors.backgroundDarker,
     },
+    // ... (existing styles) ...
+    startCardContainer: {
+      position: 'absolute',
+      width: 280,
+      zIndex: 100,
+      backgroundColor: colors.surface,
+      borderRadius: 16,
+      padding: 16,
+      borderWidth: 2,
+      borderColor: colors.border,
+      shadowColor: colors.shadow,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      elevation: 8,
+    },
+    startCardHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginBottom: 12,
+      gap: 10,
+    },
+    startCardIcon: {
+      width: 40,
+      height: 40,
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    startCardTitleContainer: {
+      flex: 1,
+    },
+    startCardTitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+    },
+    startCardSubtitle: {
+      fontSize: 12,
+      color: colors.textSecondary,
+    },
+    startCardActions: {
+      flexDirection: 'row',
+      gap: 8,
+    },
+    startButton: {
+      flex: 1,
+      paddingVertical: 12,
+      borderRadius: 12,
+      alignItems: 'center',
+      borderBottomWidth: 3,
+    },
+    startButtonText: {
+      fontSize: 15,
+      fontWeight: 'bold',
+      color: colors.textOnPrimary,
+    },
+    cancelButton: {
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    cancelButtonText: {
+      fontSize: 13,
+      fontWeight: '600',
+      color: colors.textSecondary,
+    },
+    // ... (rest of styles) ...
+
     topBar: {
       flexDirection: 'row',
       justifyContent: 'space-around',
@@ -363,7 +544,7 @@ export default function HomePage() {
     },
     carouselContent: {
       paddingHorizontal: 16,
-      paddingVertical: 8,
+      paddingVertical: 24, // Increased to prevent clipping of hover effect
       gap: 16,
     },
     lessonCard: {
@@ -579,6 +760,21 @@ export default function HomePage() {
       color: colors.xpGold,
       fontWeight: 'bold',
     },
+    devToolsToggle: {
+      backgroundColor: colors.surface,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      borderRadius: 12,
+      marginTop: 16,
+      borderWidth: 2,
+      borderColor: colors.warning,
+      alignItems: 'center',
+    },
+    devToolsToggleText: {
+      fontSize: 14,
+      fontWeight: 'bold',
+      color: colors.warning,
+    },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
@@ -595,7 +791,7 @@ export default function HomePage() {
         {/* XP Progress Bar */}
         <View style={styles.xpContainer}>
           <View style={styles.xpBarBackground}>
-            <View style={[styles.xpBarFill, { width: `${xpProgress.progressPercentage}%` }]} />
+            <Animated.View style={[styles.xpBarFill, animatedXPStyle]} />
             <Text style={styles.xpText}>
               {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
             </Text>
@@ -611,173 +807,264 @@ export default function HomePage() {
 
       {/* Content Wrapper */}
       <View style={styles.contentWrapper}>
-
-
-        {/* Section Title */}
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Dersler</Text>
-        </View>
-
-        {/* Lesson Cards Carousel */}
         <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.carouselContent}
-          style={styles.carousel}
+          style={styles.content}
+          contentContainerStyle={{ paddingBottom: 100 }}
+          showsVerticalScrollIndicator={false}
         >
-          {lessons.map((lesson) => (
-            <Pressable
-              key={lesson.id}
-              style={[
-                styles.lessonCard,
-                {
-                  backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
-                  borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
-                },
-                !lesson.unlocked && styles.lessonCardLocked,
-              ]}
-              onPress={() => {
-                if (!lesson.unlocked) return;
+          {/* Section Title */}
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Dersler</Text>
+          </View>
 
-                if (currentLives <= 0) {
-                  Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.');
-                  return;
-                }
-
-                router.push((lesson.route || '/games/letters') as any);
-              }}
-              disabled={!lesson.unlocked}
-            >
-              {/* Card Header */}
-              <View style={styles.cardHeader}>
-                <View style={styles.cardIconContainer}>
-                  <HugeiconsIcon
-                    icon={lesson.icon}
-                    size={32}
-                    color={colors.textOnPrimary}
-                  />
-                </View>
-                {!lesson.unlocked && (
-                  <View style={styles.levelBadge}>
-                    <Text style={styles.levelBadgeText}>Lvl {lesson.level}</Text>
+          {/* Lesson Cards Carousel */}
+          <ScrollView
+            ref={scrollViewRef}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.carouselContent}
+            style={styles.carousel}
+            onScrollBeginDrag={() => {
+              // Dismiss confirmation card when user manually scrolls
+              if (selectedLesson) {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                setSelectedLesson(null);
+              }
+            }}
+          >
+            {lessons.map((lesson) => (
+              <HoverCard
+                key={lesson.id}
+                style={[
+                  styles.lessonCard,
+                  {
+                    backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
+                    borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
+                  },
+                  !lesson.unlocked && styles.lessonCardLocked,
+                ]}
+                onPress={() => handleLessonSelect(lesson)}
+                disabled={!lesson.unlocked}
+                lightColor="rgba(255, 255, 255, 0.3)"
+              >
+                {/* Card Header */}
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
+                    <HugeiconsIcon
+                      icon={lesson.icon}
+                      size={32}
+                      color={colors.textOnPrimary}
+                    />
                   </View>
-                )}
-              </View>
-
-              {/* Card Content */}
-              <View style={styles.cardContent}>
-                <Text style={styles.cardTitle}>{lesson.title}</Text>
-                <Text style={styles.cardDescription}>{lesson.description}</Text>
-              </View>
-
-              {/* Card Footer - Progress or Status */}
-              <View style={styles.cardFooter}>
-                {lesson.unlocked ? (
-                  <View style={styles.progressContainer}>
-                    <View style={styles.progressBar}>
-                      <View style={[styles.progressFill, { width: '30%' }]} />
+                  {!lesson.unlocked && (
+                    <View style={styles.levelBadge}>
+                      <Text style={styles.levelBadgeText}>Lvl {lesson.level}</Text>
                     </View>
-                    <Text style={styles.progressText}>3/10 Ders</Text>
+                  )}
+                </View>
+
+                {/* Card Content */}
+                <View style={styles.cardContent}>
+                  <Text style={styles.cardTitle}>{lesson.title}</Text>
+                  <Text style={styles.cardDescription}>{lesson.description}</Text>
+                </View>
+
+                {/* Card Footer - Progress or Status */}
+                <View style={styles.cardFooter}>
+                  {lesson.unlocked ? (
+                    <View style={styles.progressContainer}>
+                      <View style={styles.progressBar}>
+                        <View style={[styles.progressFill, { width: '30%' }]} />
+                      </View>
+                      <Text style={styles.progressText}>3/10 Ders</Text>
+                    </View>
+                  ) : (
+                    <View style={styles.lockedBadge}>
+                      <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
+                      <Text style={styles.lockedBadgeText}>Kilitli</Text>
+                    </View>
+                  )}
+                </View>
+              </HoverCard>
+            ))}
+          </ScrollView>
+
+          {/* Bottom Section with Overlay */}
+          <View style={styles.bottomContent}>
+            {/* Weekly Activity / Daily Goal Card */}
+            <WeeklyActivity />
+
+            {/* Lesson Start Confirmation Card (Overlay) */}
+            {selectedLesson && (
+              <>
+                {/* Backdrop to close on outside click */}
+                <Pressable
+                  style={{
+                    position: 'absolute',
+                    top: -2000, // Cover entire scrollable area
+                    left: -1000,
+                    right: -1000,
+                    bottom: -2000,
+                    zIndex: 99, // Just below the card (which is 100)
+                    backgroundColor: 'transparent',
+                  }}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                    setSelectedLesson(null);
+                  }}
+                />
+
+                <Animated.View
+                  entering={FadeInUp.duration(300).easing(Easing.out(Easing.quad))}
+                  exiting={FadeOutDown.duration(200)}
+                  style={[
+                    styles.startCardContainer,
+                    {
+                      left: cardPosition.left,
+                      top: cardPosition.top,
+                    }
+                  ]}
+                >
+                  <View style={styles.startCardHeader}>
+                    <View style={[styles.startCardIcon, { backgroundColor: selectedLesson.color }]}>
+                      <HugeiconsIcon icon={selectedLesson.icon} size={20} color={colors.textOnPrimary} />
+                    </View>
+                    <View style={styles.startCardTitleContainer}>
+                      <Text style={styles.startCardTitle}>{selectedLesson.title}</Text>
+                      <Text style={styles.startCardSubtitle}>{selectedLesson.description}</Text>
+                    </View>
                   </View>
-                ) : (
-                  <View style={styles.lockedBadge}>
-                    <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
-                    <Text style={styles.lockedBadgeText}>Kilitli</Text>
+
+                  <View style={styles.startCardActions}>
+                    <Pressable
+                      style={[styles.startButton, { backgroundColor: selectedLesson.color, borderBottomColor: selectedLesson.borderColor }]}
+                      onPress={handleStartLesson}
+                    >
+                      <Text style={styles.startButtonText}>Başla</Text>
+                    </Pressable>
+
+                    <Pressable
+                      style={styles.cancelButton}
+                      onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        setSelectedLesson(null);
+                      }}
+                    >
+                      <Text style={styles.cancelButtonText}>Vazgeç</Text>
+                    </Pressable>
                   </View>
-                )}
+                </Animated.View>
+              </>
+            )}
+
+            {/* 🧪 Developer Tools Toggle */}
+            <Pressable
+              style={styles.devToolsToggle}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setShowDevTools(!showDevTools);
+              }}
+            >
+              <Text style={styles.devToolsToggleText}>
+                {showDevTools ? '🔽' : '🔼'} Geliştirici Araçları
+              </Text>
+            </Pressable>
+
+            {/* 🧪 TEST BUTTONS - Remove in production */}
+            {showDevTools && (
+              <View style={styles.testContainer}>
+                <Text style={styles.testTitle}>🧪 Geliştirici Araçları</Text>
+
+                {/* Add XP Buttons */}
+                <View style={styles.testButtonRow}>
+                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
+                    <Text style={styles.testButtonText}>➕ +100 XP</Text>
+                  </Pressable>
+
+                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
+                    <Text style={styles.testButtonText}>⚡ +1000 XP</Text>
+                  </Pressable>
+                </View>
+
+                {/* Lives Debug Buttons */}
+                <View style={styles.testButtonRow}>
+                  <Pressable
+                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      removeLives(1);
+                    }}
+                  >
+                    <Text style={styles.testButtonText}>❤️ -1 Can</Text>
+                  </Pressable>
+
+                  <Pressable
+                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      addLives(1);
+                    }}
+                  >
+                    <Text style={styles.testButtonText}>❤️ +1 Can</Text>
+                  </Pressable>
+                </View>
+
+                {/* Clear Theme Cache Button */}
+                <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
+                  <Text style={styles.testButtonText}>🎨 Tema Cache Temizle</Text>
+                </Pressable>
+
+                {/* Reset Progress Button */}
+                <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
+                  <Text style={styles.testButtonText}>🔄 İlerlemeyi Sıfırla (Her Şey)</Text>
+                </Pressable>
+
+                {/* Reset XP Only Button */}
+                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  try {
+                    // Reset local store
+                    setTotalXP(0);
+                    // Reset DB if authenticated
+                    if (isAuthenticated && user?.id) {
+                      await database.users.update(user.id, {
+                        total_xp: 0,
+                        current_level: 1,
+                        total_score: 0,
+                        updated_at: new Date().toISOString(),
+                      });
+                    }
+                    Alert.alert('✅ Sıfırlandı', 'XP sıfırlandı.');
+                  } catch (error) {
+                    console.error('❌ Reset XP error:', error);
+                  }
+                }}>
+                  <Text style={styles.testButtonText}>🔄 Sadece XP Sıfırla</Text>
+                </Pressable>
+
+                {/* Logout Button */}
+                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                  try {
+                    const { logout } = useStore.getState();
+                    await supabase.auth.signOut();
+                    logout();
+                    resetUserData();
+                    Alert.alert('✅ Çıkış Yapıldı', 'Başarıyla çıkış yapıldı.');
+                    router.replace('/(auth)/login');
+                  } catch (error) {
+                    console.error('❌ Logout error:', error);
+                    Alert.alert('Hata', 'Çıkış yapılırken bir hata oluştu.');
+                  }
+                }}>
+                  <Text style={styles.testButtonText}>🚪 Çıkış Yap</Text>
+                </Pressable>
               </View>
-            </Pressable>
-          ))}
-        </ScrollView>
-
-        {/* Bottom Section */}
-        <ScrollView style={styles.content} contentContainerStyle={styles.bottomContent}>
-          {/* Weekly Activity / Daily Goal Card */}
-          <WeeklyActivity />
-
-          {/* 🧪 TEST BUTTONS - Remove in production */}
-          <View style={styles.testContainer}>
-            <Text style={styles.testTitle}>🧪 Geliştirici Araçları</Text>
-
-            {/* Add XP Buttons */}
-            <View style={styles.testButtonRow}>
-              <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                <Text style={styles.testButtonText}>➕ +100 XP</Text>
-              </Pressable>
-
-              <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                <Text style={styles.testButtonText}>⚡ +1000 XP</Text>
-              </Pressable>
-            </View>
-
-            {/* Lives Debug Buttons */}
-            <View style={styles.testButtonRow}>
-              <Pressable
-                style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
-                onPress={() => removeLives(1)}
-              >
-                <Text style={styles.testButtonText}>❤️ -1 Can</Text>
-              </Pressable>
-
-              <Pressable
-                style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
-                onPress={() => addLives(1)}
-              >
-                <Text style={styles.testButtonText}>❤️ +1 Can</Text>
-              </Pressable>
-            </View>
-
-            {/* Clear Theme Cache Button */}
-            <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
-              <Text style={styles.testButtonText}>🎨 Tema Cache Temizle</Text>
-            </Pressable>
-
-            {/* Reset Progress Button */}
-            <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-              <Text style={styles.testButtonText}>🔄 İlerlemeyi Sıfırla (Her Şey)</Text>
-            </Pressable>
-
-            {/* Reset XP Only Button */}
-            <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
-              try {
-                // Reset local store
-                setTotalXP(0);
-                // Reset DB if authenticated
-                if (isAuthenticated && user?.id) {
-                  await database.users.update(user.id, {
-                    total_xp: 0,
-                    current_level: 1,
-                    total_score: 0,
-                    updated_at: new Date().toISOString(),
-                  });
-                }
-                Alert.alert('✅ Sıfırlandı', 'XP sıfırlandı.');
-              } catch (error) {
-                console.error('❌ Reset XP error:', error);
-              }
-            }}>
-              <Text style={styles.testButtonText}>🔄 Sadece XP Sıfırla</Text>
-            </Pressable>
-
-            {/* Logout Button */}
-            <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
-              try {
-                const { logout } = useStore.getState();
-                await supabase.auth.signOut();
-                logout();
-                resetUserData();
-                Alert.alert('✅ Çıkış Yapıldı', 'Başarıyla çıkış yapıldı.');
-                router.replace('/(auth)/login');
-              } catch (error) {
-                console.error('❌ Logout error:', error);
-                Alert.alert('Hata', 'Çıkış yapılırken bir hata oluştu.');
-              }
-            }}>
-              <Text style={styles.testButtonText}>🚪 Çıkış Yap</Text>
-            </Pressable>
+            )}
           </View>
         </ScrollView>
       </View>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }

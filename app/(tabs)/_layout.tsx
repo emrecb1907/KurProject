@@ -6,6 +6,8 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import { Home01Icon, Award01Icon, FavouriteIcon, UserAccountIcon, GiftIcon } from '@hugeicons/core-free-icons';
 
+import * as Haptics from 'expo-haptics';
+
 export default function TabLayout() {
   const { activeTheme, themeVersion } = useTheme();
 
@@ -67,6 +69,11 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={screenOptions}
+      screenListeners={{
+        tabPress: () => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        },
+      }}
     >
       <Tabs.Screen
         name="index"

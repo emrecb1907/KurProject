@@ -126,6 +126,7 @@ export default function QuizGameScreen() {
     const handleComplete = async () => {
         if (isSubmitting) return;
         setIsSubmitting(true);
+        console.log('🏁 Quiz handleComplete called');
 
         // Add XP locally
         if (correctAnswersCount > 0) {
@@ -137,13 +138,26 @@ export default function QuizGameScreen() {
                     console.log('🔄 Syncing Quiz XP to DB:', correctAnswersCount);
                     await database.users.updateXP(user.id, correctAnswersCount);
 
+                    console.log('📝 Calling updateCompletion for Quiz:', {
+                        userId: user.id,
+                        lessonId: id,
+                        correct: correctAnswersCount,
+                        total: mockQuestions.length
+                    });
+
                     // Save progress to enable weekly activity tracking
-                    await database.progress.updateCompletion(
+                    const { error: completionError } = await database.progress.updateCompletion(
                         user.id,
                         id as string, // lesson_id
                         correctAnswersCount,
                         mockQuestions.length
                     );
+
+                    if (completionError) {
+                        console.error('❌ Quiz updateCompletion failed:', completionError);
+                    } else {
+                        console.log('✅ Quiz updateCompletion success');
+                    }
 
                     // Record daily activity (optimized)
                     await database.dailyActivity.record(user.id);
@@ -151,6 +165,35 @@ export default function QuizGameScreen() {
                     console.log('✅ Quiz game progress saved');
                 } catch (error) {
                     console.error('❌ Failed to sync XP:', error);
+                }
+            } else {
+                console.log('⚠️ User not authenticated, skipping DB sync');
+            }
+        } else {
+            // Even if 0 correct, we should update completion (since we removed threshold)
+            if (isAuthenticated && user?.id) {
+                try {
+                    console.log('📝 Calling updateCompletion for Quiz (0 correct):', {
+                        userId: user.id,
+                        lessonId: id,
+                        correct: 0,
+                        total: mockQuestions.length
+                    });
+
+                    const { error: completionError } = await database.progress.updateCompletion(
+                        user.id,
+                        id as string,
+                        0,
+                        mockQuestions.length
+                    );
+
+                    if (completionError) {
+                        console.error('❌ Quiz updateCompletion failed (0 correct):', completionError);
+                    } else {
+                        console.log('✅ Quiz updateCompletion success (0 correct)');
+                    }
+                } catch (error) {
+                    console.error('❌ Failed to sync progress (0 correct):', error);
                 }
             }
         }

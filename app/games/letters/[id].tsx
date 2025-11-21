@@ -106,6 +106,7 @@ export default function LettersGamePlayScreen() {
   const handleComplete = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
+    console.log('🏁 Letters handleComplete called');
 
     // Add XP locally
     if (correctAnswersCount > 0) {
@@ -117,13 +118,26 @@ export default function LettersGamePlayScreen() {
           console.log('🔄 Syncing Letters XP to DB:', correctAnswersCount);
           await database.users.updateXP(user.id, correctAnswersCount);
 
+          console.log('📝 Calling updateCompletion for Letters:', {
+            userId: user.id,
+            lessonId: id,
+            correct: correctAnswersCount,
+            total: mockQuestions.length
+          });
+
           // Save progress to enable weekly activity tracking
-          await database.progress.updateCompletion(
+          const { error: completionError } = await database.progress.updateCompletion(
             user.id,
             id as string, // lesson_id
             correctAnswersCount,
             mockQuestions.length
           );
+
+          if (completionError) {
+            console.error('❌ Letters updateCompletion failed:', completionError);
+          } else {
+            console.log('✅ Letters updateCompletion success');
+          }
 
           // Record daily activity (optimized)
           await database.dailyActivity.record(user.id);
@@ -131,6 +145,35 @@ export default function LettersGamePlayScreen() {
           console.log('✅ Letters game progress saved');
         } catch (error) {
           console.error('❌ Failed to sync XP:', error);
+        }
+      } else {
+        console.log('⚠️ User not authenticated, skipping DB sync');
+      }
+    } else {
+      // Even if 0 correct, we should update completion (since we removed threshold)
+      if (isAuthenticated && user?.id) {
+        try {
+          console.log('📝 Calling updateCompletion for Letters (0 correct):', {
+            userId: user.id,
+            lessonId: id,
+            correct: 0,
+            total: mockQuestions.length
+          });
+
+          const { error: completionError } = await database.progress.updateCompletion(
+            user.id,
+            id as string,
+            0,
+            mockQuestions.length
+          );
+
+          if (completionError) {
+            console.error('❌ Letters updateCompletion failed (0 correct):', completionError);
+          } else {
+            console.log('✅ Letters updateCompletion success (0 correct)');
+          }
+        } catch (error) {
+          console.error('❌ Failed to sync progress (0 correct):', error);
         }
       }
     }

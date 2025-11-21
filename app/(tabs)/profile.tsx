@@ -1,8 +1,10 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useMemo } from 'react';
+import { useMemo, useCallback, useState } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { HugeiconsIcon } from '@hugeicons/react-native';
+import * as Haptics from 'expo-haptics';
 import {
   DiamondIcon,
   FireIcon,
@@ -22,6 +24,7 @@ import {
 } from '@hugeicons/core-free-icons';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
+import { database } from '@/lib/supabase/database';
 import { useAuthHook } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 
@@ -29,15 +32,53 @@ export default function ProfileScreen() {
   const router = useRouter();
 
   // Get user data from Zustand store
-  const { totalXP, streak } = useUser();
+  const { totalXP, streak, setStreak } = useUser();
   const { isAuthenticated, user } = useAuth();
   const { signOut } = useAuthHook();
   const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
   const currentStreak = streak;
+  const [completedLessons, setCompletedLessons] = useState(0);
+  const [successRate, setSuccessRate] = useState(0);
 
-  // Debug theme
-  const successRate = 0; // TODO: Calculate from user_answers
-  const completedLessons = 0; // TODO: Calculate from user_progress
+  // 🔄 Sync User Data (Streak & Stats) from database
+  useFocusEffect(
+    useCallback(() => {
+      async function syncUserData() {
+        if (isAuthenticated && user?.id) {
+          try {
+            // Fetch user data for streak and stats
+            const { data: userData } = await database.users.getById(user.id);
+            if (userData) {
+              // Update streak in store
+              if (userData.streak !== undefined) {
+                setStreak(userData.streak);
+              } else if (userData.streak_count !== undefined) {
+                setStreak(userData.streak_count);
+              }
+
+              // Update stats from user table
+              setCompletedLessons(userData.total_lessons_completed || 0);
+
+              // Calculate success rate
+              const totalQuestions = userData.total_questions_solved || 0;
+              const correctAnswers = userData.total_correct_answers || 0;
+              const rate = totalQuestions > 0
+                ? Math.round((correctAnswers / totalQuestions) * 100)
+                : 0;
+              setSuccessRate(rate);
+            }
+          } catch (error) {
+            console.error('❌ Failed to sync user data:', error);
+          }
+        } else {
+          setCompletedLessons(0);
+          setSuccessRate(0);
+        }
+      }
+
+      syncUserData();
+    }, [isAuthenticated, user?.id])
+  );
 
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || 'Anonim Kullanıcı';
@@ -372,6 +413,7 @@ export default function ProfileScreen() {
                   themeMode === 'light' && styles.themeButtonActive
                 ]}
                 onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   setThemeMode('light');
                 }}
               >
@@ -394,6 +436,7 @@ export default function ProfileScreen() {
                   themeMode === 'dark' && styles.themeButtonActive
                 ]}
                 onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                   setThemeMode('dark');
                 }}
               >
@@ -415,7 +458,10 @@ export default function ProfileScreen() {
                   styles.themeButton,
                   themeMode === 'system' && styles.themeButtonActive
                 ]}
-                onPress={() => setThemeMode('system')}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setThemeMode('system');
+                }}
               >
                 <HugeiconsIcon
                   icon={ComputerIcon}
@@ -443,6 +489,7 @@ export default function ProfileScreen() {
               <Pressable
                 style={styles.logoutButton}
                 onPress={async () => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                   await signOut();
                   router.replace('/(auth)/login');
                 }}
@@ -492,7 +539,10 @@ export default function ProfileScreen() {
             </Text>
             <Pressable
               style={styles.loginButton}
-              onPress={() => router.push('/(auth)/login')}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                router.push('/(auth)/login');
+              }}
             >
               <Text style={styles.loginButtonText}>Giriş Yap / Kayıt Ol</Text>
             </Pressable>

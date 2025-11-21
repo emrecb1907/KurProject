@@ -10,11 +10,16 @@ export interface User {
   current_lives: number;
   max_lives: number;
   streak_count: number;
+  streak: number;
   last_active: string;
   created_at: string;
   updated_at: string;
   is_anonymous: boolean;
   league: League;
+  total_lessons_completed?: number;
+  total_questions_solved?: number;
+  total_correct_answers?: number;
+  total_wrong_answers?: number;
 }
 
 export type League = 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Diamond';
@@ -26,6 +31,7 @@ export interface UserProgress {
   is_completed: boolean;
   is_mastered: boolean;
   completion_rate: number;
+  completion_count: number;
   correct_answers: number;
   total_attempts: number;
   last_attempted?: string;

@@ -42,12 +42,12 @@ export function useGameSession() {
 
     try {
       const isCorrect = userAnswer.trim().toLowerCase() === correctAnswer.trim().toLowerCase();
-      
+
       // Calculate XP earned
       let xpEarned = 0;
       if (isCorrect) {
         xpEarned = XP_REWARDS.CORRECT_ANSWER;
-        
+
         // Bonus for fast answers (under 5 seconds)
         if (timeTaken < 5) {
           xpEarned += 5;
@@ -87,16 +87,38 @@ export function useGameSession() {
 
   // Complete the game session
   async function completeGame(lessonId: string) {
-    if (!user || !gameState) return;
+    console.log('🏁 completeGame called for lesson:', lessonId);
+
+    if (!user) {
+      console.error('❌ completeGame: User is missing');
+      return;
+    }
+    if (!gameState) {
+      console.error('❌ completeGame: GameState is missing');
+      return;
+    }
 
     try {
+      console.log('📝 Calling updateCompletion with:', {
+        userId: user.id,
+        lessonId,
+        correct: gameState.correctAnswers,
+        total: gameState.totalQuestions
+      });
+
       // Update user progress
-      await database.progress.updateCompletion(
+      const { error: completionError } = await database.progress.updateCompletion(
         user.id,
         lessonId,
         gameState.correctAnswers,
         gameState.totalQuestions
       );
+
+      if (completionError) {
+        console.error('❌ updateCompletion failed:', completionError);
+      } else {
+        console.log('✅ updateCompletion success');
+      }
 
       // Update user XP
       if (gameState.totalXP > 0) {

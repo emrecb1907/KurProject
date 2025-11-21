@@ -80,6 +80,17 @@ export const database = {
       return { data: data as User | null, error };
     },
 
+    async incrementStats(userId: string, stats: { lessons?: number, questions?: number, correct?: number, wrong?: number }) {
+      const { error } = await supabase.rpc('increment_user_stats', {
+        p_user_id: userId,
+        p_lessons_completed: stats.lessons || 0,
+        p_questions_solved: stats.questions || 0,
+        p_correct_answers: stats.correct || 0,
+        p_wrong_answers: stats.wrong || 0,
+      });
+      return { error };
+    },
+
     async getLeaderboard(limit: number = 50) {
       const { data, error } = await supabase
         .from('users')
@@ -209,24 +220,72 @@ export const database = {
     },
 
     async updateCompletion(userId: string, lessonId: string, correct: number, total: number) {
-      const completionRate = (correct / total) * 100;
-      const isCompleted = completionRate >= 70; // 70% completion threshold
+      console.log('🔄 updateCompletion called:', { userId, lessonId, correct, total });
 
-      const { data, error } = await supabase
-        .from('user_progress')
-        .upsert({
-          user_id: userId,
-          lesson_id: lessonId,
-          completion_rate: completionRate,
-          correct_answers: correct,
-          total_attempts: total,
-          is_completed: isCompleted,
-          last_attempted: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        })
-        .select()
-        .single();
-      return { data: data as UserProgress | null, error };
+      try {
+        const completionRate = (correct / total) * 100;
+        const isCompleted = true; // Always mark as completed regardless of score
+
+        // 1. Get existing progress (Safe fetch)
+        let currentCount = 0;
+        const { data: existingProgress, error: fetchError } = await supabase
+          .from('user_progress')
+          .select('completion_count')
+          .eq('user_id', userId)
+          .eq('lesson_id', lessonId)
+          .single();
+
+        if (!fetchError && existingProgress) {
+          currentCount = existingProgress.completion_count || 0;
+        }
+
+        const newCount = currentCount + 1;
+
+        // 2. Upsert User Progress
+        const { data, error: upsertError } = await supabase
+          .from('user_progress')
+          .upsert({
+            user_id: userId,
+            lesson_id: lessonId,
+            completion_rate: completionRate,
+            correct_answers: correct,
+            total_attempts: total,
+            is_completed: isCompleted,
+            completion_count: newCount,
+            last_attempted: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+          }, { onConflict: 'user_id,lesson_id' })
+          .select()
+          .single();
+
+        if (upsertError) {
+          console.error('❌ Error updating user_progress:', upsertError);
+          return { data: null, error: upsertError };
+        }
+
+        // 3. Update User Stats (RPC)
+        const wrong = total - correct;
+        const { error: rpcError } = await supabase.rpc('increment_user_stats', {
+          p_user_id: userId,
+          p_lessons_completed: 1,
+          p_questions_solved: total,
+          p_correct_answers: correct,
+          p_wrong_answers: wrong,
+        });
+
+        if (rpcError) {
+          console.error('❌ Error incrementing user stats:', rpcError);
+          // We don't return error here because progress was saved successfully
+        } else {
+          console.log('✅ User stats incremented successfully');
+        }
+
+        return { data: data as UserProgress | null, error: null };
+
+      } catch (err) {
+        console.error('❌ Unexpected error in updateCompletion:', err);
+        return { data: null, error: err as any };
+      }
     },
   },
 
@@ -358,11 +417,18 @@ export const database = {
     },
   },
 
-  // ==================== DAILY ACTIVITY (Zero Bloat) ====================
+  // ==================== DAILY ACTIVITY ====================
   dailyActivity: {
     async record(userId: string) {
+      const toLocalISOString = (date: Date) => {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      };
+
       const today = new Date();
-      const todayStr = today.toISOString().split('T')[0]; // YYYY-MM-DD
+      const todayStr = toLocalISOString(today); // YYYY-MM-DD (Local)
 
       // Get current user data
       const { data: user, error: fetchError } = await supabase
@@ -373,7 +439,6 @@ export const database = {
 
       if (fetchError || !user) return { error: fetchError };
 
-      const lastActivityDate = user.last_activity_date ? new Date(user.last_activity_date) : null;
       const lastActivityStr = user.last_activity_date;
 
       // 1. Calculate Streak
@@ -381,10 +446,10 @@ export const database = {
 
       if (lastActivityStr === todayStr) {
         // Already active today, do nothing to streak
-      } else if (lastActivityDate) {
+      } else {
         const yesterday = new Date(today);
         yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = yesterday.toISOString().split('T')[0];
+        const yesterdayStr = toLocalISOString(yesterday);
 
         if (lastActivityStr === yesterdayStr) {
           // Active yesterday, increment streak
@@ -393,9 +458,6 @@ export const database = {
           // Missed a day (or more), reset streak to 1
           newStreak = 1;
         }
-      } else {
-        // First ever activity
-        newStreak = 1;
       }
 
       // 2. Update Weekly Activity
@@ -414,12 +476,10 @@ export const database = {
       };
 
       const thisMonday = getMonday(new Date(today));
+      const thisMondayStr = toLocalISOString(thisMonday);
 
       // Filter out dates that are older than this week's Monday
-      weeklyActivity = weeklyActivity.filter(dateStr => {
-        const date = new Date(dateStr);
-        return date >= thisMonday;
-      });
+      weeklyActivity = weeklyActivity.filter(dateStr => dateStr >= thisMondayStr);
 
       // Add today if not present
       if (!weeklyActivity.includes(todayStr)) {
