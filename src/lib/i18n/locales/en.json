@@ -1,0 +1,200 @@
+{
+    "common": {
+        "loading": "Loading...",
+        "error": "Error",
+        "success": "Success",
+        "cancel": "Cancel",
+        "save": "Save",
+        "start": "Start",
+        "ok": "OK",
+        "warning": "Warning",
+        "back": "← Back",
+        "next": "Next",
+        "finish": "Finish",
+        "user": "User",
+        "continue": "Continue",
+        "mainMenu": "Main Menu",
+        "tryAgain": "Try Again"
+    },
+    "home": {
+        "welcome": "Welcome",
+        "lessons": "Lessons",
+        "level": "Level",
+        "xp": "XP",
+        "lives": "Lives",
+        "locked": "Locked",
+        "startLesson": "Start Lesson",
+        "devTools": "Developer Tools",
+        "resetProgress": "Reset Progress",
+        "logout": "Logout",
+        "themeCache": "Clear Theme Cache",
+        "xpSynced": "XP Synchronized",
+        "xpAdded": "XP Added"
+    },
+    "games": {
+        "letters": {
+            "title": "Arabic Letters",
+            "description": "Listen to letter sounds and choose the correct letter"
+        },
+        "vocabulary": {
+            "title": "Vocabulary Cards",
+            "description": "Learn Islamic key terms"
+        },
+        "verses": {
+            "title": "Verse Completion",
+            "description": "Complete verses by finding missing words"
+        },
+        "quiz": {
+            "title": "Islamic Q&A",
+            "description": "Test your Islamic knowledge"
+        },
+        "speed": {
+            "title": "Quick Round",
+            "description": "Quick practice with mixed questions"
+        }
+    },
+    "gameUI": {
+        "score": "Score",
+        "correctAnswers": "Correct Answers",
+        "wrongAnswers": "Wrong Answers",
+        "totalScore": "Total Score",
+        "timeLeft": "Time Left",
+        "question": "Question",
+        "congratulations": "Congratulations!",
+        "gameComplete": "Game Complete!",
+        "wellDone": "Well Done!",
+        "tryAgainMessage": "You can do better!",
+        "perfectScore": "Perfect! You got them all right!",
+        "goodJob": "Good job!"
+    },
+    "errors": {
+        "insufficientLives": "Insufficient Lives",
+        "insufficientLivesDesc": "You're out of lives! You can earn lives by watching ads or waiting.",
+        "authRequired": "Login Required",
+        "generic": "An error occurred",
+        "tryAgainLater": "Please try again later"
+    },
+    "weeklyActivity": {
+        "title": "Daily Goal",
+        "streak": "Day",
+        "todayCompleted": "🎉 You completed a lesson today!",
+        "todayNotCompleted": "You haven't completed a lesson today yet",
+        "days": {
+            "mon": "Mon",
+            "tue": "Tue",
+            "wed": "Wed",
+            "thu": "Thu",
+            "fri": "Fri",
+            "sat": "Sat",
+            "sun": "Sun"
+        }
+    },
+    "tabs": {
+        "home": "Home",
+        "leaderboard": "Leaderboard",
+        "rewards": "Rewards",
+        "profile": "Profile"
+    },
+    "profile": {
+        "student": "QuranLearn Student",
+        "anonymous": "Anonymous User",
+        "stats": {
+            "totalXP": "Total XP",
+            "streak": "Daily Streak",
+            "successRate": "Success Rate",
+            "completedLessons": "Completed Lessons"
+        },
+        "sections": {
+            "badges": "Badges",
+            "settings": "Settings",
+            "achievements": "Achievements"
+        },
+        "badgesHint": "Earn badges by completing lessons!",
+        "theme": {
+            "label": "Theme",
+            "light": "Light",
+            "dark": "Dark",
+            "system": "System",
+            "activeTheme": "Active theme",
+            "systemSettings": "system settings"
+        },
+        "logout": "Logout",
+        "achievements": {
+            "firstStep": {
+                "title": "First Step",
+                "description": "Complete your first lesson"
+            },
+            "streakStarter": {
+                "title": "Streak Starter",
+                "description": "Practice for 7 days in a row"
+            }
+        },
+        "loginPrompt": {
+            "title": "Create Account",
+            "description": "Save your progress, join the leaderboard and unlock all features!",
+            "button": "Login / Register"
+        }
+    },
+    "leaderboard": {
+        "title": "Leaderboard",
+        "league": "Bronze League",
+        "yourRank": "Your Rank",
+        "errors": {
+            "loadFailed": "Failed to load leaderboard"
+        },
+        "empty": {
+            "title": "No one on the leaderboard yet",
+            "subtitle": "Be the first!"
+        }
+    },
+    "auth": {
+        "login": {
+            "title": "Welcome Back! 👋",
+            "subtitle": "Login to your account and save your progress",
+            "email": "Email",
+            "emailPlaceholder": "example@email.com",
+            "password": "Password",
+            "passwordPlaceholder": "••••••••",
+            "loginButton": "Login",
+            "loggingIn": "Logging in...",
+            "noAccount": "Don't have an account?",
+            "register": "Register",
+            "skipForNow": "Skip for Now →",
+            "comingSoon": "Coming Soon",
+            "googleComingSoon": "Google login feature coming very soon!",
+            "appleComingSoon": "Apple login feature coming very soon!"
+        },
+        "register": {
+            "title": "Create Account 🎉",
+            "subtitle": "Start your learning journey",
+            "username": "Username",
+            "usernamePlaceholder": "username",
+            "email": "Email",
+            "emailPlaceholder": "example@email.com",
+            "password": "Password",
+            "passwordPlaceholder": "••••••••",
+            "confirmPassword": "Confirm Password",
+            "confirmPasswordPlaceholder": "••••••••",
+            "registerButton": "Register",
+            "registering": "Registering...",
+            "hasAccount": "Already have an account?",
+            "login": "Login",
+            "skipForNow": "Skip for Now →",
+            "successTitle": "🎉 Welcome!",
+            "successMessage": "Your account has been created and you're logged in. You can start learning now!",
+            "successButton": "Let's Get Started!"
+        },
+        "errors": {
+            "fillAllFields": "Please fill in all fields",
+            "passwordMismatch": "Passwords don't match",
+            "passwordTooShort": "Password must be at least 6 characters",
+            "loginFailed": "Login failed",
+            "invalidCredentials": "Invalid email or password",
+            "emailNotConfirmed": "Please confirm your email address",
+            "userNotFound": "User not found",
+            "registerFailed": "Registration failed",
+            "emailAlreadyExists": "This email address is already registered",
+            "invalidEmail": "Invalid email address"
+        }
+    }
+}

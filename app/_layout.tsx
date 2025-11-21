@@ -5,6 +5,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import { LogBox } from 'react-native';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
+import '@/lib/i18n'; // Initialize i18n
 
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();

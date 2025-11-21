@@ -27,8 +27,10 @@ import { useUser, useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
 import { useAuthHook } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function ProfileScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
 
   // Get user data from Zustand store
@@ -81,16 +83,16 @@ export default function ProfileScreen() {
   );
 
   // Get username
-  const username = user?.username || user?.email?.split('@')[0] || 'Anonim Kullanıcı';
+  const username = user?.username || user?.email?.split('@')[0] || t('profile.anonymous');
 
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
 
   const stats = [
-    { icon: DiamondIcon, value: formatXP(totalXP), label: 'Toplam XP', color: colors.secondary },
-    { icon: FireIcon, value: currentStreak.toString(), label: 'Günlük Seri', color: colors.primary },
-    { icon: Tick01Icon, value: `${successRate}%`, label: 'Başarı Oranı', color: colors.success },
-    { icon: Book02Icon, value: completedLessons.toString(), label: 'Çözülen Ders', color: colors.pink },
+    { icon: DiamondIcon, value: formatXP(totalXP), label: t('profile.stats.totalXP'), color: colors.secondary },
+    { icon: FireIcon, value: currentStreak.toString(), label: t('profile.stats.streak'), color: colors.primary },
+    { icon: Tick01Icon, value: `${successRate}%`, label: t('profile.stats.successRate'), color: colors.success },
+    { icon: Book02Icon, value: completedLessons.toString(), label: t('profile.stats.completedLessons'), color: colors.pink },
   ];
 
   const badges = [
@@ -363,7 +365,7 @@ export default function ProfileScreen() {
           </View>
           <Text style={styles.username}>{username}</Text>
           <Text style={styles.subtitle}>
-            {isAuthenticated ? 'QuranLearn Öğrencisi' : 'Anonim Kullanıcı'}
+            {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
           </Text>
         </View>
 
@@ -382,7 +384,7 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
             <HugeiconsIcon icon={Award01Icon} size={24} color={colors.textPrimary} />
-            <Text style={styles.sectionTitle}>Rozetler</Text>
+            <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
           </View>
           <View style={styles.badgesContainer}>
             {badges.map((badge, index) => (
@@ -392,7 +394,7 @@ export default function ProfileScreen() {
             ))}
           </View>
           <Text style={styles.badgeHint}>
-            Dersler tamamlayarak rozetler kazan!
+            {t('profile.badgesHint')}
           </Text>
         </View>
 
@@ -400,12 +402,12 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
             <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textPrimary} />
-            <Text style={styles.sectionTitle}>Ayarlar</Text>
+            <Text style={styles.sectionTitle}>{t('profile.sections.settings')}</Text>
           </View>
 
           {/* Theme Selector */}
           <View style={styles.themeContainer}>
-            <Text style={styles.themeLabel}>Tema</Text>
+            <Text style={styles.themeLabel}>{t('profile.theme.label')}</Text>
             <View style={styles.themeButtons}>
               <Pressable
                 style={[
@@ -426,7 +428,7 @@ export default function ProfileScreen() {
                   styles.themeButtonText,
                   themeMode === 'light' && styles.themeButtonTextActive
                 ]}>
-                  Açık
+                  {t('profile.theme.light')}
                 </Text>
               </Pressable>
 
@@ -449,7 +451,7 @@ export default function ProfileScreen() {
                   styles.themeButtonText,
                   themeMode === 'dark' && styles.themeButtonTextActive
                 ]}>
-                  Koyu
+                  {t('profile.theme.dark')}
                 </Text>
               </Pressable>
 
@@ -472,14 +474,14 @@ export default function ProfileScreen() {
                   styles.themeButtonText,
                   themeMode === 'system' && styles.themeButtonTextActive
                 ]}>
-                  Sistem
+                  {t('profile.theme.system')}
                 </Text>
               </Pressable>
             </View>
             <Text style={styles.themeHint}>
               {themeMode === 'system'
-                ? `Aktif tema: ${activeTheme === 'light' ? 'Açık' : 'Koyu'} (sistem ayarları)`
-                : `Aktif tema: ${themeMode === 'light' ? 'Açık' : 'Koyu'}`}
+                ? `${t('profile.theme.activeTheme')}: ${activeTheme === 'light' ? t('profile.theme.light') : t('profile.theme.dark')} (${t('profile.theme.systemSettings')})`
+                : `${t('profile.theme.activeTheme')}: ${themeMode === 'light' ? t('profile.theme.light') : t('profile.theme.dark')}`}
             </Text>
           </View>
 
@@ -494,7 +496,7 @@ export default function ProfileScreen() {
                   router.replace('/(auth)/login');
                 }}
               >
-                <Text style={styles.logoutButtonText}>Çıkış Yap</Text>
+                <Text style={styles.logoutButtonText}>{t('profile.logout')}</Text>
               </Pressable>
             </View>
           )}
@@ -504,13 +506,13 @@ export default function ProfileScreen() {
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
             <HugeiconsIcon icon={Target01Icon} size={24} color={colors.textPrimary} />
-            <Text style={styles.sectionTitle}>Başarılar</Text>
+            <Text style={styles.sectionTitle}>{t('profile.sections.achievements')}</Text>
           </View>
           <View style={styles.achievementCard}>
             <HugeiconsIcon icon={Medal01Icon} size={36} color={colors.warning} />
             <View style={styles.achievementInfo}>
-              <Text style={styles.achievementTitle}>İlk Adım</Text>
-              <Text style={styles.achievementDesc}>İlk dersini tamamla</Text>
+              <Text style={styles.achievementTitle}>{t('profile.achievements.firstStep.title')}</Text>
+              <Text style={styles.achievementDesc}>{t('profile.achievements.firstStep.description')}</Text>
             </View>
             <View style={styles.achievementProgress}>
               <Text style={styles.progressText}>0/1</Text>
@@ -520,8 +522,8 @@ export default function ProfileScreen() {
           <View style={styles.achievementCard}>
             <HugeiconsIcon icon={FireIcon} size={36} color={colors.primary} />
             <View style={styles.achievementInfo}>
-              <Text style={styles.achievementTitle}>Seri Başlangıcı</Text>
-              <Text style={styles.achievementDesc}>7 gün üst üste pratik yap</Text>
+              <Text style={styles.achievementTitle}>{t('profile.achievements.streakStarter.title')}</Text>
+              <Text style={styles.achievementDesc}>{t('profile.achievements.streakStarter.description')}</Text>
             </View>
             <View style={styles.achievementProgress}>
               <Text style={styles.progressText}>0/7</Text>
@@ -533,9 +535,9 @@ export default function ProfileScreen() {
         {!isAuthenticated && (
           <View style={styles.loginPrompt}>
             <HugeiconsIcon icon={BulbIcon} size={40} color={colors.textOnPrimary} />
-            <Text style={styles.promptTitle}>Hesap Oluştur</Text>
+            <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
             <Text style={styles.promptText}>
-              İlerlemeni kaydet, liderlik tablosuna katıl ve tüm özelliklerin kilidini aç!
+              {t('profile.loginPrompt.description')}
             </Text>
             <Pressable
               style={styles.loginButton}
@@ -544,7 +546,7 @@ export default function ProfileScreen() {
                 router.push('/(auth)/login');
               }}
             >
-              <Text style={styles.loginButtonText}>Giriş Yap / Kayıt Ol</Text>
+              <Text style={styles.loginButtonText}>{t('profile.loginPrompt.button')}</Text>
             </Pressable>
           </View>
         )}

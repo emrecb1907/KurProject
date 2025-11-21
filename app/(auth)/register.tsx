@@ -6,8 +6,10 @@ import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function RegisterScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { signUp, signInWithGoogle, signInWithApple } = useAuthHook();
   const { themeVersion } = useTheme();
@@ -26,17 +28,17 @@ export default function RegisterScreen() {
     console.log('🔵 RegisterScreen.handleRegister called');
     // Validation
     if (!username || !email || !password || !confirmPassword) {
-      setError('Lütfen tüm alanları doldurun');
+      setError(t('auth.errors.fillAllFields'));
       return;
     }
 
     if (password !== confirmPassword) {
-      setError('Şifreler eşleşmiyor');
+      setError(t('auth.errors.passwordMismatch'));
       return;
     }
 
     if (password.length < 6) {
-      setError('Şifre en az 6 karakter olmalı');
+      setError(t('auth.errors.passwordTooShort'));
       return;
     }
 
@@ -47,16 +49,16 @@ export default function RegisterScreen() {
 
     if (signUpError) {
       // Translate error messages to user-friendly Turkish
-      let errorMessage = 'Kayıt başarısız';
+      let errorMessage = t('auth.errors.registerFailed');
 
       if (signUpError.message.includes('User already registered')) {
-        errorMessage = 'Bu email adresi zaten kayıtlı';
+        errorMessage = t('auth.errors.emailAlreadyExists');
       } else if (signUpError.message.includes('kullanıcı adı zaten kullanılıyor')) {
         errorMessage = signUpError.message; // Already in Turkish
       } else if (signUpError.message.includes('Password should be at least')) {
-        errorMessage = 'Şifre en az 6 karakter olmalı';
+        errorMessage = t('auth.errors.passwordTooShort');
       } else if (signUpError.message.includes('Invalid email')) {
-        errorMessage = 'Geçersiz email adresi';
+        errorMessage = t('auth.errors.invalidEmail');
       }
 
       setError(errorMessage);
@@ -65,11 +67,11 @@ export default function RegisterScreen() {
       // Success! User is automatically logged in
       setLoading(false);
       Alert.alert(
-        '🎉 Hoş Geldin!',
-        'Hesabın oluşturuldu ve giriş yapıldı. Şimdi öğrenmeye başlayabilirsin!',
+        t('auth.register.successTitle'),
+        t('auth.register.successMessage'),
         [
           {
-            text: 'Hadi Başlayalım!',
+            text: t('auth.register.successButton'),
             onPress: () => router.replace('/(tabs)'),
           },
         ]
@@ -94,22 +96,22 @@ export default function RegisterScreen() {
               router.replace('/(auth)/login');
             }
           }}>
-            <Text style={styles.backButton}>← Geri</Text>
+            <Text style={styles.backButton}>{t('common.back')}</Text>
           </Pressable>
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Hesap Oluştur ✨</Text>
+          <Text style={styles.title}>{t('auth.register.title')}</Text>
           <Text style={styles.subtitle}>
-            Kayıt olarak ilerlemeni kaydet ve liderlik tablosuna katıl
+            {t('auth.register.subtitle')}
           </Text>
 
           <Card style={styles.formCard}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Kullanıcı Adı</Text>
+              <Text style={styles.label}>{t('auth.register.username')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Kullanıcı adın"
+                placeholder={t('auth.register.usernamePlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={username}
                 onChangeText={setUsername}
@@ -119,10 +121,10 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Email</Text>
+              <Text style={styles.label}>{t('auth.register.email')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="ornek@email.com"
+                placeholder={t('auth.register.emailPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={email}
                 onChangeText={setEmail}
@@ -133,10 +135,10 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Şifre</Text>
+              <Text style={styles.label}>{t('auth.register.password')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="En az 6 karakter"
+                placeholder={t('auth.register.passwordPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={password}
                 onChangeText={setPassword}
@@ -146,10 +148,10 @@ export default function RegisterScreen() {
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Şifre Tekrar</Text>
+              <Text style={styles.label}>{t('auth.register.confirmPassword')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Şifreni tekrar gir"
+                placeholder={t('auth.register.confirmPasswordPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={confirmPassword}
                 onChangeText={setConfirmPassword}
@@ -165,7 +167,7 @@ export default function RegisterScreen() {
             ) : null}
 
             <Button
-              title={loading ? 'Kayıt yapılıyor...' : 'Kayıt Ol'}
+              title={loading ? t('auth.register.registering') : t('auth.register.registerButton')}
               onPress={handleRegister}
               disabled={loading}
               fullWidth
@@ -175,10 +177,10 @@ export default function RegisterScreen() {
 
           <SocialLoginButtons
             onGooglePress={() => {
-              Alert.alert('Yakında', 'Google ile giriş özelliği çok yakında eklenecek!');
+              Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
             }}
             onApplePress={() => {
-              Alert.alert('Yakında', 'Apple ile giriş özelliği çok yakında eklenecek!');
+              Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
             }}
             loading={loading}
           />
@@ -190,14 +192,14 @@ export default function RegisterScreen() {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Zaten hesabın var mı?</Text>
+            <Text style={styles.footerText}>{t('auth.register.hasAccount')}</Text>
             <Pressable onPress={() => router.push('/(auth)/login')}>
-              <Text style={styles.linkText}>Giriş Yap</Text>
+              <Text style={styles.linkText}>{t('auth.register.login')}</Text>
             </Pressable>
           </View>
 
           <Pressable onPress={() => router.replace('/(tabs)')}>
-            <Text style={styles.skipText}>Şimdilik Atla →</Text>
+            <Text style={styles.skipText}>{t('auth.register.skipForNow')}</Text>
           </Pressable>
         </View>
       </ScrollView>

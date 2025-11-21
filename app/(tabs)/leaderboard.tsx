@@ -8,6 +8,7 @@ import { useAuth, useUser } from '@/store';
 import { database } from '@/lib/supabase/database';
 import { Skeleton } from '@/components/ui';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 interface LeaderboardItem {
   rank: number;
@@ -22,6 +23,7 @@ interface LeaderboardItem {
 }
 
 export default function LeaderboardScreen() {
+  const { t } = useTranslation();
   const { isAuthenticated, user } = useAuth();
   const { totalXP } = useUser();
   const { activeTheme, themeVersion } = useTheme(); // Force re-render on theme change
@@ -59,7 +61,7 @@ export default function LeaderboardScreen() {
 
       if (fetchError) {
         console.error('❌ Leaderboard fetch error:', fetchError);
-        setError('Liderlik tablosu yüklenemedi');
+        setError(t('leaderboard.errors.loadFailed'));
         return;
       }
 
@@ -73,7 +75,7 @@ export default function LeaderboardScreen() {
       const items: LeaderboardItem[] = data.map((entry, index) => ({
         rank: index + 1,
         id: entry.id,
-        username: entry.username || entry.email?.split('@')[0] || 'Kullanıcı',
+        username: entry.username || entry.email?.split('@')[0] || t('common.user'),
         totalXP: entry.total_xp,
         league: entry.league,
         isYou: entry.id === user?.id,
@@ -97,7 +99,7 @@ export default function LeaderboardScreen() {
           const userItem: LeaderboardItem = {
             rank: rankData.rank,
             id: rankData.user.id,
-            username: rankData.user.username || rankData.user.email?.split('@')[0] || 'Kullanıcı',
+            username: rankData.user.username || rankData.user.email?.split('@')[0] || t('common.user'),
             totalXP: rankData.user.total_xp,
             league: rankData.user.league,
             isYou: true,
@@ -119,7 +121,7 @@ export default function LeaderboardScreen() {
       }, 300); // Small delay to ensure rendering is complete
     } catch (err) {
       console.error('❌ Unexpected leaderboard error:', err);
-      setError('Bir hata oluştu');
+      setError(t('errors.generic'));
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -184,12 +186,12 @@ export default function LeaderboardScreen() {
       <View style={styles.header}>
         <View style={styles.titleContainer}>
           <HugeiconsIcon icon={Award01Icon} size={32} color={colors.warning} />
-          <Text style={styles.title}>Liderlik Tablosu</Text>
+          <Text style={styles.title}>{t('leaderboard.title')}</Text>
 
         </View>
         <View style={styles.leagueCard}>
           <HugeiconsIcon icon={Medal01Icon} size={20} color={colors.primary} />
-          <Text style={styles.leagueText}>Bronz Ligi</Text>
+          <Text style={styles.leagueText}>{t('leaderboard.league')}</Text>
         </View>
       </View>
 
@@ -208,7 +210,7 @@ export default function LeaderboardScreen() {
         {error && !loading && (
           <View style={styles.errorContainer}>
             <Text style={styles.errorText}>❌ {error}</Text>
-            <Text style={styles.errorSubtext}>Lütfen daha sonra tekrar deneyin</Text>
+            <Text style={styles.errorSubtext}>{t('errors.tryAgainLater')}</Text>
           </View>
         )}
 
@@ -216,8 +218,8 @@ export default function LeaderboardScreen() {
         {!loading && !error && leaderboardData.length === 0 && (
           <View style={styles.emptyContainer}>
             <Text style={styles.emptyIcon}>🏆</Text>
-            <Text style={styles.emptyText}>Henüz liderlik tablosunda kimse yok</Text>
-            <Text style={styles.emptySubtext}>İlk sen ol!</Text>
+            <Text style={styles.emptyText}>{t('leaderboard.empty.title')}</Text>
+            <Text style={styles.emptySubtext}>{t('leaderboard.empty.subtitle')}</Text>
           </View>
         )}
 
@@ -269,7 +271,7 @@ export default function LeaderboardScreen() {
           <>
             <View style={styles.separator}>
               <View style={styles.separatorLine} />
-              <Text style={styles.separatorText}>Senin Sıralaman</Text>
+              <Text style={styles.separatorText}>{t('leaderboard.yourRank')}</Text>
               <View style={styles.separatorLine} />
             </View>
 

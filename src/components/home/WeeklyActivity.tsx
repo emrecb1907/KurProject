@@ -7,6 +7,7 @@ import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 interface DayActivity {
     day: string;
@@ -16,6 +17,7 @@ interface DayActivity {
 }
 
 export function WeeklyActivity() {
+    const { t } = useTranslation();
     const { user, isAuthenticated } = useAuth();
     const { themeVersion } = useTheme();
     const [weekData, setWeekData] = useState<DayActivity[]>([]);
@@ -93,7 +95,16 @@ export function WeeklyActivity() {
         },
     }), [themeVersion]);
 
-    const dayNames = ['Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct', 'Pa'];
+    // Get day names from translations (reactive to language changes)
+    const dayNames = useMemo(() => [
+        t('weeklyActivity.days.mon'),
+        t('weeklyActivity.days.tue'),
+        t('weeklyActivity.days.wed'),
+        t('weeklyActivity.days.thu'),
+        t('weeklyActivity.days.fri'),
+        t('weeklyActivity.days.sat'),
+        t('weeklyActivity.days.sun'),
+    ], [t]);
 
     // Refresh data every time screen comes into focus
     useFocusEffect(
@@ -107,6 +118,15 @@ export function WeeklyActivity() {
             }
         }, [user?.id, isAuthenticated])
     );
+
+    // Refresh data when language changes
+    useEffect(() => {
+        if (isAuthenticated && user?.id) {
+            fetchWeeklyActivity();
+        } else {
+            setWeekData(getEmptyWeek());
+        }
+    }, [dayNames]);
 
     const getEmptyWeek = (): DayActivity[] => {
         const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, ...
@@ -198,9 +218,9 @@ export function WeeklyActivity() {
             <View style={styles.header}>
                 <View style={styles.titleContainer}>
                     <HugeiconsIcon icon={Target02Icon} size={24} color={colors.primary} />
-                    <Text style={styles.title}>Günlük Hedef</Text>
+                    <Text style={styles.title}>{t('weeklyActivity.title')}</Text>
                 </View>
-                <Text style={styles.streakText}>🔥 {streak} Gün</Text>
+                <Text style={styles.streakText}>🔥 {streak} {t('weeklyActivity.streak')}</Text>
             </View>
 
             {/* Week Days */}
@@ -231,8 +251,8 @@ export function WeeklyActivity() {
             <View style={styles.footer}>
                 <Text style={styles.footerText}>
                     {todayCompleted
-                        ? '🎉 Bugün bir ders tamamladın!'
-                        : 'Bugün henüz ders tamamlamadın'}
+                        ? t('weeklyActivity.todayCompleted')
+                        : t('weeklyActivity.todayNotCompleted')}
                 </Text>
             </View>
         </View>

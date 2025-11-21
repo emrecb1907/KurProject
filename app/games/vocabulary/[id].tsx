@@ -6,8 +6,10 @@ import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function VocabularyGamePlayScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { id } = useLocalSearchParams();
   const { currentLives, maxLives, removeLives, addXP } = useStore();
@@ -179,9 +181,9 @@ export default function VocabularyGamePlayScreen() {
   useEffect(() => {
     // Check lives
     if (currentLives <= 0) {
-      Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.', [
+      Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'), [
         {
-          text: 'Tamam', onPress: () => {
+          text: t('common.ok'), onPress: () => {
             if (router.canGoBack()) {
               router.back();
             } else {
@@ -332,26 +334,14 @@ export default function VocabularyGamePlayScreen() {
   if (isGameComplete) {
     return (
       <View style={styles.container}>
-        <View style={styles.completeContainer}>
-          <Text style={styles.completeTitle}>Tebrikler!</Text>
-          <Text style={styles.completeText}>Dersi başarıyla tamamladın.</Text>
-
-          <View style={styles.statsContainer}>
-            <Text style={styles.statText}>Doğru Cevap: {correctAnswersCount}/{mockQuestions.length}</Text>
-            <Text style={styles.statText}>Kazanılan XP: +{correctAnswersCount}</Text>
-          </View>
-
-          <Pressable
-            style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
-            onPress={handleComplete}
-            disabled={isSubmitting}
+        disabled={isSubmitting}
           >
-            <Text style={styles.completeButtonText}>
-              {isSubmitting ? 'Kaydediliyor...' : 'Tamamla!'}
-            </Text>
-          </Pressable>
-        </View>
-      </View>
+        <Text style={styles.completeButtonText}>
+          {isSubmitting ? t('common.loading') : t('common.finish')}
+        </Text>
+      </Pressable>
+        </View >
+      </View >
     );
   }
 

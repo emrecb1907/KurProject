@@ -34,7 +34,10 @@ import { WeeklyActivity } from '@/components/home/WeeklyActivity';
 import { HoverCard } from '@/components/ui/HoverCard';
 import * as Haptics from 'expo-haptics';
 
+import { useTranslation } from 'react-i18next';
+
 export default function HomePage() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { statusBarStyle, activeTheme, themeVersion } = useStatusBar(); // Include themeVersion to trigger re-render
 
@@ -118,7 +121,7 @@ export default function HomePage() {
       }
     }
 
-    Alert.alert('✅ XP Eklendi!', `+100 XP kazandın!\n\nYeni Toplam: ${formatXP(totalXP + 100)} XP`);
+    Alert.alert(t('home.xpAdded'), `+100 XP!\n\n${t('common.success')}: ${formatXP(totalXP + 100)} XP`);
   };
 
   // 🧪 TEST: Add 1000 XP
@@ -136,13 +139,13 @@ export default function HomePage() {
       }
     }
 
-    Alert.alert('⚡ Büyük XP Bonusu!', `+1000 XP kazandın!\n\nYeni Toplam: ${formatXP(totalXP + 1000)} XP`);
+    Alert.alert('⚡ Bonus!', `+1000 XP!\n\n${t('common.success')}: ${formatXP(totalXP + 1000)} XP`);
   };
 
   // 🔄 TEST: Sync XP to Database (one-time fix)
   const handleSyncXP = async () => {
     if (!isAuthenticated || !user?.id) {
-      Alert.alert('⚠️ Hata', 'Giriş yapmış kullanıcılar için geçerli');
+      Alert.alert(t('common.error'), t('errors.authRequired'));
       return;
     }
 
@@ -164,25 +167,24 @@ export default function HomePage() {
         });
 
         Alert.alert(
-          '✅ XP Senkronize Edildi!',
-          `Database güncellendi:\n\nEski: ${formatXP(dbXP)} XP\nYeni: ${formatXP(localXP)} XP\n\nLeaderboard'a git ve yenileme butonuna bas!`
+          t('home.xpSynced'),
+          `Database: ${formatXP(dbXP)} XP\nLocal: ${formatXP(localXP)} XP`
         );
         console.log('✅ XP synced successfully');
-        console.log('💡 Leaderboard tab\'ına git ve otomatik yenilenecek');
       } else if (dbXP > localXP) {
         // Database has more XP than local (shouldn't happen but handle it)
         setTotalXP(dbXP);
         Alert.alert(
-          'ℹ️ Local XP Güncellendi',
-          `Database daha yüksek XP içeriyordu:\n\nLocal: ${formatXP(localXP)} XP\nDatabase: ${formatXP(dbXP)} XP\n\nLocal storage güncellendi.`
+          'ℹ️ Local XP Updated',
+          `Local: ${formatXP(localXP)} XP\nDatabase: ${formatXP(dbXP)} XP`
         );
         console.log('✅ Local XP updated from database');
       } else {
-        Alert.alert('ℹ️ Zaten Güncel', 'XP zaten senkronize');
+        Alert.alert('ℹ️ Synced', t('home.xpSynced'));
       }
     } catch (error) {
       console.error('❌ Sync error:', error);
-      Alert.alert('❌ Hata', 'XP senkronize edilemedi');
+      Alert.alert(t('common.error'), 'Sync failed');
     }
   };
 
@@ -193,11 +195,11 @@ export default function HomePage() {
       await AsyncStorage.removeItem('quranlearn-theme');
       console.log('✅ Theme cache cleared');
       Alert.alert(
-        '✅ Tema Cache Temizlendi!',
-        'Tema tercihi sıfırlandı. Uygulama yeniden başlatılınca sistem temasıyla açılacak.',
+        t('home.themeCache'),
+        'Cache cleared.',
         [
           {
-            text: 'Tamam',
+            text: t('common.ok'),
             onPress: () => {
               router.replace('/');
             },
@@ -206,7 +208,7 @@ export default function HomePage() {
       );
     } catch (error) {
       console.error('❌ Clear theme cache error:', error);
-      Alert.alert('Hata', 'Tema cache temizlenemedi.');
+      Alert.alert(t('common.error'), 'Failed to clear cache');
     }
   };
 
@@ -214,12 +216,12 @@ export default function HomePage() {
   const handleClearData = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
     Alert.alert(
-      '⚠️ İlerlemeyi Sıfırla',
-      'Tüm ilerleme sıfırlanacak (XP, Level, Canlar, Streak). Hesap bilgilerin korunur. Emin misin?',
+      t('home.resetProgress'),
+      'Are you sure?',
       [
-        { text: 'İptal', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'Sıfırla',
+          text: t('common.ok'),
           style: 'destructive',
           onPress: async () => {
             try {
@@ -253,9 +255,9 @@ export default function HomePage() {
               resetUserData();
               console.log('✅ Zustand store reset');
 
-              Alert.alert('✅ Sıfırlandı!', 'İlerleme sıfırlandı. Hesabın korundu. Tekrar giriş yapabilirsin!', [
+              Alert.alert(t('common.success'), 'Reset complete', [
                 {
-                  text: 'Tamam',
+                  text: t('common.ok'),
                   onPress: () => {
                     // Force reload app
                     router.replace('/');
@@ -264,7 +266,7 @@ export default function HomePage() {
               ]);
             } catch (error) {
               console.error('❌ Reset progress error:', error);
-              Alert.alert('Hata', 'İlerleme sıfırlanırken bir hata oluştu.');
+              Alert.alert(t('common.error'), 'Reset failed');
             }
           },
         },
@@ -275,8 +277,8 @@ export default function HomePage() {
   const lessons = [
     {
       id: 1,
-      title: 'Arapça Harfler',
-      description: 'Harf seslerini dinle ve doğru harfi seç',
+      title: t('games.letters.title'),
+      description: t('games.letters.description'),
       level: 1,
       unlocked: true,
       color: colors.primary,
@@ -286,8 +288,8 @@ export default function HomePage() {
     },
     {
       id: 2,
-      title: 'Kavram Kartları',
-      description: 'İslami anahtar kelimeleri öğren',
+      title: t('games.vocabulary.title'),
+      description: t('games.vocabulary.description'),
       level: 1,
       unlocked: true,
       color: colors.secondary,
@@ -297,8 +299,8 @@ export default function HomePage() {
     },
     {
       id: 3,
-      title: 'Ayet Tamamlama',
-      description: 'Eksik kelimeleri bularak ayetleri tamamla',
+      title: t('games.verses.title'),
+      description: t('games.verses.description'),
       level: 2,
       unlocked: true,
       color: colors.success,
@@ -308,8 +310,8 @@ export default function HomePage() {
     },
     {
       id: 4,
-      title: 'İslami Soru-Cevap',
-      description: 'İslami bilgini test et',
+      title: t('games.quiz.title'),
+      description: t('games.quiz.description'),
       level: 1,
       unlocked: true,
       color: colors.pink,
@@ -319,8 +321,8 @@ export default function HomePage() {
     },
     {
       id: 5,
-      title: 'Hızlı Tur',
-      description: 'Karışık sorularla hızlı pratik',
+      title: t('games.speed.title'),
+      description: t('games.speed.description'),
       level: 10,
       unlocked: false,
       color: colors.locked,
@@ -390,7 +392,7 @@ export default function HomePage() {
     if (!selectedLesson) return;
 
     if (currentLives <= 0) {
-      Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.');
+      Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'));
       return;
     }
 
@@ -793,7 +795,7 @@ export default function HomePage() {
           <View style={styles.xpBarBackground}>
             <Animated.View style={[styles.xpBarFill, animatedXPStyle]} />
             <Text style={styles.xpText}>
-              {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} XP
+              {formatXP(xpProgress.currentLevelXP)} / {formatXP(xpProgress.requiredXP)} {t('home.xp')}
             </Text>
           </View>
         </View>
@@ -814,7 +816,7 @@ export default function HomePage() {
         >
           {/* Section Title */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>Dersler</Text>
+            <Text style={styles.sectionTitle}>{t('home.lessons')}</Text>
           </View>
 
           {/* Lesson Cards Carousel */}
@@ -858,7 +860,7 @@ export default function HomePage() {
                   </View>
                   {!lesson.unlocked && (
                     <View style={styles.levelBadge}>
-                      <Text style={styles.levelBadgeText}>Lvl {lesson.level}</Text>
+                      <Text style={styles.levelBadgeText}>{t('home.level')} {lesson.level}</Text>
                     </View>
                   )}
                 </View>
@@ -876,12 +878,12 @@ export default function HomePage() {
                       <View style={styles.progressBar}>
                         <View style={[styles.progressFill, { width: '30%' }]} />
                       </View>
-                      <Text style={styles.progressText}>3/10 Ders</Text>
+                      <Text style={styles.progressText}>3/10 {t('home.lessons')}</Text>
                     </View>
                   ) : (
                     <View style={styles.lockedBadge}>
                       <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
-                      <Text style={styles.lockedBadgeText}>Kilitli</Text>
+                      <Text style={styles.lockedBadgeText}>{t('home.locked')}</Text>
                     </View>
                   )}
                 </View>
@@ -941,7 +943,7 @@ export default function HomePage() {
                       style={[styles.startButton, { backgroundColor: selectedLesson.color, borderBottomColor: selectedLesson.borderColor }]}
                       onPress={handleStartLesson}
                     >
-                      <Text style={styles.startButtonText}>Başla</Text>
+                      <Text style={styles.startButtonText}>{t('common.start')}</Text>
                     </Pressable>
 
                     <Pressable
@@ -951,7 +953,7 @@ export default function HomePage() {
                         setSelectedLesson(null);
                       }}
                     >
-                      <Text style={styles.cancelButtonText}>Vazgeç</Text>
+                      <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
                     </Pressable>
                   </View>
                 </Animated.View>
@@ -967,23 +969,23 @@ export default function HomePage() {
               }}
             >
               <Text style={styles.devToolsToggleText}>
-                {showDevTools ? '🔽' : '🔼'} Geliştirici Araçları
+                {showDevTools ? '🔽' : '🔼'} {t('home.devTools')}
               </Text>
             </Pressable>
 
             {/* 🧪 TEST BUTTONS - Remove in production */}
             {showDevTools && (
               <View style={styles.testContainer}>
-                <Text style={styles.testTitle}>🧪 Geliştirici Araçları</Text>
+                <Text style={styles.testTitle}>🧪 {t('home.devTools')}</Text>
 
                 {/* Add XP Buttons */}
                 <View style={styles.testButtonRow}>
                   <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                    <Text style={styles.testButtonText}>➕ +100 XP</Text>
+                    <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
                   </Pressable>
 
                   <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                    <Text style={styles.testButtonText}>⚡ +1000 XP</Text>
+                    <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
                   </Pressable>
                 </View>
 
@@ -996,7 +998,7 @@ export default function HomePage() {
                       removeLives(1);
                     }}
                   >
-                    <Text style={styles.testButtonText}>❤️ -1 Can</Text>
+                    <Text style={styles.testButtonText}>❤️ -1 {t('home.lives')}</Text>
                   </Pressable>
 
                   <Pressable
@@ -1006,18 +1008,45 @@ export default function HomePage() {
                       addLives(1);
                     }}
                   >
-                    <Text style={styles.testButtonText}>❤️ +1 Can</Text>
+                    <Text style={styles.testButtonText}>❤️ +1 {t('home.lives')}</Text>
+                  </Pressable>
+                </View>
+
+                {/* Language Switcher Buttons */}
+                <View style={styles.testButtonRow}>
+                  <Pressable
+                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: '#E30A17' }]}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      const { changeLanguage } = require('@/lib/i18n');
+                      changeLanguage('tr');
+                      Alert.alert('🇹🇷 Türkçe', 'Dil Türkçe olarak değiştirildi');
+                    }}
+                  >
+                    <Text style={styles.testButtonText}>🇹🇷 Türkçe</Text>
+                  </Pressable>
+
+                  <Pressable
+                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: '#012169' }]}
+                    onPress={() => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                      const { changeLanguage } = require('@/lib/i18n');
+                      changeLanguage('en');
+                      Alert.alert('🇬🇧 English', 'Language changed to English');
+                    }}
+                  >
+                    <Text style={styles.testButtonText}>🇬🇧 English</Text>
                   </Pressable>
                 </View>
 
                 {/* Clear Theme Cache Button */}
                 <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
-                  <Text style={styles.testButtonText}>🎨 Tema Cache Temizle</Text>
+                  <Text style={styles.testButtonText}>🎨 {t('home.themeCache')}</Text>
                 </Pressable>
 
                 {/* Reset Progress Button */}
                 <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-                  <Text style={styles.testButtonText}>🔄 İlerlemeyi Sıfırla (Her Şey)</Text>
+                  <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
                 </Pressable>
 
                 {/* Reset XP Only Button */}
@@ -1035,12 +1064,12 @@ export default function HomePage() {
                         updated_at: new Date().toISOString(),
                       });
                     }
-                    Alert.alert('✅ Sıfırlandı', 'XP sıfırlandı.');
+                    Alert.alert(t('common.success'), 'XP reset.');
                   } catch (error) {
                     console.error('❌ Reset XP error:', error);
                   }
                 }}>
-                  <Text style={styles.testButtonText}>🔄 Sadece XP Sıfırla</Text>
+                  <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
                 </Pressable>
 
                 {/* Logout Button */}
@@ -1051,14 +1080,14 @@ export default function HomePage() {
                     await supabase.auth.signOut();
                     logout();
                     resetUserData();
-                    Alert.alert('✅ Çıkış Yapıldı', 'Başarıyla çıkış yapıldı.');
+                    Alert.alert(t('common.success'), t('home.logout'));
                     router.replace('/(auth)/login');
                   } catch (error) {
                     console.error('❌ Logout error:', error);
-                    Alert.alert('Hata', 'Çıkış yapılırken bir hata oluştu.');
+                    Alert.alert(t('common.error'), 'Logout failed');
                   }
                 }}>
-                  <Text style={styles.testButtonText}>🚪 Çıkış Yap</Text>
+                  <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
                 </Pressable>
               </View>
             )}

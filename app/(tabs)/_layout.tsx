@@ -5,10 +5,12 @@ import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import { Home01Icon, Award01Icon, FavouriteIcon, UserAccountIcon, GiftIcon } from '@hugeicons/core-free-icons';
+import { useTranslation } from 'react-i18next';
 
 import * as Haptics from 'expo-haptics';
 
 export default function TabLayout() {
+  const { t } = useTranslation();
   const { activeTheme, themeVersion } = useTheme();
 
   // Dynamic styles that update when theme changes
@@ -78,7 +80,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Ana',
+          title: t('tabs.home'),
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <HugeiconsIcon
@@ -86,7 +88,7 @@ export default function TabLayout() {
                 size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>Ana</Text>
+              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.home')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -95,7 +97,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="leaderboard"
         options={{
-          title: 'Liderlik',
+          title: t('tabs.leaderboard'),
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <HugeiconsIcon
@@ -103,7 +105,7 @@ export default function TabLayout() {
                 size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>Liderlik</Text>
+              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.leaderboard')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -112,7 +114,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="chest"
         options={{
-          title: 'Ödüller',
+          title: t('tabs.rewards'),
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <HugeiconsIcon
@@ -120,7 +122,7 @@ export default function TabLayout() {
                 size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>Ödüller</Text>
+              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.rewards')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -129,7 +131,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="profile"
         options={{
-          title: 'Profil',
+          title: t('tabs.profile'),
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <HugeiconsIcon
@@ -137,7 +139,7 @@ export default function TabLayout() {
                 size={18}
                 color={focused ? colors.textPrimary : colors.textDisabled}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>Profil</Text>
+              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.profile')}</Text>
             </View>
           ),
           tabBarLabel: () => null,

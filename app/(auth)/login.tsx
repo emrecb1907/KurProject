@@ -6,8 +6,10 @@ import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function LoginScreen() {
+  const { t } = useTranslation();
   const router = useRouter();
   const { signIn, signInWithGoogle, signInWithApple } = useAuthHook();
   const { themeVersion } = useTheme(); // Trigger re-render on theme change
@@ -23,7 +25,7 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     console.log('🔵 LoginScreen.handleLogin called');
     if (!email || !password) {
-      setError('Lütfen tüm alanları doldurun');
+      setError(t('auth.errors.fillAllFields'));
       return;
     }
 
@@ -34,14 +36,14 @@ export default function LoginScreen() {
 
     if (signInError) {
       // Translate error messages to user-friendly Turkish
-      let errorMessage = 'Giriş başarısız';
+      let errorMessage = t('auth.errors.loginFailed');
 
       if (signInError.message.includes('Invalid login credentials')) {
-        errorMessage = 'Email veya şifre hatalı';
+        errorMessage = t('auth.errors.invalidCredentials');
       } else if (signInError.message.includes('Email not confirmed')) {
-        errorMessage = 'Lütfen email adresinizi onaylayın';
+        errorMessage = t('auth.errors.emailNotConfirmed');
       } else if (signInError.message.includes('User not found')) {
-        errorMessage = 'Kullanıcı bulunamadı';
+        errorMessage = t('auth.errors.userNotFound');
       }
 
       setError(errorMessage);
@@ -68,22 +70,22 @@ export default function LoginScreen() {
               router.replace('/(tabs)');
             }
           }}>
-            <Text style={styles.backButton}>← Geri</Text>
+            <Text style={styles.backButton}>{t('common.back')}</Text>
           </Pressable>
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>Hoş Geldin! 👋</Text>
+          <Text style={styles.title}>{t('auth.login.title')}</Text>
           <Text style={styles.subtitle}>
-            Hesabına giriş yap ve ilerlemeni kaydet
+            {t('auth.login.subtitle')}
           </Text>
 
           <Card style={styles.formCard}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Email</Text>
+              <Text style={styles.label}>{t('auth.login.email')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="ornek@email.com"
+                placeholder={t('auth.login.emailPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={email}
                 onChangeText={setEmail}
@@ -94,10 +96,10 @@ export default function LoginScreen() {
             </View>
 
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Şifre</Text>
+              <Text style={styles.label}>{t('auth.login.password')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="••••••••"
+                placeholder={t('auth.login.passwordPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={password}
                 onChangeText={setPassword}
@@ -113,7 +115,7 @@ export default function LoginScreen() {
             ) : null}
 
             <Button
-              title={loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
+              title={loading ? t('auth.login.loggingIn') : t('auth.login.loginButton')}
               onPress={handleLogin}
               disabled={loading}
               fullWidth
@@ -123,23 +125,23 @@ export default function LoginScreen() {
 
           <SocialLoginButtons
             onGooglePress={() => {
-              Alert.alert('Yakında', 'Google ile giriş özelliği çok yakında eklenecek!');
+              Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
             }}
             onApplePress={() => {
-              Alert.alert('Yakında', 'Apple ile giriş özelliği çok yakında eklenecek!');
+              Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
             }}
             loading={loading}
           />
 
           <View style={styles.footer}>
-            <Text style={styles.footerText}>Hesabın yok mu?</Text>
+            <Text style={styles.footerText}>{t('auth.login.noAccount')}</Text>
             <Pressable onPress={() => router.push('/(auth)/register')}>
-              <Text style={styles.linkText}>Kayıt Ol</Text>
+              <Text style={styles.linkText}>{t('auth.login.register')}</Text>
             </Pressable>
           </View>
 
           <Pressable onPress={() => router.replace('/(tabs)')}>
-            <Text style={styles.skipText}>Şimdilik Atla →</Text>
+            <Text style={styles.skipText}>{t('auth.login.skipForNow')}</Text>
           </Pressable>
         </View>
       </ScrollView>

@@ -1,0 +1,200 @@
+{
+    "common": {
+        "loading": "Yükleniyor...",
+        "error": "Hata",
+        "success": "Başarılı",
+        "cancel": "Vazgeç",
+        "save": "Kaydet",
+        "start": "Başla",
+        "ok": "Tamam",
+        "warning": "Uyarı",
+        "back": "← Geri",
+        "next": "İleri",
+        "finish": "Bitir",
+        "user": "Kullanıcı",
+        "continue": "Devam Et",
+        "mainMenu": "Ana Menü",
+        "tryAgain": "Tekrar Dene"
+    },
+    "home": {
+        "welcome": "Hoşgeldin",
+        "lessons": "Dersler",
+        "level": "Seviye",
+        "xp": "XP",
+        "lives": "Can",
+        "locked": "Kilitli",
+        "startLesson": "Dersi Başlat",
+        "devTools": "Geliştirici Araçları",
+        "resetProgress": "İlerlemeyi Sıfırla",
+        "logout": "Çıkış Yap",
+        "themeCache": "Tema Cache Temizle",
+        "xpSynced": "XP Senkronize Edildi",
+        "xpAdded": "XP Eklendi"
+    },
+    "games": {
+        "letters": {
+            "title": "Arapça Harfler",
+            "description": "Harf seslerini dinle ve doğru harfi seç"
+        },
+        "vocabulary": {
+            "title": "Kavram Kartları",
+            "description": "İslami anahtar kelimeleri öğren"
+        },
+        "verses": {
+            "title": "Ayet Tamamlama",
+            "description": "Eksik kelimeleri bularak ayetleri tamamla"
+        },
+        "quiz": {
+            "title": "İslami Soru-Cevap",
+            "description": "İslami bilgini test et"
+        },
+        "speed": {
+            "title": "Hızlı Tur",
+            "description": "Karışık sorularla hızlı pratik"
+        }
+    },
+    "gameUI": {
+        "score": "Skor",
+        "correctAnswers": "Doğru Cevap",
+        "wrongAnswers": "Yanlış Cevap",
+        "totalScore": "Toplam Skor",
+        "timeLeft": "Kalan Süre",
+        "question": "Soru",
+        "congratulations": "Tebrikler!",
+        "gameComplete": "Oyun Tamamlandı!",
+        "wellDone": "Aferin!",
+        "tryAgainMessage": "Daha iyi yapabilirsin!",
+        "perfectScore": "Mükemmel! Hepsini doğru bildin!",
+        "goodJob": "İyi iş çıkardın!"
+    },
+    "errors": {
+        "insufficientLives": "Yetersiz Can",
+        "insufficientLivesDesc": "Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.",
+        "authRequired": "Giriş Yapmalısın",
+        "generic": "Bir hata oluştu",
+        "tryAgainLater": "Lütfen daha sonra tekrar deneyin"
+    },
+    "weeklyActivity": {
+        "title": "Günlük Hedef",
+        "streak": "Gün",
+        "todayCompleted": "🎉 Bugün bir ders tamamladın!",
+        "todayNotCompleted": "Bugün henüz ders tamamlamadın",
+        "days": {
+            "mon": "Pt",
+            "tue": "Sa",
+            "wed": "Ça",
+            "thu": "Pe",
+            "fri": "Cu",
+            "sat": "Ct",
+            "sun": "Pa"
+        }
+    },
+    "tabs": {
+        "home": "Ana",
+        "leaderboard": "Liderlik",
+        "rewards": "Ödüller",
+        "profile": "Profil"
+    },
+    "profile": {
+        "student": "QuranLearn Öğrencisi",
+        "anonymous": "Anonim Kullanıcı",
+        "stats": {
+            "totalXP": "Toplam XP",
+            "streak": "Günlük Seri",
+            "successRate": "Başarı Oranı",
+            "completedLessons": "Çözülen Ders"
+        },
+        "sections": {
+            "badges": "Rozetler",
+            "settings": "Ayarlar",
+            "achievements": "Başarılar"
+        },
+        "badgesHint": "Dersler tamamlayarak rozetler kazan!",
+        "theme": {
+            "label": "Tema",
+            "light": "Açık",
+            "dark": "Koyu",
+            "system": "Sistem",
+            "activeTheme": "Aktif tema",
+            "systemSettings": "sistem ayarları"
+        },
+        "logout": "Çıkış Yap",
+        "achievements": {
+            "firstStep": {
+                "title": "İlk Adım",
+                "description": "İlk dersini tamamla"
+            },
+            "streakStarter": {
+                "title": "Seri Başlangıcı",
+                "description": "7 gün üst üste pratik yap"
+            }
+        },
+        "loginPrompt": {
+            "title": "Hesap Oluştur",
+            "description": "İlerlemeni kaydet, liderlik tablosuna katıl ve tüm özelliklerin kilidini aç!",
+            "button": "Giriş Yap / Kayıt Ol"
+        }
+    },
+    "leaderboard": {
+        "title": "Liderlik Tablosu",
+        "league": "Bronz Ligi",
+        "yourRank": "Senin Sıralaman",
+        "errors": {
+            "loadFailed": "Liderlik tablosu yüklenemedi"
+        },
+        "empty": {
+            "title": "Henüz liderlik tablosunda kimse yok",
+            "subtitle": "İlk sen ol!"
+        }
+    },
+    "auth": {
+        "login": {
+            "title": "Hoş Geldin! 👋",
+            "subtitle": "Hesabına giriş yap ve ilerlemeni kaydet",
+            "email": "Email",
+            "emailPlaceholder": "ornek@email.com",
+            "password": "Şifre",
+            "passwordPlaceholder": "••••••••",
+            "loginButton": "Giriş Yap",
+            "loggingIn": "Giriş yapılıyor...",
+            "noAccount": "Hesabın yok mu?",
+            "register": "Kayıt Ol",
+            "skipForNow": "Şimdilik Atla →",
+            "comingSoon": "Yakında",
+            "googleComingSoon": "Google ile giriş özelliği çok yakında eklenecek!",
+            "appleComingSoon": "Apple ile giriş özelliği çok yakında eklenecek!"
+        },
+        "register": {
+            "title": "Hesap Oluştur 🎉",
+            "subtitle": "Öğrenme yolculuğuna başla",
+            "username": "Kullanıcı Adı",
+            "usernamePlaceholder": "kullaniciadi",
+            "email": "Email",
+            "emailPlaceholder": "ornek@email.com",
+            "password": "Şifre",
+            "passwordPlaceholder": "••••••••",
+            "confirmPassword": "Şifre Onayı",
+            "confirmPasswordPlaceholder": "••••••••",
+            "registerButton": "Kayıt Ol",
+            "registering": "Kayıt olunuyor...",
+            "hasAccount": "Zaten hesabın var mı?",
+            "login": "Giriş Yap",
+            "skipForNow": "Şimdilik Atla →",
+            "successTitle": "🎉 Hoş Geldin!",
+            "successMessage": "Hesabın oluşturuldu ve giriş yapıldı. Şimdi öğrenmeye başlayabilirsin!",
+            "successButton": "Hadi Başlayalım!"
+        },
+        "errors": {
+            "fillAllFields": "Lütfen tüm alanları doldurun",
+            "passwordMismatch": "Şifreler eşleşmiyor",
+            "passwordTooShort": "Şifre en az 6 karakter olmalı",
+            "loginFailed": "Giriş başarısız",
+            "invalidCredentials": "Email veya şifre hatalı",
+            "emailNotConfirmed": "Lütfen email adresinizi onaylayın",
+            "userNotFound": "Kullanıcı bulunamadı",
+            "registerFailed": "Kayıt başarısız",
+            "emailAlreadyExists": "Bu email adresi zaten kayıtlı",
+            "invalidEmail": "Geçersiz email adresi"
+        }
+    }
+}

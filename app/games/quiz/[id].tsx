@@ -6,8 +6,10 @@ import { useStore, useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { database } from '@/lib/supabase/database';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 export default function QuizGameScreen() {
+    const { t } = useTranslation();
     const router = useRouter();
     const { id } = useLocalSearchParams();
     const { currentLives, maxLives, removeLives, addXP } = useStore();
@@ -64,9 +66,9 @@ export default function QuizGameScreen() {
     useEffect(() => {
         // Check lives
         if (currentLives <= 0) {
-            Alert.alert('Yetersiz Can', 'Canın kalmadı! Reklam izleyerek veya bekleyerek can kazanabilirsin.', [
+            Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'), [
                 {
-                    text: 'Tamam', onPress: () => {
+                    text: t('common.ok'), onPress: () => {
                         if (router.canGoBack()) {
                             router.back();
                         } else {
@@ -220,11 +222,11 @@ export default function QuizGameScreen() {
         return (
             <View style={styles.container}>
                 <View style={styles.completeContainer}>
-                    <Text style={styles.completeTitle}>Tebrikler!</Text>
-                    <Text style={styles.completeText}>Dersi başarıyla tamamladın.</Text>
+                    <Text style={styles.completeTitle}>{t('gameUI.congratulations')}</Text>
+                    <Text style={styles.completeText}>{t('gameUI.gameComplete')}</Text>
 
                     <View style={styles.statsContainer}>
-                        <Text style={styles.statText}>Doğru Cevap: {correctAnswersCount}/{mockQuestions.length}</Text>
+                        <Text style={styles.statText}>{t('gameUI.correctAnswers')}: {correctAnswersCount}/{mockQuestions.length}</Text>
                         <Text style={styles.statText}>Kazanılan XP: +{correctAnswersCount}</Text>
                     </View>
 
@@ -234,7 +236,7 @@ export default function QuizGameScreen() {
                         disabled={isSubmitting}
                     >
                         <Text style={styles.completeButtonText}>
-                            {isSubmitting ? 'Kaydediliyor...' : 'Tamamla!'}
+                            {isSubmitting ? t('common.loading') : t('common.finish')}
                         </Text>
                     </Pressable>
                 </View>
