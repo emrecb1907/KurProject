@@ -10,15 +10,18 @@
         "warning": "Uyarı",
         "back": "← Geri",
         "next": "İleri",
-        "finish": "Bitir",
+        "finish": "Testi Bitir",
         "user": "Kullanıcı",
         "continue": "Devam Et",
         "mainMenu": "Ana Menü",
         "tryAgain": "Tekrar Dene",
+        "showLatin": "Latinceyi Göster",
+        "showArabic": "Arapçayı Göster",
+        "nextQuestion": "Sonraki Soru",
         "xp": "XP",
         "lives": "Can",
         "locked": "Kilitli",
-        "startLesson": "Dersi Başlat",
+        "startLesson": "Teste Başla",
         "devTools": "Geliştirici Araçları",
         "resetProgress": "İlerlemeyi Sıfırla",
         "logout": "Çıkış Yap",
@@ -36,154 +39,156 @@
         "level": "Seviye",
         "tip": "💡 İpucu: Bu bölümü 'tamamlandı' olarak işaretlemek için son 20 soruda %90 başarı sağla",
         "completed": "Tamamlandı",
-        "word": "kelime",
-        "verse": "ayet",
-        "nextQuestion": "Sonraki Soru",
-        "showArabic": "Arapça Göster",
-        "showLatin": "Okunuşu Göster"
+        "word": "Kelime",
+        "verse": "Ayet"
     },
     "home": {
         "welcome": "Hoş Geldin",
-        "lessons": "Dersler",
+        "tests": "Testler",
         "level": "Seviye",
+        "locked": "Kilitli",
+        "start": "Başla",
         "xp": "XP",
         "lives": "Can",
-        "locked": "Kilitli",
-        "startLesson": "Dersi Başlat",
-        "devTools": "Geliştirici Araçları",
-        "resetProgress": "İlerlemeyi Sıfırla",
-        "logout": "Çıkış Yap",
-        "themeCache": "Tema Cache Temizle",
-        "xpSynced": "XP Senkronize Edildi",
-        "xpAdded": "XP Eklendi",
-        "timeLeft": "Kalan Süre",
-        "question": "Soru",
-        "congratulations": "Tebrikler!",
-        "gameComplete": "Oyun Tamamlandı!",
-        "wellDone": "Aferin!",
-        "tryAgainMessage": "Daha iyi yapabilirsin!",
-        "perfectScore": "Mükemmel! Hepsini doğru bildin!",
-        "goodJob": "İyi iş çıkardın!"
-    },
-    "games": {
-        "letters": {
-            "title": "Arapça Harfler",
-            "description": "Harf seslerini dinle ve doğru harfi seç",
-            "lessons": {
-                "1": "Temel Harfler 1",
-                "2": "Temel Harfler 2",
-                "3": "İleri Harfler 1",
-                "4": "İleri Harfler 2"
-            }
-        },
-        "vocabulary": {
-            "title": "Kavram Kartları",
-            "description": "İslami anahtar kelimeleri öğren",
-            "lessons": {
-                "1": "Temel Kavramlar",
-                "2": "İbadet Terimleri",
-                "3": "Ahlak Terimleri",
-                "4": "İtikat Terimleri"
-            },
-            "format": {
-                "title": "📚 Oyun Formatı:",
-                "text": "• İlk 10 soru: Türkçe → Arapça\n• Son 10 soru: Arapça → Türkçe\n• Her soru için 10 saniye süre"
-            }
-        },
-        "verses": {
-            "title": "Ayet Tamamlama",
-            "description": "Eksik kelimeleri bularak ayetleri tamamla",
-            "lessons": {
-                "1": "Kısa Sureler 1",
-                "2": "Kısa Sureler 2",
-                "3": "Namaz Duaları",
-                "4": "Amenerrasulü"
-            },
-            "features": {
-                "title": "📖 Özellikler:",
-                "text": "• Hem Arapça hem Latin transkripsiyon\n• Formatlar arası geçiş yapabilirsiniz\n• Her soru için 10 saniye süre"
-            }
-        },
-        "quiz": {
-            "title": "İslami Soru-Cevap",
-            "description": "İslami bilgini test et"
-        },
-        "speed": {
-            "title": "Hızlı Tur",
-            "description": "Karışık sorularla hızlı pratik"
-        }
-    },
-    "gameUI": {
-        "score": "Skor",
-        "correctAnswers": "Doğru Cevap",
-        "wrongAnswers": "Yanlış Cevap",
-        "totalScore": "Toplam Skor",
-        "timeLeft": "Kalan Süre",
-        "question": "Soru",
-        "congratulations": "Tebrikler!",
-        "tryAgainLater": "Lütfen daha sonra tekrar deneyin",
-        "playAgain": "Tekrar Oyna"
-    },
-    "weeklyActivity": {
-        "title": "Günlük Hedef",
-        "streak": "Gün",
-        "todayCompleted": "🎉 Bugün bir ders tamamladın!",
-        "todayNotCompleted": "Bugün henüz ders tamamlamadın",
-        "days": {
-            "mon": "Pt",
-            "tue": "Sa",
-            "wed": "Ça",
-            "thu": "Pe",
-            "fri": "Cu",
-            "sat": "Ct",
-            "sun": "Pa"
-        }
+        "devTools": "Geliştirici Araçları"
     },
     "tabs": {
         "home": "Ana",
         "leaderboard": "Liderlik",
-        "rewards": "Ödüller",
+        "rewards": "Sandık",
         "profile": "Profil"
     },
+    "weeklyActivity": {
+        "title": "Haftalık Aktivite",
+        "streak": "Gün",
+        "todayCompleted": "✅ Bugünkü hedefini tamamladın!",
+        "todayNotCompleted": "Bugün bir test çöz ve serini devam ettir!",
+        "days": {
+            "mon": "Pzt",
+            "tue": "Sal",
+            "wed": "Çar",
+            "thu": "Per",
+            "fri": "Cum",
+            "sat": "Cmt",
+            "sun": "Paz"
+        }
+    },
+    "gameUI": {
+        "gameComplete": "Test Tamamlandı!",
+        "goodJob": "İyi iş çıkardın!",
+        "congratulations": "Tebrikler!",
+        "totalScore": "Toplam Puan",
+        "correctAnswers": "Doğru Cevaplar",
+        "score": "Puan",
+        "xpEarned": "Kazanılan XP",
+        "accuracy": "Doğruluk",
+        "timeSpent": "Geçen Süre",
+        "question": "Soru",
+        "playAgain": "Tekrar Oyna"
+    },
+    "games": {
+        "common": {
+            "back": "Geri",
+            "level": "Seviye",
+            "start": "Başla",
+            "verse": "Ayet",
+            "word": "Kelime",
+            "tip": "İpucu"
+        },
+        "letters": {
+            "title": "Harfleri Öğren",
+            "description": "Kuran harflerini tanımayı öğren",
+            "tests": {
+                "1": "Harf Grubu 1",
+                "2": "Harf Grubu 2",
+                "3": "Harf Grubu 3",
+                "4": "Harf Grubu 4"
+            }
+        },
+        "vocabulary": {
+            "title": "Kelime Hazinesi",
+            "description": "Yeni kelimeler öğren",
+            "tests": {
+                "1": "Temel Kelimeler",
+                "2": "Günlük Hayat",
+                "3": "İbadet"
+            },
+            "format": {
+                "title": "Oyun Formatı",
+                "text": "Kartları eşleştirerek kelimeleri öğren"
+            }
+        },
+        "verses": {
+            "title": "Ayet Ezberle",
+            "description": "Kısa sureleri ve ayetleri ezberle",
+            "tests": {
+                "1": "Fatiha Suresi",
+                "2": "İhlas Suresi",
+                "3": "Kevser Suresi"
+            },
+            "features": {
+                "title": "Özellikler",
+                "text": "Ayetleri dinle ve tekrar et"
+            }
+        },
+        "quiz": {
+            "title": "Bilgi Yarışması",
+            "description": "Bilgini test et",
+            "tests": {
+                "1": "Genel Bilgi",
+                "2": "İleri Seviye",
+                "3": "Uzman"
+            }
+        },
+        "speed": {
+            "title": "Hız Testi",
+            "description": "Hızlı düşün, hızlı cevapla",
+            "tests": {
+                "1": "Başlangıç",
+                "2": "Orta",
+                "3": "İleri"
+            }
+        }
+    },
     "profile": {
-        "student": "QuranLearn Öğrencisi",
-        "anonymous": "Anonim Kullanıcı",
+        "student": "Öğrenci",
+        "anonymous": "Misafir",
+        "logout": "Çıkış Yap",
         "stats": {
             "totalXP": "Toplam XP",
-            "streak": "Günlük Seri",
+            "streak": "Seri",
             "successRate": "Başarı Oranı",
-            "completedLessons": "Çözülen Ders"
+            "completedTests": "Tamamlanan Testler"
         },
         "sections": {
             "badges": "Rozetler",
             "settings": "Ayarlar",
             "achievements": "Başarılar"
         },
-        "badgesHint": "Dersler tamamlayarak rozetler kazan!",
         "theme": {
             "label": "Tema",
             "light": "Açık",
             "dark": "Koyu",
             "system": "Sistem",
-            "activeTheme": "Aktif tema",
-            "systemSettings": "sistem ayarları"
+            "activeTheme": "Aktif Tema",
+            "systemSettings": "Sistem Ayarları"
         },
-        "logout": "Çıkış Yap",
         "achievements": {
             "firstStep": {
                 "title": "İlk Adım",
-                "description": "İlk dersini tamamla"
+                "description": "İlk testini tamamla"
             },
             "streakStarter": {
                 "title": "Seri Başlangıcı",
-                "description": "7 gün üst üste pratik yap"
+                "description": "7 gün üst üste çalış"
             }
         },
         "loginPrompt": {
-            "title": "Hesap Oluştur",
-            "description": "İlerlemeni kaydet, liderlik tablosuna katıl ve tüm özelliklerin kilidini aç!",
-            "button": "Giriş Yap / Kayıt Ol"
-        }
+            "title": "Giriş Yap",
+            "description": "İlerlemeni kaydetmek için giriş yap",
+            "button": "Giriş Yap"
+        },
+        "badgesHint": "Daha fazla test çözerek rozet kazan!"
     },
     "leaderboard": {
         "title": "Liderlik Tablosu",
@@ -267,5 +272,10 @@
             "adWatched": "Reklam izlendi! +1 Can kazandın.",
             "cantWatch": "Şu an reklam izleyemezsin."
         }
+    },
+    "errors": {
+        "insufficientLives": "Yetersiz Can",
+        "insufficientLivesDesc": "Bu testi başlatmak için en az 1 canın olmalı. Sandık sekmesinden can kazanabilirsin.",
+        "authRequired": "Giriş Gerekli"
     }
 }

@@ -8,10 +8,10 @@ export default function VocabularyGameScreen() {
   const router = useRouter();
   const { t } = useTranslation();
 
-  const lessons = [
-    { id: '1', title: t('games.vocabulary.lessons.1'), words: 20, level: 1, completed: false },
-    { id: '2', title: t('games.vocabulary.lessons.2'), words: 20, level: 2, completed: false, locked: true },
-    { id: '3', title: t('games.vocabulary.lessons.3'), words: 20, level: 3, completed: false, locked: true },
+  const tests = [
+    { id: '1', title: t('games.vocabulary.tests.1'), words: 20, level: 1, completed: false },
+    { id: '2', title: t('games.vocabulary.tests.2'), words: 20, level: 2, completed: false, locked: true },
+    { id: '3', title: t('games.vocabulary.tests.3'), words: 20, level: 3, completed: false, locked: true },
   ];
 
   return (
@@ -33,22 +33,22 @@ export default function VocabularyGameScreen() {
         {t('games.vocabulary.description')}
       </Text>
 
-      <View style={styles.lessonsList}>
-        {lessons.map((lesson) => (
-          <Card key={lesson.id} style={styles.lessonCard}>
+      <View style={styles.testsList}>
+        {tests.map((test) => (
+          <Card key={test.id} style={styles.lessonCard}>
             <View style={styles.lessonContent}>
               <View style={styles.lessonInfo}>
-                <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                <Text style={styles.lessonTitle}>{test.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {lesson.words} kelime • {t('games.common.level')} {lesson.level}
+                  {test.words} {t('common.word')} • {t('games.common.level')} {test.level}
                 </Text>
               </View>
 
-              {lesson.locked ? (
+              {test.locked ? (
                 <View style={styles.lockedBadge}>
                   <Text style={styles.lockedText}>🔒</Text>
                 </View>
-              ) : lesson.completed ? (
+              ) : test.completed ? (
                 <View style={styles.completedBadge}>
                   <Text style={styles.completedText}>✓</Text>
                 </View>
@@ -56,7 +56,7 @@ export default function VocabularyGameScreen() {
                 <Button
                   title={t('games.common.start')}
                   size="small"
-                  onPress={() => router.push(`/games/vocabulary/${lesson.id}`)}
+                  onPress={() => router.push(`/games/vocabulary/${test.id}`)}
                 />
               )}
             </View>
@@ -65,9 +65,9 @@ export default function VocabularyGameScreen() {
       </View>
 
       <View style={styles.infoBox}>
-        <Text style={styles.infoTitle}>📚 Oyun Formatı:</Text>
+        <Text style={styles.infoTitle}>{t('games.vocabulary.format.title')}</Text>
         <Text style={styles.infoText}>
-          {t('games.common.tip')}
+          {t('games.vocabulary.format.text')}
         </Text>
       </View>
     </View>
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 24,
   },
-  lessonsList: {
+  testsList: {
     flex: 1,
     paddingHorizontal: 16,
   },

@@ -34,15 +34,13 @@ export default function ProfileScreen() {
   const router = useRouter();
 
   // Get user data from Zustand store
-  const { totalXP, streak, setStreak } = useUser();
+  const { totalXP, streak, setStreak, completedTests, successRate, setUserStats } = useUser();
   const { isAuthenticated, user } = useAuth();
   const { signOut } = useAuthHook();
   const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
   const currentStreak = streak;
-  const [completedLessons, setCompletedLessons] = useState(0);
-  const [successRate, setSuccessRate] = useState(0);
 
-  // 🔄 Sync User Data (Streak & Stats) from database
+  // 🔄 Sync User Data (Streak & Stats) from database in background
   useFocusEffect(
     useCallback(() => {
       async function syncUserData() {
@@ -59,22 +57,21 @@ export default function ProfileScreen() {
               }
 
               // Update stats from user table
-              setCompletedLessons(userData.total_lessons_completed || 0);
+              const newCompletedTests = userData.total_lessons_completed || 0;
 
               // Calculate success rate
               const totalQuestions = userData.total_questions_solved || 0;
               const correctAnswers = userData.total_correct_answers || 0;
-              const rate = totalQuestions > 0
+              const newSuccessRate = totalQuestions > 0
                 ? Math.round((correctAnswers / totalQuestions) * 100)
                 : 0;
-              setSuccessRate(rate);
+
+              // Update stats in store (cache for next time)
+              setUserStats(newCompletedTests, newSuccessRate);
             }
           } catch (error) {
             console.error('❌ Failed to sync user data:', error);
           }
-        } else {
-          setCompletedLessons(0);
-          setSuccessRate(0);
         }
       }
 
@@ -92,7 +89,7 @@ export default function ProfileScreen() {
     { icon: DiamondIcon, value: formatXP(totalXP), label: t('profile.stats.totalXP'), color: colors.secondary },
     { icon: FireIcon, value: currentStreak.toString(), label: t('profile.stats.streak'), color: colors.primary },
     { icon: Tick01Icon, value: `${successRate}%`, label: t('profile.stats.successRate'), color: colors.success },
-    { icon: Book02Icon, value: completedLessons.toString(), label: t('profile.stats.completedLessons'), color: colors.pink },
+    { icon: Book02Icon, value: completedTests.toString(), label: t('profile.stats.completedTests'), color: colors.pink },
   ];
 
   const badges = [

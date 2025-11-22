@@ -42,6 +42,8 @@ export const useStore = create<StoreState>()(
         lastReplenishTime: state.lastReplenishTime,
         adWatchTimes: state.adWatchTimes,
         boundUserId: state.boundUserId,
+        completedTests: state.completedTests,
+        successRate: state.successRate,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
@@ -77,6 +79,8 @@ export const useUser = () => useStore(
     streakData: state.streakData,
     lastReplenishTime: state.lastReplenishTime,
     adWatchTimes: state.adWatchTimes,
+    completedTests: state.completedTests,
+    successRate: state.successRate,
     setTotalXP: state.setTotalXP,
     addXP: state.addXP,
     setCurrentLevel: state.setCurrentLevel,
@@ -87,6 +91,7 @@ export const useUser = () => useStore(
     setStreak: state.setStreak,
     setProgress: state.setProgress,
     setStreakData: state.setStreakData,
+    setUserStats: state.setUserStats,
     resetUserData: state.resetUserData,
     checkLifeRegeneration: state.checkLifeRegeneration,
     watchAd: state.watchAd,

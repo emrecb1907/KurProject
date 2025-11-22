@@ -14,21 +14,18 @@ export default function GamesLayout() {
     >
       <Stack.Screen name="letters/index" />
       <Stack.Screen name="letters/[id]" />
-      <Stack.Screen name="letters/result" />
-      
+
       <Stack.Screen name="vocabulary/index" />
       <Stack.Screen name="vocabulary/[id]" />
-      <Stack.Screen name="vocabulary/result" />
-      
+
       <Stack.Screen name="verses/index" />
       <Stack.Screen name="verses/[id]" />
-      <Stack.Screen name="verses/result" />
-      
+
+      <Stack.Screen name="quiz/[id]" />
+
       {/* Quick Quiz - Coming Soon */}
       {/* <Stack.Screen name="quick-quiz/index" /> */}
       {/* <Stack.Screen name="quick-quiz/[id]" /> */}
-      {/* <Stack.Screen name="quick-quiz/result" /> */}
     </Stack>
   );
 }
-

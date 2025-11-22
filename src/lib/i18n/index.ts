@@ -13,7 +13,7 @@ i18n
         compatibilityJSON: 'v3', // For Android compatibility
         resources: {
             tr: { translation: tr },
-            en: { translation: en },
+            // en: { translation: en }, // Temporarily disabled
         },
         lng: 'tr', // Default to Turkish
         fallbackLng: 'tr',

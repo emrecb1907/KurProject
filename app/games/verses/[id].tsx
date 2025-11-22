@@ -1,40 +1,17 @@
-import { useState, useEffect, useMemo } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
-import { QuestionCard, OptionButton, Timer, LifeIndicator } from '@components/game';
-import { Button } from '@components/ui';
-import { LoadingDots } from '@components/ui/LoadingDots';
-import { useStore, useAuth } from '@/store';
-import { colors } from '@constants/colors';
-import { database } from '@/lib/supabase/database';
-import { useTheme } from '@/contexts/ThemeContext';
-import { useTranslation } from 'react-i18next';
-import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
+import { useState } from 'react';
+import { useLocalSearchParams } from 'expo-router';
+import { GameScreen } from '@components/game';
+import { GameQuestion } from '@/types/game.types';
 
 export default function VersesGamePlayScreen() {
-  const { t } = useTranslation();
-  const router = useRouter();
   const { id } = useLocalSearchParams();
-  const { currentLives, maxLives, removeLives, addXP } = useStore();
-  const { isAuthenticated, user } = useAuth();
-  const { themeVersion } = useTheme();
-
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
-  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
-  const [isAnswered, setIsAnswered] = useState(false);
-  const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
-  const [isGameComplete, setIsGameComplete] = useState(false);
-  const [showLatin, setShowLatin] = useState(false);
-
-  // Dynamic styles
-  const styles = useMemo(() => getStyles(), [themeVersion]);
 
   // Mock questions - 20 total, 10 will be randomly selected
-  const allMockQuestions = [
+  const allMockQuestions: GameQuestion[] = [
     {
       id: '1',
-      questionText: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ __',
-      questionTextLatin: 'Bismillahir-Rahmanir-__',
+      question: 'بِسْمِ اللَّهِ الرَّحْمَٰنِ __',
+      questionLatin: 'Bismillahir-Rahmanir-__',
       correctAnswer: 'الرَّحِيمِ',
       correctAnswerLatin: 'Rahim',
       options: ['الرَّحِيمِ', 'الْكَرِيمِ', 'الْحَكِيمِ', 'الْعَظِيمِ'],
@@ -42,8 +19,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '2',
-      questionText: 'الْحَمْدُ لِلَّهِ رَبِّ __',
-      questionTextLatin: 'Elhamdulillahi rabbi-__',
+      question: 'الْحَمْدُ لِلَّهِ رَبِّ __',
+      questionLatin: 'Elhamdulillahi rabbi-__',
       correctAnswer: 'الْعَالَمِينَ',
       correctAnswerLatin: 'Alemin',
       options: ['الْعَالَمِينَ', 'الْمُؤْمِنِينَ', 'الْمُسْلِمِينَ', 'الصَّالِحِينَ'],
@@ -51,8 +28,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '3',
-      questionText: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ __',
-      questionTextLatin: 'İyyake nabudu ve iyyake-__',
+      question: 'إِيَّاكَ نَعْبُدُ وَإِيَّاكَ __',
+      questionLatin: 'İyyake nabudu ve iyyake-__',
       correctAnswer: 'نَسْتَعِينُ',
       correctAnswerLatin: 'Nestein',
       options: ['نَسْتَعِينُ', 'نَسْتَغْفِرُ', 'نَسْأَلُ', 'نَدْعُو'],
@@ -60,8 +37,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '4',
-      questionText: 'اهْدِنَا الصِّرَاطَ __',
-      questionTextLatin: 'İhdinas-siratal-__',
+      question: 'اهْدِنَا الصِّرَاطَ __',
+      questionLatin: 'İhdinas-siratal-__',
       correctAnswer: 'الْمُسْتَقِيمَ',
       correctAnswerLatin: 'Mustakim',
       options: ['الْمُسْتَقِيمَ', 'الْقَوِيمَ', 'الْعَظِيمَ', 'الْكَرِيمَ'],
@@ -69,8 +46,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '5',
-      questionText: 'قُلْ هُوَ اللَّهُ __',
-      questionTextLatin: 'Kul huvallahu-__',
+      question: 'قُلْ هُوَ اللَّهُ __',
+      questionLatin: 'Kul huvallahu-__',
       correctAnswer: 'أَحَدٌ',
       correctAnswerLatin: 'Ehad',
       options: ['أَحَدٌ', 'وَاحِدٌ', 'صَمَدٌ', 'قَدِيرٌ'],
@@ -78,8 +55,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '6',
-      questionText: 'اللَّهُ __',
-      questionTextLatin: 'Allahus-__',
+      question: 'اللَّهُ __',
+      questionLatin: 'Allahus-__',
       correctAnswer: 'الصَّمَدُ',
       correctAnswerLatin: 'Samed',
       options: ['الصَّمَدُ', 'الْأَحَدُ', 'الْوَاحِدُ', 'الْقَادِرُ'],
@@ -87,8 +64,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '7',
-      questionText: 'لَمْ يَلِدْ وَلَمْ __',
-      questionTextLatin: 'Lem yelid ve lem-__',
+      question: 'لَمْ يَلِدْ وَلَمْ __',
+      questionLatin: 'Lem yelid ve lem-__',
       correctAnswer: 'يُولَدْ',
       correctAnswerLatin: 'Yuled',
       options: ['يُولَدْ', 'يُخْلَقْ', 'يَكُنْ', 'يُوجَدْ'],
@@ -96,8 +73,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '8',
-      questionText: 'وَلَمْ يَكُنْ لَهُ __ أَحَدٌ',
-      questionTextLatin: 'Ve lem yekun lehu-__ ehad',
+      question: 'وَلَمْ يَكُنْ لَهُ __ أَحَدٌ',
+      questionLatin: 'Ve lem yekun lehu-__ ehad',
       correctAnswer: 'كُفُوًا',
       correctAnswerLatin: 'Kufuven',
       options: ['كُفُوًا', 'شَرِيكًا', 'مِثْلًا', 'نَظِيرًا'],
@@ -105,8 +82,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '9',
-      questionText: 'قُلْ أَعُوذُ بِرَبِّ __',
-      questionTextLatin: 'Kul euzu birabbi-__',
+      question: 'قُلْ أَعُوذُ بِرَبِّ __',
+      questionLatin: 'Kul euzu birabbi-__',
       correctAnswer: 'الْفَلَقِ',
       correctAnswerLatin: 'Felak',
       options: ['الْفَلَقِ', 'النَّاسِ', 'الْعَالَمِينَ', 'الْمَشْرِقِ'],
@@ -114,8 +91,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '10',
-      questionText: 'مِنْ شَرِّ مَا __',
-      questionTextLatin: 'Min şerri ma-__',
+      question: 'مِنْ شَرِّ مَا __',
+      questionLatin: 'Min şerri ma-__',
       correctAnswer: 'خَلَقَ',
       correctAnswerLatin: 'Halak',
       options: ['خَلَقَ', 'صَنَعَ', 'فَعَلَ', 'عَمِلَ'],
@@ -123,8 +100,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '11',
-      questionText: 'قُلْ أَعُوذُ بِرَبِّ __',
-      questionTextLatin: 'Kul euzu birabbi-__',
+      question: 'قُلْ أَعُوذُ بِرَبِّ __',
+      questionLatin: 'Kul euzu birabbi-__',
       correctAnswer: 'النَّاسِ',
       correctAnswerLatin: 'Nas',
       options: ['النَّاسِ', 'الْفَلَقِ', 'الْعَالَمِينَ', 'الْخَلْقِ'],
@@ -132,8 +109,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '12',
-      questionText: 'مَلِكِ __',
-      questionTextLatin: 'Meliki-__',
+      question: 'مَلِكِ __',
+      questionLatin: 'Meliki-__',
       correctAnswer: 'النَّاسِ',
       correctAnswerLatin: 'Nas',
       options: ['النَّاسِ', 'الْمُلْكِ', 'الْعَالَمِينَ', 'الْخَلْقِ'],
@@ -141,8 +118,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '13',
-      questionText: 'إِلَٰهِ __',
-      questionTextLatin: 'İlahi-__',
+      question: 'إِلَٰهِ __',
+      questionLatin: 'İlahi-__',
       correctAnswer: 'النَّاسِ',
       correctAnswerLatin: 'Nas',
       options: ['النَّاسِ', 'الْعَالَمِينَ', 'الْمُؤْمِنِينَ', 'الْخَلْقِ'],
@@ -150,8 +127,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '14',
-      questionText: 'مِنْ شَرِّ الْوَسْوَاسِ __',
-      questionTextLatin: 'Min şerril-vesvasi-__',
+      question: 'مِنْ شَرِّ الْوَسْوَاسِ __',
+      questionLatin: 'Min şerril-vesvasi-__',
       correctAnswer: 'الْخَنَّاسِ',
       correctAnswerLatin: 'Hannas',
       options: ['الْخَنَّاسِ', 'الْقَهَّارِ', 'الْجَبَّارِ', 'الْكَذَّابِ'],
@@ -159,8 +136,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '15',
-      questionText: 'إِنَّا أَعْطَيْنَاكَ __',
-      questionTextLatin: 'İnna ataynak-__',
+      question: 'إِنَّا أَعْطَيْنَاكَ __',
+      questionLatin: 'İnna ataynak-__',
       correctAnswer: 'الْكَوْثَرَ',
       correctAnswerLatin: 'Kevser',
       options: ['الْكَوْثَرَ', 'الْخَيْرَ', 'النَّصْرَ', 'الْفَتْحَ'],
@@ -168,8 +145,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '16',
-      questionText: 'فَصَلِّ لِرَبِّكَ __',
-      questionTextLatin: 'Fesalli lirabbike-__',
+      question: 'فَصَلِّ لِرَبِّكَ __',
+      questionLatin: 'Fesalli lirabbike-__',
       correctAnswer: 'وَانْحَرْ',
       correctAnswerLatin: 'Venhar',
       options: ['وَانْحَرْ', 'وَاسْجُدْ', 'وَارْكَعْ', 'وَاذْكُرْ'],
@@ -177,8 +154,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '17',
-      questionText: 'إِنَّ شَانِئَكَ هُوَ __',
-      questionTextLatin: 'İnne şaniake huve-__',
+      question: 'إِنَّ شَانِئَكَ هُوَ __',
+      questionLatin: 'İnne şaniake huve-__',
       correctAnswer: 'الْأَبْتَرُ',
       correctAnswerLatin: 'Ebter',
       options: ['الْأَبْتَرُ', 'الْأَخْسَرُ', 'الْأَذَلُّ', 'الْأَصْغَرُ'],
@@ -186,8 +163,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '18',
-      questionText: 'وَالْعَصْرِ * إِنَّ الْإِنْسَانَ لَفِي __',
-      questionTextLatin: 'Vel-asr * İnnel-insane lefi-__',
+      question: 'وَالْعَصْرِ * إِنَّ الْإِنْسَانَ لَفِي __',
+      questionLatin: 'Vel-asr * İnnel-insane lefi-__',
       correctAnswer: 'خُسْرٍ',
       correctAnswerLatin: 'Husr',
       options: ['خُسْرٍ', 'ضَلَالٍ', 'هَلَاكٍ', 'عَذَابٍ'],
@@ -195,8 +172,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '19',
-      questionText: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا __',
-      questionTextLatin: 'İllellezine amenu ve amilus-salihat ve tevasevu bil-hakki ve tevasevu-__',
+      question: 'إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا __',
+      questionLatin: 'İllellezine amenu ve amilus-salihat ve tevasevu bil-hakki ve tevasevu-__',
       correctAnswer: 'بِالصَّبْرِ',
       correctAnswerLatin: 'Bissabr',
       options: ['بِالصَّبْرِ', 'بِالشُّكْرِ', 'بِالْعِلْمِ', 'بِالْخَيْرِ'],
@@ -204,8 +181,8 @@ export default function VersesGamePlayScreen() {
     },
     {
       id: '20',
-      questionText: 'أَلَمْ نَشْرَحْ لَكَ __',
-      questionTextLatin: 'Elem neşrah leke-__',
+      question: 'أَلَمْ نَشْرَحْ لَكَ __',
+      questionLatin: 'Elem neşrah leke-__',
       correctAnswer: 'صَدْرَكَ',
       correctAnswerLatin: 'Sadrek',
       options: ['صَدْرَكَ', 'قَلْبَكَ', 'عَقْلَكَ', 'نَفْسَكَ'],
@@ -214,405 +191,18 @@ export default function VersesGamePlayScreen() {
   ];
 
   // Select 10 random questions on component mount
-  const [mockQuestions, setMockQuestions] = useState(() => {
+  const [mockQuestions] = useState(() => {
     const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 10);
   });
 
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const currentQuestion = mockQuestions[currentQuestionIndex];
-
-  useEffect(() => {
-    // Check lives
-    if (currentLives <= 0) {
-      Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'), [
-        {
-          text: t('common.ok'), onPress: () => {
-            if (router.canGoBack()) {
-              router.back();
-            } else {
-              router.replace('/');
-            }
-          }
-        }
-      ]);
-      return;
-    }
-
-    // Deduct life
-    removeLives(1);
-  }, []);
-
-  const handleTimeUp = () => {
-    handleAnswer(getCurrentOptions()[0], 0);
-  };
-
-  const handleAnswer = async (answer: string, timeTaken: number) => {
-    if (isAnswered) return;
-
-    setSelectedOption(answer);
-    const correct = showLatin
-      ? answer === currentQuestion.correctAnswerLatin
-      : answer === currentQuestion.correctAnswer;
-    setIsCorrect(correct);
-    setIsAnswered(true);
-
-    if (correct) {
-      hapticSuccess();
-      setCorrectAnswersCount(prev => prev + 1);
-    } else {
-      hapticError();
-    }
-  };
-
-  const handleNext = () => {
-    hapticLight();
-    setIsAnswered(false);
-    setSelectedOption(null);
-    setIsCorrect(null);
-
-    if (currentQuestionIndex < mockQuestions.length - 1) {
-      setCurrentQuestionIndex(currentQuestionIndex + 1);
-    } else {
-      setIsGameComplete(true);
-    }
-  };
-
-  const handleExit = () => {
-    if (router.canGoBack()) {
-      router.back();
-    } else {
-      router.replace('/');
-    }
-  };
-
-  const handleRetry = () => {
-    hapticLight();
-    setCurrentQuestionIndex(0);
-    setCorrectAnswersCount(0);
-    setIsGameComplete(false);
-    setIsAnswered(false);
-    setSelectedOption(null);
-    setIsCorrect(null);
-    // Reshuffle and pick new 10
-    const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
-    setMockQuestions(shuffled.slice(0, 10));
-  };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleComplete = async () => {
-    if (isSubmitting) return;
-    hapticLight();
-    setIsSubmitting(true);
-    console.log('🏁 Verses handleComplete called');
-
-    // Add XP locally
-    if (correctAnswersCount > 0) {
-      addXP(correctAnswersCount);
-
-      // Sync with DB if authenticated
-      if (isAuthenticated && user?.id) {
-        try {
-          console.log('🔄 Syncing Verses XP to DB:', correctAnswersCount);
-          await database.users.updateXP(user.id, correctAnswersCount);
-
-          console.log('📝 Calling updateCompletion for Verses:', {
-            userId: user.id,
-            lessonId: id,
-            correct: correctAnswersCount,
-            total: mockQuestions.length
-          });
-
-          // Save progress to enable weekly activity tracking
-          const { error: completionError } = await database.progress.updateCompletion(
-            user.id,
-            id as string, // lesson_id
-            correctAnswersCount,
-            mockQuestions.length
-          );
-
-          if (completionError) {
-            console.error('❌ Verses updateCompletion failed:', completionError);
-          } else {
-            console.log('✅ Verses updateCompletion success');
-          }
-
-          // Record daily activity (optimized)
-          await database.dailyActivity.record(user.id);
-
-          console.log('✅ Verses game progress saved');
-        } catch (error) {
-          console.error('❌ Failed to sync XP:', error);
-        }
-      } else {
-        console.log('⚠️ User not authenticated, skipping DB sync');
-      }
-    } else {
-      // Even if 0 correct, we should update completion (since we removed threshold)
-      if (isAuthenticated && user?.id) {
-        try {
-          console.log('📝 Calling updateCompletion for Verses (0 correct):', {
-            userId: user.id,
-            lessonId: id,
-            correct: 0,
-            total: mockQuestions.length
-          });
-
-          const { error: completionError } = await database.progress.updateCompletion(
-            user.id,
-            id as string,
-            0,
-            mockQuestions.length
-          );
-
-          if (completionError) {
-            console.error('❌ Verses updateCompletion failed (0 correct):', completionError);
-          } else {
-            console.log('✅ Verses updateCompletion success (0 correct)');
-          }
-        } catch (error) {
-          console.error('❌ Failed to sync progress (0 correct):', error);
-        }
-      }
-    }
-    handleExit();
-  };
-
-  const getCurrentOptions = () => {
-    return showLatin ? currentQuestion.optionsLatin : currentQuestion.options;
-  };
-
-  const getCurrentQuestion = () => {
-    return showLatin ? currentQuestion.questionTextLatin : currentQuestion.questionText;
-  };
-
-  const getOptionState = (option: string) => {
-    if (!isAnswered) {
-      return selectedOption === option ? 'selected' : 'default';
-    }
-
-    const correctAnswer = showLatin
-      ? currentQuestion.correctAnswerLatin
-      : currentQuestion.correctAnswer;
-
-    if (option === correctAnswer) {
-      return 'correct';
-    }
-
-    if (option === selectedOption && !isCorrect) {
-      return 'incorrect';
-    }
-
-    return 'default';
-  };
-
-  if (isGameComplete) {
-    return (
-      <View style={styles.container}>
-        <View style={styles.completeContainer}>
-          <Text style={styles.completeTitle}>{t('gameUI.gameComplete')}</Text>
-          <Text style={styles.completeText}>
-            {correctAnswersCount >= 8 ? t('gameUI.congratulations') : t('gameUI.goodJob')}
-          </Text>
-
-          <View style={styles.statsContainer}>
-            <Text style={styles.statText}>{t('gameUI.question')}: {mockQuestions.length}</Text>
-            <Text style={styles.statText}>{t('gameUI.correctAnswers')}: {correctAnswersCount}</Text>
-            <Text style={styles.statText}>XP: +{correctAnswersCount}</Text>
-          </View>
-
-          <Pressable
-            style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
-            onPress={handleComplete}
-            disabled={isSubmitting}
-          >
-            <Text style={styles.completeButtonText}>
-              {isSubmitting ? t('common.loading') : t('common.finish')}
-            </Text>
-            {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
-          </Pressable>
-
-          <Pressable
-            style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
-            onPress={handleRetry}
-            disabled={isSubmitting}
-          >
-            <Text style={styles.completeButtonText}>
-              {t('gameUI.playAgain').toUpperCase()}
-            </Text>
-          </Pressable>
-        </View>
-      </View>
-    );
-  }
-
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <Pressable onPress={handleExit}>
-          <Text style={styles.backButton}>✕</Text>
-        </Pressable>
-        <LifeIndicator currentLives={currentLives} maxLives={maxLives} />
-      </View>
-
-      {/* Timer - Key forces reset on question change */}
-      <Timer
-        key={currentQuestionIndex}
-        duration={10}
-        onTimeUp={handleTimeUp}
-        isActive={!isAnswered}
-      />
-
-      <ScrollView style={styles.content}>
-        <View style={styles.questionContainer}>
-          {/* Question */}
-          <QuestionCard
-            questionNumber={currentQuestionIndex + 1}
-            totalQuestions={mockQuestions.length}
-            question={getCurrentQuestion()}
-          />
-
-          <Button
-            title={showLatin ? t('common.showArabic') : t('common.showLatin')}
-            variant="outline"
-            size="small"
-            onPress={() => setShowLatin(!showLatin)}
-            style={styles.toggleButton}
-          />
-        </View>
-
-        {/* Options */}
-        <View style={styles.options}>
-          {getCurrentOptions().map((option, index) => (
-            <OptionButton
-              key={index}
-              option={option}
-              state={getOptionState(option)}
-              onPress={() => handleAnswer(option, 0)}
-              disabled={isAnswered}
-            />
-          ))}
-        </View>
-      </ScrollView>
-
-      {/* Next Button Footer */}
-      {isAnswered && (
-        <View style={styles.footer}>
-          <Pressable style={styles.nextButton} onPress={handleNext}>
-            <Text style={styles.nextButtonText}>
-              {currentQuestionIndex < mockQuestions.length - 1 ? t('common.nextQuestion') : t('common.finish')}
-            </Text>
-          </Pressable>
-        </View>
-      )}
-    </View>
+    <GameScreen
+      lessonId={id as string}
+      gameType="verses"
+      questions={mockQuestions}
+      timerDuration={10}
+      hasLatinToggle={true}
+    />
   );
 }
-
-const getStyles = () => StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingTop: 60,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  backButton: {
-    fontSize: 24,
-    color: colors.textPrimary,
-    fontWeight: '600',
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 16,
-  },
-  questionContainer: {
-    marginBottom: 16,
-  },
-  toggleButton: {
-    marginTop: 8,
-  },
-  options: {
-    marginTop: 8,
-    paddingBottom: 100, // Space for footer
-  },
-  footer: {
-    position: 'absolute',
-    bottom: 20,
-    left: 0,
-    right: 0,
-    padding: 16,
-    backgroundColor: colors.background,
-    borderTopWidth: 1,
-    borderTopColor: colors.border,
-  },
-  nextButton: {
-    backgroundColor: colors.success,
-    paddingVertical: 16,
-    borderRadius: 16,
-    alignItems: 'center',
-    borderBottomWidth: 4,
-    borderBottomColor: colors.successDark,
-    marginHorizontal: 20,
-  },
-  nextButtonText: {
-    color: colors.textOnPrimary,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  completeContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  completeTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 16,
-  },
-  completeText: {
-    fontSize: 18,
-    color: colors.textSecondary,
-    marginBottom: 32,
-  },
-  statsContainer: {
-    backgroundColor: colors.surface,
-    padding: 20,
-    borderRadius: 16,
-    width: '100%',
-    marginBottom: 32,
-    alignItems: 'center',
-    gap: 12,
-  },
-  statText: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: colors.textPrimary,
-  },
-  completeButton: {
-    backgroundColor: colors.success,
-    paddingVertical: 16,
-    paddingHorizontal: 48,
-    borderRadius: 16,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexDirection: 'row',
-    borderBottomWidth: 4,
-    borderBottomColor: colors.successDark,
-  },
-  completeButtonText: {
-    color: colors.textOnPrimary,
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-});

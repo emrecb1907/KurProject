@@ -57,16 +57,6 @@ export function useUserData() {
     };
   }
 
-  // Use a life
-  async function useLife() {
-    if (!user || currentLives <= 0) return false;
-
-    removeLives(1);
-    await database.users.updateLives(user.id, -1);
-
-    return true;
-  }
-
   // Add lives
   async function gainLives(amount: number) {
     if (!user) return;
@@ -75,38 +65,7 @@ export function useUserData() {
     await database.users.updateLives(user.id, amount);
   }
 
-  // Load user progress
-  async function loadProgress() {
-    if (!user) return;
 
-    const { data } = await database.progress.getByUserId(user.id);
-    if (data) {
-      setProgress(data);
-    }
-  }
-
-  // Update lesson progress
-  async function updateLessonProgress(
-    lessonId: string,
-    correctAnswers: number,
-    totalQuestions: number
-  ) {
-    if (!user) return;
-
-    const { data } = await database.progress.updateCompletion(
-      user.id,
-      lessonId,
-      correctAnswers,
-      totalQuestions
-    );
-
-    if (data) {
-      // Reload all progress
-      await loadProgress();
-    }
-
-    return data;
-  }
 
   // Get XP progress to next level
   function getXPProgress() {
@@ -145,13 +104,10 @@ export function useUserData() {
     maxLives,
     streak,
     progress,
-    
+
     // Actions
     earnXP,
-    useLife,
     gainLives,
-    loadProgress,
-    updateLessonProgress,
     getXPProgress,
     isLessonUnlocked,
     getLessonCompletion,

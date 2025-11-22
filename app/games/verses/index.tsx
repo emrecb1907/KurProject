@@ -12,10 +12,10 @@ export default function VersesGameScreen() {
   const styles = useMemo(() => getStyles(), [themeVersion]);
   const { t } = useTranslation();
 
-  const lessons = [
-    { id: '1', title: t('games.verses.lessons.1'), verses: 5, level: 2, completed: false },
-    { id: '2', title: t('games.verses.lessons.2'), verses: 5, level: 3, completed: false, locked: true },
-    { id: '3', title: t('games.verses.lessons.3'), verses: 10, level: 2, completed: false },
+  const tests = [
+    { id: '1', title: t('games.verses.tests.1'), verses: 5, level: 2, completed: false },
+    { id: '2', title: t('games.verses.tests.2'), verses: 5, level: 3, completed: false, locked: true },
+    { id: '3', title: t('games.verses.tests.3'), verses: 10, level: 2, completed: false },
   ];
 
   return (
@@ -31,22 +31,22 @@ export default function VersesGameScreen() {
         {t('games.verses.description')}
       </Text>
 
-      <View style={styles.lessonsList}>
-        {lessons.map((lesson) => (
-          <Card key={lesson.id} style={styles.lessonCard}>
+      <View style={styles.testsList}>
+        {tests.map((test) => (
+          <Card key={test.id} style={styles.lessonCard}>
             <View style={styles.lessonContent}>
               <View style={styles.lessonInfo}>
-                <Text style={styles.lessonTitle}>{lesson.title}</Text>
+                <Text style={styles.lessonTitle}>{test.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {lesson.verses} {t('games.common.verse')} • {t('games.common.level')} {lesson.level}
+                  {test.verses} {t('games.common.verse')} • {t('games.common.level')} {test.level}
                 </Text>
               </View>
 
-              {lesson.locked ? (
+              {test.locked ? (
                 <View style={styles.lockedBadge}>
                   <Text style={styles.lockedText}>🔒</Text>
                 </View>
-              ) : lesson.completed ? (
+              ) : test.completed ? (
                 <View style={styles.completedBadge}>
                   <Text style={styles.completedText}>✓</Text>
                 </View>
@@ -54,7 +54,7 @@ export default function VersesGameScreen() {
                 <Button
                   title={t('games.common.start')}
                   size="small"
-                  onPress={() => router.push(`/games/verses/${lesson.id}`)}
+                  onPress={() => router.push(`/games/verses/${test.id}`)}
                 />
               )}
             </View>
@@ -100,7 +100,7 @@ const getStyles = () => StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 24,
   },
-  lessonsList: {
+  testsList: {
     flex: 1,
     paddingHorizontal: 16,
   },

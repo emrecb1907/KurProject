@@ -81,7 +81,7 @@ export default function HomePage() {
     useCallback(() => {
       return () => {
         // When screen loses focus (navigating to another tab)
-        setSelectedLesson(null);
+        setSelectedTest(null);
       };
     }, [])
   );
@@ -274,7 +274,7 @@ export default function HomePage() {
     );
   };
 
-  const lessons = [
+  const tests = [
     {
       id: 1,
       title: t('games.letters.title'),
@@ -332,23 +332,23 @@ export default function HomePage() {
   ];
 
   const scrollViewRef = useRef<ScrollView>(null);
-  const [selectedLesson, setSelectedLesson] = useState<typeof lessons[0] | null>(null);
+  const [selectedTest, setSelectedTest] = useState<typeof tests[0] | null>(null);
   const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
   const [showDevTools, setShowDevTools] = useState(false);
 
-  const handleLessonSelect = (lesson: typeof lessons[0]) => {
+  const handleTestSelect = (test: typeof tests[0]) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    if (selectedLesson?.id === lesson.id) {
+    if (selectedTest?.id === test.id) {
       // If already selected, deselect
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      setSelectedLesson(null);
+      setSelectedTest(null);
     } else {
-      // Select new lesson
+      // Select new test
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      setSelectedLesson(lesson);
+      setSelectedTest(test);
 
       // Calculate card position for overlay alignment
-      const index = lessons.findIndex(l => l.id === lesson.id);
+      const index = tests.findIndex(t => t.id === test.id);
       if (index !== -1) {
         const cardWidth = 280;
         const gap = 16;
@@ -376,7 +376,7 @@ export default function HomePage() {
           top: 10 // Keep same top position
         });
 
-        // Scroll to center the selected lesson
+        // Scroll to center the selected test
         if (scrollViewRef.current) {
           scrollViewRef.current.scrollTo({
             x: targetScrollX,
@@ -387,17 +387,17 @@ export default function HomePage() {
     }
   };
 
-  const handleStartLesson = () => {
+  const handleStartTest = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-    if (!selectedLesson) return;
+    if (!selectedTest) return;
 
     if (currentLives <= 0) {
       Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'));
       return;
     }
 
-    router.push((selectedLesson.route || '/games/letters') as any);
-    setSelectedLesson(null);
+    router.push((selectedTest.route || '/games/letters') as any);
+    setSelectedTest(null);
   };
 
   // Dynamic styles that update when theme changes
@@ -816,7 +816,7 @@ export default function HomePage() {
         >
           {/* Section Title */}
           <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle}>{t('home.lessons')}</Text>
+            <Text style={styles.sectionTitle}>{t('home.tests')}</Text>
           </View>
 
           {/* Lesson Cards Carousel */}
@@ -828,57 +828,57 @@ export default function HomePage() {
             style={styles.carousel}
             onScrollBeginDrag={() => {
               // Dismiss confirmation card when user manually scrolls
-              if (selectedLesson) {
+              if (selectedTest) {
                 LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                setSelectedLesson(null);
+                setSelectedTest(null);
               }
             }}
           >
-            {lessons.map((lesson) => (
+            {tests.map((test) => (
               <HoverCard
-                key={lesson.id}
+                key={test.id}
                 style={[
                   styles.lessonCard,
                   {
-                    backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
-                    borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
+                    backgroundColor: test.unlocked ? test.color : colors.locked,
+                    borderBottomColor: test.unlocked ? test.borderColor : colors.lockedBorder,
                   },
-                  !lesson.unlocked && styles.lessonCardLocked,
+                  !test.unlocked && styles.lessonCardLocked,
                 ]}
-                onPress={() => handleLessonSelect(lesson)}
-                disabled={!lesson.unlocked}
+                onPress={() => handleTestSelect(test)}
+                disabled={!test.unlocked}
                 lightColor="rgba(255, 255, 255, 0.3)"
               >
                 {/* Card Header */}
                 <View style={styles.cardHeader}>
                   <View style={styles.cardIconContainer}>
                     <HugeiconsIcon
-                      icon={lesson.icon}
+                      icon={test.icon}
                       size={32}
                       color={colors.textOnPrimary}
                     />
                   </View>
-                  {!lesson.unlocked && (
+                  {!test.unlocked && (
                     <View style={styles.levelBadge}>
-                      <Text style={styles.levelBadgeText}>{t('home.level')} {lesson.level}</Text>
+                      <Text style={styles.levelBadgeText}>{t('home.level')} {test.level}</Text>
                     </View>
                   )}
                 </View>
 
                 {/* Card Content */}
                 <View style={styles.cardContent}>
-                  <Text style={styles.cardTitle}>{lesson.title}</Text>
-                  <Text style={styles.cardDescription}>{lesson.description}</Text>
+                  <Text style={styles.cardTitle}>{test.title}</Text>
+                  <Text style={styles.cardDescription}>{test.description}</Text>
                 </View>
 
                 {/* Card Footer - Progress or Status */}
                 <View style={styles.cardFooter}>
-                  {lesson.unlocked ? (
+                  {test.unlocked ? (
                     <View style={styles.progressContainer}>
                       <View style={styles.progressBar}>
                         <View style={[styles.progressFill, { width: '30%' }]} />
                       </View>
-                      <Text style={styles.progressText}>3/10 {t('home.lessons')}</Text>
+                      <Text style={styles.progressText}>3/10 {t('home.tests')}</Text>
                     </View>
                   ) : (
                     <View style={styles.lockedBadge}>
@@ -896,8 +896,8 @@ export default function HomePage() {
             {/* Weekly Activity / Daily Goal Card */}
             <WeeklyActivity />
 
-            {/* Lesson Start Confirmation Card (Overlay) */}
-            {selectedLesson && (
+            {/* Test Start Confirmation Card (Overlay) */}
+            {selectedTest && (
               <>
                 {/* Backdrop to close on outside click */}
                 <Pressable
@@ -913,7 +913,7 @@ export default function HomePage() {
                   onPress={() => {
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-                    setSelectedLesson(null);
+                    setSelectedTest(null);
                   }}
                 />
 
@@ -929,19 +929,19 @@ export default function HomePage() {
                   ]}
                 >
                   <View style={styles.startCardHeader}>
-                    <View style={[styles.startCardIcon, { backgroundColor: selectedLesson.color }]}>
-                      <HugeiconsIcon icon={selectedLesson.icon} size={20} color={colors.textOnPrimary} />
+                    <View style={[styles.startCardIcon, { backgroundColor: selectedTest.color }]}>
+                      <HugeiconsIcon icon={selectedTest.icon} size={20} color={colors.textOnPrimary} />
                     </View>
                     <View style={styles.startCardTitleContainer}>
-                      <Text style={styles.startCardTitle}>{selectedLesson.title}</Text>
-                      <Text style={styles.startCardSubtitle}>{selectedLesson.description}</Text>
+                      <Text style={styles.startCardTitle}>{selectedTest.title}</Text>
+                      <Text style={styles.startCardSubtitle}>{selectedTest.description}</Text>
                     </View>
                   </View>
 
                   <View style={styles.startCardActions}>
                     <Pressable
-                      style={[styles.startButton, { backgroundColor: selectedLesson.color, borderBottomColor: selectedLesson.borderColor }]}
-                      onPress={handleStartLesson}
+                      style={[styles.startButton, { backgroundColor: selectedTest.color, borderBottomColor: selectedTest.borderColor }]}
+                      onPress={handleStartTest}
                     >
                       <Text style={styles.startButtonText}>{t('common.start')}</Text>
                     </Pressable>
@@ -950,7 +950,7 @@ export default function HomePage() {
                       style={styles.cancelButton}
                       onPress={() => {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        setSelectedLesson(null);
+                        setSelectedTest(null);
                       }}
                     >
                       <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
@@ -1012,7 +1012,7 @@ export default function HomePage() {
                   </Pressable>
                 </View>
 
-                {/* Language Switcher Buttons */}
+                {/* Language Switcher Buttons - Temporarily Disabled
                 <View style={styles.testButtonRow}>
                   <Pressable
                     style={[styles.testButton, styles.testButtonHalf, { backgroundColor: '#E30A17' }]}
@@ -1038,6 +1038,7 @@ export default function HomePage() {
                     <Text style={styles.testButtonText}>🇬🇧 English</Text>
                   </Pressable>
                 </View>
+                */}
 
                 {/* Clear Theme Cache Button */}
                 <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
@@ -1093,7 +1094,7 @@ export default function HomePage() {
             )}
           </View>
         </ScrollView>
-      </View>
+      </View >
     </SafeAreaView >
   );
 }

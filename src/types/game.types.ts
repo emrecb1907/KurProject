@@ -35,3 +35,15 @@ export interface GameState {
   results: QuestionResult[];
 }
 
+// New types for generic game screen
+export interface GameQuestion {
+  id: string;
+  question: string;
+  questionLatin?: string; // For verses
+  correctAnswer: string;
+  correctAnswerLatin?: string; // For verses
+  options: string[];
+  optionsLatin?: string[]; // For verses
+}
+
+export type GameType = 'vocabulary' | 'letters' | 'verses';

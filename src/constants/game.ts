@@ -56,3 +56,32 @@ export const QUESTIONS_PER_LESSON = {
   QUICK_QUIZ: 30,
 } as const;
 
+// Game UI Configuration
+export const GAME_UI_CONFIG = {
+  QUESTIONS_PER_GAME: 10, // number of questions shown per game
+  TOTAL_QUESTION_POOL: 20, // total questions available (for random selection)
+  FOOTER_PADDING: 100, // padding for scrollable content
+  EXCELLENT_SCORE_THRESHOLD: 8, // 8/10 or better = excellent
+  GOOD_SCORE_THRESHOLD: 5, // 5/10 or better = good
+} as const;
+
+/**
+ * Shuffle an array using Fisher-Yates algorithm
+ * More efficient and truly random compared to sort(() => Math.random() - 0.5)
+ */
+export function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+/**
+ * Select random items from an array
+ */
+export function selectRandomItems<T>(array: T[], count: number): T[] {
+  const shuffled = shuffleArray(array);
+  return shuffled.slice(0, count);
+}

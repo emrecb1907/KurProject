@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Card, Button } from '@components/ui';
+import { useRouter, Link } from 'expo-router';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useMemo } from 'react';
-
 import { useTranslation } from 'react-i18next';
+import { HugeiconsIcon } from '@hugeicons/react-native';
+import { LockIcon, PlayCircleIcon } from '@hugeicons/core-free-icons';
 
 export default function LettersGameScreen() {
   const { t } = useTranslation();
@@ -13,18 +13,18 @@ export default function LettersGameScreen() {
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
-  const lessons = [
-    { id: '1', title: t('games.letters.lessons.1'), level: 1, completed: false },
-    { id: '2', title: t('games.letters.lessons.2'), level: 1, completed: false },
-    { id: '3', title: t('games.letters.lessons.3'), level: 2, completed: false, locked: true },
-    { id: '4', title: t('games.letters.lessons.4'), level: 3, completed: false, locked: true },
+  const tests = [
+    { id: '1', title: t('games.letters.tests.1'), level: 1, completed: false },
+    { id: '2', title: t('games.letters.tests.2'), level: 1, completed: false },
+    { id: '3', title: t('games.letters.tests.3'), level: 2, completed: false, locked: true },
+    { id: '4', title: t('games.letters.tests.4'), level: 3, completed: false, locked: true },
   ];
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
         <Pressable onPress={() => router.back()}>
-          <Text style={styles.backButton}>{t('games.common.back')}</Text>
+          <Text style={styles.backButton}>{t('common.back')}</Text>
         </Pressable>
         <Text style={styles.title}>{t('games.letters.title')}</Text>
       </View>
@@ -33,38 +33,37 @@ export default function LettersGameScreen() {
         {t('games.letters.description')}
       </Text>
 
-      <View style={styles.lessonsList}>
-        {lessons.map((lesson) => (
-          <Card key={lesson.id} style={styles.lessonCard}>
-            <View style={styles.lessonContent}>
+      <View style={styles.testsList}>
+        {tests.map((test) => (
+          <Link key={test.id} href={`/games/letters/${test.id}`} asChild>
+            <Pressable
+              style={[
+                styles.lessonCard,
+                test.locked && styles.lessonCardLocked
+              ]}
+              disabled={test.locked}
+            >
               <View style={styles.lessonInfo}>
-                <Text style={styles.lessonTitle}>{lesson.title}</Text>
-                <Text style={styles.lessonLevel}>{t('games.common.level')} {lesson.level}</Text>
+                <Text style={[styles.lessonTitle, test.locked && styles.textLocked]}>
+                  {test.title}
+                </Text>
+                <View style={styles.levelBadge}>
+                  <Text style={styles.levelText}>{t('common.level')} {test.level}</Text>
+                </View>
               </View>
-
-              {lesson.locked ? (
-                <View style={styles.lockedBadge}>
-                  <Text style={styles.lockedText}>🔒</Text>
-                </View>
-              ) : lesson.completed ? (
-                <View style={styles.completedBadge}>
-                  <Text style={styles.completedText}>✓</Text>
-                </View>
+              {test.locked ? (
+                <HugeiconsIcon icon={LockIcon} size={24} color={colors.textSecondary} />
               ) : (
-                <Button
-                  title={t('games.common.start')}
-                  size="small"
-                  onPress={() => router.push(`/games/letters/${lesson.id}`)}
-                />
+                <HugeiconsIcon icon={PlayCircleIcon} size={32} color={colors.primary} />
               )}
-            </View>
-          </Card>
+            </Pressable>
+          </Link>
         ))}
       </View>
 
       <View style={styles.infoBox}>
         <Text style={styles.infoText}>
-          {t('games.common.tip')}
+          {t('common.tip')}
         </Text>
       </View>
     </View>
@@ -99,17 +98,24 @@ const getStyles = () => StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 24,
   },
-  lessonsList: {
+  testsList: {
     flex: 1,
     paddingHorizontal: 16,
+    gap: 12,
   },
   lessonCard: {
-    marginBottom: 12,
-  },
-  lessonContent: {
+    backgroundColor: colors.surface,
+    padding: 16,
+    borderRadius: 12,
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    borderWidth: 1,
+    borderColor: colors.border,
+  },
+  lessonCardLocked: {
+    opacity: 0.7,
+    backgroundColor: colors.surfaceLight,
   },
   lessonInfo: {
     flex: 1,
@@ -120,44 +126,29 @@ const getStyles = () => StyleSheet.create({
     color: colors.textPrimary,
     marginBottom: 4,
   },
-  lessonLevel: {
-    fontSize: 14,
+  textLocked: {
     color: colors.textSecondary,
   },
-  lockedBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.surfaceLight, // Replaced surfaceVariant
-    justifyContent: 'center',
-    alignItems: 'center',
+  levelBadge: {
+    backgroundColor: colors.surfaceLight, // Changed from surfaceVariant
+    paddingHorizontal: 8,
+    paddingVertical: 2,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
   },
-  lockedText: {
-    fontSize: 20,
-  },
-  completedBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.success,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  completedText: {
-    fontSize: 20,
-    color: colors.textLight,
-    fontWeight: 'bold',
+  levelText: {
+    fontSize: 12,
+    color: colors.textSecondary,
   },
   infoBox: {
-    backgroundColor: colors.secondaryGlow, // Replaced #e3f2fd
+    backgroundColor: colors.secondaryGlow,
     padding: 16,
     margin: 16,
     borderRadius: 12,
   },
   infoText: {
     fontSize: 14,
-    color: colors.secondaryDark, // Replaced #1565c0
+    color: colors.secondaryDark,
     lineHeight: 20,
   },
 });
-

@@ -264,15 +264,17 @@ export default function QuizGameScreen() {
                         {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
                     </Pressable>
 
-                    <Pressable
-                        style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
-                        onPress={handleRetry}
-                        disabled={isSubmitting}
-                    >
-                        <Text style={styles.completeButtonText}>
-                            {t('gameUI.playAgain').toUpperCase()}
-                        </Text>
-                    </Pressable>
+                    {!isSubmitting && (
+                        <Pressable
+                            style={[styles.completeButton, { backgroundColor: colors.primary, marginTop: 12, borderBottomColor: colors.primaryDark }]}
+                            onPress={handleRetry}
+                            disabled={isSubmitting}
+                        >
+                            <Text style={styles.completeButtonText}>
+                                {t('gameUI.playAgain').toUpperCase()}
+                            </Text>
+                        </Pressable>
+                    )}
                 </View>
             </View>
         );

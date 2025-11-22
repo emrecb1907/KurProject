@@ -5,4 +5,5 @@ export { ScoreDisplay } from './ScoreDisplay';
 export { LifeIndicator } from './LifeIndicator';
 export { LevelUpModal } from './LevelUpModal';
 export { ResultModal } from './ResultModal';
+export { GameScreen } from './GameScreen';
 

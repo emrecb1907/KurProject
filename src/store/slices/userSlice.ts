@@ -15,6 +15,10 @@ export interface UserSlice {
   lastReplenishTime: number | null;
   adWatchTimes: number[]; // Timestamps of ad watches in the last 24h
 
+  // Stats cache (for profile page performance)
+  completedTests: number;
+  successRate: number;
+
   // Actions
   setTotalXP: (xp: number) => void;
   addXP: (xp: number) => void;
@@ -26,6 +30,7 @@ export interface UserSlice {
   setStreak: (streak: number) => void;
   setProgress: (progress: UserProgress[]) => void;
   setStreakData: (streakData: UserStreak | null) => void;
+  setUserStats: (completedTests: number, successRate: number) => void;
   resetUserData: () => void;
 
   // New Actions
@@ -49,6 +54,8 @@ const initialState = {
   lastReplenishTime: Date.now(),
   adWatchTimes: [],
   boundUserId: null,
+  completedTests: 0,
+  successRate: 0,
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -82,6 +89,8 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   setProgress: (progress) => set({ progress }),
 
   setStreakData: (streakData) => set({ streakData }),
+
+  setUserStats: (completedTests, successRate) => set({ completedTests, successRate }),
 
   resetUserData: () => set(initialState),
 
