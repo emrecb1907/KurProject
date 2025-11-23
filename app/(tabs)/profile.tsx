@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useMemo, useCallback, useState } from 'react';
+import { useMemo, useCallback, useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
@@ -25,7 +25,7 @@ import {
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
-import { useAuthHook } from '@hooks';
+import { useAuthHook, useUserStats } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
@@ -33,51 +33,38 @@ export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  // Get user data from Zustand store
-  const { totalXP, streak, setStreak, completedTests, successRate, setUserStats } = useUser();
+  // Get user data from Zustand store (UI state)
+  const { totalXP, streak, setStreak, setUserStats } = useUser();
   const { isAuthenticated, user } = useAuth();
   const { signOut } = useAuthHook();
   const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
+
+  // 🚀 React Query: Fetch user data with auto-cache and retry
+  const { data: userStats, isLoading: isLoadingStats } = useUserStats(user?.id);
+
+  // Use React Query data if available, fallback to Zustand cache
+  const completedTests = userStats?.completedTests ?? 0;
+  const successRate = userStats?.successRate ?? 0;
   const currentStreak = streak;
 
-  // 🔄 Sync User Data (Streak & Stats) from database in background
-  useFocusEffect(
-    useCallback(() => {
-      async function syncUserData() {
-        if (isAuthenticated && user?.id) {
-          try {
-            // Fetch user data for streak and stats
-            const { data: userData } = await database.users.getById(user.id);
-            if (userData) {
-              // Update streak in store
-              if (userData.streak !== undefined) {
-                setStreak(userData.streak);
-              } else if (userData.streak_count !== undefined) {
-                setStreak(userData.streak_count);
-              }
+  // 🔄 Sync streak to Zustand store when data changes
+  useEffect(() => {
+    if (userStats?.userData) {
+      const userData = userStats.userData;
 
-              // Update stats from user table
-              const newCompletedTests = userData.total_lessons_completed || 0;
-
-              // Calculate success rate
-              const totalQuestions = userData.total_questions_solved || 0;
-              const correctAnswers = userData.total_correct_answers || 0;
-              const newSuccessRate = totalQuestions > 0
-                ? Math.round((correctAnswers / totalQuestions) * 100)
-                : 0;
-
-              // Update stats in store (cache for next time)
-              setUserStats(newCompletedTests, newSuccessRate);
-            }
-          } catch (error) {
-            console.error('❌ Failed to sync user data:', error);
-          }
-        }
+      // Update streak in store
+      if (userData.streak !== undefined) {
+        setStreak(userData.streak);
+      } else if (userData.streak_count !== undefined) {
+        setStreak(userData.streak_count);
       }
 
-      syncUserData();
-    }, [isAuthenticated, user?.id])
-  );
+      // Update stats cache in store
+      if (userStats.completedTests !== undefined && userStats.successRate !== undefined) {
+        setUserStats(userStats.completedTests, userStats.successRate);
+      }
+    }
+  }, [userStats]);
 
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || t('profile.anonymous');

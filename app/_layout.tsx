@@ -3,8 +3,10 @@ import { useEffect } from 'react';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { LogBox } from 'react-native';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
+import { queryClient } from '@/lib/queryClient';
 import '@/lib/i18n'; // Initialize i18n
 
 // Prevent the splash screen from auto-hiding
@@ -38,20 +40,20 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          animation: 'fade',
-        }}
-      >
-        <Stack.Screen name="index" />
-        <Stack.Screen name="(tabs)" />
-        <Stack.Screen name="(auth)" />
-        <Stack.Screen name="auth/callback" />
-        <Stack.Screen name="games" />
-      </Stack>
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+            animation: 'fade',
+          }}
+        >
+          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen name="(auth)" />
+          <Stack.Screen name="games" />
+        </Stack>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
-

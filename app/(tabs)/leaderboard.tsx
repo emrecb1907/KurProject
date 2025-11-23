@@ -5,10 +5,10 @@ import { colors } from '@constants/colors';
 import { HugeiconsIcon } from '@hugeicons/react-native';
 import { Award01Icon, CrownIcon, Medal01Icon, StarIcon, UserAccountIcon, BulbIcon, Refresh01Icon } from '@hugeicons/core-free-icons';
 import { useAuth, useUser } from '@/store';
-import { database } from '@/lib/supabase/database';
 import { Skeleton } from '@/components/ui';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { useOptimisticLeaderboard, useUserRank } from '@hooks';
 
 interface LeaderboardItem {
   rank: number;
@@ -26,107 +26,73 @@ export default function LeaderboardScreen() {
   const { t } = useTranslation();
   const { isAuthenticated, user } = useAuth();
   const { totalXP } = useUser();
-  const { activeTheme, themeVersion } = useTheme(); // Force re-render on theme change
+  const { activeTheme, themeVersion } = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
 
-  const [leaderboardData, setLeaderboardData] = useState<LeaderboardItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const [refreshing, setRefreshing] = useState(false);
-  const [userRankData, setUserRankData] = useState<{ rank: number; item: LeaderboardItem } | null>(null);
+  // 🚀 Optimistic Leaderboard: 5dk cache + optimistic rank
+  const {
+    leaderboard: leaderboardRawData,
+    isLoading: loading,
+    error: queryError,
+    yourOptimisticRank
+  } = useOptimisticLeaderboard(50);
+
+  // Transform raw data to LeaderboardItem format
+  const leaderboardData = useMemo(() => {
+    if (!leaderboardRawData) return [];
+
+    return leaderboardRawData.map((entry, index) => ({
+      rank: index + 1,
+      id: entry.id,
+      username: entry.username || entry.email?.split('@')[0] || t('common.user'),
+      totalXP: entry.total_xp,
+      league: entry.league,
+      isYou: entry.id === user?.id,
+      isGold: index === 0,
+      isSilver: index === 1,
+      isBronze: index === 2,
+    }));
+  }, [leaderboardRawData, user?.id, t]);
+
+  // Check if user is in top 50
+  const userInTop50 = leaderboardData.some(i => i.isYou);
+
+  // 🚀 Fetch user rank if not in top 50 (for display at bottom)
+  const { data: userRankData } = useUserRank(!userInTop50 && user?.id ? user.id : undefined);
+
+  // Transform user rank data
+  const userRankItem = useMemo(() => {
+    if (!userRankData) return null;
+
+    return {
+      rank: yourOptimisticRank || userRankData.rank, // Use optimistic rank
+      item: {
+        rank: yourOptimisticRank || userRankData.rank,
+        id: userRankData.user.id,
+        username: userRankData.user.username || userRankData.user.email?.split('@')[0] || t('common.user'),
+        totalXP: totalXP, // Use current XP (optimistic)
+        league: userRankData.user.league,
+        isYou: true,
+        isGold: false,
+        isSilver: false,
+        isBronze: false,
+      }
+    };
+  }, [userRankData, yourOptimisticRank, totalXP, t]);
+
+  const error = queryError ? t('leaderboard.errors.loadFailed') : null;
 
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
-  // Fetch leaderboard when screen comes into focus
-  useFocusEffect(
-    useCallback(() => {
-      console.log('🔄 Leaderboard focused, refreshing...');
-      fetchLeaderboard();
-    }, [user?.id])
-  );
-
-  async function fetchLeaderboard(isManualRefresh = false) {
-    try {
-      if (isManualRefresh) {
-        setRefreshing(true);
-      } else {
-        setLoading(true);
-      }
-      setError(null);
-
-      console.log('📊 Fetching leaderboard from database...');
-
-      const { data, error: fetchError } = await database.users.getLeaderboard(50);
-
-      if (fetchError) {
-        console.error('❌ Leaderboard fetch error:', fetchError);
-        setError(t('leaderboard.errors.loadFailed'));
-        return;
-      }
-
-      if (!data || data.length === 0) {
-        console.log('ℹ️ No leaderboard data yet');
-        setLeaderboardData([]);
-        return;
-      }
-
-      // Map data to leaderboard items with ranks
-      const items: LeaderboardItem[] = data.map((entry, index) => ({
-        rank: index + 1,
-        id: entry.id,
-        username: entry.username || entry.email?.split('@')[0] || t('common.user'),
-        totalXP: entry.total_xp,
-        league: entry.league,
-        isYou: entry.id === user?.id,
-        isGold: index === 0,
-        isSilver: index === 1,
-        isBronze: index === 2,
-      }));
-
-      console.log('✅ Leaderboard loaded:', items.length, 'users');
-      console.log('📊 Your XP in leaderboard:', items.find(i => i.isYou)?.totalXP || 'N/A');
-      setLeaderboardData(items);
-
-      // Check if user is in top 50
-      const userInTop50 = items.some(i => i.isYou);
-
-      // If user is authenticated and NOT in top 50, fetch their rank
-      if (user?.id && !userInTop50) {
-        const { data: rankData, error: rankError } = await database.users.getUserRank(user.id);
-
-        if (!rankError && rankData) {
-          const userItem: LeaderboardItem = {
-            rank: rankData.rank,
-            id: rankData.user.id,
-            username: rankData.user.username || rankData.user.email?.split('@')[0] || t('common.user'),
-            totalXP: rankData.user.total_xp,
-            league: rankData.user.league,
-            isYou: true,
-            isGold: false,
-            isSilver: false,
-            isBronze: false,
-          };
-
-          setUserRankData({ rank: rankData.rank, item: userItem });
-          console.log('📊 Your rank:', rankData.rank);
-        }
-      } else {
-        setUserRankData(null);
-      }
-
-      // Auto-scroll to user's position after data loads
+  // Auto-scroll to user position when data loads
+  useEffect(() => {
+    if (!loading && leaderboardData.length > 0) {
       setTimeout(() => {
-        scrollToUserPosition(items, userInTop50);
-      }, 300); // Small delay to ensure rendering is complete
-    } catch (err) {
-      console.error('❌ Unexpected leaderboard error:', err);
-      setError(t('errors.generic'));
-    } finally {
-      setLoading(false);
-      setRefreshing(false);
+        scrollToUserPosition(leaderboardData, userInTop50);
+      }, 300);
     }
-  }
+  }, [loading, leaderboardData, userInTop50]);
 
   const scrollToUserPosition = (items: LeaderboardItem[], userInTop50: boolean) => {
     if (!scrollViewRef.current || !user?.id) return;
@@ -134,17 +100,13 @@ export default function LeaderboardScreen() {
     const userIndex = items.findIndex(i => i.isYou);
 
     if (userIndex !== -1) {
-      // User is in top 50, scroll to their position
-      // Each item is approximately 76px tall (padding + content)
       const itemHeight = 76;
       const scrollPosition = userIndex * itemHeight;
-
       scrollViewRef.current.scrollTo({
         y: scrollPosition,
         animated: true,
       });
     } else if (!userInTop50) {
-      // User is not in top 50, scroll to bottom to show their rank
       scrollViewRef.current.scrollToEnd({ animated: true });
     }
   };
@@ -236,7 +198,7 @@ export default function LeaderboardScreen() {
             {/* Rank */}
             <View style={styles.rankContainer}>
               <Text style={[styles.rank, { color: getRankColor(item.rank) }]}>
-                {item.rank}
+                {item.isYou && yourOptimisticRank ? yourOptimisticRank : item.rank}
               </Text>
             </View>
 
@@ -260,14 +222,16 @@ export default function LeaderboardScreen() {
 
             {/* Total XP */}
             <View style={styles.scoreContainer}>
-              <Text style={styles.score}>{item.totalXP.toLocaleString()}</Text>
+              <Text style={styles.score}>
+                {item.isYou ? totalXP.toLocaleString() : item.totalXP.toLocaleString()}
+              </Text>
               <Text style={styles.scoreLabel}>XP</Text>
             </View>
           </View>
         ))}
 
         {/* User's Rank (if not in top 50) */}
-        {!loading && !error && userRankData && (
+        {!loading && !error && userRankItem && (
           <>
             <View style={styles.separator}>
               <View style={styles.separatorLine} />
@@ -285,7 +249,7 @@ export default function LeaderboardScreen() {
               {/* Rank */}
               <View style={styles.rankContainer}>
                 <Text style={[styles.rank, { color: colors.secondary }]}>
-                  {userRankData.rank}
+                  {userRankItem.rank}
                 </Text>
               </View>
 
@@ -297,13 +261,13 @@ export default function LeaderboardScreen() {
               {/* Username */}
               <View style={styles.userInfo}>
                 <Text style={[styles.username, styles.usernameYou]}>
-                  {userRankData.item.username}
+                  {userRankItem.item.username}
                 </Text>
               </View>
 
               {/* Total XP */}
               <View style={styles.scoreContainer}>
-                <Text style={styles.score}>{userRankData.item.totalXP.toLocaleString()}</Text>
+                <Text style={styles.score}>{userRankItem.item.totalXP.toLocaleString()}</Text>
                 <Text style={styles.scoreLabel}>XP</Text>
               </View>
             </View>
