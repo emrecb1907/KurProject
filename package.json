@@ -12,6 +12,7 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
+    "@expo-google-fonts/amiri": "^0.4.1",
     "@hugeicons/core-free-icons": "^2.0.0",
     "@hugeicons/react-native": "^1.0.7",
     "@react-native-async-storage/async-storage": "^2.1.0",
@@ -21,6 +22,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "expo": "^54.0.25",
     "expo-apple-authentication": "~8.0.7",
+    "expo-audio": "~1.0.15",
     "expo-av": "~16.0.7",
     "expo-blur": "^15.0.7",
     "expo-constants": "~18.0.10",

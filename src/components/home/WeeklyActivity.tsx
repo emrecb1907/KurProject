@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { colors } from '@constants/colors';
 import { HugeiconsIcon } from '@hugeicons/react-native';
-import { Tick01Icon, Target02Icon } from '@hugeicons/core-free-icons';
+import { Tick01Icon, Target02Icon, Flag01Icon } from '@hugeicons/core-free-icons';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useFocusEffect } from '@react-navigation/native';
@@ -77,9 +77,10 @@ export function WeeklyActivity() {
             borderRadius: 16,
             justifyContent: 'center',
             alignItems: 'center',
+            borderWidth: 2,
+            borderColor: colors.border,
         },
         todayCircle: {
-            borderWidth: 2,
             borderColor: colors.textPrimary,
         },
         footer: {
@@ -228,21 +229,35 @@ export function WeeklyActivity() {
                 {weekData.map((dayData, index) => (
                     <View key={index} style={styles.dayContainer}>
                         <Text style={styles.dayLabel}>{dayData.day}</Text>
-                        <View
-                            style={[
+                        {index === 6 ? (
+                            <View style={[
                                 styles.dayCircle,
-                                { backgroundColor: getDayBackgroundColor(dayData) },
-                                dayData.isToday && styles.todayCircle,
-                            ]}
-                        >
-                            {!dayData.isFuture && (
+                                { backgroundColor: 'transparent' }, // Keep border, transparent bg
+                                dayData.isToday && styles.todayCircle
+                            ]}>
                                 <HugeiconsIcon
-                                    icon={Tick01Icon}
-                                    size={16}
-                                    color={colors.textOnPrimary}
+                                    icon={Flag01Icon}
+                                    size={24}
+                                    color={dayData.completed ? colors.success : colors.textSecondary}
                                 />
-                            )}
-                        </View>
+                            </View>
+                        ) : (
+                            <View
+                                style={[
+                                    styles.dayCircle,
+                                    { backgroundColor: getDayBackgroundColor(dayData) },
+                                    dayData.isToday && styles.todayCircle,
+                                ]}
+                            >
+                                {!dayData.isFuture && (
+                                    <HugeiconsIcon
+                                        icon={Tick01Icon}
+                                        size={16}
+                                        color={colors.textOnPrimary}
+                                    />
+                                )}
+                            </View>
+                        )}
                     </View>
                 ))}
             </View>

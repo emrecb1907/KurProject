@@ -467,19 +467,14 @@ export const database = {
       }
 
       // Check if we need to reset for a new week
-      const getMonday = (d: Date) => {
-        const day = d.getDay();
-        const diff = d.getDate() - day + (day === 0 ? -6 : 1); // adjust when day is sunday
-        const monday = new Date(d.setDate(diff));
-        monday.setHours(0, 0, 0, 0);
-        return monday;
-      };
+      // CHANGED: We now keep a rolling window of 30 days instead of resetting on Monday
+      // This supports the new "Streak View" which can start on any day
+      const thirtyDaysAgo = new Date(today);
+      thirtyDaysAgo.setDate(today.getDate() - 30);
+      const thirtyDaysAgoStr = toLocalISOString(thirtyDaysAgo);
 
-      const thisMonday = getMonday(new Date(today));
-      const thisMondayStr = toLocalISOString(thisMonday);
-
-      // Filter out dates that are older than this week's Monday
-      weeklyActivity = weeklyActivity.filter(dateStr => dateStr >= thisMondayStr);
+      // Filter out dates older than 30 days
+      weeklyActivity = weeklyActivity.filter(dateStr => dateStr >= thirtyDaysAgoStr);
 
       // Add today if not present
       if (!weeklyActivity.includes(todayStr)) {

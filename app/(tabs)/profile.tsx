@@ -40,7 +40,7 @@ export default function ProfileScreen() {
   const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
-  const { data: userStats, isLoading: isLoadingStats } = useUserStats(user?.id);
+  const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
 
   // Use React Query data if available, fallback to Zustand cache
   const completedTests = userStats?.completedTests ?? 0;
@@ -49,22 +49,55 @@ export default function ProfileScreen() {
 
   // 🔄 Sync streak to Zustand store when data changes
   useEffect(() => {
-    if (userStats?.userData) {
-      const userData = userStats.userData;
+    if (userData) {
 
       // Update streak in store
       if (userData.streak !== undefined) {
-        setStreak(userData.streak);
+        // Calculate displayed streak based on last activity
+        let lastActivityDate = userData.last_activity_date;
+        const weeklyActivity = (userData.weekly_activity as string[]) || [];
+
+        // Fallback: If last_activity_date is missing (legacy data), try to get it from weekly_activity
+        if (!lastActivityDate && weeklyActivity.length > 0) {
+          const sortedDates = [...weeklyActivity].sort();
+          lastActivityDate = sortedDates[sortedDates.length - 1];
+        }
+
+        let displayedStreak = userData.streak || 0;
+
+        if (lastActivityDate) {
+          const lastDate = new Date(lastActivityDate);
+          const todayDate = new Date();
+          todayDate.setHours(0, 0, 0, 0);
+          lastDate.setHours(0, 0, 0, 0);
+
+          const diffTime = Math.abs(todayDate.getTime() - lastDate.getTime());
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+          // If last activity was more than 1 day ago (yesterday), streak is broken
+          if (diffDays > 1) {
+            displayedStreak = 0;
+          }
+        } else {
+          displayedStreak = 0;
+        }
+
+        // Only update if different to prevent infinite loop
+        if (displayedStreak !== streak) {
+          setStreak(displayedStreak);
+        }
       } else if (userData.streak_count !== undefined) {
-        setStreak(userData.streak_count);
+        if (userData.streak_count !== streak) {
+          setStreak(userData.streak_count);
+        }
       }
 
       // Update stats cache in store
-      if (userStats.completedTests !== undefined && userStats.successRate !== undefined) {
+      if (userStats?.completedTests !== undefined && userStats?.successRate !== undefined) {
         setUserStats(userStats.completedTests, userStats.successRate);
       }
     }
-  }, [userStats]);
+  }, [userData?.streak, userData?.last_activity_date, userData?.streak_count, userStats?.completedTests, userStats?.successRate, streak]);
 
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || t('profile.anonymous');
@@ -540,4 +573,3 @@ export default function ProfileScreen() {
     </View>
   );
 }
-

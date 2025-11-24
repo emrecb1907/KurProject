@@ -82,6 +82,7 @@ export default function HomePage() {
       return () => {
         // When screen loses focus (navigating to another tab)
         setSelectedTest(null);
+        setSelectedLesson(null);
       };
     }, [])
   );
@@ -331,8 +332,46 @@ export default function HomePage() {
     },
   ];
 
+  const lessons = [
+    {
+      id: 1,
+      title: 'Elif Ba: Giriş',
+      description: 'Arapça harfleri tanımaya başla.',
+      level: 1,
+      unlocked: true,
+      color: colors.primary,
+      borderColor: colors.buttonOrangeBorder,
+      icon: AlphabetArabicIcon,
+      route: '/lessons/elif-ba/1',
+    },
+    {
+      id: 2,
+      title: 'Harekeler',
+      description: 'Üstün, Esre ve Ötre öğren.',
+      level: 1,
+      unlocked: true,
+      color: colors.secondary,
+      borderColor: colors.buttonBlueBorder,
+      icon: Book01Icon,
+      route: '/lessons/harekeler/1',
+    },
+    {
+      id: 3,
+      title: 'Cezm ve Şedde',
+      description: 'Harfleri birleştirmeyi öğren.',
+      level: 2,
+      unlocked: false,
+      color: colors.success,
+      borderColor: colors.buttonGreenBorder,
+      icon: Book02Icon,
+      route: '/lessons/cezm-sedde/1',
+    },
+  ];
+
   const scrollViewRef = useRef<ScrollView>(null);
+  const lessonsScrollViewRef = useRef<ScrollView>(null);
   const [selectedTest, setSelectedTest] = useState<typeof tests[0] | null>(null);
+  const [selectedLesson, setSelectedLesson] = useState<typeof lessons[0] | null>(null);
   const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
   const [showDevTools, setShowDevTools] = useState(false);
 
@@ -346,6 +385,7 @@ export default function HomePage() {
       // Select new test
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       setSelectedTest(test);
+      setSelectedLesson(null); // Close lesson if open
 
       // Calculate card position for overlay alignment
       const index = tests.findIndex(t => t.id === test.id);
@@ -398,6 +438,68 @@ export default function HomePage() {
 
     router.push((selectedTest.route || '/games/letters') as any);
     setSelectedTest(null);
+  };
+
+  const handleLessonSelect = (lesson: typeof lessons[0]) => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    if (selectedLesson?.id === lesson.id) {
+      // If already selected, deselect
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setSelectedLesson(null);
+    } else {
+      // Select new lesson
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setSelectedLesson(lesson);
+      setSelectedTest(null); // Close test if open
+
+      // Calculate card position for overlay alignment
+      const index = lessons.findIndex(l => l.id === lesson.id);
+      if (index !== -1) {
+        const cardWidth = 280;
+        const gap = 16;
+        const padding = 16;
+        const screenWidth = Dimensions.get('window').width;
+
+        // Calculate position to center the card on screen
+        const cardCenter = padding + (index * (cardWidth + gap)) + (cardWidth / 2);
+        const targetScrollX = Math.max(0, cardCenter - (screenWidth / 2));
+
+        // Calculate where the card will actually be on screen after scrolling
+        let confirmationLeft;
+        if (targetScrollX === 0) {
+          // Can't scroll left - card is at its natural position
+          confirmationLeft = padding + (index * (cardWidth + gap));
+        } else {
+          // Card will be centered
+          confirmationLeft = (screenWidth - cardWidth) / 2;
+        }
+
+        setCardPosition({
+          left: confirmationLeft,
+          top: 10 // Keep same top position
+        });
+
+        // Scroll to center the selected lesson
+        if (lessonsScrollViewRef.current) {
+          lessonsScrollViewRef.current.scrollTo({
+            x: targetScrollX,
+            animated: true
+          });
+        }
+      }
+    }
+  };
+
+  const handleStartLesson = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    if (!selectedLesson) return;
+
+    if (selectedLesson.route) {
+      router.push(selectedLesson.route as any);
+    } else {
+      Alert.alert('Dersler', 'Bu ders henüz hazır değil.');
+    }
+    setSelectedLesson(null);
   };
 
   // Dynamic styles that update when theme changes
@@ -816,6 +918,149 @@ export default function HomePage() {
         >
           {/* Section Title */}
           <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>Dersler</Text>
+          </View>
+
+          {/* Lessons Cards Carousel */}
+          <ScrollView
+            ref={lessonsScrollViewRef}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.carouselContent}
+            style={styles.carousel}
+            onScrollBeginDrag={() => {
+              // Dismiss confirmation card when user manually scrolls
+              if (selectedLesson) {
+                LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                setSelectedLesson(null);
+              }
+            }}
+          >
+            {lessons.map((lesson) => (
+              <HoverCard
+                key={lesson.id}
+                style={[
+                  styles.lessonCard,
+                  {
+                    backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
+                    borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
+                  },
+                  !lesson.unlocked && styles.lessonCardLocked,
+                ]}
+                onPress={() => handleLessonSelect(lesson)}
+                disabled={!lesson.unlocked}
+                lightColor="rgba(255, 255, 255, 0.3)"
+              >
+                {/* Card Header */}
+                <View style={styles.cardHeader}>
+                  <View style={styles.cardIconContainer}>
+                    <HugeiconsIcon
+                      icon={lesson.icon}
+                      size={32}
+                      color={colors.textOnPrimary}
+                    />
+                  </View>
+                  {!lesson.unlocked && (
+                    <View style={styles.levelBadge}>
+                      <Text style={styles.levelBadgeText}>{t('home.level')} {lesson.level}</Text>
+                    </View>
+                  )}
+                </View>
+
+                {/* Card Content */}
+                <View style={styles.cardContent}>
+                  <Text style={styles.cardTitle}>{lesson.title}</Text>
+                  <Text style={styles.cardDescription}>{lesson.description}</Text>
+                </View>
+
+                {/* Card Footer - Progress or Status */}
+                <View style={styles.cardFooter}>
+                  {lesson.unlocked ? (
+                    <View style={styles.progressContainer}>
+                      <View style={styles.progressBar}>
+                        <View style={[styles.progressFill, { width: '0%' }]} />
+                      </View>
+                      <Text style={styles.progressText}>0% Tamamlandı</Text>
+                    </View>
+                  ) : (
+                    <View style={styles.lockedBadge}>
+                      <HugeiconsIcon icon={LockIcon} size={16} color={colors.textOnPrimary} />
+                      <Text style={styles.lockedBadgeText}>{t('home.locked')}</Text>
+                    </View>
+                  )}
+                </View>
+              </HoverCard>
+            ))}
+          </ScrollView>
+
+          {/* Lesson Start Confirmation Card (Overlay) */}
+          <View style={{ position: 'relative', zIndex: 100 }}>
+            {selectedLesson && (
+              <>
+                {/* Backdrop to close on outside click */}
+                <Pressable
+                  style={{
+                    position: 'absolute',
+                    top: -2000, // Cover entire scrollable area
+                    left: -1000,
+                    right: -1000,
+                    bottom: -2000,
+                    zIndex: 99, // Just below the card (which is 100)
+                    backgroundColor: 'transparent',
+                  }}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                    setSelectedLesson(null);
+                  }}
+                />
+
+                <Animated.View
+                  entering={FadeInUp.duration(300).easing(Easing.out(Easing.quad))}
+                  exiting={FadeOutDown.duration(200)}
+                  style={[
+                    styles.startCardContainer,
+                    {
+                      left: cardPosition.left,
+                      top: cardPosition.top,
+                    }
+                  ]}
+                >
+                  <View style={styles.startCardHeader}>
+                    <View style={[styles.startCardIcon, { backgroundColor: selectedLesson.color }]}>
+                      <HugeiconsIcon icon={selectedLesson.icon} size={20} color={colors.textOnPrimary} />
+                    </View>
+                    <View style={styles.startCardTitleContainer}>
+                      <Text style={styles.startCardTitle}>{selectedLesson.title}</Text>
+                      <Text style={styles.startCardSubtitle}>{selectedLesson.description}</Text>
+                    </View>
+                  </View>
+
+                  <View style={styles.startCardActions}>
+                    <Pressable
+                      style={[styles.startButton, { backgroundColor: selectedLesson.color, borderBottomColor: selectedLesson.borderColor }]}
+                      onPress={handleStartLesson}
+                    >
+                      <Text style={styles.startButtonText}>{t('common.start')}</Text>
+                    </Pressable>
+
+                    <Pressable
+                      style={styles.cancelButton}
+                      onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        setSelectedLesson(null);
+                      }}
+                    >
+                      <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
+                    </Pressable>
+                  </View>
+                </Animated.View>
+              </>
+            )}
+          </View>
+
+          {/* Section Title */}
+          <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>{t('home.tests')}</Text>
           </View>
 
@@ -959,6 +1204,8 @@ export default function HomePage() {
                 </Animated.View>
               </>
             )}
+
+
 
             {/* 🧪 Developer Tools Toggle */}
             <Pressable

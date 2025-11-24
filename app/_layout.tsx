@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
-import { useFonts } from 'expo-font';
+import { useFonts, Amiri_400Regular, Amiri_700Bold } from '@expo-google-fonts/amiri';
 import * as SplashScreen from 'expo-splash-screen';
 import { LogBox } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
@@ -22,8 +22,8 @@ LogBox.ignoreLogs([
 
 export default function RootLayout() {
   const [fontsLoaded] = useFonts({
-    // Add your custom fonts here
-    // 'Arabic-Regular': require('../assets/fonts/Arabic-Regular.ttf'),
+    Amiri_400Regular,
+    Amiri_700Bold,
   });
 
   const { checkLifeRegeneration } = useUser();
