@@ -3,8 +3,7 @@ import { useMemo, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@constants/colors';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { ArrowLeft02Icon, PlayCircle02Icon, Tick01Icon } from '@hugeicons/core-free-icons';
+import { ArrowLeft, PlayCircle, Check } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Audio } from 'expo-av';
@@ -215,7 +214,7 @@ export default function ElifBaIntroductionScreen() {
                     style={styles.backButton}
                     onPress={() => router.back()}
                 >
-                    <HugeiconsIcon icon={ArrowLeft02Icon} size={24} color={colors.textPrimary} />
+                    <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
                 </Pressable>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Elif Ba: Giriş</Text>
@@ -237,11 +236,11 @@ export default function ElifBaIntroductionScreen() {
                             <View style={styles.iconContainer}>
                                 {playedLetters.has(letter.id) && (
                                     <View style={styles.checkIcon}>
-                                        <HugeiconsIcon icon={Tick01Icon} size={16} color={colors.success} />
+                                        <Check size={16} color={colors.success} weight="fill" />
                                     </View>
                                 )}
                                 <View style={styles.playIcon}>
-                                    <HugeiconsIcon icon={PlayCircle02Icon} size={16} color={colors.primary} />
+                                    <PlayCircle size={16} color={colors.primary} weight="fill" />
                                 </View>
                             </View>
                             <Text style={styles.arabicText}>{letter.arabic}</Text>

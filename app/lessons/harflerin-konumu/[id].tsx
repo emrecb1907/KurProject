@@ -7,7 +7,7 @@ import { ArrowLeft, PlayCircle, Check } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Audio } from 'expo-av';
-import { COMBINED_HAREKE_LETTERS, HAREKE_AUDIO_FILES, type CombinedHarekeLetter } from '@/data/harekeler';
+import { LETTER_POSITIONS, LETTER_POSITION_AUDIO_FILES, type LetterPosition } from '@/data/letterPositions';
 
 // Configure audio mode once
 Audio.setAudioModeAsync({
@@ -16,14 +16,14 @@ Audio.setAudioModeAsync({
     shouldDuckAndroid: true,
 }).catch(console.error);
 
-export default function HarekelerLessonScreen() {
+export default function HarflerinKonumuLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
     // Check if all items have been played
-    const allItemsPlayed = playedItems.size === COMBINED_HAREKE_LETTERS.length;
+    const allItemsPlayed = playedItems.size === LETTER_POSITIONS.length;
 
     // Cleanup audio when component unmounts
     useEffect(() => {
@@ -80,7 +80,7 @@ export default function HarekelerLessonScreen() {
             width: (Dimensions.get('window').width - 32 - 12) / 2,
             backgroundColor: colors.surface,
             borderRadius: 16,
-            padding: 12,
+            padding: 16,
             alignItems: 'center',
             justifyContent: 'center',
             borderBottomWidth: 4,
@@ -97,24 +97,18 @@ export default function HarekelerLessonScreen() {
             transform: [{ translateY: 2 }],
             borderBottomWidth: 2,
         },
-        formsContainer: {
-            flexDirection: 'row-reverse',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
-            marginBottom: 8,
-            paddingHorizontal: 4,
-        },
         arabicText: {
-            fontSize: 32,
+            fontSize: 28,
             fontFamily: 'Amiri_700Bold',
             color: colors.primary,
-            paddingVertical: 4,
+            marginBottom: 8,
+            textAlign: 'center',
         },
-        nameText: {
-            fontSize: 16,
+        descriptionText: {
+            fontSize: 12,
             fontWeight: 'bold',
-            color: colors.textPrimary,
+            color: colors.textSecondary,
+            textAlign: 'center',
         },
         iconContainer: {
             position: 'absolute',
@@ -160,7 +154,7 @@ export default function HarekelerLessonScreen() {
         }
     }), [themeVersion]);
 
-    const handlePress = async (letter: CombinedHarekeLetter) => {
+    const handlePress = async (position: LetterPosition) => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
         try {
@@ -178,7 +172,7 @@ export default function HarekelerLessonScreen() {
                 }
             }
 
-            const audioPath = HAREKE_AUDIO_FILES[letter.id];
+            const audioPath = LETTER_POSITION_AUDIO_FILES[position.id];
 
             // If audio exists, play it
             if (audioPath) {
@@ -195,11 +189,11 @@ export default function HarekelerLessonScreen() {
                     }
                 });
             } else {
-                console.log(`No audio file for letter ${letter.id} (${letter.name})`);
+                console.log(`No audio file for position ${position.id} (${position.description})`);
             }
 
             // Mark as played even if no audio
-            setPlayedItems(prev => new Set(prev).add(letter.id));
+            setPlayedItems(prev => new Set(prev).add(position.id));
 
         } catch (error) {
             console.error('Error playing audio:', error);
@@ -224,24 +218,24 @@ export default function HarekelerLessonScreen() {
                     <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
                 </Pressable>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Harekeler</Text>
-                    <Text style={styles.subtitle}>Üstün, Esre, Ötre</Text>
+                    <Text style={styles.title}>Harflerin Konumu</Text>
+                    <Text style={styles.subtitle}>Baş, Orta, Son</Text>
                 </View>
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.grid}>
-                    {COMBINED_HAREKE_LETTERS.map((letter) => (
+                    {LETTER_POSITIONS.map((position) => (
                         <Pressable
-                            key={letter.id}
+                            key={position.id}
                             style={({ pressed }) => [
                                 styles.card,
                                 pressed && styles.cardPressed
                             ]}
-                            onPress={() => handlePress(letter)}
+                            onPress={() => handlePress(position)}
                         >
                             <View style={styles.iconContainer}>
-                                {playedItems.has(letter.id) && (
+                                {playedItems.has(position.id) && (
                                     <View style={styles.checkIcon}>
                                         <Check size={16} color={colors.success} weight="fill" />
                                     </View>
@@ -251,13 +245,8 @@ export default function HarekelerLessonScreen() {
                                 </View>
                             </View>
 
-                            <View style={styles.formsContainer}>
-                                <Text style={styles.arabicText}>{letter.forms.ustun}</Text>
-                                <Text style={styles.arabicText}>{letter.forms.esre}</Text>
-                                <Text style={styles.arabicText}>{letter.forms.otre}</Text>
-                            </View>
-
-                            <Text style={styles.nameText}>{letter.name}</Text>
+                            <Text style={styles.arabicText}>{position.arabic}</Text>
+                            <Text style={styles.descriptionText}>{position.description}</Text>
                         </Pressable>
                     ))}
                 </View>

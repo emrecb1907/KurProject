@@ -4,8 +4,7 @@ import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { LockIcon, PlayCircleIcon } from '@hugeicons/core-free-icons';
+import { Lock, PlayCircle } from 'phosphor-react-native';
 
 export default function LettersGameScreen() {
   const { t } = useTranslation();
@@ -52,9 +51,9 @@ export default function LettersGameScreen() {
                 </View>
               </View>
               {test.locked ? (
-                <HugeiconsIcon icon={LockIcon} size={24} color={colors.textSecondary} />
+                <Lock size={24} color={colors.textSecondary} weight="fill" />
               ) : (
-                <HugeiconsIcon icon={PlayCircleIcon} size={32} color={colors.primary} />
+                <PlayCircle size={32} color={colors.primary} weight="fill" />
               )}
             </Pressable>
           </Link>

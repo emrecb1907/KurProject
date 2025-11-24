@@ -2,8 +2,15 @@ import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { Award01Icon, CrownIcon, Medal01Icon, StarIcon, UserAccountIcon, BulbIcon, Refresh01Icon } from '@hugeicons/core-free-icons';
+import {
+  Trophy,
+  Crown,
+  Medal,
+  Star,
+  User,
+  Lightbulb,
+  ArrowsClockwise
+} from 'phosphor-react-native';
 import { useAuth, useUser } from '@/store';
 import { Skeleton } from '@/components/ui';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -147,12 +154,12 @@ export default function LeaderboardScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.titleContainer}>
-          <HugeiconsIcon icon={Award01Icon} size={32} color={colors.warning} />
+          <Trophy size={32} color={colors.warning} weight="fill" />
           <Text style={styles.title}>{t('leaderboard.title')}</Text>
 
         </View>
         <View style={styles.leagueCard}>
-          <HugeiconsIcon icon={Medal01Icon} size={20} color={colors.primary} />
+          <Medal size={20} color={colors.primary} weight="fill" />
           <Text style={styles.leagueText}>{t('leaderboard.league')}</Text>
         </View>
       </View>
@@ -204,13 +211,13 @@ export default function LeaderboardScreen() {
 
             {/* Avatar */}
             <View style={styles.avatar}>
-              {item.isGold && <HugeiconsIcon icon={CrownIcon} size={24} color={colors.warning} />}
-              {item.isSilver && <HugeiconsIcon icon={Medal01Icon} size={24} color={colors.textSecondary} />}
-              {item.isBronze && <HugeiconsIcon icon={Medal01Icon} size={24} color={colors.primary} />}
+              {item.isGold && <Crown size={24} color={colors.warning} weight="fill" />}
+              {item.isSilver && <Medal size={24} color={colors.textSecondary} weight="fill" />}
+              {item.isBronze && <Medal size={24} color={colors.primary} weight="fill" />}
               {!item.isGold && !item.isSilver && !item.isBronze && !item.isYou && (
-                <HugeiconsIcon icon={StarIcon} size={24} color={colors.textDisabled} />
+                <Star size={24} color={colors.textDisabled} weight="fill" />
               )}
-              {item.isYou && <HugeiconsIcon icon={UserAccountIcon} size={24} color={colors.secondary} />}
+              {item.isYou && <User size={24} color={colors.secondary} weight="fill" />}
             </View>
 
             {/* Username */}
@@ -255,7 +262,7 @@ export default function LeaderboardScreen() {
 
               {/* Avatar */}
               <View style={styles.avatar}>
-                <HugeiconsIcon icon={UserAccountIcon} size={24} color={colors.secondary} />
+                <User size={24} color={colors.secondary} weight="fill" />
               </View>
 
               {/* Username */}
@@ -278,7 +285,7 @@ export default function LeaderboardScreen() {
       {/* Info Banner - Only show if not authenticated */}
       {!isAuthenticated && (
         <View style={styles.infoBox}>
-          <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textOnPrimary} />
+          <Lightbulb size={24} color={colors.textOnPrimary} weight="fill" />
           <Text style={styles.infoText}>
             Giriş yaparak asıl liderlik tablosunu gör!
           </Text>

@@ -1,8 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useEffect, useState, useCallback, useMemo } from 'react';
 import { colors } from '@constants/colors';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { Tick01Icon, Target02Icon, Flag01Icon } from '@hugeicons/core-free-icons';
+import { Target, Flag, Check, Fire } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useFocusEffect } from '@react-navigation/native';
@@ -129,16 +128,38 @@ export function WeeklyActivity() {
         }
     }, [dayNames]);
 
-    const getEmptyWeek = (): DayActivity[] => {
-        const today = new Date().getDay(); // 0 = Sunday, 1 = Monday, ...
-        const mondayIndex = today === 0 ? 6 : today - 1;
+    const getDayName = (date: Date) => {
+        const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday
+        const mapIndex = dayIndex === 0 ? 6 : dayIndex - 1;
+        return dayNames[mapIndex];
+    };
 
-        return dayNames.map((day, index) => ({
-            day,
-            completed: false,
-            isFuture: index > mondayIndex,
-            isToday: index === mondayIndex,
-        }));
+    const getEmptyWeek = (): DayActivity[] => {
+        const now = new Date();
+        // Default to Monday start if no data
+        const dayOfWeek = now.getDay();
+        const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+        const startDate = new Date(now);
+        startDate.setDate(now.getDate() + mondayOffset);
+        startDate.setHours(0, 0, 0, 0);
+
+        return Array.from({ length: 7 }).map((_, index) => {
+            const date = new Date(startDate);
+            date.setDate(startDate.getDate() + index);
+
+            // Compare dates without time
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const checkDate = new Date(date);
+            checkDate.setHours(0, 0, 0, 0);
+
+            return {
+                day: getDayName(date),
+                completed: false,
+                isFuture: checkDate > today,
+                isToday: checkDate.getTime() === today.getTime(),
+            };
+        });
     };
 
     const fetchWeeklyActivity = async () => {
@@ -153,11 +174,7 @@ export function WeeklyActivity() {
             };
 
             const now = new Date();
-            const dayOfWeek = now.getDay();
-            const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-            const monday = new Date(now);
-            monday.setDate(now.getDate() + mondayOffset);
-            monday.setHours(0, 0, 0, 0);
+            now.setHours(0, 0, 0, 0);
 
             // Get user's stats from users table
             const { data: stats } = await database.dailyActivity.getStats(user.id);
@@ -167,20 +184,38 @@ export function WeeklyActivity() {
                 return;
             }
 
-            setStreak(stats.streak || 0);
+            const currentStreak = stats.streak || 0;
+            setStreak(currentStreak);
             const weeklyActivity = (stats.weekly_activity as string[]) || [];
+
+            // Calculate Start Date
+            const startDate = new Date(now);
+            if (currentStreak > 0) {
+                // If streak exists, start from (Today - (Streak - 1))
+                // But cap it at 6 days ago (so we show a 7-day window ending today or future)
+                // Actually, if streak is 4, we want to show [Day-3, Day-2, Day-1, Today, +3 Future]
+                // So we go back (streak - 1) days.
+                // Max go back is 6 days (to show a full week ending today).
+                const daysToGoBack = Math.min(currentStreak - 1, 6);
+                startDate.setDate(now.getDate() - daysToGoBack);
+            } else {
+                // If no streak, default to this week's Monday
+                const dayOfWeek = now.getDay();
+                const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+                startDate.setDate(now.getDate() + mondayOffset);
+            }
+            startDate.setHours(0, 0, 0, 0);
 
             let isTodayDone = false;
             const todayStr = toLocalISOString(now);
 
-            const weekActivity: DayActivity[] = dayNames.map((day, index) => {
-                const dayDate = new Date(monday);
-                dayDate.setDate(monday.getDate() + index);
+            const weekActivity: DayActivity[] = Array.from({ length: 7 }).map((_, index) => {
+                const dayDate = new Date(startDate);
+                dayDate.setDate(startDate.getDate() + index);
                 const dateString = toLocalISOString(dayDate); // YYYY-MM-DD (Local)
 
-                const todayIndex = now.getDay() === 0 ? 6 : now.getDay() - 1;
-                const isFuture = index > todayIndex;
-                const isToday = index === todayIndex;
+                const isFuture = dayDate > now;
+                const isToday = dayDate.getTime() === now.getTime();
 
                 // Check if user has activity on this day
                 const activeOnDay = weeklyActivity.includes(dateString);
@@ -190,7 +225,7 @@ export function WeeklyActivity() {
                 }
 
                 return {
-                    day,
+                    day: getDayName(dayDate),
                     completed: activeOnDay,
                     isFuture,
                     isToday,
@@ -208,7 +243,7 @@ export function WeeklyActivity() {
     const getDayBackgroundColor = (dayData: DayActivity) => {
         if (dayData.isFuture) return colors.backgroundLighter;
         if (dayData.completed) {
-            return dayData.isToday ? colors.primary : colors.success;
+            return colors.success;
         }
         return colors.error;
     };
@@ -218,10 +253,13 @@ export function WeeklyActivity() {
             {/* Header */}
             <View style={styles.header}>
                 <View style={styles.titleContainer}>
-                    <HugeiconsIcon icon={Target02Icon} size={24} color={colors.primary} />
+                    <Target size={24} color={colors.primary} weight="fill" />
                     <Text style={styles.title}>{t('weeklyActivity.title')}</Text>
                 </View>
-                <Text style={styles.streakText}>🔥 {streak} {t('weeklyActivity.streak')}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                    <Fire size={20} color={colors.primary} weight="fill" />
+                    <Text style={styles.streakText}>{streak} {t('weeklyActivity.streak')}</Text>
+                </View>
             </View>
 
             {/* Week Days */}
@@ -235,10 +273,10 @@ export function WeeklyActivity() {
                                 { backgroundColor: 'transparent' }, // Keep border, transparent bg
                                 dayData.isToday && styles.todayCircle
                             ]}>
-                                <HugeiconsIcon
-                                    icon={Flag01Icon}
+                                <Flag
                                     size={24}
                                     color={dayData.completed ? colors.success : colors.textSecondary}
+                                    weight="fill"
                                 />
                             </View>
                         ) : (
@@ -250,10 +288,10 @@ export function WeeklyActivity() {
                                 ]}
                             >
                                 {!dayData.isFuture && (
-                                    <HugeiconsIcon
-                                        icon={Tick01Icon}
+                                    <Check
                                         size={16}
                                         color={colors.textOnPrimary}
+                                        weight="bold"
                                     />
                                 )}
                             </View>

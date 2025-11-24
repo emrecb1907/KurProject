@@ -2,8 +2,7 @@ import { View, Text, StyleSheet, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { colors } from '@constants/colors';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { Book01Icon } from '@hugeicons/core-free-icons';
+import { BookOpen } from 'phosphor-react-native';
 import { useAuthHook } from '@/hooks';
 
 export default function SplashScreen() {
@@ -44,7 +43,7 @@ export default function SplashScreen() {
     <View style={styles.container}>
       {/* Logo/Icon */}
       <View style={styles.logoContainer}>
-        <HugeiconsIcon icon={Book01Icon} size={60} color={colors.textOnPrimary} />
+        <BookOpen size={60} color={colors.textOnPrimary} weight="fill" />
       </View>
 
       {/* Title */}

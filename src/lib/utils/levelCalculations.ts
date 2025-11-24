@@ -1,6 +1,6 @@
 /**
  * Level Calculation Utilities
- * Formula: required_xp = round(10 * (level ** 1.4))
+ * Formula: XP_required(level) = round( (10 * level) + (0.4 * level^2) / 10 ) * 10
  * 
  * Level 1 starts at 0 XP
  * No level cap - infinite progression
@@ -17,12 +17,13 @@ export interface XPProgress {
 
 /**
  * Calculate required XP for a specific level
+ * Formula: XP_required(level) = round( (10 * level) + (0.4 * level^2) / 10 ) * 10
  * @param level - Target level (must be >= 1)
  * @returns Required XP to complete that level
  */
 export function calculateRequiredXP(level: number): number {
   if (level < 1) return 0;
-  return Math.round(10 * Math.pow(level, 1.4));
+  return Math.round((10 * level + 0.4 * Math.pow(level, 2)) / 10) * 10;
 }
 
 /**
@@ -33,22 +34,22 @@ export function calculateRequiredXP(level: number): number {
 export function calculateUserLevel(totalXP: number): number {
   let currentLevel = 1;
   let cumulativeXP = 0;
-  
+
   // Safety limit to prevent infinite loops (max level 10000)
   const MAX_LEVEL = 10000;
-  
+
   while (currentLevel <= MAX_LEVEL) {
     const requiredXP = calculateRequiredXP(currentLevel);
-    
+
     // Check if user has enough XP for next level
     if (cumulativeXP + requiredXP > totalXP) {
       break;
     }
-    
+
     cumulativeXP += requiredXP;
     currentLevel++;
   }
-  
+
   return currentLevel;
 }
 
@@ -60,25 +61,25 @@ export function calculateUserLevel(totalXP: number): number {
 export function getXPProgress(totalXP: number): XPProgress {
   // Calculate current level
   const currentLevel = calculateUserLevel(totalXP);
-  
+
   // Calculate cumulative XP up to current level (start of current level)
   let cumulativeXP = 0;
   for (let i = 1; i < currentLevel; i++) {
     cumulativeXP += calculateRequiredXP(i);
   }
-  
+
   // Calculate XP within current level
   const currentLevelXP = totalXP - cumulativeXP;
-  
+
   // Calculate required XP for current level to reach next level
   const requiredXP = calculateRequiredXP(currentLevel);
-  
+
   // Calculate progress percentage
   const progressPercentage = Math.round((currentLevelXP / requiredXP) * 100);
-  
+
   // Calculate XP needed to reach next level
   const xpToNextLevel = requiredXP - currentLevelXP;
-  
+
   return {
     currentLevel,
     currentLevelXP,
@@ -116,35 +117,35 @@ export function formatXP(xp: number): string {
  * @param level - Level to check
  * @returns Whether this is a milestone level and milestone type
  */
-export function getLevelMilestone(level: number): { 
-  isMilestone: boolean; 
+export function getLevelMilestone(level: number): {
+  isMilestone: boolean;
   type?: 'major' | 'minor';
   message?: string;
 } {
   if (level % 100 === 0) {
-    return { 
-      isMilestone: true, 
+    return {
+      isMilestone: true,
       type: 'major',
       message: `Seviye ${level}! Efsane bir başarı! 🎉`
     };
   }
-  
+
   if (level % 50 === 0) {
-    return { 
-      isMilestone: true, 
+    return {
+      isMilestone: true,
       type: 'major',
       message: `Seviye ${level}! Harika bir ilerleme! 🌟`
     };
   }
-  
+
   if (level % 10 === 0) {
-    return { 
-      isMilestone: true, 
+    return {
+      isMilestone: true,
       type: 'minor',
       message: `Seviye ${level}! Devam et! 🔥`
     };
   }
-  
+
   return { isMilestone: false };
 }
 

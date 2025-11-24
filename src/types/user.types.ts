@@ -20,6 +20,8 @@ export interface User {
   total_questions_solved?: number;
   total_correct_answers?: number;
   total_wrong_answers?: number;
+  last_activity_date?: string;
+  weekly_activity?: string[];
 }
 
 export type League = 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Diamond';

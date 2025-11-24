@@ -3,25 +3,24 @@ import { useMemo, useCallback, useState, useEffect } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
-import { HugeiconsIcon } from '@hugeicons/react-native';
 import * as Haptics from 'expo-haptics';
 import {
-  DiamondIcon,
-  FireIcon,
-  Tick01Icon,
-  Book02Icon,
-  Award01Icon,
-  StarIcon,
-  Target01Icon,
-  Rocket01Icon,
-  UserAccountIcon,
-  Medal01Icon,
-  BulbIcon,
-  LockIcon,
-  Sun03Icon,
-  Moon02Icon,
-  ComputerIcon
-} from '@hugeicons/core-free-icons';
+  Diamond,
+  Fire,
+  Check,
+  BookBookmark,
+  Trophy,
+  Star,
+  Target,
+  Rocket,
+  User,
+  Medal,
+  Lightbulb,
+  Lock,
+  Sun,
+  Moon,
+  Desktop
+} from 'phosphor-react-native';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
@@ -106,19 +105,19 @@ export default function ProfileScreen() {
   const xpProgress = getXPProgress(totalXP);
 
   const stats = [
-    { icon: DiamondIcon, value: formatXP(totalXP), label: t('profile.stats.totalXP'), color: colors.secondary },
-    { icon: FireIcon, value: currentStreak.toString(), label: t('profile.stats.streak'), color: colors.primary },
-    { icon: Tick01Icon, value: `${successRate}%`, label: t('profile.stats.successRate'), color: colors.success },
-    { icon: Book02Icon, value: completedTests.toString(), label: t('profile.stats.completedTests'), color: colors.pink },
+    { icon: Diamond, value: formatXP(totalXP), label: t('profile.stats.totalXP'), color: colors.secondary },
+    { icon: Fire, value: currentStreak.toString(), label: t('profile.stats.streak'), color: colors.primary },
+    { icon: Check, value: `${successRate}%`, label: t('profile.stats.successRate'), color: colors.success },
+    { icon: BookBookmark, value: completedTests.toString(), label: t('profile.stats.completedTests'), color: colors.pink },
   ];
 
   const badges = [
-    { icon: Award01Icon, color: colors.warning },
-    { icon: StarIcon, color: colors.warning },
-    { icon: Target01Icon, color: colors.error },
-    { icon: Rocket01Icon, color: colors.secondary },
-    { icon: Medal01Icon, color: colors.success },
-    { icon: Medal01Icon, color: colors.pink },
+    { icon: Trophy, color: colors.warning },
+    { icon: Star, color: colors.warning },
+    { icon: Target, color: colors.error },
+    { icon: Rocket, color: colors.secondary },
+    { icon: Medal, color: colors.success },
+    { icon: Medal, color: colors.pink },
   ];
 
   // Dynamic styles that update when theme changes
@@ -374,7 +373,7 @@ export default function ProfileScreen() {
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
             <View style={styles.avatar}>
-              <HugeiconsIcon icon={UserAccountIcon} size={50} color={colors.textPrimary} />
+              <User size={50} color={colors.textPrimary} weight="fill" />
             </View>
             <View style={styles.levelBadge}>
               <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
@@ -390,7 +389,7 @@ export default function ProfileScreen() {
         <View style={styles.statsContainer}>
           {stats.map((stat, index) => (
             <View key={index} style={[styles.statCard, { borderBottomColor: stat.color }]}>
-              <HugeiconsIcon icon={stat.icon} size={32} color={stat.color} />
+              <stat.icon size={32} color={stat.color} weight="fill" />
               <Text style={[styles.statValue, { color: stat.color }]}>{stat.value}</Text>
               <Text style={styles.statLabel}>{stat.label}</Text>
             </View>
@@ -400,13 +399,13 @@ export default function ProfileScreen() {
         {/* Badges Section */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
-            <HugeiconsIcon icon={Award01Icon} size={24} color={colors.textPrimary} />
+            <Trophy size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
           </View>
           <View style={styles.badgesContainer}>
             {badges.map((badge, index) => (
               <View key={index} style={styles.badgeSlot}>
-                <HugeiconsIcon icon={LockIcon} size={32} color={colors.textDisabled} />
+                <Lock size={32} color={colors.textDisabled} weight="fill" />
               </View>
             ))}
           </View>
@@ -418,7 +417,7 @@ export default function ProfileScreen() {
         {/* Settings Section */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
-            <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textPrimary} />
+            <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.sectionTitle}>{t('profile.sections.settings')}</Text>
           </View>
 
@@ -436,10 +435,10 @@ export default function ProfileScreen() {
                   setThemeMode('light');
                 }}
               >
-                <HugeiconsIcon
-                  icon={Sun03Icon}
+                <Sun
                   size={20}
                   color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary}
+                  weight="fill"
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -459,10 +458,10 @@ export default function ProfileScreen() {
                   setThemeMode('dark');
                 }}
               >
-                <HugeiconsIcon
-                  icon={Moon02Icon}
+                <Moon
                   size={20}
                   color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary}
+                  weight="fill"
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -482,10 +481,10 @@ export default function ProfileScreen() {
                   setThemeMode('system');
                 }}
               >
-                <HugeiconsIcon
-                  icon={ComputerIcon}
+                <Desktop
                   size={20}
                   color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary}
+                  weight="fill"
                 />
                 <Text style={[
                   styles.themeButtonText,
@@ -522,11 +521,11 @@ export default function ProfileScreen() {
         {/* Achievements Section */}
         <View style={styles.section}>
           <View style={styles.sectionTitleContainer}>
-            <HugeiconsIcon icon={Target01Icon} size={24} color={colors.textPrimary} />
+            <Target size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.sectionTitle}>{t('profile.sections.achievements')}</Text>
           </View>
           <View style={styles.achievementCard}>
-            <HugeiconsIcon icon={Medal01Icon} size={36} color={colors.warning} />
+            <Medal size={36} color={colors.warning} weight="fill" />
             <View style={styles.achievementInfo}>
               <Text style={styles.achievementTitle}>{t('profile.achievements.firstStep.title')}</Text>
               <Text style={styles.achievementDesc}>{t('profile.achievements.firstStep.description')}</Text>
@@ -537,7 +536,7 @@ export default function ProfileScreen() {
           </View>
 
           <View style={styles.achievementCard}>
-            <HugeiconsIcon icon={FireIcon} size={36} color={colors.primary} />
+            <Fire size={36} color={colors.primary} weight="fill" />
             <View style={styles.achievementInfo}>
               <Text style={styles.achievementTitle}>{t('profile.achievements.streakStarter.title')}</Text>
               <Text style={styles.achievementDesc}>{t('profile.achievements.streakStarter.description')}</Text>
@@ -551,7 +550,7 @@ export default function ProfileScreen() {
         {/* Login Prompt - Only show if not authenticated */}
         {!isAuthenticated && (
           <View style={styles.loginPrompt}>
-            <HugeiconsIcon icon={BulbIcon} size={40} color={colors.textOnPrimary} />
+            <Lightbulb size={40} color={colors.textOnPrimary} weight="fill" />
             <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
             <Text style={styles.promptText}>
               {t('profile.loginPrompt.description')}

@@ -4,8 +4,7 @@ import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
-import { HugeiconsIcon } from '@hugeicons/react-native';
-import { FavouriteIcon, AlertCircleIcon, BulbIcon, Video01Icon, ArrowLeft01Icon } from '@hugeicons/core-free-icons';
+import { Heart, WarningCircle, Lightbulb, Video, ArrowLeft } from 'phosphor-react-native';
 
 import { useTranslation } from 'react-i18next';
 
@@ -109,7 +108,7 @@ export default function ChestScreen() {
       {/* Header */}
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} style={styles.backButtonContainer}>
-          <HugeiconsIcon icon={ArrowLeft01Icon} size={24} color={colors.secondary} />
+          <ArrowLeft size={24} color={colors.secondary} weight="bold" />
         </Pressable>
         <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
         <View style={{ width: 40 }} />
@@ -119,7 +118,7 @@ export default function ChestScreen() {
         {/* Lives Status */}
         <View style={styles.statusCard}>
           <View style={styles.statusIconContainer}>
-            <HugeiconsIcon icon={FavouriteIcon} size={48} color={colors.error} />
+            <Heart size={48} color={colors.error} weight="fill" />
           </View>
           <Text style={styles.statusText}>
             {currentLives} / {maxLives}
@@ -141,7 +140,7 @@ export default function ChestScreen() {
 
         {/* Info Message */}
         <View style={styles.infoBanner}>
-          <HugeiconsIcon icon={AlertCircleIcon} size={24} color={colors.backgroundDarker} />
+          <WarningCircle size={24} color={colors.backgroundDarker} weight="fill" />
           <Text style={styles.infoBannerText}>
             {t('rewards.infoBanner')}
           </Text>
@@ -150,7 +149,7 @@ export default function ChestScreen() {
         {/* Ad Info */}
         <View style={styles.infoCard}>
           <View style={styles.infoTitleContainer}>
-            <HugeiconsIcon icon={BulbIcon} size={24} color={colors.textPrimary} />
+            <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.infoTitle}>{t('rewards.howItWorks.title')}</Text>
           </View>
           <Text style={styles.infoText}>
@@ -168,7 +167,7 @@ export default function ChestScreen() {
           return (
             <View key={index} style={styles.adCard}>
               <View style={styles.adCardIcon}>
-                <HugeiconsIcon icon={Video01Icon} size={24} color={colors.textPrimary} />
+                <Video size={24} color={colors.textPrimary} weight="fill" />
               </View>
               <View style={styles.adCardInfo}>
                 <Text style={styles.adCardTitle}>
