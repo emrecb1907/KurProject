@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, Alert, LayoutAnimation, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Alert, LayoutAnimation, Dimensions, PanResponder } from 'react-native';
 import { useEffect, useCallback, useMemo, useState, useRef } from 'react';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -11,7 +11,8 @@ import Animated, {
   withTiming,
   Easing,
   FadeInUp,
-  FadeOutDown
+  FadeOutDown,
+  runOnJS
 } from 'react-native-reanimated';
 import { colors } from '@constants/colors';
 import { useStatusBar } from '@/hooks/useStatusBar';
@@ -29,6 +30,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { supabase } from '@/lib/supabase/client';
 import { database } from '@/lib/supabase/database';
 import { WeeklyActivity } from '@/components/home/WeeklyActivity';
+import { DailyHadith } from '@/components/home/DailyHadith';
 import { HoverCard } from '@/components/ui/HoverCard';
 import * as Haptics from 'expo-haptics';
 
@@ -383,6 +385,13 @@ export default function HomePage() {
   const [cardPosition, setCardPosition] = useState({ left: 0, top: 0 });
   const [showDevTools, setShowDevTools] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<'genel' | 'dersler' | 'testler'>('genel');
+  const [isSwipeActive, setIsSwipeActive] = useState(false);
+  const [isCarouselTouching, setIsCarouselTouching] = useState(false);
+  
+  // Animation values for swipe effect
+  const screenWidth = Dimensions.get('window').width;
+  const translateX = useSharedValue(0);
+  const categoryIndex = useSharedValue(0); // 0: genel, 1: dersler, 2: testler
 
   const handleTestSelect = (test: typeof tests[0]) => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -448,11 +457,113 @@ export default function HomePage() {
     setSelectedTest(null);
   };
 
-  const handleCategoryChange = (category: 'genel' | 'dersler' | 'testler') => {
+  const categories: ('genel' | 'dersler' | 'testler')[] = ['genel', 'dersler', 'testler'];
+  
+  const handleCategoryChange = useCallback((category: 'genel' | 'dersler' | 'testler') => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setSelectedCategory(category);
-  };
+    
+    // Update animation value
+    const newIndex = categories.indexOf(category);
+    categoryIndex.value = newIndex;
+    translateX.value = withTiming(-newIndex * screenWidth, {
+      duration: 300,
+      easing: Easing.out(Easing.cubic),
+    });
+  }, []);
+
+  // Initialize animation value based on selected category
+  useEffect(() => {
+    const index = categories.indexOf(selectedCategory);
+    categoryIndex.value = index;
+    translateX.value = -index * screenWidth;
+  }, []);
+
+  // Track if we're currently dragging
+  const isDragging = useSharedValue(false);
+  const startX = useSharedValue(0);
+
+  // Swipe gesture for category navigation using PanResponder
+  const panResponder = useMemo(() => {
+    return PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: (evt, gestureState) => {
+        // Don't respond if user is touching a carousel
+        if (isCarouselTouching) {
+          return false;
+        }
+        
+        // Only respond to horizontal swipes
+        const isHorizontal = Math.abs(gestureState.dx) > Math.abs(gestureState.dy) * 1.5;
+        if (isHorizontal && Math.abs(gestureState.dx) > 10) {
+          setIsSwipeActive(true);
+          return true;
+        }
+        return false;
+      },
+      onPanResponderGrant: (evt) => {
+        // Store the starting position and mark as dragging
+        isDragging.value = true;
+        startX.value = evt.nativeEvent.pageX;
+      },
+      onPanResponderMove: (evt, gestureState) => {
+        if (!isDragging.value) return;
+        
+        const currentIndex = categoryIndex.value;
+        const baseOffset = -currentIndex * screenWidth;
+        const dragOffset = gestureState.dx;
+        
+        // Limit the drag to prevent over-scrolling
+        const minOffset = -(categories.length - 1) * screenWidth;
+        const maxOffset = 0;
+        const newOffset = Math.max(minOffset, Math.min(maxOffset, baseOffset + dragOffset));
+        
+        // Update position in real-time
+        translateX.value = newOffset;
+      },
+      onPanResponderRelease: (evt, gestureState) => {
+        isDragging.value = false;
+        
+        const currentIndex = categoryIndex.value;
+        const threshold = screenWidth * 0.3; // 30% of screen width
+        
+        let newIndex = currentIndex;
+        
+        // Determine if we should switch categories
+        if (Math.abs(gestureState.dx) > threshold && Math.abs(gestureState.dy) < 100) {
+          if (gestureState.dx > threshold && currentIndex > 0) {
+            // Swipe right -> previous category
+            newIndex = currentIndex - 1;
+          } else if (gestureState.dx < -threshold && currentIndex < categories.length - 1) {
+            // Swipe left -> next category
+            newIndex = currentIndex + 1;
+          }
+        }
+        
+        // Animate to the final position
+        categoryIndex.value = newIndex;
+        translateX.value = withTiming(-newIndex * screenWidth, {
+          duration: 300,
+          easing: Easing.out(Easing.cubic),
+        });
+        
+        // Update the selected category
+        if (newIndex !== currentIndex) {
+          runOnJS(handleCategoryChange)(categories[newIndex]);
+        }
+      },
+      onPanResponderTerminate: () => {
+        // Handle interruption (e.g., by another gesture)
+        isDragging.value = false;
+        const currentIndex = categoryIndex.value;
+        translateX.value = withTiming(-currentIndex * screenWidth, {
+          duration: 300,
+          easing: Easing.out(Easing.cubic),
+        });
+      },
+    });
+  }, [categories, handleCategoryChange, screenWidth, isCarouselTouching]);
 
   // Reset scroll position when category changes
   useEffect(() => {
@@ -623,6 +734,9 @@ export default function HomePage() {
       color: colors.textSecondary,
     },
     sectionHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
       paddingHorizontal: 16,
       paddingTop: 20,
       paddingBottom: 16,
@@ -631,6 +745,17 @@ export default function HomePage() {
       fontSize: 24,
       fontWeight: 'bold',
       color: colors.textPrimary,
+    },
+    viewAllButton: {
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 12,
+      backgroundColor: colors.surface,
+    },
+    viewAllButtonText: {
+      fontSize: 12,
+      fontWeight: '600',
+      color: colors.primary,
     },
     carousel: {
       flexGrow: 0,
@@ -900,15 +1025,10 @@ export default function HomePage() {
 
 
 
-      {/* Content Wrapper */}
-      <View style={styles.contentWrapper}>
-        <ScrollView
-          style={styles.content}
-          contentContainerStyle={{ paddingBottom: 100 }}
-          showsVerticalScrollIndicator={false}
-        >
-          {/* Category Selection Bar */}
-          <View style={styles.categoryBar}>
+      {/* Content Wrapper with Swipe Gesture */}
+      <View style={styles.contentWrapper} {...panResponder.panHandlers}>
+        {/* Category Selection Bar - Fixed at top */}
+        <View style={styles.categoryBar}>
             <Pressable
               style={[
                 styles.categoryButton,
@@ -951,143 +1071,174 @@ export default function HomePage() {
                 Testler
               </Text>
             </Pressable>
+            </View>
+
+        {/* Animated Category Pages Container */}
+        <Animated.View
+          style={[
+            {
+              flex: 1,
+              flexDirection: 'row',
+              width: screenWidth * 3, // 3 categories
+            },
+            useAnimatedStyle(() => ({
+              transform: [{ translateX: translateX.value }],
+            })),
+          ]}
+        >
+          {/* GENEL Category Page */}
+          <View style={{ width: screenWidth, flex: 1 }}>
+            <ScrollView
+              style={styles.content}
+              contentContainerStyle={{ paddingBottom: 100 }}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={!isSwipeActive}
+            >
+              <View style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+                <WeeklyActivity />
+                <DailyHadith />
+
+                {/* 🧪 Developer Tools Toggle */}
+                <Pressable
+                  style={styles.devToolsToggle}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setShowDevTools(!showDevTools);
+                  }}
+                >
+                  <Text style={styles.devToolsToggleText}>
+                    {showDevTools ? '🔽' : '🔼'} {t('home.devTools')}
+                  </Text>
+                </Pressable>
+
+                {/* 🧪 TEST BUTTONS - Remove in production */}
+                {showDevTools && (
+                  <View style={styles.testContainer}>
+                    <Text style={styles.testTitle}>🧪 {t('home.devTools')}</Text>
+
+                    {/* Add XP Buttons */}
+                    <View style={styles.testButtonRow}>
+                      <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
+                        <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
+                      </Pressable>
+
+                      <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
+                        <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
+                      </Pressable>
+                    </View>
+
+                    {/* Lives Debug Buttons */}
+                    <View style={styles.testButtonRow}>
+                      <Pressable
+                        style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
+                        onPress={() => {
+                          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                          removeLives(1);
+                        }}
+                      >
+                        <Text style={styles.testButtonText}>❤️ -1 {t('home.lives')}</Text>
+                      </Pressable>
+
+                      <Pressable
+                        style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
+                        onPress={() => {
+                          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                          addLives(1);
+                        }}
+                      >
+                        <Text style={styles.testButtonText}>❤️ +1 {t('home.lives')}</Text>
+                      </Pressable>
+                    </View>
+
+                    {/* Sync XP Button */}
+                    <Pressable style={styles.testButtonSync} onPress={handleSyncXP}>
+                      <Text style={styles.testButtonText}>🔄 {t('home.syncXP')}</Text>
+                    </Pressable>
+
+                    {/* Reset Progress Button */}
+                    <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
+                      <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
+                    </Pressable>
+
+                    {/* Reset XP Only Button */}
+                    <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                      try {
+                        setTotalXP(0);
+                        if (isAuthenticated && user?.id) {
+                          await database.users.update(user.id, {
+                            total_xp: 0,
+                            current_level: 1,
+                            total_score: 0,
+                            updated_at: new Date().toISOString(),
+                          });
+                        }
+                        Alert.alert(t('common.success'), 'XP reset.');
+                      } catch (error) {
+                        console.error('❌ Reset XP error:', error);
+                      }
+                    }}>
+                      <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
+                    </Pressable>
+
+                    {/* Logout Button */}
+                    <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
+                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                      try {
+                        const { logout } = useStore.getState();
+                        await supabase.auth.signOut();
+                        logout();
+                        resetUserData();
+                        Alert.alert(t('common.success'), t('home.logout'));
+                        router.replace('/(auth)/login');
+                      } catch (error) {
+                        console.error('❌ Logout error:', error);
+                        Alert.alert(t('common.error'), 'Logout failed');
+                      }
+                    }}>
+                      <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
+                    </Pressable>
+                  </View>
+                )}
+              </View>
+            </ScrollView>
           </View>
 
-
-          {/* Conditional Content Based on Selected Category */}
-          {selectedCategory === 'genel' ? (
-            /* GENEL CATEGORY: Weekly Activity + Developer Tools */
-            <>
-              <WeeklyActivity />
-
-              {/* 🧪 Developer Tools Toggle */}
-              <Pressable
-                style={styles.devToolsToggle}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setShowDevTools(!showDevTools);
-                }}
-              >
-                <Text style={styles.devToolsToggleText}>
-                  {showDevTools ? '🔽' : '🔼'} {t('home.devTools')}
-                </Text>
-              </Pressable>
-
-              {/* 🧪 TEST BUTTONS - Remove in production */}
-              {showDevTools && (
-                <View style={styles.testContainer}>
-                  <Text style={styles.testTitle}>🧪 {t('home.devTools')}</Text>
-
-                  {/* Add XP Buttons */}
-                  <View style={styles.testButtonRow}>
-                    <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                      <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
-                    </Pressable>
-
-                    <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                      <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
-                    </Pressable>
-                  </View>
-
-                  {/* Lives Debug Buttons */}
-                  <View style={styles.testButtonRow}>
-                    <Pressable
-                      style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
-                      onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        removeLives(1);
-                      }}
-                    >
-                      <Text style={styles.testButtonText}>❤️ -1 {t('home.lives')}</Text>
-                    </Pressable>
-
-                    <Pressable
-                      style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
-                      onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        addLives(1);
-                      }}
-                    >
-                      <Text style={styles.testButtonText}>❤️ +1 {t('home.lives')}</Text>
-                    </Pressable>
-                  </View>
-
-                  {/* Sync XP Button */}
-                  <Pressable style={styles.testButtonSync} onPress={handleSyncXP}>
-                    <Text style={styles.testButtonText}>🔄 {t('home.syncXP')}</Text>
-                  </Pressable>
-
-                  {/* Reset Progress Button */}
-                  <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-                    <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
-                  </Pressable>
-
-                  {/* Reset XP Only Button */}
-                  <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                    try {
-                      setTotalXP(0);
-                      if (isAuthenticated && user?.id) {
-                        await database.users.update(user.id, {
-                          total_xp: 0,
-                          current_level: 1,
-                          total_score: 0,
-                          updated_at: new Date().toISOString(),
-                        });
-                      }
-                      Alert.alert(t('common.success'), 'XP reset.');
-                    } catch (error) {
-                      console.error('❌ Reset XP error:', error);
-                    }
-                  }}>
-                    <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
-                  </Pressable>
-
-                  {/* Logout Button */}
-                  <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                    try {
-                      const { logout } = useStore.getState();
-                      await supabase.auth.signOut();
-                      logout();
-                      resetUserData();
-                      Alert.alert(t('common.success'), t('home.logout'));
-                      router.replace('/(auth)/login');
-                    } catch (error) {
-                      console.error('❌ Logout error:', error);
-                      Alert.alert(t('common.error'), 'Logout failed');
-                    }
-                  }}>
-                    <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
-                  </Pressable>
-                </View>
-              )}
-            </>
-          ) : (
-            /* DERSLER & TESTLER CATEGORIES: Carousel */
-            <>
+          {/* DERSLER Category Page */}
+          <View style={{ width: screenWidth, flex: 1 }}>
+            <ScrollView
+              style={styles.content}
+              contentContainerStyle={{ paddingBottom: 100 }}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={!isSwipeActive}
+            >
               {/* Section Title */}
               <View style={styles.sectionHeader}>
-                <Text style={styles.sectionTitle}>
-                  {selectedCategory === 'dersler' ? 'Dersler' : t('home.tests')}
-                </Text>
+                <Text style={styles.sectionTitle}>Dersler</Text>
+                <Pressable style={styles.viewAllButton} onPress={() => { }}>
+                  <Text style={styles.viewAllButtonText}>{t('common.viewAll')}</Text>
+                </Pressable>
               </View>
 
-              {/* Lesson/Test Cards Carousel */}
+              {/* Lesson Cards Carousel */}
               <ScrollView
                 ref={scrollViewRef}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 contentContainerStyle={styles.carouselContent}
                 style={styles.carousel}
+                onTouchStart={() => setIsCarouselTouching(true)}
+                onTouchEnd={() => setIsCarouselTouching(false)}
                 onScrollBeginDrag={() => {
+                  setIsCarouselTouching(true);
                   if (selectedTest) {
                     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
                     setSelectedTest(null);
                   }
                 }}
+                onScrollEndDrag={() => setIsCarouselTouching(false)}
               >
-                {(selectedCategory === 'dersler' ? lessons : tests).map((test) => (
+                {lessons.map((test) => (
                   <HoverCard
                     key={test.id}
                     style={[
@@ -1143,10 +1294,104 @@ export default function HomePage() {
                   </HoverCard>
                 ))}
               </ScrollView>
-            </>
-          )}
+            </ScrollView>
+          </View>
 
-          {/* Bottom Section with Overlay */}
+          {/* TESTLER Category Page */}
+          <View style={{ width: screenWidth, flex: 1 }}>
+            <ScrollView
+              style={styles.content}
+              contentContainerStyle={{ paddingBottom: 100 }}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={!isSwipeActive}
+            >
+              {/* Section Title */}
+              <View style={styles.sectionHeader}>
+                <Text style={styles.sectionTitle}>{t('home.tests')}</Text>
+                <Pressable style={styles.viewAllButton} onPress={() => { }}>
+                  <Text style={styles.viewAllButtonText}>{t('common.viewAll')}</Text>
+                </Pressable>
+              </View>
+
+              {/* Test Cards Carousel */}
+              <ScrollView
+                ref={scrollViewRef}
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.carouselContent}
+                style={styles.carousel}
+                onTouchStart={() => setIsCarouselTouching(true)}
+                onTouchEnd={() => setIsCarouselTouching(false)}
+                onScrollBeginDrag={() => {
+                  setIsCarouselTouching(true);
+                  if (selectedTest) {
+                    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+                    setSelectedTest(null);
+                  }
+                }}
+                onScrollEndDrag={() => setIsCarouselTouching(false)}
+              >
+                {tests.map((test) => (
+                  <HoverCard
+                    key={test.id}
+                    style={[
+                      styles.lessonCard,
+                      {
+                        backgroundColor: test.unlocked ? test.color : colors.locked,
+                        borderBottomColor: test.unlocked ? test.borderColor : colors.lockedBorder,
+                      },
+                      !test.unlocked && styles.lessonCardLocked,
+                    ]}
+                    onPress={() => handleTestSelect(test)}
+                    disabled={!test.unlocked}
+                    lightColor="rgba(255, 255, 255, 0.3)"
+                  >
+                    {/* Card Header */}
+                    <View style={styles.cardHeader}>
+                      <View style={styles.cardIconContainer}>
+                        <test.icon
+                          size={32}
+                          color={colors.textOnPrimary}
+                          weight="fill"
+                        />
+                      </View>
+                      {!test.unlocked && (
+                        <View style={styles.levelBadge}>
+                          <Text style={styles.levelBadgeText}>{t('home.level')} {test.level}</Text>
+                        </View>
+                      )}
+                    </View>
+
+                    {/* Card Content */}
+                    <View style={styles.cardContent}>
+                      <Text style={styles.cardTitle}>{test.title}</Text>
+                      <Text style={styles.cardDescription}>{test.description}</Text>
+                    </View>
+
+                    {/* Card Footer - Progress or Status */}
+                    <View style={styles.cardFooter}>
+                      {test.unlocked ? (
+                        <View style={styles.progressContainer}>
+                          <View style={styles.progressBar}>
+                            <View style={[styles.progressFill, { width: '30%' }]} />
+                          </View>
+                          <Text style={styles.progressText}>3/10 {t('home.tests')}</Text>
+                        </View>
+                      ) : (
+                        <View style={styles.lockedBadge}>
+                          <Lock size={16} color={colors.textOnPrimary} weight="fill" />
+                          <Text style={styles.lockedBadgeText}>{t('home.locked')}</Text>
+                        </View>
+                      )}
+                    </View>
+                  </HoverCard>
+                ))}
+              </ScrollView>
+            </ScrollView>
+          </View>
+        </Animated.View>
+
+        {/* Bottom Section with Overlay */}
           <View style={styles.bottomContent}>
 
             {/* Test Start Confirmation Card (Overlay) */}
@@ -1212,142 +1457,8 @@ export default function HomePage() {
                 </Animated.View>
               </>
             )}
-
-            {/* 🧪 Developer Tools Toggle */}
-            <Pressable
-              style={styles.devToolsToggle}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                setShowDevTools(!showDevTools);
-              }}
-            >
-              <Text style={styles.devToolsToggleText}>
-                {showDevTools ? '🔽' : '🔼'} {t('home.devTools')}
-              </Text>
-            </Pressable>
-
-            {/* 🧪 TEST BUTTONS - Remove in production */}
-            {showDevTools && (
-              <View style={styles.testContainer}>
-                <Text style={styles.testTitle}>🧪 {t('home.devTools')}</Text>
-
-                {/* Add XP Buttons */}
-                <View style={styles.testButtonRow}>
-                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                    <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
-                  </Pressable>
-
-                  <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                    <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
-                  </Pressable>
-                </View>
-
-                {/* Lives Debug Buttons */}
-                <View style={styles.testButtonRow}>
-                  <Pressable
-                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
-                    onPress={() => {
-                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                      removeLives(1);
-                    }}
-                  >
-                    <Text style={styles.testButtonText}>❤️ -1 {t('home.lives')}</Text>
-                  </Pressable>
-
-                  <Pressable
-                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
-                    onPress={() => {
-                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                      addLives(1);
-                    }}
-                  >
-                    <Text style={styles.testButtonText}>❤️ +1 {t('home.lives')}</Text>
-                  </Pressable>
-                </View>
-
-                {/* Language Switcher Buttons - Temporarily Disabled
-                <View style={styles.testButtonRow}>
-                  <Pressable
-                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: '#E30A17' }]}
-                    onPress={() => {
-                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                      const { changeLanguage } = require('@/lib/i18n');
-                      changeLanguage('tr');
-                      Alert.alert('🇹🇷 Türkçe', 'Dil Türkçe olarak değiştirildi');
-                    }}
-                  >
-                    <Text style={styles.testButtonText}>🇹🇷 Türkçe</Text>
-                  </Pressable>
-
-                  <Pressable
-                    style={[styles.testButton, styles.testButtonHalf, { backgroundColor: '#012169' }]}
-                    onPress={() => {
-                      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                      const { changeLanguage } = require('@/lib/i18n');
-                      changeLanguage('en');
-                      Alert.alert('🇬🇧 English', 'Language changed to English');
-                    }}
-                  >
-                    <Text style={styles.testButtonText}>🇬🇧 English</Text>
-                  </Pressable>
-                </View>
-                */}
-
-                {/* Clear Theme Cache Button */}
-                <Pressable style={[styles.testButton, { backgroundColor: colors.secondary }]} onPress={handleClearThemeCache}>
-                  <Text style={styles.testButtonText}>🎨 {t('home.themeCache')}</Text>
-                </Pressable>
-
-                {/* Reset Progress Button */}
-                <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-                  <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
-                </Pressable>
-
-                {/* Reset XP Only Button */}
-                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  try {
-                    // Reset local store
-                    setTotalXP(0);
-                    // Reset DB if authenticated
-                    if (isAuthenticated && user?.id) {
-                      await database.users.update(user.id, {
-                        total_xp: 0,
-                        current_level: 1,
-                        total_score: 0,
-                        updated_at: new Date().toISOString(),
-                      });
-                    }
-                    Alert.alert(t('common.success'), 'XP reset.');
-                  } catch (error) {
-                    console.error('❌ Reset XP error:', error);
-                  }
-                }}>
-                  <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
-                </Pressable>
-
-                {/* Logout Button */}
-                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  try {
-                    const { logout } = useStore.getState();
-                    await supabase.auth.signOut();
-                    logout();
-                    resetUserData();
-                    Alert.alert(t('common.success'), t('home.logout'));
-                    router.replace('/(auth)/login');
-                  } catch (error) {
-                    console.error('❌ Logout error:', error);
-                    Alert.alert(t('common.error'), 'Logout failed');
-                  }
-                }}>
-                  <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
-                </Pressable>
-              </View>
-            )}
           </View>
-        </ScrollView >
-      </View >
-    </SafeAreaView >
+      </View>
+    </SafeAreaView>
   );
 }

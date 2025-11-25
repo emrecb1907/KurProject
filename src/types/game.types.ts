@@ -44,6 +44,7 @@ export interface GameQuestion {
   correctAnswerLatin?: string; // For verses
   options: string[];
   optionsLatin?: string[]; // For verses
+  audioFileId?: number; // For letters game - audio file number (1-29)
 }
 
-export type GameType = 'vocabulary' | 'letters' | 'verses';
+export type GameType = 'vocabulary' | 'letters' | 'verses' | 'quiz';

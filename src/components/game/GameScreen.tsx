@@ -1,21 +1,25 @@
-import { useState, useEffect, useMemo } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert, ActivityIndicator, Modal } from 'react-native';
 import { useRouter } from 'expo-router';
+import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from 'react-native-reanimated';
 import { QuestionCard } from './QuestionCard';
 import { OptionButton } from './OptionButton';
 import { Timer } from './Timer';
 import { LifeIndicator } from './LifeIndicator';
 import { Button } from '@components/ui';
-import { LoadingDots } from '@components/ui/LoadingDots';
-import { useStore } from '@/store';
+import { useStore, useUser } from '@/store';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
+import * as Haptics from 'expo-haptics';
 import { GameQuestion, GameType } from '@/types/game.types';
 import { useGameCompletion } from '@/hooks';
 import { GAME_UI_CONFIG } from '@constants/game';
 import { logger } from '@/lib/logger';
+import { Audio } from 'expo-av';
+import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
+import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 
 interface GameScreenProps {
     lessonId: string;
@@ -37,6 +41,7 @@ export function GameScreen({
     const { t } = useTranslation();
     const router = useRouter();
     const { currentLives, maxLives, removeLives } = useStore();
+    const { totalXP } = useUser();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
 
@@ -47,9 +52,39 @@ export function GameScreen({
     const [isGameComplete, setIsGameComplete] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
+    const soundRef = useRef<Audio.Sound | null>(null);
+    
+    // XP bar animation
+    const animatedXPWidth = useSharedValue(0);
+    const [xpBarInitialized, setXpBarInitialized] = useState(false);
 
     const currentQuestion = questions[currentQuestionIndex];
     const styles = useMemo(() => getStyles(), [themeVersion]);
+
+    // Configure audio mode once
+    useEffect(() => {
+        Audio.setAudioModeAsync({
+            playsInSilentModeIOS: true,
+            staysActiveInBackground: false,
+            shouldDuckAndroid: true,
+        }).catch(console.error);
+
+        // Cleanup audio when component unmounts
+        return () => {
+            if (soundRef.current) {
+                soundRef.current.unloadAsync().catch(console.error);
+            }
+        };
+    }, []);
+
+    // Stop audio when question changes
+    useEffect(() => {
+        if (soundRef.current) {
+            soundRef.current.stopAsync().catch(console.error);
+            soundRef.current.unloadAsync().catch(console.error);
+            soundRef.current = null;
+        }
+    }, [currentQuestionIndex]);
 
     // Check lives on mount
     useEffect(() => {
@@ -155,6 +190,55 @@ export function GameScreen({
         return currentQuestion.question;
     };
 
+    // Handle audio playback for letters game
+    const handlePlayAudio = async () => {
+        if (gameType !== 'letters' || !currentQuestion.audioFileId) {
+            return;
+        }
+
+        hapticLight();
+
+        try {
+            // Stop and cleanup previous sound
+            if (soundRef.current) {
+                try {
+                    await soundRef.current.stopAsync();
+                    await soundRef.current.unloadAsync();
+                } catch (cleanupError: any) {
+                    if (cleanupError?.message !== 'Seeking interrupted.') {
+                        console.warn('Error cleaning up previous sound:', cleanupError);
+                    }
+                }
+                soundRef.current = null;
+            }
+
+            // Get audio file
+            const audioFile = LETTER_AUDIO_FILES[currentQuestion.audioFileId];
+            if (!audioFile) {
+                console.warn(`Audio file not found for letter ${currentQuestion.audioFileId}`);
+                return;
+            }
+
+            // Play audio
+            const { sound } = await Audio.Sound.createAsync(audioFile);
+            soundRef.current = sound;
+            await sound.playAsync();
+
+            // Cleanup when finished
+            sound.setOnPlaybackStatusUpdate((status) => {
+                if (status.isLoaded && status.didJustFinish) {
+                    sound.unloadAsync().catch(console.error);
+                    if (soundRef.current === sound) {
+                        soundRef.current = null;
+                    }
+                }
+            });
+        } catch (error) {
+            console.error('Error playing audio:', error);
+            soundRef.current = null;
+        }
+    };
+
     const getOptionState = (option: string) => {
         if (!isAnswered) {
             return selectedOption === option ? 'selected' : 'default';
@@ -174,6 +258,110 @@ export function GameScreen({
 
         return 'default';
     };
+
+    // Calculate XP progress for completion screen
+    const xpEarned = correctAnswersCount;
+    const { currentXPProgress, newXPProgress, leveledUp } = useMemo(() => {
+        const current = getXPProgress(totalXP);
+        const newXP = totalXP + xpEarned;
+        const newProgress = getXPProgress(newXP);
+        const leveled = newProgress.currentLevel > current.currentLevel;
+        return {
+            currentXPProgress: current,
+            newXPProgress: newProgress,
+            leveledUp: leveled,
+        };
+    }, [totalXP, xpEarned]);
+    const [showLevelUpModal, setShowLevelUpModal] = useState(false);
+
+    // Track current displayed level for XP bar
+    const [displayedLevel, setDisplayedLevel] = useState(() => currentXPProgress.currentLevel);
+    const [displayedXP, setDisplayedXP] = useState(() => currentXPProgress.currentLevelXP);
+    const [displayedRequiredXP, setDisplayedRequiredXP] = useState(() => currentXPProgress.requiredXP);
+
+    // Helper functions for state updates in animation callbacks
+    const updateDisplayedLevel = (level: number, xp: number, requiredXP: number) => {
+        setDisplayedLevel(level);
+        setDisplayedXP(xp);
+        setDisplayedRequiredXP(requiredXP);
+    };
+
+    const showLevelUp = () => {
+        setShowLevelUpModal(true);
+    };
+
+    // Animate XP bar when game completes
+    useEffect(() => {
+        if (isGameComplete && !xpBarInitialized) {
+            // Set initial value
+            animatedXPWidth.value = currentXPProgress.progressPercentage;
+            setXpBarInitialized(true);
+            setDisplayedLevel(currentXPProgress.currentLevel);
+            setDisplayedXP(currentXPProgress.currentLevelXP);
+            setDisplayedRequiredXP(currentXPProgress.requiredXP);
+            
+            // Store values for animation callbacks
+            const newLevel = newXPProgress.currentLevel;
+            const newXP = newXPProgress.currentLevelXP;
+            const newRequired = newXPProgress.requiredXP;
+            const newProgress = newXPProgress.progressPercentage;
+            const isLeveledUp = leveledUp;
+            
+            // Start animation after a small delay
+            const timer = setTimeout(() => {
+                if (isLeveledUp) {
+                    // Two-stage animation: first fill current level to 100%, then fill new level
+                    // Stage 1: Fill current level to 100%
+                    animatedXPWidth.value = withTiming(100, {
+                        duration: 400,
+                        easing: Easing.out(Easing.quad),
+                    }, (finished) => {
+                        if (finished) {
+                            // Update displayed values to new level
+                            runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
+                            
+                            // Stage 2: Reset to 0% and fill new level
+                            animatedXPWidth.value = 0;
+                            animatedXPWidth.value = withTiming(newProgress, {
+                                duration: 400,
+                                easing: Easing.out(Easing.quad),
+                            }, (finished2) => {
+                                if (finished2) {
+                                    // Show level up modal after animation completes
+                                    runOnJS(showLevelUp)();
+                                }
+                            });
+                        }
+                    });
+                } else {
+                    // Single animation: just fill to new percentage
+                    animatedXPWidth.value = withTiming(newProgress, {
+                        duration: 500,
+                        easing: Easing.out(Easing.quad),
+                    });
+                    runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
+                }
+            }, 100);
+            
+            return () => clearTimeout(timer);
+        }
+        
+        // Reset when game is not complete
+        if (!isGameComplete) {
+            setXpBarInitialized(false);
+            animatedXPWidth.value = 0;
+            setShowLevelUpModal(false);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isGameComplete]);
+
+    const animatedXPStyle = useAnimatedStyle(() => {
+        return {
+            width: `${animatedXPWidth.value}%`,
+        };
+    });
+
+    // Level up modal is controlled by showLevelUpModal state
 
     if (isGameComplete) {
         const isExcellent = correctAnswersCount >= GAME_UI_CONFIG.EXCELLENT_SCORE_THRESHOLD;
@@ -196,15 +384,36 @@ export function GameScreen({
                         <Text style={styles.statText}>XP: +{correctAnswersCount}</Text>
                     </View>
 
+                    {/* XP Progress Bar */}
+                    <View style={styles.xpBarContainer}>
+                        <View style={styles.xpBarBackground}>
+                            <Animated.View style={[styles.xpBarFill, animatedXPStyle]} />
+                            <View style={styles.xpBarTextContainer}>
+                                <Text style={styles.xpBarText}>
+                                    {formatXP(displayedXP)} / {formatXP(displayedRequiredXP)} XP
+                                </Text>
+                            </View>
+                        </View>
+                        <Text style={styles.xpBarLabel}>
+                            Seviye {displayedLevel} {xpEarned > 0 && `(+${xpEarned} XP)`}
+                        </Text>
+                    </View>
+
                     <Pressable
                         style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
                         onPress={handleComplete}
                         disabled={isSubmitting}
                     >
+                        {isSubmitting && (
+                            <ActivityIndicator 
+                                size="small" 
+                                color={colors.textOnPrimary} 
+                                style={{ marginRight: 8 }} 
+                            />
+                        )}
                         <Text style={styles.completeButtonText}>
                             {isSubmitting ? t('common.loading') : t('common.finish')}
                         </Text>
-                        {isSubmitting && <LoadingDots style={{ color: colors.textOnPrimary, marginLeft: 4 }} />}
                     </Pressable>
 
                     {!isSubmitting && (
@@ -226,6 +435,44 @@ export function GameScreen({
                         </Pressable>
                     )}
                 </View>
+
+                {/* Level Up Modal */}
+                {showLevelUpModal && leveledUp && (
+                    <Modal
+                        visible={true}
+                        transparent={true}
+                        animationType="fade"
+                        onRequestClose={() => setShowLevelUpModal(false)}
+                    >
+                        <Pressable 
+                            style={styles.modalOverlay}
+                            onPress={() => {
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                                setShowLevelUpModal(false);
+                            }}
+                        >
+                            <Pressable 
+                                style={styles.levelUpModal}
+                                onPress={(e) => e.stopPropagation()}
+                            >
+                                <Text style={styles.levelUpEmoji}>🎉</Text>
+                                <Text style={styles.levelUpTitle}>Level Atladınız!</Text>
+                                <Text style={styles.levelUpMessage}>
+                                    Tebrikler! Seviye {newXPProgress.currentLevel}'e ulaştınız!
+                                </Text>
+                                <Pressable
+                                    style={styles.levelUpButton}
+                                    onPress={() => {
+                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                                        setShowLevelUpModal(false);
+                                    }}
+                                >
+                                    <Text style={styles.levelUpButtonText}>{t('common.ok')}</Text>
+                                </Pressable>
+                            </Pressable>
+                        </Pressable>
+                    </Modal>
+                )}
             </View>
         );
     }
@@ -255,6 +502,7 @@ export function GameScreen({
                         questionNumber={currentQuestionIndex + 1}
                         totalQuestions={questions.length}
                         question={getCurrentQuestion()}
+                        onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
                     />
 
                     {/* Latin Toggle Button (only for verses) */}
@@ -403,5 +651,96 @@ const getStyles = () =>
             color: colors.textOnPrimary,
             fontSize: 18,
             fontWeight: 'bold',
+        },
+        xpBarContainer: {
+            width: '100%',
+            marginBottom: 24,
+            paddingHorizontal: 20,
+        },
+        xpBarBackground: {
+            height: 40,
+            backgroundColor: colors.surface,
+            borderRadius: 20,
+            overflow: 'hidden',
+            borderWidth: 2,
+            borderColor: colors.border,
+            position: 'relative',
+            justifyContent: 'center',
+        },
+        xpBarFill: {
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            backgroundColor: colors.primary,
+            borderRadius: 18,
+        },
+        xpBarTextContainer: {
+            position: 'absolute',
+            width: '100%',
+            height: '100%',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 1,
+        },
+        xpBarText: {
+            fontSize: 14,
+            fontWeight: 'bold',
+            color: colors.textPrimary,
+        },
+        xpBarLabel: {
+            fontSize: 12,
+            color: colors.textSecondary,
+            textAlign: 'center',
+            marginTop: 8,
+        },
+        modalOverlay: {
+            flex: 1,
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        levelUpModal: {
+            backgroundColor: colors.surface,
+            borderRadius: 24,
+            padding: 32,
+            alignItems: 'center',
+            width: '85%',
+            maxWidth: 400,
+            borderBottomWidth: 6,
+            borderBottomColor: colors.primary,
+        },
+        levelUpEmoji: {
+            fontSize: 64,
+            marginBottom: 16,
+        },
+        levelUpTitle: {
+            fontSize: 28,
+            fontWeight: 'bold',
+            color: colors.textPrimary,
+            marginBottom: 12,
+            textAlign: 'center',
+        },
+        levelUpMessage: {
+            fontSize: 16,
+            color: colors.textSecondary,
+            textAlign: 'center',
+            marginBottom: 24,
+            lineHeight: 24,
+        },
+        levelUpButton: {
+            backgroundColor: colors.primary,
+            paddingVertical: 14,
+            paddingHorizontal: 32,
+            borderRadius: 12,
+            borderBottomWidth: 4,
+            borderBottomColor: colors.buttonOrangeBorder,
+            minWidth: 120,
+        },
+        levelUpButtonText: {
+            color: colors.textOnPrimary,
+            fontSize: 16,
+            fontWeight: 'bold',
+            textAlign: 'center',
         },
     });

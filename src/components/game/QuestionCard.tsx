@@ -56,18 +56,20 @@ export function QuestionCard({
 
       {/* Question Text */}
       <View style={styles.questionBox}>
-        <Text style={[styles.questionText, showArabic && styles.arabicText]}>
-          {showArabic ? questionArabic : question}
-        </Text>
+        {(showArabic ? questionArabic : question) && (
+          <Text style={[styles.questionText, showArabic && styles.arabicText]}>
+            {showArabic ? questionArabic : question}
+          </Text>
+        )}
+        
+        {/* Audio Button */}
+        {onPlayAudio && (
+          <Pressable style={styles.audioButton} onPress={onPlayAudio}>
+            <Text style={styles.audioIcon}>🔊</Text>
+            <Text style={styles.audioText}>Dinle</Text>
+          </Pressable>
+        )}
       </View>
-
-      {/* Audio Button */}
-      {onPlayAudio && (
-        <Pressable style={styles.audioButton} onPress={onPlayAudio}>
-          <Text style={styles.audioIcon}>🔊</Text>
-          <Text style={styles.audioText}>Dinle</Text>
-        </Pressable>
-      )}
     </View>
   );
 }
@@ -102,6 +104,7 @@ const getStyles = () => StyleSheet.create({
     minHeight: 100,
     justifyContent: 'center',
     alignItems: 'center',
+    gap: 16,
   },
   questionText: {
     fontSize: 22,
@@ -125,7 +128,6 @@ const getStyles = () => StyleSheet.create({
     borderWidth: 2,
     borderColor: colors.secondaryDark,
     borderBottomWidth: 4,
-    marginTop: 16,
   },
   audioIcon: {
     fontSize: 20,

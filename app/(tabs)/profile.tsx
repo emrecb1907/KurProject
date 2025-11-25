@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
-import { useMemo, useCallback, useState, useEffect } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
@@ -17,9 +18,8 @@ import {
   Medal,
   Lightbulb,
   Lock,
-  Sun,
-  Moon,
-  Desktop
+  PencilSimple,
+  Gear
 } from 'phosphor-react-native';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
@@ -36,10 +36,20 @@ export default function ProfileScreen() {
   const { totalXP, streak, setStreak, setUserStats } = useUser();
   const { isAuthenticated, user } = useAuth();
   const { signOut } = useAuthHook();
-  const { themeMode, activeTheme, themeVersion, setThemeMode } = useTheme();
+  const { themeVersion } = useTheme();
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
   const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
+
+  // ScrollView ref for resetting scroll position
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  // Reset scroll position when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }, [])
+  );
 
   // Use React Query data if available, fallback to Zustand cache
   const completedTests = userStats?.completedTests ?? 0;
@@ -122,6 +132,10 @@ export default function ProfileScreen() {
 
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: colors.backgroundDarker,
+    },
     container: {
       flex: 1,
       backgroundColor: colors.background,
@@ -130,7 +144,7 @@ export default function ProfileScreen() {
       flex: 1,
     },
     scrollContent: {
-      paddingTop: 60,
+      paddingTop: 0,
     },
     header: {
       alignItems: 'center',
@@ -236,50 +250,6 @@ export default function ProfileScreen() {
       borderWidth: 2,
       borderColor: colors.border,
     },
-    themeContainer: {
-      marginTop: 8,
-    },
-    themeLabel: {
-      fontSize: 16,
-      fontWeight: '600',
-      color: colors.textPrimary,
-      marginBottom: 12,
-    },
-    themeButtons: {
-      flexDirection: 'row',
-      gap: 12,
-    },
-    themeButton: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: 8,
-      paddingVertical: 12,
-      paddingHorizontal: 16,
-      borderRadius: 12,
-      backgroundColor: colors.surface,
-      borderWidth: 2,
-      borderColor: colors.border,
-    },
-    themeButtonActive: {
-      backgroundColor: colors.primary,
-      borderColor: colors.buttonOrangeBorder,
-    },
-    themeButtonText: {
-      fontSize: 14,
-      fontWeight: '600',
-      color: colors.textSecondary,
-    },
-    themeButtonTextActive: {
-      color: colors.textOnPrimary,
-    },
-    themeHint: {
-      fontSize: 12,
-      color: colors.textSecondary,
-      marginTop: 8,
-      textAlign: 'center',
-    },
     badgeHint: {
       fontSize: 12,
       color: colors.textSecondary,
@@ -364,11 +334,46 @@ export default function ProfileScreen() {
       fontSize: 16,
       fontWeight: 'bold',
     },
+    actionButtonsContainer: {
+      flexDirection: 'row',
+      gap: 12,
+      paddingHorizontal: 16,
+      paddingTop: 16,
+      paddingBottom: 8,
+    },
+    actionButton: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+      backgroundColor: colors.warning,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 12,
+      borderBottomWidth: 4,
+      borderBottomColor: colors.warningDark,
+    },
+    actionButtonText: {
+      color: colors.backgroundDarker,
+      fontSize: 15,
+      fontWeight: 'bold',
+    },
+    logoutButtonContainer: {
+      paddingHorizontal: 16,
+      paddingTop: 12,
+      paddingBottom: 8,
+    },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.content} contentContainerStyle={styles.scrollContent}>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <View style={styles.container}>
+        <ScrollView 
+          ref={scrollViewRef}
+          style={styles.content} 
+          contentContainerStyle={styles.scrollContent}
+        >
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
@@ -384,6 +389,47 @@ export default function ProfileScreen() {
             {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
           </Text>
         </View>
+
+        {/* Action Buttons */}
+        <View style={styles.actionButtonsContainer}>
+          <Pressable
+            style={styles.actionButton}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              // TODO: Navigate to edit profile page
+            }}
+          >
+            <PencilSimple size={20} color={colors.backgroundDarker} weight="fill" />
+            <Text style={styles.actionButtonText}>Profilini Düzenle</Text>
+          </Pressable>
+
+          <Pressable
+            style={styles.actionButton}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              router.push('/settings');
+            }}
+          >
+            <Gear size={20} color={colors.backgroundDarker} weight="fill" />
+            <Text style={styles.actionButtonText}>Ayarlar</Text>
+          </Pressable>
+        </View>
+
+        {/* Logout Button - Only show if authenticated */}
+        {isAuthenticated && (
+          <View style={styles.logoutButtonContainer}>
+            <Pressable
+              style={styles.logoutButton}
+              onPress={async () => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                await signOut();
+                router.replace('/(auth)/login');
+              }}
+            >
+              <Text style={styles.logoutButtonText}>{t('profile.logout')}</Text>
+            </Pressable>
+          </View>
+        )}
 
         {/* Stats Grid */}
         <View style={styles.statsContainer}>
@@ -414,109 +460,6 @@ export default function ProfileScreen() {
           </Text>
         </View>
 
-        {/* Settings Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.sectionTitle}>{t('profile.sections.settings')}</Text>
-          </View>
-
-          {/* Theme Selector */}
-          <View style={styles.themeContainer}>
-            <Text style={styles.themeLabel}>{t('profile.theme.label')}</Text>
-            <View style={styles.themeButtons}>
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'light' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('light');
-                }}
-              >
-                <Sun
-                  size={20}
-                  color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'light' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.light')}
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'dark' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('dark');
-                }}
-              >
-                <Moon
-                  size={20}
-                  color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'dark' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.dark')}
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'system' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('system');
-                }}
-              >
-                <Desktop
-                  size={20}
-                  color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'system' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.system')}
-                </Text>
-              </Pressable>
-            </View>
-            <Text style={styles.themeHint}>
-              {themeMode === 'system'
-                ? `${t('profile.theme.activeTheme')}: ${activeTheme === 'light' ? t('profile.theme.light') : t('profile.theme.dark')} (${t('profile.theme.systemSettings')})`
-                : `${t('profile.theme.activeTheme')}: ${themeMode === 'light' ? t('profile.theme.light') : t('profile.theme.dark')}`}
-            </Text>
-          </View>
-
-          {/* Logout Button - Only show if authenticated */}
-          {isAuthenticated && (
-            <View style={{ marginTop: 24 }}>
-              <Pressable
-                style={styles.logoutButton}
-                onPress={async () => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                  await signOut();
-                  router.replace('/(auth)/login');
-                }}
-              >
-                <Text style={styles.logoutButtonText}>{t('profile.logout')}</Text>
-              </Pressable>
-            </View>
-          )}
-        </View>
 
         {/* Achievements Section */}
         <View style={styles.section}>
@@ -568,7 +511,8 @@ export default function ProfileScreen() {
         )}
 
         <View style={{ height: 40 }} />
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </SafeAreaView>
   );
 }

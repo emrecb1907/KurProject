@@ -1,10 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
-import { useEffect, useState, useCallback, useMemo } from 'react';
+import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { colors } from '@constants/colors';
 import { Target, Flag, Check, Fire } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
-import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
@@ -15,7 +14,7 @@ interface DayActivity {
     isToday: boolean;
 }
 
-export function WeeklyActivity() {
+export const WeeklyActivity = memo(function WeeklyActivity() {
     const { t } = useTranslation();
     const { user, isAuthenticated } = useAuth();
     const { themeVersion } = useTheme();
@@ -106,35 +105,14 @@ export function WeeklyActivity() {
         t('weeklyActivity.days.sun'),
     ], [t]);
 
-    // Refresh data every time screen comes into focus
-    useFocusEffect(
-        useCallback(() => {
-            if (isAuthenticated && user?.id) {
-                fetchWeeklyActivity();
-            } else {
-                setWeekData(getEmptyWeek());
-                setTodayCompleted(false);
-                setStreak(0);
-            }
-        }, [user?.id, isAuthenticated])
-    );
-
-    // Refresh data when language changes
-    useEffect(() => {
-        if (isAuthenticated && user?.id) {
-            fetchWeeklyActivity();
-        } else {
-            setWeekData(getEmptyWeek());
-        }
-    }, [dayNames]);
-
-    const getDayName = (date: Date) => {
+    // Helper functions - defined early with useCallback
+    const getDayName = useCallback((date: Date) => {
         const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday
         const mapIndex = dayIndex === 0 ? 6 : dayIndex - 1;
         return dayNames[mapIndex];
-    };
+    }, [dayNames]);
 
-    const getEmptyWeek = (): DayActivity[] => {
+    const getEmptyWeek = useCallback((): DayActivity[] => {
         const now = new Date();
         // Default to Monday start if no data
         const dayOfWeek = now.getDay();
@@ -160,9 +138,9 @@ export function WeeklyActivity() {
                 isToday: checkDate.getTime() === today.getTime(),
             };
         });
-    };
+    }, [getDayName]);
 
-    const fetchWeeklyActivity = async () => {
+    const fetchWeeklyActivity = useCallback(async () => {
         if (!user?.id) return;
 
         try {
@@ -238,7 +216,32 @@ export function WeeklyActivity() {
             console.error('❌ Failed to fetch weekly activity:', error);
             setWeekData(getEmptyWeek());
         }
-    };
+    }, [user?.id, getDayName, getEmptyWeek]);
+
+    // Track if component has mounted to prevent unnecessary re-fetches on category changes
+    const mountedRef = useRef(false);
+
+    // Load data only on mount and when user/auth changes
+    useEffect(() => {
+        if (isAuthenticated && user?.id) {
+            if (!mountedRef.current) {
+                fetchWeeklyActivity();
+                mountedRef.current = true;
+            }
+        } else {
+            setWeekData(getEmptyWeek());
+            setTodayCompleted(false);
+            setStreak(0);
+            mountedRef.current = false;
+        }
+    }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek]);
+
+    // Refresh data when language changes (but only if already mounted)
+    useEffect(() => {
+        if (isAuthenticated && user?.id && mountedRef.current) {
+            fetchWeeklyActivity();
+        }
+    }, [dayNames, isAuthenticated, user?.id, fetchWeeklyActivity]);
 
     const getDayBackgroundColor = (dayData: DayActivity) => {
         if (dayData.isFuture) return colors.backgroundLighter;
@@ -310,4 +313,4 @@ export function WeeklyActivity() {
             </View>
         </View>
     );
-}
+});

@@ -1,6 +1,7 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
@@ -18,6 +19,16 @@ export default function ChestScreen() {
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
   const [now, setNow] = useState(Date.now());
+
+  // ScrollView ref for resetting scroll position
+  const scrollViewRef = useRef<ScrollView>(null);
+
+  // Reset scroll position when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }, [])
+  );
 
   // Update timer every minute
   useEffect(() => {
@@ -114,7 +125,11 @@ export default function ChestScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView style={styles.content} contentContainerStyle={styles.scrollContent}>
+      <ScrollView 
+        ref={scrollViewRef}
+        style={styles.content} 
+        contentContainerStyle={styles.scrollContent}
+      >
         {/* Lives Status */}
         <View style={styles.statusCard}>
           <View style={styles.statusIconContainer}>
