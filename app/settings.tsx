@@ -1,13 +1,19 @@
-import React, { useMemo, useRef, useCallback, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import React, { useMemo, useRef, useCallback, useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable, Animated } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe } from 'phosphor-react-native';
+import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe, SignOut, Trash } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import Constants from 'expo-constants';
+import { useAuthHook } from '@/hooks';
+import { useAuth } from '@/store';
+import { database } from '@/lib/supabase/database';
+import { supabase } from '@/lib/supabase/client';
+import { Modal } from '@components/ui/Modal';
+import { Button } from '@components/ui/Button';
 
 interface SettingsOption {
   id: string;
@@ -25,6 +31,60 @@ export default function SettingsScreen() {
   const router = useRouter();
   const { themeVersion, themeMode, activeTheme, setThemeMode } = useTheme();
   const [selectedLanguage, setSelectedLanguage] = useState<'tr' | 'en'>('tr');
+  const { signOut } = useAuthHook();
+  const { isAuthenticated, user } = useAuth();
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+  
+  // Animation values for logout modal
+  const [logoutScaleAnim] = useState(new Animated.Value(0));
+  const [logoutFadeAnim] = useState(new Animated.Value(0));
+  
+  // Animation values for delete account modal
+  const [deleteScaleAnim] = useState(new Animated.Value(0));
+  const [deleteFadeAnim] = useState(new Animated.Value(0));
+
+  // Animate logout modal
+  useEffect(() => {
+    if (showLogoutModal) {
+      logoutScaleAnim.setValue(0);
+      logoutFadeAnim.setValue(0);
+      Animated.parallel([
+        Animated.spring(logoutScaleAnim, {
+          toValue: 1,
+          tension: 50,
+          friction: 7,
+          useNativeDriver: true,
+        }),
+        Animated.timing(logoutFadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [showLogoutModal]);
+
+  // Animate delete account modal
+  useEffect(() => {
+    if (showDeleteAccountModal) {
+      deleteScaleAnim.setValue(0);
+      deleteFadeAnim.setValue(0);
+      Animated.parallel([
+        Animated.spring(deleteScaleAnim, {
+          toValue: 1,
+          tension: 50,
+          friction: 7,
+          useNativeDriver: true,
+        }),
+        Animated.timing(deleteFadeAnim, {
+          toValue: 1,
+          duration: 300,
+          useNativeDriver: true,
+        }),
+      ]).start();
+    }
+  }, [showDeleteAccountModal]);
 
   // ScrollView ref for resetting scroll position
   const scrollViewRef = useRef<ScrollView>(null);
@@ -35,6 +95,55 @@ export default function SettingsScreen() {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [])
   );
+
+  // Handle logout
+  const handleLogout = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setShowLogoutModal(true);
+  };
+
+  const confirmLogout = async () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setShowLogoutModal(false);
+    await signOut();
+    router.replace('/(auth)/login');
+  };
+
+  // Handle delete account
+  const handleDeleteAccount = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+    setShowDeleteAccountModal(true);
+  };
+
+  const confirmDeleteAccount = async () => {
+    try {
+      if (!user?.id) {
+        setShowDeleteAccountModal(false);
+        return;
+      }
+
+      // Delete user data from database
+      const { error: dbError } = await supabase
+        .from('users')
+        .delete()
+        .eq('id', user.id);
+      
+      if (dbError) {
+        console.error('Error deleting user data:', dbError);
+        setShowDeleteAccountModal(false);
+        return;
+      }
+
+      // Sign out (auth user deletion requires admin API)
+      // In production, you might want to use a server-side function for complete deletion
+      await signOut();
+      setShowDeleteAccountModal(false);
+      router.replace('/(auth)/login');
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      setShowDeleteAccountModal(false);
+    }
+  };
 
   // Settings sections and options
   const settingsSections: SettingsSection[] = useMemo(() => [
@@ -288,6 +397,114 @@ export default function SettingsScreen() {
       opacity: 0.6,
       textAlign: 'center',
     },
+    accountSection: {
+      paddingHorizontal: 16,
+      paddingTop: 24,
+      paddingBottom: 8,
+    },
+    accountButtons: {
+      gap: 12,
+    },
+    logoutButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+      backgroundColor: colors.error,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 12,
+      borderBottomWidth: 4,
+      borderBottomColor: colors.errorDark,
+    },
+    logoutButtonText: {
+      color: colors.textOnPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    deleteAccountButton: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: 8,
+      backgroundColor: colors.error,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 12,
+      borderBottomWidth: 4,
+      borderBottomColor: colors.errorDark,
+      opacity: 0.8,
+    },
+    deleteAccountButtonText: {
+      color: colors.textOnPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    modalContent: {
+      alignItems: 'center',
+      paddingVertical: 20,
+    },
+    modalEmojiContainer: {
+      marginBottom: 16,
+    },
+    modalEmoji: {
+      fontSize: 64,
+    },
+    modalTitle: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      textAlign: 'center',
+      marginBottom: 12,
+    },
+    modalMessage: {
+      fontSize: 16,
+      color: colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: 24,
+      lineHeight: 22,
+    },
+    modalButtons: {
+      flexDirection: 'row',
+      gap: 12,
+      width: '100%',
+    },
+    modalButton: {
+      flex: 1,
+      paddingVertical: 14,
+      paddingHorizontal: 24,
+      borderRadius: 12,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderBottomWidth: 4,
+    },
+    modalButtonCancel: {
+      backgroundColor: colors.surface,
+      borderBottomColor: colors.border,
+    },
+    modalButtonConfirm: {
+      backgroundColor: colors.error,
+      borderBottomColor: colors.errorDark,
+    },
+    modalButtonDelete: {
+      backgroundColor: colors.error,
+      borderBottomColor: colors.errorDark,
+    },
+    modalButtonCancelText: {
+      color: colors.textPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    modalButtonConfirmText: {
+      color: colors.textOnPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
+    modalButtonDeleteText: {
+      color: colors.textOnPrimary,
+      fontSize: 16,
+      fontWeight: 'bold',
+    },
   }), [themeVersion]);
 
   return (
@@ -468,6 +685,29 @@ export default function SettingsScreen() {
           </View>
         ))}
 
+        {/* Account Actions - Only show if authenticated */}
+        {isAuthenticated && (
+          <View style={styles.accountSection}>
+            <View style={styles.accountButtons}>
+              <Pressable
+                style={styles.logoutButton}
+                onPress={handleLogout}
+              >
+                <SignOut size={20} color={colors.textOnPrimary} weight="fill" />
+                <Text style={styles.logoutButtonText}>Çıkış Yap</Text>
+              </Pressable>
+
+              <Pressable
+                style={styles.deleteAccountButton}
+                onPress={handleDeleteAccount}
+              >
+                <Trash size={20} color={colors.textOnPrimary} weight="fill" />
+                <Text style={styles.deleteAccountButtonText}>Hesabımı Sil</Text>
+              </Pressable>
+            </View>
+          </View>
+        )}
+
         {/* App Version */}
         <View style={styles.versionContainer}>
           <Text style={styles.versionText}>
@@ -478,6 +718,112 @@ export default function SettingsScreen() {
         {/* Bottom Spacing */}
         <View style={{ height: 40 }} />
       </ScrollView>
+
+      {/* Logout Confirmation Modal */}
+      <Modal
+        visible={showLogoutModal}
+        onClose={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          setShowLogoutModal(false);
+        }}
+        showCloseButton={false}
+        transparent
+      >
+        <Animated.View 
+          style={[
+            styles.modalContent,
+            {
+              opacity: logoutFadeAnim,
+              transform: [{ scale: logoutScaleAnim }],
+            },
+          ]}
+        >
+          <Animated.View
+            style={[
+              styles.modalEmojiContainer,
+              {
+                transform: [{ scale: logoutScaleAnim }],
+              },
+            ]}
+          >
+            <Text style={styles.modalEmoji}>🚪</Text>
+          </Animated.View>
+          <Text style={styles.modalTitle}>Çıkış Yap</Text>
+          <Text style={styles.modalMessage}>
+            Hesabınızdan çıkmak istediğinize emin misiniz?
+          </Text>
+          <View style={styles.modalButtons}>
+            <Pressable
+              style={[styles.modalButton, styles.modalButtonCancel]}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setShowLogoutModal(false);
+              }}
+            >
+              <Text style={styles.modalButtonCancelText}>İptal</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.modalButton, styles.modalButtonConfirm]}
+              onPress={confirmLogout}
+            >
+              <Text style={styles.modalButtonConfirmText}>Çıkış Yap</Text>
+            </Pressable>
+          </View>
+        </Animated.View>
+      </Modal>
+
+      {/* Delete Account Confirmation Modal */}
+      <Modal
+        visible={showDeleteAccountModal}
+        onClose={() => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          setShowDeleteAccountModal(false);
+        }}
+        showCloseButton={false}
+        transparent
+      >
+        <Animated.View 
+          style={[
+            styles.modalContent,
+            {
+              opacity: deleteFadeAnim,
+              transform: [{ scale: deleteScaleAnim }],
+            },
+          ]}
+        >
+          <Animated.View
+            style={[
+              styles.modalEmojiContainer,
+              {
+                transform: [{ scale: deleteScaleAnim }],
+              },
+            ]}
+          >
+            <Text style={styles.modalEmoji}>⚠️</Text>
+          </Animated.View>
+          <Text style={styles.modalTitle}>Hesabı Sil</Text>
+          <Text style={styles.modalMessage}>
+            Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.
+          </Text>
+          <View style={styles.modalButtons}>
+            <Pressable
+              style={[styles.modalButton, styles.modalButtonCancel]}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                setShowDeleteAccountModal(false);
+              }}
+            >
+              <Text style={styles.modalButtonCancelText}>İptal</Text>
+            </Pressable>
+            <Pressable
+              style={[styles.modalButton, styles.modalButtonDelete]}
+              onPress={confirmDeleteAccount}
+            >
+              <Text style={styles.modalButtonDeleteText}>Sil</Text>
+            </Pressable>
+          </View>
+        </Animated.View>
+      </Modal>
     </View>
   );
 }

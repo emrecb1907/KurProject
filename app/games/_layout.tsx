@@ -13,15 +13,47 @@ export default function GamesLayout() {
       }}
     >
       <Stack.Screen name="letters/index" />
-      <Stack.Screen name="letters/[id]" />
+      <Stack.Screen
+        name="letters/[id]"
+        options={{
+          gestureEnabled: false,
+          fullScreenGestureEnabled: false,
+          animation: 'fade',
+          headerLeft: () => null,
+        }}
+      />
 
       <Stack.Screen name="vocabulary/index" />
-      <Stack.Screen name="vocabulary/[id]" />
+      <Stack.Screen
+        name="vocabulary/[id]"
+        options={{
+          gestureEnabled: false,
+          fullScreenGestureEnabled: false,
+          animation: 'fade',
+          headerLeft: () => null,
+        }}
+      />
 
       <Stack.Screen name="verses/index" />
-      <Stack.Screen name="verses/[id]" />
+      <Stack.Screen
+        name="verses/[id]"
+        options={{
+          gestureEnabled: false,
+          fullScreenGestureEnabled: false,
+          animation: 'fade',
+          headerLeft: () => null,
+        }}
+      />
 
-      <Stack.Screen name="quiz/[id]" />
+      <Stack.Screen
+        name="quiz/[id]"
+        options={{
+          gestureEnabled: false,
+          fullScreenGestureEnabled: false,
+          animation: 'fade',
+          headerLeft: () => null,
+        }}
+      />
 
       {/* Quick Quiz - Coming Soon */}
       {/* <Stack.Screen name="quick-quiz/index" /> */}

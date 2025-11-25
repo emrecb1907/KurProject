@@ -24,7 +24,7 @@ import {
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
-import { useAuthHook, useUserStats } from '@hooks';
+import { useUserStats } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
@@ -35,7 +35,6 @@ export default function ProfileScreen() {
   // Get user data from Zustand store (UI state)
   const { totalXP, streak, setStreak, setUserStats } = useUser();
   const { isAuthenticated, user } = useAuth();
-  const { signOut } = useAuthHook();
   const { themeVersion } = useTheme();
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
@@ -320,20 +319,6 @@ export default function ProfileScreen() {
       fontSize: 16,
       fontWeight: 'bold',
     },
-    logoutButton: {
-      backgroundColor: colors.error,
-      paddingVertical: 14,
-      paddingHorizontal: 24,
-      borderRadius: 12,
-      alignItems: 'center',
-      borderBottomWidth: 4,
-      borderBottomColor: colors.errorDark,
-    },
-    logoutButtonText: {
-      color: colors.textOnPrimary,
-      fontSize: 16,
-      fontWeight: 'bold',
-    },
     actionButtonsContainer: {
       flexDirection: 'row',
       gap: 12,
@@ -358,11 +343,6 @@ export default function ProfileScreen() {
       color: colors.backgroundDarker,
       fontSize: 15,
       fontWeight: 'bold',
-    },
-    logoutButtonContainer: {
-      paddingHorizontal: 16,
-      paddingTop: 12,
-      paddingBottom: 8,
     },
   }), [themeVersion]); // Re-create styles when theme changes
 
@@ -415,21 +395,6 @@ export default function ProfileScreen() {
           </Pressable>
         </View>
 
-        {/* Logout Button - Only show if authenticated */}
-        {isAuthenticated && (
-          <View style={styles.logoutButtonContainer}>
-            <Pressable
-              style={styles.logoutButton}
-              onPress={async () => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                await signOut();
-                router.replace('/(auth)/login');
-              }}
-            >
-              <Text style={styles.logoutButtonText}>{t('profile.logout')}</Text>
-            </Pressable>
-          </View>
-        )}
 
         {/* Stats Grid */}
         <View style={styles.statsContainer}>

@@ -45,6 +45,8 @@
     },
     "home": {
         "welcome": "Hoş Geldin",
+        "general": "Genel",
+        "lessons": "Dersler",
         "tests": "Testler",
         "level": "Seviye",
         "locked": "Kilitli",
@@ -277,6 +279,15 @@
     "errors": {
         "insufficientLives": "Yetersiz Can",
         "insufficientLivesDesc": "Bu testi başlatmak için en az 1 canın olmalı. Sandık sekmesinden can kazanabilirsin.",
-        "authRequired": "Giriş Gerekli"
+        "authRequired": "Giriş Gerekli",
+        "tryAgainLater": "Lütfen daha sonra tekrar deneyin"
+    },
+    "lessons": {
+        "islamicHistory": {
+            "title": "İslam Tarihi",
+            "completeLesson": "Dersi Tamamla",
+            "summary": "Özet",
+            "lessonSummary": "Ders Özeti"
+        }
     }
 }

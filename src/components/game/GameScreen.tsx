@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert, ActivityIndicator, Modal } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useNavigation } from 'expo-router';
+import { BackHandler } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from 'react-native-reanimated';
 import { QuestionCard } from './QuestionCard';
 import { OptionButton } from './OptionButton';
@@ -44,6 +45,25 @@ export function GameScreen({
     const { totalXP } = useUser();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
+    const navigation = useNavigation();
+
+    // Disable gestures and hardware back button
+    useEffect(() => {
+        // Disable swipe back gesture (iOS/Android)
+        navigation.setOptions({
+            gestureEnabled: false,
+            // Also disable the header back button just in case (though we hide header)
+            headerLeft: () => null,
+        });
+
+        // Disable hardware back button (Android)
+        const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
+            // Return true to prevent default behavior (exit)
+            return true;
+        });
+
+        return () => backHandler.remove();
+    }, [navigation]);
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -53,7 +73,7 @@ export function GameScreen({
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
     const soundRef = useRef<Audio.Sound | null>(null);
-    
+
     // XP bar animation
     const animatedXPWidth = useSharedValue(0);
     const [xpBarInitialized, setXpBarInitialized] = useState(false);
@@ -299,14 +319,14 @@ export function GameScreen({
             setDisplayedLevel(currentXPProgress.currentLevel);
             setDisplayedXP(currentXPProgress.currentLevelXP);
             setDisplayedRequiredXP(currentXPProgress.requiredXP);
-            
+
             // Store values for animation callbacks
             const newLevel = newXPProgress.currentLevel;
             const newXP = newXPProgress.currentLevelXP;
             const newRequired = newXPProgress.requiredXP;
             const newProgress = newXPProgress.progressPercentage;
             const isLeveledUp = leveledUp;
-            
+
             // Start animation after a small delay
             const timer = setTimeout(() => {
                 if (isLeveledUp) {
@@ -319,7 +339,7 @@ export function GameScreen({
                         if (finished) {
                             // Update displayed values to new level
                             runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
-                            
+
                             // Stage 2: Reset to 0% and fill new level
                             animatedXPWidth.value = 0;
                             animatedXPWidth.value = withTiming(newProgress, {
@@ -342,10 +362,10 @@ export function GameScreen({
                     runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
                 }
             }, 100);
-            
+
             return () => clearTimeout(timer);
         }
-        
+
         // Reset when game is not complete
         if (!isGameComplete) {
             setXpBarInitialized(false);
@@ -405,10 +425,10 @@ export function GameScreen({
                         disabled={isSubmitting}
                     >
                         {isSubmitting && (
-                            <ActivityIndicator 
-                                size="small" 
-                                color={colors.textOnPrimary} 
-                                style={{ marginRight: 8 }} 
+                            <ActivityIndicator
+                                size="small"
+                                color={colors.textOnPrimary}
+                                style={{ marginRight: 8 }}
                             />
                         )}
                         <Text style={styles.completeButtonText}>
@@ -444,14 +464,14 @@ export function GameScreen({
                         animationType="fade"
                         onRequestClose={() => setShowLevelUpModal(false)}
                     >
-                        <Pressable 
+                        <Pressable
                             style={styles.modalOverlay}
                             onPress={() => {
                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                                 setShowLevelUpModal(false);
                             }}
                         >
-                            <Pressable 
+                            <Pressable
                                 style={styles.levelUpModal}
                                 onPress={(e) => e.stopPropagation()}
                             >
@@ -534,7 +554,24 @@ export function GameScreen({
             {/* Next Button Footer */}
             {isAnswered && (
                 <View style={styles.footer}>
-                    <Pressable style={styles.nextButton} onPress={handleNext}>
+                    {isCorrect ? (
+                        <>
+                            <Text style={styles.footerTitle}>Tebrikler!</Text>
+                            <Text style={styles.footerMessage}>Bravo, böyle devam et!</Text>
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.footerTitle}>Yanlış Cevap</Text>
+                            <Text style={styles.footerMessage}>Bir sonraki soruya geçelim!</Text>
+                        </>
+                    )}
+                    <Pressable 
+                        style={[
+                            styles.nextButton,
+                            !isCorrect && styles.nextButtonError
+                        ]} 
+                        onPress={handleNext}
+                    >
                         <Text style={styles.nextButtonText}>
                             {currentQuestionIndex < questions.length - 1
                                 ? t('common.nextQuestion')
@@ -586,9 +623,25 @@ const getStyles = () =>
             left: 0,
             right: 0,
             padding: 16,
+            paddingTop: 40,
             backgroundColor: colors.background,
             borderTopWidth: 1,
             borderTopColor: colors.border,
+        },
+        footerTitle: {
+            fontSize: 18,
+            fontWeight: 'bold',
+            color: colors.textPrimary,
+            textAlign: 'center',
+            marginBottom: 4,
+            marginTop: -28,
+        },
+        footerMessage: {
+            fontSize: 16,
+            fontWeight: '600',
+            color: colors.textPrimary,
+            textAlign: 'center',
+            marginBottom: 12,
         },
         nextButton: {
             backgroundColor: colors.success,
@@ -598,6 +651,10 @@ const getStyles = () =>
             borderBottomWidth: 4,
             borderBottomColor: colors.successDark,
             marginHorizontal: 20,
+        },
+        nextButtonError: {
+            backgroundColor: colors.error,
+            borderBottomColor: colors.errorDark,
         },
         nextButtonText: {
             color: colors.textOnPrimary,

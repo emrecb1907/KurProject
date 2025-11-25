@@ -36,13 +36,37 @@ export const COMBINED_HAREKE_LETTERS: CombinedHarekeLetter[] = [
     { id: 25, name: 'Nun', forms: { ustun: 'نَ', esre: 'نِ', otre: 'نُ' } },
     { id: 26, name: 'Vav', forms: { ustun: 'وَ', esre: 'وِ', otre: 'وُ' } },
     { id: 27, name: 'He', forms: { ustun: 'هَ', esre: 'هِ', otre: 'هُ' } },
-    { id: 28, name: 'Lam Elif', forms: { ustun: 'لاَ', esre: 'لاِ', otre: 'لاُ' } },
-    { id: 29, name: 'Ye', forms: { ustun: 'يَ', esre: 'يِ', otre: 'يُ' } },
+    { id: 28, name: 'Ye', forms: { ustun: 'يَ', esre: 'يِ', otre: 'يُ' } },
 ];
 
-// Audio files for harekeler - placeholder for now
-// You can add audio files later in assets/audio/letters/Harekeler/
+// Audio files for harekeler
 export const HAREKE_AUDIO_FILES: { [key: number]: any } = {
-    // Audio files can be added here when available
-    // Example: 1: require('../../assets/audio/letters/Harekeler/1.mp3'),
+    1: require('../../assets/audio/letters/Harekeler/1-1.mp3'),
+    2: require('../../assets/audio/letters/Harekeler/2-1.mp3'),
+    3: require('../../assets/audio/letters/Harekeler/3-1.mp3'),
+    4: require('../../assets/audio/letters/Harekeler/4-1.mp3'),
+    5: require('../../assets/audio/letters/Harekeler/5-1.mp3'),
+    6: require('../../assets/audio/letters/Harekeler/6-1.mp3'),
+    7: require('../../assets/audio/letters/Harekeler/7-1.mp3'),
+    8: require('../../assets/audio/letters/Harekeler/8-1.mp3'),
+    9: require('../../assets/audio/letters/Harekeler/9-1.mp3'),
+    10: require('../../assets/audio/letters/Harekeler/10-1.mp3'),
+    11: require('../../assets/audio/letters/Harekeler/11-1.mp3'),
+    12: require('../../assets/audio/letters/Harekeler/12-1.mp3'),
+    13: require('../../assets/audio/letters/Harekeler/13-1.mp3'),
+    14: require('../../assets/audio/letters/Harekeler/14-1.mp3'),
+    15: require('../../assets/audio/letters/Harekeler/15-1.mp3'),
+    16: require('../../assets/audio/letters/Harekeler/16-1.mp3'),
+    17: require('../../assets/audio/letters/Harekeler/17-1.mp3'),
+    18: require('../../assets/audio/letters/Harekeler/18-1.mp3'),
+    19: require('../../assets/audio/letters/Harekeler/19-1.mp3'),
+    20: require('../../assets/audio/letters/Harekeler/20-1.mp3'),
+    21: require('../../assets/audio/letters/Harekeler/21-1.mp3'),
+    22: require('../../assets/audio/letters/Harekeler/22-1.mp3'),
+    23: require('../../assets/audio/letters/Harekeler/23-1.mp3'),
+    24: require('../../assets/audio/letters/Harekeler/24-1.mp3'),
+    25: require('../../assets/audio/letters/Harekeler/25-1.mp3'),
+    26: require('../../assets/audio/letters/Harekeler/26-1.mp3'),
+    27: require('../../assets/audio/letters/Harekeler/27-1.mp3'),
+    28: require('../../assets/audio/letters/Harekeler/28-1.mp3'),
 };

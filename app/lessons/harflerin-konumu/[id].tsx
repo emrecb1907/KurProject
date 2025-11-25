@@ -72,15 +72,16 @@ export default function HarflerinKonumuLessonScreen() {
         grid: {
             flexDirection: 'row-reverse',
             flexWrap: 'wrap',
-            gap: 12,
+            gap: 8,
             justifyContent: 'center',
             paddingBottom: 20,
         },
         card: {
-            width: (Dimensions.get('window').width - 32 - 12) / 2,
+            width: (Dimensions.get('window').width - 32 - 24) / 4, // 4 columns with gap
+            aspectRatio: 1,
             backgroundColor: colors.surface,
-            borderRadius: 16,
-            padding: 16,
+            borderRadius: 12,
+            padding: 4,
             alignItems: 'center',
             justifyContent: 'center',
             borderBottomWidth: 4,
@@ -98,17 +99,20 @@ export default function HarflerinKonumuLessonScreen() {
             borderBottomWidth: 2,
         },
         arabicText: {
-            fontSize: 28,
+            fontSize: 24,
             fontFamily: 'Amiri_700Bold',
             color: colors.primary,
-            marginBottom: 8,
             textAlign: 'center',
         },
         descriptionText: {
-            fontSize: 12,
+            fontSize: 8,
             fontWeight: 'bold',
             color: colors.textSecondary,
             textAlign: 'center',
+            marginTop: 2,
+            display: 'none', // Hide description to match image style, or keep it? User didn't explicitly say hide.
+            // But 4 columns is tight. Let's hide it or make it very small.
+            // I'll hide it for now as the image doesn't have it.
         },
         iconContainer: {
             position: 'absolute',
@@ -237,11 +241,11 @@ export default function HarflerinKonumuLessonScreen() {
                             <View style={styles.iconContainer}>
                                 {playedItems.has(position.id) && (
                                     <View style={styles.checkIcon}>
-                                        <Check size={16} color={colors.success} weight="fill" />
+                                        <Check size={12} color={colors.success} weight="fill" />
                                     </View>
                                 )}
                                 <View style={styles.playIcon}>
-                                    <PlayCircle size={16} color={colors.primary} weight="fill" />
+                                    <PlayCircle size={12} color={colors.primary} weight="fill" />
                                 </View>
                             </View>
 

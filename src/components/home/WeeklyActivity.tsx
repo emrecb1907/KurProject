@@ -109,16 +109,18 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
     const getDayName = useCallback((date: Date) => {
         const dayIndex = date.getDay(); // 0 = Sunday, 1 = Monday
         const mapIndex = dayIndex === 0 ? 6 : dayIndex - 1;
-        return dayNames[mapIndex];
+        // Safety check to prevent array index out of bounds
+        if (mapIndex < 0 || mapIndex >= dayNames.length) {
+            console.warn('⚠️ Invalid day index:', mapIndex, 'dayIndex:', dayIndex);
+            return dayNames[0] || ''; // Fallback to first day or empty string
+        }
+        return dayNames[mapIndex] || '';
     }, [dayNames]);
 
     const getEmptyWeek = useCallback((): DayActivity[] => {
         const now = new Date();
-        // Default to Monday start if no data
-        const dayOfWeek = now.getDay();
-        const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+        // Start from today if no data
         const startDate = new Date(now);
-        startDate.setDate(now.getDate() + mondayOffset);
         startDate.setHours(0, 0, 0, 0);
 
         return Array.from({ length: 7 }).map((_, index) => {
@@ -177,10 +179,8 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                 const daysToGoBack = Math.min(currentStreak - 1, 6);
                 startDate.setDate(now.getDate() - daysToGoBack);
             } else {
-                // If no streak, default to this week's Monday
-                const dayOfWeek = now.getDay();
-                const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
-                startDate.setDate(now.getDate() + mondayOffset);
+                // If no streak, start from today
+                // startDate is already set to now, so no change needed
             }
             startDate.setHours(0, 0, 0, 0);
 

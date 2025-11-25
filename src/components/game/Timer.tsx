@@ -96,6 +96,7 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
 const getStyles = () => StyleSheet.create({
   container: {
     marginBottom: 16,
+    paddingHorizontal: 16,
   },
   timerBar: {
     height: 16,
