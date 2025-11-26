@@ -1,7 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
-import tr from './locales/tr.json';
+import tr from './locales';
 import en from './locales/en.json';
 
 // Get device language (not used yet, but ready for future)

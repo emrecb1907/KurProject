@@ -1,0 +1,22 @@
+{
+    "title": "Sandık",
+    "lives": "Can",
+    "livesMax": "Can sayın maksimumda! 🎉",
+    "nextLife": "Sonraki can:",
+    "infoBanner": "Her reklam izlediğinde +1 can kazanırsın.",
+    "howItWorks": {
+        "title": "Nasıl Çalışır?",
+        "text": "• Her reklam izlediğinde +1 can kazanırsın\n• Günde maksimum 3 reklam izleyebilirsin\n• Canların maksimuma ulaştığında reklam izleyemezsin\n• Kullanılan haklar 24 saat sonra yenilenir"
+    },
+    "adSlots": "Reklam Slotları",
+    "watchAd": "İzle",
+    "cooldown": "Bekleme Süresi",
+    "earnLife": "Can Kazan",
+    "watchAdDesc": "Reklam izle, +1 can kazan",
+    "cooldownDesc": "{{time}} sonra tekrar izleyebilirsin",
+    "alerts": {
+        "adWatched": "Reklam izlendi! +1 Can kazandın.",
+        "cantWatch": "Şu an reklam izleyemezsin."
+    }
+}
+

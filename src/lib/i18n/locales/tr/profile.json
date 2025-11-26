@@ -1,0 +1,41 @@
+{
+    "student": "Öğrenci",
+    "anonymous": "Misafir",
+    "logout": "Çıkış Yap",
+    "stats": {
+        "totalXP": "Toplam XP",
+        "streak": "Seri",
+        "successRate": "Başarı Oranı",
+        "completedTests": "Tamamlanan Testler"
+    },
+    "sections": {
+        "badges": "Rozetler",
+        "settings": "Ayarlar",
+        "achievements": "Başarılar"
+    },
+    "theme": {
+        "label": "Tema",
+        "light": "Açık",
+        "dark": "Koyu",
+        "system": "Sistem",
+        "activeTheme": "Aktif Tema",
+        "systemSettings": "Sistem Ayarları"
+    },
+    "achievements": {
+        "firstStep": {
+            "title": "İlk Adım",
+            "description": "İlk testini tamamla"
+        },
+        "streakStarter": {
+            "title": "Seri Başlangıcı",
+            "description": "7 gün üst üste çalış"
+        }
+    },
+    "loginPrompt": {
+        "title": "Giriş Yap",
+        "description": "İlerlemeni kaydetmek için giriş yap",
+        "button": "Giriş Yap"
+    },
+    "badgesHint": "Daha fazla test çözerek rozet kazan!"
+}
+

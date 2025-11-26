@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Pressable, Dimensions } from 'react-native';
-import { useEffect, useCallback, useMemo, useState } from 'react';
+import { useEffect, useCallback, useMemo, useState, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -33,34 +33,74 @@ export default function HomePage() {
   const { totalXP, currentLives, setTotalXP } = useUser();
   const { isAuthenticated, user } = useAuth();
 
+  // Track last XP update time to avoid race conditions
+  const lastXPUpdateRef = useRef<number>(0);
+  const syncTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastTotalXPRef = useRef<number>(totalXP);
+
   // 🔄 Sync XP from database for authenticated users (on focus)
   useFocusEffect(
     useCallback(() => {
       async function syncXPFromDB() {
         if (isAuthenticated && user?.id) {
           try {
-            console.log('🔄 Fetching latest XP from database...');
+            // Skip sync if we just updated XP (within last 2 seconds) to avoid race conditions
+            const timeSinceLastUpdate = Date.now() - lastXPUpdateRef.current;
+            if (timeSinceLastUpdate < 2000) {
+              return;
+            }
+
             const { data: userData } = await database.users.getById(user.id);
             if (userData) {
+              const xpDifference = Math.abs(userData.total_xp - totalXP);
+              const xpIncreased = totalXP > lastTotalXPRef.current;
+              
               if (userData.total_xp > totalXP) {
-                console.log('🔄 XP updated from DB:', totalXP, '→', userData.total_xp);
                 setTotalXP(userData.total_xp);
+                lastTotalXPRef.current = userData.total_xp;
               } else if (userData.total_xp < totalXP) {
-                console.log('⏳ Local XP is ahead of DB (pending sync):', totalXP, '>', userData.total_xp);
+                // Only sync if difference is significant (more than 100 XP) to avoid cache timing issues
+                // OR if XP didn't just increase (meaning it's a real sync issue, not cache)
+                if (xpDifference > 100 || !xpIncreased) {
+                  const { calculateLevel } = require('@constants/xp');
+                  const newLevel = calculateLevel(totalXP);
+                  const { error } = await database.users.update(user.id, {
+                    total_xp: totalXP,
+                    total_score: totalXP,
+                    current_level: newLevel,
+                  });
+                  if (error) {
+                    console.error('❌ Failed to sync local XP to DB:', error);
+                  } else {
+                    lastXPUpdateRef.current = Date.now();
+                    lastTotalXPRef.current = totalXP;
+                  }
+                }
               } else {
-                console.log('✅ XP already in sync:', userData.total_xp);
+                lastTotalXPRef.current = totalXP;
               }
             }
           } catch (error) {
             console.error('❌ Failed to sync XP from DB:', error);
           }
-        } else {
-          console.log('ℹ️ Anonymous user - using local XP:', totalXP);
         }
       }
 
-      syncXPFromDB();
+      // Clear any pending sync
+      if (syncTimeoutRef.current) {
+        clearTimeout(syncTimeoutRef.current);
+      }
 
+      // Debounce sync by 500ms to avoid rapid calls
+      syncTimeoutRef.current = setTimeout(() => {
+        syncXPFromDB();
+      }, 500);
+
+      return () => {
+        if (syncTimeoutRef.current) {
+          clearTimeout(syncTimeoutRef.current);
+        }
+      };
     }, [isAuthenticated, user?.id, totalXP])
   );
 

@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { colors } from '@constants/colors';
-import { Target, Flag, Check, Fire } from 'phosphor-react-native';
+import { Target, TreasureChest, Check, Fire } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -276,7 +276,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                                 { backgroundColor: 'transparent' }, // Keep border, transparent bg
                                 dayData.isToday && styles.todayCircle
                             ]}>
-                                <Flag
+                                <TreasureChest
                                     size={24}
                                     color={dayData.completed ? colors.success : colors.textSecondary}
                                     weight="fill"

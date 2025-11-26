@@ -36,8 +36,18 @@ export function useUserData() {
     addXP(xp);
     setCurrentLevel(newLevel);
 
-    // Update database
-    await database.users.updateXP(user.id, xp);
+    // Update database - write local XP directly to ensure sync
+    // This prevents sync issues where local XP > DB XP
+    const { error } = await database.users.update(user.id, {
+      total_xp: newTotalXP,
+      total_score: newTotalXP,
+      current_level: newLevel,
+    });
+
+    if (error) {
+      console.error('❌ Failed to update XP in database:', error);
+      // Don't throw - local state is already updated
+    }
 
     // Update leaderboard
     if (!user.is_anonymous) {

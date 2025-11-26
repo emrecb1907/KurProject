@@ -1,0 +1,65 @@
+{
+    "common": {
+        "back": "Geri",
+        "level": "Seviye",
+        "start": "Başla",
+        "verse": "Ayet",
+        "word": "Kelime",
+        "tip": "İpucu"
+    },
+    "letters": {
+        "title": "Harfleri Öğren",
+        "description": "Kuran harflerini tanımayı öğren",
+        "tests": {
+            "1": "Harf Grubu 1",
+            "2": "Harf Grubu 2",
+            "3": "Harf Grubu 3",
+            "4": "Harf Grubu 4"
+        }
+    },
+    "vocabulary": {
+        "title": "Kelime Hazinesi",
+        "description": "Yeni kelimeler öğren",
+        "tests": {
+            "1": "Temel Kelimeler",
+            "2": "Günlük Hayat",
+            "3": "İbadet"
+        },
+        "format": {
+            "title": "Oyun Formatı",
+            "text": "Kartları eşleştirerek kelimeleri öğren"
+        }
+    },
+    "verses": {
+        "title": "Ayet Ezberle",
+        "description": "Kısa sureleri ve ayetleri ezberle",
+        "tests": {
+            "1": "Fatiha Suresi",
+            "2": "İhlas Suresi",
+            "3": "Kevser Suresi"
+        },
+        "features": {
+            "title": "Özellikler",
+            "text": "Ayetleri dinle ve tekrar et"
+        }
+    },
+    "quiz": {
+        "title": "Bilgi Yarışması",
+        "description": "Bilgini test et",
+        "tests": {
+            "1": "Genel Bilgi",
+            "2": "İleri Seviye",
+            "3": "Uzman"
+        }
+    },
+    "speed": {
+        "title": "Hız Testi",
+        "description": "Hızlı düşün, hızlı cevapla",
+        "tests": {
+            "1": "Başlangıç",
+            "2": "Orta",
+            "3": "İleri"
+        }
+    }
+}
+

@@ -1,0 +1,13 @@
+{
+    "title": "Liderlik Tablosu",
+    "league": "Bronz Ligi",
+    "yourRank": "Senin Sıralaman",
+    "errors": {
+        "loadFailed": "Liderlik tablosu yüklenemedi"
+    },
+    "empty": {
+        "title": "Henüz liderlik tablosunda kimse yok",
+        "subtitle": "İlk sen ol!"
+    }
+}
+
