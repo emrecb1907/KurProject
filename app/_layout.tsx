@@ -30,9 +30,6 @@ export default function RootLayout() {
   const { checkLifeRegeneration } = useUser();
 
   useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync();
-    }
     checkLifeRegeneration();
   }, [fontsLoaded]);
 

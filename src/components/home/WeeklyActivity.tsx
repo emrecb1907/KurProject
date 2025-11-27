@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
@@ -217,17 +218,39 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         }
     }, [user?.id, getDayName, getEmptyWeek]);
 
+    const checkRewardStatus = useCallback(async () => {
+        if (!user?.id) return;
+        try {
+            const today = new Date().toISOString().split('T')[0];
+            const lastRewardDate = await AsyncStorage.getItem(`last_reward_date_${user.id}`);
+
+            if (lastRewardDate === today) {
+                setRewardClaimed(true);
+            } else {
+                // Only reset if it's a different day. 
+                // If it's the same day, we keep it true.
+                // If it's a new day, we reset to false (so they can claim if they complete a new week)
+                // But wait, if they are on day 8 (new week), the button won't be visible anyway.
+                // So this logic is safe.
+                setRewardClaimed(false);
+            }
+        } catch (e) {
+            console.error('Error checking reward status:', e);
+        }
+    }, [user?.id]);
+
     // Load data when screen comes into focus or user/auth changes
     useFocusEffect(
         useCallback(() => {
             if (isAuthenticated && user?.id) {
                 fetchWeeklyActivity();
+                checkRewardStatus();
             } else {
                 setWeekData(getEmptyWeek());
                 setTodayCompleted(false);
                 setStreak(0);
             }
-        }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek])
+        }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek, checkRewardStatus])
     );
 
 
@@ -241,6 +264,10 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             const { error } = await database.users.updateXP(user.id, REWARD_AMOUNT);
 
             if (error) throw error;
+
+            // Save claim status persistently
+            const today = new Date().toISOString().split('T')[0];
+            await AsyncStorage.setItem(`last_reward_date_${user.id}`, today);
 
             setRewardClaimed(true);
             setShowRewardModal(true); // Updated to show modal instead of Alert

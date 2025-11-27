@@ -72,15 +72,16 @@ export default function Ustun1LessonScreen() {
         grid: {
             flexDirection: 'row-reverse',
             flexWrap: 'wrap',
-            gap: 12,
+            gap: 8,
             justifyContent: 'center',
             paddingBottom: 20,
         },
         card: {
-            width: (Dimensions.get('window').width - 32 - 12) / 2,
+            width: (Dimensions.get('window').width - 32 - 8) / 2,
+            height: 120,
             backgroundColor: colors.surface,
-            borderRadius: 16,
-            padding: 16,
+            borderRadius: 12,
+            padding: 4,
             alignItems: 'center',
             justifyContent: 'center',
             borderBottomWidth: 4,
@@ -97,18 +98,12 @@ export default function Ustun1LessonScreen() {
             transform: [{ translateY: 2 }],
             borderBottomWidth: 2,
         },
-        arabicText: {
-            fontSize: 32,
-            fontFamily: 'Amiri_700Bold',
-            color: colors.primary,
-            marginBottom: 8,
-            textAlign: 'center',
-        },
-        readingText: {
-            fontSize: 14,
-            fontWeight: 'bold',
-            color: colors.textSecondary,
-            textAlign: 'center',
+        imageContainer: {
+            width: '100%',
+            height: '100%',
+            padding: 8,
+            alignItems: 'center',
+            justifyContent: 'center',
         },
         iconContainer: {
             position: 'absolute',
@@ -116,6 +111,7 @@ export default function Ustun1LessonScreen() {
             right: 6,
             flexDirection: 'row',
             gap: 4,
+            zIndex: 1,
         },
         playIcon: {
             opacity: 0.5,
@@ -237,16 +233,25 @@ export default function Ustun1LessonScreen() {
                             <View style={styles.iconContainer}>
                                 {playedItems.has(word.id) && (
                                     <View style={styles.checkIcon}>
-                                        <Check size={16} color={colors.success} weight="fill" />
+                                        <Check size={12} color={colors.success} weight="fill" />
                                     </View>
                                 )}
                                 <View style={styles.playIcon}>
-                                    <PlayCircle size={16} color={colors.primary} weight="fill" />
+                                    <PlayCircle size={12} color={colors.primary} weight="fill" />
                                 </View>
                             </View>
 
-                            <Text style={styles.arabicText}>{word.arabic}</Text>
-                            <Text style={styles.readingText}>{word.reading}</Text>
+                            <View style={styles.imageContainer}>
+                                <Image
+                                    source={word.image}
+                                    style={{
+                                        width: '100%',
+                                        height: '100%',
+                                        resizeMode: 'contain',
+                                        tintColor: colors.textPrimary,
+                                    }}
+                                />
+                            </View>
                         </Pressable>
                     ))}
                 </View>
