@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
+import { useFocusEffect } from 'expo-router';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { RewardModal } from './RewardModal';
 
 interface DayActivity {
     day: string;
@@ -21,6 +23,8 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
     const [weekData, setWeekData] = useState<DayActivity[]>([]);
     const [todayCompleted, setTodayCompleted] = useState(false);
     const [streak, setStreak] = useState(0);
+    const [rewardClaimed, setRewardClaimed] = useState(false);
+    const [showRewardModal, setShowRewardModal] = useState(false);
 
     // Dynamic styles
     const styles = useMemo(() => StyleSheet.create({
@@ -67,7 +71,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             fontSize: 11,
             fontWeight: '600',
             color: colors.textSecondary,
-            marginBottom: 6,
+            marginBottom: 16,
         },
         dayCircle: {
             width: 32,
@@ -169,23 +173,20 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             const weeklyActivity = (stats.weekly_activity as string[]) || [];
 
             // Calculate Start Date
-            const startDate = new Date(now);
-            if (currentStreak > 0) {
-                // If streak exists, start from (Today - (Streak - 1))
-                // But cap it at 6 days ago (so we show a 7-day window ending today or future)
-                // Actually, if streak is 4, we want to show [Day-3, Day-2, Day-1, Today, +3 Future]
-                // So we go back (streak - 1) days.
-                // Max go back is 6 days (to show a full week ending today).
-                const daysToGoBack = Math.min(currentStreak - 1, 6);
-                startDate.setDate(now.getDate() - daysToGoBack);
-            } else {
-                // If no streak, start from today
-                // startDate is already set to now, so no change needed
-            }
-            startDate.setHours(0, 0, 0, 0);
-
-            let isTodayDone = false;
             const todayStr = toLocalISOString(now);
+            const isTodayDone = weeklyActivity.includes(todayStr);
+
+            // Calculate effective streak position in the 7-day cycle
+            // If today is done, we are at 'currentStreak'.
+            // If today is NOT done, we are at 'currentStreak + 1' (working on the next day of streak).
+            const effectiveStreak = Math.max(1, isTodayDone ? currentStreak : currentStreak + 1);
+
+            // Calculate how many days to go back to find the start of the current 7-day cycle
+            const daysToGoBack = (effectiveStreak - 1) % 7;
+
+            const startDate = new Date(now);
+            startDate.setDate(now.getDate() - daysToGoBack);
+            startDate.setHours(0, 0, 0, 0);
 
             const weekActivity: DayActivity[] = Array.from({ length: 7 }).map((_, index) => {
                 const dayDate = new Date(startDate);
@@ -198,9 +199,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                 // Check if user has activity on this day
                 const activeOnDay = weeklyActivity.includes(dateString);
 
-                if (isToday && activeOnDay) {
-                    isTodayDone = true;
-                }
+                // isTodayDone is already calculated
 
                 return {
                     day: getDayName(dayDate),
@@ -218,30 +217,38 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         }
     }, [user?.id, getDayName, getEmptyWeek]);
 
-    // Track if component has mounted to prevent unnecessary re-fetches on category changes
-    const mountedRef = useRef(false);
-
-    // Load data only on mount and when user/auth changes
-    useEffect(() => {
-        if (isAuthenticated && user?.id) {
-            if (!mountedRef.current) {
+    // Load data when screen comes into focus or user/auth changes
+    useFocusEffect(
+        useCallback(() => {
+            if (isAuthenticated && user?.id) {
                 fetchWeeklyActivity();
-                mountedRef.current = true;
+            } else {
+                setWeekData(getEmptyWeek());
+                setTodayCompleted(false);
+                setStreak(0);
             }
-        } else {
-            setWeekData(getEmptyWeek());
-            setTodayCompleted(false);
-            setStreak(0);
-            mountedRef.current = false;
-        }
-    }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek]);
+        }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek])
+    );
 
-    // Refresh data when language changes (but only if already mounted)
-    useEffect(() => {
-        if (isAuthenticated && user?.id && mountedRef.current) {
-            fetchWeeklyActivity();
+
+
+    const handleClaimReward = async () => {
+        if (!user?.id || rewardClaimed) return;
+
+        try {
+            // Give 1000 XP reward
+            const REWARD_AMOUNT = 1000; // Updated REWARD_AMOUNT
+            const { error } = await database.users.updateXP(user.id, REWARD_AMOUNT);
+
+            if (error) throw error;
+
+            setRewardClaimed(true);
+            setShowRewardModal(true); // Updated to show modal instead of Alert
+        } catch (error) {
+            console.error('Error claiming reward:', error);
+            Alert.alert("Hata", "Ödül alınırken bir sorun oluştu.");
         }
-    }, [dayNames, isAuthenticated, user?.id, fetchWeeklyActivity]);
+    };
 
     const getDayBackgroundColor = (dayData: DayActivity) => {
         if (dayData.isFuture) return colors.backgroundLighter;
@@ -271,17 +278,40 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                     <View key={index} style={styles.dayContainer}>
                         <Text style={styles.dayLabel}>{dayData.day}</Text>
                         {index === 6 ? (
-                            <View style={[
-                                styles.dayCircle,
-                                { backgroundColor: 'transparent' }, // Keep border, transparent bg
-                                dayData.isToday && styles.todayCircle
-                            ]}>
+                            <TouchableOpacity
+                                activeOpacity={0.7}
+                                onPress={handleClaimReward}
+                                disabled={!dayData.completed || rewardClaimed}
+                                style={[
+                                    styles.dayCircle,
+                                    { backgroundColor: 'transparent' }, // Keep border, transparent bg
+                                    dayData.isToday && styles.todayCircle,
+                                    dayData.completed && {
+                                        width: 48,
+                                        height: 48,
+                                        borderRadius: 24,
+                                        borderWidth: 3,
+                                        borderColor: colors.warning, // Gold border
+                                        backgroundColor: colors.secondary, // Blue background
+                                        marginTop: -8,
+                                        shadowColor: colors.warning,
+                                        shadowOffset: { width: 0, height: 4 },
+                                        shadowOpacity: 0.3,
+                                        shadowRadius: 8,
+                                        elevation: 8,
+                                    },
+                                    rewardClaimed && {
+                                        opacity: 0.5, // Dim if already claimed
+                                        backgroundColor: colors.surfaceLight
+                                    }
+                                ]}
+                            >
                                 <TreasureChest
-                                    size={24}
-                                    color={dayData.completed ? colors.success : colors.textSecondary}
+                                    size={dayData.completed ? 32 : 24}
+                                    color={dayData.completed ? colors.warning : colors.textSecondary}
                                     weight="fill"
                                 />
-                            </View>
+                            </TouchableOpacity>
                         ) : (
                             <View
                                 style={[
@@ -311,6 +341,12 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                         : t('weeklyActivity.todayNotCompleted')}
                 </Text>
             </View>
+
+            <RewardModal
+                visible={showRewardModal}
+                onClose={() => setShowRewardModal(false)}
+                xpAmount={1000}
+            />
         </View>
     );
 });

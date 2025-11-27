@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Dimensions, Image } from 'react-native';
 import { useMemo, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -77,8 +77,8 @@ export default function HarflerinKonumuLessonScreen() {
             paddingBottom: 20,
         },
         card: {
-            width: (Dimensions.get('window').width - 32 - 24) / 4, // 4 columns with gap
-            aspectRatio: 1,
+            width: (Dimensions.get('window').width - 32 - 8) / 2,
+            height: 120,
             backgroundColor: colors.surface,
             borderRadius: 12,
             padding: 4,
@@ -98,21 +98,12 @@ export default function HarflerinKonumuLessonScreen() {
             transform: [{ translateY: 2 }],
             borderBottomWidth: 2,
         },
-        arabicText: {
-            fontSize: 24,
-            fontFamily: 'Amiri_700Bold',
-            color: colors.primary,
-            textAlign: 'center',
-        },
-        descriptionText: {
-            fontSize: 8,
-            fontWeight: 'bold',
-            color: colors.textSecondary,
-            textAlign: 'center',
-            marginTop: 2,
-            display: 'none', // Hide description to match image style, or keep it? User didn't explicitly say hide.
-            // But 4 columns is tight. Let's hide it or make it very small.
-            // I'll hide it for now as the image doesn't have it.
+        imageContainer: {
+            width: '100%',
+            height: '100%',
+            padding: 8,
+            alignItems: 'center',
+            justifyContent: 'center',
         },
         iconContainer: {
             position: 'absolute',
@@ -193,7 +184,7 @@ export default function HarflerinKonumuLessonScreen() {
                     }
                 });
             } else {
-                console.log(`No audio file for position ${position.id} (${position.description})`);
+                console.log(`No audio file for position ${position.id}`);
             }
 
             // Mark as played even if no audio
@@ -229,30 +220,49 @@ export default function HarflerinKonumuLessonScreen() {
 
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.grid}>
-                    {LETTER_POSITIONS.map((position) => (
-                        <Pressable
-                            key={position.id}
-                            style={({ pressed }) => [
-                                styles.card,
-                                pressed && styles.cardPressed
-                            ]}
-                            onPress={() => handlePress(position)}
-                        >
-                            <View style={styles.iconContainer}>
-                                {playedItems.has(position.id) && (
-                                    <View style={styles.checkIcon}>
-                                        <Check size={12} color={colors.success} weight="fill" />
-                                    </View>
-                                )}
-                                <View style={styles.playIcon}>
-                                    <PlayCircle size={12} color={colors.primary} weight="fill" />
-                                </View>
-                            </View>
+                    {LETTER_POSITIONS.map((position) => {
+                        // Handle potential ES module export from require
+                        const SvgImage = position.image?.default || position.image;
 
-                            <Text style={styles.arabicText}>{position.arabic}</Text>
-                            <Text style={styles.descriptionText}>{position.description}</Text>
-                        </Pressable>
-                    ))}
+                        if (!SvgImage) return null;
+
+                        return (
+                            <Pressable
+                                key={position.id}
+                                style={({ pressed }) => [
+                                    styles.card,
+                                    pressed && styles.cardPressed
+                                ]}
+                                onPress={() => handlePress(position)}
+                            >
+                                <View style={styles.iconContainer}>
+                                    {playedItems.has(position.id) && (
+                                        <View style={styles.checkIcon}>
+                                            <Check size={12} color={colors.success} weight="fill" />
+                                        </View>
+                                    )}
+                                    <View style={styles.playIcon}>
+                                        <PlayCircle size={12} color={colors.primary} weight="fill" />
+                                    </View>
+                                </View>
+
+                                <View style={[
+                                    styles.imageContainer,
+                                    position.scale ? { transform: [{ scale: position.scale }] } : undefined
+                                ]}>
+                                    <Image
+                                        source={position.image}
+                                        style={{
+                                            width: '100%',
+                                            height: '100%',
+                                            resizeMode: 'contain',
+                                            tintColor: colors.textPrimary,
+                                        }}
+                                    />
+                                </View>
+                            </Pressable>
+                        );
+                    })}
                 </View>
 
                 <Pressable
