@@ -2,7 +2,7 @@ import { Stack } from 'expo-router';
 import { useEffect } from 'react';
 import { useFonts, Amiri_400Regular, Amiri_700Bold } from '@expo-google-fonts/amiri';
 import * as SplashScreen from 'expo-splash-screen';
-import { LogBox } from 'react-native';
+import { LogBox, useColorScheme } from 'react-native';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
@@ -22,6 +22,7 @@ LogBox.ignoreLogs([
 ]);
 
 export default function RootLayout() {
+  const colorScheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Amiri_400Regular,
     Amiri_700Bold,
@@ -31,6 +32,14 @@ export default function RootLayout() {
 
   useEffect(() => {
     checkLifeRegeneration();
+  }, [fontsLoaded]);
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      // Hide Expo's splash screen as soon as fonts are loaded
+      // Our custom splash will be shown in index.tsx
+      SplashScreen.hideAsync();
+    }
   }, [fontsLoaded]);
 
   if (!fontsLoaded) {

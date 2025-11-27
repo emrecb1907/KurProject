@@ -8,9 +8,9 @@
     "userInterfaceStyle": "automatic",
     "scheme": "quranlearn",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-removebg.png",
       "resizeMode": "contain",
-      "backgroundColor": "#007AFF"
+      "backgroundColor": "#F5F5F0"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#007AFF"
+        "backgroundColor": "#F5F5F0"
       },
       "package": "com.quranlearn.app"
     },

@@ -54,7 +54,7 @@ export default function HomePage() {
             if (userData) {
               const xpDifference = Math.abs(userData.total_xp - totalXP);
               const xpIncreased = totalXP > lastTotalXPRef.current;
-              
+
               if (userData.total_xp > totalXP) {
                 setTotalXP(userData.total_xp);
                 lastTotalXPRef.current = userData.total_xp;
@@ -209,7 +209,7 @@ export default function HomePage() {
       justifyContent: 'center',
     },
     categoryButtonActive: {
-      backgroundColor: colors.success,
+      backgroundColor: colors.primary,
     },
     categoryButtonInactive: {
       backgroundColor: colors.surface,
@@ -228,7 +228,7 @@ export default function HomePage() {
     },
     contentWrapper: {
       flex: 1,
-      backgroundColor: colors.background,
+      backgroundColor: colors.backgroundDarker,
     },
   }), [themeVersion]);
 

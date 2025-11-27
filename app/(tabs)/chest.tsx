@@ -125,9 +125,9 @@ export default function ChestScreen() {
         <View style={{ width: 40 }} />
       </View>
 
-      <ScrollView 
+      <ScrollView
         ref={scrollViewRef}
-        style={styles.content} 
+        style={styles.content}
         contentContainerStyle={styles.scrollContent}
       >
         {/* Lives Status */}
@@ -217,7 +217,7 @@ export default function ChestScreen() {
 const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundDarker,
   },
   header: {
     flexDirection: 'row',

@@ -299,7 +299,7 @@ export default function LeaderboardScreen() {
 const getStyles = () => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background,
+    backgroundColor: colors.backgroundDarker,
   },
   header: {
     paddingTop: 60,
