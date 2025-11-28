@@ -30,8 +30,13 @@ export default function HomePage() {
     const { themeVersion } = useTheme();
 
     // Get user data from Zustand store
-    const { totalXP, currentLives, setTotalXP } = useUser();
+    const { totalXP, currentLives, setTotalXP, checkDailyReset } = useUser();
     const { isAuthenticated, user } = useAuth();
+
+    // Check daily reset on mount
+    useEffect(() => {
+        checkDailyReset();
+    }, [checkDailyReset]);
 
     // Track last XP update time to avoid race conditions
     const lastXPUpdateRef = useRef<number>(0);
@@ -152,6 +157,17 @@ export default function HomePage() {
     const handleCategoryChange = (category: 'genel' | 'dersler' | 'testler') => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         setSelectedCategory(category);
+        
+        // Reset scroll position for the newly selected tab
+        setTimeout(() => {
+            if (category === 'genel') {
+                genelTabRef.current?.scrollToTop();
+            } else if (category === 'dersler') {
+                derslerTabRef.current?.scrollToTop();
+            } else if (category === 'testler') {
+                testlerTabRef.current?.scrollToTop();
+            }
+        }, 0);
     };
 
     const styles = useMemo(() => StyleSheet.create({

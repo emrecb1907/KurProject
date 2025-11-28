@@ -8,6 +8,7 @@ import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Audio } from 'expo-av';
 import { LETTER_POSITIONS, LETTER_POSITION_AUDIO_FILES, type LetterPosition } from '@/data/letterPositions';
+import { useUser } from '@/store';
 
 // Configure audio mode once
 Audio.setAudioModeAsync({
@@ -19,6 +20,7 @@ Audio.setAudioModeAsync({
 export default function HarflerinKonumuLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
+    const { incrementDailyLessons } = useUser();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -200,6 +202,7 @@ export default function HarflerinKonumuLessonScreen() {
         if (!allItemsPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        incrementDailyLessons();
         router.push('/(tabs)');
     };
 

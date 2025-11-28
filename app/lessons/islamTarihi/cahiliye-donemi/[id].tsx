@@ -1,0 +1,97 @@
+import { useLocalSearchParams } from 'expo-router';
+import IslamicHistoryLesson, { LessonContent } from '@/components/lessons/IslamicHistoryLesson';
+
+const islamicHistoryContent: Record<string, LessonContent> = {
+  '1': {
+    title: 'Cahiliye dönemi',
+    content: [
+      {
+        section: '1. Dönemin Genel Tanımı',
+        text: [
+          '"Cahiliye" kelimesi İslam kaynaklarında, İslam öncesi Arap toplumunun sosyal ve inanç yapısını tanımlamak için kullanılan bir dönem adıdır.',
+          'Bu ifade, bir toplumu küçültmek için değil, İslam\'ın gelişinden önceki kültürel yapıyı tarif etmek için kullanılan tarihsel bir kavramdır.',
+          'Arap Yarımadası bu dönemde farklı kabilelerden oluşuyordu ve bu kabilelerin her biri kendi yönetişim yapısına sahipti.',
+        ],
+      },
+      {
+        section: '2. Toplumsal Yapı: Kabile Düzeni',
+        text: [
+          'Arap toplumunda kabileler, bireyin güvenlik ve kimlik sağlayıcısıydı.',
+          '-Kabile bağları oldukça güçlüydü.',
+          '-Toplumsal düzen bu bağlar üzerine kuruluydu.',
+          '-Devlet benzeri merkezi bir otorite olmadığından, kabileler arası ilişkiler zaman zaman rekabete dönüşebiliyordu.',
+          'Bu yapı, dönemin sosyal dinamiklerini anlamayı kolaylaştırır.',
+        ],
+      },
+      {
+        section: '3. İnanç Yapısı ve Dinî Çeşitlilik',
+        text: [
+          'İslam öncesi Arabistan\'da farklı inanç anlayışları bir arada bulunuyordu:',
+          '-Çok tanrıcılık yaygındı ve Kâbe gibi kutsal mekânlar bulunuyordu.',
+          '-Bazı bölgelerde Yahudilik, Hristiyanlık ve Haniflik gibi tektanrıcı inançlara mensup gruplar da vardı.',
+          '-Geleneksel uygulamalar arasında sembolik ritüeller ve kehanet anlayışı yer alıyordu.',
+          'Bu dönem, inanç açısından çeşitliliğin yoğun olduğu bir kültürel ortamdır.',
+        ],
+      },
+      {
+        section: '4. Sosyal Yaşam ve Ahlaki Yapı',
+        text: [
+          'Toplum, dönemin koşulları gereği farklı alışkanlıklara ve geleneklere sahipti.',
+          '-Misafirperverlik, cömertlik ve sözünde durmak önemli değerlerdi.',
+          '-Bazı uygulamalar ise günümüz etik anlayışıyla uyumlu görülmeyebilir; bu uygulamalar dönemin sosyo-kültürel şartları içinde değerlendirilmelidir.',
+          '-Kadınların hakları bölgeler arasında farklılık gösterebiliyordu.',
+          'Buradaki amaç, dönemi günümüz değerleriyle karşılaştırmak değil, kültürel bir gerçeklik olarak anlamaktır.',
+        ],
+      },
+      {
+        section: '5. Ekonomi ve Ticaret',
+        text: [
+          'Arap Yarımadası, önemli ticaret yolları üzerinde olduğu için:',
+          '-Mekke ve çevresi ticarette merkez konumdaydı.',
+          '-Panayırlar ekonomik ve kültürel buluşma alanıydı.',
+          '-Ticaret, toplumda prestij kazandıran bir faaliyet olarak görülüyordu.',
+          'Coğrafi koşullar nedeniyle tarım sınırlı olsa da ticaret oldukça gelişmişti.',
+        ],
+      },
+      {
+        section: '6. Kültür ve Edebiyat',
+        text: [
+          'İslam öncesi Arap toplumunda sözlü kültür güçlüydü.',
+          '-Şiir ve hitabet, toplumun en önemli ifade biçimlerindendi.',
+          '-"Muallakat" gibi ünlü şiirler kültürel hafızanın önemli parçalarıydı.',
+          '-Edebi yarışmalar ve panayır etkinlikleri, toplumsal iletişimin önemli unsuruydu.',
+          'Bu zengin kültür, İslam\'ın gelişiyle birlikte yeni bir içerik kazanarak devam etmiştir.',
+        ],
+      },
+      {
+        section: '7. Bu Döneme Neden "Cahiliye" Deniyor?',
+        text: [
+          'İslam literatüründeki "cahiliye" terimi:',
+          '-Bir değer yargısı olarak değil,',
+          '-İslam öncesi dönemi tanımlayan tarihsel bir kavram olarak kullanılır.',
+          'Buradaki anlam "bilgisizlik" değil; İslam\'ın getirdiği yeni düzenin henüz ortaya çıkmadığı dönem demektir.',
+        ],
+      },
+      {
+        section: 'Ders Özeti',
+        text: [
+          'Cahiliye dönemi, Arap toplumunun İslam öncesindeki sosyal, kültürel ve inanç yapısını ifade eden tarihsel bir dönem adıdır.',
+          'Bu dönem, farklı kabilelerin, çeşitli inançların ve zengin bir sözlü kültürün bir arada yaşadığı dinamik bir yapıya sahiptir.',
+          'İslam\'ın gelişiyle, bu toplumsal zemin yeni bir değer sistemiyle birleşerek daha bütüncül bir medeniyetin oluşmasına katkı sağlamıştır.',
+        ],
+      },
+    ],
+  },
+};
+
+export default function IslamicHistoryLessonScreen() {
+  const { id } = useLocalSearchParams<{ id: string }>();
+  const lesson = islamicHistoryContent[id || '1'];
+  
+  if (!lesson) {
+    return null;
+  }
+
+  return <IslamicHistoryLesson lesson={lesson} />;
+}
+

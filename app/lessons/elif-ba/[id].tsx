@@ -8,6 +8,7 @@ import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { Audio } from 'expo-av';
 import { ARABIC_LETTERS, LETTER_AUDIO_FILES, type Letter } from '@/data/elifBaLetters';
+import { useUser } from '@/store';
 
 // Configure audio mode once
 Audio.setAudioModeAsync({
@@ -19,6 +20,7 @@ Audio.setAudioModeAsync({
 export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
+    const { incrementDailyLessons } = useUser();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
@@ -204,6 +206,7 @@ export default function ElifBaIntroductionScreen() {
         if (!allLettersPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        incrementDailyLessons();
         router.push('/(tabs)');
     };
 

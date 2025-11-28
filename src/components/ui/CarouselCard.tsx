@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useRef } from 'react';
 import { View, Text, Pressable, StyleSheet, LayoutAnimation } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
@@ -28,6 +28,7 @@ export interface CarouselCardProps {
     onPress?: (route?: string) => void;
     screenWidth?: number;
     size?: 'small' | 'large'; // 'small' = 135x243, 'large' = 280x220
+    width?: number; // Custom width override
 }
 
 export const CarouselCard: React.FC<CarouselCardProps> = ({
@@ -43,14 +44,18 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     onPress,
     screenWidth,
     size = 'small',
+    width,
 }) => {
     const { t } = useTranslation();
     const router = useRouter();
     const { themeVersion } = useTheme();
     const [isSelected, setIsSelected] = useState(false);
-    const [cardPosition, setCardPosition] = useState({ top: 0, left: 0 });
 
     const styles = useMemo(() => getStyles(size), [themeVersion, size]);
+    
+    // Calculate actual card width and height
+    const actualCardWidth = width || (size === 'large' ? 280 : 135);
+    const actualCardHeight = size === 'large' ? 220 : 243;
 
     const handleCardPress = () => {
         if (!unlocked) {
@@ -68,25 +73,36 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 
         // Otherwise, show confirmation modal if screenWidth is provided
         if (screenWidth) {
-            const cardWidth = size === 'large' ? 280 : 135;
-            setCardPosition({
-                top: 180,
-                left: (screenWidth - cardWidth) / 2,
-            });
-            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
             setIsSelected(true);
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         } else if (route) {
             // Direct navigation if no screenWidth (no confirmation modal)
             router.push(route as any);
         }
     };
 
-    const handleStart = () => {
-        if (route) {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-            router.push(route as any);
+    const handleStart = async () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+        
+        if (!route) {
+            setIsSelected(false);
+            return;
         }
+        
+        // Close modal first
         setIsSelected(false);
+        
+        // Navigate after a short delay to ensure modal closes
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        try {
+            // Use router.push with the route path
+            router.push(route as any);
+        } catch (error) {
+            console.error('Navigation error:', error);
+            // Fallback: try with replace
+            router.replace(route as any);
+        }
     };
 
     const handleCancel = () => {
@@ -98,13 +114,14 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const progressLabel = progress?.label || t('home.tests');
 
     return (
-        <>
+        <View collapsable={false} style={{ position: 'relative', zIndex: isSelected ? 1000 : 1 }}>
             <HoverCard
                 style={[
                     styles.lessonCard,
                     {
                         backgroundColor: unlocked ? color : colors.locked,
                         borderBottomColor: unlocked ? borderColor : colors.lockedBorder,
+                        ...(width ? { width } : {}),
                     },
                     !unlocked && styles.lessonCardLocked,
                 ]}
@@ -154,29 +171,18 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 
             {/* Confirmation Modal (only shown if screenWidth is provided and no custom onPress) */}
             {isSelected && screenWidth && !onPress && (
-                <>
+                <View style={styles.modalWrapper}>
                     {/* Backdrop to close on outside click */}
                     <Pressable
-                        style={{
-                            position: 'absolute',
-                            top: -2000,
-                            left: -1000,
-                            right: -1000,
-                            bottom: -2000,
-                            zIndex: 99,
-                            backgroundColor: 'transparent',
-                        }}
+                        style={styles.backdrop}
                         onPress={handleCancel}
                     />
 
-                    <Animated.View
-                        entering={FadeInUp.duration(300).easing(Easing.out(Easing.quad))}
-                        exiting={FadeOutDown.duration(200)}
+                    <View
                         style={[
                             styles.startCardContainer,
                             {
-                                left: cardPosition.left,
-                                top: cardPosition.top,
+                                width: actualCardWidth,
                             }
                         ]}
                     >
@@ -205,10 +211,10 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
                                 <Text style={styles.cancelButtonText}>{t('common.cancel')}</Text>
                             </Pressable>
                         </View>
-                    </Animated.View>
-                </>
+                    </View>
+                </View>
             )}
-        </>
+        </View>
     );
 };
 
@@ -305,11 +311,15 @@ const getStyles = (size: 'small' | 'large') => StyleSheet.create({
         fontWeight: '600',
         color: colors.textOnPrimary,
     },
-    startCardContainer: {
+    modalWrapper: {
         position: 'absolute',
-        width: 280,
-        zIndex: 100,
-        backgroundColor: colors.surface,
+        top: '100%',
+        marginTop: 8,
+        width: '100%',
+        zIndex: 1000,
+    },
+    startCardContainer: {
+        backgroundColor: colors.surface || '#1A1A1A',
         borderRadius: 16,
         padding: 16,
         borderWidth: 2,
@@ -319,6 +329,15 @@ const getStyles = (size: 'small' | 'large') => StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 8,
         elevation: 8,
+    },
+    backdrop: {
+        position: 'absolute',
+        top: -2000,
+        left: -1000,
+        right: -1000,
+        bottom: -2000,
+        zIndex: 999,
+        backgroundColor: 'transparent',
     },
     startCardHeader: {
         flexDirection: 'row',

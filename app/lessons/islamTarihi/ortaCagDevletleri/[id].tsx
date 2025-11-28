@@ -7,6 +7,7 @@ import { ArrowLeft, BookOpen } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '@/store';
 
 // İslam Tarihi ders içerikleri
 interface SectionContent {
@@ -21,81 +22,112 @@ interface LessonContent {
 
 const islamicHistoryContent: Record<string, LessonContent> = {
   '1': {
-    title: 'İslam Öncesi Dönem (Cahiliye)',
+    title: 'Orta Çağ İslam Coğrafyasında Bölgesel Devletler',
     content: [
       {
-        section: '1. Dönemin Genel Tanımı',
+        section: 'Giriş',
         text: [
-          '"Cahiliye" kelimesi İslam kaynaklarında, İslam öncesi Arap toplumunun sosyal ve inanç yapısını tanımlamak için kullanılan bir dönem adıdır.',
-          'Bu ifade, bir toplumu küçültmek için değil, İslam\'ın gelişinden önceki kültürel yapıyı tarif etmek için kullanılan tarihsel bir kavramdır.',
-          'Arap Yarımadası bu dönemde farklı kabilelerden oluşuyordu ve bu kabilelerin her biri kendi yönetişim yapısına sahipti.',
+          'Abbâsîlerin etkisinin zayıflamasıyla İslam dünyasının farklı bölgelerinde yeni siyasi yapılar ortaya çıktı. Bu devletler, etnik veya coğrafi kimliklerinden bağımsız biçimde, kendi bölgelerinde düzeni sağlama, ilmi ve kültürel faaliyetleri geliştirme, ticareti ayakta tutma gibi önemli görevler üstlendiler. Bu nedenle bu dönem, tek merkezli bir yapıdan çok, geniş bir coğrafyada birden fazla gücün birlikte var olduğu bir süreç olarak değerlendirilir.',
         ],
       },
       {
-        section: '2. Toplumsal Yapı: Kabile Düzeni',
+        section: '1. Büyük Selçuklular (1040–1157)',
         text: [
-          'Arap toplumunda kabileler, bireyin güvenlik ve kimlik sağlayıcısıydı.',
-          '-Kabile bağları oldukça güçlüydü.',
-          '-Toplumsal düzen bu bağlar üzerine kuruluydu.',
-          '-Devlet benzeri merkezi bir otorite olmadığından, kabileler arası ilişkiler zaman zaman rekabete dönüşebiliyordu.',
-          'Bu yapı, dönemin sosyal dinamiklerini anlamayı kolaylaştırır.',
+          'Selçuklular, Orta Asya\'dan gelen bir topluluk olsalar da kısa sürede İslam dünyasında güçlü bir siyasi denge unsuru hâline geldiler. Yönetimleri, Abbâsî halifesini dış tehditlerden koruma ve merkezî otoriteyi güçlendirme amacı taşıyordu.',
         ],
       },
       {
-        section: '3. İnanç Yapısı ve Dinî Çeşitlilik',
+        section: 'a) İdari Düzen ve Medreseler',
         text: [
-          'İslam öncesi Arabistan\'da farklı inanç anlayışları bir arada bulunuyordu:',
-          '-Çok tanrıcılık yaygındı ve Kâbe gibi kutsal mekânlar bulunuyordu.',
-          '-Bazı bölgelerde Yahudilik, Hristiyanlık ve Haniflik gibi tektanrıcı inançlara mensup gruplar da vardı.',
-          '-Geleneksel uygulamalar arasında sembolik ritüeller ve kehanet anlayışı yer alıyordu.',
-          'Bu dönem, inanç açısından çeşitliliğin yoğun olduğu bir kültürel ortamdır.',
+          'Selçuklular, Nizâmülmülk\'ün öncülüğünde medrese sistemini kurumsallaştırdı. Bu kurumlar yalnızca eğitim merkezleri değil; aynı zamanda toplumsal düzenin ve düşünce hayatının gelişmesine katkı sağlayan yapılardı.',
         ],
       },
       {
-        section: '4. Sosyal Yaşam ve Ahlaki Yapı',
+        section: 'b) Coğrafi Güç ve Siyasi Etki',
         text: [
-          'Toplum, dönemin koşulları gereği farklı alışkanlıklara ve geleneklere sahipti.',
-          '-Misafirperverlik, cömertlik ve sözünde durmak önemli değerlerdi.',
-          '-Bazı uygulamalar ise günümüz etik anlayışıyla uyumlu görülmeyebilir; bu uygulamalar dönemin sosyo-kültürel şartları içinde değerlendirilmelidir.',
-          '-Kadınların hakları bölgeler arasında farklılık gösterebiliyordu.',
-          'Buradaki amaç, dönemi günümüz değerleriyle karşılaştırmak değil, kültürel bir gerçeklik olarak anlamaktır.',
+          'Geniş coğrafyayı kontrol etmeleri, İslam dünyasında uzun süre istikrarın korunmasına yardımcı oldu. Selçuklular, farklı toplulukları aynı yönetsel çatı altında bir arada tutmayı başardılar.',
         ],
       },
       {
-        section: '5. Ekonomi ve Ticaret',
+        section: '2. Gazneliler (10.–12. yüzyıllar)',
         text: [
-          'Arap Yarımadası, önemli ticaret yolları üzerinde olduğu için:',
-          '-Mekke ve çevresi ticarette merkez konumdaydı.',
-          '-Panayırlar ekonomik ve kültürel buluşma alanıydı.',
-          '-Ticaret, toplumda prestij kazandıran bir faaliyet olarak görülüyordu.',
-          'Coğrafi koşullar nedeniyle tarım sınırlı olsa da ticaret oldukça gelişmişti.',
+          'Gazneliler, Horasan ve Hindistan\'ın kuzey bölgelerinde etkinlik gösterdi. Bu devlet, yalnızca askerî gücüyle değil; bölgedeki ilmi faaliyetleri desteklemesiyle de dikkat çekti.',
         ],
       },
       {
-        section: '6. Kültür ve Edebiyat',
+        section: 'a) Bilim ve Kültür Ortamı',
         text: [
-          'İslam öncesi Arap toplumunda sözlü kültür güçlüydü.',
-          '-Şiir ve hitabet, toplumun en önemli ifade biçimlerindendi.',
-          '-"Muallakat" gibi ünlü şiirler kültürel hafızanın önemli parçalarıydı.',
-          '-Edebi yarışmalar ve panayır etkinlikleri, toplumsal iletişimin önemli unsuruydu.',
-          'Bu zengin kültür, İslam\'ın gelişiyle birlikte yeni bir içerik kazanarak devam etmiştir.',
+          'Gazneli sarayları, bilginler, şairler ve tarihçiler için bir merkez hâline geldi. Bu ortam, Farsça edebiyatın gelişmesinde büyük rol oynadı.',
         ],
       },
       {
-        section: '7. Bu Döneme Neden "Cahiliye" Deniyor?',
+        section: 'b) Bölgesel İstikrar',
         text: [
-          'İslam literatüründeki "cahiliye" terimi:',
-          '-Bir değer yargısı olarak değil,',
-          '-İslam öncesi dönemi tanımlayan tarihsel bir kavram olarak kullanılır.',
-          'Buradaki anlam "bilgisizlik" değil; İslam\'ın getirdiği yeni düzenin henüz ortaya çıkmadığı dönem demektir.',
+          'Gazneliler, ticaret yollarını koruyarak bölgenin ekonomik canlılığını sürdürdü. Hindistan coğrafyasında kurdukları düzen, kültürel etkileşimi artırdı.',
         ],
       },
       {
-        section: 'Ders Özeti',
+        section: '3. Fatımîler (909–1171)',
         text: [
-          'Cahiliye dönemi, Arap toplumunun İslam öncesindeki sosyal, kültürel ve inanç yapısını ifade eden tarihsel bir dönem adıdır.',
-          'Bu dönem, farklı kabilelerin, çeşitli inançların ve zengin bir sözlü kültürün bir arada yaşadığı dinamik bir yapıya sahiptir.',
-          'İslam\'ın gelişiyle, bu toplumsal zemin yeni bir değer sistemiyle birleşerek daha bütüncül bir medeniyetin oluşmasına katkı sağlamıştır.',
+          'Fatımîler, Kuzey Afrika merkezli bir devletti ve ardından Mısır\'a yerleşerek Kahire\'yi güçlü bir kültür ve yönetim merkezine dönüştürdü.',
+        ],
+      },
+      {
+        section: 'a) Kahire\'nin Yükselişi',
+        text: [
+          'Kahire, camileri, kütüphaneleri ve eğitim kurumlarıyla dönemin önemli kültür merkezlerinden biri oldu. Bu dönemde kurulan el-Ezher kurumu, İslam eğitim geleneğinin önemli bir unsuru hâline geldi.',
+        ],
+      },
+      {
+        section: 'b) Akdeniz Ticaretindeki Etkileri',
+        text: [
+          'Fatımîler, Akdeniz ticaret yollarını düzenleyerek bölgede ekonomik istikrar sağladı. Bu durum Mısır\'ın refah seviyesini artırdı.',
+        ],
+      },
+      {
+        section: '4. Büveyhîler (945–1055)',
+        text: [
+          'Büveyhîler, Abbâsî halifesinin devam ettiği Bağdat çevresinde etkin bir bölgesel güç haline geldiler. Halifenin dini otoritesine dokunmadan, idari ve askeri yapıya yön verdiler.',
+        ],
+      },
+      {
+        section: 'a) Bağdat\'ın Kültürel Canlılığı',
+        text: [
+          'Bu dönemde Bağdat\'ta edebiyat, felsefe ve tıp alanlarında üretim yoğunlaşmıştır. Bilim insanları saray ve şehir merkezlerinde desteklenmiştir.',
+        ],
+      },
+      {
+        section: 'b) Yönetimde Esneklik',
+        text: [
+          'Büveyhîler farklı etnik ve kültürel unsurları yönetime dahil ederek çok sesli bir yapıyı korumaya çalıştılar.',
+        ],
+      },
+      {
+        section: '5. Memlûkler (1250–1517)',
+        text: [
+          'Memlûkler, özellikle Mısır ve Suriye bölgesinde güçlü bir devlet yapısı kurdular. Moğol istilasının hızla yayıldığı bir dönemde, bölgeyi koruyarak İslam dünyasının önemli merkezlerini savundular.',
+        ],
+      },
+      {
+        section: 'a) Savunma Başarıları',
+        text: [
+          'Memlûkler, Moğollara karşı kazandıkları kritik mücadelelerle İslam dünyasının batı bölgelerinin yıkıma uğramasını engellediler. Bu başarı, dönemin siyasi dengelerini önemli ölçüde etkiledi.',
+        ],
+      },
+      {
+        section: 'b) Kültürel Hayat ve Mimari',
+        text: [
+          'Kahire, Memlûk döneminde sanat ve mimari açısından en parlak dönemlerinden birini yaşadı. Medreseler, camiler ve hanlar bu dönemin karakteristik mimari yapılarıdır.',
+        ],
+      },
+      {
+        section: 'Genel Değerlendirme',
+        text: [
+          'Orta Çağ İslam coğrafyasında ortaya çıkan bu devletlerin ortak özelliği, bulundukları bölgelerde düzeni sağlama, ekonomik hayatı canlı tutma ve bilimsel-kültürel faaliyetleri destekleme yönündeki çabalarıdır. Bu devletler:',
+          '-Farklı kimliklere sahip olmalarına rağmen,',
+          '-Aynı medeniyet alanı içinde,',
+          '-Üretim, eğitim, savunma ve şehirleşme konularında güçlü katkılar sağlamışlardır.',
+          'Bu nedenle söz konusu dönem, İslam medeniyetinin bölgesel çeşitlilik içinde olgunlaştığı bir evre olarak değerlendirilir.',
         ],
       },
     ],
@@ -107,6 +139,7 @@ export default function IslamicHistoryLessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { themeVersion } = useTheme();
   const { t } = useTranslation();
+  const { incrementDailyLessons } = useUser();
 
   const lesson = islamicHistoryContent[id || '1'];
   if (!lesson) {
@@ -247,6 +280,7 @@ export default function IslamicHistoryLessonScreen() {
 
   const handleComplete = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+    incrementDailyLessons();
     router.back();
   };
 
@@ -302,30 +336,6 @@ export default function IslamicHistoryLessonScreen() {
                 </Text>
               );
             })}
-            {section.section === t('lessons.islamicHistory.lessonSummary') && (
-              <View style={styles.summarySection}>
-                <Text style={styles.summaryTitle}>{t('lessons.islamicHistory.summary')}</Text>
-                {section.text.map((text, tIndex) => {
-                  const isBulletPoint = text.trim().startsWith('-');
-                  const textContent = isBulletPoint ? text.trim().substring(1).trim() : text;
-                  
-                  if (isBulletPoint) {
-                    return (
-                      <View key={tIndex} style={styles.bulletContainer}>
-                        <Text style={styles.bullet}>•</Text>
-                        <Text style={[styles.summaryText, { marginBottom: 0 }]}>{textContent}</Text>
-                      </View>
-                    );
-                  }
-                  
-                  return (
-                    <Text key={tIndex} style={styles.summaryText}>
-                      {textContent}
-                    </Text>
-                  );
-                })}
-              </View>
-            )}
           </View>
         ))}
 

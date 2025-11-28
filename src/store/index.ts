@@ -44,10 +44,17 @@ export const useStore = create<StoreState>()(
         boundUserId: state.boundUserId,
         completedTests: state.completedTests,
         successRate: state.successRate,
+        dailyProgress: state.dailyProgress,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
       }),
+      onRehydrateStorage: () => (state) => {
+        // Check daily reset when storage is rehydrated (app opens)
+        if (state) {
+          state.checkDailyReset();
+        }
+      },
     }
   )
 );
@@ -101,6 +108,7 @@ export const useUser = () => useStore(
     incrementDailyLessons: state.incrementDailyLessons,
     incrementDailyTests: state.incrementDailyTests,
     claimDailyTask: state.claimDailyTask,
+    checkDailyReset: state.checkDailyReset,
   }))
 );
 

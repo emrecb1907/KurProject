@@ -80,6 +80,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             subtitle: "Peygamberlik öncesinden günümüze",
             icon: Bank,
             color: '#A07528',
+            route: '/lessons/islamTarihi'
         },
         {
             id: '5',
@@ -123,9 +124,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
                             style={styles.categoryCard}
                             onPress={() => {
                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                // Navigation will be implemented later as requested
                                 if (category.route) {
-                                    // router.push(category.route);
+                                    router.push(category.route as any);
                                 }
                             }}
                         >

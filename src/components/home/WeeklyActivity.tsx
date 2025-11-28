@@ -254,16 +254,31 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         }
     }, [user?.id]);
 
+    // Track if we've already loaded data to prevent unnecessary refetches
+    const hasLoadedRef = useRef(false);
+    const lastUserIdRef = useRef<string | undefined>(user?.id);
+
     // Load data when screen comes into focus or user/auth changes
     useFocusEffect(
         useCallback(() => {
-            if (isAuthenticated && user?.id) {
+            // Only refetch if user changed or we haven't loaded yet
+            const userChanged = lastUserIdRef.current !== user?.id;
+            
+            if (userChanged) {
+                hasLoadedRef.current = false;
+                lastUserIdRef.current = user?.id;
+            }
+
+            // Only fetch if not already loaded or user changed
+            if (!hasLoadedRef.current && isAuthenticated && user?.id) {
+                hasLoadedRef.current = true;
                 fetchWeeklyActivity();
                 checkRewardStatus();
-            } else {
+            } else if (!isAuthenticated || !user?.id) {
                 setWeekData(getEmptyWeek());
                 setTodayCompleted(false);
                 setStreak(0);
+                hasLoadedRef.current = false;
             }
         }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek, checkRewardStatus])
     );
