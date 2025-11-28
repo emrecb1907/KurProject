@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useRef, useImperativeHandle, forwardRef } from 'react';
 import { View, Text, ScrollView, Pressable, TextInput, StyleSheet, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
@@ -20,6 +20,10 @@ interface DerslerTabProps {
     screenWidth: number;
 }
 
+export interface DerslerTabRef {
+    scrollToTop: () => void;
+}
+
 interface CategoryItem {
     id: string;
     title: string;
@@ -31,12 +35,19 @@ interface CategoryItem {
     route?: string;
 }
 
-export const DerslerTab: React.FC<DerslerTabProps> = ({ screenWidth }) => {
+export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWidth }, ref) => {
     const { t } = useTranslation();
     const router = useRouter();
     const { themeVersion } = useTheme();
+    const scrollViewRef = useRef<ScrollView>(null);
 
     const styles = useMemo(() => getStyles(), [themeVersion]);
+
+    useImperativeHandle(ref, () => ({
+        scrollToTop: () => {
+            scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+        },
+    }));
 
     const categories: CategoryItem[] = [
         {
@@ -82,6 +93,7 @@ export const DerslerTab: React.FC<DerslerTabProps> = ({ screenWidth }) => {
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
             <ScrollView
+                ref={scrollViewRef}
                 style={styles.content}
                 contentContainerStyle={{ paddingBottom: 100 }}
                 showsVerticalScrollIndicator={false}
@@ -170,7 +182,7 @@ export const DerslerTab: React.FC<DerslerTabProps> = ({ screenWidth }) => {
             </ScrollView>
         </View>
     );
-};
+});
 
 const getStyles = () => StyleSheet.create({
     content: {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useImperativeHandle, forwardRef } from 'react';
 import { View, Text, ScrollView, Pressable, Alert, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
@@ -20,7 +20,11 @@ interface GenelTabProps {
     screenWidth: number;
 }
 
-export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
+export interface GenelTabRef {
+    scrollToTop: () => void;
+}
+
+export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth }, ref) => {
     const { t } = useTranslation();
     const router = useRouter();
     const { user, isAuthenticated } = useAuth();
@@ -33,6 +37,13 @@ export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
         removeLives
     } = useStore();
     const { earnXP } = useUserData();
+    const scrollViewRef = useRef<ScrollView>(null);
+
+    useImperativeHandle(ref, () => ({
+        scrollToTop: () => {
+            scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+        },
+    }));
 
     // 🧪 TEST: Add 100 XP
     const handleAddXP = async () => {
@@ -207,6 +218,7 @@ export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
             <ScrollView
+                ref={scrollViewRef}
                 style={styles.content}
                 contentContainerStyle={{ paddingBottom: 100 }}
                 showsVerticalScrollIndicator={false}
@@ -306,7 +318,7 @@ export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
             </ScrollView>
         </View>
     );
-};
+});
 
 const styles = StyleSheet.create({
     content: {

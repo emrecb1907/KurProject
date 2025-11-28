@@ -20,9 +20,9 @@ import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
 
 // Import new tab components
-import { GenelTab } from '@/components/home/GenelTab';
-import { DerslerTab } from '@/components/home/DerslerTab';
-import { TestlerTab } from '@/components/home/TestlerTab';
+import { GenelTab, GenelTabRef } from '@/components/home/GenelTab';
+import { DerslerTab, DerslerTabRef } from '@/components/home/DerslerTab';
+import { TestlerTab, TestlerTabRef } from '@/components/home/TestlerTab';
 
 export default function HomePage() {
     const { t } = useTranslation();
@@ -127,6 +127,26 @@ export default function HomePage() {
     // Page Navigation State
     const [selectedCategory, setSelectedCategory] = useState<'genel' | 'dersler' | 'testler'>('genel');
     const screenWidth = Dimensions.get('window').width;
+
+    // Refs for tab components to control scroll
+    const genelTabRef = useRef<GenelTabRef>(null);
+    const derslerTabRef = useRef<DerslerTabRef>(null);
+    const testlerTabRef = useRef<TestlerTabRef>(null);
+
+    // Reset scroll when tab navigation changes (bottom tab menu)
+    useFocusEffect(
+        useCallback(() => {
+            // Reset all tab scrolls when home tab is focused
+            // Use a small delay to ensure refs are ready
+            const timer = setTimeout(() => {
+                genelTabRef.current?.scrollToTop();
+                derslerTabRef.current?.scrollToTop();
+                testlerTabRef.current?.scrollToTop();
+            }, 50);
+
+            return () => clearTimeout(timer);
+        }, [])
+    );
 
     // Handle category change
     const handleCategoryChange = (category: 'genel' | 'dersler' | 'testler') => {
@@ -363,13 +383,13 @@ export default function HomePage() {
             {/* Main Content Area */}
             <View style={styles.contentWrapper}>
                 <View style={{ display: selectedCategory === 'genel' ? 'flex' : 'none', flex: 1 }}>
-                    <GenelTab screenWidth={screenWidth} />
+                    <GenelTab key="genel" ref={genelTabRef} screenWidth={screenWidth} />
                 </View>
                 <View style={{ display: selectedCategory === 'dersler' ? 'flex' : 'none', flex: 1 }}>
-                    <DerslerTab screenWidth={screenWidth} />
+                    <DerslerTab key="dersler" ref={derslerTabRef} screenWidth={screenWidth} />
                 </View>
                 <View style={{ display: selectedCategory === 'testler' ? 'flex' : 'none', flex: 1 }}>
-                    <TestlerTab screenWidth={screenWidth} />
+                    <TestlerTab key="testler" ref={testlerTabRef} screenWidth={screenWidth} />
                 </View>
             </View>
         </SafeAreaView>

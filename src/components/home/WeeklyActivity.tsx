@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
-import { useFocusEffect } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire, CheckCircle } from 'phosphor-react-native';

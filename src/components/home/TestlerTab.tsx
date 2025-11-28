@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useImperativeHandle, forwardRef } from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -11,7 +11,11 @@ interface TestlerTabProps {
     screenWidth: number;
 }
 
-export const TestlerTab: React.FC<TestlerTabProps> = ({ screenWidth }) => {
+export interface TestlerTabRef {
+    scrollToTop: () => void;
+}
+
+export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWidth }, ref) => {
     const { t } = useTranslation();
     const { themeVersion } = useTheme();
     const [isCarouselTouching, setIsCarouselTouching] = useState(false);
@@ -22,6 +26,12 @@ export const TestlerTab: React.FC<TestlerTabProps> = ({ screenWidth }) => {
     const tests = getTests(t);
 
     const styles = useMemo(() => getStyles(), [themeVersion]);
+
+    useImperativeHandle(ref, () => ({
+        scrollToTop: () => {
+            testlerPageScrollRef.current?.scrollTo({ y: 0, animated: false });
+        },
+    }));
 
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
@@ -72,7 +82,7 @@ export const TestlerTab: React.FC<TestlerTabProps> = ({ screenWidth }) => {
             </ScrollView>
         </View>
     );
-};
+});
 
 const getStyles = () => StyleSheet.create({
     content: {

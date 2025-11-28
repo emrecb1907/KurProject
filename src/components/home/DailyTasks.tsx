@@ -182,14 +182,14 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         xpButtonTextClaimed: {
             color: colors.success,
         },
-        settingsButton: {
-            position: 'absolute',
-            top: 0,
-            right: 50,
-            width: 40,
-            height: 40,
+        settingsIconButton: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: 'rgba(100, 100, 100, 0.1)',
             justifyContent: 'center',
             alignItems: 'center',
+            marginRight: 8,
         },
         modalContent: {
             padding: 20,
@@ -273,17 +273,18 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                     <Text style={styles.title}>Günlük Görevler</Text>
                 </View>
 
-                {/* Dev Tools Button */}
+                {/* Settings Button */}
                 <Pressable
-                    style={styles.settingsButton}
+                    style={styles.settingsIconButton}
                     onPress={() => {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                         setShowDevToolsModal(true);
                     }}
                 >
-                    {/* <Gear size={20} color={colors.textSecondary} weight="fill" /> */}
+                    <Gear size={18} color={colors.textSecondary} weight="fill" />
                 </Pressable>
 
+                {/* Gift Icon */}
                 <View style={styles.iconContainer}>
                     <Gift size={20} color={colors.warning} weight="fill" />
                 </View>

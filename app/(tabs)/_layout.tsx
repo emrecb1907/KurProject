@@ -20,7 +20,7 @@ export default function TabLayout() {
       borderTopColor: colors.border,
       height: 75,
       paddingBottom: 12,
-      paddingTop: 10,
+      paddingTop: 12,
       paddingHorizontal: 8,
     },
     tabBarLabel: {
@@ -28,32 +28,21 @@ export default function TabLayout() {
       fontWeight: '600',
     },
     tabBarItem: {
-      paddingHorizontal: 2,
+      paddingHorizontal: 0,
     },
     tabItem: {
-      flexDirection: 'column',
+      flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: 3,
-      paddingHorizontal: 12,
-      paddingVertical: 17,
+      width: 55,
+      height: 55,
       borderRadius: 12,
-      minWidth: 68,
       borderWidth: 2,
       borderColor: 'transparent',
     },
     tabItemActive: {
       backgroundColor: colors.surface,
       borderColor: colors.primary,
-    },
-    label: {
-      fontSize: 10,
-      fontWeight: '600',
-      color: colors.textDisabled,
-      textAlign: 'center',
-    },
-    labelActive: {
-      color: colors.textPrimary,
     },
   }), [themeVersion]); // Use themeVersion to capture color changes
 
@@ -83,11 +72,10 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <House
-                size={18}
+                size={28}
                 color={focused ? colors.textPrimary : colors.textDisabled}
                 weight={focused ? 'fill' : 'regular'}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.home')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -100,11 +88,10 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <Trophy
-                size={18}
+                size={28}
                 color={focused ? colors.textPrimary : colors.textDisabled}
                 weight={focused ? 'fill' : 'regular'}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.leaderboard')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -117,11 +104,10 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <Gift
-                size={18}
+                size={28}
                 color={focused ? colors.textPrimary : colors.textDisabled}
                 weight={focused ? 'fill' : 'regular'}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.rewards')}</Text>
             </View>
           ),
           tabBarLabel: () => null,
@@ -134,11 +120,10 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <User
-                size={18}
+                size={28}
                 color={focused ? colors.textPrimary : colors.textDisabled}
                 weight={focused ? 'fill' : 'regular'}
               />
-              <Text style={[styles.label, focused && styles.labelActive]}>{t('tabs.profile')}</Text>
             </View>
           ),
           tabBarLabel: () => null,

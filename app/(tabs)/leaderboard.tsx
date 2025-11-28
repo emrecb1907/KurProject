@@ -92,6 +92,13 @@ export default function LeaderboardScreen() {
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
+  // Reset scroll position when screen comes into focus
+  useFocusEffect(
+    useCallback(() => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+    }, [])
+  );
+
   // Auto-scroll to user position when data loads
   useEffect(() => {
     if (!loading && leaderboardData.length > 0) {

@@ -31,9 +31,6 @@ export function QuestionCard({
       {/* Progress Indicator */}
       {questionNumber && totalQuestions && (
         <View style={styles.progressContainer}>
-          <Text style={styles.progressText}>
-            Soru {questionNumber} / {totalQuestions}
-          </Text>
           <View style={styles.progressBar}>
             <View
               style={[
@@ -42,6 +39,9 @@ export function QuestionCard({
               ]}
             />
           </View>
+          <Text style={styles.progressText}>
+            Soru {questionNumber} / {totalQuestions}
+          </Text>
         </View>
       )}
 
