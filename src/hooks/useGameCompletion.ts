@@ -6,6 +6,7 @@ interface CompleteGameParams {
     gameType: GameType;
     correctAnswers: number;
     totalQuestions: number;
+    source?: 'lesson' | 'test';
 }
 
 /**

@@ -97,6 +97,10 @@ export const useUser = () => useStore(
     watchAd: state.watchAd,
     boundUserId: state.boundUserId,
     setBoundUserId: state.setBoundUserId,
+    dailyProgress: state.dailyProgress,
+    incrementDailyLessons: state.incrementDailyLessons,
+    incrementDailyTests: state.incrementDailyTests,
+    claimDailyTask: state.claimDailyTask,
   }))
 );
 

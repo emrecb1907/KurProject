@@ -140,6 +140,7 @@ export default function VocabularyGamePlayScreen() {
     <GameScreen
       lessonId={id as string}
       gameType="vocabulary"
+      source="test"
       questions={mockQuestions}
       timerDuration={10}
       hasLatinToggle={false}

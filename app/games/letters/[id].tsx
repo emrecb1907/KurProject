@@ -11,7 +11,7 @@ export default function LettersGamePlayScreen() {
   const [questions] = useState<GameQuestion[]>(() => {
     // Shuffle all 29 letters
     const shuffledLetters = [...ARABIC_LETTERS].sort(() => Math.random() - 0.5);
-    
+
     // Take first 10 letters
     const selectedLetters = shuffledLetters.slice(0, 10);
 
@@ -40,6 +40,7 @@ export default function LettersGamePlayScreen() {
     <GameScreen
       lessonId={id as string}
       gameType="letters"
+      source="test"
       questions={questions}
       timerDuration={10}
       hasLatinToggle={false}

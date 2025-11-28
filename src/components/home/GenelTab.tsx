@@ -37,7 +37,7 @@ export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
     // 🧪 TEST: Add 100 XP
     const handleAddXP = async () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        
+
         try {
             // Use earnXP hook which handles both local and DB updates
             if (user && isAuthenticated && user.id) {
@@ -72,7 +72,7 @@ export const GenelTab: React.FC<GenelTabProps> = ({ screenWidth }) => {
     // 🧪 TEST: Add 1000 XP
     const handleAdd1000XP = async () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        
+
         try {
             // Use earnXP hook which handles both local and DB updates
             if (user && isAuthenticated && user.id) {

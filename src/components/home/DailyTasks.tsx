@@ -1,27 +1,81 @@
-import React from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
-import { useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
+import { View, Text, StyleSheet, Pressable, ScrollView, Modal as RNModal } from 'react-native';
 import { colors } from '@constants/colors';
-import { Gift, CheckCircle, Gear } from 'phosphor-react-native';
+import { Gift, Check, Gear, X } from 'phosphor-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { Modal } from '@components/ui/Modal';
+import { useUser } from '@/store';
 
 interface DailyTasksProps {
     devToolsContent?: React.ReactNode;
+}
+
+interface Task {
+    id: number;
+    text: string;
+    xp: number;
+    current: number;
+    target: number;
+    completed: boolean;
+    claimed: boolean;
 }
 
 export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const { t } = useTranslation();
     const { themeVersion } = useTheme();
     const [showDevToolsModal, setShowDevToolsModal] = useState(false);
+    const [showRewardModal, setShowRewardModal] = useState(false);
+    const [claimedReward, setClaimedReward] = useState<{ xp: number; taskName: string } | null>(null);
 
-    // Mock data for now
-    const tasks = [
-        { id: 1, text: 'Read 10 ayahs', xp: 10, completed: true },
-        { id: 2, text: 'Complete a quiz', xp: 25, completed: true },
-    ];
+    // Get user state and actions from store
+    const {
+        dailyProgress,
+        incrementDailyLessons,
+        incrementDailyTests,
+        claimDailyTask,
+        addXP
+    } = useUser();
+
+    // Derive tasks from store state
+    const tasks: Task[] = useMemo(() => {
+        const lessonTask = {
+            id: 1,
+            text: '2 Ders Bitir',
+            xp: 50,
+            current: dailyProgress.lessonsCompleted,
+            target: 2,
+            completed: dailyProgress.lessonsCompleted >= 2,
+            claimed: dailyProgress.claimedTasks.includes(1)
+        };
+
+        const testTask = {
+            id: 2,
+            text: '3 Test Çöz',
+            xp: 75,
+            current: dailyProgress.testsCompleted,
+            target: 3,
+            completed: dailyProgress.testsCompleted >= 3,
+            claimed: dailyProgress.claimedTasks.includes(2)
+        };
+
+        return [lessonTask, testTask];
+    }, [dailyProgress]);
+
+    const handleClaimTaskReward = (task: Task) => {
+        if (task.completed && !task.claimed) {
+            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+            // Show reward modal
+            setClaimedReward({ xp: task.xp, taskName: task.text });
+            setShowRewardModal(true);
+
+            // Update store
+            claimDailyTask(task.id);
+            addXP(task.xp);
+        }
+    };
 
     // Dynamic styles
     const styles = useMemo(() => StyleSheet.create({
@@ -43,12 +97,6 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         headerTextContainer: {
             flex: 1,
         },
-        subtitle: {
-            fontSize: 13,
-            color: colors.textSecondary,
-            marginBottom: 4,
-            fontWeight: '500',
-        },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
@@ -64,57 +112,80 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             alignItems: 'center',
         },
         tasksContainer: {
-            gap: 12,
+            gap: 0,
             marginBottom: 20,
         },
         taskItem: {
             flexDirection: 'row',
             alignItems: 'center',
             backgroundColor: colors.backgroundLighter,
-            padding: 16,
+            padding: 10,
             borderRadius: 16,
             gap: 12,
+            marginBottom: 8,
         },
-        taskIcon: {
-            width: 24,
-            height: 24,
-            borderRadius: 12,
-            backgroundColor: colors.success,
+        taskCircle: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
             justifyContent: 'center',
             alignItems: 'center',
+            backgroundColor: colors.error,
+        },
+        taskCircleCompleted: {
+            backgroundColor: colors.success,
+        },
+        taskInfo: {
+            flex: 1,
         },
         taskText: {
-            flex: 1,
             fontSize: 15,
             color: colors.textPrimary,
             fontWeight: '500',
+            marginBottom: 2,
         },
-        xpText: {
-            fontSize: 14,
-            fontWeight: 'bold',
-            color: colors.warning,
+        progressText: {
+            fontSize: 12,
+            color: colors.textSecondary,
+            fontWeight: '600',
         },
-        rewardButton: {
+        xpButton: {
+            paddingVertical: 6,
+            paddingHorizontal: 12,
+            borderRadius: 12,
+            backgroundColor: colors.surfaceLight,
+            borderWidth: 1,
+            borderColor: 'transparent',
+        },
+        xpButtonActive: {
             backgroundColor: colors.primary,
-            paddingVertical: 16,
-            borderRadius: 16,
-            alignItems: 'center',
-            justifyContent: 'center',
             shadowColor: colors.primary,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.6,
             shadowRadius: 8,
             elevation: 4,
+            borderColor: colors.primaryLight,
         },
-        rewardButtonText: {
-            fontSize: 16,
+        xpButtonClaimed: {
+            backgroundColor: 'transparent',
+            borderWidth: 1,
+            borderColor: colors.border,
+        },
+        xpButtonText: {
+            fontSize: 12,
             fontWeight: 'bold',
-            color: colors.textOnPrimary, // White text on orange button
+            color: colors.textDisabled,
+        },
+        xpButtonTextActive: {
+            color: colors.textOnPrimary,
+        },
+        xpButtonTextClaimed: {
+            color: colors.success,
         },
         settingsButton: {
             position: 'absolute',
             top: 0,
-            right: 50, // Next to icon
+            right: 50,
             width: 40,
             height: 40,
             justifyContent: 'center',
@@ -131,12 +202,68 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             marginBottom: 16,
             textAlign: 'center',
         },
+        devToolButton: {
+            backgroundColor: colors.surfaceLight,
+            padding: 12,
+            borderRadius: 8,
+            marginBottom: 8,
+            alignItems: 'center',
+        },
+        devToolButtonText: {
+            color: colors.textPrimary,
+            fontWeight: '600',
+        },
+        // Reward Modal Styles
+        rewardModalOverlay: {
+            flex: 1,
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
+        rewardModalContent: {
+            backgroundColor: colors.surface,
+            borderRadius: 24,
+            padding: 32,
+            alignItems: 'center',
+            width: '80%',
+            maxWidth: 320,
+        },
+        rewardEmoji: {
+            fontSize: 64,
+            marginBottom: 16,
+        },
+        rewardTitle: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: colors.textPrimary,
+            marginBottom: 8,
+        },
+        rewardXP: {
+            fontSize: 48,
+            fontWeight: 'bold',
+            color: colors.warning,
+            marginBottom: 8,
+        },
+        rewardTaskName: {
+            fontSize: 16,
+            color: colors.textSecondary,
+            marginBottom: 24,
+            textAlign: 'center',
+        },
+        rewardButton: {
+            backgroundColor: colors.primary,
+            paddingVertical: 12,
+            paddingHorizontal: 32,
+            borderRadius: 12,
+            width: '100%',
+        },
+        rewardButtonText: {
+            color: colors.textOnPrimary,
+            fontSize: 16,
+            fontWeight: 'bold',
+            textAlign: 'center',
+        },
     }), [themeVersion]);
-
-    const handleRewardPress = () => {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-        // Mockup - will be implemented later
-    };
 
     return (
         <View style={styles.container}>
@@ -146,7 +273,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                     <Text style={styles.title}>Günlük Görevler</Text>
                 </View>
 
-                {/* Dev Tools Button (Hidden/Subtle) */}
+                {/* Dev Tools Button */}
                 <Pressable
                     style={styles.settingsButton}
                     onPress={() => {
@@ -166,22 +293,82 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             <View style={styles.tasksContainer}>
                 {tasks.map((task) => (
                     <View key={task.id} style={styles.taskItem}>
-                        <View style={styles.taskIcon}>
-                            <CheckCircle size={16} color={colors.textOnPrimary} weight="fill" />
+                        {/* Circle Icon */}
+                        <View style={[
+                            styles.taskCircle,
+                            task.completed && styles.taskCircleCompleted
+                        ]}>
+                            {task.completed ? (
+                                <Check size={18} color={colors.textOnPrimary} weight="bold" />
+                            ) : (
+                                <X size={18} color={colors.textOnPrimary} weight="bold" />
+                            )}
                         </View>
-                        <Text style={styles.taskText}>{task.text}</Text>
-                        <Text style={styles.xpText}>+{task.xp} XP</Text>
+
+                        {/* Task Info */}
+                        <View style={styles.taskInfo}>
+                            <Text style={styles.taskText}>{task.text}</Text>
+                            <Text style={styles.progressText}>
+                                {task.current}/{task.target} Tamamlandı
+                            </Text>
+                        </View>
+
+                        {/* XP Button */}
+                        <Pressable
+                            style={[
+                                styles.xpButton,
+                                task.completed && !task.claimed && styles.xpButtonActive,
+                                task.claimed && styles.xpButtonClaimed
+                            ]}
+                            onPress={() => handleClaimTaskReward(task)}
+                            disabled={!task.completed || task.claimed}
+                        >
+                            <Text style={[
+                                styles.xpButtonText,
+                                task.completed && !task.claimed && styles.xpButtonTextActive,
+                                task.claimed && styles.xpButtonTextClaimed
+                            ]}>
+                                {task.claimed ? 'Alındı' : `+${task.xp} XP`}
+                            </Text>
+                        </Pressable>
                     </View>
                 ))}
             </View>
 
-            {/* Reward Button */}
-            <Pressable
-                style={styles.rewardButton}
-                onPress={handleRewardPress}
+            {/* Reward Modal */}
+            <RNModal
+                visible={showRewardModal}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setShowRewardModal(false)}
             >
-                <Text style={styles.rewardButtonText}>Ödülünü Al</Text>
-            </Pressable>
+                <Pressable
+                    style={styles.rewardModalOverlay}
+                    onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        setShowRewardModal(false);
+                    }}
+                >
+                    <Pressable
+                        style={styles.rewardModalContent}
+                        onPress={(e) => e.stopPropagation()}
+                    >
+                        <Text style={styles.rewardEmoji}>🎉</Text>
+                        <Text style={styles.rewardTitle}>Tebrikler!</Text>
+                        <Text style={styles.rewardXP}>+{claimedReward?.xp} XP</Text>
+                        <Text style={styles.rewardTaskName}>{claimedReward?.taskName}</Text>
+                        <Pressable
+                            style={styles.rewardButton}
+                            onPress={() => {
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                                setShowRewardModal(false);
+                            }}
+                        >
+                            <Text style={styles.rewardButtonText}>Harika!</Text>
+                        </Pressable>
+                    </Pressable>
+                </Pressable>
+            </RNModal>
 
             {/* Developer Tools Modal */}
             <Modal
@@ -199,6 +386,25 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                     contentContainerStyle={{ paddingBottom: 20 }}
                 >
                     <Text style={styles.modalTitle}>🧪 {t('home.devTools')}</Text>
+
+                    <Text style={{ color: colors.textSecondary, marginBottom: 8 }}>Görev İlerlemesi Simülasyonu:</Text>
+
+                    <Pressable
+                        style={styles.devToolButton}
+                        onPress={() => incrementDailyLessons()}
+                    >
+                        <Text style={styles.devToolButtonText}>Ders Bitir (+1)</Text>
+                    </Pressable>
+
+                    <Pressable
+                        style={styles.devToolButton}
+                        onPress={() => incrementDailyTests()}
+                    >
+                        <Text style={styles.devToolButtonText}>Test Çöz (+1)</Text>
+                    </Pressable>
+
+                    <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 16 }} />
+
                     {devToolsContent}
                 </ScrollView>
             </Modal>

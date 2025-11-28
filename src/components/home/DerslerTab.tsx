@@ -1,186 +1,173 @@
-import React, { useState, useRef, useMemo } from 'react';
-import { View, Text, ScrollView, Pressable, FlatList, StyleSheet } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, ScrollView, Pressable, TextInput, StyleSheet, Dimensions } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
-import { BookOpen, BookBookmark, Lock, CaretRight } from 'phosphor-react-native';
+import {
+    BookOpen,
+    HandPalm,
+    BookBookmark,
+    Bank,
+    Star,
+    CaretRight,
+    MagnifyingGlass
+} from 'phosphor-react-native';
 
 import { colors } from '@/constants/colors';
-import { CarouselCard } from '@/components/ui/CarouselCard';
-import { lessons } from '@/data/lessons';
-import { islamicHistory } from '@/data/islamicHistory';
 import { useTheme } from '@/contexts/ThemeContext';
 
 interface DerslerTabProps {
     screenWidth: number;
 }
 
+interface CategoryItem {
+    id: string;
+    title: string;
+    subtitle: string;
+    count?: string;
+    progress?: number;
+    icon: React.ElementType;
+    color: string;
+    route?: string;
+}
+
 export const DerslerTab: React.FC<DerslerTabProps> = ({ screenWidth }) => {
     const { t } = useTranslation();
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const [lessonFilter, setLessonFilter] = useState<'arabic' | 'islamicHistory'>('arabic');
-    const [isCarouselTouching, setIsCarouselTouching] = useState(false);
-
-    const derslerPageScrollRef = useRef<FlatList>(null);
-    const islamicHistoryScrollViewRef = useRef<ScrollView>(null);
 
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
+    const categories: CategoryItem[] = [
+        {
+            id: '1',
+            title: "Kur'an Öğrenimi",
+            subtitle: "Elif-Ba'dan tecvid temeline",
+            count: "(28 Ders)",
+            progress: 0.65,
+            icon: BookOpen,
+            color: '#A07528', // Gold/Brownish
+            route: '/lessons/elif-ba'
+        },
+        {
+            id: '2',
+            title: "Namaz Duaları",
+            subtitle: "Sübhaneke, Ettehiyyatü, Rabbena...",
+            icon: HandPalm,
+            color: '#A07528',
+        },
+        {
+            id: '3',
+            title: "Sureler",
+            subtitle: "Kısa surelerden başlayarak",
+            icon: BookBookmark,
+            color: '#A07528',
+        },
+        {
+            id: '4',
+            title: "İslam Tarihi",
+            subtitle: "Peygamberlik öncesinden günümüze",
+            icon: Bank,
+            color: '#A07528',
+        },
+        {
+            id: '5',
+            title: "İslami Kavramlar",
+            subtitle: "Temel kavramlar, terimler",
+            icon: Star,
+            color: '#A07528',
+        }
+    ];
+
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
-            <FlatList
-                ref={derslerPageScrollRef}
-                data={lessonFilter === 'arabic' ? lessons : []}
-                keyExtractor={(item) => item.id.toString()}
+            <ScrollView
                 style={styles.content}
                 contentContainerStyle={{ paddingBottom: 100 }}
                 showsVerticalScrollIndicator={false}
-                ListHeaderComponent={
-                    <>
-                        {/* Category Filter Cards */}
-                        <View style={styles.categoryFilterContainer}>
-                            <Pressable
-                                style={[
-                                    styles.categoryFilterCard,
-                                    {
-                                        backgroundColor: colors.primary,
-                                        borderBottomColor: colors.buttonOrangeBorder,
-                                    },
-                                    lessonFilter === 'arabic' && styles.categoryFilterCardActive
-                                ]}
-                                onPress={() => {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    setLessonFilter('arabic');
-                                }}
-                            >
-                                <BookOpen
-                                    size={32}
-                                    color={colors.textOnPrimary}
-                                    weight="fill"
-                                    style={styles.categoryFilterIcon}
-                                />
-                                <Text style={styles.categoryFilterTitle} numberOfLines={2}>Arapça Öğren</Text>
-                            </Pressable>
+            >
+                {/* Search Bar */}
+                <View style={styles.searchContainer}>
+                    <View style={styles.searchBar}>
+                        <MagnifyingGlass size={20} color={colors.textSecondary} weight="bold" />
+                        <TextInput
+                            placeholder="Ders ara..."
+                            placeholderTextColor={colors.textSecondary}
+                            style={styles.searchInput}
+                        />
+                    </View>
+                </View>
 
-                            <Pressable
-                                style={[
-                                    styles.categoryFilterCard,
-                                    {
-                                        backgroundColor: colors.secondary,
-                                        borderBottomColor: colors.buttonBlueBorder,
-                                    },
-                                    lessonFilter === 'islamicHistory' && styles.categoryFilterCardActive
-                                ]}
-                                onPress={() => {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                    setLessonFilter('islamicHistory');
-                                }}
-                            >
-                                <BookBookmark
-                                    size={32}
-                                    color={colors.textOnPrimary}
-                                    weight="fill"
-                                    style={styles.categoryFilterIcon}
-                                />
-                                <Text style={styles.categoryFilterTitle} numberOfLines={2}>İslam Tarihi</Text>
-                            </Pressable>
-                        </View>
+                {/* Section Title */}
+                <View style={styles.sectionHeader}>
+                    <Text style={styles.sectionTitle}>Tüm Kategoriler</Text>
+                </View>
 
-                        {/* Section Title */}
-                        <View style={styles.sectionHeader}>
-                            <Text style={styles.sectionTitle}>
-                                {lessonFilter === 'arabic' ? 'Arapça Dersler' : 'İslam Tarihi'}
-                            </Text>
-                            <Pressable style={styles.viewAllButton} onPress={() => { }}>
-                                <Text style={styles.viewAllButtonText}>{t('common.viewAll')}</Text>
-                            </Pressable>
-                        </View>
-
-                        {/* Islamic History Section - Show based on filter */}
-                        {lessonFilter === 'islamicHistory' && (
-                            <View style={{ position: 'relative', marginBottom: 24 }}>
-                                <ScrollView
-                                    ref={islamicHistoryScrollViewRef}
-                                    horizontal
-                                    showsHorizontalScrollIndicator={false}
-                                    contentContainerStyle={styles.carouselContent}
-                                    style={styles.carousel}
-                                onTouchStart={() => setIsCarouselTouching(true)}
-                                onTouchEnd={() => setIsCarouselTouching(false)}
-                                onScrollBeginDrag={() => setIsCarouselTouching(true)}
-                                onScrollEndDrag={() => setIsCarouselTouching(false)}
-                            >
-                                {islamicHistory.map((test) => (
-                                    <CarouselCard
-                                        key={test.id}
-                                        icon={test.icon}
-                                        title={test.title}
-                                        description={test.description}
-                                        unlocked={test.unlocked}
-                                        color={test.color}
-                                        borderColor={test.borderColor}
-                                        level={test.level}
-                                        progress={test.unlocked ? { current: 3, total: 10 } : undefined}
-                                        route={test.route}
-                                        screenWidth={screenWidth}
-                                    />
-                                ))}
-                            </ScrollView>
-                            </View>
-                        )}
-                    </>
-                }
-                renderItem={({ item: lesson, index }) => (
-                    <View style={{ paddingHorizontal: 16 }}>
+                {/* Categories List */}
+                <View style={styles.categoriesList}>
+                    {categories.map((category, index) => (
                         <Pressable
-                            style={[
-                                styles.verticalLessonCard,
-                                {
-                                    backgroundColor: lesson.unlocked ? lesson.color : colors.locked,
-                                    borderBottomColor: lesson.unlocked ? lesson.borderColor : colors.lockedBorder,
-                                },
-                                !lesson.unlocked && styles.verticalLessonCardLocked,
-                            ]}
+                            key={category.id}
+                            style={styles.categoryCard}
                             onPress={() => {
-                                if (lesson.unlocked) {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                                    router.push((lesson.route || '/lessons/elif-ba/1') as any);
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                // Navigation will be implemented later as requested
+                                if (category.route) {
+                                    // router.push(category.route);
                                 }
                             }}
-                            disabled={!lesson.unlocked}
                         >
-                            {/* Lesson Number */}
-                            <View style={styles.verticalLessonIconContainer}>
-                                <Text style={styles.verticalLessonNumber}>{index + 1}</Text>
-                            </View>
+                            <View style={styles.cardContent}>
+                                {/* Icon */}
+                                <View style={[styles.iconContainer, { backgroundColor: 'rgba(160, 117, 40, 0.2)' }]}>
+                                    <category.icon
+                                        size={24}
+                                        color="#FFC800" // Bright yellow/gold for icon
+                                        weight="fill"
+                                    />
+                                </View>
 
-                            {/* Content */}
-                            <View style={styles.verticalLessonContent}>
-                                <Text style={styles.verticalLessonTitle}>{lesson.title}</Text>
-                                <Text style={styles.verticalLessonDescription}>{lesson.description}</Text>
-                            </View>
+                                {/* Text Info */}
+                                <View style={styles.textContainer}>
+                                    <View style={styles.titleRow}>
+                                        <Text style={styles.cardTitle}>{category.title}</Text>
+                                        {category.count && (
+                                            <Text style={styles.cardCount}>{category.count}</Text>
+                                        )}
+                                    </View>
+                                    <Text style={styles.cardSubtitle} numberOfLines={1}>
+                                        {category.subtitle}
+                                    </Text>
+                                </View>
 
-                            {/* Chevron or Lock */}
-                            {lesson.unlocked ? (
+                                {/* Arrow */}
                                 <CaretRight
-                                    size={24}
-                                    color={colors.textOnPrimary}
+                                    size={20}
+                                    color={colors.textSecondary}
                                     weight="bold"
-                                    style={styles.verticalLessonChevron}
                                 />
-                            ) : (
-                                <Lock size={20} color={colors.textOnPrimary} weight="fill" />
+                            </View>
+
+                            {/* Progress Bar (Only if progress exists) */}
+                            {category.progress !== undefined && (
+                                <View style={styles.progressContainer}>
+                                    <View style={styles.progressBarBg}>
+                                        <View
+                                            style={[
+                                                styles.progressBarFill,
+                                                { width: `${category.progress * 100}%` }
+                                            ]}
+                                        />
+                                    </View>
+                                    <Text style={styles.progressText}>
+                                        {Math.round(category.progress * 100)}%
+                                    </Text>
+                                </View>
                             )}
                         </Pressable>
-                    </View>
-                )}
-                ItemSeparatorComponent={() => (
-                    <View style={styles.separatorContainer}>
-                        <View style={styles.separatorLine} />
-                    </View>
-                )}
-            />
+                    ))}
+                </View>
+            </ScrollView>
         </View>
     );
 };
@@ -189,120 +176,110 @@ const getStyles = () => StyleSheet.create({
     content: {
         flex: 1,
     },
-    sectionHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+    searchContainer: {
         paddingHorizontal: 16,
-        paddingTop: 20,
-        paddingBottom: 16,
+        paddingTop: 16,
+        paddingBottom: 8,
+    },
+    searchBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: colors.surface,
+        borderRadius: 16,
+        paddingHorizontal: 16,
+        paddingVertical: 12,
+        gap: 12,
+        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.05)',
+    },
+    searchInput: {
+        flex: 1,
+        fontSize: 16,
+        color: colors.textPrimary,
+        fontWeight: '500',
+    },
+    sectionHeader: {
+        paddingHorizontal: 16,
+        paddingTop: 16,
+        paddingBottom: 12,
     },
     sectionTitle: {
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: 'bold',
         color: colors.textPrimary,
     },
-    viewAllButton: {
-        paddingHorizontal: 12,
-        paddingVertical: 6,
-        borderRadius: 12,
-        backgroundColor: colors.surface,
-    },
-    viewAllButtonText: {
-        fontSize: 12,
-        fontWeight: '600',
-        color: colors.primary,
-    },
-    categoryFilterContainer: {
-        flexDirection: 'row',
+    categoriesList: {
         paddingHorizontal: 16,
-        paddingTop: 16,
         gap: 12,
     },
-    categoryFilterCard: {
-        flex: 1,
+    categoryCard: {
+        backgroundColor: colors.surface,
+        borderRadius: 20,
         padding: 16,
-        borderRadius: 16,
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderBottomWidth: 4,
-        height: 100,
-        opacity: 0.7,
+        borderWidth: 1,
+        borderColor: 'rgba(255, 255, 255, 0.05)',
     },
-    categoryFilterCardActive: {
-        opacity: 1,
-        transform: [{ scale: 1.02 }],
-    },
-    categoryFilterIcon: {
-        marginBottom: 8,
-    },
-    categoryFilterTitle: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        color: colors.textOnPrimary,
-        textAlign: 'center',
-    },
-    carousel: {
-        flexGrow: 0,
-    },
-    carouselContent: {
-        paddingHorizontal: 16,
-        paddingVertical: 24,
-        gap: 8, // Kartlar arası mesafe - yarı yarıya indirilmiş
-    },
-    verticalLessonCard: {
+    cardContent: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: colors.primary,
-        padding: 16,
-        borderRadius: 16,
-        borderBottomWidth: 4,
-        borderBottomColor: colors.buttonOrangeBorder,
         gap: 16,
     },
-    verticalLessonCardLocked: {
-        opacity: 0.6,
-        backgroundColor: colors.locked,
-        borderBottomColor: colors.lockedBorder,
-    },
-    verticalLessonIconContainer: {
+    iconContainer: {
         width: 48,
         height: 48,
-        borderRadius: 12,
-        backgroundColor: 'rgba(255, 255, 255, 0.2)',
+        borderRadius: 24,
         justifyContent: 'center',
         alignItems: 'center',
     },
-    verticalLessonNumber: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        color: colors.textOnPrimary,
-    },
-    verticalLessonContent: {
+    textContainer: {
         flex: 1,
+        justifyContent: 'center',
         gap: 4,
     },
-    verticalLessonTitle: {
+    titleRow: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+    },
+    cardTitle: {
         fontSize: 16,
         fontWeight: 'bold',
-        color: colors.textOnPrimary,
+        color: colors.textPrimary,
     },
-    verticalLessonDescription: {
-        fontSize: 12,
-        color: colors.textOnPrimary,
-        opacity: 0.9,
+    cardCount: {
+        fontSize: 14,
+        color: colors.textSecondary,
+        fontWeight: '500',
     },
-    verticalLessonChevron: {
+    cardSubtitle: {
+        fontSize: 13,
+        color: colors.textSecondary,
         opacity: 0.8,
     },
-    separatorContainer: {
-        paddingHorizontal: 16,
-        paddingVertical: 6,
+    progressContainer: {
+        flexDirection: 'row',
         alignItems: 'center',
+        marginTop: 16,
+        gap: 12,
     },
-    separatorLine: {
-        width: 1,
-        height: 20,
-        backgroundColor: colors.border,
+    progressBarBg: {
+        flex: 1,
+        height: 6,
+        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+        borderRadius: 3,
+        overflow: 'hidden',
+    },
+    progressBarFill: {
+        height: '100%',
+        backgroundColor: colors.primary, // Orange
+        borderRadius: 3,
+    },
+    progressText: {
+        fontSize: 12,
+        color: colors.textSecondary,
+        fontWeight: '600',
+        width: 32,
+        textAlign: 'right',
     },
 });
+

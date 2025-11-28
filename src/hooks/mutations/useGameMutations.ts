@@ -12,6 +12,7 @@ interface CompleteGameParams {
     gameType: GameType;
     correctAnswers: number;
     totalQuestions: number;
+    source?: 'lesson' | 'test'; // Track where the game was started from
 }
 
 interface CompleteGameResult {
@@ -34,7 +35,7 @@ interface CompleteGameResult {
 export function useCompleteGameMutation() {
     const { isAuthenticated, user } = useAuth();
     const { earnXP } = useUserData();
-    const { setUserStats } = useUser();
+    const { setUserStats, incrementDailyLessons, incrementDailyTests } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -42,6 +43,7 @@ export function useCompleteGameMutation() {
             gameType,
             correctAnswers,
             totalQuestions,
+            source = 'lesson', // Default to lesson for backward compatibility
         }: CompleteGameParams): Promise<CompleteGameResult> => {
             let leveledUp = false;
             let newLevel = 0;
@@ -73,6 +75,16 @@ export function useCompleteGameMutation() {
 
                 // Record daily activity
                 await database.dailyActivity.record(user.id);
+
+                // Update Daily Tasks (Zustand Store)
+                // Use source to determine if it's a lesson or test
+                if (source === 'test') {
+                    incrementDailyTests();
+                    logger.info(`Daily test count incremented (source: ${source}, gameType: ${gameType})`);
+                } else {
+                    incrementDailyLessons();
+                    logger.info(`Daily lesson count incremented (source: ${source}, gameType: ${gameType})`);
+                }
 
                 // Update stats cache immediately after game completion
                 const { data: userData } = await database.users.getById(user.id);

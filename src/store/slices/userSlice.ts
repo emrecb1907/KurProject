@@ -38,16 +38,32 @@ export interface UserSlice {
   watchAd: () => boolean; // Returns true if successful
 
   // Security
+  // Daily Progress
+  dailyProgress: {
+    date: string;
+    lessonsCompleted: number;
+    testsCompleted: number;
+    claimedTasks: number[]; // IDs of claimed tasks for the day
+  };
+
+  // Actions
+  incrementDailyLessons: () => void;
+  incrementDailyTests: () => void;
+  claimDailyTask: (taskId: number) => void;
+  checkDailyReset: () => void;
+
   boundUserId: string | null;
   setBoundUserId: (id: string | null) => void;
 }
+
+const getTodayDateString = () => new Date().toISOString().split('T')[0];
 
 const initialState = {
   totalXP: 0,
   currentLevel: 1,
   totalScore: 0,
-  currentLives: 6, // Changed to 6
-  maxLives: 6,     // Changed to 6
+  currentLives: 6,
+  maxLives: 6,
   streak: 0,
   progress: [],
   streakData: null,
@@ -56,6 +72,12 @@ const initialState = {
   boundUserId: null,
   completedTests: 0,
   successRate: 0,
+  dailyProgress: {
+    date: getTodayDateString(),
+    lessonsCompleted: 0,
+    testsCompleted: 0,
+    claimedTasks: [],
+  },
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -151,6 +173,52 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     });
 
     return true;
+  },
+
+  checkDailyReset: () => {
+    const state = get();
+    const today = getTodayDateString();
+
+    if (state.dailyProgress.date !== today) {
+      set({
+        dailyProgress: {
+          date: today,
+          lessonsCompleted: 0,
+          testsCompleted: 0,
+          claimedTasks: [],
+        }
+      });
+    }
+  },
+
+  incrementDailyLessons: () => {
+    get().checkDailyReset();
+    set((state) => ({
+      dailyProgress: {
+        ...state.dailyProgress,
+        lessonsCompleted: state.dailyProgress.lessonsCompleted + 1
+      }
+    }));
+  },
+
+  incrementDailyTests: () => {
+    get().checkDailyReset();
+    set((state) => ({
+      dailyProgress: {
+        ...state.dailyProgress,
+        testsCompleted: state.dailyProgress.testsCompleted + 1
+      }
+    }));
+  },
+
+  claimDailyTask: (taskId) => {
+    get().checkDailyReset();
+    set((state) => ({
+      dailyProgress: {
+        ...state.dailyProgress,
+        claimedTasks: [...state.dailyProgress.claimedTasks, taskId]
+      }
+    }));
   },
 
   setBoundUserId: (id) => set({ boundUserId: id }),

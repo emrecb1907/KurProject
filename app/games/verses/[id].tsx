@@ -200,6 +200,7 @@ export default function VersesGamePlayScreen() {
     <GameScreen
       lessonId={id as string}
       gameType="verses"
+      source="test"
       questions={mockQuestions}
       timerDuration={10}
       hasLatinToggle={true}

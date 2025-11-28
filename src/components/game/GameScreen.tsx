@@ -35,6 +35,7 @@ interface GameScreenProps {
     timerDuration?: number;
     hasLatinToggle?: boolean;
     onComplete?: () => void;
+    source?: 'lesson' | 'test'; // Track where the game was started from
 }
 
 export function GameScreen({
@@ -44,6 +45,7 @@ export function GameScreen({
     timerDuration = 10,
     hasLatinToggle = false,
     onComplete,
+    source = 'lesson', // Default to lesson for backward compatibility
 }: GameScreenProps) {
     const { t } = useTranslation();
     const router = useRouter();
@@ -254,6 +256,7 @@ export function GameScreen({
             gameType,
             correctAnswers: correctAnswersCount,
             totalQuestions: questions.length,
+            source, // Pass source to track lesson vs test
         });
 
         if (onComplete) {
@@ -400,7 +403,7 @@ export function GameScreen({
                     // If modal is shown, user leveled up, play LevelUp.mp3
                     // If modal is not shown, user didn't level up, play GameComplete.mp3
                     const soundFile = showLevelUpModal ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
-                    
+
                     // Will not play if device is in silent mode due to playsInSilentModeIOS: false
                     const { sound } = await Audio.Sound.createAsync(soundFile, {
                         shouldPlay: true,
@@ -696,11 +699,11 @@ export function GameScreen({
                             <Text style={styles.footerMessage}>Bir sonraki soruya geçelim!</Text>
                         </>
                     )}
-                    <Pressable 
+                    <Pressable
                         style={[
                             styles.nextButton,
                             !isCorrect && styles.nextButtonError
-                        ]} 
+                        ]}
                         onPress={handleNext}
                     >
                         <Text style={styles.nextButtonText}>

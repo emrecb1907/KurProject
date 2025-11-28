@@ -51,6 +51,7 @@ export default function QuizGamePlayScreen() {
         <GameScreen
             lessonId={id as string}
             gameType="quiz"
+            source="test"
             questions={questions}
             timerDuration={10}
             hasLatinToggle={false}
