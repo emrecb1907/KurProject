@@ -20,7 +20,7 @@
     "weeklyActivity": {
         "title": "Haftalık Aktivite",
         "streak": "Gün",
-        "todayCompleted": "✅ Bugünkü hedefini tamamladın!",
+        "todayCompleted": "Bugünkü hedefini tamamladın!",
         "todayNotCompleted": "Bugün bir test çöz ve serini devam ettir!",
         "days": {
             "mon": "Pzt",
@@ -33,4 +33,3 @@
         }
     }
 }
-

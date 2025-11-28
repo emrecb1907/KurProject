@@ -11,7 +11,7 @@ export function DailyHadith() {
 
     // Static hadith for now (will be dynamic later)
     const hadith = {
-        text: "Mü’minin en fazîletlisi, ahlâkı en güzel olanıdır.",
+        text: "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
         source: "Buhârî",
     };
 
@@ -19,45 +19,60 @@ export function DailyHadith() {
     const styles = useMemo(() => StyleSheet.create({
         container: {
             backgroundColor: colors.surface,
-            borderRadius: 16,
-            padding: 16,
-            marginBottom: 24,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.border,
+            borderRadius: 24,
+            padding: 10,
+            marginBottom: 18,
         },
         header: {
             flexDirection: 'row',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: 8,
-            marginBottom: 16,
+            marginBottom: 12,
+            paddingBottom: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        headerTextContainer: {
+            flex: 1,
+        },
+        subtitle: {
+            fontSize: 13,
+            color: colors.textSecondary,
+            marginBottom: 4,
+            fontWeight: '500',
         },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
             color: colors.textPrimary,
+            paddingLeft: 6,
+        },
+        iconContainer: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: 'rgba(255, 200, 0, 0.1)',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         content: {
-            marginBottom: 8,
-            paddingVertical: 12,
-            paddingHorizontal: 8,
+            marginBottom: 16,
+            paddingLeft: 5,
         },
         hadithText: {
             fontSize: 16,
-            lineHeight: 26,
-            color: colors.textPrimary,
-            textAlign: 'center',
-            fontWeight: '500',
-            fontStyle: 'italic',
+            lineHeight: 24,
+            color: colors.textSecondary,
+            fontWeight: '400',
         },
         sourceContainer: {
             flexDirection: 'row',
             justifyContent: 'flex-end',
-            alignItems: 'center',
         },
         sourceText: {
             fontSize: 13,
-            color: colors.primary,
-            fontWeight: 'bold',
+            color: colors.textDisabled,
+            fontWeight: '500',
         },
     }), [themeVersion]);
 
@@ -65,8 +80,12 @@ export function DailyHadith() {
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <BookOpen size={24} color={colors.primary} weight="fill" />
-                <Text style={styles.title}>Günün Hadisi</Text>
+                <View style={styles.headerTextContainer}>
+                    <Text style={styles.title}>Günün Hadisi</Text>
+                </View>
+                <View style={styles.iconContainer}>
+                    <BookOpen size={20} color={colors.warning} weight="fill" />
+                </View>
             </View>
 
             {/* Hadith Content */}
@@ -83,4 +102,3 @@ export function DailyHadith() {
         </View>
     );
 }
-

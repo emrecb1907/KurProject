@@ -19,53 +19,69 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
     // Mock data for now
     const tasks = [
-        { id: 1, text: 'Bugün 3 ders tamamla', completed: false },
-        { id: 2, text: 'Bugün 3 test tamamla', completed: false },
+        { id: 1, text: 'Read 10 ayahs', xp: 10, completed: true },
+        { id: 2, text: 'Complete a quiz', xp: 25, completed: true },
     ];
 
     // Dynamic styles
     const styles = useMemo(() => StyleSheet.create({
         container: {
             backgroundColor: colors.surface,
-            borderRadius: 16,
-            padding: 16,
-            marginBottom: 24,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.border,
+            borderRadius: 24,
+            padding: 10,
+            marginBottom: 22,
         },
         header: {
             flexDirection: 'row',
+            justifyContent: 'space-between',
             alignItems: 'center',
-            gap: 8,
-            marginBottom: 16,
+            marginBottom: 12,
+            paddingBottom: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(255, 255, 255, 0.1)',
+        },
+        headerTextContainer: {
+            flex: 1,
+        },
+        subtitle: {
+            fontSize: 13,
+            color: colors.textSecondary,
+            marginBottom: 4,
+            fontWeight: '500',
         },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
             color: colors.textPrimary,
+            paddingLeft: 6,
+        },
+        iconContainer: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: 'rgba(255, 200, 0, 0.1)',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         tasksContainer: {
             gap: 12,
-            marginBottom: 16,
+            marginBottom: 20,
         },
         taskItem: {
             flexDirection: 'row',
             alignItems: 'center',
+            backgroundColor: colors.backgroundLighter,
+            padding: 16,
+            borderRadius: 16,
             gap: 12,
-            paddingVertical: 8,
         },
-        taskCheckbox: {
+        taskIcon: {
             width: 24,
             height: 24,
             borderRadius: 12,
-            borderWidth: 2,
-            borderColor: colors.border,
+            backgroundColor: colors.success,
             justifyContent: 'center',
             alignItems: 'center',
-        },
-        taskCheckboxCompleted: {
-            backgroundColor: colors.success,
-            borderColor: colors.success,
         },
         taskText: {
             flex: 1,
@@ -73,43 +89,36 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             color: colors.textPrimary,
             fontWeight: '500',
         },
-        taskTextCompleted: {
-            color: colors.textSecondary,
-            textDecorationLine: 'line-through',
-        },
-        buttonRow: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-        },
-        settingsButton: {
-            width: 40,
-            height: 40,
-            borderRadius: 12,
-            backgroundColor: colors.surface,
-            borderWidth: 2,
-            borderColor: colors.border,
-            justifyContent: 'center',
-            alignItems: 'center',
+        xpText: {
+            fontSize: 14,
+            fontWeight: 'bold',
+            color: colors.warning,
         },
         rewardButton: {
-            flexDirection: 'row',
+            backgroundColor: colors.primary,
+            paddingVertical: 16,
+            borderRadius: 16,
             alignItems: 'center',
             justifyContent: 'center',
-            gap: 8,
-            backgroundColor: colors.primary,
-            paddingVertical: 12,
-            paddingHorizontal: 16,
-            borderRadius: 12,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.buttonOrangeBorder,
-            width: '50%',
-            opacity: 0.6, // Deaktif için
+            shadowColor: colors.primary,
+            shadowOffset: { width: 0, height: 4 },
+            shadowOpacity: 0.3,
+            shadowRadius: 8,
+            elevation: 4,
         },
         rewardButtonText: {
-            fontSize: 15,
+            fontSize: 16,
             fontWeight: 'bold',
-            color: colors.textOnPrimary,
+            color: colors.textOnPrimary, // White text on orange button
+        },
+        settingsButton: {
+            position: 'absolute',
+            top: 0,
+            right: 50, // Next to icon
+            width: 40,
+            height: 40,
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         modalContent: {
             padding: 20,
@@ -120,56 +129,6 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             fontWeight: 'bold',
             color: colors.textPrimary,
             marginBottom: 16,
-            textAlign: 'center',
-        },
-        testContainer: {
-            backgroundColor: colors.backgroundDarker,
-            padding: 16,
-            borderRadius: 16,
-            marginTop: 8,
-            borderWidth: 2,
-            borderColor: colors.warning,
-        },
-        testButtonRow: {
-            flexDirection: 'row',
-            gap: 10,
-            marginBottom: 10,
-        },
-        testButton: {
-            backgroundColor: colors.primary,
-            paddingVertical: 14,
-            paddingHorizontal: 20,
-            borderRadius: 12,
-            marginBottom: 10,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.buttonOrangeBorder,
-        },
-        testButtonHalf: {
-            flex: 1,
-            marginBottom: 0,
-        },
-        testButtonSync: {
-            backgroundColor: colors.secondary,
-            paddingVertical: 14,
-            paddingHorizontal: 20,
-            borderRadius: 12,
-            marginBottom: 10,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.buttonBlueBorder,
-        },
-        testButtonDanger: {
-            backgroundColor: colors.error,
-            paddingVertical: 14,
-            paddingHorizontal: 20,
-            borderRadius: 12,
-            marginBottom: 10,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.errorDark,
-        },
-        testButtonText: {
-            color: colors.textOnPrimary,
-            fontSize: 15,
-            fontWeight: 'bold',
             textAlign: 'center',
         },
     }), [themeVersion]);
@@ -183,35 +142,11 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <Gift size={24} color={colors.primary} weight="fill" />
-                <Text style={styles.title}>Günlük Görevler</Text>
-            </View>
+                <View style={styles.headerTextContainer}>
+                    <Text style={styles.title}>Günlük Görevler</Text>
+                </View>
 
-            {/* Tasks List */}
-            <View style={styles.tasksContainer}>
-                {tasks.map((task) => (
-                    <View key={task.id} style={styles.taskItem}>
-                        <View style={[
-                            styles.taskCheckbox,
-                            task.completed && styles.taskCheckboxCompleted
-                        ]}>
-                            {task.completed && (
-                                <CheckCircle size={16} color={colors.textOnPrimary} weight="fill" />
-                            )}
-                        </View>
-                        <Text style={[
-                            styles.taskText,
-                            task.completed && styles.taskTextCompleted
-                        ]}>
-                            {task.text}
-                        </Text>
-                    </View>
-                ))}
-            </View>
-
-            {/* Button Row */}
-            <View style={styles.buttonRow}>
-                {/* Settings Button */}
+                {/* Dev Tools Button (Hidden/Subtle) */}
                 <Pressable
                     style={styles.settingsButton}
                     onPress={() => {
@@ -219,19 +154,34 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                         setShowDevToolsModal(true);
                     }}
                 >
-                    <Gear size={20} color={colors.textPrimary} weight="fill" />
+                    {/* <Gear size={20} color={colors.textSecondary} weight="fill" /> */}
                 </Pressable>
 
-                {/* Reward Button */}
-                <Pressable
-                    style={styles.rewardButton}
-                    onPress={handleRewardPress}
-                    disabled={true} // Mockup için disabled
-                >
-                    <Gift size={20} color={colors.textOnPrimary} weight="fill" />
-                    <Text style={styles.rewardButtonText}>Ödülünü Al</Text>
-                </Pressable>
+                <View style={styles.iconContainer}>
+                    <Gift size={20} color={colors.warning} weight="fill" />
+                </View>
             </View>
+
+            {/* Tasks List */}
+            <View style={styles.tasksContainer}>
+                {tasks.map((task) => (
+                    <View key={task.id} style={styles.taskItem}>
+                        <View style={styles.taskIcon}>
+                            <CheckCircle size={16} color={colors.textOnPrimary} weight="fill" />
+                        </View>
+                        <Text style={styles.taskText}>{task.text}</Text>
+                        <Text style={styles.xpText}>+{task.xp} XP</Text>
+                    </View>
+                ))}
+            </View>
+
+            {/* Reward Button */}
+            <Pressable
+                style={styles.rewardButton}
+                onPress={handleRewardPress}
+            >
+                <Text style={styles.rewardButtonText}>Ödülünü Al</Text>
+            </Pressable>
 
             {/* Developer Tools Modal */}
             <Modal
@@ -243,7 +193,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                 showCloseButton={true}
                 transparent
             >
-                <ScrollView 
+                <ScrollView
                     style={styles.modalContent}
                     showsVerticalScrollIndicator={false}
                     contentContainerStyle={{ paddingBottom: 20 }}
@@ -255,4 +205,3 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         </View>
     );
 }
-

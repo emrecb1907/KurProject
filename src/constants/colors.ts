@@ -43,14 +43,14 @@ const darkThemeColors = {
   warningDark: '#E6B400',
 
   // Dark Background
-  background: '#1F2937', // Dark blue-gray
-  backgroundDarker: '#111827', // Darker
-  backgroundLighter: '#374151', // Lighter panels
+  background: '#050816', // Updated Dark Blue/Black
+  backgroundDarker: '#050816', // Updated Dark Blue/Black
+  backgroundLighter: '#111827', // Lighter panels (Surface color)
 
   // Surface & Cards
-  surface: '#374151',
-  surfaceDark: '#1F2937',
-  surfaceLight: '#4B5563',
+  surface: '#111827', // Updated Card Background
+  surfaceDark: '#0B101E',
+  surfaceLight: '#1F2937',
 
   // Text colors - Dark mode (white text on dark bg)
   textPrimary: '#FFFFFF', // Pure White

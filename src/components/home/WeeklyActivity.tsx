@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
-import { Target, TreasureChest, Check, Fire } from 'phosphor-react-native';
+import { Target, TreasureChest, Check, Fire, CheckCircle } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -31,37 +31,46 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
     const styles = useMemo(() => StyleSheet.create({
         container: {
             backgroundColor: colors.surface,
-            borderRadius: 16,
-            padding: 16,
-            marginBottom: 24,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.border,
+            borderRadius: 24,
+            padding: 10,
+            marginBottom: 18,
         },
         header: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'center',
-            marginBottom: 16,
+            marginBottom: 12,
+            paddingBottom: 10,
+            borderBottomWidth: 1,
+            borderBottomColor: 'rgba(255, 255, 255, 0.1)',
         },
-        titleContainer: {
-            flexDirection: 'row',
-            alignItems: 'center',
-            gap: 8,
+        headerTextContainer: {
+            flex: 1,
+        },
+        subtitle: {
+            fontSize: 13,
+            color: colors.textSecondary,
+            marginBottom: 4,
+            fontWeight: '500',
         },
         title: {
             fontSize: 18,
             fontWeight: 'bold',
             color: colors.textPrimary,
+            paddingLeft: 6,
         },
-        streakText: {
-            fontSize: 16,
-            fontWeight: 'bold',
-            color: colors.primary,
+        iconContainer: {
+            width: 36,
+            height: 36,
+            borderRadius: 18,
+            backgroundColor: 'rgba(255, 150, 0, 0.1)',
+            justifyContent: 'center',
+            alignItems: 'center',
         },
         weekContainer: {
             flexDirection: 'row',
             justifyContent: 'space-between',
-            marginBottom: 16,
+            marginBottom: 20,
             gap: 4,
         },
         dayContainer: {
@@ -69,33 +78,44 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             flex: 1,
         },
         dayLabel: {
-            fontSize: 11,
+            fontSize: 12,
             fontWeight: '600',
             color: colors.textSecondary,
-            marginBottom: 16,
+            marginBottom: 8,
         },
         dayCircle: {
-            width: 32,
-            height: 32,
-            borderRadius: 16,
+            width: 36,
+            height: 36,
+            borderRadius: 18,
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: 2,
-            borderColor: colors.border,
+            backgroundColor: colors.surfaceLight, // Visible gray for inactive/future days
         },
-        todayCircle: {
-            borderColor: colors.textPrimary,
+        dayCircleCompleted: {
+            backgroundColor: colors.success,
+        },
+        dayCircleToday: {
+            borderWidth: 2,
+            borderColor: colors.primary,
+        },
+        dayCircleTodayCompleted: {
+            backgroundColor: colors.primary,
+            borderColor: colors.primary,
         },
         footer: {
-            backgroundColor: colors.backgroundLighter,
-            padding: 12,
-            borderRadius: 12,
+            backgroundColor: 'rgba(88, 204, 2, 0.1)', // Light green bg
+            paddingVertical: 12,
+            paddingHorizontal: 16,
+            borderRadius: 32, // Rounded pill shape
+            flexDirection: 'row',
             alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
         },
         footerText: {
             fontSize: 14,
             fontWeight: '600',
-            color: colors.textSecondary,
+            color: colors.success,
         },
     }), [themeVersion]);
 
@@ -227,11 +247,6 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             if (lastRewardDate === today) {
                 setRewardClaimed(true);
             } else {
-                // Only reset if it's a different day. 
-                // If it's the same day, we keep it true.
-                // If it's a new day, we reset to false (so they can claim if they complete a new week)
-                // But wait, if they are on day 8 (new week), the button won't be visible anyway.
-                // So this logic is safe.
                 setRewardClaimed(false);
             }
         } catch (e) {
@@ -252,8 +267,6 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             }
         }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek, checkRewardStatus])
     );
-
-
 
     const handleClaimReward = async () => {
         if (!user?.id || rewardClaimed) return;
@@ -277,25 +290,18 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         }
     };
 
-    const getDayBackgroundColor = (dayData: DayActivity) => {
-        if (dayData.isFuture) return colors.backgroundLighter;
-        if (dayData.completed) {
-            return colors.success;
-        }
-        return colors.error;
-    };
-
     return (
         <View style={styles.container}>
             {/* Header */}
             <View style={styles.header}>
-                <View style={styles.titleContainer}>
-                    <Target size={24} color={colors.primary} weight="fill" />
+                <View style={styles.headerTextContainer}>
                     <Text style={styles.title}>{t('weeklyActivity.title')}</Text>
                 </View>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                    <Fire size={20} color={colors.primary} weight="fill" />
-                    <Text style={styles.streakText}>{streak} {t('weeklyActivity.streak')}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                    <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.primary }}>{streak} gün</Text>
+                    <View style={styles.iconContainer}>
+                        <Fire size={20} color={colors.primary} weight="fill" />
+                    </View>
                 </View>
             </View>
 
@@ -304,69 +310,40 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                 {weekData.map((dayData, index) => (
                     <View key={index} style={styles.dayContainer}>
                         <Text style={styles.dayLabel}>{dayData.day}</Text>
-                        {index === 6 ? (
-                            <TouchableOpacity
-                                activeOpacity={0.7}
-                                onPress={handleClaimReward}
-                                disabled={!dayData.completed || rewardClaimed}
-                                style={[
-                                    styles.dayCircle,
-                                    { backgroundColor: 'transparent' }, // Keep border, transparent bg
-                                    dayData.isToday && styles.todayCircle,
-                                    dayData.completed && {
-                                        width: 48,
-                                        height: 48,
-                                        borderRadius: 24,
-                                        borderWidth: 3,
-                                        borderColor: colors.warning, // Gold border
-                                        backgroundColor: colors.secondary, // Blue background
-                                        marginTop: -8,
-                                        shadowColor: colors.warning,
-                                        shadowOffset: { width: 0, height: 4 },
-                                        shadowOpacity: 0.3,
-                                        shadowRadius: 8,
-                                        elevation: 8,
-                                    },
-                                    rewardClaimed && {
-                                        opacity: 0.5, // Dim if already claimed
-                                        backgroundColor: colors.surfaceLight
-                                    }
-                                ]}
-                            >
-                                <TreasureChest
-                                    size={dayData.completed ? 32 : 24}
-                                    color={dayData.completed ? colors.warning : colors.textSecondary}
-                                    weight="fill"
+                        <View
+                            style={[
+                                styles.dayCircle,
+                                dayData.completed && styles.dayCircleCompleted,
+                                dayData.isToday && styles.dayCircleToday,
+                                (dayData.isToday && dayData.completed) && styles.dayCircleTodayCompleted,
+                            ]}
+                        >
+                            {dayData.completed && (
+                                <Check
+                                    size={18}
+                                    color={dayData.isToday ? colors.textOnPrimary : colors.textOnPrimary} // Always white on completed
+                                    weight="bold"
                                 />
-                            </TouchableOpacity>
-                        ) : (
-                            <View
-                                style={[
-                                    styles.dayCircle,
-                                    { backgroundColor: getDayBackgroundColor(dayData) },
-                                    dayData.isToday && styles.todayCircle,
-                                ]}
-                            >
-                                {!dayData.isFuture && (
-                                    <Check
-                                        size={16}
-                                        color={colors.textOnPrimary}
-                                        weight="bold"
-                                    />
-                                )}
-                            </View>
-                        )}
+                            )}
+                        </View>
                     </View>
                 ))}
             </View>
 
             {/* Footer Text */}
             <View style={styles.footer}>
-                <Text style={styles.footerText}>
-                    {todayCompleted
-                        ? t('weeklyActivity.todayCompleted')
-                        : t('weeklyActivity.todayNotCompleted')}
-                </Text>
+                {todayCompleted ? (
+                    <>
+                        <CheckCircle size={20} color={colors.success} weight="fill" />
+                        <Text style={styles.footerText}>
+                            {t('weeklyActivity.todayCompleted')}
+                        </Text>
+                    </>
+                ) : (
+                    <Text style={[styles.footerText, { color: colors.textSecondary }]}>
+                        {t('weeklyActivity.todayNotCompleted')}
+                    </Text>
+                )}
             </View>
 
             <RewardModal

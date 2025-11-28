@@ -23,6 +23,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { ArrowRight, Check } from 'phosphor-react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const { width, height } = Dimensions.get('window');
 
@@ -82,18 +83,22 @@ const OnboardingScreen = () => {
         }
     }).current;
 
-    const handleNext = () => {
+    const handleNext = async () => {
         if (currentIndex < SLIDES.length - 1) {
             flatListRef.current?.scrollToIndex({
                 index: currentIndex + 1,
                 animated: true,
             });
         } else {
+            // Mark onboarding as seen
+            await AsyncStorage.setItem('hasSeenOnboarding', 'true');
             router.replace('/(tabs)');
         }
     };
 
-    const handleSkip = () => {
+    const handleSkip = async () => {
+        // Mark onboarding as seen
+        await AsyncStorage.setItem('hasSeenOnboarding', 'true');
         router.replace('/(tabs)');
     };
 
