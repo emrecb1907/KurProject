@@ -52,6 +52,20 @@
             "3": "Uzman"
         }
     },
+    "islamTarihi": {
+        "title": "İslam Tarihi",
+        "description": "İslam tarihi hakkında bilgini test et",
+        "tests": {
+            "1": "Genel İslam Tarihi"
+        }
+    },
+    "namazBilgisi": {
+        "title": "Namaz Bilgisi",
+        "description": "Namaz hakkında bilgini test et",
+        "tests": {
+            "1": "Genel Namaz Bilgisi"
+        }
+    },
     "speed": {
         "title": "Hız Testi",
         "description": "Hızlı düşün, hızlı cevapla",

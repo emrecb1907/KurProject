@@ -143,6 +143,13 @@
                 "3": "Uzman"
             }
         },
+        "islamTarihi": {
+            "title": "İslam Tarihi",
+            "description": "İslam tarihi hakkında bilgini test et",
+            "tests": {
+                "1": "Genel İslam Tarihi"
+            }
+        },
         "speed": {
             "title": "Hız Testi",
             "description": "Hızlı düşün, hızlı cevapla",

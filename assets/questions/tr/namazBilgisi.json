@@ -1,0 +1,3570 @@
+[
+  {
+    "question": "Namazın farzlarından biri hangisidir?",
+    "A": "Tesbih çekmek",
+    "B": "Kıyam",
+    "C": "Selam vermek",
+    "D": "İmam olmak",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin farzları kaç tanedir?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Abdestin farzlarından biri değildir?",
+    "A": "Yüzü yıkamak",
+    "B": "Başın mesh edilmesi",
+    "C": "Niyete etmek",
+    "D": "Kolları yıkamak",
+    "correct": "C"
+  },
+  {
+    "question": "Guslün farzlarından biri hangisidir?",
+    "A": "Burna su vermek",
+    "B": "Yüzü yıkamak",
+    "C": "Başın mesh edilmesi",
+    "D": "Kolları dirseğe kadar yıkamak",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın şartlarından biri nedir?",
+    "A": "Cemaatle kılmak",
+    "B": "Setr-i avret",
+    "C": "Yüksek sesle okumak",
+    "D": "Uzun kıyam",
+    "correct": "B"
+  },
+  {
+    "question": "Setr-i avret ne demektir?",
+    "A": "Namazı acele kılmak",
+    "B": "Örtülmesi gereken yerleri örtmek",
+    "C": "Namazı cemaatle kılmak",
+    "D": "Sessiz okumak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın içindeki farzlardan biri hangisidir?",
+    "A": "Tekbir getirmek",
+    "B": "Rüku",
+    "C": "Tesbihat",
+    "D": "Kunut duası",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazında vacip olan uygulama hangisidir?",
+    "A": "Üç rekât kılmak",
+    "B": "Kıyamı uzun tutmak",
+    "C": "Kunut duası okumak",
+    "D": "Cemaatle kılmak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın sonunda yapılan selam neyi ifade eder?",
+    "A": "Namazın bittiğini",
+    "B": "Tesbihatın başladığını",
+    "C": "Farzın kılındığını",
+    "D": "Yeni bir rekâtın başladığını",
+    "correct": "A"
+  },
+  {
+    "question": "Hangi durumda abdesti bozan bir hâl vardır?",
+    "A": "Uyuklamak",
+    "B": "Kan aldırmak",
+    "C": "Bilinci kaybetmek",
+    "D": "Dua etmek",
+    "correct": "C"
+  },
+  {
+    "question": "Hangi durum abdesti geçersiz kılar?",
+    "A": "Gülmek",
+    "B": "Sesli gülmek (namaz içinde)",
+    "C": "Koku sürmek",
+    "D": "Ayakta su içmek",
+    "correct": "B"
+  },
+  {
+    "question": "Kadınlarda hangi durum guslü gerektirir?",
+    "A": "Abdest almak",
+    "B": "Namaz vakti girmesi",
+    "C": "Hayız hâlinin bitmesi",
+    "D": "Saç taramak",
+    "correct": "C"
+  },
+  {
+    "question": "Abdesti bozan durumlardan biri hangisidir?",
+    "A": "Uyku",
+    "B": "Burnu temizlemek",
+    "C": "Kan çıkması",
+    "D": "Su içmek",
+    "correct": "C"
+  },
+  {
+    "question": "Ayakta su içmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın vaciplerinden biri hangisidir?",
+    "A": "Rükû",
+    "B": "İftitah tekbiri",
+    "C": "Fatiha okumak",
+    "D": "Selam",
+    "correct": "C"
+  },
+  {
+    "question": "Sünnet olan bir davranış nedir?",
+    "A": "Namazı terk etmek",
+    "B": "Misvak kullanmak",
+    "C": "Abdestsiz Kur’an okumak",
+    "D": "Cemaatten ayrılmak",
+    "correct": "B"
+  },
+  {
+    "question": "Kerahet vakitlerinden biri hangisidir?",
+    "A": "Güneş doğarken",
+    "B": "İkindi sonrası",
+    "C": "Yatsıdan sonra",
+    "D": "Sabah ezanından önce",
+    "correct": "A"
+  },
+  {
+    "question": "Namazı bozan durumlardan biri nedir?",
+    "A": "Kıbleye dönmek",
+    "B": "Gülmek",
+    "C": "Esnemek",
+    "D": "Ayakta durmak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda hangi hareket mekruhtur?",
+    "A": "Ellerini kaldırmak",
+    "B": "Sağa sola bakmak",
+    "C": "Secdeye gitmek",
+    "D": "Teşehhüdde oturmak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda gözlerin sürekli sağa sola kayması hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Mübah",
+    "correct": "C"
+  },
+  {
+    "question": "Hangi namaz cemaatle kılınması farz değildir ama sünnettir?",
+    "A": "Sabah",
+    "B": "Öğle",
+    "C": "Vitir",
+    "D": "Cuma",
+    "correct": "C"
+  },
+  {
+    "question": "Cuma namazı kaç rekâttır?",
+    "A": "2 farz",
+    "B": "4 farz",
+    "C": "3 farz",
+    "D": "1 farz",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazının farz olabilmesi için şartlardan biri nedir?",
+    "A": "Oruçlu olmak",
+    "B": "Mukim olmak",
+    "C": "Yolcu olmak",
+    "D": "Niyet etmemek",
+    "correct": "B"
+  },
+  {
+    "question": "Mazereti olan kimse neyi kılamaz?",
+    "A": "Cuma namazını",
+    "B": "Yatsı namazını",
+    "C": "Teravih namazını",
+    "D": "Sabah namazını",
+    "correct": "A"
+  },
+  {
+    "question": "Seferi olan bir kişi farz namazları kaç rekât kılar?",
+    "A": "Tam",
+    "B": "3 rekât",
+    "C": "2 rekât",
+    "D": "1 rekât",
+    "correct": "C"
+  },
+  {
+    "question": "Seferilik kaç km yolculukta başlar?",
+    "A": "30 km",
+    "B": "60 km",
+    "C": "90 km",
+    "D": "150 km",
+    "correct": "C"
+  },
+  {
+    "question": "Teyemmüm hangi durumda yapılır?",
+    "A": "Cuma vakti gelince",
+    "B": "Su yoksa veya kullanılamıyorsa",
+    "C": "Oruç tutarken",
+    "D": "Bayram sabahı",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmümde kaç farz vardır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmümün farzlarından biri hangisidir?",
+    "A": "Ayakta yapmak",
+    "B": "Eli toprağa vurmak",
+    "C": "Niyet etmek",
+    "D": "Su içmek",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda sağa sola gereksiz hareket etmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Helal",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda özürsüz konuşmak hangi hükme girer?",
+    "A": "Namazı bozar",
+    "B": "Sünnettir",
+    "C": "Mahzurlu değildir",
+    "D": "Vaciptir",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda fazla hareket etmek neye sebep olur?",
+    "A": "Sevap kazanılır",
+    "B": "Namaz bozulabilir",
+    "C": "Gusül gerekir",
+    "D": "Farz olur",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza başlamadan önce ilk şart hangisidir?",
+    "A": "Abdest almak",
+    "B": "Selam vermek",
+    "C": "Ayakta durmak",
+    "D": "Sünnet kılmak",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda Fatiha okumak hangi namazlarda vaciptir?",
+    "A": "Farz namazlarda",
+    "B": "Vitirde",
+    "C": "Sadece sabah namazında",
+    "D": "Sadece teravihte",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın başında getirilen ilk tekbirin adı nedir?",
+    "A": "Kunut tekbiri",
+    "B": "Tahiyyat tekbiri",
+    "C": "İftitah tekbiri",
+    "D": "Sünnet tekbiri",
+    "correct": "C"
+  },
+  {
+    "question": "Secde kaç organın yere konulmasıyla tamamlanır?",
+    "A": "4",
+    "B": "5",
+    "C": "7",
+    "D": "8",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda secde için gerekli olan organlardan biri nedir?",
+    "A": "Diz",
+    "B": "Kalça",
+    "C": "Topuk",
+    "D": "Omuz",
+    "correct": "A"
+  },
+  {
+    "question": "Rükûda yapılması farz olan nedir?",
+    "A": "Tesbih çekmek",
+    "B": "Eğilmek",
+    "C": "Dua etmek",
+    "D": "Eli kaldırmak",
+    "correct": "B"
+  },
+  {
+    "question": "Teşehhüd oturuşu ne zaman yapılır?",
+    "A": "Sadece farzlarda",
+    "B": "Son oturuşta",
+    "C": "İlk ve son oturuşlarda",
+    "D": "Cuma namazında",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kaşınmak hangi hükme girer?",
+    "A": "Namazı bozar",
+    "B": "Sünnettir",
+    "C": "Zaruret yoksa mekruhtur",
+    "D": "Vaciptir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleyi bilmeyen ne yapar?",
+    "A": "Namazı terk eder",
+    "B": "Rastgele döner",
+    "C": "Zannettiği yöne yönelir",
+    "D": "Sadece dua eder",
+    "correct": "C"
+  },
+  {
+    "question": "Hangi durumda namaz kazaya bırakılır?",
+    "A": "Uykuya dalınca",
+    "B": "Yemek vaktinde",
+    "C": "Ders sırasında",
+    "D": "Gezide",
+    "correct": "A"
+  },
+  {
+    "question": "Kaza namazı hangi durum için geçerlidir?",
+    "A": "Tecdit",
+    "B": "Geçmiş vakit namazı",
+    "C": "Sünnet namazı",
+    "D": "Vitir namazı",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın bozulması hâlinde ne yapılır?",
+    "A": "Devam edilir",
+    "B": "Sadece dua edilir",
+    "C": "Yeniden başlanır",
+    "D": "Oturulur",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda ayak parmaklarının kıbleye dönmesi hangi şarttır?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namaz için gerekli şartlardan biri hangisidir?",
+    "A": "Oruçlu olmak",
+    "B": "Kıbleye yönelmek",
+    "C": "Cemaat bulmak",
+    "D": "Teravih kılmak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın dışındaki şartlardan biri hangisidir?",
+    "A": "Kıyam",
+    "B": "Kıbleye yönelmek",
+    "C": "Rükû",
+    "D": "Secde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın içinde farz olan bir rükün hangisidir?",
+    "A": "Sübhaneke okumak",
+    "B": "Kıyam",
+    "C": "Teşehhüd duası",
+    "D": "Salavat getirmek",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte niyet hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte yüz nasıl yıkanır?",
+    "A": "Çene altından saç bitimine kadar",
+    "B": "Göğüsten kulaklara kadar",
+    "C": "Yalnız göz çevresi",
+    "D": "Kulak arkasına kadar",
+    "correct": "A"
+  },
+  {
+    "question": "Hangi durumda gusül almak farzdır?",
+    "A": "Tıraş olmak",
+    "B": "Denize girmek",
+    "C": "Cünüplük hâli",
+    "D": "Uyku",
+    "correct": "C"
+  },
+  {
+    "question": "Gusülde suyun ulaşması gereken yerlerden biri hangisidir?",
+    "A": "Saç dipleri",
+    "B": "Diz kapakları",
+    "C": "El parmakları",
+    "D": "Göz kapakları",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda Fatiha’dan sonra okunan kısa sure veya ayetlere ne denir?",
+    "A": "Tilavet",
+    "B": "Zamm-ı sure",
+    "C": "Hatim",
+    "D": "Dua",
+    "correct": "B"
+  },
+  {
+    "question": "Zamm-ı sure hangi namazlarda okunur?",
+    "A": "Farz namazların ilk iki rekâtında",
+    "B": "Sadece yatsıda",
+    "C": "Sadece sabah namazında",
+    "D": "Sadece teravihte",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükûdan doğrulmaya ne denir?",
+    "A": "Kavme",
+    "B": "Celse",
+    "C": "Rükû",
+    "D": "İftitah",
+    "correct": "A"
+  },
+  {
+    "question": "Secdeden oturuşa geçmeye ne denir?",
+    "A": "Kavme",
+    "B": "Kıyam",
+    "C": "Celse",
+    "D": "Teşehhüd",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda iki secde arasında kısa oturuşun adı nedir?",
+    "A": "Celse",
+    "B": "Kıyam",
+    "C": "Rükû",
+    "D": "Tahiyyat",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda imamın arkasında Fatiha okumanın hükmü nedir?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Tilavet secdesi hangi durumda yapılır?",
+    "A": "Abdest alınca",
+    "B": "Secde ayeti okununca",
+    "C": "Namaz bitince",
+    "D": "Seferde olunca",
+    "correct": "B"
+  },
+  {
+    "question": "Tilavet secdesi abdestli yapılmazsa hükmü nedir?",
+    "A": "Sevap artar",
+    "B": "Mekruh olur",
+    "C": "Caiz olmaz",
+    "D": "Bozulur",
+    "correct": "C"
+  },
+  {
+    "question": "Hangi durum namazı bozar?",
+    "A": "Esnemek",
+    "B": "Hapşırmak",
+    "C": "Yemek yemek",
+    "D": "Ağlamak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleye karşı bir engel koymaya ne denir?",
+    "A": "Rükün",
+    "B": "Sutra",
+    "C": "Sünnet",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sutranın amacı nedir?",
+    "A": "Gölge yapmak",
+    "B": "İmamı korumak",
+    "C": "Önünden geçilmesini engellemek",
+    "D": "Cemaat oluşturmak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir rüknün terk edilmesi hangi sonuca yol açar?",
+    "A": "Namaz sahih olur",
+    "B": "Namaz mekruh olur",
+    "C": "Namaz bozulur",
+    "D": "Sevap artar",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir vacibin unutularak terk edilmesinin hükmü nedir?",
+    "A": "Namaz bozulur",
+    "B": "Hiçbir şey gerekmez",
+    "C": "Sehiv secdesi yapılır",
+    "D": "Namaz tekrar kılınır",
+    "correct": "C"
+  },
+  {
+    "question": "Sehiv secdesi ne zaman yapılır?",
+    "A": "Rükû unutulunca",
+    "B": "Vacip terk edilince",
+    "C": "Cemaat kalabalık olunca",
+    "D": "Sünnet terk edilince",
+    "correct": "B"
+  },
+  {
+    "question": "Sehiv secdesi namazın hangi aşamasında yapılır?",
+    "A": "Namazdan önce",
+    "B": "Namaz esnasında",
+    "C": "Selamdan sonra",
+    "D": "Teşehhüdden önce",
+    "correct": "C"
+  },
+  {
+    "question": "Şüphe eden kimse namazı nasıl tamamlar?",
+    "A": "Her zaman en yüksek rekâtı alır",
+    "B": "Her zaman en düşük rekâtı esas alır",
+    "C": "Namazı bozar",
+    "D": "Devam etmez",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda bir kimsenin önünden geçmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mübah",
+    "C": "Günah",
+    "D": "Caiz",
+    "correct": "C"
+  },
+  {
+    "question": "Camide birinin önünden geçmemek için ne yapılır?",
+    "A": "Durulur",
+    "B": "Sutra konur",
+    "C": "Selam verilir",
+    "D": "Namaz bozulur",
+    "correct": "B"
+  },
+  {
+    "question": "Hangi vakit namaz kılmak mekruhtur?",
+    "A": "Güneşin batmasına yakın",
+    "B": "İkindi sonrası",
+    "C": "Güneş doğarken",
+    "D": "Hepsi",
+    "correct": "D"
+  },
+  {
+    "question": "Sabah namazının kaç rekât sünneti vardır?",
+    "A": "4",
+    "B": "2",
+    "C": "6",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "Sünnet namazların temel amacı nedir?",
+    "A": "Farzı düşürmek",
+    "B": "Ek sevap kazanmak",
+    "C": "Namazı kısaltmak",
+    "D": "Farzı geciktirmek",
+    "correct": "B"
+  },
+  {
+    "question": "Farz namazdan sonra teşvik edilen zikir hangisidir?",
+    "A": "İstihare",
+    "B": "Tesbihat",
+    "C": "Teravih",
+    "D": "Kurban",
+    "correct": "B"
+  },
+  {
+    "question": "Hangi namaz sadece Ramazan ayında kılınır?",
+    "A": "Vitir",
+    "B": "Teravih",
+    "C": "Duha",
+    "D": "Kuşluk",
+    "correct": "B"
+  },
+  {
+    "question": "Teravih namazı kaç rekâttır?",
+    "A": "10",
+    "B": "20",
+    "C": "12",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "Teravihin cemaatle kılınması hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Bayram namazı hangi tür namazdır?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazında kaç tekbir vardır?",
+    "A": "3+3",
+    "B": "7+5",
+    "C": "2+2",
+    "D": "10+10",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazı kaç rekâttır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram hutbesinin hükmü nedir?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazında kaç tekbir vardır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazı hangi hükme girer?",
+    "A": "Farz-ı ayın",
+    "B": "Vacip",
+    "C": "Farz-ı kifaye",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Cenaze namazında rükû ve secde var mıdır?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Bazen",
+    "D": "Sadece imamda",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazından sonra yapılan uygulama hangisidir?",
+    "A": "Tekbir",
+    "B": "Dua",
+    "C": "Rükû",
+    "D": "Sehiv secdesi",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Vitirde kunut duası hangi rekâtta okunur?",
+    "A": "Birinci",
+    "B": "İkinci",
+    "C": "Üçüncü",
+    "D": "Dördüncü",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda sağ ayağı dik, sol ayağı yayvan koyarak oturmaya ne denir?",
+    "A": "Tahiyyat",
+    "B": "İftirash",
+    "C": "Teşehhüd",
+    "D": "Celse",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda teşehhüd duası nerede okunur?",
+    "A": "Sadece sonunda",
+    "B": "Sadece başında",
+    "C": "İlk ve son oturuşta",
+    "D": "Rükûda",
+    "correct": "C"
+  },
+  {
+    "question": "Teşehhüd duasından sonra okunan dua hangisidir?",
+    "A": "Sübhaneke",
+    "B": "İftitah",
+    "C": "Salavat",
+    "D": "Ezan",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın farzlarından hangisi kıyamdan önce gelir?",
+    "A": "Kunut",
+    "B": "Niyet",
+    "C": "Secde",
+    "D": "Teşehhüd",
+    "correct": "B"
+  },
+  {
+    "question": "Niyet hangi organla yapılır?",
+    "A": "Dille",
+    "B": "Yalnız kalple",
+    "C": "Ayakla",
+    "D": "Gözle",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda hangi durumda selam verilmeden namaz biter?",
+    "A": "Bayılma",
+    "B": "Esneme",
+    "C": "Cemaatin dağılması",
+    "D": "Zamanın dolması",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda selam hangi yönlere verilir?",
+    "A": "Sağ ve sol",
+    "B": "Sadece sağ",
+    "C": "Sadece sol",
+    "D": "Kıbleye",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte kollar nereye kadar yıkanır?",
+    "A": "El bileğine kadar",
+    "B": "Dirseklerle birlikte",
+    "C": "Omza kadar",
+    "D": "Sadece eller",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte başın mesh edilmesi nasıl yapılır?",
+    "A": "Tamamen suya sokularak",
+    "B": "Başın dörtte biri mesh edilerek",
+    "C": "Saç uçları yıkanarak",
+    "D": "Yüz yıkanarak",
+    "correct": "B"
+  },
+  {
+    "question": "Mesh ne demektir?",
+    "A": "Yıkamak",
+    "B": "Silmek",
+    "C": "Kurulamak",
+    "D": "Çıkarmak",
+    "correct": "B"
+  },
+  {
+    "question": "Mesh edilecek mestin şartlarından biri nedir?",
+    "A": "Su geçirmesi",
+    "B": "Çorap olması",
+    "C": "Topuğu kapatması",
+    "D": "Süslü olması",
+    "correct": "C"
+  },
+  {
+    "question": "Mestin mesh süresi yolcu için ne kadardır?",
+    "A": "12 saat",
+    "B": "24 saat",
+    "C": "48 saat",
+    "D": "72 saat",
+    "correct": "C"
+  },
+  {
+    "question": "Mestin mesh süresi mukim için kaç saattir?",
+    "A": "24",
+    "B": "48",
+    "C": "72",
+    "D": "12",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte ayaklar nasıl yıkanır?",
+    "A": "Topuğa kadar",
+    "B": "Baldırlara kadar",
+    "C": "Dize kadar",
+    "D": "Sadece parmak uçları",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz vakitlerinden biri değildir?",
+    "A": "İkindi",
+    "B": "Yatsı",
+    "C": "Teravih",
+    "D": "Sabah",
+    "correct": "C"
+  },
+  {
+    "question": "Sabah namazının farzı kaç rekâttır?",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "1",
+    "correct": "B"
+  },
+  {
+    "question": "Öğle namazının farzı kaç rekâttır?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "C"
+  },
+  {
+    "question": "İkindi namazının farzı kaç rekâttır?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Akşam namazının farzı kaç rekâttır?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "B"
+  },
+  {
+    "question": "Yatsı namazının farzı kaç rekâttır?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Hangi namazın son sünneti yoktur?",
+    "A": "Sabah",
+    "B": "Öğle",
+    "C": "İkindi",
+    "D": "Yatsı",
+    "correct": "C"
+  },
+  {
+    "question": "Namaz kılarken ayaklar arasında ne kadar mesafe olmalıdır?",
+    "A": "30 cm",
+    "B": "Omuz genişliği kadar",
+    "C": "Çok geniş",
+    "D": "Bitşik",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sağ ayağın parmakları nereye yönelir?",
+    "A": "Sağa",
+    "B": "Sola",
+    "C": "Kıbleye",
+    "D": "Yukarı",
+    "correct": "C"
+  },
+  {
+    "question": "Başını rükûdan kaldırırken ne denir?",
+    "A": "Subhanerabbiyelazim",
+    "B": "Semiallahu limen hamideh",
+    "C": "Allahu Ekber",
+    "D": "Allahümmeğfirli",
+    "correct": "B"
+  },
+  {
+    "question": "Rükûda ne edilmektedir?",
+    "A": "Ayakta durma",
+    "B": "Eğilme",
+    "C": "Oturma",
+    "D": "Secde",
+    "correct": "B"
+  },
+  {
+    "question": "Secdede ne yapılır?",
+    "A": "Eğilme",
+    "B": "Ayakta durma",
+    "C": "Yüzü yere koymak",
+    "D": "Oturmak",
+    "correct": "C"
+  },
+  {
+    "question": "Secde kaç organla yapılır?",
+    "A": "4",
+    "B": "5",
+    "C": "6",
+    "D": "7",
+    "correct": "D"
+  },
+  {
+    "question": "Namaz sırasında kaşınmak hangi durumdadır?",
+    "A": "Mekruh",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Sevap",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kolları iki yana açmak hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Farz",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda fazla hareket etmek neye sebep olur?",
+    "A": "Namaz bozulabilir",
+    "B": "Sevap artar",
+    "C": "Ödül kazanılır",
+    "D": "Namaz güçlenir",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın sonunda ne yapılır?",
+    "A": "Tekbir getirilir",
+    "B": "Selam verilir",
+    "C": "Rükû yapılır",
+    "D": "Sünnet kılınır",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda unutma olursa ne yapılır?",
+    "A": "Namaz bozulur",
+    "B": "Yüksek sesle konuşulur",
+    "C": "Sehiv secdesi yapılır",
+    "D": "Secde terk edilir",
+    "correct": "C"
+  },
+  {
+    "question": "Teşehhüdden sonra okunan salavatın hükmü nedir?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Kunut duası hangi namazda vaciptir?",
+    "A": "Sabah",
+    "B": "İkindi",
+    "C": "Vitir",
+    "D": "Akşam",
+    "correct": "C"
+  },
+  {
+    "question": "Vitir namazı kaç rekâttır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "C"
+  },
+  {
+    "question": "Namaza başlarken getirilen tekbirin adı nedir?",
+    "A": "Tahiyyat",
+    "B": "Kıraat",
+    "C": "İftitah",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıraatte ne yapılır?",
+    "A": "Rükû",
+    "B": "Kur’an okunur",
+    "C": "Oturulur",
+    "D": "Selam verilir",
+    "correct": "B"
+  },
+  {
+    "question": "Rükûdan doğrulunca ne denir?",
+    "A": "Allahu Ekber",
+    "B": "Subhanerabbiyelazim",
+    "C": "Sami'allahu limen hamideh",
+    "D": "Rabbenalekelhamd",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda eller nereye bağlanır?",
+    "A": "Göğse",
+    "B": "Göbek altına",
+    "C": "Göbek üzerine",
+    "D": "Yere",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda okunan Fatiha’nın hükmü nedir?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıraat hangi rekâtlarda yapılır?",
+    "A": "Her rekâtta",
+    "B": "İlk iki rekâtta",
+    "C": "Son rekâtta",
+    "D": "Yalnız farzlarda",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda zamm-ı sure okumamak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Vacip terkidir",
+    "D": "Farz terkidir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir kimse dalarsa ne yapmalıdır?",
+    "A": "Namazı bozmalı",
+    "B": "Sesli konuşmalı",
+    "C": "Devam edip sonunda sehiv secdesi yapmalı",
+    "D": "Namazı yeniden kılmalı",
+    "correct": "C"
+  },
+  {
+    "question": "Namazı bozan durumlardan biri hangisidir?",
+    "A": "Esnemek",
+    "B": "Hafif öne eğilmek",
+    "C": "Konuşmak",
+    "D": "Ayakta durmak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda gözlerin sürekli kapalı olması hangi hükme girer?",
+    "A": "Caiz",
+    "B": "Farz",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıble değişirse imam ne yapar?",
+    "A": "Namazı bitirir",
+    "B": "Cemaati bilgilendirip döner",
+    "C": "Dua eder",
+    "D": "Kur’an okur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın sonunda yapılan selam kaç yönedir?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sakal ile oynamak hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Mübah",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda yüksek sesle konuşmak ne yapar?",
+    "A": "Sevap artırır",
+    "B": "Namazı bozar",
+    "C": "Sünnettir",
+    "D": "Vaciptir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın vaciplerinden biri değildir?",
+    "A": "Fatiha okumak",
+    "B": "Zamm-ı sure okumak",
+    "C": "Kıraat",
+    "D": "Rükû yapmak",
+    "correct": "D"
+  },
+  {
+    "question": "Namazda tekbir alırken eller hangi yöne kaldırılır?",
+    "A": "Başa",
+    "B": "Göğüs hizasına",
+    "C": "Kulak hizasına",
+    "D": "Bel hizasına",
+    "correct": "C"
+  },
+  {
+    "question": "Rükûda sırtın durumu nasıl olmalıdır?",
+    "A": "Öne çok eğik",
+    "B": "Biraz kıvrımlı",
+    "C": "Düz bir şekilde",
+    "D": "Tam dik",
+    "correct": "C"
+  },
+  {
+    "question": "Secdede alın ve burun temasının hükmü nedir?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Farz",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda ellerin bağlanma şekli nedir?",
+    "A": "Göğüs üzerine",
+    "B": "Göbek altına",
+    "C": "Kol altında",
+    "D": "Diz üstünde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sağ ayak nasıl durur?",
+    "A": "Parmaklar sola dönük",
+    "B": "Düz şekilde",
+    "C": "Parmaklar kıbleye dönük",
+    "D": "Geriye dönük",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda sol ayak nasıl durur?",
+    "A": "Düz şekilde yere yayılır",
+    "B": "Başparmak üzerine basılır",
+    "C": "Tam dik tutulur",
+    "D": "Kıbleye dönük",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda elleri dizlere koymak hangi rükû ile ilgilidir?",
+    "A": "Doğrulma",
+    "B": "Oturma",
+    "C": "Secde",
+    "D": "Rükû",
+    "correct": "D"
+  },
+  {
+    "question": "Secde iki kez yapılır çünkü...",
+    "A": "Sünnettir",
+    "B": "Vaciptir",
+    "C": "Farzdır",
+    "D": "Namazın rüknüdür",
+    "correct": "D"
+  },
+  {
+    "question": "Namazda kıyam ne demektir?",
+    "A": "Ayakta durmak",
+    "B": "Oturmak",
+    "C": "Eğilmek",
+    "D": "Selam vermek",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıraat hangi durumda yapılır?",
+    "A": "Ayakta",
+    "B": "Secdede",
+    "C": "Rükûda",
+    "D": "Oturuşta",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda yüksek sesle okumak hangi namazlarda olur?",
+    "A": "Sabah, akşam, yatsı",
+    "B": "Öğle, ikindi",
+    "C": "Cuma ve teravih",
+    "D": "Hepsinde",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda sessiz okumak hangi namazlarda olur?",
+    "A": "Sabah ve yatsı",
+    "B": "Akşam ve teravih",
+    "C": "Öğle ve ikindi",
+    "D": "Hepsinde",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda tekbir getirirken hangi söz söylenir?",
+    "A": "Allahu Ekber",
+    "B": "Subhanallah",
+    "C": "La ilahe illallah",
+    "D": "Elhamdülillah",
+    "correct": "A"
+  },
+  {
+    "question": "Tahiyyat duası nerede okunur?",
+    "A": "Ayakta",
+    "B": "Secdede",
+    "C": "İlk ve son oturuşta",
+    "D": "Rükûda",
+    "correct": "C"
+  },
+  {
+    "question": "Ettehiyyatün'ün ardından genelde ne okunur?",
+    "A": "Dua",
+    "B": "Salavat",
+    "C": "Zamm-ı sure",
+    "D": "Fatiha",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sağa selam vermek neyi ifade eder?",
+    "A": "Başlangıcı",
+    "B": "Bitirişi",
+    "C": "Rüknü",
+    "D": "Teşehhüdü",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imam Fatiha'yı yüksek okuduğunda cemaat ne yapar?",
+    "A": "Sessiz dinler",
+    "B": "Tekrar eder",
+    "C": "Atlar",
+    "D": "Zamm-ı sure okur",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda eller neden kulak hizasına kaldırılır?",
+    "A": "Daha iyi duyulması için",
+    "B": "Sünnet olduğu için",
+    "C": "Bedeni güçlendirmek için",
+    "D": "Namazı uzatmak için",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda bir rüknün unutulması hâlinde ne gerekir?",
+    "A": "Namaz bozulur",
+    "B": "Sehiv secdesi",
+    "C": "Oruç",
+    "D": "Cemaat",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda bir vacibin unutulması hâlinde ne yapılır?",
+    "A": "Namaz bozulur",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Abdest alınır",
+    "D": "Tekrar kılınır",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza dururken niyet hangi organla yapılır?",
+    "A": "Dil",
+    "B": "Kalp",
+    "C": "Göz",
+    "D": "Ayak",
+    "correct": "B"
+  },
+  {
+    "question": "İmamın görevi nedir?",
+    "A": "Cemaatin önünde okumak",
+    "B": "Yalnız kılmak",
+    "C": "Her şeyi sessiz yapmak",
+    "D": "Namazı hızlı kılmak",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda imamdan önce hareket etmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Farz",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "İmamla birlikte hareket etmeye ne denir?",
+    "A": "İktida",
+    "B": "İsar",
+    "C": "İlham",
+    "D": "İhlas",
+    "correct": "A"
+  },
+  {
+    "question": "Cemaatle kılınan namazdan daha faziletli olan nedir?",
+    "A": "Tek başına kılmak",
+    "B": "Cemaatle kılmak",
+    "C": "Evde kılmak",
+    "D": "Mekruh vakitte kılmak",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaatle namaz kılmanın sevabı kaç kat daha fazladır?",
+    "A": "10",
+    "B": "17",
+    "C": "27",
+    "D": "100",
+    "correct": "C"
+  },
+  {
+    "question": "Camide cemaatin ardında saf düzeni nasıl olmalıdır?",
+    "A": "Dağınık",
+    "B": "Sık ve düz",
+    "C": "Aralıklı",
+    "D": "Çember şeklinde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın başında alınan tekbirin hükmü nedir?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda zamm-ı sure okumak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıble yönünün bozulması halinde ne yapılır?",
+    "A": "Namaz bırakılır",
+    "B": "Kıbleye dönülür",
+    "C": "Selam verilir",
+    "D": "Dua edilir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda özürsüz konuşmak ne yapar?",
+    "A": "Sevap kazandırır",
+    "B": "Namazı bozar",
+    "C": "Tesbihat sayılır",
+    "D": "Vacip olur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yemek yemek hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Namazı bozar",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda esnemek hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kaşınılabilir mi?",
+    "A": "Evet ama aşırı olmamalı",
+    "B": "Hayır, haramdır",
+    "C": "Vaciptir",
+    "D": "Farzdır",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ayakların kıbleye yönelmesi hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda bedenin örtülmesi neye girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıbleye yönelmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın ortasında abdesti bozulan ne yapar?",
+    "A": "Devam eder",
+    "B": "Namazı bırakır ve yeniden kılar",
+    "C": "Dua eder",
+    "D": "Konuşur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ayakta duramayan kişi nasıl kılar?",
+    "A": "Oturur",
+    "B": "Yatar",
+    "C": "El işaretleriyle",
+    "D": "Hiç kılmaz",
+    "correct": "A"
+  },
+  {
+    "question": "Otururken rükû nasıl yapılır?",
+    "A": "Baş hafif eğilir",
+    "B": "Ayakta yapılır",
+    "C": "Secdeye gidilir",
+    "D": "Hiç yapılmaz",
+    "correct": "A"
+  },
+  {
+    "question": "Otururken secde nasıl yapılır?",
+    "A": "Baş daha çok eğilir",
+    "B": "Normal şekilde yapılır",
+    "C": "Ayakta yapılır",
+    "D": "Eller kaldırılır",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda gülmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Abdesti bozar",
+    "D": "Sevap kazandırır",
+    "correct": "C"
+  },
+  {
+    "question": "Abdest alırken ağza su vermek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte burna su vermek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest sırasındaki tertip hangi mezhepte farzdır?",
+    "A": "Şafii",
+    "B": "Hanefi",
+    "C": "Maliki",
+    "D": "Hanbeli",
+    "correct": "A"
+  },
+  {
+    "question": "Hanefi mezhebine göre abdeste niyet etmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Caiz değil",
+    "correct": "C"
+  },
+  {
+    "question": "Abdestte yüzü yıkarken suyun ulaşması gereken alanlardan biridir:",
+    "A": "Kulak arkası",
+    "B": "Alın ve çene arası",
+    "C": "Göğüs",
+    "D": "Saç uçları",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte parmak aralarını ovmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Gusülde saç diplerine su ulaştırmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Caiz",
+    "correct": "A"
+  },
+  {
+    "question": "Cünüplükten kurtulmak için ne yapmak gerekir?",
+    "A": "Abdest",
+    "B": "Gusül",
+    "C": "Teyemmüm",
+    "D": "Dua",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmüm hangi maddelerle yapılır?",
+    "A": "Su",
+    "B": "Toprak türü maddeler",
+    "C": "Tahta",
+    "D": "Cam",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmümün farzlarından biri hangisidir?",
+    "A": "Niyet",
+    "B": "El yıkamak",
+    "C": "Beden yıkamak",
+    "D": "Tekbir almak",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm ne zaman bozulur?",
+    "A": "Su bulununca",
+    "B": "Rüzgar çıkınca",
+    "C": "Güneş batınca",
+    "D": "Ay doğunca",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın vaktinde kılınmasına ne denir?",
+    "A": "İade",
+    "B": "Kaza",
+    "C": "Ada",
+    "D": "Bedel",
+    "correct": "C"
+  },
+  {
+    "question": "Namaz vaktinde kılınmazsa ne olur?",
+    "A": "Ödül verilir",
+    "B": "Kaza edilir",
+    "C": "Sünnet olur",
+    "D": "Sevap azalır",
+    "correct": "B"
+  },
+  {
+    "question": "Namaz vaktinin girdiğini ne belirler?",
+    "A": "Ezan",
+    "B": "Güneşin konumu",
+    "C": "İmam",
+    "D": "Hoca",
+    "correct": "B"
+  },
+  {
+    "question": "Sabah namazı vakti hangi olayla sona erer?",
+    "A": "Güneş doğunca",
+    "B": "Güneş batınca",
+    "C": "Öğle vakti girince",
+    "D": "Akşam olunca",
+    "correct": "A"
+  },
+  {
+    "question": "İmam ile cemaat arasındaki mesafe çok açılırsa hüküm nedir?",
+    "A": "Namaz bozulur",
+    "B": "Sünnet olur",
+    "C": "Sehiv secdesi gerekir",
+    "D": "Hiçbir şey olmaz",
+    "correct": "A"
+  },
+  {
+    "question": "Cemaatle namazda saf düzeni nasıl olmalıdır?",
+    "A": "Düz ve sık",
+    "B": "Karışık",
+    "C": "Çember şeklinde",
+    "D": "Dağınık",
+    "correct": "A"
+  },
+  {
+    "question": "Cemaatle namazın sevabı tek başına namaza göre kaç kat daha fazladır?",
+    "A": "5",
+    "B": "17",
+    "C": "27",
+    "D": "40",
+    "correct": "C"
+  },
+  {
+    "question": "Cuma namazı kime farzdır?",
+    "A": "Kadınlara",
+    "B": "Seferi olana",
+    "C": "Mukim erkeklere",
+    "D": "Çocuklara",
+    "correct": "C"
+  },
+  {
+    "question": "Cuma günü hangi namaz kılınmaz?",
+    "A": "Öğle farzı",
+    "B": "Cuma farzı",
+    "C": "Sünnet",
+    "D": "Tesbih",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazında hutbenin hükmü nedir?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma hutbesi kaç bölümden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazı kaç rekâttır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazında fazladan tekbirler hangi rekâtlarda alınır?",
+    "A": "İlk rekât",
+    "B": "Son rekât",
+    "C": "Her iki rekât",
+    "D": "Hiçbirinde",
+    "correct": "C"
+  },
+  {
+    "question": "Cenaze namazı kaç tekbirle kılınır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazında rükû ve secde var mıdır?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Sadece secde",
+    "D": "Sadece rükû",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazının hükmü nedir?",
+    "A": "Farz-ı ayın",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Farz-ı kifaye",
+    "correct": "D"
+  },
+  {
+    "question": "Secde ayetini duyunca ne yapılması gerekir?",
+    "A": "Rükû",
+    "B": "Secde",
+    "C": "Oturmak",
+    "D": "Kıyam",
+    "correct": "B"
+  },
+  {
+    "question": "Tilavet secdesi için abdest şart mıdır?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Fakihlere göre değişir",
+    "D": "Sadece sabah namazında",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda özürsüz gülmek neyi bozar?",
+    "A": "Sadece namazı",
+    "B": "Sadece abdesti",
+    "C": "Hem namazı hem abdesti",
+    "D": "Hiçbirini",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda çok hareket etmek hangi sonuca yol açar?",
+    "A": "Namaz bozulabilir",
+    "B": "Sevap artar",
+    "C": "Tesbihat olur",
+    "D": "Sünnet olur",
+    "correct": "A"
+  },
+  {
+    "question": "Kıyam ne demektir?",
+    "A": "Secde",
+    "B": "Ayakta durma",
+    "C": "Oturma",
+    "D": "Rükû",
+    "correct": "B"
+  },
+  {
+    "question": "Kıraat hangi rükündür?",
+    "A": "Kur’an okumak",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Tesbih",
+    "correct": "A"
+  },
+  {
+    "question": "Kunut duası hangi namazda okunur?",
+    "A": "Sabah",
+    "B": "Akşam",
+    "C": "Vitir",
+    "D": "Öğle",
+    "correct": "C"
+  },
+  {
+    "question": "Vitir namazı kaç rekâttır?",
+    "A": "1",
+    "B": "3",
+    "C": "4",
+    "D": "2",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda niyet nasıl yapılır?",
+    "A": "Dil ile",
+    "B": "Kalp ile",
+    "C": "Ayakta",
+    "D": "Otururken",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın sonunda selam kaç tarafa verilir?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamdan önce rükûya gitmek hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda imamın hareketlerine uymaya ne denir?",
+    "A": "İsar",
+    "B": "İktida",
+    "C": "İhlas",
+    "D": "İcma",
+    "correct": "B"
+  },
+  {
+    "question": "Saf düzeninin düzgün olması neden önemlidir?",
+    "A": "Güzel görünüm",
+    "B": "Cemaat sevabı artması",
+    "C": "Sünnet",
+    "D": "Mecburiyet",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kaşınmak hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Caiz değildir",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıbleyi yanlış yönelmek durumunda ne yapılır?",
+    "A": "Namaz bırakılır",
+    "B": "Doğru yöne dönülür",
+    "C": "Dua edilir",
+    "D": "Sehiv secdesi yapılır",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda konuşmak hangi sonucu doğurur?",
+    "A": "Sevap artar",
+    "B": "Mekruh olur",
+    "C": "Namaz bozulur",
+    "D": "Vacip olur",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıble şartını sağlayamayan ne yapmalıdır?",
+    "A": "Namazı bırakır",
+    "B": "Zannettiği yöne döner",
+    "C": "Kıble yok sayılır",
+    "D": "Dua eder",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda özürsüz oturmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Caiz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kaçıncı rekâtta oturmak vaciptir?",
+    "A": "İlk oturuş",
+    "B": "Son oturuş",
+    "C": "Her oturuş",
+    "D": "Hiçbiri",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda son oturuşun hükmü nedir?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Sehiv secdesi ne zaman yapılmaz?",
+    "A": "Vacip terk edilince",
+    "B": "Sünnet terk edilince",
+    "C": "Şüphe olunca",
+    "D": "Rekât karışınca",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sehiv secdesi kaç secdeden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda selamdan önce sehiv secdesi yapılırsa hüküm nedir?",
+    "A": "Caiz değildir",
+    "B": "Namaz bozulur",
+    "C": "Sünnet olur",
+    "D": "Namaz geçerlidir",
+    "correct": "D"
+  },
+  {
+    "question": "Secde sırasında ayak parmaklarının yere değmesi hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda özür olmadan başı sağa sola çevirmek hangi hükme girer?",
+    "A": "Mübah",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Caiz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıyam ederken elleri bağlamak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıraat hangi rüknün içine girer?",
+    "A": "Ayakta durmak",
+    "B": "Okumak",
+    "C": "Rükû",
+    "D": "Secde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda iki secde arasında kısa bir süre oturmaya ne denir?",
+    "A": "Kavme",
+    "B": "Celse",
+    "C": "Kıyam",
+    "D": "Teşehhüd",
+    "correct": "B"
+  },
+  {
+    "question": "Celse oturuşu hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda imamla cemaat arasındaki bağı koparan olay hangisidir?",
+    "A": "Hapşırma",
+    "B": "Öksürme",
+    "C": "Araya engel girmesi",
+    "D": "Esneme",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda özürsüz yan tarafa dönmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Caiz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleye tam dönmemek neye sebep olur?",
+    "A": "Namaz bozulur",
+    "B": "Sevap azalır",
+    "C": "Vacip olur",
+    "D": "Mekruh olur",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda elleri kaldırmanın hükmü nedir?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rükûdan sonra kısa bir süre durmaya ne denir?",
+    "A": "Kıyam",
+    "B": "Kavme",
+    "C": "Celse",
+    "D": "Teşehhüd",
+    "correct": "B"
+  },
+  {
+    "question": "Rükûdan kalkınca 'Rabbenâ lekel hamd' demek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda rükû neyi ifade eder?",
+    "A": "Eğilmek",
+    "B": "Oturmak",
+    "C": "Selam vermek",
+    "D": "Ayakta durmak",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda secde neyi ifade eder?",
+    "A": "Oturma",
+    "B": "Yere kapanma",
+    "C": "Eğilme",
+    "D": "Ayakta durma",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda selam vermek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda teşehhüd duası neden okunur?",
+    "A": "Namazı bitirmek için",
+    "B": "Oturuşu tamamlamak için",
+    "C": "Sünnet olduğu için",
+    "D": "Rükû için",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda 'Ettehiyyatü' duası nerede okunur?",
+    "A": "Rükûda",
+    "B": "Secdede",
+    "C": "Oturmada",
+    "D": "Ayakta",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda 'Salli ve Barik' duaları hangi hükme girer?",
+    "A": "Vacip",
+    "B": "Farz",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ayakları kıbleye çevirmek hangi hükme girer?",
+    "A": "Vacip",
+    "B": "Sünnet",
+    "C": "Farz",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda selam verdikten sonra ne yapılır?",
+    "A": "Namaz biter",
+    "B": "Rükû yapılır",
+    "C": "Secde yapılır",
+    "D": "Tekrar kıyam",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz bittikten sonra yapılan zikir hangi isimle bilinir?",
+    "A": "Hatim",
+    "B": "Tesbihat",
+    "C": "Teheccüd",
+    "D": "Vitir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıraat hangi vakitlerde gizli yapılır?",
+    "A": "Sabah",
+    "B": "Akşam",
+    "C": "Öğle ve ikindi",
+    "D": "Yatsı",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıraat hangi vakitlerde yüksek yapılır?",
+    "A": "Öğle",
+    "B": "İkindi",
+    "C": "Sabah, akşam, yatsı",
+    "D": "Öğle ve yatsı",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir rekât kaç secde içerir?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamın arkasında Fatiha okumak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Caiz değil",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda 'amin' demek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ağız dolusu gülmek neyi bozar?",
+    "A": "Sadece namazı",
+    "B": "Sadece abdesti",
+    "C": "Hem abdesti hem namazı",
+    "D": "Hiçbir şeyi bozmaz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda esnemek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Farz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleyi bilmeyen kişi ne yapmalıdır?",
+    "A": "Namazı terk eder",
+    "B": "Rastgele döner",
+    "C": "Zannettiği yöne yönelir",
+    "D": "Sadece dua eder",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda unutulan bir vacip için ne yapılır?",
+    "A": "Namaz bitirilir",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Tekrar kılınır",
+    "D": "Abdest alınır",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıyamı kısa tutmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Caizdir",
+    "D": "Mekruhtur",
+    "correct": "C"
+  },
+  {
+    "question": "Vitir namazında kunut duası ne zaman okunur?",
+    "A": "Rükûdan sonra",
+    "B": "Rükûdan önce",
+    "C": "Selamdan sonra",
+    "D": "Namaza başlamadan önce",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ağlamak hangi durumda caizdir?",
+    "A": "Dünya işi için",
+    "B": "Ahiret korkusu için",
+    "C": "Canı sıkılınca",
+    "D": "Esnerken",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rahatsızlık veren düşünceler hangi hükme girer?",
+    "A": "Namazı bozar",
+    "B": "Sevap artırır",
+    "C": "Vesvese sayılır",
+    "D": "Farz olur",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda vesvese geldiğinde ne yapılmalıdır?",
+    "A": "Namaz bırakılır",
+    "B": "Yüksek sesle konuşulur",
+    "C": "Devam edilir",
+    "D": "Sehiv secdesi yapılır",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıyamda duramayan kişi ne yapar?",
+    "A": "Namazı terk eder",
+    "B": "Oturup kılar",
+    "C": "Ayakta bekler",
+    "D": "Rükûsuz kılar",
+    "correct": "B"
+  },
+  {
+    "question": "Otururken secde nasıl yapılır?",
+    "A": "Baş daha fazla eğilir",
+    "B": "Baş hiç eğilmez",
+    "C": "Ayakta yapılır",
+    "D": "Eller kaldırılır",
+    "correct": "A"
+  },
+  {
+    "question": "Seferi olan kaç rekâtlık farzları kısaltır?",
+    "A": "2 rekât",
+    "B": "4 rekâtlık farzları",
+    "C": "Tüm sünnetleri",
+    "D": "Yalnız vitiri",
+    "correct": "B"
+  },
+  {
+    "question": "Seferilik yolculuğu kaç km ile başlar?",
+    "A": "30 km",
+    "B": "60 km",
+    "C": "90 km",
+    "D": "150 km",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın farz olmayan ama tamamlayıcı unsurlarına ne denir?",
+    "A": "Vacip",
+    "B": "Sünnet",
+    "C": "Mekruh",
+    "D": "Farz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ilk oturuş ne zaman yapılır?",
+    "A": "Her rekâtta",
+    "B": "İki rekâtlık namazlarda",
+    "C": "Dört rekâtlık namazlarda ikinci rekâttan sonra",
+    "D": "Namazın sonunda",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda son oturuşun hükmü nedir?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükûdan hemen sonra kısa bir duruşa ne denir?",
+    "A": "Kavme",
+    "B": "Celse",
+    "C": "Teşehhüd",
+    "D": "İftitah",
+    "correct": "A"
+  },
+  {
+    "question": "Secdeden kalkıp kısa bir süre oturmaya ne denir?",
+    "A": "Celse",
+    "B": "Kıyam",
+    "C": "Teşehhüd",
+    "D": "Rükû",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda yalnız farz ve vacip rükünler kılınarak namazı tamamlamaya ne denir?",
+    "A": "Ed’a",
+    "B": "İfa",
+    "C": "İcma",
+    "D": "İdrak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda omuz hizasında elleri kaldırmak hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Farz",
+    "C": "Sünnet",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleye yönelmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda gözleri kapatmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Farz",
+    "D": "Cabiz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıyamın yerine geçecek durum hangisidir?",
+    "A": "Oturmak",
+    "B": "Yatmak",
+    "C": "İşaretle kılmak",
+    "D": "Secde etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Hangi kişi kıyam yapmayabilir?",
+    "A": "Seferi olan",
+    "B": "Hasta olan",
+    "C": "Çocuk",
+    "D": "İmam",
+    "correct": "B"
+  },
+  {
+    "question": "Namazı tam olarak ayakta kılamayan ne yapar?",
+    "A": "Namazı terk eder",
+    "B": "Oturup kılar",
+    "C": "Başka zaman kılar",
+    "D": "Kıyamı atlarken",
+    "correct": "B"
+  },
+  {
+    "question": "Otururken rükû nasıl yapılır?",
+    "A": "Elleri dizlere koyarak",
+    "B": "Baş hafif eğilerek",
+    "C": "Ayakta yapılır",
+    "D": "Yere kapanarak",
+    "correct": "B"
+  },
+  {
+    "question": "Otururken secde nasıl yapılır?",
+    "A": "Ayakta yapılır",
+    "B": "Baş normalden daha çok eğilir",
+    "C": "Sadece gözle işaret edilir",
+    "D": "Bir şey yapılmaz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda bir rüknü unutmanın çözümü nedir?",
+    "A": "Namaz bozulur",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Dua edilir",
+    "D": "Sünnet eklenir",
+    "correct": "A"
+  },
+  {
+    "question": "Vacip terk edilince ne yapılır?",
+    "A": "Hiçbir şey olmaz",
+    "B": "Namaz bozulur",
+    "C": "Sehiv secdesi yapılır",
+    "D": "İmam değiştirilir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir şey düşünmek hangi hükme girer?",
+    "A": "Namazı bozar",
+    "B": "Caiz",
+    "C": "Vesvese",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Vesvese geldiğinde ne yapılmalıdır?",
+    "A": "Namaz bozulur",
+    "B": "Devam edilir",
+    "C": "Selam verilir",
+    "D": "Kıble değiştirilir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda öksürmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Caiz",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda ağız dolusu gülmek neyi bozar?",
+    "A": "Sadece namazı",
+    "B": "Sadece abdesti",
+    "C": "Hem namazı hem abdesti",
+    "D": "Hiçbir şeyi bozmaz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda hafif gülmek neyi bozar?",
+    "A": "Namazı",
+    "B": "Abdesti",
+    "C": "Sevabı",
+    "D": "Hiçbir şeyi",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda konuşmak hangi sonucu doğurur?",
+    "A": "Mekruh olur",
+    "B": "Namazı bozar",
+    "C": "Vacip olur",
+    "D": "Sünnet olur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kasıtlı konuşmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Namazı bozar",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda istemsiz gülmek neye sebep olur?",
+    "A": "Hiçbir şeye",
+    "B": "Abdest bozulur",
+    "C": "Namaz bozulur",
+    "D": "Günah olur",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda uyuklamak hangi hükme girer?",
+    "A": "Namaz bozulur",
+    "B": "Abdest bozulur",
+    "C": "Caizdir",
+    "D": "Mekruhtur",
+    "correct": "D"
+  },
+  {
+    "question": "Kişi namazda rekâtı karıştırırsa ne yapmalıdır?",
+    "A": "Namazı terk eder",
+    "B": "Şüphe eden en az rekâtı alır",
+    "C": "En fazla rekâtı alır",
+    "D": "Selam verir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ayakta durmak mümkün değilse alternatif nedir?",
+    "A": "Hiç kılmaz",
+    "B": "Oturur",
+    "C": "Yatar",
+    "D": "İşaretle kılar",
+    "correct": "B"
+  },
+  {
+    "question": "İşaretle namaz kılmak hangi durumda caizdir?",
+    "A": "Sağlıklı iken",
+    "B": "Ayakta duramayan ağır hastalarda",
+    "C": "Namazı uzatmak isteyince",
+    "D": "Cemaatte yer olmayınca",
+    "correct": "B"
+  },
+  {
+    "question": "Saf düzeni niçin önemlidir?",
+    "A": "Estetik için",
+    "B": "Cemaat sevabı için",
+    "C": "Hızlı bitirmek için",
+    "D": "Gizlilik için",
+    "correct": "B"
+  },
+  {
+    "question": "Saflar arasında boşluk bırakmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Farz",
+    "correct": "B"
+  },
+  {
+    "question": "İmamdan çok öne geçmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamın tekbiri ile aynı anda tekbir almak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Caiz",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "İmamdan önce rükûa varmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Mübah",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaate geç katılan kişi neyi takip eder?",
+    "A": "En yakın rekâtı",
+    "B": "İmamın durduğu pozisyonu",
+    "C": "Cemaatin isteğini",
+    "D": "Kendi zannını",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaate sonradan katılan kişi ne yapar?",
+    "A": "Namazı terk eder",
+    "B": "İmamla beraber devam eder",
+    "C": "Tek başına kılar",
+    "D": "Bekler",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaatle namazda imam selam verdiğinde sonradan katılan kişi ne yapar?",
+    "A": "Namazı bırakır",
+    "B": "Kendi eksik rekâtlarını tamamlar",
+    "C": "Abdest alır",
+    "D": "Dua eder",
+    "correct": "B"
+  },
+  {
+    "question": "Kadınların cemaatte durduğu yer neresidir?",
+    "A": "İlk saf",
+    "B": "Orta saf",
+    "C": "Son saf",
+    "D": "İmamın yanı",
+    "correct": "C"
+  },
+  {
+    "question": "İmamın yanlış okuması hâlinde cemaat ne yapar?",
+    "A": "Uyarır",
+    "B": "Devam eder",
+    "C": "Namazı bozar",
+    "D": "Sessiz kalır",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda yanlışlıkla fazla secde yapılırsa ne gerekir?",
+    "A": "Namaz bozulur",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Tekrar kılınır",
+    "D": "Hiçbir şey",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yanlışlıkla bir rekât eksik kılınırsa ne yapılır?",
+    "A": "Namaz bitirilir",
+    "B": "Kalan rekât tamamlanır",
+    "C": "Abdest alınır",
+    "D": "Namaz bozulur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yanlışlıkla fazla rekât kılınırsa ne yapılır?",
+    "A": "Namaz geçersiz olur",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Namaz yarıda bırakılır",
+    "D": "Tekrar kılınır",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda zamm-ı sureyi unutmak hangi hükme girer?",
+    "A": "Farz terkidir",
+    "B": "Vacip terkidir",
+    "C": "Mekruhtur",
+    "D": "Sünnettir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda Fatiha’yı unutmak neyi gerektirir?",
+    "A": "Sehiv secdesi",
+    "B": "Namazı bozup yeniden kılmak",
+    "C": "Sadece dua etmek",
+    "D": "Selam vermek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıbleyi bilmeyen kişinin ne yapması gerekir?",
+    "A": "Namazı bırakmak",
+    "B": "Zannî olarak doğru yöne yönelmek",
+    "C": "İmamı beklemek",
+    "D": "Her yöne dönmek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda örtülmesi gereken yerlere ne ad verilir?",
+    "A": "Satr-ı avret",
+    "B": "Tesettür",
+    "C": "Hicab",
+    "D": "İhram",
+    "correct": "A"
+  },
+  {
+    "question": "Erkeklerde satr-ı avret sınırı neresidir?",
+    "A": "Göbek ile diz kapağı arası",
+    "B": "Omuzlar",
+    "C": "Ayaklar",
+    "D": "Baş",
+    "correct": "A"
+  },
+  {
+    "question": "Kadınlarda satr-ı avret hangisidir?",
+    "A": "Yüz ve eller hariç tüm vücut",
+    "B": "Sadece baş",
+    "C": "Sadece bacaklar",
+    "D": "Sadece kollar",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda bedenin üçte birinin açılması neye sebep olur?",
+    "A": "Vacip olur",
+    "B": "Namaz mekruh olur",
+    "C": "Namaz bozulur",
+    "D": "Dua gerekir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda elbisenin yırtılması ama avretin görünmemesi hâli neye sebep olur?",
+    "A": "Namaz bozulur",
+    "B": "Mekruh olur",
+    "C": "Namaz geçerli olur",
+    "D": "Sehiv secdesi gerekir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıyafet dar olursa ve avret belli olursa hüküm nedir?",
+    "A": "Sünnet olur",
+    "B": "Mekruh",
+    "C": "Namaz bozulur",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda rükûsuz secde yapılır mı?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Sadece cenazede",
+    "D": "Yatsıda",
+    "correct": "B"
+  },
+  {
+    "question": "Rükûda en az ne kadar durmak gerekir?",
+    "A": "Bir tesbih miktarı",
+    "B": "10 saniye",
+    "C": "1 dakika",
+    "D": "Hiç durmaya gerek yok",
+    "correct": "A"
+  },
+  {
+    "question": "Secdede en az durma süresi nedir?",
+    "A": "Bir nefes",
+    "B": "Bir tesbih miktarı",
+    "C": "3 dakika",
+    "D": "Hiçbiri",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda Kur'an okumak neyin kapsamındadır?",
+    "A": "Secde",
+    "B": "Kıraat",
+    "C": "Kavme",
+    "D": "Celse",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda 'Allahu Ekber' demek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza başlarken alınan tekbire ne ad verilir?",
+    "A": "İftitah tekbiri",
+    "B": "Tahiyyat tekbiri",
+    "C": "Kunut tekbiri",
+    "D": "Tilavet tekbiri",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ayakta durmak neyi ifade eder?",
+    "A": "Rükû",
+    "B": "Kıyam",
+    "C": "Secde",
+    "D": "Teşehhüd",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ellerin bağlandığı yer erkekte neresidir?",
+    "A": "Göbek altı",
+    "B": "Göğüs üstü",
+    "C": "Diz hizası",
+    "D": "Omuz hizası",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda İmam ile cemaat arasındaki bağı koparan şey nedir?",
+    "A": "Hapşırmak",
+    "B": "Araya engel girmesi",
+    "C": "Cemaatin öne geçmesi",
+    "D": "Secde etmek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamdan önce kalkmak hangi sonucu doğurur?",
+    "A": "Vacip olur",
+    "B": "Namaz bitmiş sayılır",
+    "C": "Mekruh olur",
+    "D": "Sevap artar",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda imamla aynı anda hareket etmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Farz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamdan sonra hareket etmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Mübah",
+    "D": "Vacip",
+    "correct": "A"
+  },
+  {
+    "question": "İmamla birlikte namaza başlayan kimseye ne denir?",
+    "A": "Müdrik",
+    "B": "Mülhak",
+    "C": "Mükellef",
+    "D": "Musalli",
+    "correct": "A"
+  },
+  {
+    "question": "Sonradan cemaate katılan kişiye ne denir?",
+    "A": "Müdrik",
+    "B": "Mülhak",
+    "C": "Mükellef",
+    "D": "Muntazır",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imam selam verince sonradan katılan kişi ne yapar?",
+    "A": "Namazı bırakır",
+    "B": "Kendi eksik rekâtlarını tamamlar",
+    "C": "Abdest tazeler",
+    "D": "Hiçbir şey yapmaz",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma namazı kimlere farz değildir?",
+    "A": "Mukim erkek",
+    "B": "Kadın",
+    "C": "Sağlıklı erkek",
+    "D": "Şehirde bulunan erkek",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma namazından önce kaç rekât sünnet kılınır?",
+    "A": "2",
+    "B": "4",
+    "C": "6",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma namazının farzı kaç rekâttır?",
+    "A": "2",
+    "B": "4",
+    "C": "1",
+    "D": "3",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı kaç rekâttır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazında fazladan kaç tekbir alınır?",
+    "A": "7",
+    "B": "6",
+    "C": "5",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazında rükû var mıdır?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Bazen",
+    "D": "Sadece imam yapar",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazının farzı nedir?",
+    "A": "Selam",
+    "B": "Kıraat",
+    "C": "Dört tekbir",
+    "D": "Rükû",
+    "correct": "C"
+  },
+  {
+    "question": "Cenaze namazının hükmü nedir?",
+    "A": "Farz-ı ayın",
+    "B": "Farz-ı kifaye",
+    "C": "Sünnet",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Tilavet secdesi için abdest gerekli midir?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Sadece sabah",
+    "D": "Cuma günü değil",
+    "correct": "A"
+  },
+  {
+    "question": "Tilavet secdesi ne zaman yapılır?",
+    "A": "Rükûdan sonra",
+    "B": "Secde ayeti duyulduğunda",
+    "C": "Namaz bitince",
+    "D": "Ezan okununca",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda özürsüz konuşmak hangi sonucu doğurur?",
+    "A": "Sevap kazanılır",
+    "B": "Namaz bozulur",
+    "C": "Mekruh olur",
+    "D": "Vacip olur",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda fazla hareket etmek hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Farz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda üçten fazla ardı ardına hareket etmek neyi bozar?",
+    "A": "Ödülü",
+    "B": "Namazı",
+    "C": "Abdesti",
+    "D": "Sünneti",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kıraat hangi rekâtlarda vaciptir?",
+    "A": "İlk iki rekât",
+    "B": "Son iki rekât",
+    "C": "Her rekât",
+    "D": "Sadece vitir",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda zammı sure okumak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda Fatiha suresi yerine başka bir sure okunabilir mi?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Sadece seferide",
+    "D": "Sadece imamda",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda tesbih ne zaman söylenir?",
+    "A": "Rükûda",
+    "B": "Secdede",
+    "C": "Oturuşta",
+    "D": "Hepsinde",
+    "correct": "D"
+  },
+  {
+    "question": "Namazda 'Sübhaneke' duası ne zaman okunur?",
+    "A": "Kıyamda",
+    "B": "Secdede",
+    "C": "Rükûda",
+    "D": "Selamdan sonra",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda 'Ettehiyyatü' duası hangi oturuşta okunur?",
+    "A": "İlk",
+    "B": "Son",
+    "C": "Her ikisinde",
+    "D": "Hiçbirinde",
+    "correct": "C"
+  },
+  {
+    "question": "Teşehhüd duasının ardından ne okunur?",
+    "A": "Salavat",
+    "B": "Zammı sure",
+    "C": "Fatiha",
+    "D": "Ayetel Kürsi",
+    "correct": "A"
+  },
+  {
+    "question": "Namazı bozan durumlardan biri nedir?",
+    "A": "Esnemek",
+    "B": "Öksürmek",
+    "C": "Konuşmak",
+    "D": "Hapşırmak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda ayakların kıbleye dönmesi hangi hükme girer?",
+    "A": "Vacip",
+    "B": "Farz",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın şartlarından biri değildir?",
+    "A": "Kıbleye yönelmek",
+    "B": "Vakit girmesi",
+    "C": "Kıyam",
+    "D": "Abdest",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın içindeki farzlardan biri değildir?",
+    "A": "Kıyam",
+    "B": "Rükû",
+    "C": "Kıbleye yönelmek",
+    "D": "Secde",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kaç farz vardır? (Hanefî)",
+    "A": "6",
+    "B": "9",
+    "C": "12",
+    "D": "14",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın dışındaki farzlardan biri hangisidir?",
+    "A": "Kıyam",
+    "B": "Niyet",
+    "C": "Kıraat",
+    "D": "Secde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın içindeki farzlardan biri hangisidir?",
+    "A": "Setr-i avret",
+    "B": "Kıbleye yönelmek",
+    "C": "Kıyam",
+    "D": "Vakit",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıraat kaçıncı rekâtlarda farzdır?",
+    "A": "Her rekâtta",
+    "B": "İlk iki rekâtta",
+    "C": "Son iki rekâtta",
+    "D": "Sadece vitirde",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rükû kaç farzdandır?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda iki secde yapmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın sonunda selam vermek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda zammı sure okumak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Niyetin kalp ile yapılmasının hükmü nedir?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Niyetin dil ile söylenmesi hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Abdest alırken niyet etmek Hanefî mezhebinde hangi hükme girer?",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Mekruh",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Gusülde ağza su vermek Hanefî mezhebinde hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Gusülde burna su vermek Hanefî mezhebinde hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "A"
+  },
+  {
+    "question": "Gusülde saç diplerine su ulaştırmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mübah",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi maddelerle yapılır?",
+    "A": "Su",
+    "B": "Toprak türü maddeler",
+    "C": "Ağaç",
+    "D": "Cam",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmümün farzı kaçtır? (Hanefî)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmümün farzlarından biri nedir?",
+    "A": "Abdest almak",
+    "B": "Yüzü mesh etmek",
+    "C": "Secde",
+    "D": "Kıyam",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin farzlarından biri değildir?",
+    "A": "Yüzü yıkamak",
+    "B": "Kolları dirsekle birlikte yıkamak",
+    "C": "Ayakları yıkamak",
+    "D": "Sakalı üç defa taramak",
+    "correct": "D"
+  },
+  {
+    "question": "Abdestin farzlarından biri nedir?",
+    "A": "Başın tamamını mesh etmek",
+    "B": "Başın dörtte birini mesh etmek",
+    "C": "Göğsü yıkamak",
+    "D": "Kulakları mesh etmek",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin sünnetlerinden biri değildir?",
+    "A": "Ağıza su vermek",
+    "B": "Burna su vermek",
+    "C": "Ayağa mesh etmek",
+    "D": "Misvak kullanmak",
+    "correct": "C"
+  },
+  {
+    "question": "Abdest hangi durumlarda bozulur?",
+    "A": "Gülmek",
+    "B": "Uyumak",
+    "C": "Yellenmek",
+    "D": "Esnemek",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda abdest bozulursa ne yapılır?",
+    "A": "Devam edilir",
+    "B": "Namaz bozulur",
+    "C": "Oturulur",
+    "D": "Sehiv secdesi yapılır",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaatle namazın sevabı tek başına kılınan namaza göre kaç kat daha fazladır?",
+    "A": "7",
+    "B": "17",
+    "C": "27",
+    "D": "37",
+    "correct": "C"
+  },
+  {
+    "question": "Cemaatle namazın hükmü nedir?",
+    "A": "Vacip",
+    "B": "Sünnet-i müekkede",
+    "C": "Farz-ı kifaye",
+    "D": "Farz-ı ayın",
+    "correct": "B"
+  },
+  {
+    "question": "Cemaatle namazda imamın arkasında durmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Safların sık tutulması hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Saflarda boşluk bırakmanın hükmü nedir?",
+    "A": "Mekruh",
+    "B": "Vacip",
+    "C": "Farz",
+    "D": "Sevap",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda imamdan önce hareket etmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Mekruh",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "İmamın rükûa gitmesiyle cemaat ne yapmalıdır?",
+    "A": "Önce secde",
+    "B": "Arkasından rükûa gitmek",
+    "C": "Sessiz beklemek",
+    "D": "Selam vermek",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza sonradan katılana ne denir?",
+    "A": "Mülhak",
+    "B": "Müdrik",
+    "C": "Musalli",
+    "D": "Mukim",
+    "correct": "A"
+  },
+  {
+    "question": "Sonradan katılan kişi imam selam verince ne yapar?",
+    "A": "Namazı bozar",
+    "B": "Tamamlar",
+    "C": "Oturur",
+    "D": "Bekler",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma namazı kimlere farzdır?",
+    "A": "Erkek, akıllı ve mukim olanlara",
+    "B": "Kadınlara",
+    "C": "Çocuklara",
+    "D": "Seferilere",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı kaç rekâttır?",
+    "A": "2",
+    "B": "4",
+    "C": "3",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı kaç rekâttır?",
+    "A": "1",
+    "B": "2",
+    "C": "4",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazında kaç fazladan tekbir vardır?",
+    "A": "3+3",
+    "B": "4+4",
+    "C": "5+5",
+    "D": "7+7",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı kaç rekâttır?",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "2",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazında hangi dua okunur?",
+    "A": "Kunut duası",
+    "B": "Tevhid duası",
+    "C": "Salât-ı Tefriciye",
+    "D": "Ayetel Kürsi",
+    "correct": "A"
+  },
+  {
+    "question": "Kunut duası ne zaman okunur?",
+    "A": "Rükûdan önce",
+    "B": "Rükûdan sonra",
+    "C": "Secdede",
+    "D": "Selamdan sonra",
+    "correct": "B"
+  },
+  {
+    "question": "Tilavet secdesi kaç secdeden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Tilavet secdesi ne zaman farz olur?",
+    "A": "Secde ayeti okununca",
+    "B": "Ezan okununca",
+    "C": "Sadece imam okursa",
+    "D": "Sadece sabah namazında",
+    "correct": "A"
+  },
+  {
+    "question": "Cenaze namazı kaç tekbirle kılınır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazında rükû var mıdır?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Bazen",
+    "D": "Sadece imam yapar",
+    "correct": "B"
+  },
+  {
+    "question": "Cenaze namazının hükmü nedir?",
+    "A": "Farz-ı ayın",
+    "B": "Farz-ı kifaye",
+    "C": "Sünnet",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda kaçınılması gereken davranışlardan biri hangisidir?",
+    "A": "Sükûnetle durmak",
+    "B": "Gereksiz hareket etmek",
+    "C": "Kıbleye yönelmek",
+    "D": "Tesbih getirmek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda hafif öksürmek hangi hükme girer?",
+    "A": "Namazı bozar",
+    "B": "Mekruh",
+    "C": "Farz",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yüksek sesle konuşmak neyi bozar?",
+    "A": "Sadece sevabı",
+    "B": "Namazı",
+    "C": "Abdesti",
+    "D": "Hiçbir şeyi",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda esneme hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıyam yerine ne zaman oturularak kılınabilir?",
+    "A": "Hastalık durumunda",
+    "B": "Cemaat çok kalabalık olunca",
+    "C": "Güneş batınca",
+    "D": "Cami küçükse",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükû yapamayacak durumda olan kişi ne yapar?",
+    "A": "Kılayamaz",
+    "B": "İşaretle yapar",
+    "C": "Teyemmüm eder",
+    "D": "Kaza yapar",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda secde yapamayacak durumda olan kişi neyle işaret eder?",
+    "A": "Gözleriyle",
+    "B": "Başını daha fazla eğerek",
+    "C": "Eliyle",
+    "D": "Yalnızca niyet ederek",
+    "correct": "B"
+  },
+  {
+    "question": "Seferi olan kişi dört rekât farzları nasıl kılar?",
+    "A": "Tam kılar",
+    "B": "İki rekâta indirir",
+    "C": "Hiç kılmaz",
+    "D": "Sadece vitir kılar",
+    "correct": "B"
+  },
+  {
+    "question": "Seferilik sınırı kaç km’dir?",
+    "A": "60 km",
+    "B": "90 km",
+    "C": "120 km",
+    "D": "150 km",
+    "correct": "B"
+  },
+  {
+    "question": "Bir kimse hangi namazı kazaya bırakamaz?",
+    "A": "Farz namaz",
+    "B": "Vitir",
+    "C": "Cuma namazı",
+    "D": "Bayram namazı",
+    "correct": "C"
+  },
+  {
+    "question": "Cuma namazı yerine hangi namaz kılınır?",
+    "A": "Sabah namazı",
+    "B": "Öğle namazı",
+    "C": "Vitir namazı",
+    "D": "Teheccüd",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma hutbesi kaç bölümden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazı kaç tekbir içerir? (fazla tekbirler dahil)",
+    "A": "6",
+    "B": "7",
+    "C": "8",
+    "D": "9",
+    "correct": "C"
+  },
+  {
+    "question": "Cenaze namazında kaç farz vardır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "D"
+  },
+  {
+    "question": "Cenaze namazında hangi rükün yoktur?",
+    "A": "Tekbir",
+    "B": "Kıyam",
+    "C": "Kıraat",
+    "D": "Salavat",
+    "correct": "C"
+  },
+  {
+    "question": "Cenaze namazının farzı nedir?",
+    "A": "Kıraat",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Dört tekbir",
+    "correct": "D"
+  },
+  {
+    "question": "Cenaze namazının hükmü nedir?",
+    "A": "Farz-ı ayın",
+    "B": "Farz-ı kifaye",
+    "C": "Vacip",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Tilavet secdesi kaç secdeden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Tilavet secdesi ne zaman yapılır?",
+    "A": "Ezan okunduğunda",
+    "B": "Secde ayeti okunduğunda veya duyulduğunda",
+    "C": "Namaz bitince",
+    "D": "Rükû sırasında",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sakalı okşamak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Mekruh",
+    "C": "Farz",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yüzü sağa sola çevirmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir rüknü terk eden kişi ne yapmalıdır?",
+    "A": "Devam etmeli",
+    "B": "Sehiv secdesi yapmalı",
+    "C": "Namazı bozup yeniden kılmalı",
+    "D": "Dua etmeli",
+    "correct": "C"
+  },
+  {
+    "question": "Namazın en önemli farzı hangisidir?",
+    "A": "Secde",
+    "B": "Kıyam",
+    "C": "Kıraat",
+    "D": "Niyet",
+    "correct": "D"
+  },
+  {
+    "question": "Namazda 'Allahu Ekber' demek hangi tür tekbirdir?",
+    "A": "İftitah tekbiri",
+    "B": "Kunut tekbiri",
+    "C": "Tilavet tekbiri",
+    "D": "Teşrik tekbiri",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda cemaatle beraber hareket etmeye ne denir?",
+    "A": "İktida",
+    "B": "İcma",
+    "C": "İsar",
+    "D": "İfrat",
+    "correct": "A"
+  },
+  {
+    "question": "İmamdan çok önce hareket etmek hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "D"
+  },
+  {
+    "question": "Saflar arasında büyük boşluk bırakmak hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Sünnet",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda elleri kaldırmak hangi hükme girer? (iftitah tekbiri dışında)",
+    "A": "Farz",
+    "B": "Sünnet",
+    "C": "Vacip",
+    "D": "Mekruh",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda dizleri kırmadan eğilmek hangi rüknü ifade eder?",
+    "A": "Secde",
+    "B": "Rükû",
+    "C": "Kıyam",
+    "D": "Teşehhüd",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda iki secde arasında oturmaya ne denir?",
+    "A": "Kavme",
+    "B": "Celse",
+    "C": "Rükû",
+    "D": "Kıraat",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rükûdan sonra doğrulmaya ne ad verilir?",
+    "A": "Kavme",
+    "B": "Celse",
+    "C": "Kıraat",
+    "D": "Teşehhüd",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda 'Subhane rabbiye’l azim' duası nerede okunur?",
+    "A": "Kıyamda",
+    "B": "Rükûda",
+    "C": "Secdede",
+    "D": "Oturuşta",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda 'Subhane rabbiye’l a’la' duası nerede okunur?",
+    "A": "Rükûda",
+    "B": "Secdede",
+    "C": "Kıyamda",
+    "D": "Oturuşta",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ayakların kıbleye dönmesi hangi hükme girer?",
+    "A": "Farz",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kıbleyi tamamen terk etmek neyi bozar?",
+    "A": "Hiçbir şeyi",
+    "B": "Sadece sevabı",
+    "C": "Namazı",
+    "D": "Oturuşu",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda 'Ettehiyyatü' duası ne zaman okunur?",
+    "A": "Kıyamda",
+    "B": "Rükûda",
+    "C": "Oturmada",
+    "D": "Secdede",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda 'Salli-Barik' duaları hangi oturuşta okunur?",
+    "A": "İlk oturuş",
+    "B": "Son oturuş",
+    "C": "Sadece secdede",
+    "D": "Kıyamda",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sehiv secdesi ne zaman gereklidir?",
+    "A": "Farz terk edilince",
+    "B": "Vacip terk edilince",
+    "C": "Sünnet terk edilince",
+    "D": "Tesbihat unutulunca",
+    "correct": "B"
+  },
+  {
+    "question": "Sehiv secdesi kaç secdeden oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Sehiv secdesi ne zaman yapılır?",
+    "A": "Namazın başında",
+    "B": "Selamdan sonra",
+    "C": "Selamdan önce",
+    "D": "Rükû sırasında",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda bir rekât eksik kılındığında çözüm nedir?",
+    "A": "Namaz bozulur",
+    "B": "Eksik rekât tamamlanır",
+    "C": "Hiçbir şey yapılmaz",
+    "D": "Dua etmek yeterlidir",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda fazla rekât kılındığında ne yapılır?",
+    "A": "Namaz iptal olur",
+    "B": "Sehiv secdesi yapılır",
+    "C": "Tekrar kılınır",
+    "D": "Bir şey gerekmez",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda imamın yanlış okuması hâlinde cemaat ne yapar?",
+    "A": "Sessiz kalır",
+    "B": "Uyarır",
+    "C": "Namazı bırakır",
+    "D": "Tekrar eder",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ayakta fazla sallanmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Vacip",
+    "C": "Mekruh",
+    "D": "Farz",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda gözleri kapatmak hangi hükme girer?",
+    "A": "Mekruh",
+    "B": "Farz",
+    "C": "Sünnet",
+    "D": "Mübah",
+    "correct": "A"
+  }
+]
+
+
+  
+ 
+
+
+
+

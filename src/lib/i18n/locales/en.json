@@ -108,6 +108,14 @@
             "title": "Islamic Quiz",
             "description": "Test your Islamic knowledge"
         },
+        "islamTarihi": {
+            "title": "Islamic History",
+            "description": "Test your knowledge about Islamic history"
+        },
+        "namazBilgisi": {
+            "title": "Prayer Knowledge",
+            "description": "Test your knowledge about prayer"
+        },
         "speed": {
             "title": "Speed Round",
             "description": "Quick practice with mixed questions"
