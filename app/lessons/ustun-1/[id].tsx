@@ -20,7 +20,7 @@ Audio.setAudioModeAsync({
 export default function Ustun1LessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons } = useUser();
+    const { incrementDailyLessons, completeLesson } = useUser();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -204,6 +204,7 @@ export default function Ustun1LessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
+        completeLesson('4'); // Mark Üstün-1 as completed
         router.push('/(tabs)');
     };
 

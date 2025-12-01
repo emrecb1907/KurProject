@@ -45,6 +45,7 @@ export const useStore = create<StoreState>()(
         completedTests: state.completedTests,
         successRate: state.successRate,
         dailyProgress: state.dailyProgress,
+        completedLessons: state.completedLessons,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
@@ -109,6 +110,8 @@ export const useUser = () => useStore(
     incrementDailyTests: state.incrementDailyTests,
     claimDailyTask: state.claimDailyTask,
     checkDailyReset: state.checkDailyReset,
+    completedLessons: state.completedLessons,
+    completeLesson: state.completeLesson,
   }))
 );
 

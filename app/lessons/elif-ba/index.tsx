@@ -19,6 +19,7 @@ import {
     Heart,
     GraduationCap,
     ArrowLeft,
+    CheckCircle,
 } from 'phosphor-react-native';
 
 import { colors } from '@/constants/colors';
@@ -40,7 +41,7 @@ export default function ElifBaLessonsListScreen() {
     const { themeVersion } = useTheme();
 
     // Get user data from Zustand store
-    const { totalXP, currentLives } = useUser();
+    const { totalXP, currentLives, completedLessons } = useUser();
     const { user } = useAuth();
 
     // Calculate XP progress
@@ -86,6 +87,26 @@ export default function ElifBaLessonsListScreen() {
             title: 'Üstün-1',
             route: '/lessons/ustun-1/1',
         },
+        {
+            id: '5',
+            title: 'Üstün-2',
+            route: '/lessons/ustun-2/1',
+        },
+        {
+            id: '6',
+            title: 'Üstün-3',
+            route: '/lessons/ustun-3/1',
+        },
+        {
+            id: '7',
+            title: 'Esre',
+            route: '/lessons/esre/1',
+        },
+        {
+            id: '8',
+            title: 'Ötre',
+            route: '/lessons/otre/1',
+        },
     ];
 
     return (
@@ -96,7 +117,7 @@ export default function ElifBaLessonsListScreen() {
             <View style={styles.topHeader}>
                 <View style={styles.userInfo}>
                     <View style={styles.avatarContainer}>
-                        <User size={24} color="#000" weight="fill" opacity={0.5} />
+                        <User size={24} color="rgba(0, 0, 0, 0.5)" weight="fill" />
                     </View>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greetingText}>{t('home.welcome')},</Text>
@@ -160,39 +181,49 @@ export default function ElifBaLessonsListScreen() {
 
                 {/* Lessons List */}
                 <View style={styles.lessonsList}>
-                    {lessons.map((lesson) => (
-                        <Pressable
-                            key={lesson.id}
-                            style={styles.lessonCard}
-                            onPress={() => {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                router.push(lesson.route as any);
-                            }}
-                        >
-                            <View style={styles.cardContent}>
-                                {/* Icon */}
-                                <View style={[styles.iconContainer, { backgroundColor: 'rgba(160, 117, 40, 0.2)' }]}>
-                                    <BookOpen
-                                        size={24}
-                                        color="#FFC800"
-                                        weight="fill"
+                    {lessons.map((lesson) => {
+                        const isCompleted = completedLessons?.includes(lesson.id);
+                        return (
+                            <Pressable
+                                key={lesson.id}
+                                style={styles.lessonCard}
+                                onPress={() => {
+                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                    router.push(lesson.route as any);
+                                }}
+                            >
+                                <View style={styles.cardContent}>
+                                    {/* Icon */}
+                                    <View style={[styles.iconContainer, { backgroundColor: 'rgba(160, 117, 40, 0.2)' }]}>
+                                        <BookOpen
+                                            size={24}
+                                            color="#FFC800"
+                                            weight="fill"
+                                        />
+                                    </View>
+
+                                    {/* Text Info */}
+                                    <View style={styles.textContainer}>
+                                        <Text style={styles.cardTitle}>{lesson.title}</Text>
+                                    </View>
+
+                                    {isCompleted && (
+                                        <View style={styles.completedBadge}>
+                                            <CheckCircle size={12} color={colors.success} weight="fill" />
+                                            <Text style={styles.completedText}>Tamamlandı</Text>
+                                        </View>
+                                    )}
+
+                                    {/* Arrow */}
+                                    <CaretRight
+                                        size={20}
+                                        color={colors.textSecondary}
+                                        weight="bold"
                                     />
                                 </View>
-
-                                {/* Text Info */}
-                                <View style={styles.textContainer}>
-                                    <Text style={styles.cardTitle}>{lesson.title}</Text>
-                                </View>
-
-                                {/* Arrow */}
-                                <CaretRight
-                                    size={20}
-                                    color={colors.textSecondary}
-                                    weight="bold"
-                                />
-                            </View>
-                        </Pressable>
-                    ))}
+                            </Pressable>
+                        );
+                    })}
                 </View>
             </ScrollView>
         </SafeAreaView>
@@ -370,6 +401,20 @@ const getStyles = () => StyleSheet.create({
         fontSize: 16,
         fontWeight: 'bold',
         color: colors.textPrimary,
+    },
+    completedBadge: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 4,
+        backgroundColor: 'rgba(88, 204, 2, 0.1)',
+        paddingHorizontal: 8,
+        paddingVertical: 4,
+        borderRadius: 12,
+    },
+    completedText: {
+        fontSize: 10,
+        color: colors.success,
+        fontWeight: '600',
     },
 });
 

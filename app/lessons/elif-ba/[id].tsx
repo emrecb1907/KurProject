@@ -20,7 +20,7 @@ Audio.setAudioModeAsync({
 export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons } = useUser();
+    const { incrementDailyLessons, completeLesson } = useUser();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
@@ -207,6 +207,7 @@ export default function ElifBaIntroductionScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
+        completeLesson('1'); // Mark Elif-Ba as completed
         router.push('/(tabs)');
     };
 

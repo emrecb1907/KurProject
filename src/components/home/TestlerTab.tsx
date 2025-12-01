@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useImperativeHandle, forwardRef } from 'react';
+import React, { useRef, useMemo, useImperativeHandle, forwardRef, useState } from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
 
@@ -18,8 +18,11 @@ export interface TestlerTabRef {
 export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWidth }, ref) => {
     const { t } = useTranslation();
     const { themeVersion } = useTheme();
+    const [selectedCardId, setSelectedCardId] = useState<number | null>(null);
 
     const testlerPageScrollRef = useRef<ScrollView>(null);
+    const gridContainerY = useRef<number>(0);
+    const cardLayouts = useRef<{ [key: number]: number }>({});
 
     const tests = getTests(t);
 
@@ -36,6 +39,20 @@ export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWi
             testlerPageScrollRef.current?.scrollTo({ y: 0, animated: false });
         },
     }));
+
+    const handleCardSelect = (index: number) => {
+        setSelectedCardId(tests[index].id);
+        const cardY = cardLayouts.current[index];
+        if (cardY !== undefined) {
+            // Scroll to the card position + grid container offset
+            // Subtract some padding to give it some breathing room at the top
+            const targetY = cardY + gridContainerY.current - 20;
+            testlerPageScrollRef.current?.scrollTo({
+                y: Math.max(0, targetY),
+                animated: true
+            });
+        }
+    };
 
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
@@ -54,18 +71,27 @@ export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWi
                 </View>
 
                 {/* Test Cards Grid - 2 columns */}
-                <View style={styles.gridContainer}>
+                <View
+                    style={styles.gridContainer}
+                    onLayout={(e) => {
+                        gridContainerY.current = e.nativeEvent.layout.y;
+                    }}
+                >
                     {tests.map((test, index) => {
                         // Check if this is the last item in a row (odd index means it's the second item in a row)
                         const isLastInRow = index % 2 === 1;
                         return (
-                            <View 
-                                key={test.id} 
+                            <View
+                                key={test.id}
+                                onLayout={(e) => {
+                                    cardLayouts.current[index] = e.nativeEvent.layout.y;
+                                }}
                                 style={[
                                     styles.cardWrapper,
-                                    { 
+                                    {
                                         width: cardWidth,
                                         marginRight: isLastInRow ? 0 : gap,
+                                        zIndex: selectedCardId === test.id ? 100 : 1,
                                     }
                                 ]}
                             >
@@ -79,6 +105,7 @@ export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWi
                                     level={test.level}
                                     progress={test.unlocked ? { current: 3, total: 10 } : undefined}
                                     route={test.route}
+                                    onSelect={() => handleCardSelect(index)}
                                     screenWidth={screenWidth}
                                     width={cardWidth}
                                 />

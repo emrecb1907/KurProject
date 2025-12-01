@@ -1,3 +1,4 @@
+import React from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import IslamicHistoryLesson, { LessonContent } from '@/components/lessons/IslamicHistoryLesson';
 
@@ -57,7 +58,7 @@ const islamicHistoryContent: Record<string, LessonContent> = {
 export default function IslamicHistoryLessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const lesson = islamicHistoryContent[id || '1'];
-  
+
   if (!lesson) {
     return null;
   }

@@ -319,163 +319,164 @@ export default function ProfileScreen() {
       fontSize: 16,
       fontWeight: 'bold',
     },
-    actionButtonsContainer: {
-      flexDirection: 'row',
-      gap: 12,
-      paddingHorizontal: 16,
-      paddingTop: 16,
-      paddingBottom: 8,
+    settingsButton: {
+      position: 'absolute',
+      top: 16,
+      right: 16,
+      zIndex: 10,
+      padding: 8,
+      backgroundColor: colors.surface,
+      borderRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
     },
-    actionButton: {
-      flex: 1,
-      flexDirection: 'row',
-      alignItems: 'center',
+    editBadge: {
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      backgroundColor: colors.surface,
+      borderRadius: 15,
+      width: 35,
+      height: 35,
       justifyContent: 'center',
-      gap: 8,
-      backgroundColor: colors.warning,
-      paddingVertical: 14,
-      paddingHorizontal: 16,
-      borderRadius: 12,
-      borderBottomWidth: 4,
-      borderBottomColor: colors.warningDark,
-    },
-    actionButtonText: {
-      color: colors.backgroundDarker,
-      fontSize: 15,
-      fontWeight: 'bold',
+      alignItems: 'center',
+      borderWidth: 3,
+      borderColor: colors.backgroundDarker,
     },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <View style={styles.container}>
-        <ScrollView 
+        {/* Settings Button */}
+        <Pressable
+          style={styles.settingsButton}
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            router.push('/settings');
+          }}
+        >
+          <Gear size={24} color={colors.textPrimary} weight="fill" />
+        </Pressable>
+
+        <ScrollView
           ref={scrollViewRef}
-          style={styles.content} 
+          style={styles.content}
           contentContainerStyle={styles.scrollContent}
         >
-        {/* Header */}
-        <View style={styles.header}>
-          <View style={styles.avatarContainer}>
-            <View style={styles.avatar}>
-              <User size={50} color={colors.textPrimary} weight="fill" />
+          {/* Header */}
+          <View style={styles.header}>
+            <View style={styles.avatarContainer}>
+              <View style={styles.avatar}>
+                <User size={50} color={colors.textPrimary} weight="fill" />
+              </View>
+
+              {/* Edit Badge */}
+              <Pressable
+                style={styles.editBadge}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  // TODO: Navigate to edit profile page
+                }}
+              >
+                <PencilSimple size={18} color={colors.textPrimary} weight="fill" />
+              </Pressable>
+              <View style={styles.levelBadge}>
+                <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
+              </View>
             </View>
-            <View style={styles.levelBadge}>
-              <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
-            </View>
+            <Text style={styles.username}>{username}</Text>
+            <Text style={styles.subtitle}>
+              {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
+            </Text>
           </View>
-          <Text style={styles.username}>{username}</Text>
-          <Text style={styles.subtitle}>
-            {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
-          </Text>
-        </View>
-
-        {/* Action Buttons */}
-        <View style={styles.actionButtonsContainer}>
-          <Pressable
-            style={styles.actionButton}
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              // TODO: Navigate to edit profile page
-            }}
-          >
-            <PencilSimple size={20} color={colors.backgroundDarker} weight="fill" />
-            <Text style={styles.actionButtonText}>Profilini Düzenle</Text>
-          </Pressable>
-
-          <Pressable
-            style={styles.actionButton}
-            onPress={() => {
-              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              router.push('/settings');
-            }}
-          >
-            <Gear size={20} color={colors.backgroundDarker} weight="fill" />
-            <Text style={styles.actionButtonText}>Ayarlar</Text>
-          </Pressable>
-        </View>
 
 
-        {/* Stats Grid */}
-        <View style={styles.statsContainer}>
-          {stats.map((stat, index) => (
-            <View key={index} style={[styles.statCard, { borderBottomColor: stat.color }]}>
-              <stat.icon size={32} color={stat.color} weight="fill" />
-              <Text style={[styles.statValue, { color: stat.color }]}>{stat.value}</Text>
-              <Text style={styles.statLabel}>{stat.label}</Text>
-            </View>
-          ))}
-        </View>
 
-        {/* Badges Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <Trophy size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
-          </View>
-          <View style={styles.badgesContainer}>
-            {badges.map((badge, index) => (
-              <View key={index} style={styles.badgeSlot}>
-                <Lock size={32} color={colors.textDisabled} weight="fill" />
+
+          {/* Stats Grid */}
+          <View style={styles.statsContainer}>
+            {stats.map((stat, index) => (
+              <View key={index} style={[styles.statCard, { borderBottomColor: stat.color }]}>
+                <stat.icon size={32} color={stat.color} weight="fill" />
+                <Text style={[styles.statValue, { color: stat.color }]}>{stat.value}</Text>
+                <Text style={styles.statLabel}>{stat.label}</Text>
               </View>
             ))}
           </View>
-          <Text style={styles.badgeHint}>
-            {t('profile.badgesHint')}
-          </Text>
-        </View>
 
-
-        {/* Achievements Section */}
-        <View style={styles.section}>
-          <View style={styles.sectionTitleContainer}>
-            <Target size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.sectionTitle}>{t('profile.sections.achievements')}</Text>
-          </View>
-          <View style={styles.achievementCard}>
-            <Medal size={36} color={colors.warning} weight="fill" />
-            <View style={styles.achievementInfo}>
-              <Text style={styles.achievementTitle}>{t('profile.achievements.firstStep.title')}</Text>
-              <Text style={styles.achievementDesc}>{t('profile.achievements.firstStep.description')}</Text>
+          {/* Badges Section */}
+          <View style={styles.section}>
+            <View style={styles.sectionTitleContainer}>
+              <Trophy size={24} color={colors.textPrimary} weight="fill" />
+              <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
             </View>
-            <View style={styles.achievementProgress}>
-              <Text style={styles.progressText}>0/1</Text>
+            <View style={styles.badgesContainer}>
+              {badges.map((badge, index) => (
+                <View key={index} style={styles.badgeSlot}>
+                  <Lock size={32} color={colors.textDisabled} weight="fill" />
+                </View>
+              ))}
             </View>
-          </View>
-
-          <View style={styles.achievementCard}>
-            <Fire size={36} color={colors.primary} weight="fill" />
-            <View style={styles.achievementInfo}>
-              <Text style={styles.achievementTitle}>{t('profile.achievements.streakStarter.title')}</Text>
-              <Text style={styles.achievementDesc}>{t('profile.achievements.streakStarter.description')}</Text>
-            </View>
-            <View style={styles.achievementProgress}>
-              <Text style={styles.progressText}>0/7</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Login Prompt - Only show if not authenticated */}
-        {!isAuthenticated && (
-          <View style={styles.loginPrompt}>
-            <Lightbulb size={40} color={colors.textOnPrimary} weight="fill" />
-            <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
-            <Text style={styles.promptText}>
-              {t('profile.loginPrompt.description')}
+            <Text style={styles.badgeHint}>
+              {t('profile.badgesHint')}
             </Text>
-            <Pressable
-              style={styles.loginButton}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                router.push('/(auth)/login');
-              }}
-            >
-              <Text style={styles.loginButtonText}>{t('profile.loginPrompt.button')}</Text>
-            </Pressable>
           </View>
-        )}
 
-        <View style={{ height: 40 }} />
+
+          {/* Achievements Section */}
+          <View style={styles.section}>
+            <View style={styles.sectionTitleContainer}>
+              <Target size={24} color={colors.textPrimary} weight="fill" />
+              <Text style={styles.sectionTitle}>{t('profile.sections.achievements')}</Text>
+            </View>
+            <View style={styles.achievementCard}>
+              <Medal size={36} color={colors.warning} weight="fill" />
+              <View style={styles.achievementInfo}>
+                <Text style={styles.achievementTitle}>{t('profile.achievements.firstStep.title')}</Text>
+                <Text style={styles.achievementDesc}>{t('profile.achievements.firstStep.description')}</Text>
+              </View>
+              <View style={styles.achievementProgress}>
+                <Text style={styles.progressText}>0/1</Text>
+              </View>
+            </View>
+
+            <View style={styles.achievementCard}>
+              <Fire size={36} color={colors.primary} weight="fill" />
+              <View style={styles.achievementInfo}>
+                <Text style={styles.achievementTitle}>{t('profile.achievements.streakStarter.title')}</Text>
+                <Text style={styles.achievementDesc}>{t('profile.achievements.streakStarter.description')}</Text>
+              </View>
+              <View style={styles.achievementProgress}>
+                <Text style={styles.progressText}>0/7</Text>
+              </View>
+            </View>
+          </View>
+
+          {/* Login Prompt - Only show if not authenticated */}
+          {!isAuthenticated && (
+            <View style={styles.loginPrompt}>
+              <Lightbulb size={40} color={colors.textOnPrimary} weight="fill" />
+              <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
+              <Text style={styles.promptText}>
+                {t('profile.loginPrompt.description')}
+              </Text>
+              <Pressable
+                style={styles.loginButton}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push('/(auth)/login');
+                }}
+              >
+                <Text style={styles.loginButtonText}>{t('profile.loginPrompt.button')}</Text>
+              </Pressable>
+            </View>
+          )}
+
+          <View style={{ height: 40 }} />
         </ScrollView>
       </View>
     </SafeAreaView>

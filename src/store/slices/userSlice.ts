@@ -54,6 +54,10 @@ export interface UserSlice {
 
   boundUserId: string | null;
   setBoundUserId: (id: string | null) => void;
+
+  // Lesson Completion
+  completedLessons: string[];
+  completeLesson: (lessonId: string) => void;
 }
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
@@ -78,6 +82,7 @@ const initialState = {
     testsCompleted: 0,
     claimedTasks: [],
   },
+  completedLessons: [],
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -222,5 +227,15 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   },
 
   setBoundUserId: (id) => set({ boundUserId: id }),
-});
 
+  completeLesson: (lessonId) => {
+    set((state) => {
+      if (state.completedLessons.includes(lessonId)) {
+        return state;
+      }
+      return {
+        completedLessons: [...state.completedLessons, lessonId]
+      };
+    });
+  },
+});

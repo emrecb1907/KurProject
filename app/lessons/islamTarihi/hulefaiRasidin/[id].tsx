@@ -1,4 +1,13 @@
-import { useLocalSearchParams } from 'expo-router';
+import React, { useMemo } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useTranslation } from 'react-i18next';
+import * as Haptics from 'expo-haptics';
+import { BookOpen, ArrowLeft } from 'phosphor-react-native';
+import { colors } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
+import { useUser } from '@/store';
 import IslamicHistoryLesson, { LessonContent } from '@/components/lessons/IslamicHistoryLesson';
 
 const islamicHistoryContent: Record<string, LessonContent> = {
@@ -286,7 +295,7 @@ export default function IslamicHistoryLessonScreen() {
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -304,7 +313,7 @@ export default function IslamicHistoryLessonScreen() {
             {section.text.map((paragraph, pIndex) => {
               const isBulletPoint = paragraph.trim().startsWith('-');
               const text = isBulletPoint ? paragraph.trim().substring(1).trim() : paragraph;
-              
+
               if (isBulletPoint) {
                 return (
                   <View key={pIndex} style={styles.bulletContainer}>
@@ -313,7 +322,7 @@ export default function IslamicHistoryLessonScreen() {
                   </View>
                 );
               }
-              
+
               return (
                 <Text key={pIndex} style={styles.paragraph}>
                   {text}

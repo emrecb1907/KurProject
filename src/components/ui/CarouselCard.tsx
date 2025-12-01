@@ -26,6 +26,7 @@ export interface CarouselCardProps {
     };
     route?: string;
     onPress?: (route?: string) => void;
+    onSelect?: () => void;
     screenWidth?: number;
     size?: 'small' | 'large'; // 'small' = 135x243, 'large' = 280x220
     width?: number; // Custom width override
@@ -42,6 +43,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     progress,
     route,
     onPress,
+    onSelect,
     screenWidth,
     size = 'small',
     width,
@@ -52,7 +54,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const [isSelected, setIsSelected] = useState(false);
 
     const styles = useMemo(() => getStyles(size), [themeVersion, size]);
-    
+
     // Calculate actual card width and height
     const actualCardWidth = width || (size === 'large' ? 280 : 135);
     const actualCardHeight = size === 'large' ? 220 : 243;
@@ -74,6 +76,9 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
         // Otherwise, show confirmation modal if screenWidth is provided
         if (screenWidth) {
             setIsSelected(true);
+            if (onSelect) {
+                onSelect();
+            }
             LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         } else if (route) {
             // Direct navigation if no screenWidth (no confirmation modal)
@@ -81,27 +86,24 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
         }
     };
 
-    const handleStart = async () => {
+    const handleStart = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-        
+
         if (!route) {
             setIsSelected(false);
             return;
         }
-        
-        // Close modal first
-        setIsSelected(false);
-        
-        // Navigate after a short delay to ensure modal closes
-        await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         try {
             // Use router.push with the route path
             router.push(route as any);
+            // Close modal so it's closed when/if we return
+            setIsSelected(false);
         } catch (error) {
             console.error('Navigation error:', error);
             // Fallback: try with replace
             router.replace(route as any);
+            setIsSelected(false);
         }
     };
 
@@ -329,6 +331,7 @@ const getStyles = (size: 'small' | 'large') => StyleSheet.create({
         shadowOpacity: 0.15,
         shadowRadius: 8,
         elevation: 8,
+        zIndex: 1001,
     },
     backdrop: {
         position: 'absolute',

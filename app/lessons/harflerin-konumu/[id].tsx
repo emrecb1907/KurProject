@@ -20,7 +20,7 @@ Audio.setAudioModeAsync({
 export default function HarflerinKonumuLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons } = useUser();
+    const { incrementDailyLessons, completeLesson } = useUser();
     const soundRef = useRef<Audio.Sound | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -203,6 +203,7 @@ export default function HarflerinKonumuLessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
+        completeLesson('3'); // Mark Harflerin Konumu as completed
         router.push('/(tabs)');
     };
 
