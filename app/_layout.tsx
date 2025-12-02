@@ -10,6 +10,11 @@ import { queryClient } from '@/lib/queryClient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import '@/lib/i18n'; // Initialize i18n
 
+// Error Handling
+import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { errorHandler } from '@/lib/errorHandler';
+import * as Sentry from '@sentry/react-native';
+
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
 
@@ -21,7 +26,10 @@ LogBox.ignoreLogs([
   'Invalid login credentials',
 ]);
 
-export default function RootLayout() {
+// Initialize Sentry/ErrorHandler
+errorHandler.init();
+
+function RootLayout() {
   const colorScheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Amiri_400Regular,
@@ -47,31 +55,35 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <QueryClientProvider client={queryClient}>
-        <ThemeProvider>
-          <Stack
-            screenOptions={{
-              headerShown: false,
-              animation: 'fade',
-            }}
-          >
-            <Stack.Screen name="index" />
-            <Stack.Screen name="onboarding" />
-            <Stack.Screen name="(tabs)" />
-            <Stack.Screen name="(auth)" />
-            <Stack.Screen name="settings" />
-            <Stack.Screen name="change-password" />
-            <Stack.Screen
-              name="games"
-              options={{
-                gestureEnabled: false,
-                fullScreenGestureEnabled: false,
+    <ErrorBoundary>
+      <GestureHandlerRootView style={{ flex: 1 }}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeProvider>
+            <Stack
+              screenOptions={{
+                headerShown: false,
+                animation: 'fade',
               }}
-            />
-          </Stack>
-        </ThemeProvider>
-      </QueryClientProvider>
-    </GestureHandlerRootView>
+            >
+              <Stack.Screen name="index" />
+              <Stack.Screen name="onboarding" />
+              <Stack.Screen name="(tabs)" />
+              <Stack.Screen name="(auth)" />
+              <Stack.Screen name="settings" />
+              <Stack.Screen name="change-password" />
+              <Stack.Screen
+                name="games"
+                options={{
+                  gestureEnabled: false,
+                  fullScreenGestureEnabled: false,
+                }}
+              />
+            </Stack>
+          </ThemeProvider>
+        </QueryClientProvider>
+      </GestureHandlerRootView>
+    </ErrorBoundary>
   );
 }
+
+export default Sentry.wrap(RootLayout);

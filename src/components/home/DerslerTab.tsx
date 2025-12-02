@@ -1,7 +1,6 @@
 import React, { useMemo, useRef, useImperativeHandle, forwardRef } from 'react';
-import { View, Text, ScrollView, Pressable, TextInput, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, ScrollView, TextInput, StyleSheet } from 'react-native';
 import { useTranslation } from 'react-i18next';
-import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
 import {
     BookOpen,
@@ -9,12 +8,12 @@ import {
     BookBookmark,
     Bank,
     Star,
-    CaretRight,
     MagnifyingGlass
 } from 'phosphor-react-native';
 
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { CarouselCard } from '@/components/ui/CarouselCard';
 
 interface DerslerTabProps {
     screenWidth: number;
@@ -28,11 +27,15 @@ interface CategoryItem {
     id: string;
     title: string;
     subtitle: string;
-    count?: string;
+    count?: number;
+    totalCount?: number;
     progress?: number;
     icon: React.ElementType;
     color: string;
+    borderColor: string;
     route?: string;
+    unlocked: boolean;
+    level?: number;
 }
 
 export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWidth }, ref) => {
@@ -41,7 +44,13 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     const { themeVersion } = useTheme();
     const scrollViewRef = useRef<ScrollView>(null);
 
-    const styles = useMemo(() => getStyles(), [themeVersion]);
+    // Calculate card width for 2-column grid
+    const gap = 16;
+    const padding = 16;
+    const availableWidth = screenWidth - (padding * 2) - gap;
+    const cardWidth = availableWidth / 2;
+
+    const styles = useMemo(() => getStyles(gap, padding), [themeVersion]);
 
     useImperativeHandle(ref, () => ({
         scrollToTop: () => {
@@ -54,42 +63,76 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             id: '1',
             title: "Kur'an Öğrenimi",
             subtitle: "Elif-Ba'dan tecvid temeline",
-            count: "(28 Ders)",
+            count: 18,
+            totalCount: 28,
             progress: 0.65,
             icon: BookOpen,
-            color: '#A07528', // Gold/Brownish
-            route: '/lessons/elif-ba'
+            color: colors.primary,
+            borderColor: colors.buttonOrangeBorder,
+            route: '/lessons/elif-ba',
+            unlocked: true,
+            level: 1
         },
         {
             id: '2',
             title: "Namaz Duaları",
-            subtitle: "Sübhaneke, Ettehiyyatü, Rabbena...",
+            subtitle: "Sübhaneke, Ettehiyyatü...",
+            count: 0,
+            totalCount: 10,
+            progress: 0,
             icon: HandPalm,
-            color: '#A07528',
+            color: colors.secondary,
+            borderColor: colors.buttonBlueBorder,
+            unlocked: true,
+            level: 1
         },
         {
             id: '3',
             title: "Sureler",
             subtitle: "Kısa surelerden başlayarak",
+            count: 0,
+            totalCount: 15,
+            progress: 0,
             icon: BookBookmark,
-            color: '#A07528',
+            color: colors.success,
+            borderColor: colors.buttonGreenBorder,
+            unlocked: true,
+            level: 1
         },
         {
             id: '4',
             title: "İslam Tarihi",
             subtitle: "Peygamberlik öncesinden günümüze",
+            count: 0,
+            totalCount: 12,
+            progress: 0,
             icon: Bank,
-            color: '#A07528',
-            route: '/lessons/islamTarihi'
+            color: colors.pink,
+            borderColor: colors.buttonPinkBorder,
+            route: '/lessons/islamTarihi',
+            unlocked: true,
+            level: 1
         },
         {
             id: '5',
             title: "İslami Kavramlar",
             subtitle: "Temel kavramlar, terimler",
+            count: 0,
+            totalCount: 20,
+            progress: 0,
             icon: Star,
-            color: '#A07528',
+            color: colors.warning,
+            borderColor: colors.buttonOrangeBorder,
+            unlocked: true,
+            level: 1
         }
     ];
+
+    const handleCardPress = (route?: string) => {
+        if (route) {
+            router.push(route as any);
+        }
+    };
 
     return (
         <View style={{ width: screenWidth, flex: 1 }}>
@@ -116,80 +159,54 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
                     <Text style={styles.sectionTitle}>Tüm Kategoriler</Text>
                 </View>
 
-                {/* Categories List */}
-                <View style={styles.categoriesList}>
-                    {categories.map((category, index) => (
-                        <Pressable
-                            key={category.id}
-                            style={styles.categoryCard}
-                            onPress={() => {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                if (category.route) {
-                                    router.push(category.route as any);
-                                }
-                            }}
-                        >
-                            <View style={styles.cardContent}>
-                                {/* Icon */}
-                                <View style={[styles.iconContainer, { backgroundColor: 'rgba(160, 117, 40, 0.2)' }]}>
-                                    <category.icon
-                                        size={24}
-                                        color="#FFC800" // Bright yellow/gold for icon
-                                        weight="fill"
-                                    />
-                                </View>
-
-                                {/* Text Info */}
-                                <View style={styles.textContainer}>
-                                    <View style={styles.titleRow}>
-                                        <Text style={styles.cardTitle}>{category.title}</Text>
-                                        {category.count && (
-                                            <Text style={styles.cardCount}>{category.count}</Text>
-                                        )}
-                                    </View>
-                                    <Text style={styles.cardSubtitle} numberOfLines={1}>
-                                        {category.subtitle}
-                                    </Text>
-                                </View>
-
-                                {/* Arrow */}
-                                <CaretRight
-                                    size={20}
-                                    color={colors.textSecondary}
-                                    weight="bold"
+                {/* Categories Grid */}
+                <View style={styles.gridContainer}>
+                    {categories.map((category, index) => {
+                        const isLastInRow = index % 2 === 1;
+                        return (
+                            <View
+                                key={category.id}
+                                style={[
+                                    styles.cardWrapper,
+                                    {
+                                        width: cardWidth,
+                                        marginRight: isLastInRow ? 0 : gap,
+                                    }
+                                ]}
+                            >
+                                <CarouselCard
+                                    icon={category.icon}
+                                    title={category.title}
+                                    description={category.subtitle}
+                                    unlocked={category.unlocked}
+                                    color={category.color}
+                                    borderColor={category.borderColor}
+                                    level={category.level}
+                                    progress={category.progress !== undefined ? {
+                                        current: category.count || 0,
+                                        total: category.totalCount || 100,
+                                        label: 'Ders'
+                                    } : undefined}
+                                    route={category.route}
+                                    onPress={() => handleCardPress(category.route)}
+                                    screenWidth={screenWidth}
+                                    width={cardWidth}
                                 />
                             </View>
-
-                            {/* Progress Bar (Only if progress exists) */}
-                            {category.progress !== undefined && (
-                                <View style={styles.progressContainer}>
-                                    <View style={styles.progressBarBg}>
-                                        <View
-                                            style={[
-                                                styles.progressBarFill,
-                                                { width: `${category.progress * 100}%` }
-                                            ]}
-                                        />
-                                    </View>
-                                    <Text style={styles.progressText}>
-                                        {Math.round(category.progress * 100)}%
-                                    </Text>
-                                </View>
-                            )}
-                        </Pressable>
-                    ))}
+                        );
+                    })}
                 </View>
             </ScrollView>
         </View>
     );
 });
 
-const getStyles = () => StyleSheet.create({
+const getStyles = (gap: number, padding: number) => StyleSheet.create({
     content: {
         flex: 1,
     },
     searchContainer: {
-        paddingHorizontal: 16,
+        paddingHorizontal: padding,
         paddingTop: 16,
         paddingBottom: 8,
     },
@@ -211,7 +228,7 @@ const getStyles = () => StyleSheet.create({
         fontWeight: '500',
     },
     sectionHeader: {
-        paddingHorizontal: 16,
+        paddingHorizontal: padding,
         paddingTop: 16,
         paddingBottom: 12,
     },
@@ -220,78 +237,15 @@ const getStyles = () => StyleSheet.create({
         fontWeight: 'bold',
         color: colors.textPrimary,
     },
-    categoriesList: {
-        paddingHorizontal: 16,
-        gap: 12,
-    },
-    categoryCard: {
-        backgroundColor: colors.surface,
-        borderRadius: 20,
-        padding: 16,
-        borderWidth: 1,
-        borderColor: 'rgba(255, 255, 255, 0.05)',
-    },
-    cardContent: {
+    gridContainer: {
         flexDirection: 'row',
-        alignItems: 'center',
-        gap: 16,
+        flexWrap: 'wrap',
+        paddingHorizontal: padding,
+        paddingVertical: 8,
+        overflow: 'visible',
     },
-    iconContainer: {
-        width: 48,
-        height: 48,
-        borderRadius: 24,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    textContainer: {
-        flex: 1,
-        justifyContent: 'center',
-        gap: 4,
-    },
-    titleRow: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 6,
-    },
-    cardTitle: {
-        fontSize: 16,
-        fontWeight: 'bold',
-        color: colors.textPrimary,
-    },
-    cardCount: {
-        fontSize: 14,
-        color: colors.textSecondary,
-        fontWeight: '500',
-    },
-    cardSubtitle: {
-        fontSize: 13,
-        color: colors.textSecondary,
-        opacity: 0.8,
-    },
-    progressContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 16,
-        gap: 12,
-    },
-    progressBarBg: {
-        flex: 1,
-        height: 6,
-        backgroundColor: 'rgba(255, 255, 255, 0.1)',
-        borderRadius: 3,
-        overflow: 'hidden',
-    },
-    progressBarFill: {
-        height: '100%',
-        backgroundColor: colors.primary, // Orange
-        borderRadius: 3,
-    },
-    progressText: {
-        fontSize: 12,
-        color: colors.textSecondary,
-        fontWeight: '600',
-        width: 32,
-        textAlign: 'right',
+    cardWrapper: {
+        marginBottom: gap,
+        overflow: 'visible',
     },
 });
-

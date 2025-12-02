@@ -41,7 +41,14 @@
       "expo-router",
       "expo-secure-store",
       "expo-font",
-      "expo-audio"
+      "expo-audio",
+      [
+        "@sentry/react-native/expo",
+        {
+          "organization": "kurlearn",
+          "project": "react-native"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
