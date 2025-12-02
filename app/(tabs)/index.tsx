@@ -157,7 +157,7 @@ export default function HomePage() {
     const handleCategoryChange = (category: 'genel' | 'dersler' | 'testler') => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         setSelectedCategory(category);
-        
+
         // Reset scroll position for the newly selected tab
         setTimeout(() => {
             if (category === 'genel') {
@@ -318,7 +318,7 @@ export default function HomePage() {
                     </View>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greetingText}>{t('home.welcome')},</Text>
-                        <Text style={styles.userName}>{user?.email?.split('@')[0] || 'Misafir'}</Text>
+                        <Text style={styles.userName}>{user?.username || user?.email?.split('@')[0] || 'Misafir'}</Text>
                     </View>
                 </View>
                 <Pressable style={styles.notificationButton} onPress={() => Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light)}>

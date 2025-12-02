@@ -5,7 +5,7 @@ import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useUser } from '@/store';
-import { Heart, WarningCircle, Lightbulb, Video, ArrowLeft } from 'phosphor-react-native';
+import { Heart, Lightbulb, Video, ArrowLeft, Play, Gift, Calendar, Star, CaretDown, CaretUp } from 'phosphor-react-native';
 
 import { useTranslation } from 'react-i18next';
 
@@ -65,39 +65,17 @@ export default function ChestScreen() {
   };
 
   const getSlotStatus = (index: number) => {
-    // Sort watches descending (newest first)
-    const sortedWatches = [...adWatchTimes].sort((a, b) => b - a);
-    // Get the watch for this "slot" (0, 1, 2)
-    // Since we want 3 slots, we check if there are active cooldowns
-    // Actually, the requirement is "limit to 3 times per day".
-    // So we just check if we have 3 valid watches in the last 24h.
-    // But for UI, we want to show 3 slots.
-    // If we have 0 watches in last 24h -> 3 open slots.
-    // If we have 1 watch in last 24h -> 1 used slot (showing countdown), 2 open.
+    // Filter valid watches (within last 24 hours)
+    const validWatches = [...adWatchTimes].filter(t => now - t < 24 * 60 * 60 * 1000);
+    
+    // Sort by oldest first (so slot 1 shows the one that will expire soonest)
+    // This way: Slot 1 = oldest (expires soonest), Slot 3 = newest (expires latest)
+    const sortedWatches = validWatches.sort((a, b) => a - b);
 
-    // Let's map the last 3 watches to the slots.
-    // But we need to know WHICH slot corresponds to which watch? 
-    // Not necessarily. We can just say:
-    // Slot 1: Shows oldest active watch (or open if < 1 active watch)
-    // Slot 2: Shows 2nd oldest active watch (or open if < 2 active watches)
-    // Slot 3: Shows newest active watch (or open if < 3 active watches)
-
-    // Let's filter valid watches first
-    const validWatches = sortedWatches.filter(t => now - t < 24 * 60 * 60 * 1000);
-
-    // We want to display them. Let's say we fill from left to right or top to bottom.
-    // If we have 1 valid watch, Slot 1 is used (countdown), Slot 2 & 3 are open.
-    // Wait, usually you want the available ones first? Or used ones?
-    // Let's say:
-    // Slot 1: If validWatches[0] exists, show countdown. Else Open.
-    // Slot 2: If validWatches[1] exists, show countdown. Else Open.
-    // Slot 3: If validWatches[2] exists, show countdown. Else Open.
-
-    // But validWatches are sorted Newest first.
-    // So validWatches[0] is the one that will take the LONGEST to expire.
-    // validWatches[2] is the one that will expire soonest.
-
-    const watchTime = validWatches[index];
+    // Map slots: index 0 = slot 1, index 1 = slot 2, index 2 = slot 3
+    // Slot 1 should show the oldest watch (expires soonest)
+    // Slot 3 should show the newest watch (expires latest)
+    const watchTime = sortedWatches[index];
 
     if (watchTime) {
       const msRemaining = (watchTime + 24 * 60 * 60 * 1000) - now;
@@ -113,13 +91,41 @@ export default function ChestScreen() {
   };
 
   const adSlots = [0, 1, 2];
+  const [isHowItWorksExpanded, setIsHowItWorksExpanded] = useState(false);
+
+  // Calculate progress percentage for lives
+  const livesProgress = (currentLives / maxLives) * 100;
+
+  // Get all slot statuses once
+  const allSlotStatuses = useMemo(() => {
+    return adSlots.map(index => getSlotStatus(index));
+  }, [adWatchTimes, now]);
+
+  // Get ad slot renewal text
+  const getAdSlotRenewalText = (index: number, slotStatus: { status: string; timeLeft?: string }) => {
+    if (slotStatus.status === 'cooldown' && slotStatus.timeLeft) {
+      return `${slotStatus.timeLeft} sonra yenilenir`;
+    }
+    // If available, check if it's the first available slot
+    const availableSlots = allSlotStatuses
+      .map((status, i) => ({ status, index: i }))
+      .filter(({ status }) => status.status === 'available')
+      .map(({ index }) => index);
+    
+    // If this is the first available slot (lowest index), show "Hakkın mevcut"
+    if (availableSlots.length > 0 && index === availableSlots[0]) {
+      return t('rewards.available');
+    }
+    // Otherwise show "Yarın yenilenir" for other available slots
+    return t('rewards.renewsTomorrow');
+  };
 
   return (
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
         <Pressable onPress={() => router.back()} style={styles.backButtonContainer}>
-          <ArrowLeft size={24} color={colors.secondary} weight="bold" />
+          <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
         </Pressable>
         <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
         <View style={{ width: 40 }} />
@@ -130,82 +136,147 @@ export default function ChestScreen() {
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
       >
-        {/* Lives Status */}
+        {/* Lives Status Card */}
         <View style={styles.statusCard}>
-          <View style={styles.statusIconContainer}>
-            <Heart size={48} color={colors.error} weight="fill" />
-          </View>
-          <Text style={styles.statusText}>
-            {currentLives} / {maxLives}
-          </Text>
-          <Text style={styles.statusLabel}>{t('rewards.lives')}</Text>
-          {currentLives >= maxLives ? (
-            <Text style={styles.statusSubtext}>{t('rewards.livesMax')}</Text>
-          ) : (
-            <View style={styles.timerContainer}>
-              <Text style={styles.statusSubtext}>
-                {t('rewards.nextLife')}
-              </Text>
-              <Text style={styles.timerText}>
-                {getNextLifeTime()}
-              </Text>
+          <View style={styles.statusCardHeader}>
+            <Text style={styles.statusCardTitle}>{t('rewards.livesStatus')}</Text>
+            <View style={styles.statusCardHeartIcon}>
+              <Heart size={24} color={colors.error} weight="fill" />
             </View>
-          )}
-        </View>
-
-        {/* Info Message */}
-        <View style={styles.infoBanner}>
-          <WarningCircle size={24} color={colors.backgroundDarker} weight="fill" />
-          <Text style={styles.infoBannerText}>
-            {t('rewards.infoBanner')}
-          </Text>
-        </View>
-
-        {/* Ad Info */}
-        <View style={styles.infoCard}>
-          <View style={styles.infoTitleContainer}>
-            <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.infoTitle}>{t('rewards.howItWorks.title')}</Text>
           </View>
-          <Text style={styles.infoText}>
-            {t('rewards.howItWorks.text')}
+          <Text style={styles.statusCardSubtitle}>
+            {currentLives >= maxLives ? t('rewards.livesMax') : ''}
           </Text>
+          <View style={styles.livesCountRow}>
+            <Text style={styles.statusCardLivesCount}>
+              {t('rewards.livesCount', { current: currentLives, max: maxLives })}
+            </Text>
+            {currentLives < maxLives && (
+              <View style={styles.timerInline}>
+                <Text style={styles.timerLabel}>
+                  {t('rewards.nextLife')}
+                </Text>
+                <Text style={styles.timerText}>
+                  {getNextLifeTime()}
+                </Text>
+              </View>
+            )}
+          </View>
+          <View style={styles.progressBarContainer}>
+            <View style={styles.progressBarBackground}>
+              <View style={[styles.progressBarFill, { width: `${livesProgress}%` }]} />
+            </View>
+            {currentLives >= maxLives && (
+              <View style={styles.fullBadge}>
+                <Text style={styles.fullBadgeText}>Full</Text>
+              </View>
+            )}
+          </View>
         </View>
 
-        {/* Ad Slots */}
-        <Text style={styles.sectionTitle}>{t('rewards.adSlots')}</Text>
+        {/* Daily Free Lives Section */}
+        <Text style={styles.sectionTitle}>{t('rewards.dailyFreeLives')}</Text>
 
         {adSlots.map((index) => {
-          const { status, timeLeft } = getSlotStatus(index);
-          const isLocked = status === 'cooldown' || currentLives >= maxLives;
+          const slotStatus = allSlotStatuses[index];
+          const isLocked = slotStatus.status === 'cooldown' || currentLives >= maxLives;
+          const isUsed = slotStatus.status === 'cooldown';
 
           return (
             <View key={index} style={styles.adCard}>
               <View style={styles.adCardIcon}>
-                <Video size={24} color={colors.textPrimary} weight="fill" />
+                <Play size={20} color={colors.textPrimary} weight="fill" />
               </View>
               <View style={styles.adCardInfo}>
                 <Text style={styles.adCardTitle}>
-                  {status === 'cooldown' ? t('rewards.cooldown') : t('rewards.earnLife')}
+                  {t('rewards.watchAdDesc')}
                 </Text>
                 <Text style={styles.adCardDescription}>
-                  {status === 'cooldown'
-                    ? t('rewards.cooldownDesc', { time: timeLeft })
-                    : t('rewards.watchAdDesc')}
+                  {getAdSlotRenewalText(index, slotStatus)}
                 </Text>
               </View>
               <Pressable
-                style={[styles.adButton, isLocked && styles.adButtonDisabled]}
+                style={[styles.adButton, isUsed && styles.adButtonUsed, isLocked && !isUsed && styles.adButtonDisabled]}
                 onPress={handleWatchAd}
                 disabled={isLocked}
               >
-                <Text style={styles.adButtonText}>
-                  {status === 'cooldown' ? timeLeft : t('rewards.watchAd')}
+                <Text style={[styles.adButtonText, isUsed && styles.adButtonUsedText]}>
+                  {isUsed ? t('rewards.used') : t('rewards.watchAd')}
                 </Text>
               </Pressable>
             </View>
           );
         })}
+
+        {/* Bonus Tasks Section */}
+        <Text style={styles.sectionTitle}>{t('rewards.bonusTasks')}</Text>
+
+        {/* Invite Friend */}
+        <View style={styles.bonusCard}>
+          <View style={[styles.bonusCardIcon, { backgroundColor: 'rgba(59, 130, 246, 0.1)' }]}>
+            <Gift size={24} color="#3B82F6" weight="fill" />
+          </View>
+          <View style={styles.bonusCardInfo}>
+            <Text style={styles.bonusCardTitle}>{t('rewards.inviteFriend.title')}</Text>
+            <Text style={styles.bonusCardReward}>{t('rewards.inviteFriend.reward')}</Text>
+          </View>
+          <Pressable style={styles.bonusButton}>
+            <Text style={styles.bonusButtonText}>{t('rewards.inviteFriend.button')}</Text>
+          </Pressable>
+        </View>
+
+        {/* 3 Day Consecutive Login */}
+        <View style={styles.bonusCard}>
+          <View style={[styles.bonusCardIcon, { backgroundColor: 'rgba(168, 85, 247, 0.1)' }]}>
+            <Calendar size={24} color="#A855F7" weight="fill" />
+          </View>
+          <View style={styles.bonusCardInfo}>
+            <Text style={styles.bonusCardTitle}>{t('rewards.consecutiveLogin.title')}</Text>
+            <Text style={styles.bonusCardReward}>{t('rewards.consecutiveLogin.reward')}</Text>
+          </View>
+          <Pressable style={styles.bonusButtonClaimed}>
+            <Text style={styles.bonusButtonClaimedText}>{t('rewards.consecutiveLogin.claimed')}</Text>
+          </Pressable>
+        </View>
+
+        {/* Daily Task */}
+        <View style={styles.bonusCard}>
+          <View style={[styles.bonusCardIcon, { backgroundColor: 'rgba(234, 179, 8, 0.1)' }]}>
+            <Star size={24} color="#EAB308" weight="fill" />
+          </View>
+          <View style={styles.bonusCardInfo}>
+            <Text style={styles.bonusCardTitle}>{t('rewards.dailyTask.title')}</Text>
+            <Text style={styles.bonusCardReward}>{t('rewards.dailyTask.reward')}</Text>
+          </View>
+          <Pressable style={styles.bonusButton}>
+            <Text style={styles.bonusButtonText}>{t('rewards.dailyTask.button')}</Text>
+          </Pressable>
+        </View>
+
+        {/* How It Works - Collapsible */}
+        <Pressable 
+          style={styles.howItWorksCard}
+          onPress={() => setIsHowItWorksExpanded(!isHowItWorksExpanded)}
+        >
+          <View style={styles.howItWorksHeader}>
+            <View style={styles.howItWorksHeaderLeft}>
+              <View style={styles.howItWorksIcon}>
+                <Lightbulb size={24} color="#EAB308" weight="fill" />
+              </View>
+              <Text style={styles.howItWorksTitle}>{t('rewards.howItWorks.title')}</Text>
+            </View>
+            {isHowItWorksExpanded ? (
+              <CaretUp size={20} color={colors.textSecondary} />
+            ) : (
+              <CaretDown size={20} color={colors.textSecondary} />
+            )}
+          </View>
+          {isHowItWorksExpanded && (
+            <Text style={styles.howItWorksText}>
+              {t('rewards.howItWorks.text')}
+            </Text>
+          )}
+        </Pressable>
 
         {/* Bottom Spacing */}
         <View style={{ height: 40 }} />
@@ -227,8 +298,6 @@ const getStyles = () => StyleSheet.create({
     paddingTop: 60,
     paddingBottom: 12,
     backgroundColor: colors.backgroundDarker,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
   },
   backButtonContainer: {
     width: 40,
@@ -247,103 +316,97 @@ const getStyles = () => StyleSheet.create({
   scrollContent: {
     padding: 16,
   },
+  // Lives Status Card
   statusCard: {
-    alignItems: 'center',
     backgroundColor: colors.surface,
-    padding: 32,
-    marginBottom: 16,
+    padding: 16,
+    marginBottom: 18,
     borderRadius: 16,
-    borderBottomWidth: 4,
-    borderBottomColor: colors.border,
   },
-  statusIconContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-    backgroundColor: colors.backgroundLighter,
+  statusCardHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  statusCardTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: colors.textPrimary,
+  },
+  statusCardHeartIcon: {
+    width: 32,
+    height: 32,
+    borderRadius: 8,
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 16,
   },
-  statusText: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 4,
-  },
-  statusLabel: {
-    fontSize: 16,
+  statusCardSubtitle: {
+    fontSize: 13,
     color: colors.textSecondary,
+    marginBottom: 8,
+  },
+  livesCountRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     marginBottom: 12,
   },
-  statusSubtext: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    textAlign: 'center',
+  statusCardLivesCount: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
   },
-  infoBanner: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: colors.warning,
-    padding: 16,
-    borderRadius: 16,
-    marginBottom: 16,
-    gap: 12,
-    borderBottomWidth: 4,
-    borderBottomColor: colors.warningDark,
-  },
-  infoBannerText: {
-    flex: 1,
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.backgroundDarker,
-  },
-  infoCard: {
-    backgroundColor: colors.surface,
-    padding: 20,
-    borderRadius: 16,
-    marginBottom: 24,
-    borderBottomWidth: 4,
-    borderBottomColor: colors.border,
-  },
-  infoTitleContainer: {
+  progressBarContainer: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    marginBottom: 12,
   },
-  infoTitle: {
+  progressBarBackground: {
+    flex: 1,
+    height: 8,
+    backgroundColor: colors.backgroundLighter,
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#22C55E',
+    borderRadius: 4,
+  },
+  fullBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+  },
+  fullBadgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#22C55E',
+  },
+  sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
     color: colors.textPrimary,
+    marginBottom: 12,
+    marginTop: 8,
   },
-  infoText: {
-    fontSize: 14,
-    color: colors.textSecondary,
-    lineHeight: 22,
-  },
-  sectionTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 16,
-  },
+  // Ad Cards
   adCard: {
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: colors.surface,
-    padding: 16,
+    padding: 12,
     borderRadius: 16,
     marginBottom: 12,
     gap: 12,
-    borderBottomWidth: 4,
-    borderBottomColor: colors.border,
   },
   adCardIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    backgroundColor: colors.backgroundLighter,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: '#EAB308',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -351,38 +414,141 @@ const getStyles = () => StyleSheet.create({
     flex: 1,
   },
   adCardTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 14,
+    fontWeight: '500',
     color: colors.textPrimary,
-    marginBottom: 2,
+    marginBottom: 4,
   },
   adCardDescription: {
-    fontSize: 13,
+    fontSize: 12,
     color: colors.textSecondary,
   },
   adButton: {
     backgroundColor: colors.primary,
     paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 12,
-    borderBottomWidth: 3,
-    borderBottomColor: colors.buttonOrangeBorder,
+    paddingVertical: 8,
+    borderRadius: 8,
+    minWidth: 70,
+    alignItems: 'center',
+  },
+  adButtonUsed: {
+    backgroundColor: colors.locked,
   },
   adButtonDisabled: {
     backgroundColor: colors.locked,
-    borderBottomColor: colors.lockedBorder,
   },
   adButtonText: {
     fontSize: 13,
-    fontWeight: 'bold',
+    fontWeight: '600',
     color: colors.textOnPrimary,
   },
-  timerContainer: {
+  adButtonUsedText: {
+    color: colors.textSecondary,
+  },
+  // Bonus Cards
+  bonusCard: {
+    flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: colors.surface,
+    padding: 12,
+    borderRadius: 16,
+    marginBottom: 12,
+    gap: 12,
+  },
+  bonusCardIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  bonusCardInfo: {
+    flex: 1,
+  },
+  bonusCardTitle: {
+    fontSize: 14,
+    fontWeight: '500',
+    color: colors.textPrimary,
+    marginBottom: 4,
+  },
+  bonusCardReward: {
+    fontSize: 12,
+    color: colors.textSecondary,
+  },
+  bonusButton: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    minWidth: 90,
+    alignItems: 'center',
+  },
+  bonusButtonText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: colors.textOnPrimary,
+  },
+  bonusButtonClaimed: {
+    backgroundColor: '#22C55E',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 8,
+    minWidth: 90,
+    alignItems: 'center',
+  },
+  bonusButtonClaimedText: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#FFFFFF',
+  },
+  // How It Works
+  howItWorksCard: {
+    backgroundColor: colors.surface,
+    padding: 16,
+    borderRadius: 16,
     marginTop: 8,
   },
+  howItWorksHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  howItWorksHeaderLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+    flex: 1,
+  },
+  howItWorksIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(234, 179, 8, 0.1)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  howItWorksTitle: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: colors.textPrimary,
+  },
+  howItWorksText: {
+    fontSize: 13,
+    color: colors.textSecondary,
+    lineHeight: 20,
+    marginTop: 12,
+  },
+  // Timer
+  timerInline: {
+    alignItems: 'flex-end',
+  },
+  timerLabel: {
+    fontSize: 12,
+    color: colors.textSecondary,
+    marginBottom: 2,
+  },
   timerText: {
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: 'bold',
     color: colors.primary,
     fontFamily: 'monospace', // For fixed width numbers

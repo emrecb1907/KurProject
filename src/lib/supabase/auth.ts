@@ -104,6 +104,58 @@ export const authService = {
     }
   },
 
+  // Sign in with email or username
+  async signInWithEmailOrUsername(emailOrUsername: string, password: string): Promise<AuthResponse> {
+    try {
+      // Trim and validate input
+      const input = emailOrUsername.trim();
+
+      if (!input || !password) {
+        return {
+          user: null,
+          error: new Error('Email/kullanıcı adı ve şifre gereklidir.'),
+        };
+      }
+
+      // Check if input is an email (contains @)
+      const isEmail = input.includes('@');
+
+      if (isEmail) {
+        // Direct email login
+        return await this.signIn(input, password);
+      } else {
+        // Username login - need to find the email first
+        console.log('🔍 Looking up email for username:', input);
+
+        // Query database for user with this username (case-insensitive)
+        const { data: userData, error: dbError } = await supabase
+          .from('users')
+          .select('email')
+          .ilike('username', input) // Case-insensitive match
+          .single();
+
+        if (dbError || !userData?.email) {
+          console.error('❌ Username not found:', input, dbError);
+          return {
+            user: null,
+            error: new Error('Kullanıcı adı bulunamadı.'),
+          };
+        }
+
+        console.log('✅ Found email for username:', input);
+
+        // Now sign in with the found email
+        return await this.signIn(userData.email, password);
+      }
+    } catch (error) {
+      console.error('❌ SignIn Error:', error);
+      return {
+        user: null,
+        error: error as Error,
+      };
+    }
+  },
+
   // Sign out
   async signOut(): Promise<{ error: Error | null }> {
     try {

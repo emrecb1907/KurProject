@@ -1,0 +1,79 @@
+{
+    "common": {
+        "back": "Back",
+        "level": "Level",
+        "start": "Start",
+        "verse": "Verse",
+        "word": "Word",
+        "tip": "Tip"
+    },
+    "letters": {
+        "title": "Arabic Letters",
+        "description": "Listen to letter sounds and choose the correct letter",
+        "tests": {
+            "1": "Letter Group 1",
+            "2": "Letter Group 2",
+            "3": "Letter Group 3",
+            "4": "Letter Group 4"
+        }
+    },
+    "vocabulary": {
+        "title": "Vocabulary Cards",
+        "description": "Learn Islamic keywords",
+        "tests": {
+            "1": "Basic Words",
+            "2": "Daily Life",
+            "3": "Worship"
+        },
+        "format": {
+            "title": "Game Format",
+            "text": "Learn words by matching cards"
+        }
+    },
+    "verses": {
+        "title": "Verse Completion",
+        "description": "Complete verses by finding missing words",
+        "tests": {
+            "1": "Fatiha Surah",
+            "2": "Ikhlas Surah",
+            "3": "Kawthar Surah"
+        },
+        "features": {
+            "title": "Features",
+            "text": "Listen to verses and repeat"
+        }
+    },
+    "quiz": {
+        "title": "Islamic Quiz",
+        "description": "Test your Islamic knowledge",
+        "tests": {
+            "1": "General Knowledge",
+            "2": "Advanced Level",
+            "3": "Expert"
+        }
+    },
+    "islamTarihi": {
+        "title": "Islamic History",
+        "description": "Test your knowledge about Islamic history",
+        "tests": {
+            "1": "General Islamic History"
+        }
+    },
+    "namazBilgisi": {
+        "title": "Prayer Knowledge",
+        "description": "Test your knowledge about prayer",
+        "tests": {
+            "1": "General Prayer Knowledge"
+        }
+    },
+    "speed": {
+        "title": "Speed Round",
+        "description": "Quick practice with mixed questions",
+        "tests": {
+            "1": "Beginner",
+            "2": "Intermediate",
+            "3": "Advanced"
+        }
+    }
+}
+

@@ -1,0 +1,41 @@
+{
+    "student": "QuranLearn Student",
+    "anonymous": "Anonymous User",
+    "logout": "Log Out",
+    "stats": {
+        "totalXP": "Total XP",
+        "streak": "Daily Streak",
+        "successRate": "Success Rate",
+        "completedTests": "Completed Tests"
+    },
+    "sections": {
+        "badges": "Badges",
+        "settings": "Settings",
+        "achievements": "Achievements"
+    },
+    "theme": {
+        "label": "Theme",
+        "light": "Light",
+        "dark": "Dark",
+        "system": "System",
+        "activeTheme": "Active theme",
+        "systemSettings": "system settings"
+    },
+    "achievements": {
+        "firstStep": {
+            "title": "First Step",
+            "description": "Complete your first lesson"
+        },
+        "streakStarter": {
+            "title": "Streak Starter",
+            "description": "Practice for 7 days in a row"
+        }
+    },
+    "loginPrompt": {
+        "title": "Create Account",
+        "description": "Save your progress, join the leaderboard, and unlock all features!",
+        "button": "Login / Register"
+    },
+    "badgesHint": "Earn badges by completing lessons!"
+}
+

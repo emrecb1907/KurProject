@@ -1,19 +1,69 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Share, Alert } from 'react-native';
 import { useMemo } from 'react';
 import { colors } from '@constants/colors';
-import { BookOpen } from 'phosphor-react-native';
+import { BookOpen, ShareNetwork } from 'phosphor-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+
+// Import hadis JSON
+const hadisData = require('@assets/hadis/tr/hadis.json');
+
+interface HadisItem {
+    id: number;
+    hadis: string;
+    kaynak: string;
+}
+
+// Calculate day of year (1-365 or 1-366 for leap years)
+function getDayOfYear(date: Date): number {
+    const start = new Date(date.getFullYear(), 0, 0);
+    const diff = date.getTime() - start.getTime();
+    const oneDay = 1000 * 60 * 60 * 24;
+    return Math.floor(diff / oneDay);
+}
+
+// Check if year is leap year
+function isLeapYear(year: number): boolean {
+    return (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
+}
+
+// Get hadis ID based on current date
+function getHadisId(): number {
+    const today = new Date();
+    const dayOfYear = getDayOfYear(today);
+    const year = today.getFullYear();
+    
+    // If it's a leap year and day is 366, use id 365
+    if (isLeapYear(year) && dayOfYear === 366) {
+        return 365;
+    }
+    
+    // Otherwise use the day of year as id (1-365)
+    return Math.min(dayOfYear, 365);
+}
 
 export function DailyHadith() {
     const { t } = useTranslation();
     const { themeVersion } = useTheme();
 
-    // Static hadith for now (will be dynamic later)
-    const hadith = {
-        text: "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
-        source: "Buhârî",
-    };
+    // Get today's hadis dynamically
+    const hadith = useMemo(() => {
+        const hadisId = getHadisId();
+        const hadisItem = (hadisData as HadisItem[]).find(item => item.id === hadisId);
+        
+        if (hadisItem) {
+            return {
+                text: hadisItem.hadis,
+                source: hadisItem.kaynak,
+            };
+        }
+        
+        // Fallback to first hadis if not found
+        return {
+            text: hadisData[0]?.hadis || "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
+            source: hadisData[0]?.kaynak || "Buhârî",
+        };
+    }, []);
 
     // Dynamic styles
     const styles = useMemo(() => StyleSheet.create({
@@ -68,13 +118,36 @@ export function DailyHadith() {
         sourceContainer: {
             flexDirection: 'row',
             justifyContent: 'flex-end',
+            alignItems: 'center',
+            gap: 8,
         },
         sourceText: {
             fontSize: 13,
             color: colors.textDisabled,
             fontWeight: '500',
         },
+        shareButton: {
+            padding: 4,
+        },
     }), [themeVersion]);
+
+    // Handle share functionality
+    const handleShare = async () => {
+        try {
+            const shareMessage = `"${hadith.text}" - ${hadith.source}`;
+            const result = await Share.share({
+                message: shareMessage,
+            });
+
+            if (result.action === Share.sharedAction) {
+                // Share was successful
+            } else if (result.action === Share.dismissedAction) {
+                // Share was dismissed
+            }
+        } catch (error: any) {
+            Alert.alert('Hata', 'Paylaşım sırasında bir sorun oluştu.');
+        }
+    };
 
     return (
         <View style={styles.container}>
@@ -98,6 +171,13 @@ export function DailyHadith() {
             {/* Source */}
             <View style={styles.sourceContainer}>
                 <Text style={styles.sourceText}>{hadith.source}</Text>
+                <TouchableOpacity 
+                    style={styles.shareButton}
+                    onPress={handleShare}
+                    activeOpacity={0.7}
+                >
+                    <ShareNetwork size={18} color={colors.textDisabled} weight="regular" />
+                </TouchableOpacity>
             </View>
         </View>
     );

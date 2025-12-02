@@ -379,7 +379,7 @@ export default function ProfileScreen() {
                 style={styles.editBadge}
                 onPress={() => {
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  // TODO: Navigate to edit profile page
+                  router.push('/edit-profile');
                 }}
               >
                 <PencilSimple size={18} color={colors.textPrimary} weight="fill" />

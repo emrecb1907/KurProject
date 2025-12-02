@@ -175,6 +175,35 @@ export function useAuthHook() {
     }
   }
 
+  // Sign in with email or username
+  async function signInWithEmailOrUsername(emailOrUsername: string, password: string) {
+    console.log('🔵 useAuth.signInWithEmailOrUsername called with:', emailOrUsername);
+    try {
+      setIsLoading(true);
+      const { user: authUser, error } = await authService.signInWithEmailOrUsername(emailOrUsername, password);
+
+      if (error) throw error;
+
+      if (authUser) {
+        console.log('✅ SignIn Success! User:', authUser.id);
+
+        // Track conversion in analytics (in case this is first login after signup)
+        await sessionTracker.markAccountCreated(authUser.id);
+
+        // Re-initialize to load user data from database
+        await initializeAuth();
+        console.log('✅ Auth initialized after signin');
+      }
+
+      return { error: null };
+    } catch (error) {
+      console.error('❌ SignIn Error:', error);
+      return { error: error as Error };
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   // Social Sign In Helper
   async function handleSocialLogin(loginPromise: Promise<{ user: User | null; error: Error | null }>) {
     try {
@@ -249,6 +278,7 @@ export function useAuthHook() {
     isInitialized,
     signUp,
     signIn,
+    signInWithEmailOrUsername,
     signInWithGoogle,
     signInWithApple,
     signOut,

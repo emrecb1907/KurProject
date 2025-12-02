@@ -1,8 +1,7 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
-import tr from './locales';
-import en from './locales/en.json';
+import tr, { en } from './locales';
 
 // Get device language (not used yet, but ready for future)
 const deviceLanguage = getLocales()[0]?.languageCode ?? 'tr';
@@ -13,7 +12,7 @@ i18n
         compatibilityJSON: 'v3', // For Android compatibility
         resources: {
             tr: { translation: tr },
-            // en: { translation: en }, // Temporarily disabled
+            en: { translation: en },
         },
         lng: 'tr', // Default to Turkish
         fallbackLng: 'tr',

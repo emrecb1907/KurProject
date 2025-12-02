@@ -7,6 +7,7 @@ import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { validateText } from '@/utils/profanityFilter';
 
 export default function RegisterScreen() {
   const { t } = useTranslation();
@@ -34,6 +35,13 @@ export default function RegisterScreen() {
 
     if (password !== confirmPassword) {
       setError(t('auth.errors.passwordMismatch'));
+      return;
+    }
+
+    // Validate Username (Profanity & Safety Check)
+    const validation = validateText(username);
+    if (!validation.isValid) {
+      setError(validation.error || 'Geçersiz kullanıcı adı.');
       return;
     }
 

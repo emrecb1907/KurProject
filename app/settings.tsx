@@ -4,7 +4,7 @@ import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe, SignOut, Trash } from 'phosphor-react-native';
+import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe, SignOut, Trash, Lock } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import Constants from 'expo-constants';
@@ -35,11 +35,11 @@ export default function SettingsScreen() {
   const { isAuthenticated, user } = useAuth();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
-  
+
   // Animation values for logout modal
   const [logoutScaleAnim] = useState(new Animated.Value(0));
   const [logoutFadeAnim] = useState(new Animated.Value(0));
-  
+
   // Animation values for delete account modal
   const [deleteScaleAnim] = useState(new Animated.Value(0));
   const [deleteFadeAnim] = useState(new Animated.Value(0));
@@ -127,7 +127,7 @@ export default function SettingsScreen() {
         .from('users')
         .delete()
         .eq('id', user.id);
-      
+
       if (dbError) {
         console.error('Error deleting user data:', dbError);
         setShowDeleteAccountModal(false);
@@ -150,6 +150,14 @@ export default function SettingsScreen() {
     {
       title: 'HESAP',
       options: [
+        {
+          id: 'change-password',
+          title: 'Şifre Değiştir',
+          onPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            router.push('/change-password');
+          },
+        },
         {
           id: 'preferences',
           title: 'Tercihler',
@@ -536,7 +544,7 @@ export default function SettingsScreen() {
             <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.themeSectionTitle}>Tema</Text>
           </View>
-          
+
           <View style={styles.themeContainer}>
             <View style={styles.themeButtons}>
               <Pressable
@@ -622,7 +630,7 @@ export default function SettingsScreen() {
             <Globe size={24} color={colors.textPrimary} weight="fill" />
             <Text style={styles.languageSectionTitle}>Dil</Text>
           </View>
-          
+
           <View style={styles.languageContainer}>
             <View style={styles.languageButtons}>
               <Pressable
@@ -729,7 +737,7 @@ export default function SettingsScreen() {
         showCloseButton={false}
         transparent
       >
-        <Animated.View 
+        <Animated.View
           style={[
             styles.modalContent,
             {
@@ -782,7 +790,7 @@ export default function SettingsScreen() {
         showCloseButton={false}
         transparent
       >
-        <Animated.View 
+        <Animated.View
           style={[
             styles.modalContent,
             {

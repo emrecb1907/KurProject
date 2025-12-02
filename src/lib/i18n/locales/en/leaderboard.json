@@ -1,0 +1,13 @@
+{
+    "title": "Leaderboard",
+    "league": "Bronze League",
+    "yourRank": "Your Rank",
+    "errors": {
+        "loadFailed": "Failed to load leaderboard"
+    },
+    "empty": {
+        "title": "No one on the leaderboard yet",
+        "subtitle": "Be the first!"
+    }
+}
+

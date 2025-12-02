@@ -3,12 +3,13 @@ import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
-import { Target, TreasureChest, Check, Fire, CheckCircle } from 'phosphor-react-native';
+import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { RewardModal } from './RewardModal';
+import { BlurView } from 'expo-blur';
 
 interface DayActivity {
     day: string;
@@ -117,6 +118,32 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             fontWeight: '600',
             color: colors.success,
         },
+        blurOverlay: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            borderRadius: 24,
+            overflow: 'hidden',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 10,
+        },
+        loginPrompt: {
+            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+            paddingVertical: 16,
+            paddingHorizontal: 24,
+            borderRadius: 16,
+            alignItems: 'center',
+            gap: 12,
+        },
+        loginPromptText: {
+            fontSize: 16,
+            fontWeight: '600',
+            color: '#FFFFFF',
+            textAlign: 'center',
+        },
     }), [themeVersion]);
 
     // Get day names from translations (reactive to language changes)
@@ -166,6 +193,13 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             };
         });
     }, [getDayName]);
+
+    // Get streak message based on current streak
+    const getStreakMessage = useCallback((currentStreak: number): string => {
+        // Clamp streak between 1 and 91+
+        const streakKey = currentStreak <= 0 ? 1 : currentStreak > 90 ? 'default' : String(currentStreak);
+        return t(`weeklyActivity.streakMessages.${streakKey}`);
+    }, [t]);
 
     const fetchWeeklyActivity = useCallback(async () => {
         if (!user?.id) return;
@@ -263,7 +297,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         useCallback(() => {
             // Only refetch if user changed or we haven't loaded yet
             const userChanged = lastUserIdRef.current !== user?.id;
-            
+
             if (userChanged) {
                 hasLoadedRef.current = false;
                 lastUserIdRef.current = user?.id;
@@ -307,7 +341,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
 
     return (
         <View style={styles.container}>
-            {/* Header */}
+            {/* Header - Always Visible */}
             <View style={styles.header}>
                 <View style={styles.headerTextContainer}>
                     <Text style={styles.title}>{t('weeklyActivity.title')}</Text>
@@ -320,44 +354,63 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                 </View>
             </View>
 
-            {/* Week Days */}
-            <View style={styles.weekContainer}>
-                {weekData.map((dayData, index) => (
-                    <View key={index} style={styles.dayContainer}>
-                        <Text style={styles.dayLabel}>{dayData.day}</Text>
-                        <View
-                            style={[
-                                styles.dayCircle,
-                                dayData.completed && styles.dayCircleCompleted,
-                                dayData.isToday && styles.dayCircleToday,
-                                (dayData.isToday && dayData.completed) && styles.dayCircleTodayCompleted,
-                            ]}
-                        >
-                            {dayData.completed && (
-                                <Check
-                                    size={18}
-                                    color={dayData.isToday ? colors.textOnPrimary : colors.textOnPrimary} // Always white on completed
-                                    weight="bold"
-                                />
-                            )}
+            {/* Content Container - Can be blurred */}
+            <View style={{ position: 'relative' }}>
+                {/* Week Days */}
+                <View style={styles.weekContainer}>
+                    {weekData.map((dayData, index) => (
+                        <View key={index} style={styles.dayContainer}>
+                            <Text style={styles.dayLabel}>{dayData.day}</Text>
+                            <View
+                                style={[
+                                    styles.dayCircle,
+                                    dayData.completed && styles.dayCircleCompleted,
+                                    dayData.isToday && styles.dayCircleToday,
+                                    (dayData.isToday && dayData.completed) && styles.dayCircleTodayCompleted,
+                                ]}
+                            >
+                                {dayData.completed && (
+                                    <Check
+                                        size={18}
+                                        color={dayData.isToday ? colors.textOnPrimary : colors.textOnPrimary} // Always white on completed
+                                        weight="bold"
+                                    />
+                                )}
+                            </View>
                         </View>
-                    </View>
-                ))}
-            </View>
+                    ))}
+                </View>
 
-            {/* Footer Text */}
-            <View style={styles.footer}>
-                {todayCompleted ? (
-                    <>
-                        <CheckCircle size={20} color={colors.success} weight="fill" />
-                        <Text style={styles.footerText}>
-                            {t('weeklyActivity.todayCompleted')}
+                {/* Footer Text */}
+                <View style={styles.footer}>
+                    {todayCompleted ? (
+                        <>
+                            <CheckCircle size={20} color={colors.success} weight="fill" />
+                            <Text style={styles.footerText}>
+                                {getStreakMessage(streak)}
+                            </Text>
+                        </>
+                    ) : (
+                        <Text style={[styles.footerText, { color: colors.textSecondary }]}>
+                            {t('weeklyActivity.todayNotCompleted')}
                         </Text>
-                    </>
-                ) : (
-                    <Text style={[styles.footerText, { color: colors.textSecondary }]}>
-                        {t('weeklyActivity.todayNotCompleted')}
-                    </Text>
+                    )}
+                </View>
+
+                {/* Blur Overlay for Non-Authenticated Users - Only covers content */}
+                {!isAuthenticated && (
+                    <View style={styles.blurOverlay}>
+                        <BlurView intensity={80} tint="dark" style={StyleSheet.absoluteFill}>
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <View style={styles.loginPrompt}>
+                                    <LockKey size={32} color="#FFFFFF" weight="fill" />
+                                    <Text style={styles.loginPromptText}>
+                                        Bu özellik için giriş yapmalısınız.
+                                    </Text>
+                                </View>
+                            </View>
+                        </BlurView>
+                    </View>
                 )}
             </View>
 

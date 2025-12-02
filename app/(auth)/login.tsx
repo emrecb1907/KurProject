@@ -11,10 +11,10 @@ import { useTranslation } from 'react-i18next';
 export default function LoginScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { signIn, signInWithGoogle, signInWithApple } = useAuthHook();
+  const { signIn, signInWithEmailOrUsername, signInWithGoogle, signInWithApple } = useAuthHook();
   const { themeVersion } = useTheme(); // Trigger re-render on theme change
 
-  const [email, setEmail] = useState('');
+  const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -24,7 +24,7 @@ export default function LoginScreen() {
 
   const handleLogin = async () => {
     console.log('🔵 LoginScreen.handleLogin called');
-    if (!email || !password) {
+    if (!emailOrUsername || !password) {
       setError(t('auth.errors.fillAllFields'));
       return;
     }
@@ -32,7 +32,7 @@ export default function LoginScreen() {
     setLoading(true);
     setError('');
 
-    const { error: signInError } = await signIn(email, password);
+    const { error: signInError } = await signInWithEmailOrUsername(emailOrUsername, password);
 
     if (signInError) {
       // Translate error messages to user-friendly Turkish
@@ -42,8 +42,8 @@ export default function LoginScreen() {
         errorMessage = t('auth.errors.invalidCredentials');
       } else if (signInError.message.includes('Email not confirmed')) {
         errorMessage = t('auth.errors.emailNotConfirmed');
-      } else if (signInError.message.includes('User not found')) {
-        errorMessage = t('auth.errors.userNotFound');
+      } else if (signInError.message.includes('User not found') || signInError.message.includes('Kullanıcı adı bulunamadı')) {
+        errorMessage = 'Kullanıcı adı veya email bulunamadı.';
       }
 
       setError(errorMessage);
@@ -82,15 +82,14 @@ export default function LoginScreen() {
 
           <Card style={styles.formCard}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.login.email')}</Text>
+              <Text style={styles.label}>Email veya Kullanıcı Adı</Text>
               <TextInput
                 style={styles.input}
-                placeholder={t('auth.login.emailPlaceholder')}
+                placeholder="Email veya kullanıcı adınızı girin"
                 placeholderTextColor={colors.textDisabled}
-                value={email}
-                onChangeText={setEmail}
+                value={emailOrUsername}
+                onChangeText={setEmailOrUsername}
                 autoCapitalize="none"
-                keyboardType="email-address"
                 autoCorrect={false}
               />
             </View>
@@ -107,6 +106,15 @@ export default function LoginScreen() {
                 autoCapitalize="none"
               />
             </View>
+
+            <Pressable
+              onPress={() => router.push('/(auth)/forgot-password')}
+              style={styles.forgotPasswordContainer}
+            >
+              <Text style={styles.forgotPasswordText}>
+                {t('auth.login.forgotPassword') || 'Şifremi Unuttum'}
+              </Text>
+            </Pressable>
 
             {error ? (
               <View style={styles.errorBox}>
@@ -204,6 +212,16 @@ const getStyles = () => StyleSheet.create({
     fontSize: 16,
     color: colors.textPrimary,
     backgroundColor: colors.surface,
+  },
+  forgotPasswordContainer: {
+    alignSelf: 'flex-end',
+    marginBottom: 20,
+    marginTop: -10,
+  },
+  forgotPasswordText: {
+    fontSize: 14,
+    color: colors.primary,
+    fontWeight: '600',
   },
   errorBox: {
     backgroundColor: `${colors.error}15`,
