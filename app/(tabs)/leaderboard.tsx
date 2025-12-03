@@ -344,6 +344,14 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 20,
     alignSelf: 'center',
     gap: 8,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   leagueText: {
     fontSize: 16,
@@ -364,16 +372,22 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 16,
     padding: 12,
     marginBottom: 8,
-    borderWidth: 2,
-    borderColor: 'transparent',
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
   },
   itemTop: {
     borderColor: colors.border,
-    shadowColor: colors.shadowStrong,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 4,
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 5,
   },
   itemYou: {
     backgroundColor: colors.surfaceLight,
@@ -432,6 +446,12 @@ const getStyles = () => StyleSheet.create({
     gap: 12,
     borderBottomWidth: 4,
     borderBottomColor: colors.buttonBlueBorder,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
   },
   infoText: {
     flex: 1,
@@ -515,11 +535,11 @@ const getStyles = () => StyleSheet.create({
     color: colors.textSecondary,
   },
   userRankCard: {
-    shadowColor: colors.shadowStrong,
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 8,
-    elevation: 8,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 5,
   },
 });
 

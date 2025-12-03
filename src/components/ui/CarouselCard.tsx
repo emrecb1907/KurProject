@@ -227,11 +227,12 @@ const getStyles = (size: 'small' | 'large') => StyleSheet.create({
         borderRadius: size === 'large' ? 20 : 18,
         padding: size === 'large' ? 20 : 18,
         borderBottomWidth: size === 'large' ? 6 : 5.4,
-        shadowColor: colors.shadowStrong,
-        shadowOffset: { width: 0, height: size === 'large' ? 4 : 3.6 },
-        shadowOpacity: 0.5,
-        shadowRadius: size === 'large' ? 8 : 7.2,
-        elevation: size === 'large' ? 8 : 7.2,
+        // iOS 18 style shadow
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.08,
+        shadowRadius: 16,
+        elevation: 4,
         justifyContent: 'space-between',
     },
     lessonCardLocked: {

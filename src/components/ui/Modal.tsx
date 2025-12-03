@@ -4,12 +4,12 @@ import {
   View,
   Text,
   StyleSheet,
-  Pressable,
   Dimensions,
   Platform,
+  Pressable,
 } from 'react-native';
 import { BlurView } from 'expo-blur';
-import { colors } from '@constants/colors';
+import { colors, getActiveTheme } from '@constants/colors';
 
 const { width, height } = Dimensions.get('window');
 
@@ -30,6 +30,8 @@ export function Modal({
   showCloseButton = true,
   transparent = false,
 }: ModalProps) {
+  const theme = getActiveTheme();
+
   return (
     <RNModal
       visible={visible}

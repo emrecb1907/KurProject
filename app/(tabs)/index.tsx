@@ -218,8 +218,14 @@ export default function HomePage() {
             backgroundColor: colors.surface,
             justifyContent: 'center',
             alignItems: 'center',
-            borderWidth: 1,
-            borderColor: colors.border,
+            borderWidth: 0.2,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            // iOS 18 style shadow
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.08,
+            shadowRadius: 16,
+            elevation: 4,
         },
         statsRow: {
             flexDirection: 'row',
@@ -236,8 +242,14 @@ export default function HomePage() {
             paddingHorizontal: 12,
             borderRadius: 32, // Fully rounded
             gap: 8,
-            borderWidth: 1,
-            borderColor: colors.border,
+            borderWidth: 0.2,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
+            // iOS 18 style shadow
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.08,
+            shadowRadius: 16,
+            elevation: 4,
         },
         statValue: {
             fontSize: 14,
@@ -274,6 +286,14 @@ export default function HomePage() {
             backgroundColor: colors.surface,
             borderRadius: 32,
             gap: 8,
+            // Softer shadow for category bar
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 1 },
+            shadowOpacity: 0.06,
+            shadowRadius: 8,
+            elevation: 2,
+            borderWidth: 0.2,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
         },
         categoryButton: {
             flex: 1,

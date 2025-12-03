@@ -461,13 +461,13 @@ export default function SettingsScreen() {
     modalTitle: {
       fontSize: 24,
       fontWeight: 'bold',
-      color: colors.textPrimary,
+      color: '#FFFFFF',
       textAlign: 'center',
       marginBottom: 12,
     },
     modalMessage: {
       fontSize: 16,
-      color: colors.textSecondary,
+      color: '#FFFFFF',
       textAlign: 'center',
       marginBottom: 24,
       lineHeight: 22,
@@ -504,12 +504,12 @@ export default function SettingsScreen() {
       fontWeight: 'bold',
     },
     modalButtonConfirmText: {
-      color: colors.textOnPrimary,
+      color: '#FFFFFF',
       fontSize: 16,
       fontWeight: 'bold',
     },
     modalButtonDeleteText: {
-      color: colors.textOnPrimary,
+      color: '#FFFFFF',
       fontSize: 16,
       fontWeight: 'bold',
     },

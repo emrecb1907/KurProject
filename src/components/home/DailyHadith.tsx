@@ -32,12 +32,12 @@ function getHadisId(): number {
     const today = new Date();
     const dayOfYear = getDayOfYear(today);
     const year = today.getFullYear();
-    
+
     // If it's a leap year and day is 366, use id 365
     if (isLeapYear(year) && dayOfYear === 366) {
         return 365;
     }
-    
+
     // Otherwise use the day of year as id (1-365)
     return Math.min(dayOfYear, 365);
 }
@@ -50,14 +50,14 @@ export function DailyHadith() {
     const hadith = useMemo(() => {
         const hadisId = getHadisId();
         const hadisItem = (hadisData as HadisItem[]).find(item => item.id === hadisId);
-        
+
         if (hadisItem) {
             return {
                 text: hadisItem.hadis,
                 source: hadisItem.kaynak,
             };
         }
-        
+
         // Fallback to first hadis if not found
         return {
             text: hadisData[0]?.hadis || "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
@@ -72,6 +72,14 @@ export function DailyHadith() {
             borderRadius: 24,
             padding: 10,
             marginBottom: 18,
+            // iOS 18 style shadow - more depth, softer spread
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.08,
+            shadowRadius: 16,
+            elevation: 4,
+            borderWidth: 0.2,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
         },
         header: {
             flexDirection: 'row',
@@ -171,7 +179,7 @@ export function DailyHadith() {
             {/* Source */}
             <View style={styles.sourceContainer}>
                 <Text style={styles.sourceText}>{hadith.source}</Text>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.shareButton}
                     onPress={handleShare}
                     activeOpacity={0.7}

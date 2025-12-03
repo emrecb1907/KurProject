@@ -67,7 +67,7 @@ export default function ChestScreen() {
   const getSlotStatus = (index: number) => {
     // Filter valid watches (within last 24 hours)
     const validWatches = [...adWatchTimes].filter(t => now - t < 24 * 60 * 60 * 1000);
-    
+
     // Sort by oldest first (so slot 1 shows the one that will expire soonest)
     // This way: Slot 1 = oldest (expires soonest), Slot 3 = newest (expires latest)
     const sortedWatches = validWatches.sort((a, b) => a - b);
@@ -111,7 +111,7 @@ export default function ChestScreen() {
       .map((status, i) => ({ status, index: i }))
       .filter(({ status }) => status.status === 'available')
       .map(({ index }) => index);
-    
+
     // If this is the first available slot (lowest index), show "Hakkın mevcut"
     if (availableSlots.length > 0 && index === availableSlots[0]) {
       return t('rewards.available');
@@ -254,7 +254,7 @@ export default function ChestScreen() {
         </View>
 
         {/* How It Works - Collapsible */}
-        <Pressable 
+        <Pressable
           style={styles.howItWorksCard}
           onPress={() => setIsHowItWorksExpanded(!isHowItWorksExpanded)}
         >
@@ -322,6 +322,14 @@ const getStyles = () => StyleSheet.create({
     padding: 16,
     marginBottom: 18,
     borderRadius: 16,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   statusCardHeader: {
     flexDirection: 'row',
@@ -401,6 +409,14 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 16,
     marginBottom: 12,
     gap: 12,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   adCardIcon: {
     width: 40,
@@ -454,6 +470,14 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 16,
     marginBottom: 12,
     gap: 12,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   bonusCardIcon: {
     width: 40,
@@ -507,6 +531,14 @@ const getStyles = () => StyleSheet.create({
     padding: 16,
     borderRadius: 16,
     marginTop: 8,
+    // iOS 18 style shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+    elevation: 4,
+    borderWidth: 0.2,
+    borderColor: 'rgba(255, 255, 255, 0.1)',
   },
   howItWorksHeader: {
     flexDirection: 'row',

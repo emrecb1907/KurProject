@@ -35,6 +35,14 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             borderRadius: 24,
             padding: 10,
             marginBottom: 18,
+            // iOS 18 style shadow - more depth, softer spread
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.08,
+            shadowRadius: 16,
+            elevation: 4,
+            borderWidth: 0.2,
+            borderColor: 'rgba(255, 255, 255, 0.1)',
         },
         header: {
             flexDirection: 'row',

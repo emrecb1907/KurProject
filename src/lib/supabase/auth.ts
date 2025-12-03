@@ -135,7 +135,13 @@ export const authService = {
           .single();
 
         if (dbError || !userData?.email) {
-          console.error('❌ Username not found:', input, dbError);
+          // PGRST116: The result contains 0 rows (User not found)
+          if (dbError?.code === 'PGRST116') {
+            console.log('ℹ️ Username not found:', input);
+          } else {
+            console.error('❌ Error looking up username:', input, dbError);
+          }
+
           return {
             user: null,
             error: new Error('Kullanıcı adı bulunamadı.'),
