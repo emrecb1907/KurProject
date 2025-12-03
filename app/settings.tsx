@@ -4,16 +4,14 @@ import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe, SignOut, Trash, Lock } from 'phosphor-react-native';
+import { X, CaretRight, Sun, Moon, Desktop, Lightbulb, Globe, SignOut, Trash } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import Constants from 'expo-constants';
 import { useAuthHook } from '@/hooks';
 import { useAuth } from '@/store';
-import { database } from '@/lib/supabase/database';
 import { supabase } from '@/lib/supabase/client';
 import { Modal } from '@components/ui/Modal';
-import { Button } from '@components/ui/Button';
 
 interface SettingsOption {
   id: string;

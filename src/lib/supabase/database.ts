@@ -4,6 +4,8 @@ import { Lesson } from '@types/lesson.types';
 import { Question, UserAnswer } from '@types/question.types';
 import { Badge, UserBadge } from '@types/badge.types';
 
+import { rateLimiter, RATE_LIMITS } from '@/lib/utils/rateLimiter';
+
 export const database = {
   // ==================== USERS ====================
   users: {
@@ -45,7 +47,61 @@ export const database = {
     },
 
     async updateXP(userId: string, xpToAdd: number) {
-      // Get current user to calculate new values
+      // 1. Client-side Rate Limit Check (UX & Performance)
+      const canProceed = await rateLimiter.canProceed(
+        userId,
+        'xp_update',
+        RATE_LIMITS.XP_UPDATE.maxRequests,
+        RATE_LIMITS.XP_UPDATE.windowMs
+      );
+
+      if (!canProceed) {
+        console.warn('⚠️ Rate limit exceeded (Client-side)');
+        return { data: null, error: new Error('Çok hızlı işlem yapıyorsunuz. Lütfen biraz bekleyin.') };
+      }
+
+      // 2. Secure Update via RPC (Server-side Rate Limit & Validation)
+      try {
+        const { data, error } = await supabase.rpc('update_xp_with_limit', {
+          p_user_id: userId,
+          p_amount: xpToAdd
+        });
+
+        if (error) {
+          console.error('❌ Error updating XP (RPC):', error);
+
+          // If RPC fails (e.g. function not found yet), fallback to direct update
+          // This ensures backward compatibility until migration is run
+          if (error.code === 'PGRST202' || error.message.includes('function not found')) {
+            console.warn('⚠️ RPC function not found, falling back to direct update');
+            return this.fallbackUpdateXP(userId, xpToAdd);
+          }
+
+          return { data: null, error };
+        }
+
+        // RPC returns { success: true, total_xp: 123 } or { error: '...' }
+        if (data && data.error) {
+          return { data: null, error: new Error(data.error) };
+        }
+
+        // Construct a partial User object to return
+        const updatedUser: Partial<User> = {
+          id: userId,
+          total_xp: data.total_xp,
+          // Note: total_score is also updated in RPC but not returned directly in this simple version
+        };
+
+        return { data: updatedUser as User, error: null };
+
+      } catch (err) {
+        console.error('❌ Unexpected error in updateXP:', err);
+        return { data: null, error: err as any };
+      }
+    },
+
+    // Fallback method for direct updates (legacy)
+    async fallbackUpdateXP(userId: string, xpToAdd: number) {
       const { data: user } = await this.getById(userId);
       if (!user) return { data: null, error: new Error('User not found') };
 
@@ -223,69 +279,102 @@ export const database = {
       console.log('🔄 updateCompletion called:', { userId, lessonId, correct, total });
 
       try {
-        const completionRate = (correct / total) * 100;
-        const isCompleted = true; // Always mark as completed regardless of score
-
-        // 1. Get existing progress (Safe fetch)
-        let currentCount = 0;
-        const { data: existingProgress, error: fetchError } = await supabase
-          .from('user_progress')
-          .select('completion_count')
-          .eq('user_id', userId)
-          .eq('lesson_id', lessonId)
-          .single();
-
-        if (!fetchError && existingProgress) {
-          currentCount = existingProgress.completion_count || 0;
-        }
-
-        const newCount = currentCount + 1;
-
-        // 2. Upsert User Progress
-        const { data, error: upsertError } = await supabase
-          .from('user_progress')
-          .upsert({
-            user_id: userId,
-            lesson_id: lessonId,
-            completion_rate: completionRate,
-            correct_answers: correct,
-            total_attempts: total,
-            is_completed: isCompleted,
-            completion_count: newCount,
-            last_attempted: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-          }, { onConflict: 'user_id,lesson_id' })
-          .select()
-          .single();
-
-        if (upsertError) {
-          console.error('❌ Error updating user_progress:', upsertError);
-          return { data: null, error: upsertError };
-        }
-
-        // 3. Update User Stats (RPC)
-        const wrong = total - correct;
-        const { error: rpcError } = await supabase.rpc('increment_user_stats', {
+        // Use secure RPC function with rate limiting
+        const { data, error } = await supabase.rpc('complete_game_with_limit', {
           p_user_id: userId,
-          p_lessons_completed: 1,
-          p_questions_solved: total,
+          p_lesson_id: lessonId,
           p_correct_answers: correct,
-          p_wrong_answers: wrong,
+          p_total_questions: total,
         });
 
-        if (rpcError) {
-          console.error('❌ Error incrementing user stats:', rpcError);
-          // We don't return error here because progress was saved successfully
-        } else {
-          console.log('✅ User stats incremented successfully');
+        if (error) {
+          console.error('❌ Error in complete_game_with_limit RPC:', error);
+
+          // Fallback to old method if RPC not available (backward compatibility)
+          if (error.code === '42883') { // Function does not exist
+            console.warn('⚠️ complete_game_with_limit RPC not found, using fallback method');
+            return await this.fallbackUpdateCompletion(userId, lessonId, correct, total);
+          }
+
+          return { data: null, error };
         }
 
-        return { data: data as UserProgress | null, error: null };
+        // Check for rate limit error in response
+        if (data?.error) {
+          console.warn('⚠️ Rate limit hit (Game Completion):', data.error);
+          return { data: null, error: new Error(data.error) };
+        }
+
+        console.log('✅ Game completion successful via RPC');
+        return { data: data as any, error: null };
 
       } catch (err) {
         console.error('❌ Unexpected error in updateCompletion:', err);
         return { data: null, error: err as any };
       }
+    },
+
+    // Fallback method for backward compatibility
+    async fallbackUpdateCompletion(userId: string, lessonId: string, correct: number, total: number) {
+      console.log('🔄 Using fallback updateCompletion method');
+
+      const completionRate = (correct / total) * 100;
+      const isCompleted = true;
+
+      // 1. Get existing progress
+      let currentCount = 0;
+      const { data: existingProgress, error: fetchError } = await supabase
+        .from('user_progress')
+        .select('completion_count')
+        .eq('user_id', userId)
+        .eq('lesson_id', lessonId)
+        .single();
+
+      if (!fetchError && existingProgress) {
+        currentCount = existingProgress.completion_count || 0;
+      }
+
+      const newCount = currentCount + 1;
+
+      // 2. Upsert User Progress
+      const { data, error: upsertError } = await supabase
+        .from('user_progress')
+        .upsert({
+          user_id: userId,
+          lesson_id: lessonId,
+          completion_rate: completionRate,
+          correct_answers: correct,
+          total_attempts: total,
+          is_completed: isCompleted,
+          completion_count: newCount,
+          last_attempted: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id,lesson_id' })
+        .select()
+        .single();
+
+      if (upsertError) {
+        console.error('❌ Error updating user_progress:', upsertError);
+        return { data: null, error: upsertError };
+      }
+
+      // 3. Update User Stats (RPC)
+      const wrong = total - correct;
+      const { error: rpcError } = await supabase.rpc('increment_user_stats', {
+        p_user_id: userId,
+        p_lessons_completed: 1,
+        p_questions_solved: total,
+        p_correct_answers: correct,
+        p_wrong_answers: wrong,
+      });
+
+      if (rpcError) {
+        console.error('❌ Error incrementing user stats:', rpcError);
+      } else {
+        console.log('✅ User stats incremented successfully');
+      }
+
+      return { data: data as UserProgress | null, error: null };
     },
   },
 
