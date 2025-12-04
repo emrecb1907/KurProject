@@ -9,7 +9,48 @@
         "start": "Start",
         "xp": "XP",
         "lives": "Lives",
-        "devTools": "Developer Tools"
+        "devTools": "Developer Tools",
+        "dailyHadith": {
+            "title": "Daily Hadith",
+            "shareError": "An error occurred while sharing."
+        },
+        "dailyTasks": {
+            "title": "Daily Tasks",
+            "completeLessons": "Complete {{count}} Lessons",
+            "completeTests": "Complete {{count}} Tests",
+            "completed": "Completed",
+            "claimed": "Claimed",
+            "reward": {
+                "title": "Congratulations!",
+                "button": "Awesome!"
+            },
+            "devTools": {
+                "title": "Task Progress Simulation",
+                "completeLesson": "Complete Lesson (+1)",
+                "completeTest": "Complete Test (+1)"
+            }
+        },
+        "changePassword": {
+            "title": "Change Password",
+            "currentPassword": "Current Password",
+            "currentPasswordPlaceholder": "Enter your current password",
+            "newPassword": "New Password",
+            "newPasswordPlaceholder": "Enter your new password",
+            "confirmPassword": "Confirm New Password",
+            "confirmPasswordPlaceholder": "Re-enter your new password",
+            "requirement": "Must be at least 6 characters",
+            "updateButton": "Update Password",
+            "success": "Your password has been updated successfully!",
+            "errors": {
+                "fillAll": "Please fill in all fields.",
+                "notMatch": "New passwords do not match.",
+                "tooShort": "New password must be at least 6 characters.",
+                "sameAsOld": "New password cannot be the same as old password.",
+                "userNotFound": "User not found.",
+                "wrongPassword": "Current password is incorrect.",
+                "general": "An error occurred while updating password."
+            }
+        }
     },
     "tabs": {
         "home": "Home",
@@ -126,4 +167,3 @@
         }
     }
 }
-

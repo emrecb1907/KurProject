@@ -9,6 +9,7 @@ import { useUser } from '@/store';
 import { queryClient } from '@/lib/queryClient';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import '@/lib/i18n'; // Initialize i18n
+import { loadSavedLanguage } from '@/lib/i18n';
 
 // Error Handling
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -40,6 +41,7 @@ function RootLayout() {
 
   useEffect(() => {
     checkLifeRegeneration();
+    loadSavedLanguage();
   }, [fontsLoaded]);
 
   useEffect(() => {

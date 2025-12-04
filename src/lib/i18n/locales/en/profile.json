@@ -36,6 +36,43 @@
         "description": "Save your progress, join the leaderboard, and unlock all features!",
         "button": "Login / Register"
     },
-    "badgesHint": "Earn badges by completing lessons!"
+    "badgesHint": "Earn badges by completing lessons!",
+    "settings": {
+        "title": "Settings",
+        "language": {
+            "title": "Language",
+            "select": "Language Selection",
+            "turkish": "Türkçe",
+            "english": "English",
+            "save": "Save"
+        },
+        "account": {
+            "title": "ACCOUNT",
+            "changePassword": "Change Password",
+            "preferences": "Preferences",
+            "notifications": "Notifications"
+        },
+        "general": {
+            "title": "GENERAL",
+            "subscription": "Subscription",
+            "terms": "Terms of Service",
+            "privacy": "Privacy Policy",
+            "credits": "Credits"
+        },
+        "logout": {
+            "button": "Log Out",
+            "title": "Log Out",
+            "message": "Are you sure you want to log out?",
+            "cancel": "Cancel",
+            "confirm": "Log Out"
+        },
+        "deleteAccount": {
+            "button": "Delete My Account",
+            "title": "Delete Account",
+            "message": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.",
+            "cancel": "Cancel",
+            "confirm": "Delete"
+        },
+        "version": "Version"
+    }
 }
-

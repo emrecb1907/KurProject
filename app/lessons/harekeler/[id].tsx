@@ -6,22 +6,15 @@ import { colors } from '@constants/colors';
 import { ArrowLeft, PlayCircle, Check } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Audio } from 'expo-av';
+import { playSound } from '@/utils/audio';
 import { COMBINED_HAREKE_LETTERS, HAREKE_AUDIO_FILES, type CombinedHarekeLetter } from '@/data/harekeler';
 import { useUser } from '@/store';
-
-// Configure audio mode once
-Audio.setAudioModeAsync({
-    playsInSilentModeIOS: true,
-    staysActiveInBackground: false,
-    shouldDuckAndroid: true,
-}).catch(console.error);
 
 export default function HarekelerLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
     const { incrementDailyLessons, completeLesson } = useUser();
-    const soundRef = useRef<Audio.Sound | null>(null);
+    const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
     // Check if all items have been played
@@ -30,9 +23,7 @@ export default function HarekelerLessonScreen() {
     // Cleanup audio when component unmounts
     useEffect(() => {
         return () => {
-            if (soundRef.current) {
-                soundRef.current.unloadAsync().catch(console.error);
-            }
+            if (stopSoundRef.current) stopSoundRef.current();
         };
     }, []);
 
@@ -166,36 +157,18 @@ export default function HarekelerLessonScreen() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
         try {
-            // Stop and unload previous sound if exists
-            const currentSound = soundRef.current;
-            if (currentSound) {
-                soundRef.current = null;
-                try {
-                    await currentSound.stopAsync();
-                    await currentSound.unloadAsync();
-                } catch (cleanupError: any) {
-                    if (cleanupError?.message !== 'Seeking interrupted.') {
-                        console.warn('Error cleaning up previous sound:', cleanupError);
-                    }
-                }
+            // Stop previous sound if exists
+            if (stopSoundRef.current) {
+                await stopSoundRef.current();
+                stopSoundRef.current = null;
             }
 
             const audioPath = HAREKE_AUDIO_FILES[letter.id];
 
             // If audio exists, play it
             if (audioPath) {
-                const { sound } = await Audio.Sound.createAsync(audioPath);
-                soundRef.current = sound;
-                await sound.playAsync();
-
-                sound.setOnPlaybackStatusUpdate((status) => {
-                    if (status.isLoaded && status.didJustFinish) {
-                        sound.unloadAsync().catch(console.error);
-                        if (soundRef.current === sound) {
-                            soundRef.current = null;
-                        }
-                    }
-                });
+                const stop = await playSound(audioPath);
+                stopSoundRef.current = stop;
             } else {
                 console.log(`No audio file for letter ${letter.id} (${letter.name})`);
             }
@@ -205,7 +178,7 @@ export default function HarekelerLessonScreen() {
 
         } catch (error) {
             console.error('Error playing audio:', error);
-            soundRef.current = null;
+            stopSoundRef.current = null;
         }
     };
 

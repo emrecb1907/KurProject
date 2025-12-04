@@ -6,22 +6,15 @@ import { colors } from '@constants/colors';
 import { ArrowLeft, PlayCircle, Check } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
-import { Audio } from 'expo-av';
+import { playSound } from '@/utils/audio';
 import { ARABIC_LETTERS, LETTER_AUDIO_FILES, type Letter } from '@/data/elifBaLetters';
 import { useUser } from '@/store';
-
-// Configure audio mode once
-Audio.setAudioModeAsync({
-    playsInSilentModeIOS: true,
-    staysActiveInBackground: false,
-    shouldDuckAndroid: true,
-}).catch(console.error);
 
 export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
     const { incrementDailyLessons, completeLesson } = useUser();
-    const soundRef = useRef<Audio.Sound | null>(null);
+    const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
     // Check if all letters have been played
@@ -30,9 +23,7 @@ export default function ElifBaIntroductionScreen() {
     // Cleanup audio when component unmounts
     useEffect(() => {
         return () => {
-            if (soundRef.current) {
-                soundRef.current.unloadAsync().catch(console.error);
-            }
+            if (stopSoundRef.current) stopSoundRef.current();
         };
     }, []);
 
@@ -163,17 +154,9 @@ export default function ElifBaIntroductionScreen() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
         try {
-            const currentSound = soundRef.current;
-            if (currentSound) {
-                soundRef.current = null;
-                try {
-                    await currentSound.stopAsync();
-                    await currentSound.unloadAsync();
-                } catch (cleanupError: any) {
-                    if (cleanupError?.message !== 'Seeking interrupted.') {
-                        console.warn('Error cleaning up previous sound:', cleanupError);
-                    }
-                }
+            if (stopSoundRef.current) {
+                await stopSoundRef.current();
+                stopSoundRef.current = null;
             }
 
             const audioPath = LETTER_AUDIO_FILES[letter.id];
@@ -182,23 +165,12 @@ export default function ElifBaIntroductionScreen() {
                 return;
             }
 
-            const { sound } = await Audio.Sound.createAsync(audioPath);
-            soundRef.current = sound;
-            await sound.playAsync();
-
+            const stop = await playSound(audioPath);
+            stopSoundRef.current = stop;
             setPlayedLetters(prev => new Set(prev).add(letter.id));
-
-            sound.setOnPlaybackStatusUpdate((status) => {
-                if (status.isLoaded && status.didJustFinish) {
-                    sound.unloadAsync().catch(console.error);
-                    if (soundRef.current === sound) {
-                        soundRef.current = null;
-                    }
-                }
-            });
         } catch (error) {
             console.error('Error playing audio:', error);
-            soundRef.current = null;
+            stopSoundRef.current = null;
         }
     };
 

@@ -9,7 +9,48 @@
         "start": "Başla",
         "xp": "XP",
         "lives": "Can",
-        "devTools": "Geliştirici Araçları"
+        "devTools": "Geliştirici Araçları",
+        "dailyHadith": {
+            "title": "Günün Hadisi",
+            "shareError": "Paylaşım sırasında bir sorun oluştu."
+        },
+        "dailyTasks": {
+            "title": "Günlük Görevler",
+            "completeLessons": "{{count}} Ders Bitir",
+            "completeTests": "{{count}} Test Çöz",
+            "completed": "Tamamlandı",
+            "claimed": "Alındı",
+            "reward": {
+                "title": "Tebrikler!",
+                "button": "Harika!"
+            },
+            "devTools": {
+                "title": "Görev İlerlemesi Simülasyonu",
+                "completeLesson": "Ders Bitir (+1)",
+                "completeTest": "Test Çöz (+1)"
+            }
+        },
+        "changePassword": {
+            "title": "Şifre Değiştir",
+            "currentPassword": "Mevcut Şifre",
+            "currentPasswordPlaceholder": "Mevcut şifrenizi girin",
+            "newPassword": "Yeni Şifre",
+            "newPasswordPlaceholder": "Yeni şifrenizi girin",
+            "confirmPassword": "Yeni Şifre (Tekrar)",
+            "confirmPasswordPlaceholder": "Yeni şifrenizi tekrar girin",
+            "requirement": "En az 6 karakter olmalı",
+            "updateButton": "Şifreyi Güncelle",
+            "success": "Şifreniz başarıyla güncellendi!",
+            "errors": {
+                "fillAll": "Lütfen tüm alanları doldurun.",
+                "notMatch": "Yeni şifreler eşleşmiyor.",
+                "tooShort": "Yeni şifre en az 6 karakter olmalıdır.",
+                "sameAsOld": "Yeni şifre eski şifre ile aynı olamaz.",
+                "userNotFound": "Kullanıcı bilgisi bulunamadı.",
+                "wrongPassword": "Mevcut şifreniz hatalı.",
+                "general": "Şifre güncellenirken bir hata oluştu."
+            }
+        }
     },
     "tabs": {
         "home": "Ana",

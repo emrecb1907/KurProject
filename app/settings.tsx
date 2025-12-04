@@ -12,6 +12,7 @@ import { useAuthHook } from '@/hooks';
 import { useAuth } from '@/store';
 import { supabase } from '@/lib/supabase/client';
 import { Modal } from '@components/ui/Modal';
+import { getCurrentLanguage } from '@/lib/i18n';
 
 interface SettingsOption {
   id: string;
@@ -28,7 +29,7 @@ export default function SettingsScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { themeVersion, themeMode, activeTheme, setThemeMode } = useTheme();
-  const [selectedLanguage, setSelectedLanguage] = useState<'tr' | 'en'>('tr');
+  const [selectedLanguage, setSelectedLanguage] = useState<'tr' | 'en'>(getCurrentLanguage());
   const { signOut } = useAuthHook();
   const { isAuthenticated, user } = useAuth();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
@@ -87,10 +88,11 @@ export default function SettingsScreen() {
   // ScrollView ref for resetting scroll position
   const scrollViewRef = useRef<ScrollView>(null);
 
-  // Reset scroll position when screen comes into focus
+  // Reset scroll position and refresh language when screen comes into focus
   useFocusEffect(
     useCallback(() => {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+      setSelectedLanguage(getCurrentLanguage());
     }, [])
   );
 
@@ -146,11 +148,11 @@ export default function SettingsScreen() {
   // Settings sections and options
   const settingsSections: SettingsSection[] = useMemo(() => [
     {
-      title: 'HESAP',
+      title: t('profile.settings.account.title'),
       options: [
         {
           id: 'change-password',
-          title: 'Şifre Değiştir',
+          title: t('profile.settings.account.changePassword'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             router.push('/change-password');
@@ -158,7 +160,7 @@ export default function SettingsScreen() {
         },
         {
           id: 'preferences',
-          title: 'Tercihler',
+          title: t('profile.settings.account.preferences'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to preferences page
@@ -166,7 +168,7 @@ export default function SettingsScreen() {
         },
         {
           id: 'notifications',
-          title: 'Bildirimler',
+          title: t('profile.settings.account.notifications'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to notifications page
@@ -175,11 +177,11 @@ export default function SettingsScreen() {
       ],
     },
     {
-      title: 'GENEL',
+      title: t('profile.settings.general.title'),
       options: [
         {
           id: 'subscription',
-          title: 'Abonelik',
+          title: t('profile.settings.general.subscription'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to subscription page
@@ -187,7 +189,7 @@ export default function SettingsScreen() {
         },
         {
           id: 'terms',
-          title: 'Şartlar',
+          title: t('profile.settings.general.terms'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to terms page
@@ -195,7 +197,7 @@ export default function SettingsScreen() {
         },
         {
           id: 'privacy',
-          title: 'Gizlilik Politikası',
+          title: t('profile.settings.general.privacy'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to privacy policy page
@@ -203,7 +205,7 @@ export default function SettingsScreen() {
         },
         {
           id: 'credits',
-          title: 'Teşekkürler',
+          title: t('profile.settings.general.credits'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to credits page
@@ -211,7 +213,7 @@ export default function SettingsScreen() {
         },
       ],
     },
-  ], []);
+  ], [t]);
 
   const styles = useMemo(() => StyleSheet.create({
     container: {
@@ -353,43 +355,25 @@ export default function SettingsScreen() {
       fontWeight: 'bold',
       color: colors.textPrimary,
     },
-    languageContainer: {
-      marginTop: 8,
-    },
-    languageButtons: {
-      flexDirection: 'row',
-      gap: 12,
-    },
-    languageButton: {
-      flex: 1,
+    languageItem: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'center',
-      gap: 8,
-      paddingVertical: 12,
+      justifyContent: 'space-between',
       paddingHorizontal: 16,
-      borderRadius: 12,
+      paddingVertical: 16,
       backgroundColor: colors.surface,
-      borderWidth: 2,
+      borderRadius: 12,
+      borderWidth: 1,
       borderColor: colors.border,
     },
-    languageButtonActive: {
-      backgroundColor: colors.primary,
-      borderColor: colors.buttonOrangeBorder,
+    languageItemText: {
+      fontSize: 16,
+      fontWeight: '500',
+      color: colors.textPrimary,
     },
-    languageButtonText: {
+    languageItemValue: {
       fontSize: 14,
-      fontWeight: '600',
       color: colors.textSecondary,
-    },
-    languageButtonTextActive: {
-      color: colors.textOnPrimary,
-    },
-    languageHint: {
-      fontSize: 12,
-      color: colors.textSecondary,
-      marginTop: 8,
-      textAlign: 'center',
     },
     versionContainer: {
       alignItems: 'center',
@@ -526,7 +510,7 @@ export default function SettingsScreen() {
         >
           <X size={24} color={colors.textPrimary} weight="bold" />
         </Pressable>
-        <Text style={styles.headerTitle}>Ayarlar</Text>
+        <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
         <View style={styles.headerSpacer} />
       </View>
 
@@ -540,7 +524,7 @@ export default function SettingsScreen() {
         <View style={styles.themeSection}>
           <View style={styles.themeSectionHeader}>
             <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.themeSectionTitle}>Tema</Text>
+            <Text style={styles.themeSectionTitle}>{t('profile.theme.label')}</Text>
           </View>
 
           <View style={styles.themeContainer}>
@@ -626,53 +610,24 @@ export default function SettingsScreen() {
         <View style={styles.languageSection}>
           <View style={styles.languageSectionHeader}>
             <Globe size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.languageSectionTitle}>Dil</Text>
+            <Text style={styles.languageSectionTitle}>{t('profile.settings.language.title')}</Text>
           </View>
 
-          <View style={styles.languageContainer}>
-            <View style={styles.languageButtons}>
-              <Pressable
-                style={[
-                  styles.languageButton,
-                  selectedLanguage === 'tr' && styles.languageButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  // TODO: Implement language change
-                  setSelectedLanguage('tr');
-                }}
-              >
-                <Text style={[
-                  styles.languageButtonText,
-                  selectedLanguage === 'tr' && styles.languageButtonTextActive
-                ]}>
-                  Türkçe
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[
-                  styles.languageButton,
-                  selectedLanguage === 'en' && styles.languageButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  // TODO: Implement language change
-                  setSelectedLanguage('en');
-                }}
-              >
-                <Text style={[
-                  styles.languageButtonText,
-                  selectedLanguage === 'en' && styles.languageButtonTextActive
-                ]}>
-                  English
-                </Text>
-              </Pressable>
+          <Pressable
+            style={styles.languageItem}
+            onPress={() => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              router.push('/language-settings');
+            }}
+          >
+            <Text style={styles.languageItemText}>{t('profile.settings.language.select')}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+              <Text style={styles.languageItemValue}>
+                {selectedLanguage === 'tr' ? t('profile.settings.language.turkish') : t('profile.settings.language.english')}
+              </Text>
+              <CaretRight size={20} color={colors.textSecondary} weight="bold" />
             </View>
-            <Text style={styles.languageHint}>
-              Dil değişikliği yakında aktif olacak
-            </Text>
-          </View>
+          </Pressable>
         </View>
 
         {settingsSections.map((section, sectionIndex) => (
@@ -700,7 +655,7 @@ export default function SettingsScreen() {
                 onPress={handleLogout}
               >
                 <SignOut size={20} color={colors.textOnPrimary} weight="fill" />
-                <Text style={styles.logoutButtonText}>Çıkış Yap</Text>
+                <Text style={styles.logoutButtonText}>{t('profile.settings.logout.button')}</Text>
               </Pressable>
 
               <Pressable
@@ -708,7 +663,7 @@ export default function SettingsScreen() {
                 onPress={handleDeleteAccount}
               >
                 <Trash size={20} color={colors.textOnPrimary} weight="fill" />
-                <Text style={styles.deleteAccountButtonText}>Hesabımı Sil</Text>
+                <Text style={styles.deleteAccountButtonText}>{t('profile.settings.deleteAccount.button')}</Text>
               </Pressable>
             </View>
           </View>
@@ -717,7 +672,7 @@ export default function SettingsScreen() {
         {/* App Version */}
         <View style={styles.versionContainer}>
           <Text style={styles.versionText}>
-            Sürüm {Constants.expoConfig?.version || '1.0.0'}
+            {t('profile.settings.version')} {Constants.expoConfig?.version || '1.0.0'}
           </Text>
         </View>
 
@@ -754,9 +709,9 @@ export default function SettingsScreen() {
           >
             <Text style={styles.modalEmoji}>🚪</Text>
           </Animated.View>
-          <Text style={styles.modalTitle}>Çıkış Yap</Text>
+          <Text style={styles.modalTitle}>{t('profile.settings.logout.title')}</Text>
           <Text style={styles.modalMessage}>
-            Hesabınızdan çıkmak istediğinize emin misiniz?
+            {t('profile.settings.logout.message')}
           </Text>
           <View style={styles.modalButtons}>
             <Pressable
@@ -766,13 +721,13 @@ export default function SettingsScreen() {
                 setShowLogoutModal(false);
               }}
             >
-              <Text style={styles.modalButtonCancelText}>İptal</Text>
+              <Text style={styles.modalButtonCancelText}>{t('profile.settings.logout.cancel')}</Text>
             </Pressable>
             <Pressable
               style={[styles.modalButton, styles.modalButtonConfirm]}
               onPress={confirmLogout}
             >
-              <Text style={styles.modalButtonConfirmText}>Çıkış Yap</Text>
+              <Text style={styles.modalButtonConfirmText}>{t('profile.settings.logout.confirm')}</Text>
             </Pressable>
           </View>
         </Animated.View>
@@ -807,9 +762,9 @@ export default function SettingsScreen() {
           >
             <Text style={styles.modalEmoji}>⚠️</Text>
           </Animated.View>
-          <Text style={styles.modalTitle}>Hesabı Sil</Text>
+          <Text style={styles.modalTitle}>{t('profile.settings.deleteAccount.title')}</Text>
           <Text style={styles.modalMessage}>
-            Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.
+            {t('profile.settings.deleteAccount.message')}
           </Text>
           <View style={styles.modalButtons}>
             <Pressable
@@ -819,13 +774,13 @@ export default function SettingsScreen() {
                 setShowDeleteAccountModal(false);
               }}
             >
-              <Text style={styles.modalButtonCancelText}>İptal</Text>
+              <Text style={styles.modalButtonCancelText}>{t('profile.settings.deleteAccount.cancel')}</Text>
             </Pressable>
             <Pressable
               style={[styles.modalButton, styles.modalButtonDelete]}
               onPress={confirmDeleteAccount}
             >
-              <Text style={styles.modalButtonDeleteText}>Sil</Text>
+              <Text style={styles.modalButtonDeleteText}>{t('profile.settings.deleteAccount.confirm')}</Text>
             </Pressable>
           </View>
         </Animated.View>

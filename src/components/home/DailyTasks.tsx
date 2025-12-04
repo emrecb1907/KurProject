@@ -42,7 +42,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const tasks: Task[] = useMemo(() => {
         const lessonTask = {
             id: 1,
-            text: '2 Ders Bitir',
+            text: t('home.dailyTasks.completeLessons', { count: 2 }),
             xp: 50,
             current: dailyProgress.lessonsCompleted,
             target: 2,
@@ -52,7 +52,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
         const testTask = {
             id: 2,
-            text: '3 Test Çöz',
+            text: t('home.dailyTasks.completeTests', { count: 3 }),
             xp: 75,
             current: dailyProgress.testsCompleted,
             target: 3,
@@ -278,7 +278,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             {/* Header */}
             <View style={styles.header}>
                 <View style={styles.headerTextContainer}>
-                    <Text style={styles.title}>Günlük Görevler</Text>
+                    <Text style={styles.title}>{t('home.dailyTasks.title')}</Text>
                 </View>
 
                 {/* Settings Button */}
@@ -318,7 +318,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                         <View style={styles.taskInfo}>
                             <Text style={styles.taskText}>{task.text}</Text>
                             <Text style={styles.progressText}>
-                                {task.current}/{task.target} Tamamlandı
+                                {task.current}/{task.target} {t('home.dailyTasks.completed')}
                             </Text>
                         </View>
 
@@ -337,7 +337,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                                 task.completed && !task.claimed && styles.xpButtonTextActive,
                                 task.claimed && styles.xpButtonTextClaimed
                             ]}>
-                                {task.claimed ? 'Alındı' : `+${task.xp} XP`}
+                                {task.claimed ? t('home.dailyTasks.claimed') : `+${task.xp} XP`}
                             </Text>
                         </Pressable>
                     </View>
@@ -363,7 +363,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                         onPress={(e) => e.stopPropagation()}
                     >
                         <Text style={styles.rewardEmoji}>🎉</Text>
-                        <Text style={styles.rewardTitle}>Tebrikler!</Text>
+                        <Text style={styles.rewardTitle}>{t('home.dailyTasks.reward.title')}</Text>
                         <Text style={styles.rewardXP}>+{claimedReward?.xp} XP</Text>
                         <Text style={styles.rewardTaskName}>{claimedReward?.taskName}</Text>
                         <Pressable
@@ -373,7 +373,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                                 setShowRewardModal(false);
                             }}
                         >
-                            <Text style={styles.rewardButtonText}>Harika!</Text>
+                            <Text style={styles.rewardButtonText}>{t('home.dailyTasks.reward.button')}</Text>
                         </Pressable>
                     </Pressable>
                 </Pressable>
@@ -396,20 +396,20 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                 >
                     <Text style={styles.modalTitle}>🧪 {t('home.devTools')}</Text>
 
-                    <Text style={{ color: colors.textSecondary, marginBottom: 8 }}>Görev İlerlemesi Simülasyonu:</Text>
+                    <Text style={{ color: colors.textSecondary, marginBottom: 8 }}>{t('home.dailyTasks.devTools.title')}:</Text>
 
                     <Pressable
                         style={styles.devToolButton}
                         onPress={() => incrementDailyLessons()}
                     >
-                        <Text style={styles.devToolButtonText}>Ders Bitir (+1)</Text>
+                        <Text style={styles.devToolButtonText}>{t('home.dailyTasks.devTools.completeLesson')}</Text>
                     </Pressable>
 
                     <Pressable
                         style={styles.devToolButton}
                         onPress={() => incrementDailyTests()}
                     >
-                        <Text style={styles.devToolButtonText}>Test Çöz (+1)</Text>
+                        <Text style={styles.devToolButtonText}>{t('home.dailyTasks.devTools.completeTest')}</Text>
                     </Pressable>
 
                     <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 16 }} />

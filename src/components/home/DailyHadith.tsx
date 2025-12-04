@@ -153,7 +153,7 @@ export function DailyHadith() {
                 // Share was dismissed
             }
         } catch (error: any) {
-            Alert.alert('Hata', 'Paylaşım sırasında bir sorun oluştu.');
+            Alert.alert('Error', t('home.dailyHadith.shareError'));
         }
     };
 
@@ -162,7 +162,7 @@ export function DailyHadith() {
             {/* Header */}
             <View style={styles.header}>
                 <View style={styles.headerTextContainer}>
-                    <Text style={styles.title}>Günün Hadisi</Text>
+                    <Text style={styles.title}>{t('home.dailyHadith.title')}</Text>
                 </View>
                 <View style={styles.iconContainer}>
                     <BookOpen size={20} color={colors.warning} weight="fill" />

@@ -36,6 +36,43 @@
         "description": "İlerlemeni kaydetmek için giriş yap",
         "button": "Giriş Yap"
     },
-    "badgesHint": "Daha fazla test çözerek rozet kazan!"
+    "badgesHint": "Daha fazla test çözerek rozet kazan!",
+    "settings": {
+        "title": "Ayarlar",
+        "language": {
+            "title": "Dil",
+            "select": "Dil Seçimi",
+            "turkish": "Türkçe",
+            "english": "English",
+            "save": "Kaydet"
+        },
+        "account": {
+            "title": "HESAP",
+            "changePassword": "Şifre Değiştir",
+            "preferences": "Tercihler",
+            "notifications": "Bildirimler"
+        },
+        "general": {
+            "title": "GENEL",
+            "subscription": "Abonelik",
+            "terms": "Şartlar",
+            "privacy": "Gizlilik Politikası",
+            "credits": "Teşekkürler"
+        },
+        "logout": {
+            "button": "Çıkış Yap",
+            "title": "Çıkış Yap",
+            "message": "Hesabınızdan çıkmak istediğinize emin misiniz?",
+            "cancel": "İptal",
+            "confirm": "Çıkış Yap"
+        },
+        "deleteAccount": {
+            "button": "Hesabımı Sil",
+            "title": "Hesabı Sil",
+            "message": "Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinecektir.",
+            "cancel": "İptal",
+            "confirm": "Sil"
+        },
+        "version": "Sürüm"
+    }
 }
-

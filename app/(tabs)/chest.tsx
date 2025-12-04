@@ -104,7 +104,7 @@ export default function ChestScreen() {
   // Get ad slot renewal text
   const getAdSlotRenewalText = (index: number, slotStatus: { status: string; timeLeft?: string }) => {
     if (slotStatus.status === 'cooldown' && slotStatus.timeLeft) {
-      return `${slotStatus.timeLeft} sonra yenilenir`;
+      return t('rewards.cooldownDesc', { time: slotStatus.timeLeft });
     }
     // If available, check if it's the first available slot
     const availableSlots = allSlotStatuses

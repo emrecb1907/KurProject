@@ -1,22 +1,43 @@
 {
     "title": "Chest",
     "lives": "Lives",
+    "livesStatus": "Lives Status",
     "livesMax": "Lives are full! 🎉",
+    "livesCount": "{{current}} / {{max}} Lives",
     "nextLife": "Next life:",
     "infoBanner": "Earn +1 life every time you watch an ad.",
     "howItWorks": {
         "title": "How It Works?",
         "text": "• Earn +1 life every time you watch an ad\n• Watch up to 3 ads per day\n• Cannot watch ads when lives are full\n• Used slots refresh after 24 hours"
     },
+    "dailyFreeLives": "Daily Free Lives",
     "adSlots": "Ad Slots",
     "watchAd": "Watch",
+    "used": "Used",
     "cooldown": "Cooldown",
     "earnLife": "Earn Life",
     "watchAdDesc": "Watch ad, earn +1 life",
-    "cooldownDesc": "You can watch again in {{time}}",
+    "cooldownDesc": "Renews in {{time}}",
+    "renewsTomorrow": "Renews tomorrow",
+    "available": "Available",
+    "bonusTasks": "Bonus Tasks & Rewards",
+    "inviteFriend": {
+        "title": "Invite a Friend",
+        "reward": "+1 Life + 25 XP",
+        "button": "Invite"
+    },
+    "consecutiveLogin": {
+        "title": "3 Days Consecutive Login",
+        "reward": "Mini Chest",
+        "claimed": "Claimed"
+    },
+    "dailyTask": {
+        "title": "Complete today's task",
+        "reward": "+1 Life bonus",
+        "button": "Go to Task"
+    },
     "alerts": {
         "adWatched": "Ad watched! +1 Life earned.",
         "cantWatch": "You cannot watch ads right now."
     }
 }
-

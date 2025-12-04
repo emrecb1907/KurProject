@@ -18,7 +18,7 @@ import { GameQuestion, GameType } from '@/types/game.types';
 import { useGameCompletion } from '@/hooks';
 import { GAME_UI_CONFIG } from '@constants/game';
 import { logger } from '@/lib/logger';
-import { Audio } from 'expo-av';
+import { playSound } from '@/utils/audio';
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 
@@ -81,9 +81,9 @@ export function GameScreen({
     const [gameCompletedRef, setGameCompletedRef] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
-    const soundRef = useRef<Audio.Sound | null>(null);
-    const effectSoundRef = useRef<Audio.Sound | null>(null);
-    const gameCompleteSoundRef = useRef<Audio.Sound | null>(null);
+    const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
+    const stopEffectSoundRef = useRef<(() => Promise<void>) | null>(null);
+    const stopGameCompleteSoundRef = useRef<(() => Promise<void>) | null>(null);
 
     // XP bar animation
     const animatedXPWidth = useSharedValue(0);
@@ -94,33 +94,20 @@ export function GameScreen({
 
     // Configure audio mode once
     // playsInSilentModeIOS: false means sounds won't play when device is in silent mode
+    // Cleanup audio when component unmounts
     useEffect(() => {
-        Audio.setAudioModeAsync({
-            playsInSilentModeIOS: false, // Don't play sounds in silent mode
-            staysActiveInBackground: false,
-            shouldDuckAndroid: true,
-        }).catch(console.error);
-
-        // Cleanup audio when component unmounts
         return () => {
-            if (soundRef.current) {
-                soundRef.current.unloadAsync().catch(console.error);
-            }
-            if (effectSoundRef.current) {
-                effectSoundRef.current.unloadAsync().catch(console.error);
-            }
-            if (gameCompleteSoundRef.current) {
-                gameCompleteSoundRef.current.unloadAsync().catch(console.error);
-            }
+            if (stopSoundRef.current) stopSoundRef.current();
+            if (stopEffectSoundRef.current) stopEffectSoundRef.current();
+            if (stopGameCompleteSoundRef.current) stopGameCompleteSoundRef.current();
         };
     }, []);
 
     // Stop audio when question changes
     useEffect(() => {
-        if (soundRef.current) {
-            soundRef.current.stopAsync().catch(console.error);
-            soundRef.current.unloadAsync().catch(console.error);
-            soundRef.current = null;
+        if (stopSoundRef.current) {
+            stopSoundRef.current();
+            stopSoundRef.current = null;
         }
     }, [currentQuestionIndex]);
 
@@ -148,44 +135,24 @@ export function GameScreen({
 
     // Play sound effect (correct or wrong)
     // Note: Sounds will not play if device is in silent mode (playsInSilentModeIOS: false)
+    // Play sound effect (correct or wrong)
     const playSoundEffect = async (isCorrect: boolean) => {
         try {
-            // Stop and cleanup previous effect sound
-            if (effectSoundRef.current) {
-                try {
-                    await effectSoundRef.current.stopAsync();
-                    await effectSoundRef.current.unloadAsync();
-                } catch (cleanupError: any) {
-                    if (cleanupError?.message !== 'Seeking interrupted.') {
-                        console.warn('Error cleaning up previous effect sound:', cleanupError);
-                    }
-                }
-                effectSoundRef.current = null;
+            // Stop previous effect sound
+            if (stopEffectSoundRef.current) {
+                await stopEffectSoundRef.current();
+                stopEffectSoundRef.current = null;
             }
 
             // Get the appropriate sound file
             const soundFile = isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND;
 
             // Play the sound effect
-            // Will not play if device is in silent mode due to playsInSilentModeIOS: false
-            const { sound } = await Audio.Sound.createAsync(soundFile, {
-                shouldPlay: true,
-                volume: 1.0,
-            });
-            effectSoundRef.current = sound;
-
-            // Cleanup when finished
-            sound.setOnPlaybackStatusUpdate((status) => {
-                if (status.isLoaded && status.didJustFinish) {
-                    sound.unloadAsync().catch(console.error);
-                    if (effectSoundRef.current === sound) {
-                        effectSoundRef.current = null;
-                    }
-                }
-            });
+            const stop = await playSound(soundFile);
+            stopEffectSoundRef.current = stop;
         } catch (error) {
             console.error('Error playing sound effect:', error);
-            effectSoundRef.current = null;
+            stopEffectSoundRef.current = null;
         }
     };
 
@@ -288,17 +255,10 @@ export function GameScreen({
         hapticLight();
 
         try {
-            // Stop and cleanup previous sound
-            if (soundRef.current) {
-                try {
-                    await soundRef.current.stopAsync();
-                    await soundRef.current.unloadAsync();
-                } catch (cleanupError: any) {
-                    if (cleanupError?.message !== 'Seeking interrupted.') {
-                        console.warn('Error cleaning up previous sound:', cleanupError);
-                    }
-                }
-                soundRef.current = null;
+            // Stop previous sound
+            if (stopSoundRef.current) {
+                await stopSoundRef.current();
+                stopSoundRef.current = null;
             }
 
             // Get audio file
@@ -309,22 +269,11 @@ export function GameScreen({
             }
 
             // Play audio
-            const { sound } = await Audio.Sound.createAsync(audioFile);
-            soundRef.current = sound;
-            await sound.playAsync();
-
-            // Cleanup when finished
-            sound.setOnPlaybackStatusUpdate((status) => {
-                if (status.isLoaded && status.didJustFinish) {
-                    sound.unloadAsync().catch(console.error);
-                    if (soundRef.current === sound) {
-                        soundRef.current = null;
-                    }
-                }
-            });
+            const stop = await playSound(audioFile);
+            stopSoundRef.current = stop;
         } catch (error) {
             console.error('Error playing audio:', error);
-            soundRef.current = null;
+            stopSoundRef.current = null;
         }
     };
 
@@ -382,52 +331,30 @@ export function GameScreen({
     // Play game complete or level up sound based on modal visibility
     // Note: Sound will not play if device is in silent mode (playsInSilentModeIOS: false)
     // If level up modal is shown, play LevelUp sound, otherwise play GameComplete sound
+    // Play game complete or level up sound based on modal visibility
     useEffect(() => {
         if (isGameComplete) {
             const playCompletionSound = async () => {
                 try {
-                    // Stop and cleanup previous sound
-                    if (gameCompleteSoundRef.current) {
-                        try {
-                            await gameCompleteSoundRef.current.stopAsync();
-                            await gameCompleteSoundRef.current.unloadAsync();
-                        } catch (cleanupError: any) {
-                            if (cleanupError?.message !== 'Seeking interrupted.') {
-                                console.warn('Error cleaning up previous completion sound:', cleanupError);
-                            }
-                        }
-                        gameCompleteSoundRef.current = null;
+                    // Stop previous sound
+                    if (stopGameCompleteSoundRef.current) {
+                        await stopGameCompleteSoundRef.current();
+                        stopGameCompleteSoundRef.current = null;
                     }
 
                     // Choose sound based on level up modal visibility
-                    // If modal is shown, user leveled up, play LevelUp.mp3
-                    // If modal is not shown, user didn't level up, play GameComplete.mp3
                     const soundFile = showLevelUpModal ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
 
-                    // Will not play if device is in silent mode due to playsInSilentModeIOS: false
-                    const { sound } = await Audio.Sound.createAsync(soundFile, {
-                        shouldPlay: true,
-                        volume: 1.0,
-                    });
-                    gameCompleteSoundRef.current = sound;
-
-                    // Cleanup when finished
-                    sound.setOnPlaybackStatusUpdate((status) => {
-                        if (status.isLoaded && status.didJustFinish) {
-                            sound.unloadAsync().catch(console.error);
-                            if (gameCompleteSoundRef.current === sound) {
-                                gameCompleteSoundRef.current = null;
-                            }
-                        }
-                    });
+                    // Play sound
+                    const stop = await playSound(soundFile);
+                    stopGameCompleteSoundRef.current = stop;
                 } catch (error) {
                     console.error('Error playing completion sound:', error);
-                    gameCompleteSoundRef.current = null;
+                    stopGameCompleteSoundRef.current = null;
                 }
             };
 
-            // Wait a bit for modal state to be set (modal is shown after animation)
-            // If leveled up, modal will be shown, otherwise it won't
+            // Wait a bit for modal state to be set
             const timer = setTimeout(() => {
                 playCompletionSound();
             }, 100);
@@ -437,9 +364,9 @@ export function GameScreen({
 
         // Cleanup when component unmounts or game is not complete
         return () => {
-            if (gameCompleteSoundRef.current && !isGameComplete) {
-                gameCompleteSoundRef.current.unloadAsync().catch(console.error);
-                gameCompleteSoundRef.current = null;
+            if (stopGameCompleteSoundRef.current && !isGameComplete) {
+                stopGameCompleteSoundRef.current();
+                stopGameCompleteSoundRef.current = null;
             }
         };
     }, [isGameComplete, showLevelUpModal]);

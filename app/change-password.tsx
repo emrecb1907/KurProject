@@ -48,22 +48,22 @@ export default function ChangePasswordScreen() {
 
         // Basic validation
         if (!oldPassword || !newPassword || !confirmPassword) {
-            setError('Lütfen tüm alanları doldurun.');
+            setError(t('home.changePassword.errors.fillAll'));
             return;
         }
 
         if (newPassword !== confirmPassword) {
-            setError('Yeni şifreler eşleşmiyor.');
+            setError(t('home.changePassword.errors.notMatch'));
             return;
         }
 
         if (!validatePassword(newPassword)) {
-            setError('Yeni şifre en az 6 karakter olmalıdır.');
+            setError(t('home.changePassword.errors.tooShort'));
             return;
         }
 
         if (oldPassword === newPassword) {
-            setError('Yeni şifre eski şifre ile aynı olamaz.');
+            setError(t('home.changePassword.errors.sameAsOld'));
             return;
         }
 
@@ -71,7 +71,7 @@ export default function ChangePasswordScreen() {
 
         try {
             if (!user?.email) {
-                throw new Error('Kullanıcı bilgisi bulunamadı.');
+                throw new Error(t('home.changePassword.errors.userNotFound'));
             }
 
             // 1. Verify old password by attempting to sign in
@@ -81,7 +81,7 @@ export default function ChangePasswordScreen() {
             });
 
             if (signInError) {
-                setError('Mevcut şifreniz hatalı.');
+                setError(t('home.changePassword.errors.wrongPassword'));
                 setIsLoading(false);
                 return;
             }
@@ -107,7 +107,7 @@ export default function ChangePasswordScreen() {
 
         } catch (err: any) {
             console.error('Password update error:', err);
-            setError(err.message || 'Şifre güncellenirken bir hata oluştu.');
+            setError(err.message || t('home.changePassword.errors.general'));
         } finally {
             setIsLoading(false);
         }
@@ -264,7 +264,7 @@ export default function ChangePasswordScreen() {
                     >
                         <X size={24} color={colors.textPrimary} weight="bold" />
                     </Pressable>
-                    <Text style={styles.headerTitle}>Şifre Değiştir</Text>
+                    <Text style={styles.headerTitle}>{t('home.changePassword.title')}</Text>
                     <View style={styles.headerSpacer} />
                 </View>
 
@@ -287,21 +287,21 @@ export default function ChangePasswordScreen() {
                         success && (
                             <View style={styles.successContainer}>
                                 <Check size={20} color="#2E7D32" weight="fill" />
-                                <Text style={styles.successText}>Şifreniz başarıyla güncellendi!</Text>
+                                <Text style={styles.successText}>{t('home.changePassword.success')}</Text>
                             </View>
                         )
                     }
 
                     {/* Old Password */}
                     <View style={styles.formGroup}>
-                        <Text style={styles.label}>Mevcut Şifre</Text>
+                        <Text style={styles.label}>{t('home.changePassword.currentPassword')}</Text>
                         <View style={styles.inputContainer}>
                             <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
                             <TextInput
                                 style={styles.input}
                                 value={oldPassword}
                                 onChangeText={setOldPassword}
-                                placeholder="Mevcut şifrenizi girin"
+                                placeholder={t('home.changePassword.currentPasswordPlaceholder')}
                                 placeholderTextColor={colors.textDisabled}
                                 secureTextEntry={!showOldPassword}
                                 autoCapitalize="none"
@@ -321,14 +321,14 @@ export default function ChangePasswordScreen() {
 
                     {/* New Password */}
                     <View style={styles.formGroup}>
-                        <Text style={styles.label}>Yeni Şifre</Text>
+                        <Text style={styles.label}>{t('home.changePassword.newPassword')}</Text>
                         <View style={styles.inputContainer}>
                             <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
                             <TextInput
                                 style={styles.input}
                                 value={newPassword}
                                 onChangeText={setNewPassword}
-                                placeholder="Yeni şifrenizi girin"
+                                placeholder={t('home.changePassword.newPasswordPlaceholder')}
                                 placeholderTextColor={colors.textDisabled}
                                 secureTextEntry={!showNewPassword}
                                 autoCapitalize="none"
@@ -347,19 +347,19 @@ export default function ChangePasswordScreen() {
                     </View>
 
                     <View style={styles.requirements}>
-                        <Text style={styles.requirementText}>• En az 6 karakter olmalı</Text>
+                        <Text style={styles.requirementText}>• {t('home.changePassword.requirement')}</Text>
                     </View>
 
                     {/* Confirm Password */}
                     <View style={styles.formGroup}>
-                        <Text style={styles.label}>Yeni Şifre (Tekrar)</Text>
+                        <Text style={styles.label}>{t('home.changePassword.confirmPassword')}</Text>
                         <View style={styles.inputContainer}>
                             <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
                             <TextInput
                                 style={styles.input}
                                 value={confirmPassword}
                                 onChangeText={setConfirmPassword}
-                                placeholder="Yeni şifrenizi tekrar girin"
+                                placeholder={t('home.changePassword.confirmPasswordPlaceholder')}
                                 placeholderTextColor={colors.textDisabled}
                                 secureTextEntry={!showConfirmPassword}
                                 autoCapitalize="none"
@@ -389,7 +389,7 @@ export default function ChangePasswordScreen() {
                         {isLoading ? (
                             <ActivityIndicator color={colors.textOnPrimary} />
                         ) : (
-                            <Text style={styles.updateButtonText}>Şifreyi Güncelle</Text>
+                            <Text style={styles.updateButtonText}>{t('home.changePassword.updateButton')}</Text>
                         )}
                     </Pressable>
 
