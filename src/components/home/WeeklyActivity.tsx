@@ -21,7 +21,11 @@ interface DayActivity {
 export const WeeklyActivity = memo(function WeeklyActivity() {
     const { t } = useTranslation();
     const { user, isAuthenticated } = useAuth();
-    const { themeVersion } = useTheme();
+    const { themeVersion, activeTheme } = useTheme();
+
+    // Light theme specific border color
+    const lightBorderColor = '#BCAAA4';
+    const isLight = activeTheme === 'light';
     const [weekData, setWeekData] = useState<DayActivity[]>([]);
     const [todayCompleted, setTodayCompleted] = useState(false);
     const [streak, setStreak] = useState(0);
@@ -34,15 +38,15 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             backgroundColor: colors.surface,
             borderRadius: 24,
             padding: 10,
-            marginBottom: 18,
+            marginBottom: 14,
             // iOS 18 style shadow - more depth, softer spread
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.08,
             shadowRadius: 16,
             elevation: 4,
-            borderWidth: 0.2,
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: isLight ? 0.2 : 0,
+            borderColor: isLight ? '#FFC800' : 'transparent',
         },
         header: {
             flexDirection: 'row',
@@ -72,7 +76,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             width: 36,
             height: 36,
             borderRadius: 18,
-            backgroundColor: 'rgba(255, 150, 0, 0.1)',
+            backgroundColor: 'rgba(255, 200, 0, 0.1)',
             justifyContent: 'center',
             alignItems: 'center',
         },
@@ -105,11 +109,11 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         },
         dayCircleToday: {
             borderWidth: 2,
-            borderColor: colors.primary,
+            borderColor: colors.xpGold,
         },
         dayCircleTodayCompleted: {
-            backgroundColor: colors.primary,
-            borderColor: colors.primary,
+            backgroundColor: colors.xpGold,
+            borderColor: colors.xpGold,
         },
         footer: {
             backgroundColor: 'rgba(88, 204, 2, 0.1)', // Light green bg
@@ -152,7 +156,7 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             color: '#FFFFFF',
             textAlign: 'center',
         },
-    }), [themeVersion]);
+    }), [themeVersion, activeTheme]);
 
     // Get day names from translations (reactive to language changes)
     const dayNames = useMemo(() => [
@@ -355,9 +359,9 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                     <Text style={styles.title}>{t('weeklyActivity.title')}</Text>
                 </View>
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                    <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.primary }}>{streak} gün</Text>
+                    <Text style={{ fontSize: 14, fontWeight: 'bold', color: colors.xpGold }}>{streak} gün</Text>
                     <View style={styles.iconContainer}>
-                        <Fire size={20} color={colors.primary} weight="fill" />
+                        <Fire size={20} color={colors.xpGold} weight="fill" />
                     </View>
                 </View>
             </View>

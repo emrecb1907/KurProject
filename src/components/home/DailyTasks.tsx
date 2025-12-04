@@ -24,7 +24,11 @@ interface Task {
 
 export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const { t } = useTranslation();
-    const { themeVersion } = useTheme();
+    const { themeVersion, activeTheme } = useTheme();
+
+    // Light theme specific border color
+    const lightBorderColor = '#BCAAA4';
+    const isLight = activeTheme === 'light';
     const [showDevToolsModal, setShowDevToolsModal] = useState(false);
     const [showRewardModal, setShowRewardModal] = useState(false);
     const [claimedReward, setClaimedReward] = useState<{ xp: number; taskName: string } | null>(null);
@@ -83,15 +87,15 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             backgroundColor: colors.surface,
             borderRadius: 24,
             padding: 10,
-            marginBottom: 22,
+            marginBottom: 18,
             // iOS 18 style shadow - more depth, softer spread
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
             shadowOpacity: 0.08,
             shadowRadius: 16,
             elevation: 4,
-            borderWidth: 0.2,
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: isLight ? 0.2 : 0,
+            borderColor: isLight ? '#FFC800' : 'transparent',
         },
         header: {
             flexDirection: 'row',
@@ -271,7 +275,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             fontWeight: 'bold',
             textAlign: 'center',
         },
-    }), [themeVersion]);
+    }), [themeVersion, activeTheme]);
 
     return (
         <View style={styles.container}>

@@ -9,6 +9,7 @@ import games from './tr/games.json';
 import gameUI from './tr/gameUI.json';
 import lessons from './tr/lessons.json';
 import errors from './tr/errors.json';
+import premiumpaywall from './tr/premiumpaywall.json';
 
 // Import all English translation modules
 import enCommon from './en/common.json';
@@ -21,6 +22,7 @@ import enGames from './en/games.json';
 import enGameUI from './en/gameUI.json';
 import enLessons from './en/lessons.json';
 import enErrors from './en/errors.json';
+import enPremiumpaywall from './en/premiumpaywall.json';
 
 // Merge all Turkish translations into a single object
 // home.json already contains home, tabs, weeklyActivity objects (spread them)
@@ -36,6 +38,7 @@ export const tr = {
     gameUI, // Contains root-level gameUI content (wrapped as gameUI namespace)
     lessons, // Contains root-level lessons content (wrapped as lessons namespace)
     errors, // Contains root-level errors content (wrapped as errors namespace)
+    premiumpaywall,
 };
 
 // Merge all English translations into a single object
@@ -50,6 +53,7 @@ const en = {
     gameUI: enGameUI, // Contains root-level gameUI content (wrapped as gameUI namespace)
     lessons: enLessons, // Contains root-level lessons content (wrapped as lessons namespace)
     errors: enErrors, // Contains root-level errors content (wrapped as errors namespace)
+    premiumpaywall: enPremiumpaywall,
 };
 
 export { tr as default, en };

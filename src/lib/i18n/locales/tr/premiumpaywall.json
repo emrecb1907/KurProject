@@ -1,0 +1,43 @@
+{
+    "headerTitle": "Premium Üyelik",
+    "heroTitle1": "Sınırsız Öğren,",
+    "heroTitle2": "Kesintisiz İlerle",
+    "features": {
+        "noAds": {
+            "title": "Reklamsız Deneyim",
+            "subtitle": "Öğrenme sürecine odaklan"
+        },
+        "allLessons": {
+            "title": "Tüm Derslere Erişim",
+            "subtitle": "Kilitli dersler olmadan ilerle"
+        },
+        "unlimitedHearts": {
+            "title": "Sınırsız Can Hakları",
+            "subtitle": "Hata yapmaktan korkma"
+        },
+        "offlineAccess": {
+            "title": "İnternet olmadan derslere erişim",
+            "subtitle": "Bilgini özel içeriklerle sına"
+        },
+        "progressTracking": {
+            "title": "Gelişmiş İlerleme Takibi",
+            "subtitle": "Detaylı raporlarla gelişimini izle"
+        }
+    },
+    "plans": {
+        "monthly": {
+            "name": "Aylık",
+            "price": "₺29.99/ay"
+        },
+        "yearly": {
+            "name": "Yıllık",
+            "price": "₺249.99/yıl",
+            "saveBadge": "%20 Tasarruf Edin"
+        }
+    },
+    "subscribeButton": "Abone Ol",
+    "footer": {
+        "privacy": "Gizlilik Politikası",
+        "terms": "Kullanım Şartları"
+    }
+}

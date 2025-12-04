@@ -27,7 +27,7 @@ import { TestlerTab, TestlerTabRef } from '@/components/home/TestlerTab';
 export default function HomePage() {
     const { t } = useTranslation();
     const { statusBarStyle } = useStatusBar();
-    const { themeVersion } = useTheme();
+    const { themeVersion, activeTheme } = useTheme();
 
     // Get user data from Zustand store
     const { totalXP, currentLives, setTotalXP, checkDailyReset } = useUser();
@@ -231,7 +231,7 @@ export default function HomePage() {
             flexDirection: 'row',
             justifyContent: 'space-between',
             paddingHorizontal: 16,
-            marginBottom: 12,
+            marginBottom: 8,
             marginTop: 8,
         },
         statBadge: {
@@ -240,10 +240,10 @@ export default function HomePage() {
             backgroundColor: colors.surface,
             paddingVertical: 6,
             paddingHorizontal: 12,
-            borderRadius: 32, // Fully rounded
+            borderRadius: 32,
             gap: 8,
-            borderWidth: 0.2,
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: activeTheme === 'light' ? 0.2 : 0,
+            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
             // iOS 18 style shadow
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
@@ -258,7 +258,7 @@ export default function HomePage() {
         },
         xpContainer: {
             paddingHorizontal: 16,
-            marginBottom: 14, // Reduced margin by ~30%
+            marginBottom: 10,
         },
         xpBarBackground: {
             height: 12,
@@ -266,10 +266,12 @@ export default function HomePage() {
             borderRadius: 6,
             overflow: 'hidden',
             marginBottom: 6,
+            borderWidth: activeTheme === 'light' ? 0.2 : 0,
+            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
         },
         xpBarFill: {
             height: '100%',
-            backgroundColor: colors.primary, // Orange bar
+            backgroundColor: '#FFC800',
             borderRadius: 6,
         },
         xpText: {
@@ -281,7 +283,7 @@ export default function HomePage() {
         categoryBar: {
             flexDirection: 'row',
             marginHorizontal: 16,
-            marginBottom: 6, // Reduced margin
+            marginBottom: 2,
             padding: 4,
             backgroundColor: colors.surface,
             borderRadius: 32,
@@ -292,8 +294,8 @@ export default function HomePage() {
             shadowOpacity: 0.06,
             shadowRadius: 8,
             elevation: 2,
-            borderWidth: 0.2,
-            borderColor: 'rgba(255, 255, 255, 0.1)',
+            borderWidth: activeTheme === 'light' ? 0.2 : 0,
+            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
         },
         categoryButton: {
             flex: 1,
@@ -304,7 +306,7 @@ export default function HomePage() {
             justifyContent: 'center',
         },
         categoryButtonActive: {
-            backgroundColor: colors.primary, // Orange active
+            backgroundColor: '#FFC800',
         },
         categoryButtonInactive: {
             backgroundColor: 'transparent',
@@ -314,7 +316,7 @@ export default function HomePage() {
             fontWeight: 'bold',
         },
         categoryButtonTextActive: {
-            color: colors.background, // Text color matches background
+            color: activeTheme === 'light' ? '#000000' : colors.background,
         },
         categoryButtonTextInactive: {
             color: colors.textSecondary,
@@ -323,7 +325,7 @@ export default function HomePage() {
             flex: 1,
             backgroundColor: colors.backgroundDarker,
         },
-    }), [themeVersion]);
+    }), [themeVersion, activeTheme]);
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>

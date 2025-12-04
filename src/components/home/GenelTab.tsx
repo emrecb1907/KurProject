@@ -223,7 +223,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                 contentContainerStyle={{ paddingBottom: 100 }}
                 showsVerticalScrollIndicator={false}
             >
-                <View style={{ paddingHorizontal: 16, paddingTop: 16 }}>
+                <View style={{ paddingHorizontal: 16, paddingTop: 12 }}>
                     <DailyHadith />
                     <WeeklyActivity />
                     <DailyTasks

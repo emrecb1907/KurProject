@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useMemo } from 'react';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { House, Trophy, User, Gift } from 'phosphor-react-native';
+import { House, Trophy, User, Gift, Crown } from 'phosphor-react-native';
 import { useTranslation } from 'react-i18next';
 
 import * as Haptics from 'expo-haptics';
@@ -104,6 +104,22 @@ export default function TabLayout() {
           tabBarIcon: ({ focused }) => (
             <View style={[styles.tabItem, focused && styles.tabItemActive]}>
               <Gift
+                size={28}
+                color={focused ? colors.textPrimary : colors.textDisabled}
+                weight={focused ? 'fill' : 'regular'}
+              />
+            </View>
+          ),
+          tabBarLabel: () => null,
+        }}
+      />
+      <Tabs.Screen
+        name="premium"
+        options={{
+          title: t('tabs.premium'),
+          tabBarIcon: ({ focused }) => (
+            <View style={[styles.tabItem, focused && styles.tabItemActive]}>
+              <Crown
                 size={28}
                 color={focused ? colors.textPrimary : colors.textDisabled}
                 weight={focused ? 'fill' : 'regular'}

@@ -90,7 +90,7 @@ export default function LeaderboardScreen() {
   const error = queryError ? t('leaderboard.errors.loadFailed') : null;
 
   // Dynamic styles that update when theme changes
-  const styles = useMemo(() => getStyles(), [themeVersion]);
+  const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
 
   // Reset scroll position when screen comes into focus
   useFocusEffect(
@@ -303,7 +303,7 @@ export default function LeaderboardScreen() {
 }
 
 // Force re-create styles when theme changes by making them a function
-const getStyles = () => StyleSheet.create({
+const getStyles = (activeTheme?: string) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundDarker,
@@ -350,8 +350,8 @@ const getStyles = () => StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
-    borderWidth: 0.2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: activeTheme === 'light' ? 0.2 : 0.2,
+    borderColor: activeTheme === 'light' ? '#FFC800' : 'rgba(255, 255, 255, 0.1)',
   },
   leagueText: {
     fontSize: 16,

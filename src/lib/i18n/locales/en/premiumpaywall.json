@@ -1,0 +1,43 @@
+{
+    "headerTitle": "Premium Membership",
+    "heroTitle1": "Learn Unlimited,",
+    "heroTitle2": "Progress Uninterrupted",
+    "features": {
+        "noAds": {
+            "title": "Ad-Free Experience",
+            "subtitle": "Focus on your learning process"
+        },
+        "allLessons": {
+            "title": "Access All Lessons",
+            "subtitle": "Advance without locked lessons"
+        },
+        "unlimitedHearts": {
+            "title": "Unlimited Hearts",
+            "subtitle": "Don't fear making mistakes"
+        },
+        "offlineAccess": {
+            "title": "Access lessons without internet",
+            "subtitle": "Test your knowledge with special content"
+        },
+        "progressTracking": {
+            "title": "Advanced Progress Tracking",
+            "subtitle": "Track your development with detailed reports"
+        }
+    },
+    "plans": {
+        "monthly": {
+            "name": "Monthly",
+            "price": "₺29.99/mo"
+        },
+        "yearly": {
+            "name": "Yearly",
+            "price": "₺249.99/yr",
+            "saveBadge": "Save 20%"
+        }
+    },
+    "subscribeButton": "Subscribe",
+    "footer": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use"
+    }
+}

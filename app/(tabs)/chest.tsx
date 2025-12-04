@@ -12,11 +12,11 @@ import { useTranslation } from 'react-i18next';
 export default function ChestScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { themeVersion } = useTheme();
+  const { themeVersion, activeTheme } = useTheme();
   const { currentLives, maxLives, watchAd, adWatchTimes, lastReplenishTime, checkLifeRegeneration } = useUser();
 
   // Dynamic styles that update when theme changes
-  const styles = useMemo(() => getStyles(), [themeVersion]);
+  const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
 
   const [now, setNow] = useState(Date.now());
 
@@ -285,7 +285,7 @@ export default function ChestScreen() {
   );
 }
 
-const getStyles = () => StyleSheet.create({
+const getStyles = (activeTheme?: string) => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.backgroundDarker,
@@ -328,8 +328,8 @@ const getStyles = () => StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
-    borderWidth: 0.2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: activeTheme === 'light' ? 0.2 : 0.2,
+    borderColor: activeTheme === 'light' ? '#FFC800' : 'rgba(255, 255, 255, 0.1)',
   },
   statusCardHeader: {
     flexDirection: 'row',
@@ -415,8 +415,8 @@ const getStyles = () => StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
-    borderWidth: 0.2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: activeTheme === 'light' ? 0.2 : 0.2,
+    borderColor: activeTheme === 'light' ? '#FFC800' : 'rgba(255, 255, 255, 0.1)',
   },
   adCardIcon: {
     width: 40,
@@ -440,7 +440,7 @@ const getStyles = () => StyleSheet.create({
     color: colors.textSecondary,
   },
   adButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.xpGold,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
@@ -456,7 +456,7 @@ const getStyles = () => StyleSheet.create({
   adButtonText: {
     fontSize: 13,
     fontWeight: '600',
-    color: colors.textOnPrimary,
+    color: '#000000',
   },
   adButtonUsedText: {
     color: colors.textSecondary,
@@ -476,8 +476,8 @@ const getStyles = () => StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
-    borderWidth: 0.2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: activeTheme === 'light' ? 0.2 : 0.2,
+    borderColor: activeTheme === 'light' ? '#FFC800' : 'rgba(255, 255, 255, 0.1)',
   },
   bonusCardIcon: {
     width: 40,
@@ -500,7 +500,7 @@ const getStyles = () => StyleSheet.create({
     color: colors.textSecondary,
   },
   bonusButton: {
-    backgroundColor: colors.primary,
+    backgroundColor: colors.xpGold,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,
@@ -510,7 +510,7 @@ const getStyles = () => StyleSheet.create({
   bonusButtonText: {
     fontSize: 13,
     fontWeight: '600',
-    color: colors.textOnPrimary,
+    color: '#000000',
   },
   bonusButtonClaimed: {
     backgroundColor: '#22C55E',
@@ -537,8 +537,8 @@ const getStyles = () => StyleSheet.create({
     shadowOpacity: 0.08,
     shadowRadius: 16,
     elevation: 4,
-    borderWidth: 0.2,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
+    borderWidth: activeTheme === 'light' ? 0.2 : 0.2,
+    borderColor: activeTheme === 'light' ? '#FFC800' : 'rgba(255, 255, 255, 0.1)',
   },
   howItWorksHeader: {
     flexDirection: 'row',
