@@ -1,0 +1,39 @@
+{
+    "title": "Premium Center",
+    "subtitle": "New Dimension of Privileged Learning",
+    "badge": "You are a Premium Member",
+    "footer": "Ads removed.",
+    "features": {
+        "aiAssistant": {
+            "title": "Personal Quran Assistant",
+            "subtitle": "Ask anything you're stuck on"
+        },
+        "detailedAnalysis": {
+            "title": "Detailed Analysis",
+            "subtitle": "See your progress"
+        },
+        "allLessons": {
+            "title": "All Lessons",
+            "subtitle": "Unlimited access"
+        },
+        "unlimitedPractice": {
+            "title": "Unlimited Practice",
+            "subtitle": "Improve yourself"
+        },
+        "offlineMode": {
+            "title": "Offline Mode",
+            "subtitle": "Learn without internet"
+        }
+    },
+    "analysis": {
+        "overview": "Overview",
+        "streak": "Daily Streak",
+        "totalXP": "Total XP",
+        "successRate": "Success Rate",
+        "weeklyActivity": "Weekly Activity",
+        "completedLessons": "Completed Lessons",
+        "completedTests": "Completed Tests",
+        "correctAnswers": "Correct Answers",
+        "averageTime": "Average Time"
+    }
+}

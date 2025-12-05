@@ -1,0 +1,39 @@
+{
+    "title": "Premium Merkez",
+    "subtitle": "Ayrıcalıklı Öğrenimin Yeni Boyutu",
+    "badge": "Premium Üyesisin",
+    "footer": "Reklamlar kaldırıldı.",
+    "features": {
+        "aiAssistant": {
+            "title": "Kişisel Kur'an Asistanı",
+            "subtitle": "Takıldığın her şeyi sor"
+        },
+        "detailedAnalysis": {
+            "title": "Detaylı Analiz",
+            "subtitle": "İlerlemeni gör"
+        },
+        "allLessons": {
+            "title": "Tüm Dersler",
+            "subtitle": "Sınırsız erişim"
+        },
+        "unlimitedPractice": {
+            "title": "Sınırsız Pratik",
+            "subtitle": "Kendini geliştir"
+        },
+        "offlineMode": {
+            "title": "Çevrimdışı Mod",
+            "subtitle": "İnternetsiz öğren"
+        }
+    },
+    "analysis": {
+        "overview": "Genel Bakış",
+        "streak": "Günlük Seri",
+        "totalXP": "Toplam XP",
+        "successRate": "Başarı",
+        "weeklyActivity": "Haftalık Aktivite",
+        "completedLessons": "Tamamlanan Ders",
+        "completedTests": "Tamamlanan Test",
+        "correctAnswers": "Doğru Cevap",
+        "averageTime": "Ortalama Süre"
+    }
+}

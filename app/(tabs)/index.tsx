@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable, Dimensions, Image } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Dimensions, Image, DeviceEventEmitter } from 'react-native';
 import { useEffect, useCallback, useMemo, useState, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -148,10 +148,26 @@ export default function HomePage() {
                 derslerTabRef.current?.scrollToTop();
                 testlerTabRef.current?.scrollToTop();
             }, 50);
-
             return () => clearTimeout(timer);
         }, [])
     );
+
+    // Listen for scrollToTop event from tab bar
+    useEffect(() => {
+        const subscription = DeviceEventEmitter.addListener('scrollToTop', () => {
+            if (selectedCategory === 'genel') {
+                genelTabRef.current?.scrollToTop();
+            } else if (selectedCategory === 'dersler') {
+                derslerTabRef.current?.scrollToTop();
+            } else if (selectedCategory === 'testler') {
+                testlerTabRef.current?.scrollToTop();
+            }
+        });
+
+        return () => {
+            subscription.remove();
+        };
+    }, [selectedCategory]);
 
     // Handle category change
     const handleCategoryChange = (category: 'genel' | 'dersler' | 'testler') => {
@@ -336,7 +352,7 @@ export default function HomePage() {
                 <View style={styles.userInfo}>
                     <View style={styles.avatarContainer}>
                         {/* Placeholder for avatar - can be replaced with Image if available */}
-                        <User size={24} color="#000" weight="fill" opacity={0.5} />
+                        <User size={24} color="#000" weight="fill" style={{ opacity: 0.5 }} />
                     </View>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greetingText}>{t('home.welcome')},</Text>

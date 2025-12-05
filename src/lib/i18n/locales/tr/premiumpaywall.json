@@ -1,43 +1,45 @@
 {
-    "headerTitle": "Premium Üyelik",
-    "heroTitle1": "Sınırsız Öğren,",
-    "heroTitle2": "Kesintisiz İlerle",
+    "headerTitle": "Premium'a Geç",
+    "heroTitle1": "Sınırsız Öğrenme",
+    "heroTitle2": "Deneyimi",
     "features": {
-        "noAds": {
-            "title": "Reklamsız Deneyim",
-            "subtitle": "Öğrenme sürecine odaklan"
+        "aiAssistant": {
+            "title": "Kişisel Kur'an Asistanı (AI)",
+            "subtitle": "Derslerde anlamadığın her şeyi sor, anında cevap al."
         },
         "allLessons": {
-            "title": "Tüm Derslere Erişim",
-            "subtitle": "Kilitli dersler olmadan ilerle"
+            "title": "Tüm Dersler Açık",
+            "subtitle": "Başlangıçtan ileri seviyeye kadar tüm içeriklere eriş."
         },
-        "unlimitedHearts": {
-            "title": "Sınırsız Can Hakları",
-            "subtitle": "Hata yapmaktan korkma"
+        "unlimitedPractice": {
+            "title": "Sınırsız Pratik",
+            "subtitle": "Tekrar sınırı yok. İstediğin kadar çöz."
         },
-        "offlineAccess": {
-            "title": "İnternet olmadan derslere erişim",
-            "subtitle": "Bilgini özel içeriklerle sına"
+        "noAds": {
+            "title": "Reklamsız Öğrenme",
+            "subtitle": "Dikkatini dağıtan hiçbir reklam yok."
         },
-        "progressTracking": {
-            "title": "Gelişmiş İlerleme Takibi",
-            "subtitle": "Detaylı raporlarla gelişimini izle"
+        "progressReport": {
+            "title": "İlerleme Raporu",
+            "subtitle": "Nerede eksiksin, ne kadar öğrendin gör."
         }
     },
     "plans": {
         "monthly": {
-            "name": "Aylık",
-            "price": "₺29.99/ay"
+            "title": "Aylık Plan",
+            "price": "₺49.99",
+            "period": "/ay"
         },
         "yearly": {
-            "name": "Yıllık",
-            "price": "₺249.99/yıl",
-            "saveBadge": "%20 Tasarruf Edin"
+            "title": "Yıllık Plan",
+            "price": "₺399.99",
+            "period": "/yıl",
+            "save": "%33 Tasarruf",
+            "bestValue": "En İyi Fiyat"
         }
     },
-    "subscribeButton": "Abone Ol",
-    "footer": {
-        "privacy": "Gizlilik Politikası",
-        "terms": "Kullanım Şartları"
-    }
+    "cta": "Premium'a Geç",
+    "restore": "Satın Alımları Geri Yükle",
+    "terms": "Kullanım Koşulları",
+    "privacy": "Gizlilik Politikası"
 }

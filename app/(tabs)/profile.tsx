@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -49,6 +49,14 @@ export default function ProfileScreen() {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [])
   );
+
+  // Scroll to top listener
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('scrollToTopProfile', () => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    });
+    return () => subscription.remove();
+  }, []);
 
   // Use React Query data if available, fallback to Zustand cache
   const completedTests = userStats?.completedTests ?? 0;
@@ -164,13 +172,13 @@ export default function ProfileScreen() {
       justifyContent: 'center',
       alignItems: 'center',
       borderWidth: 4,
-      borderColor: colors.primary,
+      borderColor: colors.warning,
     },
     levelBadge: {
       position: 'absolute',
       bottom: 0,
       right: 0,
-      backgroundColor: colors.primary,
+      backgroundColor: colors.warning,
       borderRadius: 15,
       width: 35,
       height: 35,
@@ -346,6 +354,20 @@ export default function ProfileScreen() {
       borderWidth: 3,
       borderColor: colors.backgroundDarker,
     },
+    editButton: {
+      position: 'absolute',
+      top: 16,
+      left: 16,
+      zIndex: 10,
+      padding: 8,
+      backgroundColor: colors.surface,
+      borderRadius: 20,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 2 },
+      shadowOpacity: 0.1,
+      shadowRadius: 4,
+      elevation: 3,
+    },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
@@ -362,6 +384,17 @@ export default function ProfileScreen() {
           <Gear size={24} color={colors.textPrimary} weight="fill" />
         </Pressable>
 
+        {/* Edit Profile Button (Top Left) */}
+        <Pressable
+          style={styles.editButton}
+          onPress={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            router.push('/edit-profile');
+          }}
+        >
+          <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
+        </Pressable>
+
         <ScrollView
           ref={scrollViewRef}
           style={styles.content}
@@ -374,16 +407,7 @@ export default function ProfileScreen() {
                 <User size={50} color={colors.textPrimary} weight="fill" />
               </View>
 
-              {/* Edit Badge */}
-              <Pressable
-                style={styles.editBadge}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  router.push('/edit-profile');
-                }}
-              >
-                <PencilSimple size={18} color={colors.textPrimary} weight="fill" />
-              </Pressable>
+
               <View style={styles.levelBadge}>
                 <Text style={styles.levelText}>{xpProgress.currentLevel}</Text>
               </View>

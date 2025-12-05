@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -98,6 +98,14 @@ export default function LeaderboardScreen() {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [])
   );
+
+  // Scroll to top listener
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('scrollToTopLeaderboard', () => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    });
+    return () => subscription.remove();
+  }, []);
 
   // Auto-scroll to user position when data loads
   useEffect(() => {

@@ -1,12 +1,14 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, DeviceEventEmitter } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native';
 import { StatusBar } from 'expo-status-bar';
 import { useTheme } from '@/contexts/ThemeContext';
 import { colors } from '@constants/colors';
-import { ArrowLeft, Check, LockKey, Heart, Star, ChartBar } from 'phosphor-react-native';
+import { ArrowLeft, Check, LockKey, Heart, Star, ChartBar, Sparkle, BookOpen, ArrowsClockwise, ProhibitInset } from 'phosphor-react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useStatusBar } from '@/hooks/useStatusBar';
+import * as Haptics from 'expo-haptics';
 
 export default function PremiumScreen() {
     const { activeTheme } = useTheme();
@@ -14,6 +16,22 @@ export default function PremiumScreen() {
     const { t } = useTranslation();
     const { statusBarStyle } = useStatusBar();
     const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
+    const scrollViewRef = useRef<ScrollView>(null);
+
+    // Reset scroll position when screen comes into focus
+    useFocusEffect(
+        useCallback(() => {
+            scrollViewRef.current?.scrollTo({ y: 0, animated: false });
+        }, [])
+    );
+
+    // Scroll to top listener
+    useEffect(() => {
+        const subscription = DeviceEventEmitter.addListener('scrollToTopPremium', () => {
+            scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+        });
+        return () => subscription.remove();
+    }, []);
 
     // Dynamic colors based on theme
     const premiumColors = useMemo(() => {
@@ -35,34 +53,33 @@ export default function PremiumScreen() {
 
     const features = [
         {
-            icon: <View style={[styles.iconCircle, { backgroundColor: premiumColors.iconBg }]}><View style={styles.noAdsIcon} /></View>,
-            phosphorIcon: (props: any) => <View style={[styles.iconCircle, { backgroundColor: premiumColors.featureIconBg }]}><View style={styles.slashLine} /><View style={styles.circleIcon} /></View>,
-            title: t('premiumpaywall.features.noAds.title'),
-            subtitle: t('premiumpaywall.features.noAds.subtitle'),
-            iconColor: premiumColors.gold
+            icon: <Sparkle size={24} weight="fill" color={premiumColors.gold} />,
+            title: t('premiumpaywall.features.aiAssistant.title'),
+            subtitle: t('premiumpaywall.features.aiAssistant.subtitle'),
+            iconBg: premiumColors.featureIconBg
         },
         {
-            icon: <LockKey size={24} weight="fill" color={premiumColors.gold} />,
+            icon: <BookOpen size={24} weight="fill" color={premiumColors.gold} />,
             title: t('premiumpaywall.features.allLessons.title'),
             subtitle: t('premiumpaywall.features.allLessons.subtitle'),
             iconBg: premiumColors.featureIconBg
         },
         {
-            icon: <Heart size={24} weight="fill" color={premiumColors.gold} />,
-            title: t('premiumpaywall.features.unlimitedHearts.title'),
-            subtitle: t('premiumpaywall.features.unlimitedHearts.subtitle'),
+            icon: <ArrowsClockwise size={24} weight="fill" color={premiumColors.gold} />,
+            title: t('premiumpaywall.features.unlimitedPractice.title'),
+            subtitle: t('premiumpaywall.features.unlimitedPractice.subtitle'),
             iconBg: premiumColors.featureIconBg
         },
         {
-            icon: <Star size={24} weight="fill" color={premiumColors.gold} />,
-            title: t('premiumpaywall.features.offlineAccess.title'),
-            subtitle: t('premiumpaywall.features.offlineAccess.subtitle'),
+            icon: <ProhibitInset size={24} weight="fill" color={premiumColors.gold} />,
+            title: t('premiumpaywall.features.noAds.title'),
+            subtitle: t('premiumpaywall.features.noAds.subtitle'),
             iconBg: premiumColors.featureIconBg
         },
         {
             icon: <ChartBar size={24} weight="fill" color={premiumColors.gold} />,
-            title: t('premiumpaywall.features.progressTracking.title'),
-            subtitle: t('premiumpaywall.features.progressTracking.subtitle'),
+            title: t('premiumpaywall.features.progressReport.title'),
+            subtitle: t('premiumpaywall.features.progressReport.subtitle'),
             iconBg: premiumColors.featureIconBg
         }
     ];
@@ -70,7 +87,7 @@ export default function PremiumScreen() {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: premiumColors.background }]}>
             <StatusBar style={statusBarStyle} />
-            <ScrollView contentContainerStyle={styles.scrollContent}>
+            <ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollContent}>
 
                 {/* Header */}
                 <View style={styles.header}>
@@ -78,7 +95,15 @@ export default function PremiumScreen() {
                         <Text style={styles.backButtonText}>{t('common.back')}</Text>
                     </TouchableOpacity>
                     <Text style={[styles.headerTitle, { color: premiumColors.text }]}>{t('premiumpaywall.headerTitle')}</Text>
-                    <View style={{ width: 80 }} />
+                    <TouchableOpacity
+                        style={styles.premiumButton}
+                        onPress={() => {
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                            router.push('/premiumCenter');
+                        }}
+                    >
+                        <Text style={styles.premiumButtonText}>{t('premiumpaywall.cta')}</Text>
+                    </TouchableOpacity>
                 </View>
 
                 {/* Hero Title */}
@@ -92,13 +117,7 @@ export default function PremiumScreen() {
                     {features.map((feature, index) => (
                         <View key={index} style={styles.featureRow}>
                             <View style={[styles.iconContainer, { backgroundColor: feature.iconBg || premiumColors.iconBg }]}>
-                                {/* Using Phosphor icons directly for consistency where possible */}
-                                {index === 0 ? (
-                                    <View style={{ position: 'relative', width: 24, height: 24, alignItems: 'center', justifyContent: 'center' }}>
-                                        <View style={{ width: 18, height: 18, borderRadius: 9, backgroundColor: premiumColors.gold }} />
-                                        <View style={{ position: 'absolute', width: 24, height: 4, backgroundColor: activeTheme === 'dark' ? '#1A1A1A' : '#FFFFFF', transform: [{ rotate: '-45deg' }] }} />
-                                    </View>
-                                ) : feature.icon}
+                                {feature.icon}
                             </View>
                             <View style={styles.featureTextContainer}>
                                 <Text style={[styles.featureTitle, { color: premiumColors.text }]}>{feature.title}</Text>
@@ -124,8 +143,8 @@ export default function PremiumScreen() {
                             {selectedPlan === 'monthly' && <View style={styles.radioButtonInner} />}
                         </View>
                         <View style={styles.planInfo}>
-                            <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.monthly.name')}</Text>
-                            <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.monthly.price')}</Text>
+                            <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.monthly.title')}</Text>
+                            <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.monthly.price')} {t('premiumpaywall.plans.monthly.period')}</Text>
                         </View>
                     </TouchableOpacity>
 
@@ -140,7 +159,7 @@ export default function PremiumScreen() {
                         onPress={() => setSelectedPlan('yearly')}
                     >
                         <View style={styles.saveBadge}>
-                            <Text style={styles.saveBadgeText}>{t('premiumpaywall.plans.yearly.saveBadge')}</Text>
+                            <Text style={styles.saveBadgeText}>{t('premiumpaywall.plans.yearly.save')}</Text>
                         </View>
 
                         <View style={styles.planContentRow}>
@@ -148,8 +167,8 @@ export default function PremiumScreen() {
                                 {selectedPlan === 'yearly' && <Check size={14} color="#000" weight="bold" />}
                             </View>
                             <View style={styles.planInfo}>
-                                <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.yearly.name')}</Text>
-                                <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.yearly.price')}</Text>
+                                <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.yearly.title')}</Text>
+                                <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.yearly.price')} {t('premiumpaywall.plans.yearly.period')}</Text>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -158,16 +177,19 @@ export default function PremiumScreen() {
 
                 {/* Subscribe Button */}
                 <TouchableOpacity style={styles.subscribeButton}>
-                    <Text style={styles.subscribeButtonText}>{t('premiumpaywall.subscribeButton')}</Text>
+                    <Text style={styles.subscribeButtonText}>{t('premiumpaywall.cta')}</Text>
                 </TouchableOpacity>
 
                 {/* Footer Links */}
                 <View style={styles.footerLinks}>
                     <TouchableOpacity>
-                        <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.footer.privacy')}</Text>
+                        <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.privacy')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.footer.terms')}</Text>
+                        <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.terms')}</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                        <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.restore')}</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -203,6 +225,17 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
     },
     backButtonText: {
+        color: '#000000',
+        fontSize: 14,
+        fontWeight: '600',
+    },
+    premiumButton: {
+        backgroundColor: '#FFC800',
+        borderRadius: 20,
+        paddingVertical: 8,
+        paddingHorizontal: 16,
+    },
+    premiumButtonText: {
         color: '#000000',
         fontSize: 14,
         fontWeight: '600',

@@ -1,0 +1,21 @@
+{
+    "title": "Quran Assistant",
+    "subtitle": "Learn with AI",
+    "welcomeTitle": "Welcome to Quran Assistant!",
+    "welcomeSubtitle": "You can ask anything about learning to read the Quran.",
+    "exampleQuestionsTitle": "Example questions:",
+    "examples": {
+        "q1": "How do I read the letter Alif?",
+        "q2": "What is the Fatha vowel?",
+        "q3": "What are the Tajweed rules?"
+    },
+    "loading": "Thinking...",
+    "error": "An error occurred. Please try again.",
+    "clearChat": {
+        "title": "Clear Chat",
+        "message": "All messages will be deleted. Are you sure?",
+        "cancel": "Cancel",
+        "confirm": "Clear"
+    },
+    "inputPlaceholder": "Ask a question..."
+}

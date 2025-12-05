@@ -1,5 +1,5 @@
 import { Tabs } from 'expo-router';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, DeviceEventEmitter } from 'react-native';
 import { useMemo } from 'react';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -80,6 +80,13 @@ export default function TabLayout() {
           ),
           tabBarLabel: () => null,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            if (navigation.isFocused()) {
+              DeviceEventEmitter.emit('scrollToTop');
+            }
+          },
+        })}
       />
       <Tabs.Screen
         name="leaderboard"
@@ -96,6 +103,13 @@ export default function TabLayout() {
           ),
           tabBarLabel: () => null,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            if (navigation.isFocused()) {
+              DeviceEventEmitter.emit('scrollToTopLeaderboard');
+            }
+          },
+        })}
       />
       <Tabs.Screen
         name="chest"
@@ -112,6 +126,13 @@ export default function TabLayout() {
           ),
           tabBarLabel: () => null,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            if (navigation.isFocused()) {
+              DeviceEventEmitter.emit('scrollToTopChest');
+            }
+          },
+        })}
       />
       <Tabs.Screen
         name="premium"
@@ -128,6 +149,13 @@ export default function TabLayout() {
           ),
           tabBarLabel: () => null,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            if (navigation.isFocused()) {
+              DeviceEventEmitter.emit('scrollToTopPremium');
+            }
+          },
+        })}
       />
       <Tabs.Screen
         name="profile"
@@ -144,6 +172,13 @@ export default function TabLayout() {
           ),
           tabBarLabel: () => null,
         }}
+        listeners={({ navigation }) => ({
+          tabPress: (e) => {
+            if (navigation.isFocused()) {
+              DeviceEventEmitter.emit('scrollToTopProfile');
+            }
+          },
+        })}
       />
     </Tabs>
   );

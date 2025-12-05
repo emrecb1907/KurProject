@@ -114,11 +114,18 @@ npm install
 
 3. **Environment variables ayarla**
 
-`.env` dosyası oluştur:
+`.env.local` dosyası oluştur:
 ```env
 EXPO_PUBLIC_SUPABASE_URL=your_supabase_url
 EXPO_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+EXPO_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
 ```
+
+> **Gemini API Key Nasıl Alınır?**
+> 1. [Google AI Studio](https://aistudio.google.com/app/apikey) adresine git
+> 2. "Get API Key" butonuna tıkla
+> 3. Yeni bir API key oluştur veya mevcut olanı kullan
+> 4. API key'i kopyala ve `.env.local` dosyasına ekle
 
 4. **Supabase'i kur**
 

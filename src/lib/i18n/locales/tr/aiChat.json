@@ -1,0 +1,21 @@
+{
+    "title": "Kur'an Asistanı",
+    "subtitle": "AI ile öğren",
+    "welcomeTitle": "Kur'an Asistanına Hoş Geldin!",
+    "welcomeSubtitle": "Kur'an okumayı öğrenirken aklına takılan her şeyi sorabilirsin.",
+    "exampleQuestionsTitle": "Örnek sorular:",
+    "examples": {
+        "q1": "Elif harfini nasıl okurum?",
+        "q2": "Üstün harekesi nedir?",
+        "q3": "Tecvid kuralları nelerdir?"
+    },
+    "loading": "Düşünüyor...",
+    "error": "Bir hata oluştu. Lütfen tekrar deneyin.",
+    "clearChat": {
+        "title": "Sohbeti Temizle",
+        "message": "Tüm mesajlar silinecek. Emin misiniz?",
+        "cancel": "İptal",
+        "confirm": "Temizle"
+    },
+    "inputPlaceholder": "Bir soru sor..."
+}

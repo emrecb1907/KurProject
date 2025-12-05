@@ -1,43 +1,45 @@
 {
-    "headerTitle": "Premium Membership",
-    "heroTitle1": "Learn Unlimited,",
-    "heroTitle2": "Progress Uninterrupted",
+    "headerTitle": "Go Premium",
+    "heroTitle1": "Unlimited Learning",
+    "heroTitle2": "Experience",
     "features": {
-        "noAds": {
-            "title": "Ad-Free Experience",
-            "subtitle": "Focus on your learning process"
+        "aiAssistant": {
+            "title": "Personal Quran Assistant (AI)",
+            "subtitle": "Ask anything you don't understand, get instant answers."
         },
         "allLessons": {
-            "title": "Access All Lessons",
-            "subtitle": "Advance without locked lessons"
+            "title": "All Lessons Unlocked",
+            "subtitle": "Access all content from beginner to advanced."
         },
-        "unlimitedHearts": {
-            "title": "Unlimited Hearts",
-            "subtitle": "Don't fear making mistakes"
+        "unlimitedPractice": {
+            "title": "Unlimited Practice",
+            "subtitle": "No repetition limits. Solve as much as you want."
         },
-        "offlineAccess": {
-            "title": "Access lessons without internet",
-            "subtitle": "Test your knowledge with special content"
+        "noAds": {
+            "title": "Ad-Free Learning",
+            "subtitle": "No ads to distract you."
         },
-        "progressTracking": {
-            "title": "Advanced Progress Tracking",
-            "subtitle": "Track your development with detailed reports"
+        "progressReport": {
+            "title": "Progress Report",
+            "subtitle": "See where you are lacking and how much you have learned."
         }
     },
     "plans": {
         "monthly": {
-            "name": "Monthly",
-            "price": "₺29.99/mo"
+            "title": "Monthly Plan",
+            "price": "$4.99",
+            "period": "/mo"
         },
         "yearly": {
-            "name": "Yearly",
-            "price": "₺249.99/yr",
-            "saveBadge": "Save 20%"
+            "title": "Yearly Plan",
+            "price": "$39.99",
+            "period": "/yr",
+            "save": "Save 33%",
+            "bestValue": "Best Value"
         }
     },
-    "subscribeButton": "Subscribe",
-    "footer": {
-        "privacy": "Privacy Policy",
-        "terms": "Terms of Use"
-    }
+    "cta": "Go Premium",
+    "restore": "Restore Purchases",
+    "terms": "Terms of Use",
+    "privacy": "Privacy Policy"
 }

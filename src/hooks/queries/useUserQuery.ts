@@ -42,6 +42,7 @@ export function useUserStats(userId: string | undefined) {
 
     const stats = userData ? {
         completedTests: userData.total_lessons_completed || 0,
+        lessonsCompleted: userData.total_lessons_completed || 0,
         successRate: calculateSuccessRate(userData),
         totalQuestions: userData.total_questions_solved || 0,
         correctAnswers: userData.total_correct_answers || 0,

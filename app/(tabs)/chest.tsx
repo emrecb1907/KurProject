@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert, DeviceEventEmitter } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -29,6 +29,14 @@ export default function ChestScreen() {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [])
   );
+
+  // Scroll to top listener
+  useEffect(() => {
+    const subscription = DeviceEventEmitter.addListener('scrollToTopChest', () => {
+      scrollViewRef.current?.scrollTo({ y: 0, animated: true });
+    });
+    return () => subscription.remove();
+  }, []);
 
   // Update timer every minute
   useEffect(() => {

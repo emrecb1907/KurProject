@@ -502,9 +502,9 @@ export function GameScreen({
                             style={[
                                 styles.completeButton,
                                 {
-                                    backgroundColor: colors.primary,
+                                    backgroundColor: colors.warning,
                                     marginTop: 12,
-                                    borderBottomColor: colors.primaryDark,
+                                    borderBottomColor: colors.warningDark,
                                 },
                             ]}
                             onPress={handleRetry}
@@ -790,7 +790,7 @@ const getStyles = () =>
             left: 0,
             top: 0,
             bottom: 0,
-            backgroundColor: colors.primary,
+            backgroundColor: colors.xpGold,
             borderRadius: 18,
         },
         xpBarTextContainer: {
