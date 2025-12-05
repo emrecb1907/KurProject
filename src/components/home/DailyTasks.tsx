@@ -75,9 +75,9 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             setClaimedReward({ xp: task.xp, taskName: task.text });
             setShowRewardModal(true);
 
-            // Update store
-            claimDailyTask(task.id);
-            addXP(task.xp);
+            // Update store (handles both claim and XP add + DB sync)
+            claimDailyTask(task.id, task.xp);
+            // addXP(task.xp); // Removed: claimDailyTask now handles this
         }
     };
 

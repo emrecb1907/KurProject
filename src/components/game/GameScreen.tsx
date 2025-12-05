@@ -210,26 +210,39 @@ export function GameScreen({
         setIsCorrect(null);
     };
 
+    // Ref to prevent double submission (more reliable than state for rapid taps)
+    const isSubmittingRef = useRef(false);
+
     const handleComplete = async () => {
-        if (isSubmitting) return;
+        // Check both state and ref
+        if (isSubmitting || isSubmittingRef.current) return;
+
+        // Lock immediately
+        isSubmittingRef.current = true;
         hapticLight();
 
         // Mark game as completed (this will trigger sound in useEffect)
         setGameCompletedRef(true);
 
-        // Use the centralized completion hook
-        await completeGame({
-            lessonId,
-            gameType,
-            correctAnswers: correctAnswersCount,
-            totalQuestions: questions.length,
-            source, // Pass source to track lesson vs test
-        });
+        try {
+            // Use the centralized completion hook
+            await completeGame({
+                lessonId,
+                gameType,
+                correctAnswers: correctAnswersCount,
+                totalQuestions: questions.length,
+                source, // Pass source to track lesson vs test
+            });
 
-        if (onComplete) {
-            onComplete();
+            if (onComplete) {
+                onComplete();
+            }
+            handleExit();
+        } catch (error) {
+            console.error('Game completion error:', error);
+            // Unlock on error so user can retry
+            isSubmittingRef.current = false;
         }
-        handleExit();
     };
 
     const getCurrentOptions = () => {

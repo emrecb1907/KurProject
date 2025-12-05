@@ -10,7 +10,6 @@ export interface User {
   current_lives: number;
   max_lives: number;
   streak_count: number;
-  streak: number;
   last_active: string;
   created_at: string;
   updated_at: string;
@@ -20,8 +19,6 @@ export interface User {
   total_questions_solved?: number;
   total_correct_answers?: number;
   total_wrong_answers?: number;
-  last_activity_date?: string;
-  weekly_activity?: string[];
 }
 
 export type League = 'Bronze' | 'Silver' | 'Gold' | 'Platinum' | 'Diamond';
@@ -45,10 +42,24 @@ export interface UserProgress {
 export interface UserStreak {
   id: string;
   user_id: string;
-  current_streak: number;
-  longest_streak: number;
+  streak: number;
   last_activity_date: string;
-  streak_freeze_count: number;
+  weekly_activity: string[];
+  last_game_completion?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface UserStats {
+  id: string;
+  user_id: string;
+  total_xp: number;
+  current_level: number;
+  total_score: number;
+  current_lives: number;
+  max_lives: number;
+  league: League;
+  total_tests_completed?: number;
   created_at: string;
   updated_at: string;
 }

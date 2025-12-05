@@ -187,7 +187,7 @@ export default function HarekelerLessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('2'); // Mark Harekeler as completed
+        completeLesson('102'); // Mark Harekeler as completed
         router.push('/(tabs)');
     };
 

@@ -55,25 +55,30 @@ export default function HomePage() {
                             return;
                         }
 
-                        const { data: userData } = await database.users.getById(user.id);
-                        if (userData) {
-                            const xpDifference = Math.abs(userData.total_xp - totalXP);
+                        const { data: userProfile } = await database.users.getProfile(user.id);
+
+                        if (userProfile && userProfile.stats) {
+                            // Map DB stats to local variables
+                            const dbXP = userProfile.stats.total_score || 0; // total_score is used as XP
+
+                            const xpDifference = Math.abs(dbXP - totalXP);
                             const xpIncreased = totalXP > lastTotalXPRef.current;
 
-                            if (userData.total_xp > totalXP) {
-                                setTotalXP(userData.total_xp);
-                                lastTotalXPRef.current = userData.total_xp;
-                            } else if (userData.total_xp < totalXP) {
+                            if (dbXP > totalXP) {
+                                setTotalXP(dbXP);
+                                lastTotalXPRef.current = dbXP;
+                            } else if (dbXP < totalXP) {
                                 // Only sync if difference is significant (more than 100 XP) to avoid cache timing issues
                                 // OR if XP didn't just increase (meaning it's a real sync issue, not cache)
                                 if (xpDifference > 100 || !xpIncreased) {
                                     const { calculateLevel } = require('@constants/xp');
                                     const newLevel = calculateLevel(totalXP);
-                                    const { error } = await database.users.update(user.id, {
-                                        total_xp: totalXP,
+
+                                    const { error } = await database.users.updateStats(user.id, {
                                         total_score: totalXP,
                                         current_level: newLevel,
                                     });
+
                                     if (error) {
                                         console.error('❌ Failed to sync local XP to DB:', error);
                                     } else {

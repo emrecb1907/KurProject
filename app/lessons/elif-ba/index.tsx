@@ -68,42 +68,42 @@ export default function ElifBaLessonsListScreen() {
 
     const lessons: LessonItem[] = [
         {
-            id: '1',
+            id: '101',
             title: 'Elif-Ba',
             route: '/lessons/elif-ba/1',
         },
         {
-            id: '2',
+            id: '102',
             title: 'Harekeler',
             route: '/lessons/harekeler/1',
         },
         {
-            id: '3',
+            id: '103',
             title: 'Harflerin Konumu',
             route: '/lessons/harflerin-konumu/1',
         },
         {
-            id: '4',
+            id: '104',
             title: 'Üstün-1',
             route: '/lessons/ustun-1/1',
         },
         {
-            id: '5',
+            id: '105',
             title: 'Üstün-2',
             route: '/lessons/ustun-2/1',
         },
         {
-            id: '6',
+            id: '106',
             title: 'Üstün-3',
             route: '/lessons/ustun-3/1',
         },
         {
-            id: '7',
+            id: '107',
             title: 'Esre',
             route: '/lessons/esre/1',
         },
         {
-            id: '8',
+            id: '108',
             title: 'Ötre',
             route: '/lessons/otre/1',
         },

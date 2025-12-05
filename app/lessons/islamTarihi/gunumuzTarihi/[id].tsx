@@ -2,7 +2,7 @@ import { useLocalSearchParams } from 'expo-router';
 import IslamicHistoryLesson, { LessonContent } from '@/components/lessons/IslamicHistoryLesson';
 
 const islamicHistoryContent: Record<string, LessonContent> = {
-  '1': {
+  '412': {
     title: 'Modern Çağda İslam Dünyası (1800–Günümüz)',
     content: [
       {
@@ -106,12 +106,12 @@ const islamicHistoryContent: Record<string, LessonContent> = {
 
 export default function IslamicHistoryLessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const lesson = islamicHistoryContent[id || '1'];
-  
+  const lesson = islamicHistoryContent[id || '412'];
+
   if (!lesson) {
     return null;
   }
 
-  return <IslamicHistoryLesson lesson={lesson} />;
+  return <IslamicHistoryLesson lesson={lesson} lessonId="412" />;
 }
 

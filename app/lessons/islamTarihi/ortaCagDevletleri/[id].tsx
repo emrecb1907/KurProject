@@ -21,7 +21,7 @@ interface LessonContent {
 }
 
 const islamicHistoryContent: Record<string, LessonContent> = {
-  '1': {
+  '408': {
     title: 'Orta Çağ İslam Coğrafyasında Bölgesel Devletler',
     content: [
       {
@@ -128,10 +128,11 @@ const islamicHistoryContent: Record<string, LessonContent> = {
           '-Aynı medeniyet alanı içinde,',
           '-Üretim, eğitim, savunma ve şehirleşme konularında güçlü katkılar sağlamışlardır.',
           'Bu nedenle söz konusu dönem, İslam medeniyetinin bölgesel çeşitlilik içinde olgunlaştığı bir evre olarak değerlendirilir.',
-        ],
-      },
-    ],
-  },
+
+        ]
+      }
+    ]
+  }
 };
 
 export default function IslamicHistoryLessonScreen() {
@@ -141,7 +142,7 @@ export default function IslamicHistoryLessonScreen() {
   const { t } = useTranslation();
   const { incrementDailyLessons } = useUser();
 
-  const lesson = islamicHistoryContent[id || '1'];
+  const lesson = islamicHistoryContent[id || '408'];
   if (!lesson) {
     return null;
   }
@@ -285,7 +286,7 @@ export default function IslamicHistoryLessonScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top']} >
       <View style={styles.header}>
         <Pressable
           style={styles.backButton}
@@ -302,7 +303,7 @@ export default function IslamicHistoryLessonScreen() {
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -320,7 +321,7 @@ export default function IslamicHistoryLessonScreen() {
             {section.text.map((paragraph, pIndex) => {
               const isBulletPoint = paragraph.trim().startsWith('-');
               const text = isBulletPoint ? paragraph.trim().substring(1).trim() : paragraph;
-              
+
               if (isBulletPoint) {
                 return (
                   <View key={pIndex} style={styles.bulletContainer}>
@@ -329,7 +330,7 @@ export default function IslamicHistoryLessonScreen() {
                   </View>
                 );
               }
-              
+
               return (
                 <Text key={pIndex} style={styles.paragraph}>
                   {text}
@@ -346,7 +347,7 @@ export default function IslamicHistoryLessonScreen() {
           <Text style={styles.completeButtonText}>{t('lessons.islamicHistory.completeLesson')}</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 

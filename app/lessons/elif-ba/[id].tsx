@@ -179,7 +179,7 @@ export default function ElifBaIntroductionScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('1'); // Mark Elif-Ba as completed
+        completeLesson('101'); // Mark Elif-Ba as completed
         router.push('/(tabs)');
     };
 

@@ -26,6 +26,9 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
+import { islamicHistory } from '@/data/islamicHistory';
+import { useCompletedLessons } from '@/hooks/queries/useUserQuery';
+import { CheckCircle } from 'phosphor-react-native';
 
 interface LessonItem {
     id: string;
@@ -65,73 +68,13 @@ export default function IslamTarihiLessonsListScreen() {
 
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
-    const lessons: LessonItem[] = [
-        {
-            id: '1',
-            title: 'Cahiliye dönemi',
-            route: '/lessons/islamTarihi/cahiliye-donemi/1',
-        },
-        {
-            id: '2',
-            title: 'Peygamberlik Öncesi Hz.Muhammed',
-            route: '/lessons/islamTarihi/PeyOncHzMuhammed/1',
-        },
-        {
-            id: '3',
-            title: 'Peygamberlik Dönemi (610-632)',
-            route: '/lessons/islamTarihi/PeygamberlikDonemi/1',
-        },
-        {
-            id: '4',
-            title: 'Hulefâ-i Râşidîn Dönemi (632–661)',
-            route: '/lessons/islamTarihi/hulefaiRasidin/1',
-        },
-        {
-            id: '5',
-            title: 'Erken İslam Devletleri ve Emevîler Dönemi (661–750)',
-            route: '/lessons/islamTarihi/emeviler/1',
-        },
-        {
-            id: '6',
-            title: 'Abbâsîler Dönemi ve İslam\'ın Altın Çağı (750–1258)',
-            route: '/lessons/islamTarihi/abbasiler/1',
-        },
-        {
-            id: '7',
-            title: 'Endülüs Emevîleri ve Avrupa ile Etkileşim (711–1492)',
-            route: '/lessons/islamTarihi/endulusEmevileri/1',
-        },
-        {
-            id: '8',
-            title: 'Orta Çağ İslam Coğrafyasında Bölgesel Devletler',
-            route: '/lessons/islamTarihi/ortaCagDevletleri/1',
-        },
-        {
-            id: '9',
-            title: 'Haçlı Seferleri Dönemi ve İslam Dünyasının Durumu (11.–13. yüzyıllar)',
-            route: '/lessons/islamTarihi/hacliSeferleri/1',
-        },
-        {
-            id: '10',
-            title: 'Moğol İstilaları ve İslam Dünyasında Dönüşüm (13. yüzyıl)',
-            route: '/lessons/islamTarihi/mogolIstila/1',
-        },
-        {
-            id: '11',
-            title: 'Geç Dönem İslam Devletleri (1300–1900)',
-            route: '/lessons/islamTarihi/gecDonemIslam/1',
-        },
-        {
-            id: '12',
-            title: 'Modern Çağda İslam Dünyası (1800–Günümüz)',
-            route: '/lessons/islamTarihi/gunumuzTarihi/1',
-        },
-        {
-            id: '13',
-            title: 'İslam Medeniyetinin Evrensel Katkıları',
-            route: '/lessons/islamTarihi/islamMedeniyeti/1',
-        },
-    ];
+
+
+    // ... inside component ...
+    const { data: completedLessons } = useCompletedLessons(user?.id);
+
+    // Use data from file
+    const lessons = islamicHistory;
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -141,7 +84,7 @@ export default function IslamTarihiLessonsListScreen() {
             <View style={styles.topHeader}>
                 <View style={styles.userInfo}>
                     <View style={styles.avatarContainer}>
-                        <User size={24} color="#000" weight="fill" opacity={0.5} />
+                        <User size={24} color="rgba(0, 0, 0, 0.5)" weight="fill" />
                     </View>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greetingText}>{t('home.welcome')},</Text>
@@ -205,39 +148,47 @@ export default function IslamTarihiLessonsListScreen() {
 
                 {/* Lessons List */}
                 <View style={styles.lessonsList}>
-                    {lessons.map((lesson) => (
-                        <Pressable
-                            key={lesson.id}
-                            style={styles.lessonCard}
-                            onPress={() => {
-                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                router.push(lesson.route as any);
-                            }}
-                        >
-                            <View style={styles.cardContent}>
-                                {/* Icon */}
-                                <View style={[styles.iconContainer, { backgroundColor: 'rgba(160, 117, 40, 0.2)' }]}>
-                                    <BookOpen
-                                        size={24}
-                                        color="#FFC800"
-                                        weight="fill"
+                    {lessons.map((lesson) => {
+                        const isCompleted = completedLessons?.includes(lesson.id.toString());
+
+                        return (
+                            <Pressable
+                                key={lesson.id}
+                                style={[styles.lessonCard, isCompleted && { borderColor: colors.success }]}
+                                onPress={() => {
+                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                    router.push(lesson.route as any);
+                                }}
+                            >
+                                <View style={styles.cardContent}>
+                                    {/* Icon */}
+                                    <View style={[styles.iconContainer, { backgroundColor: isCompleted ? 'rgba(88, 204, 2, 0.1)' : 'rgba(160, 117, 40, 0.2)' }]}>
+                                        {isCompleted ? (
+                                            <CheckCircle size={24} color={colors.success} weight="fill" />
+                                        ) : (
+                                            <BookOpen
+                                                size={24}
+                                                color="#FFC800"
+                                                weight="fill"
+                                            />
+                                        )}
+                                    </View>
+
+                                    {/* Text Info */}
+                                    <View style={styles.textContainer}>
+                                        <Text style={styles.cardTitle}>{lesson.title}</Text>
+                                    </View>
+
+                                    {/* Arrow */}
+                                    <CaretRight
+                                        size={20}
+                                        color={colors.textSecondary}
+                                        weight="bold"
                                     />
                                 </View>
-
-                                {/* Text Info */}
-                                <View style={styles.textContainer}>
-                                    <Text style={styles.cardTitle}>{lesson.title}</Text>
-                                </View>
-
-                                {/* Arrow */}
-                                <CaretRight
-                                    size={20}
-                                    color={colors.textSecondary}
-                                    weight="bold"
-                                />
-                            </View>
-                        </Pressable>
-                    ))}
+                            </Pressable>
+                        )
+                    })}
                 </View>
             </ScrollView>
         </SafeAreaView>

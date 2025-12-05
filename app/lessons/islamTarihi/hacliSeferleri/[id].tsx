@@ -21,7 +21,7 @@ interface LessonContent {
 }
 
 const islamicHistoryContent: Record<string, LessonContent> = {
-  '1': {
+  '409': {
     title: 'Haçlı Seferleri Dönemi ve İslam Dünyasının Durumu (11.–13. yüzyıllar)',
     content: [
       {
@@ -135,10 +135,11 @@ const islamicHistoryContent: Record<string, LessonContent> = {
           '-Şehirleşme ve güvenlik alanında yeni adımlar atmış,',
           '-Siyasi ve toplumsal tecrübeler kazanmıştır.',
           'Bu süreç, İslam tarihinin ilerleyen dönemlerini derinden etkilemiştir.',
-        ],
-      },
-    ],
-  },
+
+        ]
+      }
+    ]
+  }
 };
 
 export default function IslamicHistoryLessonScreen() {
@@ -148,7 +149,7 @@ export default function IslamicHistoryLessonScreen() {
   const { t } = useTranslation();
   const { incrementDailyLessons } = useUser();
 
-  const lesson = islamicHistoryContent[id || '1'];
+  const lesson = islamicHistoryContent[id || '409'];
   if (!lesson) {
     return null;
   }
@@ -292,7 +293,7 @@ export default function IslamicHistoryLessonScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top']} >
       <View style={styles.header}>
         <Pressable
           style={styles.backButton}
@@ -309,7 +310,7 @@ export default function IslamicHistoryLessonScreen() {
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -327,7 +328,7 @@ export default function IslamicHistoryLessonScreen() {
             {section.text.map((paragraph, pIndex) => {
               const isBulletPoint = paragraph.trim().startsWith('-');
               const text = isBulletPoint ? paragraph.trim().substring(1).trim() : paragraph;
-              
+
               if (isBulletPoint) {
                 return (
                   <View key={pIndex} style={styles.bulletContainer}>
@@ -336,7 +337,7 @@ export default function IslamicHistoryLessonScreen() {
                   </View>
                 );
               }
-              
+
               return (
                 <Text key={pIndex} style={styles.paragraph}>
                   {text}
@@ -353,7 +354,7 @@ export default function IslamicHistoryLessonScreen() {
           <Text style={styles.completeButtonText}>{t('lessons.islamicHistory.completeLesson')}</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 

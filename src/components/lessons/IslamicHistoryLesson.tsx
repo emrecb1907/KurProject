@@ -7,7 +7,8 @@ import { ArrowLeft, BookOpen } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import { useUser } from '@/store';
+import { useUser, useAuth } from '@/store';
+import { useCompleteGameMutation } from '@/hooks/mutations/useGameMutations';
 
 export interface SectionContent {
   section: string;
@@ -21,9 +22,10 @@ export interface LessonContent {
 
 interface IslamicHistoryLessonProps {
   lesson: LessonContent;
+  lessonId: string;
 }
 
-export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonProps) {
+export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistoryLessonProps) {
   const router = useRouter();
   const { themeVersion } = useTheme();
   const { t } = useTranslation();
@@ -161,9 +163,32 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
     },
   }), [themeVersion]);
 
+  const { mutate: completeGame, isPending } = useCompleteGameMutation();
+  const { user } = useAuth();
+  const { completedTests } = useUser(); // Assuming completedTests tracks completed lessons too, or we need a new selector
+  // Actually, useUser doesn't seem to expose completedLessons array directly. 
+  // We might need to fetch it or check against a list.
+  // For now, let's just implement the completion logic.
+
+  const isCompleted = useMemo(() => {
+    // This logic needs to be robust. For now, we rely on the button action.
+    // Ideally, we pass isCompleted as a prop or fetch it.
+    return false;
+  }, []);
+
   const handleComplete = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    incrementDailyLessons();
+
+    if (lessonId) {
+      completeGame({
+        lessonId: lessonId.toString(),
+        gameType: 'lesson',
+        correctAnswers: 1, // Dummy values for lesson completion
+        totalQuestions: 1,
+        source: 'lesson'
+      });
+    }
+
     router.back();
   };
 
@@ -185,7 +210,7 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -203,7 +228,7 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
             {section.text.map((paragraph, pIndex) => {
               const isBulletPoint = paragraph.trim().startsWith('-');
               const text = isBulletPoint ? paragraph.trim().substring(1).trim() : paragraph;
-              
+
               if (isBulletPoint) {
                 return (
                   <View key={pIndex} style={styles.bulletContainer}>
@@ -212,7 +237,7 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
                   </View>
                 );
               }
-              
+
               return (
                 <Text key={pIndex} style={styles.paragraph}>
                   {text}
@@ -225,7 +250,7 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
                 {section.text.map((text, tIndex) => {
                   const isBulletPoint = text.trim().startsWith('-');
                   const textContent = isBulletPoint ? text.trim().substring(1).trim() : text;
-                  
+
                   if (isBulletPoint) {
                     return (
                       <View key={tIndex} style={styles.bulletContainer}>
@@ -234,7 +259,7 @@ export default function IslamicHistoryLesson({ lesson }: IslamicHistoryLessonPro
                       </View>
                     );
                   }
-                  
+
                   return (
                     <Text key={tIndex} style={styles.summaryText}>
                       {textContent}

@@ -177,7 +177,7 @@ export default function OtreLessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('8'); // Mark Ötre as completed
+        completeLesson('108'); // Mark Ötre as completed
         router.push('/(tabs)');
     };
 

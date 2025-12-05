@@ -177,7 +177,7 @@ export default function EsreLessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('7'); // Mark Esre as completed
+        completeLesson('107'); // Mark Esre as completed
         router.push('/(tabs)');
     };
 

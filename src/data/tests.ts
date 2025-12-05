@@ -22,7 +22,7 @@ export const getTests = (t: (key: string) => string) => [
         color: colors.secondary,
         borderColor: colors.buttonBlueBorder,
         icon: BookBookmark,
-        route: '/games/vocabulary/1',
+        route: '/games/vocabulary/2',
     },
     {
         id: 3,
@@ -33,7 +33,7 @@ export const getTests = (t: (key: string) => string) => [
         color: colors.success,
         borderColor: colors.buttonGreenBorder,
         icon: BookBookmark,
-        route: '/games/verses/1',
+        route: '/games/verses/3',
     },
     {
         id: 4,
@@ -44,7 +44,7 @@ export const getTests = (t: (key: string) => string) => [
         color: colors.pink,
         borderColor: colors.buttonPinkBorder,
         icon: BookBookmark,
-        route: '/games/quiz/1',
+        route: '/games/quiz/4',
     },
     {
         id: 5,
@@ -55,7 +55,7 @@ export const getTests = (t: (key: string) => string) => [
         color: colors.warning,
         borderColor: colors.buttonOrangeBorder,
         icon: BookBookmark,
-        route: '/games/islam-tarihi/1',
+        route: '/games/islam-tarihi/5',
     },
     {
         id: 6,
@@ -66,7 +66,7 @@ export const getTests = (t: (key: string) => string) => [
         color: colors.success,
         borderColor: colors.buttonGreenBorder,
         icon: BookBookmark,
-        route: '/games/namaz-bilgisi/1',
+        route: '/games/namaz-bilgisi/6',
     },
     {
         id: 7,

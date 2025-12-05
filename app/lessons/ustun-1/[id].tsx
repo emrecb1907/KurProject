@@ -177,7 +177,7 @@ export default function Ustun1LessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('4'); // Mark Üstün-1 as completed
+        completeLesson('104'); // Mark Üstün-1 as completed
         router.push('/(tabs)');
     };
 

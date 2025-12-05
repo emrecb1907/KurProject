@@ -100,6 +100,7 @@ export const useUser = () => useStore(
     setProgress: state.setProgress,
     setStreakData: state.setStreakData,
     setUserStats: state.setUserStats,
+    updateGameStats: state.updateGameStats,
     resetUserData: state.resetUserData,
     checkLifeRegeneration: state.checkLifeRegeneration,
     watchAd: state.watchAd,

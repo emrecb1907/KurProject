@@ -1,596 +1,171 @@
 import { supabase } from './client';
-import { User, UserProgress, LeaderboardEntry } from '@types/user.types';
-import { Lesson } from '@types/lesson.types';
-import { Question, UserAnswer } from '@types/question.types';
-import { Badge, UserBadge } from '@types/badge.types';
 
-import { rateLimiter, RATE_LIMITS } from '@/lib/utils/rateLimiter';
+// ==============================================================================
+// DATABASE CLIENT (SKELETON)
+// ==============================================================================
+// This file has been reset. We will rebuild methods as we define new tables.
+// ==============================================================================
+
+// ==============================================================================
+// DATABASE CLIENT (REBUILD PHASE 1)
+// ==============================================================================
 
 export const database = {
-  // ==================== USERS ====================
+
+  // ==================== USERS & STATS ====================
   users: {
-    async getById(userId: string) {
-      const { data, error } = await supabase
+    // Get full user profile (User + Stats + Streak)
+    async getProfile(userId: string) {
+      const { data: user, error: userError } = await supabase
         .from('users')
         .select('*')
         .eq('id', userId)
         .single();
-      return { data: data as User | null, error };
-    },
 
-    async getByDeviceId(deviceId: string) {
-      const { data, error } = await supabase
-        .from('users')
+      if (userError) return { data: null, error: userError };
+
+      const { data: stats } = await supabase
+        .from('user_stats')
         .select('*')
-        .eq('device_id', deviceId)
-        .single();
-      return { data: data as User | null, error };
-    },
-
-    async create(userData: Partial<User>) {
-      const { data, error } = await supabase
-        .from('users')
-        .insert(userData)
-        .select()
-        .single();
-      return { data: data as User | null, error };
-    },
-
-    async update(userId: string, updates: Partial<User>) {
-      const { data, error } = await supabase
-        .from('users')
-        .update(updates)
-        .eq('id', userId)
-        .select()
-        .single();
-      return { data: data as User | null, error };
-    },
-
-    async updateXP(userId: string, xpToAdd: number) {
-      // 1. Client-side Rate Limit Check (UX & Performance)
-      const canProceed = await rateLimiter.canProceed(
-        userId,
-        'xp_update',
-        RATE_LIMITS.XP_UPDATE.maxRequests,
-        RATE_LIMITS.XP_UPDATE.windowMs
-      );
-
-      if (!canProceed) {
-        console.warn('⚠️ Rate limit exceeded (Client-side)');
-        return { data: null, error: new Error('Çok hızlı işlem yapıyorsunuz. Lütfen biraz bekleyin.') };
-      }
-
-      // 2. Secure Update via RPC (Server-side Rate Limit & Validation)
-      try {
-        const { data, error } = await supabase.rpc('update_xp_with_limit', {
-          p_user_id: userId,
-          p_amount: xpToAdd
-        });
-
-        if (error) {
-          console.error('❌ Error updating XP (RPC):', error);
-
-          // If RPC fails (e.g. function not found yet), fallback to direct update
-          // This ensures backward compatibility until migration is run
-          if (error.code === 'PGRST202' || error.message.includes('function not found')) {
-            console.warn('⚠️ RPC function not found, falling back to direct update');
-            return this.fallbackUpdateXP(userId, xpToAdd);
-          }
-
-          return { data: null, error };
-        }
-
-        // RPC returns { success: true, total_xp: 123 } or { error: '...' }
-        if (data && data.error) {
-          return { data: null, error: new Error(data.error) };
-        }
-
-        // Construct a partial User object to return
-        const updatedUser: Partial<User> = {
-          id: userId,
-          total_xp: data.total_xp,
-          // Note: total_score is also updated in RPC but not returned directly in this simple version
-        };
-
-        return { data: updatedUser as User, error: null };
-
-      } catch (err) {
-        console.error('❌ Unexpected error in updateXP:', err);
-        return { data: null, error: err as any };
-      }
-    },
-
-    // Fallback method for direct updates (legacy)
-    async fallbackUpdateXP(userId: string, xpToAdd: number) {
-      const { data: user } = await this.getById(userId);
-      if (!user) return { data: null, error: new Error('User not found') };
-
-      const newTotalXP = user.total_xp + xpToAdd;
-      const newScore = user.total_score + xpToAdd;
-
-      const { data, error } = await supabase
-        .from('users')
-        .update({
-          total_xp: newTotalXP,
-          total_score: newScore,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', userId)
-        .select()
-        .single();
-      return { data: data as User | null, error };
-    },
-
-    async updateLives(userId: string, livesChange: number) {
-      const { data: user } = await this.getById(userId);
-      if (!user) return { data: null, error: new Error('User not found') };
-
-      const newLives = Math.max(0, Math.min(user.max_lives, user.current_lives + livesChange));
-
-      const { data, error } = await supabase
-        .from('users')
-        .update({ current_lives: newLives })
-        .eq('id', userId)
-        .select()
-        .single();
-      return { data: data as User | null, error };
-    },
-
-    async incrementStats(userId: string, stats: { lessons?: number, questions?: number, correct?: number, wrong?: number }) {
-      const { error } = await supabase.rpc('increment_user_stats', {
-        p_user_id: userId,
-        p_lessons_completed: stats.lessons || 0,
-        p_questions_solved: stats.questions || 0,
-        p_correct_answers: stats.correct || 0,
-        p_wrong_answers: stats.wrong || 0,
-      });
-      return { error };
-    },
-
-    async getLeaderboard(limit: number = 50) {
-      const { data, error } = await supabase
-        .from('users')
-        .select('id, username, email, total_xp, current_level, league')
-        .eq('is_anonymous', false) // Only show authenticated users
-        .order('total_xp', { ascending: false })
-        .limit(limit);
-
-      return { data: data as LeaderboardEntry[] | null, error };
-    },
-
-    async getUserRank(userId: string) {
-      // Get user's data
-      const { data: userData, error: userError } = await supabase
-        .from('users')
-        .select('id, username, email, total_xp, current_level, league')
-        .eq('id', userId)
+        .eq('user_id', userId)
         .single();
 
-      if (userError || !userData) {
-        return { data: null, error: userError };
-      }
-
-      // Count how many users have more XP (to get rank)
-      const { count, error: countError } = await supabase
-        .from('users')
-        .select('*', { count: 'exact', head: true })
-        .eq('is_anonymous', false)
-        .gt('total_xp', userData.total_xp);
-
-      if (countError) {
-        return { data: null, error: countError };
-      }
-
-      const rank = (count || 0) + 1;
+      const { data: streak } = await supabase
+        .from('user_streaks')
+        .select('*')
+        .eq('user_id', userId)
+        .single();
 
       return {
         data: {
-          rank,
-          user: userData as LeaderboardEntry,
+          ...user,
+          stats: stats || {},
+          streak: streak || {}
         },
-        error: null,
+        error: null
       };
     },
+
+    // Update User Stats (Score, Level, Lives, League)
+    async updateStats(userId: string, updates: {
+      total_score?: number,
+      current_level?: number,
+      current_lives?: number,
+      league?: string
+    }) {
+      const { data, error } = await supabase
+        .from('user_stats')
+        .update(updates)
+        .eq('user_id', userId)
+        .select()
+        .single();
+      return { data, error };
+    },
+
+    // Update User Streak
+    async updateStreak(userId: string, streak: number, activityDate: string) {
+      // 1. Get current activity days
+      const { data: currentData } = await supabase
+        .from('user_streaks')
+        .select('activity_days')
+        .eq('user_id', userId)
+        .single();
+
+      let activityDays = currentData?.activity_days || [];
+      if (!activityDays.includes(activityDate)) {
+        activityDays.push(activityDate);
+      }
+
+      const { data, error } = await supabase
+        .from('user_streaks')
+        .update({
+          streak: streak,
+          last_activity_date: activityDate,
+          activity_days: activityDays,
+          updated_at: new Date().toISOString()
+        })
+        .eq('user_id', userId)
+        .select()
+        .single();
+
+      return { data, error };
+    }
   },
 
-  // ==================== LESSONS ====================
+  // ==================== LESSON PROGRESS ====================
   lessons: {
-    async getAll() {
-      const { data, error } = await supabase
-        .from('lessons')
-        .select('*')
-        .eq('is_active', true)
-        .order('order_index');
-      return { data: data as Lesson[] | null, error };
-    },
-
-    async getByCategory(category: string) {
-      const { data, error } = await supabase
-        .from('lessons')
-        .select('*')
-        .eq('category', category)
-        .eq('is_active', true)
-        .order('order_index');
-      return { data: data as Lesson[] | null, error };
-    },
-
-    async getById(lessonId: string) {
-      const { data, error } = await supabase
-        .from('lessons')
-        .select('*')
-        .eq('id', lessonId)
-        .single();
-      return { data: data as Lesson | null, error };
-    },
-  },
-
-  // ==================== QUESTIONS ====================
-  questions: {
-    async getByLessonId(lessonId: string) {
-      const { data, error } = await supabase
-        .from('questions')
-        .select('*')
-        .eq('lesson_id', lessonId)
-        .eq('is_active', true)
-        .order('order_index');
-      return { data: data as Question[] | null, error };
-    },
-
-    async getById(questionId: string) {
-      const { data, error } = await supabase
-        .from('questions')
-        .select('*')
-        .eq('id', questionId)
-        .single();
-      return { data: data as Question | null, error };
-    },
-  },
-
-  // ==================== USER PROGRESS ====================
-  progress: {
-    async getByUserId(userId: string) {
-      const { data, error } = await supabase
-        .from('user_progress')
-        .select('*')
-        .eq('user_id', userId);
-      return { data: data as UserProgress[] | null, error };
-    },
-
-    async getByUserAndLesson(userId: string, lessonId: string) {
-      const { data, error } = await supabase
-        .from('user_progress')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('lesson_id', lessonId)
-        .single();
-      return { data: data as UserProgress | null, error };
-    },
-
-    async upsert(progressData: Partial<UserProgress>) {
-      const { data, error } = await supabase
-        .from('user_progress')
-        .upsert(progressData)
-        .select()
-        .single();
-      return { data: data as UserProgress | null, error };
-    },
-
-    async updateCompletion(userId: string, lessonId: string, correct: number, total: number) {
-      console.log('🔄 updateCompletion called:', { userId, lessonId, correct, total });
-
-      try {
-        // Use secure RPC function with rate limiting
-        const { data, error } = await supabase.rpc('complete_game_with_limit', {
-          p_user_id: userId,
-          p_lesson_id: lessonId,
-          p_correct_answers: correct,
-          p_total_questions: total,
-        });
-
-        if (error) {
-          console.error('❌ Error in complete_game_with_limit RPC:', error);
-
-          // Fallback to old method if RPC not available (backward compatibility)
-          if (error.code === '42883') { // Function does not exist
-            console.warn('⚠️ complete_game_with_limit RPC not found, using fallback method');
-            return await this.fallbackUpdateCompletion(userId, lessonId, correct, total);
-          }
-
-          return { data: null, error };
-        }
-
-        // Check for rate limit error in response
-        if (data?.error) {
-          console.warn('⚠️ Rate limit hit (Game Completion):', data.error);
-          return { data: null, error: new Error(data.error) };
-        }
-
-        console.log('✅ Game completion successful via RPC');
-        return { data: data as any, error: null };
-
-      } catch (err) {
-        console.error('❌ Unexpected error in updateCompletion:', err);
-        return { data: null, error: err as any };
-      }
-    },
-
-    // Fallback method for backward compatibility
-    async fallbackUpdateCompletion(userId: string, lessonId: string, correct: number, total: number) {
-      console.log('🔄 Using fallback updateCompletion method');
-
-      const completionRate = (correct / total) * 100;
-      const isCompleted = true;
-
-      // 1. Get existing progress
-      let currentCount = 0;
-      const { data: existingProgress, error: fetchError } = await supabase
-        .from('user_progress')
-        .select('completion_count')
-        .eq('user_id', userId)
-        .eq('lesson_id', lessonId)
-        .single();
-
-      if (!fetchError && existingProgress) {
-        currentCount = existingProgress.completion_count || 0;
-      }
-
-      const newCount = currentCount + 1;
-
-      // 2. Upsert User Progress
-      const { data, error: upsertError } = await supabase
-        .from('user_progress')
-        .upsert({
-          user_id: userId,
-          lesson_id: lessonId,
-          completion_rate: completionRate,
-          correct_answers: correct,
-          total_attempts: total,
-          is_completed: isCompleted,
-          completion_count: newCount,
-          last_attempted: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
-        }, { onConflict: 'user_id,lesson_id' })
-        .select()
-        .single();
-
-      if (upsertError) {
-        console.error('❌ Error updating user_progress:', upsertError);
-        return { data: null, error: upsertError };
-      }
-
-      // 3. Update User Stats (RPC)
-      const wrong = total - correct;
-      const { error: rpcError } = await supabase.rpc('increment_user_stats', {
+    async complete(userId: string, lessonId: string) {
+      // Use RPC for idempotent completion
+      const { data, error } = await supabase.rpc('complete_lesson', {
         p_user_id: userId,
-        p_lessons_completed: 1,
-        p_questions_solved: total,
-        p_correct_answers: correct,
-        p_wrong_answers: wrong,
+        p_lesson_id: lessonId
       });
-
-      if (rpcError) {
-        console.error('❌ Error incrementing user stats:', rpcError);
-      } else {
-        console.log('✅ User stats incremented successfully');
-      }
-
-      return { data: data as UserProgress | null, error: null };
+      return { data, error };
     },
+
+    async getCompleted(userId: string) {
+      const { data, error } = await supabase
+        .from('user_lessons')
+        .select('lesson_id')
+        .eq('user_id', userId)
+        .eq('is_completed', true);
+
+      // Return simple array of completed lesson IDs
+      const completedIds = data ? data.map(l => l.lesson_id) : [];
+      return { data: completedIds, error };
+    }
   },
 
-  // ==================== USER ANSWERS ====================
-  answers: {
-    async create(answerData: Partial<UserAnswer>) {
-      const { data, error } = await supabase
-        .from('user_answers')
-        .insert(answerData)
-        .select()
-        .single();
-      return { data: data as UserAnswer | null, error };
+  // ==================== TEST RESULTS ====================
+  tests: {
+    async saveResult(userId: string, result: {
+      test_id: string,
+      correct_answer: number,
+      total_question: number,
+      percent: number,
+      new_level?: number // Optional: Client calculated level
+    }) {
+      // Use RPC for cumulative logic + XP + Streak
+      const { data, error } = await supabase.rpc('submit_test_result', {
+        p_user_id: userId,
+        p_test_id: result.test_id,
+        p_correct: result.correct_answer,
+        p_total: result.total_question,
+        p_new_level: result.new_level
+      });
+      return { data, error };
     },
 
-    async getByUserId(userId: string, limit = 100) {
+    async getHistory(userId: string) {
       const { data, error } = await supabase
-        .from('user_answers')
+        .from('user_test_results')
         .select('*')
         .eq('user_id', userId)
-        .order('answered_at', { ascending: false })
-        .limit(limit);
-      return { data: data as UserAnswer[] | null, error };
-    },
-
-    async getWeeklyActivity(userId: string) {
-      // Get activity for the last 7 days
-      const today = new Date();
-      const sevenDaysAgo = new Date(today);
-      sevenDaysAgo.setDate(today.getDate() - 7);
-
-      const { data, error } = await supabase
-        .from('user_answers')
-        .select('answered_at')
-        .eq('user_id', userId)
-        .gte('answered_at', sevenDaysAgo.toISOString())
-        .order('answered_at', { ascending: false });
-
-      return { data: data as { answered_at: string }[] | null, error };
-    },
+        .order('created_at', { ascending: false });
+      return { data, error };
+    }
   },
 
-  // ==================== LEADERBOARD ====================
-  leaderboard: {
-    async getByLeague(league: string, limit = 100) {
-      const { data, error } = await supabase
-        .from('leaderboard')
-        .select('*')
-        .eq('league', league)
-        .order('total_score', { ascending: false })
-        .limit(limit);
-      return { data: data as LeaderboardEntry[] | null, error };
-    },
-
-    async getGlobal(limit = 100) {
-      const { data, error } = await supabase
-        .from('leaderboard')
-        .select('*')
-        .order('total_score', { ascending: false })
-        .limit(limit);
-      return { data: data as LeaderboardEntry[] | null, error };
-    },
-
-    async upsert(userId: string, username: string, totalScore: number, currentLevel: number, league: string) {
-      const { data, error } = await supabase
-        .from('leaderboard')
-        .upsert({
-          user_id: userId,
-          username,
-          total_score: totalScore,
-          current_level: currentLevel,
-          league,
-          last_updated: new Date().toISOString(),
-        })
-        .select()
-        .single();
-      return { data: data as LeaderboardEntry | null, error };
-    },
-  },
-
-  // ==================== BADGES ====================
-  badges: {
-    async getAll() {
-      const { data, error } = await supabase
-        .from('badges')
-        .select('*')
-        .eq('is_active', true);
-      return { data: data as Badge[] | null, error };
-    },
-
-    async getUserBadges(userId: string) {
-      const { data, error } = await supabase
-        .from('user_badges')
-        .select('*, badges(*)')
-        .eq('user_id', userId);
-      return { data: data as UserBadge[] | null, error };
-    },
-
-    async awardBadge(userId: string, badgeId: string) {
-      const { data, error } = await supabase
-        .from('user_badges')
-        .insert({
-          user_id: userId,
-          badge_id: badgeId,
-          earned_at: new Date().toISOString(),
-          is_claimed: false,
-        })
-        .select()
-        .single();
-      return { data: data as UserBadge | null, error };
-    },
-  },
-
-  // ==================== STREAKS ====================
-  streaks: {
-    async getByUserId(userId: string) {
+  // ==================== DAILY ACTIVITY ====================
+  dailyActivity: {
+    async getStats(userId: string) {
       const { data, error } = await supabase
         .from('user_streaks')
         .select('*')
         .eq('user_id', userId)
         .single();
-      return { data, error };
-    },
 
-    async updateStreak(userId: string) {
-      const { data, error } = await supabase.rpc('update_user_streak', {
-        p_user_id: userId,
-      });
-      return { data, error };
-    },
-  },
-
-  // ==================== DAILY ACTIVITY ====================
-  dailyActivity: {
-    async record(userId: string) {
-      const toLocalISOString = (date: Date) => {
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0');
-        const day = String(date.getDate()).padStart(2, '0');
-        return `${year}-${month}-${day}`;
-      };
-
-      const today = new Date();
-      const todayStr = toLocalISOString(today); // YYYY-MM-DD (Local)
-
-      // Get current user data
-      const { data: user, error: fetchError } = await supabase
-        .from('users')
-        .select('streak, last_activity_date, weekly_activity')
-        .eq('id', userId)
-        .single();
-
-      if (fetchError || !user) return { error: fetchError };
-
-      const lastActivityStr = user.last_activity_date;
-
-      // 1. Calculate Streak
-      let newStreak = user.streak || 0;
-
-      if (lastActivityStr === todayStr) {
-        // Already active today, do nothing to streak
-      } else {
-        const yesterday = new Date(today);
-        yesterday.setDate(yesterday.getDate() - 1);
-        const yesterdayStr = toLocalISOString(yesterday);
-
-        if (lastActivityStr === yesterdayStr) {
-          // Active yesterday, increment streak
-          newStreak += 1;
-        } else {
-          // Missed a day (or more), reset streak to 1
-          newStreak = 1;
-        }
+      if (data) {
+        return {
+          data: {
+            ...data,
+            weekly_activity: data.activity_days
+          },
+          error
+        };
       }
-
-      // 2. Update Weekly Activity
-      let weeklyActivity: string[] = [];
-      if (Array.isArray(user.weekly_activity)) {
-        weeklyActivity = user.weekly_activity as string[];
-      }
-
-      // Check if we need to reset for a new week
-      // CHANGED: We now keep a rolling window of 30 days instead of resetting on Monday
-      // This supports the new "Streak View" which can start on any day
-      const thirtyDaysAgo = new Date(today);
-      thirtyDaysAgo.setDate(today.getDate() - 30);
-      const thirtyDaysAgoStr = toLocalISOString(thirtyDaysAgo);
-
-      // Filter out dates older than 30 days
-      weeklyActivity = weeklyActivity.filter(dateStr => dateStr >= thirtyDaysAgoStr);
-
-      // Add today if not present
-      if (!weeklyActivity.includes(todayStr)) {
-        weeklyActivity.push(todayStr);
-      }
-
-      // 3. Save to DB
-      const { error: updateError } = await supabase
-        .from('users')
-        .update({
-          streak: newStreak,
-          last_activity_date: todayStr,
-          weekly_activity: weeklyActivity,
-          updated_at: new Date().toISOString(),
-        })
-        .eq('id', userId);
-
-      return { error: updateError };
-    },
-
-    async getStats(userId: string) {
-      const { data, error } = await supabase
-        .from('users')
-        .select('streak, weekly_activity')
-        .eq('id', userId)
-        .single();
       return { data, error };
     }
-  },
+  }
 };
+

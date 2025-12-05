@@ -18,12 +18,20 @@ export function useUserData(userId: string | undefined) {
         queryFn: async () => {
             if (!userId) throw new Error('User ID required');
 
-            const { data, error } = await database.users.getById(userId);
+            // Fetch user profile (includes stats and streaks)
+            const { data: userProfile, error: userError } = await database.users.getProfile(userId);
+            if (userError) throw userError;
+            if (!userProfile) throw new Error('User not found');
 
-            if (error) throw error;
-            if (!data) throw new Error('User not found');
-
-            return data;
+            // Flatten structure for compatibility
+            return {
+                ...userProfile,
+                ...userProfile.stats,
+                streak: userProfile.streak?.streak || 0,
+                last_activity_date: userProfile.streak?.last_activity_date,
+                weekly_activity: userProfile.streak?.activity_days || [],
+                // last_game_completion: ... // Removed or needs mapping if critical
+            };
         },
         enabled: !!userId, // Only run if userId exists
         staleTime: 0, // Always fetch fresh data
@@ -42,6 +50,7 @@ export function useUserStats(userId: string | undefined) {
 
     const stats = userData ? {
         completedTests: userData.total_lessons_completed || 0,
+        total_tests_completed: userData.total_tests_completed || 0, // Add this line
         lessonsCompleted: userData.total_lessons_completed || 0,
         successRate: calculateSuccessRate(userData),
         totalQuestions: userData.total_questions_solved || 0,
@@ -58,6 +67,9 @@ export function useUserStats(userId: string | undefined) {
 /**
  * Calculate success rate from user data
  */
+/**
+ * Calculate success rate from user data
+ */
 function calculateSuccessRate(userData: any): number {
     const totalQuestions = userData.total_questions_solved || 0;
     const correctAnswers = userData.total_correct_answers || 0;
@@ -65,4 +77,20 @@ function calculateSuccessRate(userData: any): number {
     return totalQuestions > 0
         ? Math.round((correctAnswers / totalQuestions) * 100)
         : 0;
+}
+
+/**
+ * Fetch completed lessons for a user
+ */
+export function useCompletedLessons(userId: string | undefined) {
+    return useQuery({
+        queryKey: ['completedLessons', userId],
+        queryFn: async () => {
+            if (!userId) return [];
+            const { data, error } = await database.lessons.getCompleted(userId);
+            if (error) throw error;
+            return data || [];
+        },
+        enabled: !!userId,
+    });
 }

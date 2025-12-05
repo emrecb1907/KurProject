@@ -4,7 +4,6 @@ import { database } from '@/lib/supabase/database';
 import { GameType } from '@/types/game.types';
 import { useUserData } from '../useUserData';
 import { logger } from '@/lib/logger';
-import { handleError } from '@/lib/errorHandler';
 import { queryClient } from '@/lib/queryClient';
 
 interface CompleteGameParams {
@@ -34,8 +33,7 @@ interface CompleteGameResult {
  */
 export function useCompleteGameMutation() {
     const { isAuthenticated, user } = useAuth();
-    const { earnXP } = useUserData();
-    const { setUserStats, incrementDailyLessons, incrementDailyTests } = useUser();
+    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -48,56 +46,82 @@ export function useCompleteGameMutation() {
             let leveledUp = false;
             let newLevel = 0;
 
-            // Earn XP (includes level up, leaderboard update, DB sync)
-            if (correctAnswers > 0 && user) {
-                const result = await earnXP(correctAnswers);
+            // Save progress if authenticated and NOT anonymous
+            if (isAuthenticated && user?.id && !user.is_anonymous) {
+                let dbError = null;
 
-                if (result?.leveledUp) {
-                    leveledUp = true;
-                    newLevel = result.newLevel;
-                    logger.levelUp(result.newLevel);
-                }
-            }
-
-            // Save progress if authenticated
-            if (isAuthenticated && user?.id) {
-                // Update completion
-                const { error: completionError } = await database.progress.updateCompletion(
-                    user.id,
-                    lessonId,
-                    correctAnswers,
-                    totalQuestions
-                );
-
-                if (completionError) {
-                    throw completionError;
-                }
-
-                // Record daily activity
-                await database.dailyActivity.record(user.id);
-
-                // Update Daily Tasks (Zustand Store)
-                // Use source to determine if it's a lesson or test
                 if (source === 'test') {
-                    incrementDailyTests();
-                    logger.info(`Daily test count incremented (source: ${source}, gameType: ${gameType})`);
+                    // 1. Fetch fresh user profile to get accurate current XP
+                    // We cannot rely on local state (user.stats) as it might be stale or incomplete
+                    const { data: freshProfile } = await database.users.getProfile(user.id);
+                    const currentXP = freshProfile?.stats?.total_score || 0;
+
+                    // 2. Calculate new level locally
+                    const { calculateUserLevel } = require('@/lib/utils/levelCalculations');
+                    const newXP = currentXP + correctAnswers;
+                    const calculatedLevel = calculateUserLevel(newXP);
+
+                    console.log('📊 Level Calculation (Fresh Data):', { currentXP, newXP, calculatedLevel });
+
+                    // Call RPC for Test (Cumulative + XP + Streak)
+                    const { error } = await database.tests.saveResult(user.id, {
+                        test_id: lessonId, // For tests, lessonId is the test ID (e.g., "4")
+                        correct_answer: correctAnswers,
+                        total_question: totalQuestions,
+                        percent: Math.round((correctAnswers / totalQuestions) * 100),
+                        new_level: calculatedLevel // Pass the calculated level to DB
+                    });
+                    dbError = error;
+
+                    if (!error) {
+                        incrementDailyTests();
+                        logger.info(`Daily test count incremented (Test ID: ${lessonId})`);
+                    }
                 } else {
-                    incrementDailyLessons();
-                    logger.info(`Daily lesson count incremented (source: ${source}, gameType: ${gameType})`);
+                    // Call RPC for Lesson (Idempotent)
+                    // Only mark as complete if all questions were answered correctly (or threshold met)
+                    // For now, assuming completion if correctAnswers > 0, but usually lessons require full completion
+                    // Adjusting logic: If it's a lesson, we just mark it complete.
+                    const { error } = await database.lessons.complete(user.id, lessonId);
+                    dbError = error;
+
+                    if (!error) {
+                        incrementDailyLessons();
+                        logger.info(`Daily lesson count incremented (Lesson ID: ${lessonId})`);
+                    }
+                }
+
+                if (dbError) {
+                    throw dbError;
                 }
 
                 // Update stats cache immediately after game completion
-                const { data: userData } = await database.users.getById(user.id);
-                if (userData) {
-                    const newCompletedTests = userData.total_lessons_completed || 0;
-                    const totalQuestionsDB = userData.total_questions_solved || 0;
-                    const correctAnswersDB = userData.total_correct_answers || 0;
+                // We fetch the updated profile to get the new XP/Level calculated by the DB trigger/RPC
+                const { data: userProfile } = await database.users.getProfile(user.id);
+                console.log('🔄 Fetched Profile after update:', userProfile?.stats);
+
+                if (userProfile && userProfile.stats) {
+                    const newCompletedTests = userProfile.stats.total_lessons_completed || 0;
+                    const totalQuestionsDB = userProfile.stats.total_questions_solved || 0;
+                    const correctAnswersDB = userProfile.stats.total_correct_answers || 0;
                     const newSuccessRate = totalQuestionsDB > 0
                         ? Math.round((correctAnswersDB / totalQuestionsDB) * 100)
                         : 0;
 
-                    setUserStats(newCompletedTests, newSuccessRate);
-                    logger.info(`Stats updated: ${newCompletedTests} tests, ${newSuccessRate}% success rate`);
+                    // Update local state with fresh DB data
+                    updateGameStats(
+                        userProfile.stats.total_score || 0, // XP
+                        userProfile.stats.current_level || 1,
+                        newCompletedTests,
+                        newSuccessRate
+                    );
+
+                    // Check for level up based on DB response
+                    if (userProfile.stats.current_level > (user.current_level || 0)) {
+                        leveledUp = true;
+                        newLevel = userProfile.stats.current_level;
+                        logger.levelUp(newLevel);
+                    }
                 }
 
                 // 🚀 CRITICAL: Invalidate React Query caches
@@ -112,10 +136,7 @@ export function useCompleteGameMutation() {
         },
 
         onError: (error, variables) => {
-            handleError(error, {
-                context: `${variables.gameType} game completion`,
-                logToConsole: true,
-            });
+            console.error(`${variables.gameType} game completion error:`, error);
         },
 
         retry: 1, // Retry once on failure

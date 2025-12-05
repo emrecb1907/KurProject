@@ -31,6 +31,7 @@ export interface UserSlice {
   setProgress: (progress: UserProgress[]) => void;
   setStreakData: (streakData: UserStreak | null) => void;
   setUserStats: (completedTests: number, successRate: number) => void;
+  updateGameStats: (xp: number, level: number, completedTests: number, successRate: number) => void;
   resetUserData: () => void;
 
   // New Actions
@@ -49,7 +50,7 @@ export interface UserSlice {
   // Actions
   incrementDailyLessons: () => void;
   incrementDailyTests: () => void;
-  claimDailyTask: (taskId: number) => void;
+  claimDailyTask: (taskId: number, xpReward: number) => Promise<void>;
   checkDailyReset: () => void;
 
   boundUserId: string | null;
@@ -118,6 +119,14 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   setStreakData: (streakData) => set({ streakData }),
 
   setUserStats: (completedTests, successRate) => set({ completedTests, successRate }),
+
+  updateGameStats: (xp, level, completedTests, successRate) => set({
+    totalXP: xp,
+    totalScore: xp, // Assuming totalScore tracks XP for now
+    currentLevel: level,
+    completedTests,
+    successRate
+  }),
 
   resetUserData: () => set(initialState),
 
@@ -216,26 +225,68 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     }));
   },
 
-  claimDailyTask: (taskId) => {
+  claimDailyTask: async (taskId, xpReward) => {
+    const state = get();
     get().checkDailyReset();
+
+    // 1. Local Update (Optimistic)
+    const newTotalXP = state.totalXP + xpReward;
+    const newTotalScore = state.totalScore + xpReward;
+
     set((state) => ({
+      totalXP: newTotalXP,
+      totalScore: newTotalScore,
       dailyProgress: {
         ...state.dailyProgress,
         claimedTasks: [...state.dailyProgress.claimedTasks, taskId]
       }
     }));
+
+    // 2. Database Sync
+    const { boundUserId } = state;
+    if (boundUserId) {
+      try {
+        const { error } = await database.users.updateStats(boundUserId, {
+          total_score: newTotalXP // Syncing XP as total_score for now, consistent with useAuth
+        });
+
+        if (error) {
+          console.error('❌ Failed to sync daily task XP to DB:', error);
+        } else {
+          console.log('✅ Daily task XP synced to DB:', xpReward);
+        }
+      } catch (err) {
+        console.error('❌ Error syncing daily task XP:', err);
+      }
+    }
   },
 
   setBoundUserId: (id) => set({ boundUserId: id }),
 
-  completeLesson: (lessonId) => {
-    set((state) => {
-      if (state.completedLessons.includes(lessonId)) {
-        return state;
-      }
-      return {
+  completeLesson: async (lessonId) => {
+    const state = get();
+
+    // 1. Optimistic Update
+    if (!state.completedLessons.includes(lessonId)) {
+      set({
         completedLessons: [...state.completedLessons, lessonId]
-      };
-    });
+      });
+    }
+
+    // 2. Database Sync
+    const { boundUserId } = state;
+    if (boundUserId) {
+      try {
+        const { error } = await database.lessons.complete(boundUserId, lessonId);
+        if (error) {
+          console.error('❌ Failed to sync lesson completion to DB:', error);
+          // Optional: Revert state if critical, but for now we keep optimistic update
+        } else {
+          console.log('✅ Lesson completion synced to DB:', lessonId);
+        }
+      } catch (err) {
+        console.error('❌ Error syncing lesson completion:', err);
+      }
+    }
   },
 });

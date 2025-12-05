@@ -176,7 +176,7 @@ export default function HarflerinKonumuLessonScreen() {
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         incrementDailyLessons();
-        completeLesson('3'); // Mark Harflerin Konumu as completed
+        completeLesson('103'); // Mark Harflerin Konumu as completed
         router.push('/(tabs)');
     };
 

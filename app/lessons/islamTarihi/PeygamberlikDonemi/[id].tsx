@@ -2,7 +2,7 @@ import { useLocalSearchParams } from 'expo-router';
 import IslamicHistoryLesson, { LessonContent } from '@/components/lessons/IslamicHistoryLesson';
 
 const islamicHistoryContent: Record<string, LessonContent> = {
-  '1': {
+  '403': {
     title: 'Peygamberlik Dönemi (610–632)',
     content: [
       {
@@ -99,11 +99,11 @@ const islamicHistoryContent: Record<string, LessonContent> = {
 
 export default function IslamicHistoryLessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const lesson = islamicHistoryContent[id || '1'];
-  
+  const lesson = islamicHistoryContent[id || '403'];
+
   if (!lesson) {
     return null;
   }
 
-  return <IslamicHistoryLesson lesson={lesson} />;
+  return <IslamicHistoryLesson lesson={lesson} lessonId="403" />;
 }

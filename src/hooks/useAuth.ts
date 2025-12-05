@@ -2,7 +2,8 @@ import { useEffect, useState } from 'react';
 import { useStore } from '@store';
 import { authService } from '@lib/supabase/auth';
 import { database } from '@lib/supabase/database';
-import { sessionTracker } from '@lib/analytics/sessionTracker';
+import { supabase } from '@lib/supabase/client';
+
 import { migrateLocalDataToDatabase } from '@lib/utils/dataMigration';
 import { User } from '@types/user.types';
 
@@ -20,8 +21,7 @@ export function useAuthHook() {
       setIsLoading(true);
       console.log('🔄 Initializing auth...');
 
-      // 1. Track session for analytics (non-blocking, silent fail)
-      sessionTracker.trackSession().catch(() => { });
+
 
       // 2. Check for existing session
       const { session } = await authService.getSession();
@@ -29,61 +29,63 @@ export function useAuthHook() {
 
       if (session?.user) {
         // User is logged in - fetch from database
-        let { data: userData } = await database.users.getById(session.user.id);
-        console.log('👤 User data from DB:', userData ? 'Found' : 'Not found');
+        const { data: userProfile, error: profileError } = await database.users.getProfile(session.user.id);
+        console.log('👤 User data from DB:', userProfile ? 'Found' : 'Not found');
+        if (profileError) console.error('❌ Profile Fetch Error:', profileError);
+
+        if (!userProfile) {
+          // DEBUG: Check if user exists bypassing RLS
+          const { data: debugUser } = await supabase.rpc('debug_get_user', { user_id_input: session.user.id });
+          console.log('🕵️ DEBUG: User exists in DB (RLS bypassed)?', debugUser ? 'YES' : 'NO');
+          if (debugUser) console.log('🕵️ DEBUG User Data:', debugUser);
+        }
 
         // SECURITY: Check Bound User ID
         const { boundUserId, setBoundUserId, resetUserData } = useStore.getState();
 
         if (boundUserId && boundUserId !== session.user.id) {
           console.log('🔒 Security: Different user logged in. Wiping local data to prevent merge.');
-          console.log(`🔒 Bound: ${boundUserId}, Current: ${session.user.id}`);
           resetUserData();
           setBoundUserId(session.user.id);
-          // After wipe, we must ensure we don't use stale local state for auto-sync below
         } else if (!boundUserId) {
           console.log('🔒 Security: First time auth (or Anon). Binding local data to user:', session.user.id);
           setBoundUserId(session.user.id);
-        } else {
-          console.log('🔒 Security: User matches bound ID. Allowing sync.');
         }
 
-        // If user exists in Auth but not in DB, create DB record
-        if (!userData) {
-          console.log('⚠️ User in Auth but not in DB. Waiting for explicit creation (Social Login flow)...');
-        }
+        if (userProfile) {
+          // Flatten the profile structure for the store
+          // The store expects a single User object with stats merged in
+          const fullUser = {
+            ...userProfile,
+            ...userProfile.stats, // Merge stats (total_xp, level, etc.)
+            streak_count: userProfile.streak?.streak || 0, // Merge streak
+          };
 
-        if (userData) {
-          console.log('🔄 Setting user in store:', userData.id, userData.username);
-          setUser(userData);
+          console.log('🔄 Setting user in store:', fullUser.id, fullUser.username);
+          setUser(fullUser as unknown as User); // Type assertion needed until types are fully aligned
           setIsAuthenticated(true);
           setIsAnonymous(false);
-          console.log('✅ Authenticated user set:', userData.username || userData.email);
+          console.log('✅ Authenticated user set:', fullUser.username || fullUser.email);
 
           // Auto-sync: If local XP > database XP, update database
-          // IMPORTANT: We fetch fresh state because resetUserData() might have been called above
           const localXP = useStore.getState().totalXP;
-          const dbXP = userData.total_xp;
+          const dbXP = fullUser.total_xp || 0;
 
           if (localXP > dbXP) {
             console.log('🔄 Auto-syncing XP: local', localXP, '> db', dbXP);
-            database.users.update(userData.id, {
-              total_xp: localXP,
+
+            // Update stats
+            await database.users.updateStats(fullUser.id, {
               total_score: localXP,
-            }).then(({ error }) => {
-              if (error) {
-                console.error('❌ Auto-sync failed:', error);
-              } else {
-                console.log('✅ XP auto-synced to database');
-              }
+              // We might want to sync level here too if local calculation is trusted
             });
           } else if (dbXP > localXP) {
-            // Database has more XP, update local storage
             console.log('🔄 Database XP higher, updating local:', dbXP);
             useStore.getState().setTotalXP(dbXP);
           }
         } else {
-          console.log('ℹ️ No user data found in DB, user remains unauthenticated in store (waiting for setup)');
+          console.log('ℹ️ User authenticated but no DB record found yet (Trigger might be slow)');
+          // Ideally we should retry or show a loading state, but for now we wait
         }
       } else {
         // No session - user is anonymous
@@ -92,6 +94,28 @@ export function useAuthHook() {
         console.log('👤 Anonymous user - using local storage only');
         setIsAuthenticated(false);
         setIsAnonymous(true);
+
+        // Ensure user object in store reflects anonymous state if it exists
+        // or create a temporary anonymous user object if missing
+        if (user) {
+          setUser({ ...user, is_anonymous: true });
+        } else {
+          // Create a default anonymous user so local XP/Lives work
+          setUser({
+            id: 'anon_' + Date.now(),
+            is_anonymous: true,
+            total_xp: 0,
+            current_level: 1,
+            total_score: 0,
+            current_lives: 5,
+            max_lives: 5,
+            streak_count: 0,
+            league: 'Bronze',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString(),
+            device_id: 'unknown'
+          } as User);
+        }
       }
 
       setIsInitialized(true);
@@ -125,9 +149,6 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignUp Success! User:', authUser.id);
 
-        // Track conversion in analytics
-        await sessionTracker.markAccountCreated(authUser.id);
-
         // Migrate local data to database
         await migrateLocalDataToDatabase(authUser.id);
 
@@ -158,8 +179,7 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
 
-        // Track conversion in analytics (in case this is first login after signup)
-        await sessionTracker.markAccountCreated(authUser.id);
+
 
         // Re-initialize to load user data from database
         await initializeAuth();
@@ -187,8 +207,7 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
 
-        // Track conversion in analytics (in case this is first login after signup)
-        await sessionTracker.markAccountCreated(authUser.id);
+
 
         // Re-initialize to load user data from database
         await initializeAuth();
@@ -216,11 +235,10 @@ export function useAuthHook() {
         console.log('✅ Social Login Success! User:', authUser.id);
 
         // Check if user exists in DB
-        const { data: userData } = await database.users.getById(authUser.id);
+        const { data: userProfile } = await database.users.getProfile(authUser.id);
 
-        if (userData) {
+        if (userProfile) {
           // User exists, proceed as normal
-          await sessionTracker.markAccountCreated(authUser.id);
           await initializeAuth();
           return { error: null, isNew: false };
         } else {

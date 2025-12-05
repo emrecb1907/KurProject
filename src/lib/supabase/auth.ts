@@ -1,4 +1,5 @@
 import { supabase } from './client';
+import { database } from './database';
 import { User } from '../../types/user.types';
 
 export interface AuthResponse {
@@ -12,22 +13,17 @@ export const authService = {
     try {
       // Check if username already exists
       if (username) {
-        const { data: existingUser, error: checkError } = await supabase
-          .from('users')
-          .select('username')
-          .eq('username', username)
-          .single();
+        const { data: exists, error: checkError } = await supabase.rpc('check_username', {
+          username_to_check: username
+        });
 
-        if (existingUser) {
+        if (checkError) {
+          console.error('❌ Error checking username:', checkError);
+        } else if (exists) {
           return {
             user: null,
             error: new Error('Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.'),
           };
-        }
-
-        // Ignore error if no user found (that's what we want)
-        if (checkError && checkError.code !== 'PGRST116') {
-          console.error('❌ Error checking username:', checkError);
         }
       }
 
@@ -45,29 +41,7 @@ export const authService = {
 
       // Create user record in users table
       if (data.user) {
-        console.log('📝 Creating user record in users table...');
-
-        const { error: dbError } = await supabase.from('users').insert({
-          id: data.user.id,
-          email: data.user.email,
-          username: username || data.user.email?.split('@')[0] || 'User',
-          is_anonymous: false,
-          device_id: null,
-          current_lives: 5,
-          max_lives: 5,
-          total_xp: 0,
-          current_level: 1,
-          total_score: 0,
-          streak_count: 0,
-          league: 'Bronze',
-        });
-
-        if (dbError) {
-          console.error('❌ Failed to create user in users table:', dbError);
-          // Don't throw error, user is created in auth, just log it
-        } else {
-          console.log('✅ User record created successfully in users table');
-        }
+        console.log('📝 User created in Auth. Database trigger should handle public.users creation.');
       }
 
       return {
@@ -128,20 +102,13 @@ export const authService = {
         console.log('🔍 Looking up email for username:', input);
 
         // Query database for user with this username (case-insensitive)
-        const { data: userData, error: dbError } = await supabase
-          .from('users')
-          .select('email')
-          .ilike('username', input) // Case-insensitive match
-          .single();
+        // Use RPC to bypass RLS for unauthenticated users
+        const { data: email, error: dbError } = await supabase.rpc('get_email_by_username', {
+          username_input: input
+        });
 
-        if (dbError || !userData?.email) {
-          // PGRST116: The result contains 0 rows (User not found)
-          if (dbError?.code === 'PGRST116') {
-            console.log('ℹ️ Username not found:', input);
-          } else {
-            console.error('❌ Error looking up username:', input, dbError);
-          }
-
+        if (dbError || !email) {
+          console.error('❌ Error looking up username:', input, dbError);
           return {
             user: null,
             error: new Error('Kullanıcı adı bulunamadı.'),
@@ -151,7 +118,7 @@ export const authService = {
         console.log('✅ Found email for username:', input);
 
         // Now sign in with the found email
-        return await this.signIn(userData.email, password);
+        return await this.signIn(email, password);
       }
     } catch (error) {
       console.error('❌ SignIn Error:', error);

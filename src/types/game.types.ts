@@ -47,4 +47,4 @@ export interface GameQuestion {
   audioFileId?: number; // For letters game - audio file number (1-29)
 }
 
-export type GameType = 'vocabulary' | 'letters' | 'verses' | 'quiz';
+export type GameType = 'vocabulary' | 'letters' | 'verses' | 'quiz' | 'lesson';

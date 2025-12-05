@@ -21,7 +21,7 @@ interface LessonContent {
 }
 
 const islamicHistoryContent: Record<string, LessonContent> = {
-  '1': {
+  '407': {
     title: 'Endülüs Emevîleri ve Avrupa ile Etkileşim (711–1492)',
     content: [
       {
@@ -101,10 +101,11 @@ const islamicHistoryContent: Record<string, LessonContent> = {
         section: 'Genel Değerlendirme',
         text: [
           'Endülüs dönemi, bilim, sanat ve kültürün birlikte geliştiği; farklı toplumların barış içinde bir arada yaşayabildiği eşsiz bir tarih sürecidir. Avrupa ile kurulan bilimsel köprüler, bilginin doğudan batıya aktarılmasını sağlayarak dünya tarihinin yönünü değiştirmiştir. Endülüs\'ü anlamak, İslam medeniyetinin evrensel karakterinin nasıl şekillendiğini görmek açısından önem taşır.',
-        ],
-      },
-    ],
-  },
+
+        ]
+      }
+    ]
+  }
 };
 
 export default function IslamicHistoryLessonScreen() {
@@ -114,7 +115,7 @@ export default function IslamicHistoryLessonScreen() {
   const { t } = useTranslation();
   const { incrementDailyLessons } = useUser();
 
-  const lesson = islamicHistoryContent[id || '1'];
+  const lesson = islamicHistoryContent[id || '407'];
   if (!lesson) {
     return null;
   }
@@ -258,7 +259,7 @@ export default function IslamicHistoryLessonScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container} edges={['top']}>
+    <SafeAreaView style={styles.container} edges={['top']} >
       <View style={styles.header}>
         <Pressable
           style={styles.backButton}
@@ -275,7 +276,7 @@ export default function IslamicHistoryLessonScreen() {
         </View>
       </View>
 
-      <ScrollView 
+      <ScrollView
         style={styles.content}
         contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
@@ -293,7 +294,7 @@ export default function IslamicHistoryLessonScreen() {
             {section.text.map((paragraph, pIndex) => {
               const isBulletPoint = paragraph.trim().startsWith('-');
               const text = isBulletPoint ? paragraph.trim().substring(1).trim() : paragraph;
-              
+
               if (isBulletPoint) {
                 return (
                   <View key={pIndex} style={styles.bulletContainer}>
@@ -302,7 +303,7 @@ export default function IslamicHistoryLessonScreen() {
                   </View>
                 );
               }
-              
+
               return (
                 <Text key={pIndex} style={styles.paragraph}>
                   {text}
@@ -319,7 +320,7 @@ export default function IslamicHistoryLessonScreen() {
           <Text style={styles.completeButtonText}>{t('lessons.islamicHistory.completeLesson')}</Text>
         </Pressable>
       </ScrollView>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 

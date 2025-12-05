@@ -59,7 +59,8 @@ export default function ProfileScreen() {
   }, []);
 
   // Use React Query data if available, fallback to Zustand cache
-  const completedTests = userStats?.completedTests ?? 0;
+  // Use total_tests_completed from DB stats if available, otherwise fallback to completedTests
+  const completedTests = userStats?.total_tests_completed ?? userStats?.completedTests ?? 0;
   const successRate = userStats?.successRate ?? 0;
   const currentStreak = streak;
 
