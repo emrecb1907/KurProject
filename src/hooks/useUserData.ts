@@ -1,6 +1,6 @@
 import { useStore } from '@store';
 import { database } from '@lib/supabase/database';
-import { calculateLevel, calculateXPProgress } from '@constants/xp';
+import { calculateUserLevel, getXPProgress } from '@/lib/utils/levelCalculations';
 
 export function useUserData() {
   const {
@@ -29,7 +29,7 @@ export function useUserData() {
     if (!user) return;
 
     const newTotalXP = totalXP + xp;
-    const newLevel = calculateLevel(newTotalXP);
+    const newLevel = calculateUserLevel(newTotalXP);
     const leveledUp = newLevel > currentLevel;
 
     // Update local state
@@ -49,23 +49,10 @@ export function useUserData() {
       }
     }
 
-
-
-    // Update leaderboard
-    if (!user.is_anonymous) {
-      await database.leaderboard.upsert(
-        user.id,
-        user.username || 'Anonim',
-        newTotalXP,
-        newLevel,
-        user.league
-      );
-    }
-
     return {
       leveledUp,
       newLevel,
-      xpProgress: calculateXPProgress(newTotalXP),
+      xpProgress: getXPProgress(newTotalXP),
     };
   }
 
@@ -74,14 +61,22 @@ export function useUserData() {
     if (!user) return;
 
     addLives(amount);
-    await database.users.updateLives(user.id, amount);
+
+    // Update database - ONLY if not anonymous
+    if (!user.is_anonymous) {
+      const { error } = await database.users.update(user.id, {
+        current_lives: Math.min(currentLives + amount, maxLives)
+      });
+
+      if (error) {
+        console.error('❌ Failed to update lives in database:', error);
+      }
+    }
   }
 
-
-
   // Get XP progress to next level
-  function getXPProgress() {
-    return calculateXPProgress(totalXP);
+  function getXPProgressResult() {
+    return getXPProgress(totalXP);
   }
 
   // Check if lesson is unlocked
@@ -120,11 +115,10 @@ export function useUserData() {
     // Actions
     earnXP,
     gainLives,
-    getXPProgress,
+    getXPProgress: getXPProgressResult,
     isLessonUnlocked,
     getLessonCompletion,
     isLessonCompleted,
     isLessonMastered,
   };
 }
-

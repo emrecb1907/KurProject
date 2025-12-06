@@ -1,12 +1,11 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { View, Text, Pressable, StyleSheet, SafeAreaView } from 'react-native';
-import { errorHandler, ErrorSeverity } from '@/lib/errorHandler';
+import React, { Component, ErrorInfo } from 'react';
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ArrowClockwise, Warning } from 'phosphor-react-native';
 import { colors } from '@/constants/colors';
-import { WarningCircle, ArrowClockwise } from 'phosphor-react-native';
 
 interface Props {
-    children: ReactNode;
-    fallback?: ReactNode;
+    children: React.ReactNode;
 }
 
 interface State {
@@ -17,24 +16,21 @@ interface State {
 export class ErrorBoundary extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
-        this.state = { hasError: false, error: null };
+        this.state = {
+            hasError: false,
+            error: null
+        };
     }
 
     static getDerivedStateFromError(error: Error): State {
-        return { hasError: true, error };
+        return {
+            hasError: true,
+            error
+        };
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-        errorHandler.handleError({
-            code: 'REACT_RENDER_ERROR',
-            message: error.message,
-            userMessage: 'Görünüm oluşturulurken bir hata meydana geldi.',
-            severity: ErrorSeverity.HIGH,
-            originalError: error,
-            context: {
-                componentStack: errorInfo.componentStack,
-            }
-        });
+        console.error('ErrorBoundary caught an error:', error, errorInfo);
     }
 
     handleReset = () => {
@@ -43,24 +39,22 @@ export class ErrorBoundary extends Component<Props, State> {
 
     render() {
         if (this.state.hasError) {
-            if (this.props.fallback) {
-                return this.props.fallback;
-            }
-
             return (
                 <SafeAreaView style={styles.container}>
                     <View style={styles.content}>
-                        <WarningCircle size={64} color={colors.error} weight="fill" style={styles.icon} />
+                        <Warning size={64} color={colors.error} weight="fill" style={styles.icon} />
 
                         <Text style={styles.title}>Bir şeyler ters gitti</Text>
 
                         <Text style={styles.message}>
-                            Uygulama beklenmedik bir hatayla karşılaştı. Endişelenmeyin, hatayı kaydettik ve üzerinde çalışacağız.
+                            Beklenmedik bir hata oluştu. Lütfen tekrar deneyin.
                         </Text>
 
-                        {__DEV__ && this.state.error && (
-                            <View style={styles.debugBox}>
-                                <Text style={styles.debugText}>{this.state.error.message}</Text>
+                        {this.state.error && (
+                            <View style={styles.errorBox}>
+                                <Text style={styles.errorText} numberOfLines={3}>
+                                    {this.state.error.toString()}
+                                </Text>
                             </View>
                         )}
 
@@ -112,28 +106,27 @@ const styles = StyleSheet.create({
         marginBottom: 32,
         lineHeight: 24,
     },
-    debugBox: {
-        backgroundColor: colors.surface,
+    errorBox: {
+        backgroundColor: 'rgba(255, 75, 75, 0.1)',
         padding: 12,
         borderRadius: 8,
         marginBottom: 32,
         width: '100%',
-        borderWidth: 1,
-        borderColor: colors.border,
     },
-    debugText: {
-        fontSize: 12,
+    errorText: {
         color: colors.error,
+        fontSize: 12,
         fontFamily: 'monospace',
     },
     button: {
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: colors.primary,
+        paddingVertical: 12,
         paddingHorizontal: 24,
-        paddingVertical: 14,
-        borderRadius: 16,
+        borderRadius: 12,
         gap: 8,
+        // Shadow
         shadowColor: colors.primary,
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.3,
@@ -141,7 +134,7 @@ const styles = StyleSheet.create({
         elevation: 4,
     },
     buttonPressed: {
-        opacity: 0.8,
+        opacity: 0.9,
         transform: [{ scale: 0.98 }],
     },
     buttonText: {

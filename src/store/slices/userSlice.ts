@@ -59,6 +59,7 @@ export interface UserSlice {
   // Lesson Completion
   completedLessons: string[];
   completeLesson: (lessonId: string) => void;
+  syncCompletedLessons: () => Promise<void>;
 }
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
@@ -286,6 +287,31 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
         }
       } catch (err) {
         console.error('❌ Error syncing lesson completion:', err);
+      }
+    }
+  },
+
+  syncCompletedLessons: async () => {
+    const state = get();
+    const { boundUserId } = state;
+
+    if (boundUserId) {
+      try {
+        const { data, error } = await database.lessons.getCompleted(boundUserId);
+        if (error) {
+          console.error('❌ Failed to sync completed lessons from DB:', error);
+        } else if (data) {
+          const currentLessons = state.completedLessons;
+          const dbLessons = data;
+          const mergedLessons = Array.from(new Set([...currentLessons, ...dbLessons]));
+
+          if (mergedLessons.length !== currentLessons.length || !dbLessons.every(id => currentLessons.includes(id))) {
+            set({ completedLessons: mergedLessons });
+            console.log('✅ Synced completed lessons from DB:', dbLessons.length);
+          }
+        }
+      } catch (err) {
+        console.error('❌ Error syncing completed lessons:', err);
       }
     }
   },

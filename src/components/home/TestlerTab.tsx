@@ -65,9 +65,6 @@ export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWi
                 {/* Section Title */}
                 <View style={styles.sectionHeader}>
                     <Text style={styles.sectionTitle}>{t('home.tests')}</Text>
-                    <Pressable style={styles.viewAllButton} onPress={() => { }}>
-                        <Text style={styles.viewAllButtonText}>{t('common.viewAll')}</Text>
-                    </Pressable>
                 </View>
 
                 {/* Test Cards Grid - 2 columns */}
@@ -103,7 +100,6 @@ export const TestlerTab = forwardRef<TestlerTabRef, TestlerTabProps>(({ screenWi
                                     color={test.color}
                                     borderColor={test.borderColor}
                                     level={test.level}
-                                    progress={test.unlocked ? { current: 3, total: 10 } : undefined}
                                     route={test.route}
                                     onSelect={() => handleCardSelect(index)}
                                     screenWidth={screenWidth}
@@ -135,17 +131,6 @@ const getStyles = (screenWidth: number, gap: number, padding: number) => {
             fontSize: 24,
             fontWeight: 'bold',
             color: colors.textPrimary,
-        },
-        viewAllButton: {
-            paddingHorizontal: 12,
-            paddingVertical: 6,
-            borderRadius: 12,
-            backgroundColor: colors.surface,
-        },
-        viewAllButtonText: {
-            fontSize: 12,
-            fontWeight: '600',
-            color: colors.primary,
         },
         gridContainer: {
             flexDirection: 'row',

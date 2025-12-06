@@ -8,3 +8,4 @@ export { DuoButton } from './DuoButton';
 export { CarouselCard } from './CarouselCard';
 export type { CarouselCardProps } from './CarouselCard';
 
+export { CircularProgress } from './CircularProgress';

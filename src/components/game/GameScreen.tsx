@@ -7,7 +7,7 @@ import { QuestionCard } from './QuestionCard';
 import { OptionButton } from './OptionButton';
 import { Timer } from './Timer';
 import { LifeIndicator } from './LifeIndicator';
-import { Button } from '@components/ui';
+import { Button, CircularProgress } from '@components/ui';
 import { useStore, useUser } from '@/store';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -463,20 +463,21 @@ export function GameScreen({
         return (
             <View style={styles.container}>
                 <View style={styles.completeContainer}>
-                    <Text style={styles.completeTitle}>{t('gameUI.gameComplete')}</Text>
-                    <Text style={styles.completeText}>
-                        {isExcellent ? t('gameUI.congratulations') : t('gameUI.goodJob')}
-                    </Text>
-
-                    <View style={styles.statsContainer}>
-                        <Text style={styles.statText}>
-                            {t('gameUI.question')}: {questions.length}
-                        </Text>
-                        <Text style={styles.statText}>
-                            {t('gameUI.correctAnswers')}: {correctAnswersCount}
-                        </Text>
-                        <Text style={styles.statText}>XP: +{correctAnswersCount}</Text>
+                    {/* Circular Progress & New Header */}
+                    <View style={{ marginBottom: 24, alignItems: 'center' }}>
+                        <CircularProgress
+                            size={200}
+                            strokeWidth={20}
+                            progress={questions.length > 0 ? correctAnswersCount / questions.length : 0}
+                            correct={correctAnswersCount}
+                            total={questions.length}
+                        />
                     </View>
+
+                    <Text style={styles.completeTitle}>Harika İş!</Text>
+                    <Text style={styles.completeText}>
+                        Beklenenden çok daha iyisini yaptın.
+                    </Text>
 
                     {/* XP Progress Bar */}
                     <View style={styles.xpBarContainer}>
@@ -720,7 +721,7 @@ const getStyles = () =>
         nextButton: {
             backgroundColor: colors.success,
             paddingVertical: 16,
-            borderRadius: 16,
+            borderRadius: 30,
             alignItems: 'center',
             borderBottomWidth: 4,
             borderBottomColor: colors.successDark,
@@ -770,7 +771,7 @@ const getStyles = () =>
             backgroundColor: colors.success,
             paddingVertical: 16,
             paddingHorizontal: 48,
-            borderRadius: 16,
+            borderRadius: 30,
             width: '100%',
             alignItems: 'center',
             justifyContent: 'center',
@@ -779,7 +780,7 @@ const getStyles = () =>
             borderBottomColor: colors.successDark,
         },
         completeButtonText: {
-            color: colors.textOnPrimary,
+            color: '#000000',
             fontSize: 18,
             fontWeight: 'bold',
         },

@@ -1,14 +1,13 @@
-import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView, DeviceEventEmitter } from 'react-native';
-import { useFocusEffect } from '@react-navigation/native';
-import { StatusBar } from 'expo-status-bar';
-import { useTheme } from '@/contexts/ThemeContext';
-import { colors } from '@constants/colors';
-import { ArrowLeft, Check, LockKey, Heart, Star, ChartBar, Sparkle, BookOpen, ArrowsClockwise, ProhibitInset } from 'phosphor-react-native';
-import { useRouter } from 'expo-router';
+import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
+import { View, Text, ScrollView, StyleSheet, DeviceEventEmitter, TouchableOpacity, Platform, Alert, ActivityIndicator } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
+import { Sparkle, BookOpen, ArrowsClockwise, ChartBar, ProhibitInset, Check } from 'phosphor-react-native';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import * as Haptics from 'expo-haptics';
+import { StatusBar } from 'expo-status-bar';
 
 export default function PremiumScreen() {
     const { activeTheme } = useTheme();
@@ -85,7 +84,7 @@ export default function PremiumScreen() {
     ];
 
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: premiumColors.background }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: premiumColors.background }]} edges={['top', 'left', 'right']}>
             <StatusBar style={statusBarStyle} />
             <ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollContent}>
 

@@ -46,6 +46,38 @@ export const database = {
       };
     },
 
+    // Generic update for migration or bulk updates
+    async update(userId: string, data: {
+      total_xp?: number,
+      current_level?: number,
+      current_lives?: number,
+      streak_count?: number
+    }) {
+      let firstError = null;
+
+      // 1. Update Stats (total_xp => total_score)
+      if (data.total_xp !== undefined || data.current_level !== undefined || data.current_lives !== undefined) {
+        const statsUpdates: any = {};
+        if (data.total_xp !== undefined) statsUpdates.total_score = data.total_xp;
+        if (data.current_level !== undefined) statsUpdates.current_level = data.current_level;
+        if (data.current_lives !== undefined) statsUpdates.current_lives = data.current_lives;
+
+        const { error } = await this.updateStats(userId, statsUpdates);
+        if (error) firstError = error;
+      }
+
+      // 2. Update Streak
+      if (data.streak_count !== undefined) {
+        const { error } = await supabase
+          .from('user_streaks')
+          .update({ streak: data.streak_count })
+          .eq('user_id', userId);
+        if (error && !firstError) firstError = error;
+      }
+
+      return { error: firstError };
+    },
+
     // Update User Stats (Score, Level, Lives, League)
     async updateStats(userId: string, updates: {
       total_score?: number,
@@ -60,6 +92,11 @@ export const database = {
         .select()
         .single();
       return { data, error };
+    },
+
+    // Alias for updating lives (backward compatibility)
+    async updateLives(userId: string, lives: number) {
+      return this.updateStats(userId, { current_lives: lives });
     },
 
     // Update User Streak
@@ -89,6 +126,87 @@ export const database = {
         .single();
 
       return { data, error };
+    },
+
+    // Get Leaderboard (Top 50)
+    async getLeaderboard(limit: number = 50) {
+      const { data, error } = await supabase
+        .from('user_stats')
+        .select(`
+          total_score,
+          league,
+          user_id,
+          users:users (
+            id,
+            username,
+            avatar_url,
+            email
+          )
+        `)
+        .order('total_score', { ascending: false })
+        .limit(limit);
+
+      if (error) return { data: null, error };
+      if (!data) return { data: [], error: null };
+
+      // Transform to expected format
+      const leaderboardData = data.map((item: any) => ({
+        id: item.users?.id || item.user_id,
+        username: item.users?.username || item.users?.email?.split('@')[0] || 'Unknown User',
+        email: item.users?.email,
+        total_xp: item.total_score, // Map total_score to total_xp
+        league: item.league || 'Bronze',
+        avatar_url: item.users?.avatar_url
+      }));
+
+      return { data: leaderboardData, error: null };
+    },
+
+    // Get User Rank
+    async getUserRank(userId: string) {
+      // Since we can't easily get row number in Supabase without a window function RPC,
+      // we'll fetch the user's stats first, then count how many users have more XP.
+
+      // 1. Get user's score
+      const { data: userStats, error: statsError } = await supabase
+        .from('user_stats')
+        .select('total_score')
+        .eq('user_id', userId)
+        .single();
+
+      if (statsError || !userStats) return { data: null, error: statsError };
+
+      // 2. Count users with more XP
+      const { count, error: countError } = await supabase
+        .from('user_stats')
+        .select('*', { count: 'exact', head: true })
+        .gt('total_score', userStats.total_score);
+
+      if (countError) return { data: null, error: countError };
+
+      // Rank is count + 1
+      const rank = (count || 0) + 1;
+
+      // 3. Get user details for the return object
+      const { data: userData } = await supabase
+        .from('users')
+        .select('username, email, league')
+        .eq('id', userId)
+        .single();
+
+      return {
+        data: {
+          rank,
+          user: {
+            id: userId,
+            username: userData?.username,
+            email: userData?.email,
+            league: userData?.league || 'Bronze',
+            total_xp: userStats.total_score
+          }
+        },
+        error: null
+      };
     }
   },
 

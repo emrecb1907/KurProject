@@ -1,8 +1,9 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Platform } from 'react-native';
 import { colors } from '@constants/colors';
 import { PaperPlaneRight } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface ChatInputProps {
     onSend: (message: string) => void;
@@ -10,6 +11,8 @@ interface ChatInputProps {
 }
 
 export function ChatInput({ onSend, disabled }: ChatInputProps) {
+    const { themeVersion } = useTheme();
+    const styles = useMemo(() => getStyles(), [themeVersion]);
     const [message, setMessage] = useState('');
     const inputRef = useRef<TextInput>(null);
 
@@ -68,7 +71,7 @@ export function ChatInput({ onSend, disabled }: ChatInputProps) {
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
     container: {
         paddingHorizontal: 16,
         paddingVertical: 12,

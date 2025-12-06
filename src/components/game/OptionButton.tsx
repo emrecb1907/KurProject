@@ -38,7 +38,7 @@ export function OptionButton({
 const getStyles = () => StyleSheet.create({
   button: {
     padding: 20,
-    borderRadius: 16,
+    borderRadius: 30,
     marginBottom: 12,
     borderWidth: 2,
     backgroundColor: colors.surface,

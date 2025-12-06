@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Animated, Dimensions } from 'react-native';
 import { useEffect, useRef, useMemo } from 'react';
-import { DuoButton } from '@components/ui';
+import { DuoButton, CircularProgress } from '@components/ui';
 import { LoadingDots } from '@components/ui/LoadingDots';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -82,42 +82,26 @@ export function ResultModal({
           },
         ]}
       >
-        {/* Duo Character */}
-        <View style={styles.duoContainer}>
-          <Text style={styles.duoEmoji}>{success ? '🦉' : '😢'}</Text>
+        {/* Circular Progress */}
+        <View style={{ marginBottom: 24, alignItems: 'center' }}>
+          <CircularProgress
+            size={200}
+            strokeWidth={20}
+            progress={totalQuestions > 0 ? correctAnswers / totalQuestions : 0}
+            correct={correctAnswers}
+            total={totalQuestions}
+          />
         </View>
 
-        {/* Title */}
-        <Text style={styles.title}>
-          {success ? t('gameUI.gameComplete') : t('gameUI.goodJob')}
+        {/* Success Text */}
+        <Text style={styles.mainTitle}>
+          Harika İş!
+        </Text>
+        <Text style={styles.subTitle}>
+          Beklenenden çok daha iyisini yaptın.
         </Text>
 
-        {/* Stats Grid */}
-        <View style={styles.statsContainer}>
-          <View style={styles.statBox}>
-            <Text style={styles.statValue}>+{xpEarned}</Text>
-            <Text style={styles.statLabel}>⚡ {t('home.xp')}</Text>
-          </View>
-
-          <View style={styles.statBox}>
-            <Text style={styles.statValue}>{accuracy}%</Text>
-            <Text style={styles.statLabel}>🎯 {t('gameUI.accuracy')}</Text>
-          </View>
-
-          <View style={styles.statBox}>
-            <Text style={styles.statValue}>{timeSpent}</Text>
-            <Text style={styles.statLabel}>⏱️ {t('gameUI.timeSpent')}</Text>
-          </View>
-        </View>
-
-        {/* Score Display */}
-        <View style={styles.scoreCard}>
-          <Text style={styles.scoreLabel}>{t('gameUI.totalScore')}</Text>
-          <Text style={styles.scoreValue}>{score}</Text>
-          <Text style={styles.scoreSubtext}>
-            {correctAnswers}/{totalQuestions} {t('gameUI.correctAnswers')}
-          </Text>
-        </View>
+        <View style={{ height: 30 }} />
 
         {/* Continue Button */}
         <DuoButton
@@ -143,12 +127,6 @@ export function ResultModal({
           />
         )}
 
-        {/* Encouragement Text */}
-        <Text style={styles.encouragement}>
-          {success
-            ? `🎉 ${t('gameUI.congratulations')}`
-            : `💪 ${t('gameUI.tryAgainMessage')}`}
-        </Text>
       </Animated.View>
     </Animated.View>
   );
@@ -167,91 +145,25 @@ const getStyles = () => StyleSheet.create({
     padding: 20,
   },
   modal: {
-    backgroundColor: colors.background,
+    backgroundColor: colors.background, // Should ensure this is dark in dark mode
     borderRadius: 24,
     padding: 24,
     width: width * 0.9,
     maxWidth: 400,
     alignItems: 'center',
   },
-  duoContainer: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: colors.primaryLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  duoEmoji: {
-    fontSize: 60,
-  },
-  title: {
+  mainTitle: {
     fontSize: 28,
-    fontWeight: '800',
+    fontWeight: 'bold',
     color: colors.textPrimary,
-    marginBottom: 24,
+    marginTop: 16,
+    marginBottom: 8,
     textAlign: 'center',
   },
-  statsContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    marginBottom: 24,
-  },
-  statBox: {
-    flex: 1,
-    alignItems: 'center',
-    backgroundColor: colors.surface, // Replaced backgroundGray
-    padding: 16,
-    borderRadius: 16,
-    marginHorizontal: 4,
-    borderWidth: 2,
-    borderColor: colors.border,
-  },
-  statValue: {
-    fontSize: 24,
-    fontWeight: '800',
-    color: colors.primary,
-    marginBottom: 4,
-  },
-  statLabel: {
-    fontSize: 12,
-    color: colors.textSecondary,
-    fontWeight: '600',
-  },
-  scoreCard: {
-    width: '100%',
-    backgroundColor: colors.successGlow, // Replaced cardGreen
-    padding: 20,
-    borderRadius: 16,
-    alignItems: 'center',
-    marginBottom: 24,
-    borderWidth: 2,
-    borderColor: colors.success,
-    borderBottomWidth: 4,
-  },
-  scoreLabel: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: colors.textSecondary,
-    marginBottom: 8,
-  },
-  scoreValue: {
-    fontSize: 48,
-    fontWeight: '800',
-    color: colors.success,
-    marginBottom: 8,
-  },
-  scoreSubtext: {
-    fontSize: 14,
-    color: colors.textSecondary,
-  },
-  encouragement: {
+  subTitle: {
     fontSize: 16,
     color: colors.textSecondary,
     textAlign: 'center',
-    marginTop: 16,
-    fontWeight: '600',
+    marginBottom: 8,
   },
 });

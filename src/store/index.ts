@@ -113,6 +113,7 @@ export const useUser = () => useStore(
     checkDailyReset: state.checkDailyReset,
     completedLessons: state.completedLessons,
     completeLesson: state.completeLesson,
+    syncCompletedLessons: state.syncCompletedLessons,
   }))
 );
 

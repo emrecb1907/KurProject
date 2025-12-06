@@ -51,28 +51,16 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
 
         try {
             // Use earnXP hook which handles both local and DB updates
-            if (user && isAuthenticated && user.id) {
-                const result = await earnXP(100);
-                if (result) {
-                    const newTotalXP = totalXP + 100;
-                    Alert.alert(t('home.xpAdded'), `+100 XP!\n\n${t('common.success')}: ${formatXP(newTotalXP)} XP`);
-                } else {
-                    // Fallback: Update manually
-                    addXP(100);
-                    const newTotalXP = totalXP + 100;
-                    const { calculateLevel } = require('@constants/xp');
-                    const newLevel = calculateLevel(newTotalXP);
-                    await database.users.update(user.id, {
-                        total_xp: newTotalXP,
-                        total_score: newTotalXP,
-                        current_level: newLevel,
-                    });
-                    Alert.alert(t('home.xpAdded'), `+100 XP!\n\n${t('common.success')}: ${formatXP(newTotalXP)} XP`);
-                }
+            const result = await earnXP(100);
+            if (result) {
+                const { xpProgress } = result;
+                // Since earnXP updates the store immediately, totalXP + 100 might be redundant if reading from store again,
+                // but let's assume we want to show the NEW total.
+                // It's safer to query the updated state or calculate locally if we trust the hook.
+                // The hook returns xpProgress which might be handy for debugging.
+                Alert.alert(t('home.xpAdded'), `+100 XP!`);
             } else {
-                // User not authenticated, only update local state
-                addXP(100);
-                Alert.alert(t('home.xpAdded'), `+100 XP!\n\n${t('common.success')}: ${formatXP(totalXP + 100)} XP`);
+                Alert.alert(t('home.xpAdded'), `+100 XP! (Local Only)`);
             }
         } catch (error) {
             console.error('❌ Failed to add XP:', error);
@@ -86,28 +74,11 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
 
         try {
             // Use earnXP hook which handles both local and DB updates
-            if (user && isAuthenticated && user.id) {
-                const result = await earnXP(1000);
-                if (result) {
-                    const newTotalXP = totalXP + 1000;
-                    Alert.alert('⚡ Bonus!', `+1000 XP!\n\n${t('common.success')}: ${formatXP(newTotalXP)} XP`);
-                } else {
-                    // Fallback: Update manually
-                    addXP(1000);
-                    const newTotalXP = totalXP + 1000;
-                    const { calculateLevel } = require('@constants/xp');
-                    const newLevel = calculateLevel(newTotalXP);
-                    await database.users.update(user.id, {
-                        total_xp: newTotalXP,
-                        total_score: newTotalXP,
-                        current_level: newLevel,
-                    });
-                    Alert.alert('⚡ Bonus!', `+1000 XP!\n\n${t('common.success')}: ${formatXP(newTotalXP)} XP`);
-                }
+            const result = await earnXP(1000);
+            if (result) {
+                Alert.alert('⚡ Bonus!', `+1000 XP!`);
             } else {
-                // User not authenticated, only update local state
-                addXP(1000);
-                Alert.alert('⚡ Bonus!', `+1000 XP!\n\n${t('common.success')}: ${formatXP(totalXP + 1000)} XP`);
+                Alert.alert('⚡ Bonus!', `+1000 XP! (Local Only)`);
             }
         } catch (error) {
             console.error('❌ Failed to add XP:', error);

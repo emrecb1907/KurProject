@@ -8,12 +8,15 @@ import {
     BookBookmark,
     Bank,
     Star,
-    MagnifyingGlass
+    MagnifyingGlass,
+    IconProps
 } from 'phosphor-react-native';
 
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { CarouselCard } from '@/components/ui/CarouselCard';
+import { useUser } from '@/store';
+import { islamicHistory } from '@/data/islamicHistory';
 
 interface DerslerTabProps {
     screenWidth: number;
@@ -30,7 +33,7 @@ interface CategoryItem {
     count?: number;
     totalCount?: number;
     progress?: number;
-    icon: React.ElementType;
+    icon: React.ComponentType<IconProps>;
     color: string;
     borderColor: string;
     route?: string;
@@ -58,14 +61,28 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
     }));
 
+    const { completedLessons } = useUser();
+
+    // Calculate Kur'an Öğrenimi progress
+    // IDs: 101-108 (Elif-Ba and initial lessons)
+    const kuranIds = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111'];
+    const kuranTotal = kuranIds.length;
+    const kuranCompleted = completedLessons.filter((id: string) => kuranIds.includes(id)).length;
+
+    // Calculate İslam Tarihi progress
+    // IDs: 401-413 (from islamicHistory data)
+    const historyIds = islamicHistory.map((l: { id: number }) => l.id.toString());
+    const historyTotal = historyIds.length;
+    const historyCompleted = completedLessons.filter((id: string) => historyIds.includes(id)).length;
+
     const categories: CategoryItem[] = [
         {
             id: '1',
             title: "Kur'an Öğrenimi",
             subtitle: "Elif-Ba'dan tecvid temeline",
-            count: 18,
-            totalCount: 28,
-            progress: 0.65,
+            count: kuranCompleted,
+            totalCount: kuranTotal,
+            progress: kuranTotal > 0 ? kuranCompleted / kuranTotal : 0,
             icon: BookOpen,
             color: colors.primary,
             borderColor: colors.buttonOrangeBorder,
@@ -103,9 +120,9 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             id: '4',
             title: "İslam Tarihi",
             subtitle: "Peygamberlik öncesinden günümüze",
-            count: 0,
-            totalCount: 12,
-            progress: 0,
+            count: historyCompleted,
+            totalCount: historyTotal,
+            progress: historyTotal > 0 ? historyCompleted / historyTotal : 0,
             icon: Bank,
             color: colors.pink,
             borderColor: colors.buttonPinkBorder,

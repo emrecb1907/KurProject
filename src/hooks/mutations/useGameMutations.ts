@@ -33,7 +33,7 @@ interface CompleteGameResult {
  */
 export function useCompleteGameMutation() {
     const { isAuthenticated, user } = useAuth();
-    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests } = useUser();
+    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests, completeLesson } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -87,6 +87,7 @@ export function useCompleteGameMutation() {
 
                     if (!error) {
                         incrementDailyLessons();
+                        completeLesson(lessonId); // Update local store
                         logger.info(`Daily lesson count incremented (Lesson ID: ${lessonId})`);
                     }
                 }

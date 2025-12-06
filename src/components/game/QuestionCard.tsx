@@ -61,7 +61,7 @@ export function QuestionCard({
             {showArabic ? questionArabic : question}
           </Text>
         )}
-        
+
         {/* Audio Button */}
         {onPlayAudio && (
           <Pressable style={styles.audioButton} onPress={onPlayAudio}>
@@ -101,7 +101,7 @@ const getStyles = () => StyleSheet.create({
     borderColor: colors.borderDark,
     borderBottomWidth: 4,
     width: '100%',
-    minHeight: 100,
+    minHeight: 200,
     justifyContent: 'center',
     alignItems: 'center',
     gap: 16,

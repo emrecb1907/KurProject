@@ -1,11 +1,12 @@
-import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView, Pressable, Platform, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useTheme } from '@/contexts/ThemeContext';
-import { colors } from '@constants/colors';
-import { ArrowLeft, Sparkle, BookOpen, ArrowsClockwise, ChartBar, GraduationCap, WifiSlash, Crown, CheckCircle } from 'phosphor-react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
+import { Sparkle, CaretRight, X, ChartBar, GraduationCap, ArrowsClockwise, WifiSlash, ArrowLeft, Crown, CheckCircle } from 'phosphor-react-native';
+import { colors } from '@/constants/colors';
 import * as Haptics from 'expo-haptics';
 
 import { useTranslation } from 'react-i18next';

@@ -1,12 +1,12 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, SafeAreaView, TouchableOpacity, ActivityIndicator, Alert, KeyboardAvoidingView, Platform } from 'react-native';
-import { StatusBar } from 'expo-status-bar';
-import { useRouter } from 'expo-router';
-import { useFocusEffect } from '@react-navigation/native';
-import { ArrowLeft, Trash, Sparkle } from 'phosphor-react-native';
-import { colors } from '@constants/colors';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, TouchableOpacity, ScrollView } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { useTheme } from '@/contexts/ThemeContext';
+import { ArrowLeft, Trash, Sparkle } from 'phosphor-react-native';
+import { colors } from '@/constants/colors';
+import { StatusBar } from 'expo-status-bar';
 import { useChatStore } from '@/store/chatStore';
 import { sendMessage, ChatMessage } from '@/lib/ai/gemini';
 import { MessageBubble } from '@/components/chat/MessageBubble';
@@ -17,9 +17,10 @@ import { useTranslation } from 'react-i18next';
 export default function AIChatScreen() {
     const router = useRouter();
     const { statusBarStyle } = useStatusBar();
-    const { activeTheme } = useTheme();
+    const { activeTheme, themeVersion } = useTheme();
     const { i18n, t } = useTranslation();
     const scrollViewRef = useRef<ScrollView>(null);
+    const styles = useMemo(() => getStyles(), [themeVersion]);
 
     const { messages, isLoading, error, addMessage, setLoading, setError, clearChat } = useChatStore();
 
@@ -201,7 +202,7 @@ export default function AIChatScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = () => StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -266,6 +267,7 @@ const styles = StyleSheet.create({
         backgroundColor: colors.surface,
         padding: 16,
         borderRadius: 12,
+        // Ensure no hardcoded shadow or dark border if it was there (it wasn't visibly, but checking)
     },
     exampleTitle: {
         fontSize: 13,

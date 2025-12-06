@@ -374,27 +374,7 @@ export default function ProfileScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <View style={styles.container}>
-        {/* Settings Button */}
-        <Pressable
-          style={styles.settingsButton}
-          onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/settings');
-          }}
-        >
-          <Gear size={24} color={colors.textPrimary} weight="fill" />
-        </Pressable>
 
-        {/* Edit Profile Button (Top Left) */}
-        <Pressable
-          style={styles.editButton}
-          onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/edit-profile');
-          }}
-        >
-          <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
-        </Pressable>
 
         <ScrollView
           ref={scrollViewRef}
@@ -403,6 +383,27 @@ export default function ProfileScreen() {
         >
           {/* Header */}
           <View style={styles.header}>
+            {/* Settings Button */}
+            <Pressable
+              style={styles.settingsButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                router.push('/settings');
+              }}
+            >
+              <Gear size={24} color={colors.textPrimary} weight="fill" />
+            </Pressable>
+
+            {/* Edit Profile Button (Top Left) */}
+            <Pressable
+              style={styles.editButton}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                router.push('/edit-profile');
+              }}
+            >
+              <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
+            </Pressable>
             <View style={styles.avatarContainer}>
               <View style={styles.avatar}>
                 <User size={50} color={colors.textPrimary} weight="fill" />
