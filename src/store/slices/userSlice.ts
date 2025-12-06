@@ -14,10 +14,22 @@ export interface UserSlice {
   streakData: UserStreak | null;
   lastReplenishTime: number | null;
   adWatchTimes: number[]; // Timestamps of ad watches in the last 24h
+  boundUserId: string | null;
 
   // Stats cache (for profile page performance)
   completedTests: number;
   successRate: number;
+
+  // Daily Progress
+  dailyProgress: {
+    date: string;
+    lessonsCompleted: number;
+    testsCompleted: number;
+    claimedTasks: string[];
+  };
+
+  // Lesson Tracking
+  completedLessons: string[];
 
   // Actions
   setTotalXP: (xp: number) => void;
@@ -33,35 +45,25 @@ export interface UserSlice {
   setUserStats: (completedTests: number, successRate: number) => void;
   updateGameStats: (xp: number, level: number, completedTests: number, successRate: number) => void;
   resetUserData: () => void;
-
-  // New Actions
-  checkLifeRegeneration: () => void;
-  watchAd: () => boolean; // Returns true if successful
-
-  // Security
-  // Daily Progress
-  dailyProgress: {
-    date: string;
-    lessonsCompleted: number;
-    testsCompleted: number;
-    claimedTasks: number[]; // IDs of claimed tasks for the day
-  };
-
-  // Actions
-  incrementDailyLessons: () => void;
-  incrementDailyTests: () => void;
-  claimDailyTask: (taskId: number, xpReward: number) => Promise<void>;
-  checkDailyReset: () => void;
-
-  boundUserId: string | null;
   setBoundUserId: (id: string | null) => void;
 
+  // Sync & Logic
+  checkDailyReset: () => void;
+  incrementDailyLessons: () => void;
+  incrementDailyTests: () => void;
+  claimDailyTask: (taskId: string, xpReward: number) => Promise<void>;
+
   // Lesson Completion
-  completedLessons: string[];
-  completeLesson: (lessonId: string) => void;
+  completeLesson: (lessonId: string) => Promise<void>;
   syncCompletedLessons: () => Promise<void>;
+
+  // Energy & Ads
+  consumeEnergy: () => Promise<{ success: boolean; error?: string }>;
+  checkLifeRegeneration: () => Promise<void>;
+  watchAd: () => Promise<boolean>;
 }
 
+// ... (initialState)
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
 
 const initialState = {
@@ -88,7 +90,6 @@ const initialState = {
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
-  // Initial state
   ...initialState,
 
   // Actions
@@ -96,7 +97,7 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   addXP: (xp) => set((state) => ({
     totalXP: state.totalXP + xp,
-    totalScore: state.totalScore + xp,
+    totalScore: state.totalScore + xp
   })),
 
   setCurrentLevel: (level) => set({ currentLevel: level }),
@@ -105,10 +106,27 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   setCurrentLives: (lives) => set({ currentLives: lives }),
 
-  addLives: (lives) => set((state) => ({
-    currentLives: Math.min(state.currentLives + lives, state.maxLives)
-  })),
+  addLives: async (lives) => {
+    const state = get();
+    // 1. Local Optimistic Update
+    const newLives = Math.min(state.currentLives + lives, state.maxLives);
+    set({ currentLives: newLives });
 
+    // 2. Server Sync
+    if (state.boundUserId) {
+      try {
+        const { data, error } = await database.energy.add(state.boundUserId, lives);
+        if (data && (data as any).current_energy !== undefined) {
+          // Ensure local state matches server state (in case we exceeded max or logic differed)
+          set({ currentLives: (data as any).current_energy });
+        }
+      } catch (err) {
+        console.error('Failed to add energy to server:', err);
+      }
+    }
+  },
+
+  // Deprecated/Internal: Use consumeEnergy instead
   removeLives: (lives) => set((state) => ({
     currentLives: Math.max(state.currentLives - lives, 0)
   })),
@@ -121,28 +139,56 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   setUserStats: (completedTests, successRate) => set({ completedTests, successRate }),
 
-  updateGameStats: (xp, level, completedTests, successRate) => set({
-    totalXP: xp,
-    totalScore: xp, // Assuming totalScore tracks XP for now
+  updateGameStats: (xp, level, completedTests, successRate) => set((state) => ({
+    totalXP: state.totalXP + xp,
+    totalScore: state.totalScore + xp,
     currentLevel: level,
     completedTests,
     successRate
-  }),
+  })),
 
   resetUserData: () => set(initialState),
 
-  checkLifeRegeneration: () => {
+  // ...
+
+  checkLifeRegeneration: async () => {
     const state = get();
 
-    // Fix maxLives if it's wrong (migration)
-    if (state.maxLives !== 6) {
-      set({ maxLives: 6 });
+    // 1. Local Timer (Optimistic Update) allows UI to show "Refilling..."
+    // We keep a simple logic: if 4 hours passed locally since LAST CONFIRMED time, show +1.
+    // However, for strict syncing, we rely on the Server.
+
+    // If we have a user, try to Sync with DB
+    if (state.boundUserId) {
+      try {
+        const { data, error } = await database.energy.sync(state.boundUserId);
+        if (data) {
+          // data should contain { current_energy, last_update }
+          // We need to type cast or ensure Supabase returns correct shape.
+          // Assuming RPC returns valid JSON as per plan.
+          const { current_energy, last_update } = data as any;
+
+          if (typeof current_energy === 'number') {
+            set({
+              currentLives: current_energy,
+              lastReplenishTime: new Date(last_update).getTime()
+            });
+          }
+        }
+      } catch (err) {
+        console.log('Energy sync failed (offline?), using local logic');
+      }
     }
 
-    const maxLives = 6; // Force use of 6
+    // 2. Local Fallback / Guest Logic
+    // Runs if sync failed OR if user is guest (no boundUserId)
+    // ... (Existing logic below, but using 6)
 
+    const maxLives = 6;
     if (state.currentLives >= maxLives) {
-      set({ lastReplenishTime: Date.now() });
+      // If full, just update time to now so timer doesn't accumulate
+      // unless we want to track 'time since full'? No, standard regens start on use.
+      // set({ lastReplenishTime: Date.now() }); 
       return;
     }
 
@@ -150,16 +196,11 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     const lastTime = state.lastReplenishTime || now;
     const timeDiff = now - lastTime;
     const hoursPassed = timeDiff / (1000 * 60 * 60);
-
-    // 4 hours per life
     const livesToRestore = Math.floor(hoursPassed / 4);
 
     if (livesToRestore > 0) {
       const newLives = Math.min(state.currentLives + livesToRestore, maxLives);
-      // Update time: advance by the time used for restored lives
-      // This keeps the remainder time for the next life
       const timeUsed = livesToRestore * 4 * 60 * 60 * 1000;
-
       set({
         currentLives: newLives,
         lastReplenishTime: lastTime + timeUsed
@@ -167,7 +208,62 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     }
   },
 
-  watchAd: () => {
+  consumeEnergy: async () => {
+    const state = get();
+    const { boundUserId, currentLives } = state;
+
+    // 1. Check Local State First
+    if (currentLives <= 0) {
+      return { success: false, error: 'Yetersiz Enerji' };
+    }
+
+    // 2. If Guest (no ID), just local
+    if (!boundUserId) {
+      set({ currentLives: currentLives - 1 });
+      return { success: true };
+    }
+
+    // 3. Authenticated User -> Server Authority
+    try {
+      // Optimistic Update?
+      // User requested "Online Only". So we should Wait for Server?
+      // Or Optimistic + Rollback?
+      // "testler offline modda çalışmayacaklar".
+      // This implies we should wait for server response.
+
+      const { data, error } = await database.energy.consume(boundUserId);
+
+      if (error || !data) {
+        // Network error or DB error
+        return { success: false, error: 'Bağlantı hatası veya yetersiz enerji' };
+      }
+
+      // RPC returns { success: true, current_energy: 5 }
+      const result = data as any;
+
+      if (result.success) {
+        set({
+          currentLives: result.current_energy,
+          // Update timestamp too if provided? 
+          // RPC might return last_update? If so update it. 
+          // For now, trust the energy value.
+        });
+        return { success: true };
+      } else {
+        // Logic Error (e.g. DB says 0 lives even if Local said 1)
+        // Sync with DB truth
+        if (result.current_energy !== undefined) {
+          set({ currentLives: result.current_energy });
+        }
+        return { success: false, error: result.error || 'Yetersiz Enerji' };
+      }
+
+    } catch (err) {
+      return { success: false, error: 'Sunucuya ulaşılamadı' };
+    }
+  },
+
+  watchAd: async () => {
     const state = get();
     const now = Date.now();
 
@@ -182,8 +278,11 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
       return false; // Already full
     }
 
+    // Use server-aware addLives
+    await state.addLives(1);
+
+    // Update local watch times
     set({
-      currentLives: state.currentLives + 1,
       adWatchTimes: [...validWatches, now]
     });
 

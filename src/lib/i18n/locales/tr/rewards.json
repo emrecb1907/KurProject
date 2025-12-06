@@ -1,29 +1,30 @@
 {
     "title": "Sandık",
-    "lives": "Can",
-    "livesStatus": "Can Durumu",
-    "livesMax": "Can sayın maksimumda!",
-    "livesCount": "{{current}} / {{max}} Can",
-    "nextLife": "Sonraki can:",
-    "infoBanner": "Her reklam izlediğinde +1 can kazanırsın.",
+    "title": "Sandık",
+    "lives": "Enerji",
+    "livesStatus": "Enerji Durumu",
+    "livesMax": "Enerjin dolu! ⚡",
+    "livesCount": "{{current}} / {{max}} Enerji",
+    "nextLife": "Sonraki enerji:",
+    "infoBanner": "Her reklam izlediğinde +1 enerji kazanırsın.",
     "howItWorks": {
         "title": "Nasıl Çalışır?",
-        "text": "• Her reklam izlediğinde +1 can kazanırsın\n• Günde maksimum 3 reklam izleyebilirsin\n• Canların maksimuma ulaştığında reklam izleyemezsin\n• Kullanılan haklar 24 saat sonra yenilenir"
+        "text": "• Her reklam izlediğinde +1 enerji kazanırsın\n• Günde maksimum 3 reklam izleyebilirsin\n• Enerjin maksimuma ulaştığında reklam izleyemezsin\n• Kullanılan haklar 24 saat sonra yenilenir"
     },
-    "dailyFreeLives": "Günlük Ücretsiz Can Hakları",
+    "dailyFreeLives": "Günlük Ücretsiz Enerji Hakları",
     "adSlots": "Reklam Slotları",
     "watchAd": "İzle",
     "used": "Kullanıldı",
     "cooldown": "Bekleme Süresi",
-    "earnLife": "Can Kazan",
-    "watchAdDesc": "+1 Can kazanmak için reklam izle",
+    "earnLife": "Enerji Kazan",
+    "watchAdDesc": "+1 Enerji kazanmak için reklam izle",
     "cooldownDesc": "{{time}} sonra yenilenir",
     "renewsTomorrow": "Yarın yenilenir",
     "available": "Hakkın mevcut",
     "bonusTasks": "Ek Görevler & Bonuslar",
     "inviteFriend": {
         "title": "Arkadaşını Davet Et",
-        "reward": "+1 Can + 25 XP",
+        "reward": "+1 Enerji + 25 XP",
         "button": "Davet Et"
     },
     "consecutiveLogin": {
@@ -33,12 +34,11 @@
     },
     "dailyTask": {
         "title": "Bugünkü görevi tamamla",
-        "reward": "+1 Can bonusu",
+        "reward": "+1 Enerji bonusu",
         "button": "Göreve Git"
     },
     "alerts": {
-        "adWatched": "Reklam izlendi! +1 Can kazandın.",
+        "adWatched": "Reklam izlendi! +1 Enerji kazandın.",
         "cantWatch": "Şu an reklam izleyemezsin."
     }
 }
-

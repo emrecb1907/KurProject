@@ -49,7 +49,7 @@ export function GameScreen({
 }: GameScreenProps) {
     const { t } = useTranslation();
     const router = useRouter();
-    const { currentLives, maxLives, removeLives } = useStore();
+    const { currentLives, maxLives } = useStore();
     const { totalXP } = useUser();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
@@ -81,6 +81,7 @@ export function GameScreen({
     const [gameCompletedRef, setGameCompletedRef] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
+    const [isTimeUp, setIsTimeUp] = useState(false); // New state for timeout
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const stopEffectSoundRef = useRef<(() => Promise<void>) | null>(null);
     const stopGameCompleteSoundRef = useRef<(() => Promise<void>) | null>(null);
@@ -113,24 +114,18 @@ export function GameScreen({
 
     // Check lives on mount
     useEffect(() => {
+        // Log game load
         logger.game(`${gameType} game loaded - Using generic GameScreen component`);
 
-        if (currentLives <= 0) {
-            Alert.alert(t('errors.insufficientLives'), t('errors.insufficientLivesDesc'), [
-                {
-                    text: t('common.ok'),
-                    onPress: handleExit,
-                },
-            ]);
-            return;
-        }
-
-        // Deduct life
-        removeLives(1);
+        // Energy consumption is handled at the entry point (CarouselCard)
     }, []);
 
     const handleTimeUp = () => {
-        handleAnswer(getCurrentOptions()[0], 0);
+        setIsTimeUp(true);
+        setIsAnswered(true);
+        setIsCorrect(false); // Time up counts as incorrect/missed
+        hapticError();
+        playSoundEffect(false); // Play wrong/timeout sound
     };
 
     // Play sound effect (correct or wrong)
@@ -184,6 +179,7 @@ export function GameScreen({
         setIsAnswered(false);
         setSelectedOption(null);
         setIsCorrect(null);
+        setIsTimeUp(false); // Reset time up state
 
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
@@ -208,6 +204,7 @@ export function GameScreen({
         setIsAnswered(false);
         setSelectedOption(null);
         setIsCorrect(null);
+        setIsTimeUp(false);
     };
 
     // Ref to prevent double submission (more reliable than state for rapid taps)
@@ -301,6 +298,11 @@ export function GameScreen({
 
         if (option === correctAnswer) {
             return 'correct';
+        }
+
+        // If time is up, don't mark any option as 'incorrect' (user didn't choose)
+        if (isTimeUp) {
+            return 'default';
         }
 
         if (option === selectedOption && !isCorrect) {
@@ -511,24 +513,23 @@ export function GameScreen({
                         </Text>
                     </Pressable>
 
-                    {!isSubmitting && (
-                        <Pressable
-                            style={[
-                                styles.completeButton,
-                                {
-                                    backgroundColor: colors.warning,
-                                    marginTop: 12,
-                                    borderBottomColor: colors.warningDark,
-                                },
-                            ]}
-                            onPress={handleRetry}
-                            disabled={isSubmitting}
-                        >
-                            <Text style={styles.completeButtonText}>
-                                {t('gameUI.playAgain').toUpperCase()}
-                            </Text>
-                        </Pressable>
-                    )}
+                    <Pressable
+                        style={[
+                            styles.completeButton,
+                            {
+                                backgroundColor: colors.warning,
+                                marginTop: 12,
+                                borderBottomColor: colors.warningDark,
+                                opacity: isSubmitting ? 0 : 1, // Hide but keep space
+                            },
+                        ]}
+                        onPress={handleRetry}
+                        disabled={isSubmitting} // Disable when hidden
+                    >
+                        <Text style={styles.completeButtonText}>
+                            {t('gameUI.playAgain').toUpperCase()}
+                        </Text>
+                    </Pressable>
                 </View>
 
                 {/* Level Up Modal */}
@@ -590,29 +591,31 @@ export function GameScreen({
                 isActive={!isAnswered}
             />
 
-            <ScrollView style={styles.content}>
-                <View style={styles.questionContainer}>
-                    {/* Question */}
-                    <QuestionCard
-                        questionNumber={currentQuestionIndex + 1}
-                        totalQuestions={questions.length}
-                        question={getCurrentQuestion()}
-                        onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
-                    />
-
-                    {/* Latin Toggle Button (only for verses) */}
-                    {hasLatinToggle && (
-                        <Button
-                            title={showLatin ? t('common.showArabic') : t('common.showLatin')}
-                            variant="outline"
-                            size="small"
-                            onPress={() => setShowLatin(!showLatin)}
-                            style={styles.toggleButton}
+            <View style={styles.content}>
+                <View style={styles.questionScroll}>
+                    <View style={styles.questionContainer}>
+                        {/* Question */}
+                        <QuestionCard
+                            questionNumber={currentQuestionIndex + 1}
+                            totalQuestions={questions.length}
+                            question={getCurrentQuestion()}
+                            onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
                         />
-                    )}
+
+                        {/* Latin Toggle Button (only for verses) */}
+                        {hasLatinToggle && (
+                            <Button
+                                title={showLatin ? t('common.showArabic') : t('common.showLatin')}
+                                variant="outline"
+                                size="small"
+                                onPress={() => setShowLatin(!showLatin)}
+                                style={styles.toggleButton}
+                            />
+                        )}
+                    </View>
                 </View>
 
-                {/* Options */}
+                {/* Options - Fixed at bottom of content area */}
                 <View style={styles.options}>
                     {getCurrentOptions().map((option, index) => (
                         <OptionButton
@@ -624,38 +627,45 @@ export function GameScreen({
                         />
                     ))}
                 </View>
-            </ScrollView>
+            </View>
 
             {/* Next Button Footer */}
-            {isAnswered && (
-                <View style={styles.footer}>
-                    {isCorrect ? (
-                        <>
-                            <Text style={styles.footerTitle}>Tebrikler!</Text>
-                            <Text style={styles.footerMessage}>Bravo, böyle devam et!</Text>
-                        </>
-                    ) : (
-                        <>
-                            <Text style={styles.footerTitle}>Yanlış Cevap</Text>
-                            <Text style={styles.footerMessage}>Bir sonraki soruya geçelim!</Text>
-                        </>
-                    )}
-                    <Pressable
-                        style={[
-                            styles.nextButton,
-                            !isCorrect && styles.nextButtonError
-                        ]}
-                        onPress={handleNext}
-                    >
-                        <Text style={styles.nextButtonText}>
-                            {currentQuestionIndex < questions.length - 1
-                                ? t('common.nextQuestion')
-                                : t('common.finish')}
-                        </Text>
-                    </Pressable>
-                </View>
-            )}
-        </View>
+            {
+                isAnswered && (
+                    <View style={styles.footer}>
+                        {isCorrect ? (
+                            <>
+                                <Text style={styles.footerTitle}>Tebrikler!</Text>
+                                <Text style={styles.footerMessage}>Bravo, böyle devam et!</Text>
+                            </>
+                        ) : isTimeUp ? (
+                            <>
+                                <Text style={styles.footerTitle}>Süre Doldu</Text>
+                                <Text style={styles.footerMessage}>Doğru cevap yukarıda işaretlendi.</Text>
+                            </>
+                        ) : (
+                            <>
+                                <Text style={styles.footerTitle}>Yanlış Cevap</Text>
+                                <Text style={styles.footerMessage}>Bir sonraki soruya geçelim!</Text>
+                            </>
+                        )}
+                        <Pressable
+                            style={[
+                                styles.nextButton,
+                                !isCorrect && styles.nextButtonError
+                            ]}
+                            onPress={handleNext}
+                        >
+                            <Text style={styles.nextButtonText}>
+                                {currentQuestionIndex < questions.length - 1
+                                    ? t('common.nextQuestion')
+                                    : t('common.finish')}
+                            </Text>
+                        </Pressable>
+                    </View>
+                )
+            }
+        </View >
     );
 }
 
@@ -682,6 +692,12 @@ const getStyles = () =>
             flex: 1,
             paddingHorizontal: 16,
         },
+        questionScroll: {
+            flex: 1,
+        },
+        questionContent: {
+            // paddingBottom: 20, // Removed as ScrollView is gone
+        },
         questionContainer: {
             marginBottom: 16,
         },
@@ -689,8 +705,9 @@ const getStyles = () =>
             marginTop: 8,
         },
         options: {
-            marginTop: 8,
-            paddingBottom: GAME_UI_CONFIG.FOOTER_PADDING,
+            marginTop: 'auto', // Push to bottom if space permits
+            paddingTop: 8,
+            paddingBottom: GAME_UI_CONFIG.FOOTER_PADDING + 100, // Move options up further
         },
         footer: {
             position: 'absolute',
@@ -769,7 +786,7 @@ const getStyles = () =>
         },
         completeButton: {
             backgroundColor: colors.success,
-            paddingVertical: 16,
+            height: 64, // Fixed height to prevent layout shift when toggling activity indicator
             paddingHorizontal: 48,
             borderRadius: 30,
             width: '100%',
@@ -780,7 +797,7 @@ const getStyles = () =>
             borderBottomColor: colors.successDark,
         },
         completeButtonText: {
-            color: '#000000',
+            color: '#FFFFFF', // Changed from black to white as requested
             fontSize: 18,
             fontWeight: 'bold',
         },

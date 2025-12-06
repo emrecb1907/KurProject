@@ -1,7 +1,6 @@
 {
-    "insufficientLives": "Yetersiz Can",
-    "insufficientLivesDesc": "Bu testi başlatmak için en az 1 canın olmalı. Sandık sekmesinden can kazanabilirsin.",
+    "insufficientLives": "Yetersiz Enerji",
+    "insufficientLivesDesc": "Bu testi başlatmak için en az 1 enerjin olmalı. Sandık sekmesinden enerji kazanabilirsin.",
     "authRequired": "Giriş Gerekli",
     "tryAgainLater": "Lütfen daha sonra tekrar deneyin"
 }
-

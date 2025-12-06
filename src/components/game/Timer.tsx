@@ -1,7 +1,11 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { playSound } from '@/utils/audio';
+
+// Sound file
+const CLOCK_TICKING_SOUND = require('../../../assets/audio/effects/clockTicking.mp3');
 
 interface TimerProps {
   duration: number; // in seconds
@@ -18,6 +22,17 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
   const paused = isActive !== undefined ? !isActive : isPaused;
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progressAnim] = useState(new Animated.Value(100));
+  const stopTickingSoundRef = useRef<(() => Promise<void>) | null>(null);
+  const isTickingRef = useRef(false);
+
+  // Cleanup sound on unmount
+  useEffect(() => {
+    return () => {
+      if (stopTickingSoundRef.current) {
+        stopTickingSoundRef.current();
+      }
+    };
+  }, []);
 
   useEffect(() => {
     setTimeLeft(duration);
@@ -39,6 +54,44 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
 
     return () => clearInterval(interval);
   }, [paused, timeLeft > 0]); // Only re-run if paused changes or timer status changes
+
+  // Handle ticking sound
+  useEffect(() => {
+    const playTicking = async () => {
+      if (isTickingRef.current) return;
+
+      isTickingRef.current = true;
+      try {
+        const stop = await playSound(CLOCK_TICKING_SOUND);
+
+        // Critical check: If we were asked to stop while loading (isTickingRef became false),
+        // stop immediately.
+        if (!isTickingRef.current) {
+          stop();
+          return;
+        }
+
+        stopTickingSoundRef.current = stop;
+      } catch (error) {
+        console.error('Error playing ticking sound:', error);
+        isTickingRef.current = false;
+      }
+    };
+
+    const stopTicking = async () => {
+      isTickingRef.current = false; // Signal intent to stop
+      if (stopTickingSoundRef.current) {
+        await stopTickingSoundRef.current();
+        stopTickingSoundRef.current = null;
+      }
+    };
+
+    if (timeLeft <= 5 && timeLeft > 0 && !paused) {
+      playTicking();
+    } else {
+      stopTicking();
+    }
+  }, [timeLeft, paused]);
 
   // Handle progress animation
   useEffect(() => {
@@ -82,13 +135,10 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
             },
           ]}
         />
-      </View>
-
-      {isUrgent && (
-        <Text style={[styles.timerText, styles.urgentText]}>
+        <Text style={[styles.timerText, isUrgent && styles.urgentText]}>
           {Math.ceil(timeLeft)}s
         </Text>
-      )}
+      </View>
     </View>
   );
 }
@@ -99,26 +149,36 @@ const getStyles = () => StyleSheet.create({
     paddingHorizontal: 16,
   },
   timerBar: {
-    height: 16,
+    height: 24, // Increased height for text visibility
     backgroundColor: colors.borderLight,
     borderRadius: 99,
     overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: colors.borderDark,
+    // borderWidth: 2, // Removed as per request
+    // borderColor: colors.borderDark, // Removed as per request
+    justifyContent: 'center', // Center text vertically
+    position: 'relative', // For absolute positioning of text if needed, but flex centering is easier here
   },
   timerProgress: {
     height: '100%',
     borderRadius: 99,
+    position: 'absolute', // Make progress absolute so text can sit on top
+    left: 0,
+    top: 0,
+    bottom: 0,
   },
   timerText: {
     fontSize: 14,
-    fontWeight: '700',
-    color: colors.textSecondary,
+    fontWeight: '800',
+    color: colors.textPrimary, // Dark text by default for visibility on light bg
     textAlign: 'center',
-    marginTop: 8,
+    width: '100%',
+    zIndex: 1, // Ensure text is above progress bar
+    textShadowColor: 'rgba(255, 255, 255, 0.5)',
+    textShadowOffset: { width: 0, height: 1 },
+    textShadowRadius: 2,
   },
   urgentText: {
     color: colors.error,
-    fontSize: 16,
+    fontSize: 15,
   },
 });

@@ -8,6 +8,7 @@ node_modules/
 dist/
 web-build/
 
+
 # Native
 *.orig.*
 *.jks
@@ -51,3 +52,6 @@ expo-env.d.ts
 docs/SECURITY_AUDIT.md
 docs/DEVELOPMENT_PLAN.md
 docs/CRITICAL_FIXES.md
+
+
+supabase/migrations/

@@ -30,8 +30,8 @@ export const GAME_CATEGORIES = {
 
 // Lives System
 export const LIVES_CONFIG = {
-  MAX_LIVES: 5,
-  INITIAL_LIVES: 5,
+  MAX_LIVES: 6,
+  INITIAL_LIVES: 6,
   AD_REWARD_LIVES: 1,
   MAX_DAILY_AD_SLOTS: 3,
   AD_SLOT_RESET_HOURS: 24,

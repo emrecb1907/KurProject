@@ -19,7 +19,7 @@
         "showArabic": "Arapçayı Göster",
         "nextQuestion": "Sonraki Soru",
         "xp": "XP",
-        "lives": "Can",
+        "lives": "Enerji",
         "locked": "Kilitli",
         "startLesson": "Teste Başla",
         "devTools": "Geliştirici Araçları",
@@ -52,7 +52,7 @@
         "locked": "Kilitli",
         "start": "Başla",
         "xp": "XP",
-        "lives": "Can",
+        "lives": "Enerji",
         "devTools": "Geliştirici Araçları"
     },
     "tabs": {

@@ -14,7 +14,7 @@ export function LifeIndicator({ currentLives, maxLives = 6 }: LifeIndicatorProps
 
   return (
     <View style={styles.container}>
-      <Text style={styles.heartIcon}>❤️</Text>
+      <Text style={styles.heartIcon}>⚡</Text>
       <Text style={styles.livesText}>
         {currentLives} / {maxLives}
       </Text>

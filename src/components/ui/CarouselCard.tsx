@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useRef } from 'react';
-import { View, Text, Pressable, StyleSheet, LayoutAnimation } from 'react-native';
+import { View, Text, Pressable, StyleSheet, LayoutAnimation, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { useRouter } from 'expo-router';
@@ -10,6 +10,7 @@ import type { IconProps } from 'phosphor-react-native';
 import { colors } from '@/constants/colors';
 import { HoverCard } from '@/components/ui/HoverCard';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useStore } from '@/store';
 
 export interface CarouselCardProps {
     icon: React.ComponentType<IconProps>;
@@ -86,11 +87,28 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
         }
     };
 
-    const handleStart = () => {
+    const { consumeEnergy } = useStore();
+
+    const handleStart = async () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
         if (!route) {
             setIsSelected(false);
+            return;
+        }
+
+        // Attempt to consume energy
+        const result = await consumeEnergy();
+
+        if (!result.success) {
+            setIsSelected(false); // Close the modal
+            setTimeout(() => {
+                Alert.alert(
+                    t('errors.insufficientLives'),
+                    result.error || t('errors.insufficientLivesDesc'),
+                    [{ text: t('common.ok') }]
+                );
+            }, 300);
             return;
         }
 

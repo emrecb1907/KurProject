@@ -62,8 +62,8 @@ export default function ChestScreen() {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   };
 
-  const handleWatchAd = () => {
-    const success = watchAd();
+  const handleWatchAd = async () => {
+    const success = await watchAd();
     if (success) {
       // In a real app, we would show the ad here
       alert(t('rewards.alerts.adWatched'));

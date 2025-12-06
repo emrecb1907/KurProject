@@ -13,6 +13,7 @@ export const playSound = async (source: any) => {
         // Return a cleanup function
         return async () => {
             try {
+                player.pause(); // Ensure playback stops immediately
                 player.remove();
                 // The remove() method properly disposes of the player
             } catch (e) {

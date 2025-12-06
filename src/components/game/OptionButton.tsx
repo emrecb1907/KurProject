@@ -38,7 +38,7 @@ export function OptionButton({
 const getStyles = () => StyleSheet.create({
   button: {
     padding: 20,
-    borderRadius: 30,
+    borderRadius: 30, // Confirmed match with Next Question button
     marginBottom: 12,
     borderWidth: 2,
     backgroundColor: colors.surface,
@@ -55,11 +55,13 @@ const getStyles = () => StyleSheet.create({
     borderColor: colors.successDark,
     backgroundColor: colors.success,
     borderBottomWidth: 4, // Add 3D effect
+    marginBottom: 10, // Compensate for increased border width (12 - 2)
   },
   button_incorrect: {
     borderColor: colors.errorDark,
     backgroundColor: colors.error,
     borderBottomWidth: 4, // Add 3D effect
+    marginBottom: 10, // Compensate for increased border width (12 - 2)
   },
   button_selected: {
     borderColor: colors.primary,

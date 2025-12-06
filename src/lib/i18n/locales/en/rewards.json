@@ -1,29 +1,30 @@
 {
     "title": "Chest",
-    "lives": "Lives",
-    "livesStatus": "Lives Status",
-    "livesMax": "Lives are full! 🎉",
-    "livesCount": "{{current}} / {{max}} Lives",
-    "nextLife": "Next life:",
-    "infoBanner": "Earn +1 life every time you watch an ad.",
+    "title": "Chest",
+    "lives": "Energy",
+    "livesStatus": "Energy Status",
+    "livesMax": "Energy is full! ⚡",
+    "livesCount": "{{current}} / {{max}} Energy",
+    "nextLife": "Next energy:",
+    "infoBanner": "Earn +1 energy every time you watch an ad.",
     "howItWorks": {
         "title": "How It Works?",
-        "text": "• Earn +1 life every time you watch an ad\n• Watch up to 3 ads per day\n• Cannot watch ads when lives are full\n• Used slots refresh after 24 hours"
+        "text": "• Earn +1 energy every time you watch an ad\n• Watch up to 3 ads per day\n• Cannot watch ads when energy is full\n• Used slots refresh after 24 hours"
     },
-    "dailyFreeLives": "Daily Free Lives",
+    "dailyFreeLives": "Daily Free Energy",
     "adSlots": "Ad Slots",
     "watchAd": "Watch",
     "used": "Used",
     "cooldown": "Cooldown",
-    "earnLife": "Earn Life",
-    "watchAdDesc": "Watch ad, earn +1 life",
+    "earnLife": "Earn Energy",
+    "watchAdDesc": "Watch ad, earn +1 energy",
     "cooldownDesc": "Renews in {{time}}",
     "renewsTomorrow": "Renews tomorrow",
     "available": "Available",
     "bonusTasks": "Bonus Tasks & Rewards",
     "inviteFriend": {
         "title": "Invite a Friend",
-        "reward": "+1 Life + 25 XP",
+        "reward": "+1 Energy + 25 XP",
         "button": "Invite"
     },
     "consecutiveLogin": {
@@ -33,11 +34,11 @@
     },
     "dailyTask": {
         "title": "Complete today's task",
-        "reward": "+1 Life bonus",
+        "reward": "+1 Energy bonus",
         "button": "Go to Task"
     },
     "alerts": {
-        "adWatched": "Ad watched! +1 Life earned.",
+        "adWatched": "Ad watched! +1 Energy earned.",
         "cantWatch": "You cannot watch ads right now."
     }
 }

@@ -284,6 +284,31 @@ export const database = {
       }
       return { data, error };
     }
+  },
+
+  // ==================== ENERGY SYSTEM ====================
+  energy: {
+    // Sync energy (Passive Regeneration)
+    async sync(userId: string) {
+      const { data, error } = await supabase.rpc('sync_user_energy', {
+        p_user_id: userId
+      });
+      return { data, error };
+    },
+
+    // Consume energy (Start Test)
+    async consume(userId: string) {
+      const { data, error } = await supabase
+        .rpc('consume_energy', { p_user_id: userId });
+      return { data, error };
+    },
+
+    // Add energy (Rewards)
+    async add(userId: string, amount: number) {
+      const { data, error } = await supabase
+        .rpc('add_energy', { p_user_id: userId, p_amount: amount });
+      return { data, error };
+    }
   }
 };
 

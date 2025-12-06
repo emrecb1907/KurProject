@@ -7,7 +7,7 @@ import Animated, {
     Easing,
 } from 'react-native-reanimated';
 import { useTranslation } from 'react-i18next';
-import { Heart, GraduationCap, Bell, User } from 'phosphor-react-native';
+import { Heart, GraduationCap, Bell, User, Lightning } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 
 import { colors } from '@/constants/colors';
@@ -18,7 +18,7 @@ import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 export const HomeHeader = () => {
     const { t } = useTranslation();
     const { themeVersion, activeTheme } = useTheme();
-    const { totalXP, currentLives } = useUser();
+    const { totalXP, currentLives, maxLives } = useUser();
     const { user } = useAuth();
 
     // Calculate XP progress
@@ -174,9 +174,20 @@ export const HomeHeader = () => {
                     <GraduationCap size={20} color={colors.warning} weight="fill" />
                     <Text style={styles.statValue}>Level {xpProgress.currentLevel}</Text>
                 </View>
-                <View style={styles.statBadge}>
-                    <Heart size={20} color={colors.error} weight="fill" />
-                    <Text style={styles.statValue}>{currentLives}/6</Text>
+                <View style={[styles.statBadge, { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
+                    <View style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: `${Math.min((currentLives / (maxLives || 6)) * 100, 100)}%`,
+                        backgroundColor: colors.warning,
+                        opacity: 0.3,
+                    }} />
+                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
+                        <Lightning size={20} color={colors.warning} weight="fill" />
+                        <Text style={styles.statValue}>{currentLives}/{maxLives || 6}</Text>
+                    </View>
                 </View>
             </View>
 

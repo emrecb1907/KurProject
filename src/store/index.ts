@@ -54,6 +54,7 @@ export const useStore = create<StoreState>()(
         // Check daily reset when storage is rehydrated (app opens)
         if (state) {
           state.checkDailyReset();
+          state.checkLifeRegeneration();
         }
       },
     }
