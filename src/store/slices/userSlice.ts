@@ -54,7 +54,7 @@ export interface UserSlice {
   claimDailyTask: (taskId: string, xpReward: number) => Promise<void>;
 
   // Lesson Completion
-  completeLesson: (lessonId: string) => Promise<void>;
+  completeLesson: (lessonId: string, skipSync?: boolean) => Promise<void>;
   syncCompletedLessons: () => Promise<void>;
 
   // Energy & Ads
@@ -140,8 +140,8 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   setUserStats: (completedTests, successRate) => set({ completedTests, successRate }),
 
   updateGameStats: (xp, level, completedTests, successRate) => set((state) => ({
-    totalXP: state.totalXP + xp,
-    totalScore: state.totalScore + xp,
+    totalXP: xp, // Fix: Replace with new total from DB, do not add!
+    totalScore: xp, // Fix: Replace with new total from DB
     currentLevel: level,
     completedTests,
     successRate
@@ -363,7 +363,7 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   setBoundUserId: (id) => set({ boundUserId: id }),
 
-  completeLesson: async (lessonId) => {
+  completeLesson: async (lessonId, skipSync = false) => {
     const state = get();
 
     // 1. Optimistic Update

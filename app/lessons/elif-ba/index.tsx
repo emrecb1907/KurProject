@@ -91,6 +91,26 @@ export default function ElifBaLessonsListScreen() {
             title: 'Alıştırmalar - 1',
             route: '/lessons/alistirmalar-1/111',
         },
+        {
+            id: '112',
+            title: 'Harflerin Uzatılarak Okunuşu',
+            route: '/lessons/uzatilarak-okunus/112',
+        },
+        {
+            id: '113',
+            title: 'Med (Uzatma) Harfi: Elif',
+            route: '/lessons/med-elif/113',
+        },
+        {
+            id: '114',
+            title: 'Med (Uzatma) Harfi: Yâ',
+            route: '/lessons/med-ya/114',
+        },
+        {
+            id: '115',
+            title: 'Med (Uzatma) Harfi: Vâv',
+            route: '/lessons/med-vav/115',
+        },
     ];
 
     return (

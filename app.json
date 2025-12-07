@@ -48,7 +48,8 @@
           "organization": "kurlearn",
           "project": "react-native"
         }
-      ]
+      ],
+      "expo-localization"
     ],
     "experiments": {
       "typedRoutes": true

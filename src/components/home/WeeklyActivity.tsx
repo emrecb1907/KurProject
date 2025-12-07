@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
-import { useAuth } from '@/store';
+import { useAuth, useUser } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { RewardModal } from './RewardModal';
@@ -21,6 +21,7 @@ interface DayActivity {
 export const WeeklyActivity = memo(function WeeklyActivity() {
     const { t } = useTranslation();
     const { user, isAuthenticated } = useAuth();
+    const { addXP } = useUser();
     const { themeVersion, activeTheme } = useTheme();
 
     // Light theme specific border color
@@ -300,31 +301,16 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         }
     }, [user?.id]);
 
-    // Track if we've already loaded data to prevent unnecessary refetches
-    const hasLoadedRef = useRef(false);
-    const lastUserIdRef = useRef<string | undefined>(user?.id);
-
     // Load data when screen comes into focus or user/auth changes
     useFocusEffect(
         useCallback(() => {
-            // Only refetch if user changed or we haven't loaded yet
-            const userChanged = lastUserIdRef.current !== user?.id;
-
-            if (userChanged) {
-                hasLoadedRef.current = false;
-                lastUserIdRef.current = user?.id;
-            }
-
-            // Only fetch if not already loaded or user changed
-            if (!hasLoadedRef.current && isAuthenticated && user?.id) {
-                hasLoadedRef.current = true;
+            if (isAuthenticated && user?.id) {
                 fetchWeeklyActivity();
                 checkRewardStatus();
             } else if (!isAuthenticated || !user?.id) {
                 setWeekData(getEmptyWeek());
                 setTodayCompleted(false);
                 setStreak(0);
-                hasLoadedRef.current = false;
             }
         }, [user?.id, isAuthenticated, fetchWeeklyActivity, getEmptyWeek, checkRewardStatus])
     );
@@ -334,17 +320,19 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
 
         try {
             // Give 1000 XP reward
-            const REWARD_AMOUNT = 1000; // Updated REWARD_AMOUNT
+            const REWARD_AMOUNT = 1000;
             const { error } = await database.users.updateXP(user.id, REWARD_AMOUNT);
 
             if (error) throw error;
+
+            addXP(REWARD_AMOUNT);
 
             // Save claim status persistently
             const today = new Date().toISOString().split('T')[0];
             await AsyncStorage.setItem(`last_reward_date_${user.id}`, today);
 
             setRewardClaimed(true);
-            setShowRewardModal(true); // Updated to show modal instead of Alert
+            setShowRewardModal(true);
         } catch (error) {
             console.error('Error claiming reward:', error);
             Alert.alert("Hata", "Ödül alınırken bir sorun oluştu.");

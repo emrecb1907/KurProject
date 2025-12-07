@@ -34,7 +34,8 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
         setTotalXP,
         resetUserData,
         addLives,
-        removeLives
+        removeLives,
+        consumeEnergy
     } = useStore();
     const { earnXP } = useUserData();
     const scrollViewRef = useRef<ScrollView>(null);
@@ -95,17 +96,18 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
 
         try {
             // Get current database XP
-            const { data: userData } = await database.users.getById(user.id);
-            const dbXP = userData?.total_xp || 0;
+            // Get current database XP
+            const { data: userData } = await database.users.getProfile(user.id);
+            const dbXP = userData?.stats?.total_score || 0;
             const localXP = totalXP;
 
             console.log('🔄 Syncing XP:', { dbXP, localXP });
 
             if (localXP > dbXP) {
                 // Update database with local XP
+                // Update database with local XP
                 await database.users.update(user.id, {
                     total_xp: localXP,
-                    total_score: localXP,
                 });
 
                 Alert.alert(
@@ -150,10 +152,8 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                 await database.users.update(user.id, {
                                     total_xp: 0,
                                     current_level: 1,
-                                    total_score: 0,
                                     current_lives: 5,
                                     streak_count: 0,
-                                    updated_at: new Date().toISOString(),
                                 });
                             }
 
@@ -217,10 +217,10 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                         style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
                                         onPress={() => {
                                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                            removeLives(1);
+                                            consumeEnergy();
                                         }}
                                     >
-                                        <Text style={styles.testButtonText}>❤️ -1 {t('home.lives')}</Text>
+                                        <Text style={styles.testButtonText}>⚡ -1 Enerji</Text>
                                     </Pressable>
 
                                     <Pressable
@@ -230,7 +230,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                             addLives(1);
                                         }}
                                     >
-                                        <Text style={styles.testButtonText}>❤️ +1 {t('home.lives')}</Text>
+                                        <Text style={styles.testButtonText}>⚡ +1 Enerji</Text>
                                     </Pressable>
                                 </View>
 
@@ -253,8 +253,6 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                             await database.users.update(user.id, {
                                                 total_xp: 0,
                                                 current_level: 1,
-                                                total_score: 0,
-                                                updated_at: new Date().toISOString(),
                                             });
                                         }
                                         Alert.alert(t('common.success'), 'XP reset.');

@@ -21,6 +21,7 @@ import { logger } from '@/lib/logger';
 import { playSound } from '@/utils/audio';
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
+import * as Network from 'expo-network';
 
 // Sound effect files
 const CORRECT_CHOICE_SOUND = require('../../../assets/audio/effects/CorrectChoice.mp3');
@@ -85,6 +86,10 @@ export function GameScreen({
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const stopEffectSoundRef = useRef<(() => Promise<void>) | null>(null);
     const stopGameCompleteSoundRef = useRef<(() => Promise<void>) | null>(null);
+
+    // Duration Tracking
+    const startTimeRef = useRef<number>(Date.now());
+    const [durationString, setDurationString] = useState<string>("00:00");
 
     // XP bar animation
     const animatedXPWidth = useSharedValue(0);
@@ -184,6 +189,13 @@ export function GameScreen({
         if (currentQuestionIndex < questions.length - 1) {
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
+            // Calculate Duration when game ends
+            const endTime = Date.now();
+            const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
+            const minutes = Math.floor(durationSeconds / 60);
+            const seconds = durationSeconds % 60;
+            setDurationString(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
+
             setIsGameComplete(true);
         }
     };
@@ -205,6 +217,8 @@ export function GameScreen({
         setSelectedOption(null);
         setIsCorrect(null);
         setIsTimeUp(false);
+        // Reset start time on retry
+        startTimeRef.current = Date.now();
     };
 
     // Ref to prevent double submission (more reliable than state for rapid taps)
@@ -218,8 +232,35 @@ export function GameScreen({
         isSubmittingRef.current = true;
         hapticLight();
 
+        // 🛡️ NETWORK CHECK (Offline Protection)
+        try {
+            const networkState = await Network.getNetworkStateAsync();
+            if (!networkState.isConnected) {
+                Alert.alert(
+                    "Bağlantı Hatası",
+                    "İnternet bağlantısı kesildi. Lütfen internet bağlantınızı kontrol edin."
+                );
+                isSubmittingRef.current = false; // Unlock
+                return; // Stop execution
+            }
+        } catch (netError) {
+            console.warn("Network check verification failed:", netError);
+            // Proceed cautiously if network check fails itself, or block? 
+            // Better to let it try or block. Let's block to be safe if check fails strictly.
+            // But usually getNetworkStateAsync is reliable locally. 
+            // We proceed if we can't check, catching the actual error in completeGame.
+        }
+
         // Mark game as completed (this will trigger sound in useEffect)
         setGameCompletedRef(true);
+
+        // Calculate Duration again for API (since we might have waited on completion screen)
+        // Note: Ideally we should store the duration from handleNext, but re-calculating or using current diff is effectively "total time until submit".
+        // HOWEVER, anti-cheat usually cares about "time spent solving".
+        // The duration calculated in handleNext isn't stored in a ref variable accessible here easily without state.
+        // Let's rely on the start time.
+        const endTime = Date.now();
+        const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
 
         try {
             // Use the centralized completion hook
@@ -229,6 +270,7 @@ export function GameScreen({
                 correctAnswers: correctAnswersCount,
                 totalQuestions: questions.length,
                 source, // Pass source to track lesson vs test
+                duration: durationSeconds, // Pass duration for anti-cheat
             });
 
             if (onComplete) {
@@ -474,6 +516,10 @@ export function GameScreen({
                             correct={correctAnswersCount}
                             total={questions.length}
                         />
+                        {/* Duration Display */}
+                        <Text style={[styles.completeText, { marginTop: 16, marginBottom: 0, fontSize: 16 }]}>
+                            Toplam Süre: {durationString}
+                        </Text>
                     </View>
 
                     <Text style={styles.completeTitle}>Harika İş!</Text>

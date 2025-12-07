@@ -12,6 +12,7 @@ interface CompleteGameParams {
     correctAnswers: number;
     totalQuestions: number;
     source?: 'lesson' | 'test'; // Track where the game was started from
+    duration?: number;
 }
 
 interface CompleteGameResult {
@@ -42,6 +43,7 @@ export function useCompleteGameMutation() {
             correctAnswers,
             totalQuestions,
             source = 'lesson', // Default to lesson for backward compatibility
+            duration
         }: CompleteGameParams): Promise<CompleteGameResult> => {
             let leveledUp = false;
             let newLevel = 0;
@@ -51,25 +53,13 @@ export function useCompleteGameMutation() {
                 let dbError = null;
 
                 if (source === 'test') {
-                    // 1. Fetch fresh user profile to get accurate current XP
-                    // We cannot rely on local state (user.stats) as it might be stale or incomplete
-                    const { data: freshProfile } = await database.users.getProfile(user.id);
-                    const currentXP = freshProfile?.stats?.total_score || 0;
-
-                    // 2. Calculate new level locally
-                    const { calculateUserLevel } = require('@/lib/utils/levelCalculations');
-                    const newXP = currentXP + correctAnswers;
-                    const calculatedLevel = calculateUserLevel(newXP);
-
-                    console.log('📊 Level Calculation (Fresh Data):', { currentXP, newXP, calculatedLevel });
-
-                    // Call RPC for Test (Cumulative + XP + Streak)
+                    // Call Secure RPC for Test
                     const { error } = await database.tests.saveResult(user.id, {
-                        test_id: lessonId, // For tests, lessonId is the test ID (e.g., "4")
+                        test_id: lessonId,
                         correct_answer: correctAnswers,
                         total_question: totalQuestions,
                         percent: Math.round((correctAnswers / totalQuestions) * 100),
-                        new_level: calculatedLevel // Pass the calculated level to DB
+                        duration: duration
                     });
                     dbError = error;
 
@@ -79,15 +69,12 @@ export function useCompleteGameMutation() {
                     }
                 } else {
                     // Call RPC for Lesson (Idempotent)
-                    // Only mark as complete if all questions were answered correctly (or threshold met)
-                    // For now, assuming completion if correctAnswers > 0, but usually lessons require full completion
-                    // Adjusting logic: If it's a lesson, we just mark it complete.
                     const { error } = await database.lessons.complete(user.id, lessonId);
                     dbError = error;
 
                     if (!error) {
                         incrementDailyLessons();
-                        completeLesson(lessonId); // Update local store
+                        completeLesson(lessonId, true); // Update local store ONLY (Skip sync to avoid double RPC)
                         logger.info(`Daily lesson count incremented (Lesson ID: ${lessonId})`);
                     }
                 }
@@ -102,7 +89,8 @@ export function useCompleteGameMutation() {
                 console.log('🔄 Fetched Profile after update:', userProfile?.stats);
 
                 if (userProfile && userProfile.stats) {
-                    const newCompletedTests = userProfile.stats.total_lessons_completed || 0;
+                    // Use total_tests_completed if available (DB source of truth)
+                    const newCompletedTests = userProfile.stats.total_tests_completed || userProfile.stats.total_lessons_completed || 0;
                     const totalQuestionsDB = userProfile.stats.total_questions_solved || 0;
                     const correctAnswersDB = userProfile.stats.total_correct_answers || 0;
                     const newSuccessRate = totalQuestionsDB > 0

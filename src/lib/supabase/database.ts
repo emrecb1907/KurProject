@@ -99,6 +99,20 @@ export const database = {
       return this.updateStats(userId, { current_lives: lives });
     },
 
+    // Update User XP (Add to current)
+    async updateXP(userId: string, amount: number) {
+      // 1. Get current stats
+      const { data: stats, error: statsError } = await this.getProfile(userId);
+
+      if (statsError || !stats) return { data: null, error: statsError };
+
+      const currentScore = stats.stats.total_score || 0;
+      const newScore = currentScore + amount;
+
+      // 2. Update with new total
+      return this.updateStats(userId, { total_score: newScore });
+    },
+
     // Update User Streak
     async updateStreak(userId: string, streak: number, activityDate: string) {
       // 1. Get current activity days
@@ -213,8 +227,8 @@ export const database = {
   // ==================== LESSON PROGRESS ====================
   lessons: {
     async complete(userId: string, lessonId: string) {
-      // Use RPC for idempotent completion
-      const { data, error } = await supabase.rpc('complete_lesson', {
+      // Use RPC for idempotent completion & secure XP (Secure V2)
+      const { data, error } = await supabase.rpc('complete_lesson_secure', {
         p_user_id: userId,
         p_lesson_id: lessonId
       });
@@ -241,15 +255,15 @@ export const database = {
       correct_answer: number,
       total_question: number,
       percent: number,
-      new_level?: number // Optional: Client calculated level
+      duration?: number
     }) {
-      // Use RPC for cumulative logic + XP + Streak
-      const { data, error } = await supabase.rpc('submit_test_result', {
+      // Use RPC for Secure XP Calculation (Server Side)
+      const { data, error } = await supabase.rpc('submit_test_result_secure', {
         p_user_id: userId,
         p_test_id: result.test_id,
         p_correct: result.correct_answer,
         p_total: result.total_question,
-        p_new_level: result.new_level
+        p_duration: result.duration || 10 // Fallback if missing
       });
       return { data, error };
     },
