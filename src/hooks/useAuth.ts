@@ -21,8 +21,6 @@ export function useAuthHook() {
       setIsLoading(true);
       console.log('🔄 Initializing auth...');
 
-
-
       // 2. Check for existing session
       const { session } = await authService.getSession();
       console.log('📋 Session:', session ? `User ${session.user.id}` : 'No session');
@@ -63,9 +61,21 @@ export function useAuthHook() {
 
           console.log('🔄 Setting user in store:', fullUser.id, fullUser.username);
           setUser(fullUser as unknown as User); // Type assertion needed until types are fully aligned
-          setIsAuthenticated(true);
-          setIsAnonymous(false);
-          console.log('✅ Authenticated user set:', fullUser.username || fullUser.email);
+
+          // CRITICAL FIX: Robust check for anonymous user
+          // 1. Check direct 'is_anonymous' property
+          // 2. Check identities for 'anonymous' provider
+          // 3. Check app_metadata for 'anonymous' provider
+          const isAnon =
+            session.user.is_anonymous ||
+            session.user.identities?.some((id) => id.provider === 'anonymous') ||
+            session.user.app_metadata?.provider === 'anonymous' ||
+            false;
+
+          setIsAuthenticated(true); // Technically authenticated with Supabase
+          setIsAnonymous(isAnon); // But check if anonymous
+
+          console.log(`✅ Authenticated user set: ${fullUser.username || fullUser.email} (Anonymous: ${isAnon})`);
 
           // Auto-sync: If local XP > database XP, update database
           const localXP = useStore.getState().totalXP;
@@ -134,23 +144,51 @@ export function useAuthHook() {
     try {
       setIsLoading(true);
 
-      // SECURITY: If we are already bound to a different user (e.g. previous logout),
+      const currentState = useStore.getState();
+      const isAnon = currentState.isAnonymous;
+
+      // SECURITY: If we are already bound to a different user AND NOT ANONYMOUS
       // we must WIPE local data before creating a NEW account.
-      const { boundUserId, resetUserData } = useStore.getState();
-      if (boundUserId) {
-        console.log('🔒 Security: Signup with existing bound data. Wiping to prevent merge.');
-        resetUserData();
+      if (currentState.boundUserId && !isAnon) {
+        // Check if the current session matches the bound ID. 
+        // If we are currently anonymous, boundUserId IS the anon ID.
+        // Effectively: Only wipe if we are switching from one REAL user to another.
+        // BUT: here we are signing up.
+
+        // Logic: 
+        // 1. If Anonymous -> Convert (Keep Data)
+        // 2. If Not Anonymous (Logged out or other user) -> Wipe & Create New
       }
 
-      const { user: authUser, error } = await authService.signUp(email, password, username);
+      let authUser;
+      let error;
+
+      if (isAnon && currentState.user?.id) {
+        console.log('👻 Converting Anonymous User to Permanent:', currentState.user.id);
+        const result = await authService.convertAnonymousUser(email, password, username);
+        authUser = result.user;
+        error = result.error;
+      } else {
+        // Regular Sign Up (Fresh Account)
+        console.log('🆕 Creating Fresh Account');
+        if (currentState.boundUserId) {
+          console.log('🔒 Security: Wiping previous local data.');
+          currentState.resetUserData();
+        }
+        const result = await authService.signUp(email, password, username);
+        authUser = result.user;
+        error = result.error;
+      }
 
       if (error) throw error;
 
       if (authUser) {
-        console.log('✅ SignUp Success! User:', authUser.id);
+        console.log('✅ SignUp/Conversion Success! User:', authUser.id);
 
-        // Migrate local data to database
-        await migrateLocalDataToDatabase(authUser.id);
+        if (!isAnon) {
+          // Only migrate if it was a FRESH signup (conversion handles data retention automatically via DB)
+          await migrateLocalDataToDatabase(authUser.id);
+        }
 
         // Re-initialize to load new user data
         await initializeAuth();
@@ -179,8 +217,6 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
 
-
-
         // Re-initialize to load user data from database
         await initializeAuth();
         console.log('✅ Auth initialized after signin');
@@ -206,8 +242,6 @@ export function useAuthHook() {
 
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
-
-
 
         // Re-initialize to load user data from database
         await initializeAuth();
@@ -276,9 +310,6 @@ export function useAuthHook() {
       // Clear local user data (XP, streak, lives, etc.)
       // const { resetUserData } = useStore.getState();
       // resetUserData();
-      // CHANGED: We do NOT wipe local data on logout anymore.
-      // This allows the "bound" user to log back in and keep their data.
-      // If a DIFFERENT user logs in, initializeAuth will handle the wipe.
 
       logout();
       await initializeAuth(); // Reinitialize as anonymous

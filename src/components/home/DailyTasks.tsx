@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { Modal } from '@components/ui/Modal';
 import { useUser } from '@/store';
+import { database } from '@/lib/supabase/database';
 
 interface DailyTasksProps {
     devToolsContent?: React.ReactNode;
@@ -39,35 +40,82 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         incrementDailyLessons,
         incrementDailyTests,
         claimDailyTask,
-        addXP
+        boundUserId
     } = useUser();
 
-    // Derive tasks from store state
+    // We need to fetch tasks.
+    const [dbTasks, setDbTasks] = useState<any[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    // const { boundUserId } = useUser(); // Removed duplicate
+
+    React.useEffect(() => {
+        if (!boundUserId) return;
+
+        const fetchTasks = async () => {
+            // Import database inside or top level? Top level is better.
+            // Assume 'database' is imported.
+            const { data } = await database.dailyTasks.get(boundUserId);
+            if (data) {
+                setDbTasks(data);
+            }
+            setLoading(false);
+        };
+        fetchTasks();
+    }, [boundUserId]);
+
+    // Derive tasks from store state (Local Optimistic) + DB Definitions
     const tasks: Task[] = useMemo(() => {
-        const lessonTask = {
-            id: 1,
-            text: t('home.dailyTasks.completeLessons', { count: 2 }),
-            xp: 50,
-            current: dailyProgress.lessonsCompleted,
-            target: 2,
-            completed: dailyProgress.lessonsCompleted >= 2,
-            claimed: dailyProgress.claimedTasks.includes(1)
-        };
+        // If DB tasks not loaded yet, show skeletons or empty?
+        // Or fallback to hardcoded if DB fails?
+        // Let's fallback to current Hardcoded if dbTasks is empty to avoid Flash of Empty.
+        if (dbTasks.length === 0 && !loading) return []; // Or default?
 
-        const testTask = {
-            id: 2,
-            text: t('home.dailyTasks.completeTests', { count: 3 }),
-            xp: 75,
-            current: dailyProgress.testsCompleted,
-            target: 3,
-            completed: dailyProgress.testsCompleted >= 3,
-            claimed: dailyProgress.claimedTasks.includes(2)
-        };
+        if (dbTasks.length === 0) {
+            // Fallback/Initial Render
+            return [
+                {
+                    id: 1,
+                    text: t('home.dailyTasks.completeLessons', { count: 2 }),
+                    xp: 50,
+                    current: dailyProgress.lessonsCompleted,
+                    target: 2,
+                    completed: dailyProgress.lessonsCompleted >= 2,
+                    claimed: dailyProgress.claimedTasks.includes('1')
+                },
+                {
+                    id: 2,
+                    text: t('home.dailyTasks.completeTests', { count: 3 }),
+                    xp: 75,
+                    current: dailyProgress.testsCompleted,
+                    target: 3,
+                    completed: dailyProgress.testsCompleted >= 3,
+                    claimed: dailyProgress.claimedTasks.includes('2')
+                }
+            ];
+        }
 
-        return [lessonTask, testTask];
-    }, [dailyProgress]);
+        return dbTasks.map(tData => {
+            const isLesson = tData.task_type === 'lesson';
+            const current = isLesson ? dailyProgress.lessonsCompleted : dailyProgress.testsCompleted;
+            const completed = current >= tData.target_count;
+            // Claimed if DB says so OR local optimistic says so
+            const claimed = tData.is_claimed || dailyProgress.claimedTasks.includes(tData.id.toString()) || (tData.progress_id && dailyProgress.claimedTasks.includes(tData.progress_id.toString()));
 
-    const handleClaimTaskReward = (task: Task) => {
+            return {
+                id: tData.id,
+                text: t(tData.title_key, { count: tData.target_count }), // Use translation key from DB
+                xp: tData.xp_reward,
+                current: current,
+                target: tData.target_count,
+                completed: completed,
+                claimed: claimed,
+                progress_id: tData.progress_id // Keep for claiming
+            };
+        });
+    }, [dailyProgress, dbTasks, loading, t]);
+
+    const handleClaimTaskReward = (task: Task & { progress_id?: number }) => {
         if (task.completed && !task.claimed) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
@@ -76,8 +124,31 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             setShowRewardModal(true);
 
             // Update store (handles both claim and XP add + DB sync)
-            claimDailyTask(task.id, task.xp);
-            // addXP(task.xp); // Removed: claimDailyTask now handles this
+            // Pass progress_id if available, otherwise task.id?
+            // userSlice expects taskId for local opt. and maybe for DB.
+            // But we prefer progress_id for DB call.
+            // userSlice has logic: if (!isNaN(taskId)) call dailyTasks.claim(taskId).
+            // So we should pass the PROGRESS ID as the argument if we want userSlice to verify it?
+            // Wait, userSlice logic `if (!isNaN(taskId))` assumes `taskId` IS the ID to claim.
+            // If we pass `progress_id`, it works for DB.
+            // But for local `claimedTasks` array, we want to store `task.id` (definition ID) or `progress_id`?
+            // If we store `progress_id` in `claimedTasks`, then our check `includes` above needs to check progress_id.
+            // But `dailyProgress.claimedTasks` is reset daily.
+
+            // Let's pass `progress_id` (if exists) to claim.
+            // Fallback: If no progress_id (rare), use task.id? No, DB claim needs progress row.
+
+            const idToPass = task.progress_id ? task.progress_id.toString() : task.id.toString();
+
+            // NOTE: This mismatch (task.id vs progress_id) is slightly messy.
+            // Ideally claimedTasks should store Task IDs (definitions) to hide buttons.
+            // But to claim on DB we need Progress ID.
+            // Helper: We call userSlice.claimDailyTask(idToPass).
+            // userSlice logic: Adds `idToPass` to claimedTasks. Calls DB claim(`idToPass`).
+            // So if `idToPass` is `progress_id`, then `claimedTasks` has `progress_id`.
+            // So UI check needs to check if `claimedTasks` includes `progress_id`.
+
+            claimDailyTask(idToPass, task.xp);
         }
     };
 

@@ -31,6 +31,9 @@ export interface UserSlice {
   // Lesson Tracking
   completedLessons: string[];
 
+  // Session Security
+  sessionToken: string | null;
+
   // Actions
   setTotalXP: (xp: number) => void;
   addXP: (xp: number) => void;
@@ -43,7 +46,7 @@ export interface UserSlice {
   setProgress: (progress: UserProgress[]) => void;
   setStreakData: (streakData: UserStreak | null) => void;
   setUserStats: (completedTests: number, successRate: number) => void;
-  updateGameStats: (xp: number, level: number, completedTests: number, successRate: number) => void;
+  updateGameStats: (xp: number, level: number, completedTests: number, successRate: number, streak?: number) => void;
   resetUserData: () => void;
   setBoundUserId: (id: string | null) => void;
 
@@ -56,6 +59,9 @@ export interface UserSlice {
   // Lesson Completion
   completeLesson: (lessonId: string, skipSync?: boolean) => Promise<void>;
   syncCompletedLessons: () => Promise<void>;
+
+  // Session Security Action
+  startTestSession: () => Promise<void>;
 
   // Energy & Ads
   consumeEnergy: () => Promise<{ success: boolean; error?: string }>;
@@ -87,6 +93,7 @@ const initialState = {
     claimedTasks: [],
   },
   completedLessons: [],
+  sessionToken: null,
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -139,12 +146,13 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   setUserStats: (completedTests, successRate) => set({ completedTests, successRate }),
 
-  updateGameStats: (xp, level, completedTests, successRate) => set((state) => ({
+  updateGameStats: (xp, level, completedTests, successRate, streak) => set((state) => ({
     totalXP: xp, // Fix: Replace with new total from DB, do not add!
     totalScore: xp, // Fix: Replace with new total from DB
     currentLevel: level,
     completedTests,
-    successRate
+    successRate,
+    streak: streak !== undefined ? streak : state.streak // Update streak if provided
   })),
 
   resetUserData: () => set(initialState),
@@ -305,24 +313,40 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     }
   },
 
-  incrementDailyLessons: () => {
+  incrementDailyLessons: async () => {
     get().checkDailyReset();
+
+    // 1. Optimistic
     set((state) => ({
       dailyProgress: {
         ...state.dailyProgress,
         lessonsCompleted: state.dailyProgress.lessonsCompleted + 1
       }
     }));
+
+    // 2. DB Sync
+    const { boundUserId } = get();
+    if (boundUserId) {
+      await database.dailyTasks.updateProgress(boundUserId, 'lesson', 1);
+    }
   },
 
-  incrementDailyTests: () => {
+  incrementDailyTests: async () => {
     get().checkDailyReset();
+
+    // 1. Optimistic
     set((state) => ({
       dailyProgress: {
         ...state.dailyProgress,
         testsCompleted: state.dailyProgress.testsCompleted + 1
       }
     }));
+
+    // 2. DB Sync
+    const { boundUserId } = get();
+    if (boundUserId) {
+      await database.dailyTasks.updateProgress(boundUserId, 'test', 1);
+    }
   },
 
   claimDailyTask: async (taskId, xpReward) => {
@@ -346,12 +370,27 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     const { boundUserId } = state;
     if (boundUserId) {
       try {
-        const { error } = await database.users.updateStats(boundUserId, {
-          total_score: newTotalXP // Syncing XP as total_score for now, consistent with useAuth
+        // Sync XP
+        const { error: xpError } = await database.users.updateStats(boundUserId, {
+          total_score: newTotalXP
         });
 
-        if (error) {
-          console.error('❌ Failed to sync daily task XP to DB:', error);
+        // Mark as claimed in daily_tasks table
+        // We need to find the progress_id. Since we don't have it easily here without fetching,
+        // we might rely on the 'getDailyTasks' logic to have set it, or fetch it.
+        // For now, let's assume we can re-fetch or just update by task ID if we knew it.
+        // Actually, database.ts `dailyTasks.claim` takes a progressId (number).
+        // But here `taskId` is string (like '1', '2' from hardcoded).
+        // The new DB structure uses proper IDs.
+        // We will update `DailyTasks.tsx` to pass the correct ID.
+        // If passed ID is numeric string, we can try to use it.
+
+        if (!isNaN(Number(taskId))) {
+          await database.dailyTasks.claim(Number(taskId));
+        }
+
+        if (xpError) {
+          console.error('❌ Failed to sync daily task XP to DB:', xpError);
         } else {
           console.log('✅ Daily task XP synced to DB:', xpReward);
         }
@@ -414,4 +453,22 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
       }
     }
   },
+
+  startTestSession: async () => {
+    const { boundUserId } = get();
+    if (!boundUserId) return;
+
+    const sessionToken = Math.random().toString(36).substring(2) + Date.now().toString(36);
+    set({ sessionToken });
+
+    try {
+      // Verify database.startSession location from previous steps (it was database.users.startSession? No, database.startSession based on grep? 
+      // Step 76 showed: startSession under users object (lines 145).
+      // So it is database.users.startSession
+      await database.users.startSession(boundUserId, sessionToken);
+      console.log('🔐 Session started:', sessionToken);
+    } catch (error) {
+      console.error('Failed to start session:', error);
+    }
+  }
 });

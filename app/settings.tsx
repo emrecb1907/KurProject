@@ -31,7 +31,7 @@ export default function SettingsScreen() {
   const { themeVersion, themeMode, activeTheme, setThemeMode } = useTheme();
   const [selectedLanguage, setSelectedLanguage] = useState<'tr' | 'en'>(getCurrentLanguage());
   const { signOut } = useAuthHook();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, isAnonymous, user } = useAuth();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
 
@@ -646,8 +646,8 @@ export default function SettingsScreen() {
           </View>
         ))}
 
-        {/* Account Actions - Only show if authenticated */}
-        {isAuthenticated && (
+        {/* Account Actions - Only show if authenticated AND not anonymous */}
+        {isAuthenticated && !isAnonymous && (
           <View style={styles.accountSection}>
             <View style={styles.accountButtons}>
               <Pressable

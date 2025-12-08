@@ -56,6 +56,59 @@ export const authService = {
     }
   },
 
+  // Convert anonymous user to permanent via email/password
+  async convertAnonymousUser(email: string, password: string, username?: string): Promise<AuthResponse> {
+    try {
+      // Check if username already exists
+      if (username) {
+        const { data: exists, error: checkError } = await supabase.rpc('check_username', {
+          username_to_check: username
+        });
+
+        if (checkError) {
+          console.error('❌ Error checking username:', checkError);
+        } else if (exists) {
+          return {
+            user: null,
+            error: new Error('Bu kullanıcı adı zaten kullanılıyor. Lütfen farklı bir kullanıcı adı seçin.'),
+          };
+        }
+      }
+
+      // updateUser converts the anonymous user to a permanent one
+      const { data, error } = await supabase.auth.updateUser({
+        email,
+        password,
+        data: {
+          username,
+        }
+      });
+
+      if (error) throw error;
+
+      console.log('✅ Anonymous user converted successfully:', data.user.id);
+
+      // CRITICAL: Manually sync public.users profile since trigger only runs on INSERT
+      if (email || username) {
+        console.log('🔄 Syncing public profile...');
+        await database.users.updateProfile(data.user.id, {
+          email: email,
+          username: username
+        });
+      }
+
+      return {
+        user: data.user as unknown as User,
+        error: null,
+      };
+    } catch (error) {
+      return {
+        user: null,
+        error: error as Error,
+      };
+    }
+  },
+
   // Sign in with email
   async signIn(email: string, password: string): Promise<AuthResponse> {
     try {

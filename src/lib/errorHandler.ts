@@ -49,7 +49,7 @@ class ErrorHandler {
                 dsn: dsn,
                 debug: __DEV__, // Only debug in development
                 enableInExpoDevelopment: true,
-                tracesSampleRate: 1.0, // Adjust for production (e.g., 0.2)
+                tracesSampleRate: 0.2, // Adjust for production (e.g., 0.2)
             });
 
             this.isInitialized = true;

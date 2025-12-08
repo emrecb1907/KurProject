@@ -13,28 +13,19 @@ interface CompleteGameParams {
     totalQuestions: number;
     source?: 'lesson' | 'test'; // Track where the game was started from
     duration?: number;
+    timestamp?: string; // 🌍 Global Streak Support
 }
 
+// ... (Result interface)
 interface CompleteGameResult {
     success: boolean;
     leveledUp?: boolean;
     newLevel?: number;
 }
 
-/**
- * Game Completion Mutation Hook
- * 
- * Features:
- * - Automatic loading state (isPending)
- * - Automatic error handling
- * - Automatic cache invalidation
- * - XP earning and progress tracking
- * 
- * @returns React Query mutation for game completion
- */
 export function useCompleteGameMutation() {
     const { isAuthenticated, user } = useAuth();
-    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests, completeLesson } = useUser();
+    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests, completeLesson, sessionToken } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -43,29 +34,57 @@ export function useCompleteGameMutation() {
             correctAnswers,
             totalQuestions,
             source = 'lesson', // Default to lesson for backward compatibility
-            duration
+            duration,
+            timestamp // New param
         }: CompleteGameParams): Promise<CompleteGameResult> => {
             let leveledUp = false;
             let newLevel = 0;
+            let newStreak: number | undefined;
 
-            // Save progress if authenticated and NOT anonymous
-            if (isAuthenticated && user?.id && !user.is_anonymous) {
+            // Save progress if authenticated (including anonymous users with DB records)
+            if (isAuthenticated && user?.id) {
                 let dbError = null;
 
                 if (source === 'test') {
                     // Call Secure RPC for Test
-                    const { error } = await database.tests.saveResult(user.id, {
+                    console.log('🚀 Calling submit_test_result_secure with:', {
+                        user_id: user.id,
+                        test_id: lessonId,
+                        correct: correctAnswers,
+                        total: totalQuestions,
+                        duration,
+                        timestamp,
+                        session_id: sessionToken // Log session
+                    });
+
+                    const { error, data } = await database.tests.saveResult(user.id, {
                         test_id: lessonId,
                         correct_answer: correctAnswers,
                         total_question: totalQuestions,
                         percent: Math.round((correctAnswers / totalQuestions) * 100),
-                        duration: duration
+                        duration: duration,
+                        client_timestamp: timestamp, // Pass timestamp
+                        session_id: sessionToken || undefined // Pass session ID
                     });
+
+                    console.log('📡 RPC Response:', { data, error });
+
                     dbError = error;
 
                     if (!error) {
-                        incrementDailyTests();
-                        logger.info(`Daily test count incremented (Test ID: ${lessonId})`);
+                        // Check for application-level error returned in data
+                        if (data && (data as any).success === false) {
+                            dbError = new Error((data as any).error || 'Unknown RPC error');
+                            // If specific error code provided, maybe helpful to log or alert
+                        } else {
+                            // Capture streak from response if available
+                            if (data && (data as any).new_streak) {
+                                newStreak = (data as any).new_streak;
+                            }
+
+                            incrementDailyTests();
+                            logger.info(`Daily test count incremented (Test ID: ${lessonId})`);
+                        }
                     }
                 } else {
                     // Call RPC for Lesson (Idempotent)
@@ -98,11 +117,15 @@ export function useCompleteGameMutation() {
                         : 0;
 
                     // Update local state with fresh DB data
+                    // Update local state with fresh DB data
+
+
                     updateGameStats(
                         userProfile.stats.total_score || 0, // XP
                         userProfile.stats.current_level || 1,
                         newCompletedTests,
-                        newSuccessRate
+                        newSuccessRate,
+                        newStreak // Pass new streak
                     );
 
                     // Check for level up based on DB response

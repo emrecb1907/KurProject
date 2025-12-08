@@ -7,6 +7,8 @@ interface CompleteGameParams {
     correctAnswers: number;
     totalQuestions: number;
     source?: 'lesson' | 'test';
+    duration?: number;
+    timestamp?: string;
 }
 
 /**

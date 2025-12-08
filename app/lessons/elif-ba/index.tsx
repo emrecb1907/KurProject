@@ -111,6 +111,21 @@ export default function ElifBaLessonsListScreen() {
             title: 'Med (Uzatma) Harfi: Vâv',
             route: '/lessons/med-vav/115',
         },
+        {
+            id: '116',
+            title: 'Alıştırmalar - 2',
+            route: '/lessons/alistirmalar-2/116',
+        },
+        {
+            id: '117',
+            title: 'Harflerin Şeddeli Okunuşu',
+            route: '/lessons/seddeli-okunus/117',
+        },
+        {
+            id: '118',
+            title: 'Şedde',
+            route: '/lessons/sedde/118',
+        },
     ];
 
     return (

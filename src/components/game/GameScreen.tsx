@@ -51,7 +51,7 @@ export function GameScreen({
     const { t } = useTranslation();
     const router = useRouter();
     const { currentLives, maxLives } = useStore();
-    const { totalXP } = useUser();
+    const { totalXP, startTestSession } = useUser();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
     const navigation = useNavigation();
@@ -121,6 +121,11 @@ export function GameScreen({
     useEffect(() => {
         // Log game load
         logger.game(`${gameType} game loaded - Using generic GameScreen component`);
+
+        // Start Session (Security)
+        if (source === 'test') {
+            startTestSession();
+        }
 
         // Energy consumption is handled at the entry point (CarouselCard)
     }, []);
@@ -271,6 +276,9 @@ export function GameScreen({
                 totalQuestions: questions.length,
                 source, // Pass source to track lesson vs test
                 duration: durationSeconds, // Pass duration for anti-cheat
+                // 🌍 FIX: Send LOCAL time, not UTC. ToISOString() shifts to UTC (e.g. 01:00 -> 22:00 prev day)
+                // We want the server to see the User's "Day".
+                timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
             });
 
             if (onComplete) {
@@ -637,31 +645,30 @@ export function GameScreen({
                 isActive={!isAnswered}
             />
 
+            {/* Main Content Area - Top Anchored with Spacer */}
             <View style={styles.content}>
-                <View style={styles.questionScroll}>
-                    <View style={styles.questionContainer}>
-                        {/* Question */}
-                        <QuestionCard
-                            questionNumber={currentQuestionIndex + 1}
-                            totalQuestions={questions.length}
-                            question={getCurrentQuestion()}
-                            onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
-                        />
+                <View style={styles.questionContainer}>
+                    {/* Question */}
+                    <QuestionCard
+                        questionNumber={currentQuestionIndex + 1}
+                        totalQuestions={questions.length}
+                        question={getCurrentQuestion()}
+                        onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
+                    />
 
-                        {/* Latin Toggle Button (only for verses) */}
-                        {hasLatinToggle && (
-                            <Button
-                                title={showLatin ? t('common.showArabic') : t('common.showLatin')}
-                                variant="outline"
-                                size="small"
-                                onPress={() => setShowLatin(!showLatin)}
-                                style={styles.toggleButton}
-                            />
-                        )}
-                    </View>
+                    {/* Latin Toggle Button */}
+                    {hasLatinToggle && (
+                        <Button
+                            title={showLatin ? t('common.showArabic') : t('common.showLatin')}
+                            variant="outline"
+                            size="small"
+                            onPress={() => setShowLatin(!showLatin)}
+                            style={styles.toggleButton}
+                        />
+                    )}
                 </View>
 
-                {/* Options - Fixed at bottom of content area */}
+                {/* Options */}
                 <View style={styles.options}>
                     {getCurrentOptions().map((option, index) => (
                         <OptionButton
@@ -673,9 +680,12 @@ export function GameScreen({
                         />
                     ))}
                 </View>
+
+                {/* Spacer to absorb vertical space change */}
+                <View style={{ flex: 1 }} />
             </View>
 
-            {/* Next Button Footer */}
+            {/* Footer - Pinned to bottom */}
             {
                 isAnswered && (
                     <View style={styles.footer}>
@@ -738,33 +748,31 @@ const getStyles = () =>
             flex: 1,
             paddingHorizontal: 16,
         },
-        questionScroll: {
-            flex: 1,
-        },
-        questionContent: {
-            // paddingBottom: 20, // Removed as ScrollView is gone
-        },
+        // contentScroll Removed
+        // questionScroll Removed
+
         questionContainer: {
-            marginBottom: 16,
+            width: '100%',
+            marginTop: 10, // Small top margin, no flexing
+            marginBottom: 0,
         },
         toggleButton: {
             marginTop: 8,
+            alignSelf: 'center',
         },
         options: {
-            marginTop: 'auto', // Push to bottom if space permits
-            paddingTop: 8,
-            paddingBottom: GAME_UI_CONFIG.FOOTER_PADDING + 100, // Move options up further
+            marginTop: 10,
+            gap: 10,
         },
         footer: {
-            position: 'absolute',
-            bottom: 20,
-            left: 0,
-            right: 0,
+            width: '100%',
             padding: 16,
-            paddingTop: 40,
+            paddingTop: 24,
+            paddingBottom: 24,
             backgroundColor: colors.background,
             borderTopWidth: 1,
             borderTopColor: colors.border,
+            zIndex: 10,
         },
         footerTitle: {
             fontSize: 18,
@@ -772,7 +780,6 @@ const getStyles = () =>
             color: colors.textPrimary,
             textAlign: 'center',
             marginBottom: 4,
-            marginTop: -28,
         },
         footerMessage: {
             fontSize: 16,

@@ -34,7 +34,7 @@ export default function ProfileScreen() {
 
   // Get user data from Zustand store (UI state)
   const { totalXP, streak, setStreak, setUserStats } = useUser();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
@@ -482,8 +482,8 @@ export default function ProfileScreen() {
             </View>
           </View>
 
-          {/* Login Prompt - Only show if not authenticated */}
-          {!isAuthenticated && (
+          {/* Login Prompt - Show if not authenticated OR is anonymous */}
+          {(!isAuthenticated || isAnonymous) && (
             <View style={styles.loginPrompt}>
               <Lightbulb size={40} color={colors.textOnPrimary} weight="fill" />
               <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>

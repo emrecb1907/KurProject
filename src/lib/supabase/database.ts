@@ -47,6 +47,15 @@ export const database = {
     },
 
     // Generic update for migration or bulk updates
+    async updateProfile(userId: string, data: { username?: string, email?: string, avatar_url?: string }) {
+      const { error } = await supabase
+        .from('users')
+        .update(data)
+        .eq('id', userId);
+      return { error };
+    },
+
+    // Generic update for migration or bulk updates
     async update(userId: string, data: {
       total_xp?: number,
       current_level?: number,
@@ -139,6 +148,20 @@ export const database = {
         .select()
         .single();
 
+      return { data, error };
+    },
+
+    // Start a new session (for security)
+    async startSession(userId: string, sessionId: string) {
+      const { data, error } = await supabase
+        .from('user_sessions')
+        .upsert({
+          user_id: userId,
+          session_id: sessionId,
+          updated_at: new Date().toISOString()
+        })
+        .select()
+        .single();
       return { data, error };
     },
 
@@ -255,7 +278,9 @@ export const database = {
       correct_answer: number,
       total_question: number,
       percent: number,
-      duration?: number
+      duration?: number,
+      client_timestamp?: string, // 🌍 Global Streak Support
+      session_id?: string // 🔐 Session Security
     }) {
       // Use RPC for Secure XP Calculation (Server Side)
       const { data, error } = await supabase.rpc('submit_test_result_secure', {
@@ -263,7 +288,9 @@ export const database = {
         p_test_id: result.test_id,
         p_correct: result.correct_answer,
         p_total: result.total_question,
-        p_duration: result.duration || 10 // Fallback if missing
+        p_duration: result.duration || 10,
+        p_client_timestamp: result.client_timestamp || new Date().toISOString(), // Pass client time
+        p_session_id: result.session_id // Pass session ID
       });
       return { data, error };
     },
@@ -297,6 +324,102 @@ export const database = {
         };
       }
       return { data, error };
+    }
+  },
+
+  // ==================== DAILY TASKS (NEW) ====================
+  dailyTasks: {
+    // Get tasks and user progress
+    async get(userId: string) {
+      // 1. Get task definitions
+      const { data: tasks, error: tasksError } = await supabase
+        .from('daily_tasks')
+        .select('*')
+        .eq('is_active', true)
+        .order('id');
+
+      if (tasksError) return { data: null, error: tasksError };
+
+      // 2. Get user progress for today
+      const { data: progress, error: progressError } = await supabase
+        .from('user_daily_progress')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('progress_date', new Date().toISOString().split('T')[0]);
+
+      if (progressError) return { data: null, error: progressError };
+
+      // 3. Merge data
+      const mergedTasks = tasks.map(task => {
+        const userProgress = progress?.find(p => p.task_id === task.id);
+        return {
+          ...task,
+          current_count: userProgress?.current_count || 0,
+          is_claimed: userProgress?.is_claimed || false,
+          progress_id: userProgress?.id
+        };
+      });
+
+      return { data: mergedTasks, error: null };
+    },
+
+    // Update progress for a specific task type (lesson/test)
+    async updateProgress(userId: string, taskType: 'lesson' | 'test', increment: number = 1) {
+      // 1. Find the relevant active task
+      const { data: task, error: taskError } = await supabase
+        .from('daily_tasks')
+        .select('id, target_count')
+        .eq('task_type', taskType)
+        .eq('is_active', true)
+        .single();
+
+      if (taskError || !task) return { error: taskError || 'No active task found' };
+
+      const today = new Date().toISOString().split('T')[0];
+
+      // 2. Check existing progress or create new
+      const { data: existingProgress } = await supabase
+        .from('user_daily_progress')
+        .select('*')
+        .eq('user_id', userId)
+        .eq('task_id', task.id)
+        .eq('progress_date', today)
+        .single();
+
+      if (existingProgress) {
+        // Update if not already completed/claimed max (optional logic)
+        // If we want to cap at target_count: Math.min(existingProgress.current_count + increment, task.target_count)
+        // But usually we just let it count up.
+
+        const { error } = await supabase
+          .from('user_daily_progress')
+          .update({
+            current_count: existingProgress.current_count + increment,
+            updated_at: new Date().toISOString()
+          })
+          .eq('id', existingProgress.id);
+        return { error };
+      } else {
+        // Create new progress entry
+        const { error } = await supabase
+          .from('user_daily_progress')
+          .insert({
+            user_id: userId,
+            task_id: task.id,
+            current_count: increment,
+            progress_date: today
+          });
+        return { error };
+      }
+    },
+
+    // Claim reward
+    async claim(progressId: number) {
+      const { error } = await supabase
+        .from('user_daily_progress')
+        .update({ is_claimed: true })
+        .eq('id', progressId);
+      return { error };
     }
   },
 

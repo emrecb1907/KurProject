@@ -76,8 +76,9 @@ export function QuestionCard({
 
 const getStyles = () => StyleSheet.create({
   container: {
-    marginBottom: 24,
+    marginBottom: 0, // Removed built-in margin, let parent control spacing
     alignItems: 'center',
+    width: '100%',
   },
   toggleButton: {
     backgroundColor: colors.surface,
@@ -95,16 +96,16 @@ const getStyles = () => StyleSheet.create({
   },
   questionBox: {
     backgroundColor: colors.surface,
-    padding: 24,
+    padding: 16, // Reduced padding for compact layout
     borderRadius: 20,
     borderWidth: 2,
     borderColor: colors.borderDark,
     borderBottomWidth: 4,
     width: '100%',
-    minHeight: 200,
+    minHeight: 140, // Reduced minHeight for small screens
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 16,
+    gap: 12, // Reduced gap
   },
   questionText: {
     fontSize: 22,

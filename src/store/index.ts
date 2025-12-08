@@ -73,6 +73,7 @@ export const useAuth = () => useStore(
     setIsAnonymous: state.setIsAnonymous,
     setIsLoading: state.setIsLoading,
     logout: state.logout,
+    signInAnonymously: state.signInAnonymously,
   }))
 );
 
@@ -115,6 +116,8 @@ export const useUser = () => useStore(
     completedLessons: state.completedLessons,
     completeLesson: state.completeLesson,
     syncCompletedLessons: state.syncCompletedLessons,
+    startTestSession: state.startTestSession,
+    sessionToken: state.sessionToken,
   }))
 );
 
