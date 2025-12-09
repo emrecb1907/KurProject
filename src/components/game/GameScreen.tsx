@@ -537,6 +537,9 @@ export function GameScreen({
 
                     {/* XP Progress Bar */}
                     <View style={styles.xpBarContainer}>
+                        <Text style={styles.xpBarLabel}>
+                            Seviye {displayedLevel} {xpEarned > 0 && `(+${xpEarned} XP)`}
+                        </Text>
                         <View style={styles.xpBarBackground}>
                             <Animated.View style={[styles.xpBarFill, animatedXPStyle]} />
                             <View style={styles.xpBarTextContainer}>
@@ -545,9 +548,6 @@ export function GameScreen({
                                 </Text>
                             </View>
                         </View>
-                        <Text style={styles.xpBarLabel}>
-                            Seviye {displayedLevel} {xpEarned > 0 && `(+${xpEarned} XP)`}
-                        </Text>
                     </View>
 
                     <Pressable
@@ -567,23 +567,7 @@ export function GameScreen({
                         </Text>
                     </Pressable>
 
-                    <Pressable
-                        style={[
-                            styles.completeButton,
-                            {
-                                backgroundColor: colors.warning,
-                                marginTop: 12,
-                                borderBottomColor: colors.warningDark,
-                                opacity: isSubmitting ? 0 : 1, // Hide but keep space
-                            },
-                        ]}
-                        onPress={handleRetry}
-                        disabled={isSubmitting} // Disable when hidden
-                    >
-                        <Text style={styles.completeButtonText}>
-                            {t('gameUI.playAgain').toUpperCase()}
-                        </Text>
-                    </Pressable>
+
                 </View>
 
                 {/* Level Up Modal */}
@@ -891,10 +875,11 @@ const getStyles = () =>
             color: colors.textPrimary,
         },
         xpBarLabel: {
-            fontSize: 12,
-            color: colors.textSecondary,
+            fontSize: 14,
+            color: colors.primary,
+            fontWeight: 'bold',
             textAlign: 'center',
-            marginTop: 8,
+            marginBottom: 8,
         },
         modalOverlay: {
             flex: 1,

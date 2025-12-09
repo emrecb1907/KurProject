@@ -1,29 +1,30 @@
 import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button, Card } from '@components/ui';
+import { Button } from '@components/ui';
 import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { ArrowLeft, BookOpen, Eye, EyeSlash } from 'phosphor-react-native';
 
 export default function LoginScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { signIn, signInWithEmailOrUsername, signInWithGoogle, signInWithApple } = useAuthHook();
-  const { themeVersion } = useTheme(); // Trigger re-render on theme change
+  const { signInWithEmailOrUsername } = useAuthHook();
+  const { themeVersion, activeTheme } = useTheme();
 
   const [emailOrUsername, setEmailOrUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   // Re-calculate styles when theme changes
-  const styles = useMemo(() => getStyles(), [themeVersion]);
+  const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
 
   const handleLogin = async () => {
-    console.log('🔵 LoginScreen.handleLogin called');
     if (!emailOrUsername || !password) {
       setError(t('auth.errors.fillAllFields'));
       return;
@@ -53,6 +54,8 @@ export default function LoginScreen() {
     }
   };
 
+  const isDark = activeTheme === 'dark';
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -61,31 +64,36 @@ export default function LoginScreen() {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
-          <Pressable onPress={() => {
-            if (router.canGoBack()) {
-              router.back();
-            } else {
-              router.replace('/(tabs)');
-            }
-          }}>
-            <Text style={styles.backButton}>{t('common.back')}</Text>
+          <Pressable
+            onPress={() => {
+              if (router.canGoBack()) {
+                router.back();
+              } else {
+                router.replace('/(tabs)');
+              }
+            }}
+            style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
+          >
+            <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
           </Pressable>
+          <Text style={styles.headerTitle}>{t('auth.login.title')}</Text>
+          <View style={{ width: 40 }} />
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>{t('auth.login.title')}</Text>
-          <Text style={styles.subtitle}>
-            {t('auth.login.subtitle')}
-          </Text>
+          <View style={styles.iconContainer}>
+            <BookOpen size={48} color={colors.primary} weight="fill" />
+          </View>
 
-          <Card style={styles.formCard}>
+          <View style={styles.form}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>Email veya Kullanıcı Adı</Text>
+              <Text style={styles.label}>E-posta veya Kullanıcı Adı</Text>
               <TextInput
                 style={styles.input}
-                placeholder="Email veya kullanıcı adınızı girin"
+                placeholder="kullanici@mail.com"
                 placeholderTextColor={colors.textDisabled}
                 value={emailOrUsername}
                 onChangeText={setEmailOrUsername}
@@ -96,15 +104,27 @@ export default function LoginScreen() {
 
             <View style={styles.inputGroup}>
               <Text style={styles.label}>{t('auth.login.password')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.login.passwordPlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-                autoCapitalize="none"
-              />
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.passwordInput}
+                  placeholder="••••••••"
+                  placeholderTextColor={colors.textDisabled}
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!showPassword}
+                  autoCapitalize="none"
+                />
+                <Pressable
+                  onPress={() => setShowPassword(!showPassword)}
+                  style={styles.eyeIcon}
+                >
+                  {showPassword ? (
+                    <Eye size={20} color={colors.textDisabled} />
+                  ) : (
+                    <EyeSlash size={20} color={colors.textDisabled} />
+                  )}
+                </Pressable>
+              </View>
             </View>
 
             <Pressable
@@ -112,7 +132,7 @@ export default function LoginScreen() {
               style={styles.forgotPasswordContainer}
             >
               <Text style={styles.forgotPasswordText}>
-                {t('auth.login.forgotPassword') || 'Şifremi Unuttum'}
+                {t('auth.login.forgotPassword') || 'Şifremi Unuttum?'}
               </Text>
             </Pressable>
 
@@ -129,36 +149,34 @@ export default function LoginScreen() {
               fullWidth
               style={styles.submitButton}
             />
-          </Card>
 
-          <SocialLoginButtons
-            onGooglePress={() => {
-              Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
-            }}
-            onApplePress={() => {
-              Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
-            }}
-            loading={loading}
-          />
+            <View style={styles.socialSection}>
+              <SocialLoginButtons
+                onGooglePress={() => {
+                  Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
+                }}
+                onApplePress={() => {
+                  Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
+                }}
+                loading={loading}
+                variant="circular"
+              />
+            </View>
+          </View>
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>{t('auth.login.noAccount')}</Text>
             <Pressable onPress={() => router.push('/(auth)/register')}>
-              <Text style={styles.linkText}>{t('auth.login.register')}</Text>
+              <Text style={styles.linkText}> {t('auth.login.register')}</Text>
             </Pressable>
           </View>
-
-          <Pressable onPress={() => router.replace('/(tabs)')}>
-            <Text style={styles.skipText}>{t('auth.login.skipForNow')}</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
-// Styles are defined in a function to be re-evaluated when theme changes
-const getStyles = () => StyleSheet.create({
+const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -167,32 +185,41 @@ const getStyles = () => StyleSheet.create({
     flexGrow: 1,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 60,
     paddingHorizontal: 16,
     paddingBottom: 16,
   },
   backButton: {
-    fontSize: 16,
-    color: colors.primary,
+    padding: 8,
+    borderRadius: 8,
+  },
+  backButtonPressed: {
+    backgroundColor: colors.surface,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 20,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.textSecondary,
+  iconContainer: {
+    alignSelf: 'center',
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: theme === 'dark' ? '#111827' : '#F3F4F6', // Subtle circle bg
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 32,
-    lineHeight: 24,
   },
-  formCard: {
+  form: {
     marginBottom: 24,
   },
   inputGroup: {
@@ -205,23 +232,40 @@ const getStyles = () => StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: theme === 'dark' ? '#1F2937' : '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     fontSize: 16,
     color: colors.textPrimary,
-    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: theme === 'dark' ? '#374151' : '#E5E7EB',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme === 'dark' ? '#1F2937' : '#FFFFFF',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: theme === 'dark' ? '#374151' : '#E5E7EB',
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 16,
+    fontSize: 16,
+    color: colors.textPrimary,
+  },
+  eyeIcon: {
+    padding: 16,
   },
   forgotPasswordContainer: {
     alignSelf: 'flex-end',
-    marginBottom: 20,
-    marginTop: -10,
+    marginBottom: 24,
+    marginTop: -8,
   },
   forgotPasswordText: {
     fontSize: 14,
-    color: colors.primary,
-    fontWeight: '600',
+    color: colors.textSecondary,
+    textDecorationLine: 'underline',
   },
   errorBox: {
     backgroundColor: `${colors.error}15`,
@@ -235,13 +279,18 @@ const getStyles = () => StyleSheet.create({
     textAlign: 'center',
   },
   submitButton: {
-    marginTop: 8,
+    height: 56,
+    borderRadius: 28, // Fully rounded
+  },
+  socialSection: {
+    marginTop: 32,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    marginTop: 'auto',
+    marginBottom: 40,
   },
   footerText: {
     fontSize: 14,
@@ -249,13 +298,7 @@ const getStyles = () => StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: colors.primary,
-  },
-  skipText: {
-    fontSize: 14,
-    color: colors.textDisabled,
-    textAlign: 'center',
-    marginTop: 24,
   },
 });

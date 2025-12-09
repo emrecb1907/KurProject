@@ -16,12 +16,20 @@ export default function Index() {
   const checkOnboardingStatus = async () => {
     try {
       const hasSeenOnboarding = await AsyncStorage.getItem('hasSeenOnboarding');
+      const explicitLogout = await AsyncStorage.getItem('explicitLogout');
 
       // Wait for custom splash to finish
       setTimeout(async () => {
         setShowCustomSplash(false);
 
         if (hasSeenOnboarding === 'true') {
+          // If user logged out explicitly, go to Gate (Welcome)
+          if (explicitLogout === 'true') {
+            console.log('🔒 Explicit logout detected. Redirecting to Gate.');
+            router.replace('/(auth)/welcome');
+            return;
+          }
+
           // If user has seen onboarding but is not authenticated, sign in anonymously
           const state = useStore.getState();
           if (!state.isAuthenticated) {

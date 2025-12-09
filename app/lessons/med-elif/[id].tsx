@@ -13,7 +13,7 @@ import { useUser } from '@/store';
 export default function MedUzatmaElifLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons, completeLesson } = useUser();
+    const { completeLesson } = useUser();
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -176,7 +176,7 @@ export default function MedUzatmaElifLessonScreen() {
         if (!allItemsPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        incrementDailyLessons();
+
         completeLesson('113'); // Mark Med (Uzatma) Harfi: Elif as completed
         router.push('/(tabs)');
     };

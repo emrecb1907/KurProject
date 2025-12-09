@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
-import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Platform, ActivityIndicator, Alert, TouchableOpacity, ScrollView, Keyboard } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useStatusBar } from '@/hooks/useStatusBar';
@@ -35,14 +35,31 @@ export default function AIChatScreen() {
         }, [])
     );
 
-    // Scroll to bottom when new message arrives
+    const scrollToBottom = (animated = true) => {
+        if (scrollViewRef.current) {
+            scrollViewRef.current.scrollToEnd({ animated });
+        }
+    };
+
+    // Scroll when messages change
     useEffect(() => {
         if (messages.length > 0) {
-            setTimeout(() => {
-                scrollViewRef.current?.scrollToEnd({ animated: true });
-            }, 100);
+            // Small delay to ensure content is rendered
+            setTimeout(() => scrollToBottom(), 100);
         }
     }, [messages.length]);
+
+    // Scroll to bottom when keyboard opens using Layout detection
+    const [listHeight, setListHeight] = useState(0);
+
+    const handleLayout = (event: any) => {
+        const { height } = event.nativeEvent.layout;
+        // If height decreased (keyboard opened), or we just want to ensure bottom visibility
+        if (listHeight > height && height > 0) {
+            setTimeout(() => scrollToBottom(), 100);
+        }
+        setListHeight(height);
+    };
 
     const handleSendMessage = async (text: string) => {
         // Add user message
@@ -56,6 +73,9 @@ export default function AIChatScreen() {
         // Set loading state
         setLoading(true);
         setError(null);
+
+        // Use scrollToBottom to ensure user sees their own message
+        setTimeout(() => scrollToBottom(), 100);
 
         try {
             // Get AI response with user's language
@@ -76,6 +96,8 @@ export default function AIChatScreen() {
             setError(t('aiChat.error'));
         } finally {
             setLoading(false);
+            // Scroll again after response
+            setTimeout(() => scrollToBottom(), 100);
         }
     };
 
@@ -136,68 +158,76 @@ export default function AIChatScreen() {
                 )}
             </View>
 
-            {/* Messages */}
-            <ScrollView
-                ref={scrollViewRef}
-                style={styles.messagesContainer}
-                contentContainerStyle={styles.messagesContent}
-                keyboardShouldPersistTaps="handled"
+            {/* Messages & Input wrapped in KeyboardAvoidingView */}
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                style={{ flex: 1 }}
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 10 : 0}
             >
-                {messages.length === 0 && !isLoading && (
-                    <View style={styles.emptyState}>
-                        <Sparkle size={48} weight="fill" color={colors.warning} />
-                        <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>
-                            {t('aiChat.welcomeTitle')}
-                        </Text>
-                        <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
-                            {t('aiChat.welcomeSubtitle')}
-                        </Text>
-                        <View style={styles.exampleQuestions}>
-                            <Text style={[styles.exampleTitle, { color: colors.textSecondary }]}>
-                                {t('aiChat.exampleQuestionsTitle')}
+                <ScrollView
+                    ref={scrollViewRef}
+                    style={styles.messagesContainer}
+                    contentContainerStyle={styles.messagesContent}
+                    keyboardShouldPersistTaps="always"
+                    onContentSizeChange={() => scrollToBottom()}
+                    onLayout={handleLayout}
+                >
+                    {messages.length === 0 && !isLoading && (
+                        <View style={styles.emptyState}>
+                            <Sparkle size={48} weight="fill" color={colors.warning} />
+                            <Text style={[styles.emptyTitle, { color: colors.textPrimary }]}>
+                                {t('aiChat.welcomeTitle')}
                             </Text>
-                            <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
-                                • "{t('aiChat.examples.q1')}"
+                            <Text style={[styles.emptySubtitle, { color: colors.textSecondary }]}>
+                                {t('aiChat.welcomeSubtitle')}
                             </Text>
-                            <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
-                                • "{t('aiChat.examples.q2')}"
-                            </Text>
-                            <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
-                                • "{t('aiChat.examples.q3')}"
+                            <View style={styles.exampleQuestions}>
+                                <Text style={[styles.exampleTitle, { color: colors.textSecondary }]}>
+                                    {t('aiChat.exampleQuestionsTitle')}
+                                </Text>
+                                <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
+                                    • "{t('aiChat.examples.q1')}"
+                                </Text>
+                                <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
+                                    • "{t('aiChat.examples.q2')}"
+                                </Text>
+                                <Text style={[styles.exampleQuestion, { color: colors.textSecondary }]}>
+                                    • "{t('aiChat.examples.q3')}"
+                                </Text>
+                            </View>
+                        </View>
+                    )}
+
+                    {messages.map((msg, index) => (
+                        <MessageBubble
+                            key={index}
+                            message={msg.parts}
+                            isUser={msg.role === 'user'}
+                            timestamp={msg.timestamp}
+                        />
+                    ))}
+
+                    {isLoading && (
+                        <View style={styles.loadingContainer}>
+                            <ActivityIndicator size="small" color={colors.warning} />
+                            <Text style={[styles.loadingText, { color: colors.textSecondary }]}>
+                                {t('aiChat.loading')}
                             </Text>
                         </View>
-                    </View>
-                )}
+                    )}
 
-                {messages.map((msg, index) => (
-                    <MessageBubble
-                        key={index}
-                        message={msg.parts}
-                        isUser={msg.role === 'user'}
-                        timestamp={msg.timestamp}
-                    />
-                ))}
+                    {error && (
+                        <View style={[styles.errorContainer, { backgroundColor: colors.error + '20' }]}>
+                            <Text style={[styles.errorText, { color: colors.error }]}>
+                                {error}
+                            </Text>
+                        </View>
+                    )}
+                </ScrollView>
 
-                {isLoading && (
-                    <View style={styles.loadingContainer}>
-                        <ActivityIndicator size="small" color={colors.warning} />
-                        <Text style={[styles.loadingText, { color: colors.textSecondary }]}>
-                            {t('aiChat.loading')}
-                        </Text>
-                    </View>
-                )}
-
-                {error && (
-                    <View style={[styles.errorContainer, { backgroundColor: colors.error + '20' }]}>
-                        <Text style={[styles.errorText, { color: colors.error }]}>
-                            {error}
-                        </Text>
-                    </View>
-                )}
-            </ScrollView>
-
-            {/* Input */}
-            <ChatInput onSend={handleSendMessage} disabled={isLoading} />
+                {/* Input */}
+                <ChatInput onSend={handleSendMessage} disabled={isLoading} />
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 }

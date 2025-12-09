@@ -25,7 +25,7 @@ interface CompleteGameResult {
 
 export function useCompleteGameMutation() {
     const { isAuthenticated, user } = useAuth();
-    const { setUserStats, updateGameStats, incrementDailyLessons, incrementDailyTests, completeLesson, sessionToken } = useUser();
+    const { setUserStats, updateGameStats, completeLesson, sessionToken } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -81,9 +81,8 @@ export function useCompleteGameMutation() {
                             if (data && (data as any).new_streak) {
                                 newStreak = (data as any).new_streak;
                             }
-
-                            incrementDailyTests();
-                            logger.info(`Daily test count incremented (Test ID: ${lessonId})`);
+                            // incrementDailyTests(); Removed - Handled by updateGameStats in userSlice
+                            logger.info(`Daily test count handled by updateGameStats (Test ID: ${lessonId})`);
                         }
                     }
                 } else {
@@ -92,9 +91,9 @@ export function useCompleteGameMutation() {
                     dbError = error;
 
                     if (!error) {
-                        incrementDailyLessons();
-                        completeLesson(lessonId, true); // Update local store ONLY (Skip sync to avoid double RPC)
-                        logger.info(`Daily lesson count incremented (Lesson ID: ${lessonId})`);
+                        // incrementDailyLessons(); Removed - Handled by completeLesson (or updateGameStats)
+                        completeLesson(lessonId, true); // Update local store. logic in userSlice handles dailyProgress increment.
+                        logger.info(`Daily lesson count handled by completeLesson (Lesson ID: ${lessonId})`);
                     }
                 }
 

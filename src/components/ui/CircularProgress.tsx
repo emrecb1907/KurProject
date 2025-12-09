@@ -35,7 +35,7 @@ export function CircularProgress({ size, strokeWidth, progress, correct, total }
                 />
                 {/* Progress Circle */}
                 <Circle
-                    stroke="#FFC800"
+                    stroke={colors.primary}
                     cx={size / 2}
                     cy={size / 2}
                     r={radius}

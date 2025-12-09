@@ -13,7 +13,7 @@ import { useUser } from '@/store';
 export default function Ustun1LessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons, completeLesson } = useUser();
+    const { completeLesson } = useUser();
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -176,7 +176,7 @@ export default function Ustun1LessonScreen() {
         if (!allItemsPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        incrementDailyLessons();
+
         completeLesson('104'); // Mark Üstün-1 as completed
         router.push('/(tabs)');
     };

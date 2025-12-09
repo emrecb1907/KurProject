@@ -38,7 +38,7 @@ export default function PremiumScreen() {
         return {
             background: isDark ? '#050B14' : '#F5F5F0', // Dark Blue/Black vs Light Beige
             cardBg: isDark ? '#121212' : '#FFFFFF', // Dark vs White
-            gold: '#FFC800', // Always Gold
+            gold: '#FF9600', // Always Gold (now Orange per user request)
             text: isDark ? '#FFFFFF' : '#1F2937', // White vs Dark Gray
             textSecondary: isDark ? '#A0A0A0' : '#6B7280', // Gray vs Medium Gray
             iconBg: isDark ? '#2A2A2A' : '#E5E7EB', // Dark Gray vs Light Gray
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
         gap: 6,
     },
     backButton: {
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
         borderRadius: 20,
         paddingVertical: 8,
         paddingHorizontal: 16,
@@ -229,7 +229,7 @@ const styles = StyleSheet.create({
         fontWeight: '600',
     },
     premiumButton: {
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
         borderRadius: 20,
         paddingVertical: 8,
         paddingHorizontal: 16,
@@ -313,14 +313,14 @@ const styles = StyleSheet.create({
         marginRight: 16,
     },
     radioButtonChecked: {
-        backgroundColor: '#FFC800',
-        borderColor: '#FFC800',
+        backgroundColor: '#FF9600',
+        borderColor: '#FF9600',
     },
     radioButtonInner: {
         width: 12,
         height: 12,
         borderRadius: 6,
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
     },
     planInfo: {
         flex: 1,
@@ -336,7 +336,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         top: -12,
         right: 16,
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
         paddingHorizontal: 12,
         paddingVertical: 4,
         borderRadius: 12,
@@ -353,7 +353,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
     subscribeButton: {
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
         borderRadius: 30,
         paddingVertical: 16,
         alignItems: 'center',
@@ -384,7 +384,7 @@ const styles = StyleSheet.create({
         width: 20,
         height: 20,
         borderRadius: 10,
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
     },
     slashLine: {
         position: 'absolute',
@@ -398,6 +398,6 @@ const styles = StyleSheet.create({
         width: 16,
         height: 16,
         borderRadius: 8,
-        backgroundColor: '#FFC800',
+        backgroundColor: '#FF9600',
     }
 });

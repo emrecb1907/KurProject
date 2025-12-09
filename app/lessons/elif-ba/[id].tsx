@@ -13,7 +13,7 @@ import { useUser } from '@/store';
 export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons, completeLesson } = useUser();
+    const { completeLesson } = useUser();
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
@@ -178,7 +178,7 @@ export default function ElifBaIntroductionScreen() {
         if (!allLettersPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        incrementDailyLessons();
+
         completeLesson('101'); // Mark Elif-Ba as completed
         router.push('/(tabs)');
     };

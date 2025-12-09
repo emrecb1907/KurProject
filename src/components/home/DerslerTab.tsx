@@ -65,7 +65,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
 
     // Calculate Kur'an Öğrenimi progress
     // IDs: 101-118 (Elif-Ba and initial lessons)
-    const kuranIds = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118'];
+    const kuranIds = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124'];
     const kuranTotal = kuranIds.length;
     const kuranCompleted = completedLessons.filter((id: string) => kuranIds.includes(id)).length;
 

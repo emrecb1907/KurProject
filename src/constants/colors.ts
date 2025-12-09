@@ -38,9 +38,9 @@ const darkThemeColors = {
   correct: '#58CC02',
   incorrect: '#FF4B4B',
 
-  // Warning - Yellow
-  warning: '#FFC800',
-  warningDark: '#E6B400',
+  // Warning - Yellow -> Orange (User Request)
+  warning: '#FF9600',
+  warningDark: '#E68500',
 
   // Dark Background
   background: '#050816', // Updated Dark Blue/Black
@@ -73,12 +73,12 @@ const darkThemeColors = {
   buttonGrayBorder: '#4B5563',
 
   // Progress & XP
-  xpGold: '#FFC800',
+  xpGold: '#FF9600',
   xpGreen: '#58CC02',
 
   // Timer Progress
   progressGreen: '#58CC02',
-  progressYellow: '#FFC800',
+  progressYellow: '#FF9600',
   progressOrange: '#FF4B4B',
 
   // Locked/Disabled states
@@ -129,9 +129,9 @@ const lightThemeColors = {
   correct: '#58CC02',
   incorrect: '#FF4B4B',
 
-  // Warning - Yellow
-  warning: '#FFC800',
-  warningDark: '#E6B400',
+  // Warning - Yellow -> Orange (User Request)
+  warning: '#FF9600',
+  warningDark: '#E68500',
 
   // Light Background
   background: '#F5F5F0', // Hafif bej
@@ -164,12 +164,12 @@ const lightThemeColors = {
   buttonGrayBorder: '#D1D5DB',
 
   // Progress & XP
-  xpGold: '#FFC800',
+  xpGold: '#FF9600',
   xpGreen: '#58CC02',
 
   // Timer Progress
   progressGreen: '#58CC02',
-  progressYellow: '#FFC800',
+  progressYellow: '#FF9600',
   progressOrange: '#FF4B4B',
 
   // Locked/Disabled states

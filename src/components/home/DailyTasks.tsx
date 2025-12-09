@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Modal as RNModal } from 'react-native';
 import { colors } from '@constants/colors';
-import { Gift, Check, Gear, X } from 'phosphor-react-native';
+import { Gift, Check, Gear, X, BookOpen, Lightning, CheckCircle } from 'phosphor-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
@@ -37,85 +37,40 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     // Get user state and actions from store
     const {
         dailyProgress,
-        incrementDailyLessons,
-        incrementDailyTests,
         claimDailyTask,
-        boundUserId
+        checkDailyReset
     } = useUser();
 
-    // We need to fetch tasks.
-    const [dbTasks, setDbTasks] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
-
-    // const { boundUserId } = useUser(); // Removed duplicate
-
+    // Check reset on mount
     React.useEffect(() => {
-        if (!boundUserId) return;
+        checkDailyReset();
+    }, [checkDailyReset]);
 
-        const fetchTasks = async () => {
-            // Import database inside or top level? Top level is better.
-            // Assume 'database' is imported.
-            const { data } = await database.dailyTasks.get(boundUserId);
-            if (data) {
-                setDbTasks(data);
-            }
-            setLoading(false);
-        };
-        fetchTasks();
-    }, [boundUserId]);
-
-    // Derive tasks from store state (Local Optimistic) + DB Definitions
+    // Derive tasks from store state (Local Logic)
     const tasks: Task[] = useMemo(() => {
-        // If DB tasks not loaded yet, show skeletons or empty?
-        // Or fallback to hardcoded if DB fails?
-        // Let's fallback to current Hardcoded if dbTasks is empty to avoid Flash of Empty.
-        if (dbTasks.length === 0 && !loading) return []; // Or default?
+        return [
+            {
+                id: 1, // 'lesson'
+                text: t('home.dailyTasks.completeLessons', { count: 2 }),
+                xp: 20,
+                current: dailyProgress.lessonsCompleted,
+                target: 2,
+                completed: dailyProgress.lessonsCompleted >= 2,
+                claimed: dailyProgress.claimedTasks.includes('lesson')
+            },
+            {
+                id: 2, // 'test'
+                text: t('home.dailyTasks.completeTests', { count: 3 }),
+                xp: 30,
+                current: dailyProgress.testsCompleted,
+                target: 3,
+                completed: dailyProgress.testsCompleted >= 3,
+                claimed: dailyProgress.claimedTasks.includes('test')
+            }
+        ];
+    }, [dailyProgress, t]);
 
-        if (dbTasks.length === 0) {
-            // Fallback/Initial Render
-            return [
-                {
-                    id: 1,
-                    text: t('home.dailyTasks.completeLessons', { count: 2 }),
-                    xp: 50,
-                    current: dailyProgress.lessonsCompleted,
-                    target: 2,
-                    completed: dailyProgress.lessonsCompleted >= 2,
-                    claimed: dailyProgress.claimedTasks.includes('1')
-                },
-                {
-                    id: 2,
-                    text: t('home.dailyTasks.completeTests', { count: 3 }),
-                    xp: 75,
-                    current: dailyProgress.testsCompleted,
-                    target: 3,
-                    completed: dailyProgress.testsCompleted >= 3,
-                    claimed: dailyProgress.claimedTasks.includes('2')
-                }
-            ];
-        }
-
-        return dbTasks.map(tData => {
-            const isLesson = tData.task_type === 'lesson';
-            const current = isLesson ? dailyProgress.lessonsCompleted : dailyProgress.testsCompleted;
-            const completed = current >= tData.target_count;
-            // Claimed if DB says so OR local optimistic says so
-            const claimed = tData.is_claimed || dailyProgress.claimedTasks.includes(tData.id.toString()) || (tData.progress_id && dailyProgress.claimedTasks.includes(tData.progress_id.toString()));
-
-            return {
-                id: tData.id,
-                text: t(tData.title_key, { count: tData.target_count }), // Use translation key from DB
-                xp: tData.xp_reward,
-                current: current,
-                target: tData.target_count,
-                completed: completed,
-                claimed: claimed,
-                progress_id: tData.progress_id // Keep for claiming
-            };
-        });
-    }, [dailyProgress, dbTasks, loading, t]);
-
-    const handleClaimTaskReward = (task: Task & { progress_id?: number }) => {
+    const handleClaimTaskReward = (task: Task) => {
         if (task.completed && !task.claimed) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
 
@@ -123,32 +78,9 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             setClaimedReward({ xp: task.xp, taskName: task.text });
             setShowRewardModal(true);
 
-            // Update store (handles both claim and XP add + DB sync)
-            // Pass progress_id if available, otherwise task.id?
-            // userSlice expects taskId for local opt. and maybe for DB.
-            // But we prefer progress_id for DB call.
-            // userSlice has logic: if (!isNaN(taskId)) call dailyTasks.claim(taskId).
-            // So we should pass the PROGRESS ID as the argument if we want userSlice to verify it?
-            // Wait, userSlice logic `if (!isNaN(taskId))` assumes `taskId` IS the ID to claim.
-            // If we pass `progress_id`, it works for DB.
-            // But for local `claimedTasks` array, we want to store `task.id` (definition ID) or `progress_id`?
-            // If we store `progress_id` in `claimedTasks`, then our check `includes` above needs to check progress_id.
-            // But `dailyProgress.claimedTasks` is reset daily.
-
-            // Let's pass `progress_id` (if exists) to claim.
-            // Fallback: If no progress_id (rare), use task.id? No, DB claim needs progress row.
-
-            const idToPass = task.progress_id ? task.progress_id.toString() : task.id.toString();
-
-            // NOTE: This mismatch (task.id vs progress_id) is slightly messy.
-            // Ideally claimedTasks should store Task IDs (definitions) to hide buttons.
-            // But to claim on DB we need Progress ID.
-            // Helper: We call userSlice.claimDailyTask(idToPass).
-            // userSlice logic: Adds `idToPass` to claimedTasks. Calls DB claim(`idToPass`).
-            // So if `idToPass` is `progress_id`, then `claimedTasks` has `progress_id`.
-            // So UI check needs to check if `claimedTasks` includes `progress_id`.
-
-            claimDailyTask(idToPass, task.xp);
+            // Determine type based on ID (1=lesson, 2=test)
+            const type = task.id === 1 ? 'lesson' : 'test';
+            claimDailyTask(type, task.xp);
         }
     };
 
@@ -207,30 +139,50 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             gap: 12,
             marginBottom: 8,
         },
-        taskCircle: {
-            width: 36,
-            height: 36,
-            borderRadius: 18,
+        taskIconBox: {
+            width: 40,
+            height: 40,
+            borderRadius: 12,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: colors.error,
+            backgroundColor: colors.surfaceLight,
+            marginRight: 4,
         },
-        taskCircleCompleted: {
+        taskIconBoxCompleted: {
             backgroundColor: colors.success,
-        },
-        taskInfo: {
-            flex: 1,
         },
         taskText: {
             fontSize: 15,
             color: colors.textPrimary,
-            fontWeight: '500',
-            marginBottom: 2,
+            fontWeight: '600',
+            marginBottom: 6,
+        },
+        taskInfo: {
+            flex: 1,
+        },
+        progressRow: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: 8,
+        },
+        progressBarBg: {
+            flex: 1,
+            height: 6,
+            backgroundColor: colors.border,
+            borderRadius: 3,
+            overflow: 'hidden',
+        },
+        progressBarFill: {
+            height: '100%',
+            backgroundColor: colors.warning,
+            borderRadius: 3,
         },
         progressText: {
-            fontSize: 12,
+            fontSize: 11,
             color: colors.textSecondary,
             fontWeight: '600',
+            minWidth: 30,
+            textAlign: 'right',
         },
         xpButton: {
             paddingVertical: 6,
@@ -375,48 +327,67 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
             {/* Tasks List */}
             <View style={styles.tasksContainer}>
-                {tasks.map((task) => (
-                    <View key={task.id} style={styles.taskItem}>
-                        {/* Circle Icon */}
-                        <View style={[
-                            styles.taskCircle,
-                            task.completed && styles.taskCircleCompleted
-                        ]}>
-                            {task.completed ? (
-                                <Check size={18} color={colors.textOnPrimary} weight="bold" />
-                            ) : (
-                                <X size={18} color={colors.textOnPrimary} weight="bold" />
-                            )}
-                        </View>
+                {tasks.map((task) => {
+                    // Determine Icon based on task content (simple heuristic)
+                    let TaskIcon = Gift;
+                    if (task.text.toLowerCase().includes('ders') || task.text.toLowerCase().includes('lesson')) {
+                        TaskIcon = BookOpen;
+                    } else if (task.text.toLowerCase().includes('test') || task.text.toLowerCase().includes('quiz')) {
+                        TaskIcon = Lightning;
+                    }
 
-                        {/* Task Info */}
-                        <View style={styles.taskInfo}>
-                            <Text style={styles.taskText}>{task.text}</Text>
-                            <Text style={styles.progressText}>
-                                {task.current}/{task.target} {t('home.dailyTasks.completed')}
-                            </Text>
-                        </View>
+                    const progressPercent = Math.min(100, Math.max(0, (task.current / task.target) * 100));
 
-                        {/* XP Button */}
-                        <Pressable
-                            style={[
-                                styles.xpButton,
-                                task.completed && !task.claimed && styles.xpButtonActive,
-                                task.claimed && styles.xpButtonClaimed
-                            ]}
-                            onPress={() => handleClaimTaskReward(task)}
-                            disabled={!task.completed || task.claimed}
-                        >
-                            <Text style={[
-                                styles.xpButtonText,
-                                task.completed && !task.claimed && styles.xpButtonTextActive,
-                                task.claimed && styles.xpButtonTextClaimed
+                    return (
+                        <View key={task.id} style={styles.taskItem}>
+                            {/* Icon Box */}
+                            <View style={[
+                                styles.taskIconBox,
+                                task.completed && styles.taskIconBoxCompleted
                             ]}>
-                                {task.claimed ? t('home.dailyTasks.claimed') : `+${task.xp} XP`}
-                            </Text>
-                        </Pressable>
-                    </View>
-                ))}
+                                {task.completed ? (
+                                    <Check size={20} color={colors.textOnPrimary} weight="bold" />
+                                ) : (
+                                    <TaskIcon size={20} color={colors.warning} weight="fill" />
+                                )}
+                            </View>
+
+                            {/* Task Info & Progress */}
+                            <View style={styles.taskInfo}>
+                                <Text style={styles.taskText}>{task.text}</Text>
+
+                                <View style={styles.progressRow}>
+                                    <View style={styles.progressBarBg}>
+                                        <View style={[styles.progressBarFill, { width: `${progressPercent}%` }]} />
+                                    </View>
+                                    <Text style={styles.progressText}>
+                                        {task.current}/{task.target}
+                                    </Text>
+                                </View>
+                            </View>
+
+                            {/* XP Button */}
+                            <Pressable
+                                style={({ pressed }) => [
+                                    styles.xpButton,
+                                    task.completed && !task.claimed && styles.xpButtonActive,
+                                    task.claimed && styles.xpButtonClaimed,
+                                    pressed && !task.claimed && { opacity: 0.8 }
+                                ]}
+                                onPress={() => handleClaimTaskReward(task)}
+                                disabled={!task.completed || task.claimed}
+                            >
+                                <Text style={[
+                                    styles.xpButtonText,
+                                    task.completed && !task.claimed && styles.xpButtonTextActive,
+                                    task.claimed && styles.xpButtonTextClaimed
+                                ]}>
+                                    {task.claimed ? t('home.dailyTasks.claimed') : `+${task.xp} XP`}
+                                </Text>
+                            </Pressable>
+                        </View>
+                    );
+                })}
             </View>
 
             {/* Reward Modal */}
@@ -475,16 +446,12 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
                     <Pressable
                         style={styles.devToolButton}
-                        onPress={() => incrementDailyLessons()}
+                        onPress={() => {
+                            checkDailyReset();
+                            setShowDevToolsModal(false);
+                        }}
                     >
-                        <Text style={styles.devToolButtonText}>{t('home.dailyTasks.devTools.completeLesson')}</Text>
-                    </Pressable>
-
-                    <Pressable
-                        style={styles.devToolButton}
-                        onPress={() => incrementDailyTests()}
-                    >
-                        <Text style={styles.devToolButtonText}>{t('home.dailyTasks.devTools.completeTest')}</Text>
+                        <Text style={styles.devToolButtonText}>🔄 Günlük Reset Kontrol</Text>
                     </Pressable>
 
                     <View style={{ height: 1, backgroundColor: colors.border, marginVertical: 16 }} />

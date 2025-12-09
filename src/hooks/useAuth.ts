@@ -6,6 +6,7 @@ import { supabase } from '@lib/supabase/client';
 
 import { migrateLocalDataToDatabase } from '@lib/utils/dataMigration';
 import { User } from '@types/user.types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export function useAuthHook() {
   const [isInitialized, setIsInitialized] = useState(false);
@@ -165,9 +166,32 @@ export function useAuthHook() {
 
       if (isAnon && currentState.user?.id) {
         console.log('👻 Converting Anonymous User to Permanent:', currentState.user.id);
-        const result = await authService.convertAnonymousUser(email, password, username);
-        authUser = result.user;
-        error = result.error;
+
+        try {
+          const result = await authService.convertAnonymousUser(email, password, username);
+
+          if (result.error && result.error.name === 'AuthSessionMissingError') {
+            throw result.error; // Throw to catch block below to trigger fallback
+          }
+
+          authUser = result.user;
+          error = result.error;
+        } catch (conversionError: any) {
+          console.warn('⚠️ Conversion failed (likely session missing), falling back to fresh signup:', conversionError.message);
+
+          // Fallback to fresh signup
+          // If session is missing, we can't convert, so we just create a new user.
+          // We might lose local data if it wasn't synced, but we have no choice if session is gone.
+
+          if (currentState.boundUserId) {
+            console.log('🔒 Security: Wiping previous local data (fallback).');
+            currentState.resetUserData();
+          }
+
+          const result = await authService.signUp(email, password, username);
+          authUser = result.user;
+          error = result.error;
+        }
       } else {
         // Regular Sign Up (Fresh Account)
         console.log('🆕 Creating Fresh Account');
@@ -184,6 +208,9 @@ export function useAuthHook() {
 
       if (authUser) {
         console.log('✅ SignUp/Conversion Success! User:', authUser.id);
+
+        // Clear explicit logout flag so next time we might auto-login if session persists
+        await AsyncStorage.removeItem('explicitLogout');
 
         if (!isAnon) {
           // Only migrate if it was a FRESH signup (conversion handles data retention automatically via DB)
@@ -217,6 +244,9 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
 
+        // Clear explicit logout flag
+        await AsyncStorage.removeItem('explicitLogout');
+
         // Re-initialize to load user data from database
         await initializeAuth();
         console.log('✅ Auth initialized after signin');
@@ -243,6 +273,9 @@ export function useAuthHook() {
       if (authUser) {
         console.log('✅ SignIn Success! User:', authUser.id);
 
+        // Clear explicit logout flag
+        await AsyncStorage.removeItem('explicitLogout');
+
         // Re-initialize to load user data from database
         await initializeAuth();
         console.log('✅ Auth initialized after signin');
@@ -267,6 +300,9 @@ export function useAuthHook() {
 
       if (authUser) {
         console.log('✅ Social Login Success! User:', authUser.id);
+
+        // Clear explicit logout flag
+        await AsyncStorage.removeItem('explicitLogout');
 
         // Check if user exists in DB
         const { data: userProfile } = await database.users.getProfile(authUser.id);
@@ -307,12 +343,12 @@ export function useAuthHook() {
 
       if (error) throw error;
 
-      // Clear local user data (XP, streak, lives, etc.)
-      // const { resetUserData } = useStore.getState();
-      // resetUserData();
+      // PROPER LOGOUT GATE:
+      // 2. Do NOT initializeAuth() which would create a new anon user.
+      await AsyncStorage.setItem('explicitLogout', 'true');
+      console.log('🔒 Explicit logout flag set.');
 
-      logout();
-      await initializeAuth(); // Reinitialize as anonymous
+      logout(); // Clear Zustand store
 
       return { error: null };
     } catch (error) {

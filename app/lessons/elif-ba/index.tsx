@@ -126,6 +126,36 @@ export default function ElifBaLessonsListScreen() {
             title: 'Şedde',
             route: '/lessons/sedde/118',
         },
+        {
+            id: '119',
+            title: 'Alıştırmalar - 3',
+            route: '/lessons/alistirmalar-3/119',
+        },
+        {
+            id: '120',
+            title: 'İki Üstün (Tenvin)',
+            route: '/lessons/iki-ustun/120',
+        },
+        {
+            id: '121',
+            title: 'İki Esre (Tenvin)',
+            route: '/lessons/iki-esre/121',
+        },
+        {
+            id: '122',
+            title: 'İki Ötre (Tenvin)',
+            route: '/lessons/iki-otre/122',
+        },
+        {
+            id: '123',
+            title: 'Çeker (Asar)',
+            route: '/lessons/ceker/123',
+        },
+        {
+            id: '124',
+            title: 'Vav ve Ya Şeklinde Yazılan Elif',
+            route: '/lessons/vav-ve-ya-sekli-elif/124',
+        },
     ];
 
     return (

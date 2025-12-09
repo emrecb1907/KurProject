@@ -29,7 +29,7 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
   const router = useRouter();
   const { themeVersion } = useTheme();
   const { t } = useTranslation();
-  const { incrementDailyLessons } = useUser();
+  // const { incrementDailyLessons } = useUser(); // Deprecated
 
   const styles = useMemo(() => StyleSheet.create({
     container: {

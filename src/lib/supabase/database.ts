@@ -327,99 +327,28 @@ export const database = {
     }
   },
 
-  // ==================== DAILY TASKS (NEW) ====================
-  dailyTasks: {
-    // Get tasks and user progress
-    async get(userId: string) {
-      // 1. Get task definitions
-      const { data: tasks, error: tasksError } = await supabase
-        .from('daily_tasks')
-        .select('*')
-        .eq('is_active', true)
-        .order('id');
-
-      if (tasksError) return { data: null, error: tasksError };
-
-      // 2. Get user progress for today
-      const { data: progress, error: progressError } = await supabase
-        .from('user_daily_progress')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('progress_date', new Date().toISOString().split('T')[0]);
-
-      if (progressError) return { data: null, error: progressError };
-
-      // 3. Merge data
-      const mergedTasks = tasks.map(task => {
-        const userProgress = progress?.find(p => p.task_id === task.id);
-        return {
-          ...task,
-          current_count: userProgress?.current_count || 0,
-          is_claimed: userProgress?.is_claimed || false,
-          progress_id: userProgress?.id
-        };
+  // ==============================================================================
+  // DAILY SNAPSHOTS (HYBRID SYSTEM)
+  // ==============================================================================
+  dailySnapshots: {
+    // 1. Get or Create Snapshot for Today (Lazy Init)
+    // Now accepts Client Totals to handle Sync Mismatches/First Launch
+    async get(userId: string, clientLessons = 0, clientTests = 0) {
+      const { data, error } = await supabase.rpc('get_or_create_daily_snapshot', {
+        p_user_id: userId,
+        p_client_lessons: clientLessons,
+        p_client_tests: clientTests
       });
-
-      return { data: mergedTasks, error: null };
+      return { data, error };
     },
 
-    // Update progress for a specific task type (lesson/test)
-    async updateProgress(userId: string, taskType: 'lesson' | 'test', increment: number = 1) {
-      // 1. Find the relevant active task
-      const { data: task, error: taskError } = await supabase
-        .from('daily_tasks')
-        .select('id, target_count')
-        .eq('task_type', taskType)
-        .eq('is_active', true)
-        .single();
-
-      if (taskError || !task) return { error: taskError || 'No active task found' };
-
-      const today = new Date().toISOString().split('T')[0];
-
-      // 2. Check existing progress or create new
-      const { data: existingProgress } = await supabase
-        .from('user_daily_progress')
-        .select('*')
-        .eq('user_id', userId)
-        .eq('task_id', task.id)
-        .eq('progress_date', today)
-        .single();
-
-      if (existingProgress) {
-        // Update if not already completed/claimed max (optional logic)
-        // If we want to cap at target_count: Math.min(existingProgress.current_count + increment, task.target_count)
-        // But usually we just let it count up.
-
-        const { error } = await supabase
-          .from('user_daily_progress')
-          .update({
-            current_count: existingProgress.current_count + increment,
-            updated_at: new Date().toISOString()
-          })
-          .eq('id', existingProgress.id);
-        return { error };
-      } else {
-        // Create new progress entry
-        const { error } = await supabase
-          .from('user_daily_progress')
-          .insert({
-            user_id: userId,
-            task_id: task.id,
-            current_count: increment,
-            progress_date: today
-          });
-        return { error };
-      }
-    },
-
-    // Claim reward
-    async claim(progressId: number) {
-      const { error } = await supabase
-        .from('user_daily_progress')
-        .update({ is_claimed: true })
-        .eq('id', progressId);
-      return { error };
+    // 2. Claim Reward (Secure Check)
+    async claim(userId: string, rewardType: 'lesson' | 'test') {
+      const { data, error } = await supabase.rpc('claim_daily_reward', {
+        p_user_id: userId,
+        p_reward_type: rewardType
+      });
+      return { data, error };
     }
   },
 
@@ -448,4 +377,3 @@ export const database = {
     }
   }
 };
-

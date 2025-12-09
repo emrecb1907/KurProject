@@ -59,11 +59,11 @@ export const HomeHeader = () => {
             width: 48,
             height: 48,
             borderRadius: 24,
-            backgroundColor: colors.warning, // Yellow circle
+            backgroundColor: colors.primary, // Orange circle
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: 2,
-            borderColor: colors.warningDark,
+            borderColor: colors.primaryDark,
         },
         greetingContainer: {
             justifyContent: 'center',
@@ -110,7 +110,7 @@ export const HomeHeader = () => {
             borderRadius: 32,
             gap: 8,
             borderWidth: activeTheme === 'light' ? 0.2 : 0,
-            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
+            borderColor: activeTheme === 'light' ? '#FF9600' : 'transparent',
             // iOS 18 style shadow
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
@@ -134,11 +134,11 @@ export const HomeHeader = () => {
             overflow: 'hidden',
             marginBottom: 6,
             borderWidth: activeTheme === 'light' ? 0.2 : 0,
-            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
+            borderColor: activeTheme === 'light' ? '#FF9600' : 'transparent',
         },
         xpBarFill: {
             height: '100%',
-            backgroundColor: '#FFC800',
+            backgroundColor: '#FF9600',
             borderRadius: 6,
         },
         xpText: {
@@ -171,7 +171,7 @@ export const HomeHeader = () => {
             {/* Stats Row */}
             <View style={styles.statsRow}>
                 <View style={styles.statBadge}>
-                    <GraduationCap size={20} color={colors.warning} weight="fill" />
+                    <GraduationCap size={20} color={colors.primary} weight="fill" />
                     <Text style={styles.statValue}>Level {xpProgress.currentLevel}</Text>
                 </View>
                 <View style={[styles.statBadge, { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
@@ -181,11 +181,11 @@ export const HomeHeader = () => {
                         top: 0,
                         bottom: 0,
                         width: `${Math.min((currentLives / (maxLives || 6)) * 100, 100)}%`,
-                        backgroundColor: colors.warning,
+                        backgroundColor: colors.primary,
                         opacity: 0.3,
                     }} />
                     <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
-                        <Lightning size={20} color={colors.warning} weight="fill" />
+                        <Lightning size={20} color={colors.primary} weight="fill" />
                         <Text style={styles.statValue}>{currentLives}/{maxLives || 6}</Text>
                     </View>
                 </View>

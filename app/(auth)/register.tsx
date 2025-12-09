@@ -2,31 +2,34 @@ import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Card } from '@components/ui';
-import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { validateText } from '@/utils/profanityFilter';
+import { ArrowLeft, CheckCircle, Eye, EyeSlash } from 'phosphor-react-native';
 
 export default function RegisterScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { signUp, signInWithGoogle, signInWithApple } = useAuthHook();
-  const { themeVersion } = useTheme();
+  const { signUp } = useAuthHook();
+  const { themeVersion, activeTheme } = useTheme();
 
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
   // Re-calculate styles when theme changes
-  const styles = useMemo(() => getStyles(), [themeVersion]);
+  const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
+  const isDark = activeTheme === 'dark';
 
   const handleRegister = async () => {
-    console.log('🔵 RegisterScreen.handleRegister called');
     // Validation
     if (!username || !email || !password || !confirmPassword) {
       setError(t('auth.errors.fillAllFields'));
@@ -35,6 +38,11 @@ export default function RegisterScreen() {
 
     if (password !== confirmPassword) {
       setError(t('auth.errors.passwordMismatch'));
+      return;
+    }
+
+    if (!termsAccepted) {
+      setError('Lütfen kullanım şartlarını kabul edin.'); // Basic fallback
       return;
     }
 
@@ -95,6 +103,7 @@ export default function RegisterScreen() {
       <ScrollView
         contentContainerStyle={styles.scrollContent}
         keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
       >
         <View style={styles.header}>
           <Pressable onPress={() => {
@@ -103,31 +112,18 @@ export default function RegisterScreen() {
             } else {
               router.replace('/(auth)/login');
             }
-          }}>
-            <Text style={styles.backButton}>{t('common.back')}</Text>
+          }}
+            style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
+          >
+            <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
           </Pressable>
+          <Text style={styles.headerTitle}>{t('auth.register.title')}</Text>
+          <View style={{ width: 40 }} />
         </View>
 
         <View style={styles.content}>
-          <Text style={styles.title}>{t('auth.register.title')}</Text>
-          <Text style={styles.subtitle}>
-            {t('auth.register.subtitle')}
-          </Text>
-
           <Card style={styles.formCard}>
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.register.username')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.register.usernamePlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
-            </View>
-
+            {/* Email Input */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>{t('auth.register.email')}</Text>
               <TextInput
@@ -142,81 +138,120 @@ export default function RegisterScreen() {
               />
             </View>
 
+            {/* Username Input */}
+            <View style={styles.inputGroup}>
+              <Text style={styles.label}>{t('auth.register.username')}</Text>
+              <TextInput
+                style={styles.input}
+                placeholder={t('auth.register.usernamePlaceholder')}
+                placeholderTextColor={colors.textDisabled}
+                value={username}
+                onChangeText={setUsername}
+                autoCapitalize="none"
+                autoCorrect={false}
+              />
+            </View>
+
+            {/* Password Input */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>{t('auth.register.password')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.register.passwordPlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={password}
-                onChangeText={setPassword}
-                secureTextEntry
-                autoCapitalize="none"
-              />
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.passwordInput}
+                  placeholder={t('auth.register.passwordPlaceholder')}
+                  placeholderTextColor={colors.textDisabled}
+                  value={password}
+                  onChangeText={setPassword}
+                  secureTextEntry={!showPassword}
+                  autoCapitalize="none"
+                />
+                <Pressable
+                  onPress={() => setShowPassword(!showPassword)}
+                  style={styles.eyeIcon}
+                >
+                  {showPassword ? (
+                    <Eye size={20} color={colors.textDisabled} />
+                  ) : (
+                    <EyeSlash size={20} color={colors.textDisabled} />
+                  )}
+                </Pressable>
+              </View>
             </View>
 
+            {/* Confirm Password Input */}
             <View style={styles.inputGroup}>
               <Text style={styles.label}>{t('auth.register.confirmPassword')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.register.confirmPasswordPlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={confirmPassword}
-                onChangeText={setConfirmPassword}
-                secureTextEntry
-                autoCapitalize="none"
-              />
-            </View>
-
-            {error ? (
-              <View style={styles.errorBox}>
-                <Text style={styles.errorText}>{error}</Text>
+              <View style={styles.passwordContainer}>
+                <TextInput
+                  style={styles.passwordInput}
+                  placeholder={t('auth.register.confirmPasswordPlaceholder')}
+                  placeholderTextColor={colors.textDisabled}
+                  value={confirmPassword}
+                  onChangeText={setConfirmPassword}
+                  secureTextEntry={!showConfirmPassword}
+                  autoCapitalize="none"
+                />
+                <Pressable
+                  onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                  style={styles.eyeIcon}
+                >
+                  {showConfirmPassword ? (
+                    <Eye size={20} color={colors.textDisabled} />
+                  ) : (
+                    <EyeSlash size={20} color={colors.textDisabled} />
+                  )}
+                </Pressable>
               </View>
-            ) : null}
-
-            <Button
-              title={loading ? t('auth.register.registering') : t('auth.register.registerButton')}
-              onPress={handleRegister}
-              disabled={loading}
-              fullWidth
-              style={styles.submitButton}
-            />
+            </View>
           </Card>
 
-          <SocialLoginButtons
-            onGooglePress={() => {
-              Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
-            }}
-            onApplePress={() => {
-              Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
-            }}
-            loading={loading}
+          {/* Terms Checkbox */}
+          <Pressable
+            style={styles.checkboxContainer}
+            onPress={() => setTermsAccepted(!termsAccepted)}
+          >
+            {termsAccepted ? (
+              <CheckCircle size={24} color={colors.primary} weight="fill" />
+            ) : (
+              <View style={{ width: 24, height: 24, borderRadius: 12, borderWidth: 2, borderColor: colors.textSecondary }} />
+            )}
+            <Text style={[styles.checkboxText, { color: termsAccepted ? colors.textPrimary : colors.textSecondary }]}>
+              {t('auth.register.termsAndPrivacy')}
+            </Text>
+          </Pressable>
+
+          {error ? (
+            <View style={styles.errorBox}>
+              <Text style={styles.errorText}>{error}</Text>
+            </View>
+          ) : null}
+
+          <Button
+            title={loading ? t('auth.register.registering') : t('auth.register.registerButton')}
+            onPress={handleRegister}
+            disabled={loading}
+            fullWidth
+            style={styles.submitButton}
           />
 
-          <View style={styles.infoBox}>
-            <Text style={styles.infoText}>
-              🎉 Kayıt olduğunda mevcut ilerlemen hesabına aktarılacak ve hemen giriş yapılacak!
-            </Text>
-          </View>
+          {/* Progress Note */}
+          <Text style={styles.progressNote}>
+            {t('auth.register.progressNote')}
+          </Text>
 
           <View style={styles.footer}>
             <Text style={styles.footerText}>{t('auth.register.hasAccount')}</Text>
             <Pressable onPress={() => router.push('/(auth)/login')}>
-              <Text style={styles.linkText}>{t('auth.register.login')}</Text>
+              <Text style={styles.linkText}> {t('auth.register.login')}</Text>
             </Pressable>
           </View>
-
-          <Pressable onPress={() => router.replace('/(tabs)')}>
-            <Text style={styles.skipText}>{t('auth.register.skipForNow')}</Text>
-          </Pressable>
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
   );
 }
 
-// Styles are defined in a function to be re-evaluated when theme changes
-const getStyles = () => StyleSheet.create({
+const getStyles = (theme: 'light' | 'dark') => StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.background,
@@ -225,33 +260,32 @@ const getStyles = () => StyleSheet.create({
     flexGrow: 1,
   },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingTop: 60,
     paddingHorizontal: 16,
     paddingBottom: 16,
   },
   backButton: {
-    fontSize: 16,
-    color: colors.primary,
+    padding: 8,
+    borderRadius: 8,
+  },
+  backButtonPressed: {
+    backgroundColor: colors.surface,
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: colors.textPrimary,
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 20,
   },
-  title: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: colors.textPrimary,
-    marginBottom: 8,
-  },
-  subtitle: {
-    fontSize: 16,
-    color: colors.textSecondary,
-    marginBottom: 32,
-    lineHeight: 24,
-  },
   formCard: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   inputGroup: {
     marginBottom: 20,
@@ -263,13 +297,48 @@ const getStyles = () => StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: colors.border,
+    backgroundColor: theme === 'dark' ? '#1F2937' : '#FFFFFF',
     borderRadius: 12,
     padding: 16,
     fontSize: 16,
     color: colors.textPrimary,
-    backgroundColor: colors.surface,
+    borderWidth: 1,
+    borderColor: theme === 'dark' ? '#374151' : '#E5E7EB',
+  },
+  passwordContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: theme === 'dark' ? '#1F2937' : '#FFFFFF',
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: theme === 'dark' ? '#374151' : '#E5E7EB',
+  },
+  passwordInput: {
+    flex: 1,
+    padding: 16,
+    fontSize: 16,
+    color: colors.textPrimary,
+  },
+  eyeIcon: {
+    padding: 16,
+  },
+  checkboxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+    gap: 12,
+  },
+  checkboxText: {
+    flex: 1,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  progressNote: {
+    fontSize: 11,
+    color: colors.textSecondary,
+    marginTop: 24,
+    marginBottom: 8,
+    textAlign: 'center',
   },
   errorBox: {
     backgroundColor: `${colors.error}15`,
@@ -283,25 +352,15 @@ const getStyles = () => StyleSheet.create({
     textAlign: 'center',
   },
   submitButton: {
-    marginTop: 8,
-  },
-  infoBox: {
-    backgroundColor: colors.primaryLight,
-    padding: 12,
-    borderRadius: 8,
-    marginBottom: 16,
-  },
-  infoText: {
-    fontSize: 13,
-    color: colors.primaryDark,
-    textAlign: 'center',
-    lineHeight: 18,
+    height: 56,
+    borderRadius: 28,
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: 8,
+    marginTop: 'auto',
+    marginBottom: 40,
   },
   footerText: {
     fontSize: 14,
@@ -309,13 +368,7 @@ const getStyles = () => StyleSheet.create({
   },
   linkText: {
     fontSize: 14,
-    fontWeight: '600',
+    fontWeight: 'bold',
     color: colors.primary,
-  },
-  skipText: {
-    fontSize: 14,
-    color: colors.textDisabled,
-    textAlign: 'center',
-    marginTop: 24,
   },
 });

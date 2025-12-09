@@ -106,7 +106,7 @@ export default function SettingsScreen() {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setShowLogoutModal(false);
     await signOut();
-    router.replace('/(auth)/login');
+    router.replace('/(auth)/welcome');
   };
 
   // Handle delete account
@@ -138,7 +138,7 @@ export default function SettingsScreen() {
       // In production, you might want to use a server-side function for complete deletion
       await signOut();
       setShowDeleteAccountModal(false);
-      router.replace('/(auth)/login');
+      router.replace('/(auth)/welcome');
     } catch (error) {
       console.error('Error deleting account:', error);
       setShowDeleteAccountModal(false);
@@ -260,12 +260,12 @@ export default function SettingsScreen() {
       marginTop: 24,
     },
     sectionTitle: {
-      fontSize: 13,
-      fontWeight: '600',
-      color: colors.textSecondary,
-      textTransform: 'uppercase',
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
       paddingHorizontal: 16,
-      marginBottom: 8,
+      marginBottom: 16,
+      marginTop: 8,
     },
     optionItem: {
       flexDirection: 'row',
@@ -297,7 +297,7 @@ export default function SettingsScreen() {
       marginBottom: 16,
     },
     themeSectionTitle: {
-      fontSize: 22,
+      fontSize: 20,
       fontWeight: 'bold',
       color: colors.textPrimary,
     },
@@ -351,7 +351,7 @@ export default function SettingsScreen() {
       marginBottom: 16,
     },
     languageSectionTitle: {
-      fontSize: 22,
+      fontSize: 20,
       fontWeight: 'bold',
       color: colors.textPrimary,
     },
@@ -401,11 +401,9 @@ export default function SettingsScreen() {
       justifyContent: 'center',
       gap: 8,
       backgroundColor: colors.error,
-      paddingVertical: 14,
+      paddingVertical: 16,
       paddingHorizontal: 16,
-      borderRadius: 12,
-      borderBottomWidth: 4,
-      borderBottomColor: colors.errorDark,
+      borderRadius: 30,
     },
     logoutButtonText: {
       color: colors.textOnPrimary,
@@ -418,11 +416,9 @@ export default function SettingsScreen() {
       justifyContent: 'center',
       gap: 8,
       backgroundColor: colors.error,
-      paddingVertical: 14,
+      paddingVertical: 16,
       paddingHorizontal: 16,
-      borderRadius: 12,
-      borderBottomWidth: 4,
-      borderBottomColor: colors.errorDark,
+      borderRadius: 30,
       opacity: 0.8,
     },
     deleteAccountButtonText: {
@@ -461,24 +457,22 @@ export default function SettingsScreen() {
     },
     modalButton: {
       flex: 1,
-      paddingVertical: 14,
+      paddingVertical: 16,
       paddingHorizontal: 24,
-      borderRadius: 12,
+      borderRadius: 30,
       alignItems: 'center',
       justifyContent: 'center',
-      borderBottomWidth: 4,
     },
     modalButtonCancel: {
       backgroundColor: colors.surface,
-      borderBottomColor: colors.border,
+      borderWidth: 1,
+      borderColor: colors.border,
     },
     modalButtonConfirm: {
       backgroundColor: colors.error,
-      borderBottomColor: colors.errorDark,
     },
     modalButtonDelete: {
       backgroundColor: colors.error,
-      borderBottomColor: colors.errorDark,
     },
     modalButtonCancelText: {
       color: colors.textPrimary,

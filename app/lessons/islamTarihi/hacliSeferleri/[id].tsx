@@ -147,7 +147,7 @@ export default function IslamicHistoryLessonScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { themeVersion } = useTheme();
   const { t } = useTranslation();
-  const { incrementDailyLessons, completeLesson } = useUser();
+  const { completeLesson } = useUser();
 
   const lesson = islamicHistoryContent[id || '409'];
   if (!lesson) {
@@ -288,7 +288,7 @@ export default function IslamicHistoryLessonScreen() {
 
   const handleComplete = () => {
     Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-    incrementDailyLessons();
+
     completeLesson(id || '409');
     router.back();
   };

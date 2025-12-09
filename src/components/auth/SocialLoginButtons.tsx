@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { View, Text, StyleSheet, Pressable, Platform, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Platform } from 'react-native';
 import { Svg, Path, G } from 'react-native-svg';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,6 +8,7 @@ interface SocialLoginButtonsProps {
     onGooglePress: () => void;
     onApplePress: () => void;
     loading?: boolean;
+    variant?: 'default' | 'circular';
 }
 
 const GoogleLogo = () => (
@@ -31,9 +32,12 @@ export const SocialLoginButtons: React.FC<SocialLoginButtonsProps> = ({
     onGooglePress,
     onApplePress,
     loading = false,
+    variant = 'default',
 }) => {
     const { themeVersion } = useTheme();
     const styles = useMemo(() => getStyles(), [themeVersion]);
+
+    const isCircular = variant === 'circular';
 
     return (
         <View style={styles.container}>
@@ -43,25 +47,27 @@ export const SocialLoginButtons: React.FC<SocialLoginButtonsProps> = ({
                 <View style={styles.divider} />
             </View>
 
-            <View style={styles.buttonsContainer}>
+            <View style={[styles.buttonsContainer, isCircular && styles.buttonsContainerCircular]}>
                 <Pressable
                     style={({ pressed }) => [
                         styles.button,
-                        pressed && styles.buttonPressed,
+                        isCircular && styles.buttonCircular,
+                        pressed && (isCircular ? styles.buttonCircularPressed : styles.buttonPressed),
                         loading && styles.buttonDisabled,
                     ]}
                     onPress={onGooglePress}
                     disabled={loading}
                 >
                     <GoogleLogo />
-                    <Text style={styles.buttonText}>Google</Text>
+                    {!isCircular && <Text style={styles.buttonText}>Google</Text>}
                 </Pressable>
 
                 {Platform.OS === 'ios' && (
                     <Pressable
                         style={({ pressed }) => [
                             styles.button,
-                            pressed && styles.buttonPressed,
+                            isCircular && styles.buttonCircular,
+                            pressed && (isCircular ? styles.buttonCircularPressed : styles.buttonPressed),
                             loading && styles.buttonDisabled,
                         ]}
                         onPress={onApplePress}
@@ -70,7 +76,7 @@ export const SocialLoginButtons: React.FC<SocialLoginButtonsProps> = ({
                         <View style={styles.appleIcon}>
                             <AppleLogo color={colors.textPrimary} />
                         </View>
-                        <Text style={styles.buttonText}>Apple</Text>
+                        {!isCircular && <Text style={styles.buttonText}>Apple</Text>}
                     </Pressable>
                 )}
             </View>
@@ -92,6 +98,7 @@ const getStyles = () => StyleSheet.create({
         flex: 1,
         height: 1,
         backgroundColor: colors.border,
+        opacity: 0.2, // More subtle
     },
     dividerText: {
         marginHorizontal: 16,
@@ -101,6 +108,10 @@ const getStyles = () => StyleSheet.create({
     buttonsContainer: {
         flexDirection: 'row',
         gap: 12,
+    },
+    buttonsContainerCircular: {
+        justifyContent: 'center',
+        gap: 24,
     },
     button: {
         flex: 1,
@@ -114,9 +125,22 @@ const getStyles = () => StyleSheet.create({
         padding: 12,
         gap: 8,
     },
+    buttonCircular: {
+        flex: 0,
+        width: 50,
+        height: 50,
+        borderRadius: 25,
+        padding: 0,
+        backgroundColor: colors.surfaceLight, // A bit lighter for contrast
+        borderWidth: 0, // No border for circular style usually looks cleaner or use a very subtle one
+    },
     buttonPressed: {
         backgroundColor: colors.background,
         opacity: 0.8,
+    },
+    buttonCircularPressed: {
+        opacity: 0.7,
+        transform: [{ scale: 0.95 }],
     },
     buttonDisabled: {
         opacity: 0.5,

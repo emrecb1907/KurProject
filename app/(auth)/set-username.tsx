@@ -85,7 +85,7 @@ export default function SetUsernameScreen() {
                     style: 'destructive',
                     onPress: async () => {
                         await signOut();
-                        router.replace('/(auth)/login');
+                        router.replace('/(auth)/welcome');
                     }
                 }
             ]

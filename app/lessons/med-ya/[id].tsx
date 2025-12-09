@@ -13,7 +13,7 @@ import { useUser } from '@/store';
 export default function MedUzatmaYaLessonScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { incrementDailyLessons, completeLesson } = useUser();
+    const { completeLesson } = useUser();
     const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
@@ -176,7 +176,7 @@ export default function MedUzatmaYaLessonScreen() {
         if (!allItemsPlayed) return;
 
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-        incrementDailyLessons();
+
         completeLesson('114'); // Mark Med (Uzatma) Harfi: Ya as completed
         router.push('/(tabs)');
     };

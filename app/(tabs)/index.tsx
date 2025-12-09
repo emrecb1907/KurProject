@@ -23,13 +23,8 @@ export default function HomePage() {
     const { themeVersion, activeTheme } = useTheme();
 
     // Get user data from Zustand store
-    const { totalXP, setTotalXP, checkDailyReset, syncCompletedLessons } = useUser();
+    const { totalXP, setTotalXP, syncCompletedLessons } = useUser();
     const { isAuthenticated, user } = useAuth();
-
-    // Check daily reset on mount
-    useEffect(() => {
-        checkDailyReset();
-    }, [checkDailyReset]);
 
     // Track last XP update time to avoid race conditions
     const lastXPUpdateRef = useRef<number>(0);
@@ -186,7 +181,7 @@ export default function HomePage() {
             shadowRadius: 8,
             elevation: 2,
             borderWidth: activeTheme === 'light' ? 0.2 : 0,
-            borderColor: activeTheme === 'light' ? '#FFC800' : 'transparent',
+            borderColor: activeTheme === 'light' ? '#FF9600' : 'transparent',
         },
         categoryButton: {
             flex: 1,
@@ -197,7 +192,7 @@ export default function HomePage() {
             justifyContent: 'center',
         },
         categoryButtonActive: {
-            backgroundColor: '#FFC800',
+            backgroundColor: '#FF9600',
         },
         categoryButtonInactive: {
             backgroundColor: 'transparent',
