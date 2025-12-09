@@ -1,28 +1,69 @@
-import { createAudioPlayer } from 'expo-audio';
+import { createAudioPlayer, AudioPlayer } from 'expo-audio';
 
 /**
- * Plays a sound from a local asset.
- * @param source The source of the audio (require(...) or URI).
- * @returns A function to stop and unload the sound.
+ * Singleton Audio Player using the expo-audio recommended pattern.
+ * Uses a single player instance and the `replace(source)` method to switch sounds.
+ * This avoids creating multiple players which can cause playback issues.
  */
-export const playSound = async (source: any) => {
+
+let player: AudioPlayer | null = null;
+let currentSource: any = null;
+
+/**
+ * Plays a sound using a single, reused AudioPlayer instance.
+ * Per expo-audio docs, we use `replace(source)` to switch sounds and
+ * `seekTo(0); play()` to replay.
+ * 
+ * @param source The audio source (require(...) or URI)
+ * @returns A cleanup function to pause playback
+ */
+export const playSound = (source: any) => {
     try {
-        const player = createAudioPlayer(source);
-        player.play();
+        // Initialize player on first use
+        if (!player) {
+            player = createAudioPlayer(source);
+            currentSource = source;
+            player.play();
+        } else if (currentSource !== source) {
+            // Replace source if different (this is the documented way to switch sounds)
+            player.replace(source);
+            currentSource = source;
+            player.play();
+        } else {
+            // Same source - just seek to start and play (replay pattern from docs)
+            player.seekTo(0);
+            player.play();
+        }
 
         // Return a cleanup function
-        return async () => {
+        return () => {
             try {
-                player.pause(); // Ensure playback stops immediately
-                player.remove();
-                // The remove() method properly disposes of the player
+                if (player) {
+                    player.pause();
+                }
             } catch (e) {
-                console.warn('Error stopping sound:', e);
+                console.warn('Error pausing sound:', e);
             }
         };
     } catch (error) {
         console.error('Error playing sound:', error);
-        return async () => { };
+        return () => { };
+    }
+};
+
+/**
+ * Releases the audio player. Call this when leaving screens that use audio.
+ * This prevents memory leaks as noted in expo-audio docs.
+ */
+export const releaseAudioPlayer = () => {
+    if (player) {
+        try {
+            player.remove();
+        } catch (e) {
+            console.warn('Error releasing player:', e);
+        }
+        player = null;
+        currentSource = null;
     }
 };
 

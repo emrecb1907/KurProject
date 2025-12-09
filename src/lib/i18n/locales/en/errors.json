@@ -2,5 +2,7 @@
     "insufficientLives": "Insufficient Energy",
     "insufficientLivesDesc": "You need at least 1 energy to start this test. You can earn energy from the Chest tab.",
     "authRequired": "Login Required",
-    "tryAgainLater": "Please try again later"
+    "tryAgainLater": "Please try again later",
+    "noConnection": "No Internet Connection",
+    "noConnectionDesc": "It looks like you're not connected to the internet. Please check your connection and try again. 📶"
 }

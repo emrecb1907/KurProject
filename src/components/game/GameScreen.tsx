@@ -18,16 +18,19 @@ import { GameQuestion, GameType } from '@/types/game.types';
 import { useGameCompletion } from '@/hooks';
 import { GAME_UI_CONFIG } from '@constants/game';
 import { logger } from '@/lib/logger';
-import { playSound } from '@/utils/audio';
+import { playSound, releaseAudioPlayer } from '@/utils/audio';
+import {
+    playGameSound,
+    releaseGameAudioPlayer,
+    initGameSounds,
+    CORRECT_CHOICE_SOUND,
+    WRONG_CHOICE_SOUND,
+    GAME_COMPLETE_SOUND,
+    LEVEL_UP_SOUND
+} from '@/utils/gameSound';
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import * as Network from 'expo-network';
-
-// Sound effect files
-const CORRECT_CHOICE_SOUND = require('../../../assets/audio/effects/CorrectChoice.mp3');
-const WRONG_CHOICE_SOUND = require('../../../assets/audio/effects/WrongChoice.mp3');
-const GAME_COMPLETE_SOUND = require('../../../assets/audio/effects/GameComplete.mp3');
-const LEVEL_UP_SOUND = require('../../../assets/audio/effects/LevelUp.mp3');
 
 interface GameScreenProps {
     lessonId: string;
@@ -83,9 +86,9 @@ export function GameScreen({
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
     const [isTimeUp, setIsTimeUp] = useState(false); // New state for timeout
-    const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
-    const stopEffectSoundRef = useRef<(() => Promise<void>) | null>(null);
-    const stopGameCompleteSoundRef = useRef<(() => Promise<void>) | null>(null);
+    const stopSoundRef = useRef<(() => void) | null>(null);
+    const stopEffectSoundRef = useRef<(() => void) | null>(null);
+    const stopGameCompleteSoundRef = useRef<(() => void) | null>(null);
 
     // Duration Tracking
     const startTimeRef = useRef<number>(Date.now());
@@ -98,14 +101,15 @@ export function GameScreen({
     const currentQuestion = questions[currentQuestionIndex];
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
-    // Configure audio mode once
-    // playsInSilentModeIOS: false means sounds won't play when device is in silent mode
     // Cleanup audio when component unmounts
     useEffect(() => {
         return () => {
             if (stopSoundRef.current) stopSoundRef.current();
             if (stopEffectSoundRef.current) stopEffectSoundRef.current();
             if (stopGameCompleteSoundRef.current) stopGameCompleteSoundRef.current();
+            // Release the global audio players when leaving game screen
+            releaseAudioPlayer();
+            releaseGameAudioPlayer();
         };
     }, []);
 
@@ -119,6 +123,9 @@ export function GameScreen({
 
     // Check lives on mount
     useEffect(() => {
+        // Initialize game sounds for instant playback
+        initGameSounds();
+
         // Log game load
         logger.game(`${gameType} game loaded - Using generic GameScreen component`);
 
@@ -141,19 +148,19 @@ export function GameScreen({
     // Play sound effect (correct or wrong)
     // Note: Sounds will not play if device is in silent mode (playsInSilentModeIOS: false)
     // Play sound effect (correct or wrong)
-    const playSoundEffect = async (isCorrect: boolean) => {
+    const playSoundEffect = (isCorrect: boolean) => {
         try {
             // Stop previous effect sound
             if (stopEffectSoundRef.current) {
-                await stopEffectSoundRef.current();
+                stopEffectSoundRef.current();
                 stopEffectSoundRef.current = null;
             }
 
             // Get the appropriate sound file
             const soundFile = isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND;
 
-            // Play the sound effect
-            const stop = await playSound(soundFile);
+            // Play the sound effect using game sound manager
+            const stop = playGameSound(soundFile);
             stopEffectSoundRef.current = stop;
         } catch (error) {
             console.error('Error playing sound effect:', error);
@@ -307,7 +314,7 @@ export function GameScreen({
     };
 
     // Handle audio playback for letters game
-    const handlePlayAudio = async () => {
+    const handlePlayAudio = () => {
         if (gameType !== 'letters' || !currentQuestion.audioFileId) {
             return;
         }
@@ -317,7 +324,7 @@ export function GameScreen({
         try {
             // Stop previous sound
             if (stopSoundRef.current) {
-                await stopSoundRef.current();
+                stopSoundRef.current();
                 stopSoundRef.current = null;
             }
 
@@ -329,7 +336,7 @@ export function GameScreen({
             }
 
             // Play audio
-            const stop = await playSound(audioFile);
+            const stop = playSound(audioFile);
             stopSoundRef.current = stop;
         } catch (error) {
             console.error('Error playing audio:', error);
@@ -399,19 +406,19 @@ export function GameScreen({
     // Play game complete or level up sound based on modal visibility
     useEffect(() => {
         if (isGameComplete) {
-            const playCompletionSound = async () => {
+            const playCompletionSound = () => {
                 try {
                     // Stop previous sound
                     if (stopGameCompleteSoundRef.current) {
-                        await stopGameCompleteSoundRef.current();
+                        stopGameCompleteSoundRef.current();
                         stopGameCompleteSoundRef.current = null;
                     }
 
                     // Choose sound based on level up modal visibility
                     const soundFile = showLevelUpModal ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
 
-                    // Play sound
-                    const stop = await playSound(soundFile);
+                    // Play sound using game sound manager
+                    const stop = playGameSound(soundFile);
                     stopGameCompleteSoundRef.current = stop;
                 } catch (error) {
                     console.error('Error playing completion sound:', error);

@@ -2,6 +2,7 @@ import React, { useState, useMemo, useRef } from 'react';
 import { View, Text, Pressable, StyleSheet, LayoutAnimation, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
+import * as Network from 'expo-network';
 import { useRouter } from 'expo-router';
 import { Lock } from 'phosphor-react-native';
 import Animated, { FadeInUp, FadeOutDown, Easing } from 'react-native-reanimated';
@@ -53,6 +54,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const router = useRouter();
     const { themeVersion } = useTheme();
     const [isSelected, setIsSelected] = useState(false);
+    const isNavigatingRef = useRef(false); // Prevent double-tap navigation
 
     const styles = useMemo(() => getStyles(size), [themeVersion, size]);
 
@@ -90,11 +92,36 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const { consumeEnergy } = useStore();
 
     const handleStart = async () => {
+        // Prevent double-tap from opening multiple tests
+        if (isNavigatingRef.current) return;
+        isNavigatingRef.current = true;
+
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
 
         if (!route) {
             setIsSelected(false);
+            isNavigatingRef.current = false;
             return;
+        }
+
+        // 🛡️ NETWORK CHECK (Offline Protection)
+        try {
+            const networkState = await Network.getNetworkStateAsync();
+            if (!networkState.isConnected) {
+                setIsSelected(false);
+                isNavigatingRef.current = false; // Reset navigation lock
+                setTimeout(() => {
+                    Alert.alert(
+                        t('errors.noConnection'),
+                        t('errors.noConnectionDesc'),
+                        [{ text: t('common.ok') }]
+                    );
+                }, 300);
+                return;
+            }
+        } catch (e) {
+            // Network check failed, proceed cautiously
+            console.warn('Network check failed:', e);
         }
 
         // Attempt to consume energy
@@ -102,6 +129,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
 
         if (!result.success) {
             setIsSelected(false); // Close the modal
+            isNavigatingRef.current = false; // Reset navigation lock
             setTimeout(() => {
                 Alert.alert(
                     t('errors.insufficientLives'),
@@ -117,8 +145,13 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
             router.push(route as any);
             // Close modal so it's closed when/if we return
             setIsSelected(false);
+            // Reset navigation lock after navigation (with delay to prevent rapid re-tap)
+            setTimeout(() => {
+                isNavigatingRef.current = false;
+            }, 1000);
         } catch (error) {
             console.error('Navigation error:', error);
+            isNavigatingRef.current = false; // Reset on error
             // Fallback: try with replace
             router.replace(route as any);
             setIsSelected(false);
@@ -128,6 +161,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const handleCancel = () => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
         setIsSelected(false);
+        isNavigatingRef.current = false; // Reset navigation lock on cancel
     };
 
     const progressPercentage = progress ? (progress.current / progress.total) * 100 : 0;

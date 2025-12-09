@@ -2,10 +2,7 @@ import { useEffect, useState, useMemo, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { playSound } from '@/utils/audio';
-
-// Sound file
-const CLOCK_TICKING_SOUND = require('../../../assets/audio/effects/clockTicking.mp3');
+import { playGameSound, releaseGameAudioPlayer, CLOCK_TICKING_SOUND } from '@/utils/gameSound';
 
 interface TimerProps {
   duration: number; // in seconds
@@ -22,7 +19,7 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
   const paused = isActive !== undefined ? !isActive : isPaused;
   const [timeLeft, setTimeLeft] = useState(duration);
   const [progressAnim] = useState(new Animated.Value(100));
-  const stopTickingSoundRef = useRef<(() => Promise<void>) | null>(null);
+  const stopTickingSoundRef = useRef<(() => void) | null>(null);
   const isTickingRef = useRef(false);
 
   // Cleanup sound on unmount
@@ -31,6 +28,7 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
       if (stopTickingSoundRef.current) {
         stopTickingSoundRef.current();
       }
+      // Don't release here - let GameScreen handle global release
     };
   }, []);
 
@@ -57,12 +55,12 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
 
   // Handle ticking sound
   useEffect(() => {
-    const playTicking = async () => {
+    const playTicking = () => {
       if (isTickingRef.current) return;
 
       isTickingRef.current = true;
       try {
-        const stop = await playSound(CLOCK_TICKING_SOUND);
+        const stop = playGameSound(CLOCK_TICKING_SOUND);
 
         // Critical check: If we were asked to stop while loading (isTickingRef became false),
         // stop immediately.
@@ -78,10 +76,10 @@ export function Timer({ duration, onTimeUp, isPaused = false, isActive }: TimerP
       }
     };
 
-    const stopTicking = async () => {
+    const stopTicking = () => {
       isTickingRef.current = false; // Signal intent to stop
       if (stopTickingSoundRef.current) {
-        await stopTickingSoundRef.current();
+        stopTickingSoundRef.current();
         stopTickingSoundRef.current = null;
       }
     };

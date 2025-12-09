@@ -186,26 +186,46 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     const state = get();
     const { boundUserId } = state;
 
-    // 1. Local Update (Optimistic)
-    const newTotalXP = state.totalXP + xpReward;
-    const newTotalScore = state.totalScore + xpReward;
+    // 🛡️ SERVER-FIRST: Only proceed with server validation
+    if (!boundUserId) {
+      // Anonymous user without DB - still allow local (but vulnerable)
+      set((currentState) => ({
+        totalXP: currentState.totalXP + xpReward,
+        totalScore: currentState.totalScore + xpReward,
+        dailyProgress: {
+          ...currentState.dailyProgress,
+          claimedTasks: [...currentState.dailyProgress.claimedTasks, taskType]
+        }
+      }));
+      return;
+    }
 
-    set((currentState) => ({
-      totalXP: newTotalXP,
-      totalScore: newTotalScore,
-      dailyProgress: {
-        ...currentState.dailyProgress,
-        claimedTasks: [...currentState.dailyProgress.claimedTasks, taskType]
-      }
-    }));
+    // Server-side claim (validates eligibility + grants XP atomically)
+    try {
+      const { data, error } = await database.dailySnapshots.claim(boundUserId, taskType);
 
-    // 2. Passive Server Sync (Fire and Forget)
-    if (boundUserId) {
-      try {
-        await database.dailySnapshots.claim(boundUserId, taskType);
-      } catch (err) {
-        console.log('Passive claim sync failed (internet issue?), ignoring');
+      if (error) {
+        console.error('Daily task claim failed:', error);
+        return;
       }
+
+      const result = data as { success: boolean; xp_awarded?: number; error?: string };
+
+      if (result?.success) {
+        // Only update local state on server success
+        set((currentState) => ({
+          totalXP: currentState.totalXP + (result.xp_awarded || xpReward),
+          totalScore: currentState.totalScore + (result.xp_awarded || xpReward),
+          dailyProgress: {
+            ...currentState.dailyProgress,
+            claimedTasks: [...currentState.dailyProgress.claimedTasks, taskType]
+          }
+        }));
+      } else {
+        console.warn('Claim rejected by server:', result?.error);
+      }
+    } catch (err) {
+      console.error('Daily task claim error:', err);
     }
   },
 
@@ -279,34 +299,20 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   checkLifeRegeneration: async () => {
     const state = get();
 
-    // SYNC WITH SERVER FIRST if possible
-    if (state.boundUserId) {
-      try {
-        const { data } = await database.energy.sync(state.boundUserId);
-        if (data && (data as any).current_energy !== undefined) {
-          set({ currentLives: (data as any).current_energy });
-          return;
-        }
-      } catch (e) { }
+    // 🛡️ SERVER-ONLY SYNC: No local fallback to prevent time manipulation
+    if (!state.boundUserId) {
+      // Anonymous user without DB - no regeneration
+      return;
     }
 
-    // FALLBACK LOCAL LOGIC
-    const maxLives = 6;
-    if (state.currentLives >= maxLives) return;
-
-    const now = Date.now();
-    const lastTime = state.lastReplenishTime || now;
-    const timeDiff = now - lastTime;
-    const hoursPassed = timeDiff / (1000 * 60 * 60);
-    const livesToRestore = Math.floor(hoursPassed / 4);
-
-    if (livesToRestore > 0) {
-      const newLives = Math.min(state.currentLives + livesToRestore, maxLives);
-      const timeUsed = livesToRestore * 4 * 60 * 60 * 1000;
-      set({
-        currentLives: newLives,
-        lastReplenishTime: lastTime + timeUsed
-      });
+    try {
+      const { data } = await database.energy.sync(state.boundUserId);
+      if (data && (data as any).current_energy !== undefined) {
+        set({ currentLives: (data as any).current_energy });
+      }
+    } catch (e) {
+      // Server sync failed - keep current value, DON'T regenerate locally
+      console.warn('Energy sync failed, keeping current value');
     }
   },
 

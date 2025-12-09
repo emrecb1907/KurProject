@@ -24,7 +24,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(101 - 101) % 10],
         icon: BookOpen,
-        route: '/lessons/elif-ba/101',
+        route: '/lessons/kuran-ogrenimi/101',
     },
     {
         id: 102,
@@ -34,7 +34,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(102 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/harekeler/102',
+        route: '/lessons/kuran-ogrenimi/102',
     },
     {
         id: 103,
@@ -44,7 +44,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(103 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/harflerin-konumu/103',
+        route: '/lessons/kuran-ogrenimi/103',
     },
     {
         id: 104,
@@ -54,7 +54,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(104 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/ustun-1/104',
+        route: '/lessons/kuran-ogrenimi/104',
     },
     {
         id: 105,
@@ -64,7 +64,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(105 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/ustun-2/105',
+        route: '/lessons/kuran-ogrenimi/105',
     },
     {
         id: 106,
@@ -74,7 +74,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(106 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/ustun-3/106',
+        route: '/lessons/kuran-ogrenimi/106',
     },
     {
         id: 107,
@@ -84,7 +84,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(107 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/esre/107',
+        route: '/lessons/kuran-ogrenimi/107',
     },
     {
         id: 108,
@@ -94,7 +94,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(108 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/otre/108',
+        route: '/lessons/kuran-ogrenimi/108',
     },
     {
         id: 109,
@@ -104,7 +104,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(109 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/cezmli-okunus/109',
+        route: '/lessons/kuran-ogrenimi/109',
     },
     {
         id: 110,
@@ -114,7 +114,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(110 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/cezm/110',
+        route: '/lessons/kuran-ogrenimi/110',
     },
     {
         id: 111,
@@ -124,7 +124,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(111 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/alistirmalar-1/111',
+        route: '/lessons/kuran-ogrenimi/111',
     },
     {
         id: 112,
@@ -134,7 +134,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(112 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/uzatilarak-okunus/112',
+        route: '/lessons/kuran-ogrenimi/112',
     },
     {
         id: 113,
@@ -144,7 +144,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(113 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/med-elif/113',
+        route: '/lessons/kuran-ogrenimi/113',
     },
     {
         id: 114,
@@ -154,7 +154,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(114 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/med-ya/114',
+        route: '/lessons/kuran-ogrenimi/114',
     },
     {
         id: 115,
@@ -164,7 +164,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(115 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/med-vav/115',
+        route: '/lessons/kuran-ogrenimi/115',
     },
     {
         id: 116,
@@ -174,7 +174,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(116 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/alistirmalar-2/116',
+        route: '/lessons/kuran-ogrenimi/116',
     },
     {
         id: 117,
@@ -184,7 +184,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(117 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/seddeli-okunus/117',
+        route: '/lessons/kuran-ogrenimi/117',
     },
     {
         id: 118,
@@ -194,7 +194,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(118 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/sedde/118',
+        route: '/lessons/kuran-ogrenimi/118',
     },
     {
         id: 119,
@@ -204,7 +204,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(119 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/alistirmalar-3/119',
+        route: '/lessons/kuran-ogrenimi/119',
     },
     {
         id: 120,
@@ -214,7 +214,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(120 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/iki-ustun/120',
+        route: '/lessons/kuran-ogrenimi/120',
     },
     {
         id: 121,
@@ -224,7 +224,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(121 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/iki-esre/121',
+        route: '/lessons/kuran-ogrenimi/121',
     },
     {
         id: 122,
@@ -234,7 +234,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(122 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/iki-otre/122',
+        route: '/lessons/kuran-ogrenimi/122',
     },
     {
         id: 123,
@@ -244,7 +244,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(123 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/ceker/123',
+        route: '/lessons/kuran-ogrenimi/123',
     },
     {
         id: 124,
@@ -254,7 +254,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(124 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/vav-ya-elif/124',
+        route: '/lessons/kuran-ogrenimi/124',
     },
     {
         id: 125,
@@ -264,7 +264,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(125 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/zamir/125',
+        route: '/lessons/kuran-ogrenimi/125',
     },
     {
         id: 126,
@@ -274,7 +274,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(126 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/el-takisi/126',
+        route: '/lessons/kuran-ogrenimi/126',
     },
     {
         id: 127,
@@ -284,7 +284,7 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(127 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/okunmayan-elif/127',
+        route: '/lessons/kuran-ogrenimi/127',
     },
     {
         id: 128,
@@ -294,6 +294,6 @@ export const lessons = [
         unlocked: true,
         ...lessonColors[(128 - 101) % 10],
         icon: BookBookmark,
-        route: '/lessons/lafzatullah-mukattaa/128',
+        route: '/lessons/kuran-ogrenimi/128',
     },
 ];

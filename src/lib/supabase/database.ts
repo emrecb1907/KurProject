@@ -328,23 +328,20 @@ export const database = {
   },
 
   // ==============================================================================
-  // DAILY SNAPSHOTS (HYBRID SYSTEM)
+  // DAILY SNAPSHOTS (SECURE SERVER-SIDE)
   // ==============================================================================
   dailySnapshots: {
-    // 1. Get or Create Snapshot for Today (Lazy Init)
-    // Now accepts Client Totals to handle Sync Mismatches/First Launch
-    async get(userId: string, clientLessons = 0, clientTests = 0) {
-      const { data, error } = await supabase.rpc('get_or_create_daily_snapshot', {
-        p_user_id: userId,
-        p_client_lessons: clientLessons,
-        p_client_tests: clientTests
+    // Get today's progress (server-side calculation)
+    async getProgress(userId: string) {
+      const { data, error } = await supabase.rpc('get_daily_progress', {
+        p_user_id: userId
       });
       return { data, error };
     },
 
-    // 2. Claim Reward (Secure Check)
+    // Claim Reward (Secure Server-Side Validation)
     async claim(userId: string, rewardType: 'lesson' | 'test') {
-      const { data, error } = await supabase.rpc('claim_daily_reward', {
+      const { data, error } = await supabase.rpc('claim_daily_reward_secure', {
         p_user_id: userId,
         p_reward_type: rewardType
       });
@@ -373,6 +370,25 @@ export const database = {
     async add(userId: string, amount: number) {
       const { data, error } = await supabase
         .rpc('add_energy', { p_user_id: userId, p_amount: amount });
+      return { data, error };
+    }
+  },
+
+  // ==================== WEEKLY REWARD ====================
+  weeklyReward: {
+    // Check if reward can be claimed (server-side validation)
+    async checkStatus(userId: string) {
+      const { data, error } = await supabase.rpc('check_weekly_reward_status', {
+        p_user_id: userId
+      });
+      return { data, error };
+    },
+
+    // Claim the weekly reward (server-side validation + XP grant)
+    async claim(userId: string) {
+      const { data, error } = await supabase.rpc('claim_weekly_reward', {
+        p_user_id: userId
+      });
       return { data, error };
     }
   }

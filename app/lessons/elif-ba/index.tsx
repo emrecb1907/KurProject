@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
-import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
+import * as Network from 'expo-network';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -17,6 +18,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { useUser } from '@/store';
 import { HomeHeader } from '@/components/home/HomeHeader';
+import { lessons as lessonsData } from '@/data/lessons';
 
 interface LessonItem {
     id: string;
@@ -35,128 +37,10 @@ export default function ElifBaLessonsListScreen() {
 
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
 
-    const lessons: LessonItem[] = [
-        {
-            id: '101',
-            title: 'Elif-Ba',
-            route: '/lessons/elif-ba/1',
-        },
-        {
-            id: '102',
-            title: 'Harekeler',
-            route: '/lessons/harekeler/1',
-        },
-        {
-            id: '103',
-            title: 'Harflerin Konumu',
-            route: '/lessons/harflerin-konumu/1',
-        },
-        {
-            id: '104',
-            title: 'Üstün-1',
-            route: '/lessons/ustun-1/1',
-        },
-        {
-            id: '105',
-            title: 'Üstün-2',
-            route: '/lessons/ustun-2/1',
-        },
-        {
-            id: '106',
-            title: 'Üstün-3',
-            route: '/lessons/ustun-3/1',
-        },
-        {
-            id: '107',
-            title: 'Esre',
-            route: '/lessons/esre/1',
-        },
-        {
-            id: '108',
-            title: 'Ötre',
-            route: '/lessons/otre/1',
-        },
-        {
-            id: '109',
-            title: 'Harflerin Cezmli Okunuşu',
-            route: '/lessons/cezmli-okunus/109',
-        },
-        {
-            id: '110',
-            title: 'Cezm',
-            route: '/lessons/cezm/110',
-        },
-        {
-            id: '111',
-            title: 'Alıştırmalar - 1',
-            route: '/lessons/alistirmalar-1/111',
-        },
-        {
-            id: '112',
-            title: 'Harflerin Uzatılarak Okunuşu',
-            route: '/lessons/uzatilarak-okunus/112',
-        },
-        {
-            id: '113',
-            title: 'Med (Uzatma) Harfi: Elif',
-            route: '/lessons/med-elif/113',
-        },
-        {
-            id: '114',
-            title: 'Med (Uzatma) Harfi: Yâ',
-            route: '/lessons/med-ya/114',
-        },
-        {
-            id: '115',
-            title: 'Med (Uzatma) Harfi: Vâv',
-            route: '/lessons/med-vav/115',
-        },
-        {
-            id: '116',
-            title: 'Alıştırmalar - 2',
-            route: '/lessons/alistirmalar-2/116',
-        },
-        {
-            id: '117',
-            title: 'Harflerin Şeddeli Okunuşu',
-            route: '/lessons/seddeli-okunus/117',
-        },
-        {
-            id: '118',
-            title: 'Şedde',
-            route: '/lessons/sedde/118',
-        },
-        {
-            id: '119',
-            title: 'Alıştırmalar - 3',
-            route: '/lessons/alistirmalar-3/119',
-        },
-        {
-            id: '120',
-            title: 'İki Üstün (Tenvin)',
-            route: '/lessons/iki-ustun/120',
-        },
-        {
-            id: '121',
-            title: 'İki Esre (Tenvin)',
-            route: '/lessons/iki-esre/121',
-        },
-        {
-            id: '122',
-            title: 'İki Ötre (Tenvin)',
-            route: '/lessons/iki-otre/122',
-        },
-        {
-            id: '123',
-            title: 'Çeker (Asar)',
-            route: '/lessons/ceker/123',
-        },
-        {
-            id: '124',
-            title: 'Vav ve Ya Şeklinde Yazılan Elif',
-            route: '/lessons/vav-ve-ya-sekli-elif/124',
-        },
-    ];
+    // Filter lessons for this category (101-128)
+    const kuranLessons = useMemo(() => {
+        return lessonsData.filter(l => l.id >= 101 && l.id <= 128);
+    }, []);
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -194,14 +78,30 @@ export default function ElifBaLessonsListScreen() {
 
                 {/* Lessons List */}
                 <View style={styles.lessonsList}>
-                    {lessons.map((lesson) => {
-                        const isCompleted = completedLessons?.includes(lesson.id);
+                    {kuranLessons.map((lesson) => {
+                        const isCompleted = completedLessons?.includes(String(lesson.id));
                         return (
                             <Pressable
                                 key={lesson.id}
                                 style={[styles.lessonCard, isCompleted && { borderColor: colors.success }]}
-                                onPress={() => {
+                                onPress={async () => {
                                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+                                    // 🛡️ NETWORK CHECK
+                                    try {
+                                        const networkState = await Network.getNetworkStateAsync();
+                                        if (!networkState.isConnected) {
+                                            Alert.alert(
+                                                t('errors.noConnection'),
+                                                t('errors.noConnectionDesc'),
+                                                [{ text: t('common.ok') }]
+                                            );
+                                            return;
+                                        }
+                                    } catch (e) {
+                                        console.warn('Network check failed:', e);
+                                    }
+
                                     router.push(lesson.route as any);
                                 }}
                             >
@@ -213,7 +113,7 @@ export default function ElifBaLessonsListScreen() {
                                         ) : (
                                             <BookOpen
                                                 size={24}
-                                                color="#FFC800"
+                                                color={colors.primary}
                                                 weight="fill"
                                             />
                                         )}
@@ -260,7 +160,7 @@ const getStyles = (activeTheme: 'light' | 'dark') => StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 24,
-        backgroundColor: '#FFC800',
+        backgroundColor: colors.primary,
         // Softer shadow
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },

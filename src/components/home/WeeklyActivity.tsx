@@ -1,7 +1,6 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
@@ -288,14 +287,17 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
     const checkRewardStatus = useCallback(async () => {
         if (!user?.id) return;
         try {
-            const today = new Date().toISOString().split('T')[0];
-            const lastRewardDate = await AsyncStorage.getItem(`last_reward_date_${user.id}`);
+            // 🛡️ SERVER-SIDE CHECK: Use database RPC instead of AsyncStorage
+            const { data, error } = await database.weeklyReward.checkStatus(user.id);
 
-            if (lastRewardDate === today) {
-                setRewardClaimed(true);
-            } else {
-                setRewardClaimed(false);
+            if (error) {
+                console.error('Error checking reward status:', error);
+                return;
             }
+
+            // Server returns { can_claim: boolean, streak: number, ... }
+            const result = data as { can_claim: boolean; streak: number };
+            setRewardClaimed(!result?.can_claim);
         } catch (e) {
             console.error('Error checking reward status:', e);
         }
@@ -319,17 +321,22 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
         if (!user?.id || rewardClaimed) return;
 
         try {
-            // Give 1000 XP reward
-            const REWARD_AMOUNT = 1000;
-            const { error } = await database.users.updateXP(user.id, REWARD_AMOUNT);
+            // 🛡️ SERVER-SIDE CLAIM: Use database RPC for secure validation
+            const { data, error } = await database.weeklyReward.claim(user.id);
 
             if (error) throw error;
 
-            addXP(REWARD_AMOUNT);
+            const result = data as { success: boolean; xp_awarded?: number; error?: string };
 
-            // Save claim status persistently
-            const today = new Date().toISOString().split('T')[0];
-            await AsyncStorage.setItem(`last_reward_date_${user.id}`, today);
+            if (!result?.success) {
+                // Server rejected the claim
+                console.warn('Claim rejected:', result?.error);
+                setRewardClaimed(true); // Mark as claimed to hide button
+                return;
+            }
+
+            // Update local XP state
+            addXP(result.xp_awarded || 1000);
 
             setRewardClaimed(true);
             setShowRewardModal(true);

@@ -3,10 +3,10 @@ import { useMemo, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@constants/colors';
-import { ArrowLeft, PlayCircle, Check } from 'phosphor-react-native';
+import { ArrowLeft, PlayCircle, CheckCircle } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
-import { playSound } from '@/utils/audio';
+import { playSound, releaseAudioPlayer } from '@/utils/audio';
 import { ARABIC_LETTERS, LETTER_AUDIO_FILES, type Letter } from '@/data/elifBaLetters';
 import { useUser } from '@/store';
 
@@ -14,16 +14,16 @@ export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
     const { completeLesson } = useUser();
-    const stopSoundRef = useRef<(() => Promise<void>) | null>(null);
+    const stopSoundRef = useRef<(() => void) | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
     // Check if all letters have been played
     const allLettersPlayed = playedLetters.size === ARABIC_LETTERS.length;
 
-    // Cleanup audio when component unmounts
+    // Cleanup audio when component unmounts - release the singleton player
     useEffect(() => {
         return () => {
-            if (stopSoundRef.current) stopSoundRef.current();
+            releaseAudioPlayer();
         };
     }, []);
 
@@ -117,7 +117,7 @@ export default function ElifBaIntroductionScreen() {
             opacity: 0.5,
         },
         checkIcon: {
-            opacity: 0.8,
+            opacity: 1.0, // Full opacity for CheckCircle
         },
         completeButton: {
             backgroundColor: colors.primary,
@@ -150,14 +150,12 @@ export default function ElifBaIntroductionScreen() {
         }
     }), [themeVersion]);
 
-    const handlePress = async (letter: Letter) => {
+    const handlePress = (letter: Letter) => {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
         try {
-            if (stopSoundRef.current) {
-                await stopSoundRef.current();
-                stopSoundRef.current = null;
-            }
+            // Let playSound handle the interruption
+            // if (stopSoundRef.current) ...
 
             const audioPath = LETTER_AUDIO_FILES[letter.id];
             if (!audioPath) {
@@ -165,7 +163,7 @@ export default function ElifBaIntroductionScreen() {
                 return;
             }
 
-            const stop = await playSound(audioPath);
+            const stop = playSound(audioPath);
             stopSoundRef.current = stop;
             setPlayedLetters(prev => new Set(prev).add(letter.id));
         } catch (error) {
@@ -212,7 +210,7 @@ export default function ElifBaIntroductionScreen() {
                             <View style={styles.iconContainer}>
                                 {playedLetters.has(letter.id) && (
                                     <View style={styles.checkIcon}>
-                                        <Check size={16} color={colors.success} weight="fill" />
+                                        <CheckCircle size={16} color={colors.success} weight="fill" />
                                     </View>
                                 )}
                                 <View style={styles.playIcon}>

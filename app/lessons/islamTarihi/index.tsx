@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
-import { View, Text, ScrollView, Pressable, StyleSheet } from 'react-native';
+import { View, Text, ScrollView, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
+import * as Network from 'expo-network';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
@@ -84,8 +85,24 @@ export default function IslamTarihiLessonsListScreen() {
                             <Pressable
                                 key={lesson.id}
                                 style={[styles.lessonCard, isCompleted && { borderColor: colors.success }]}
-                                onPress={() => {
+                                onPress={async () => {
                                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+                                    // 🛡️ NETWORK CHECK
+                                    try {
+                                        const networkState = await Network.getNetworkStateAsync();
+                                        if (!networkState.isConnected) {
+                                            Alert.alert(
+                                                t('errors.noConnection'),
+                                                t('errors.noConnectionDesc'),
+                                                [{ text: t('common.ok') }]
+                                            );
+                                            return;
+                                        }
+                                    } catch (e) {
+                                        console.warn('Network check failed:', e);
+                                    }
+
                                     router.push(lesson.route as any);
                                 }}
                             >
@@ -97,7 +114,7 @@ export default function IslamTarihiLessonsListScreen() {
                                         ) : (
                                             <BookOpen
                                                 size={24}
-                                                color="#FFC800"
+                                                color={colors.primary}
                                                 weight="fill"
                                             />
                                         )}
@@ -144,7 +161,7 @@ const getStyles = (activeTheme: 'light' | 'dark') => StyleSheet.create({
         paddingVertical: 8,
         paddingHorizontal: 12,
         borderRadius: 24,
-        backgroundColor: '#FFC800',
+        backgroundColor: colors.primary,
         // Softer shadow
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 1 },

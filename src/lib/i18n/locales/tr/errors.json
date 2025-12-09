@@ -2,5 +2,7 @@
     "insufficientLives": "Yetersiz Enerji",
     "insufficientLivesDesc": "Bu testi başlatmak için en az 1 enerjin olmalı. Sandık sekmesinden enerji kazanabilirsin.",
     "authRequired": "Giriş Gerekli",
-    "tryAgainLater": "Lütfen daha sonra tekrar deneyin"
+    "tryAgainLater": "Lütfen daha sonra tekrar deneyin",
+    "noConnection": "İnternet Bağlantısı Yok",
+    "noConnectionDesc": "Şu an internet bağlantın yok gibi görünüyor. Lütfen bağlantını kontrol edip tekrar dene. 📶"
 }

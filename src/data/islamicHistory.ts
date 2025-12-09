@@ -11,7 +11,7 @@ export const islamicHistory = [
         color: colors.primary,
         borderColor: colors.buttonOrangeBorder,
         icon: BookOpen,
-        route: '/lessons/islamTarihi/cahiliye-donemi/401',
+        route: '/lessons/islam-tarihi/401',
     },
     {
         id: 402,
@@ -22,7 +22,7 @@ export const islamicHistory = [
         color: colors.secondary,
         borderColor: colors.buttonBlueBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/PeyOncHzMuhammed/402',
+        route: '/lessons/islam-tarihi/402',
     },
     {
         id: 403,
@@ -33,7 +33,7 @@ export const islamicHistory = [
         color: colors.success,
         borderColor: colors.buttonGreenBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/PeygamberlikDonemi/403',
+        route: '/lessons/islam-tarihi/403',
     },
     {
         id: 404,
@@ -44,7 +44,7 @@ export const islamicHistory = [
         color: colors.pink,
         borderColor: colors.buttonPinkBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/hulefaiRasidin/404',
+        route: '/lessons/islam-tarihi/404',
     },
     {
         id: 405,
@@ -55,7 +55,7 @@ export const islamicHistory = [
         color: colors.primary,
         borderColor: colors.buttonOrangeBorder,
         icon: BookOpen,
-        route: '/lessons/islamTarihi/emeviler/405',
+        route: '/lessons/islam-tarihi/405',
     },
     {
         id: 406,
@@ -66,7 +66,7 @@ export const islamicHistory = [
         color: colors.secondary,
         borderColor: colors.buttonBlueBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/abbasiler/406',
+        route: '/lessons/islam-tarihi/406',
     },
     {
         id: 407,
@@ -77,7 +77,7 @@ export const islamicHistory = [
         color: colors.success,
         borderColor: colors.buttonGreenBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/endulusEmevileri/407',
+        route: '/lessons/islam-tarihi/407',
     },
     {
         id: 408,
@@ -88,7 +88,7 @@ export const islamicHistory = [
         color: colors.pink,
         borderColor: colors.buttonPinkBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/ortaCagDevletleri/408',
+        route: '/lessons/islam-tarihi/408',
     },
     {
         id: 409,
@@ -99,7 +99,7 @@ export const islamicHistory = [
         color: colors.primary,
         borderColor: colors.buttonOrangeBorder,
         icon: BookOpen,
-        route: '/lessons/islamTarihi/hacliSeferleri/409',
+        route: '/lessons/islam-tarihi/409',
     },
     {
         id: 410,
@@ -110,7 +110,7 @@ export const islamicHistory = [
         color: colors.secondary,
         borderColor: colors.buttonBlueBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/mogolIstila/410',
+        route: '/lessons/islam-tarihi/410',
     },
     {
         id: 411,
@@ -121,7 +121,7 @@ export const islamicHistory = [
         color: colors.success,
         borderColor: colors.buttonGreenBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/gecDonemIslam/411',
+        route: '/lessons/islam-tarihi/411',
     },
     {
         id: 412,
@@ -132,7 +132,7 @@ export const islamicHistory = [
         color: colors.pink,
         borderColor: colors.buttonPinkBorder,
         icon: BookBookmark,
-        route: '/lessons/islamTarihi/gunumuzTarihi/412',
+        route: '/lessons/islam-tarihi/412',
     },
     {
         id: 413,
@@ -143,6 +143,6 @@ export const islamicHistory = [
         color: colors.primary,
         borderColor: colors.buttonOrangeBorder,
         icon: BookOpen,
-        route: '/lessons/islamTarihi/islamMedeniyeti/413',
+        route: '/lessons/islam-tarihi/413',
     },
 ];

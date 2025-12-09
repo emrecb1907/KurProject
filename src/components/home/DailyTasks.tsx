@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Modal as RNModal } from 'react-native';
 import { colors } from '@constants/colors';
 import { Gift, Check, Gear, X, BookOpen, Lightning, CheckCircle } from 'phosphor-react-native';
@@ -6,8 +6,9 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { Modal } from '@components/ui/Modal';
-import { useUser } from '@/store';
+import { useUser, useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
+import { useFocusEffect } from '@react-navigation/native';
 
 interface DailyTasksProps {
     devToolsContent?: React.ReactNode;
@@ -26,6 +27,7 @@ interface Task {
 export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const { t } = useTranslation();
     const { themeVersion, activeTheme } = useTheme();
+    const { user, isAuthenticated } = useAuth();
 
     // Light theme specific border color
     const lightBorderColor = '#BCAAA4';
@@ -34,6 +36,14 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const [showRewardModal, setShowRewardModal] = useState(false);
     const [claimedReward, setClaimedReward] = useState<{ xp: number; taskName: string } | null>(null);
 
+    // 🛡️ SERVER-SIDE PROGRESS STATE
+    const [serverProgress, setServerProgress] = useState<{
+        lessons_today: number;
+        tests_today: number;
+        lesson_claimed: boolean;
+        test_claimed: boolean;
+    } | null>(null);
+
     // Get user state and actions from store
     const {
         dailyProgress,
@@ -41,46 +51,72 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         checkDailyReset
     } = useUser();
 
-    // Check reset on mount
-    React.useEffect(() => {
-        checkDailyReset();
-    }, [checkDailyReset]);
+    // Fetch server progress for authenticated users
+    const fetchServerProgress = useCallback(async () => {
+        if (!isAuthenticated || !user?.id) return;
+        try {
+            const { data, error } = await database.dailySnapshots.getProgress(user.id);
+            if (data && !error) {
+                setServerProgress(data as any);
+            }
+        } catch (e) {
+            console.error('Failed to fetch server progress:', e);
+        }
+    }, [isAuthenticated, user?.id]);
 
-    // Derive tasks from store state (Local Logic)
+    // Fetch on focus
+    useFocusEffect(
+        useCallback(() => {
+            checkDailyReset();
+            fetchServerProgress();
+        }, [checkDailyReset, fetchServerProgress])
+    );
+
+    // Derive tasks - prefer server data for authenticated users
     const tasks: Task[] = useMemo(() => {
+        const lessonsCompleted = serverProgress?.lessons_today ?? dailyProgress.lessonsCompleted;
+        const testsCompleted = serverProgress?.tests_today ?? dailyProgress.testsCompleted;
+        const lessonClaimed = serverProgress?.lesson_claimed ?? dailyProgress.claimedTasks.includes('lesson');
+        const testClaimed = serverProgress?.test_claimed ?? dailyProgress.claimedTasks.includes('test');
+
         return [
             {
                 id: 1, // 'lesson'
                 text: t('home.dailyTasks.completeLessons', { count: 2 }),
                 xp: 20,
-                current: dailyProgress.lessonsCompleted,
+                current: lessonsCompleted,
                 target: 2,
-                completed: dailyProgress.lessonsCompleted >= 2,
-                claimed: dailyProgress.claimedTasks.includes('lesson')
+                completed: lessonsCompleted >= 2,
+                claimed: lessonClaimed
             },
             {
                 id: 2, // 'test'
                 text: t('home.dailyTasks.completeTests', { count: 3 }),
                 xp: 30,
-                current: dailyProgress.testsCompleted,
+                current: testsCompleted,
                 target: 3,
-                completed: dailyProgress.testsCompleted >= 3,
-                claimed: dailyProgress.claimedTasks.includes('test')
+                completed: testsCompleted >= 3,
+                claimed: testClaimed
             }
         ];
-    }, [dailyProgress, t]);
+    }, [dailyProgress, serverProgress, t]);
 
-    const handleClaimTaskReward = (task: Task) => {
+    const handleClaimTaskReward = async (task: Task) => {
         if (task.completed && !task.claimed) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+
+            // Determine type based on ID (1=lesson, 2=test)
+            const type = task.id === 1 ? 'lesson' : 'test';
+
+            // Call server-first claim
+            await claimDailyTask(type, task.xp);
+
+            // Refresh server progress
+            await fetchServerProgress();
 
             // Show reward modal
             setClaimedReward({ xp: task.xp, taskName: task.text });
             setShowRewardModal(true);
-
-            // Determine type based on ID (1=lesson, 2=test)
-            const type = task.id === 1 ? 'lesson' : 'test';
-            claimDailyTask(type, task.xp);
         }
     };
 
@@ -132,7 +168,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         },
         taskItem: {
             flexDirection: 'row',
-            alignItems: 'center',
+            alignItems: 'flex-end',
             backgroundColor: colors.backgroundLighter,
             padding: 10,
             borderRadius: 16,
@@ -366,7 +402,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                                 </View>
                             </View>
 
-                            {/* XP Button */}
+                            {/* XP Button - aligned at bottom with progress bar */}
                             <Pressable
                                 style={({ pressed }) => [
                                     styles.xpButton,
