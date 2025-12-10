@@ -1,0 +1,116 @@
+{
+    "letters": [
+        {
+            "id": 1,
+            "name": "Alif"
+        },
+        {
+            "id": 2,
+            "name": "Ba"
+        },
+        {
+            "id": 3,
+            "name": "Ta"
+        },
+        {
+            "id": 4,
+            "name": "Tha"
+        },
+        {
+            "id": 5,
+            "name": "Jim"
+        },
+        {
+            "id": 6,
+            "name": "Ha"
+        },
+        {
+            "id": 7,
+            "name": "Kha"
+        },
+        {
+            "id": 8,
+            "name": "Dal"
+        },
+        {
+            "id": 9,
+            "name": "Dhal"
+        },
+        {
+            "id": 10,
+            "name": "Ra"
+        },
+        {
+            "id": 11,
+            "name": "Zay"
+        },
+        {
+            "id": 12,
+            "name": "Sin"
+        },
+        {
+            "id": 13,
+            "name": "Shin"
+        },
+        {
+            "id": 14,
+            "name": "Sad"
+        },
+        {
+            "id": 15,
+            "name": "Dad"
+        },
+        {
+            "id": 16,
+            "name": "Ta"
+        },
+        {
+            "id": 17,
+            "name": "Za"
+        },
+        {
+            "id": 18,
+            "name": "Ayn"
+        },
+        {
+            "id": 19,
+            "name": "Ghayn"
+        },
+        {
+            "id": 20,
+            "name": "Fa"
+        },
+        {
+            "id": 21,
+            "name": "Qaf"
+        },
+        {
+            "id": 22,
+            "name": "Kaf"
+        },
+        {
+            "id": 23,
+            "name": "Lam"
+        },
+        {
+            "id": 24,
+            "name": "Mim"
+        },
+        {
+            "id": 25,
+            "name": "Nun"
+        },
+        {
+            "id": 26,
+            "name": "Waw"
+        },
+        {
+            "id": 27,
+            "name": "Ha"
+        },
+        {
+            "id": 28,
+            "name": "Ya"
+        }
+    ]
+}

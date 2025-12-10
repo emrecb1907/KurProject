@@ -1,0 +1,44 @@
+{
+    "words": [
+        {
+            "id": 1,
+            "reading": "De - Ra - Se"
+        },
+        {
+            "id": 2,
+            "reading": "Ve - Ze - Re"
+        },
+        {
+            "id": 3,
+            "reading": "Se - Be - Re"
+        },
+        {
+            "id": 4,
+            "reading": "Ka - Te - Be"
+        },
+        {
+            "id": 5,
+            "reading": "Na - Ze - Le"
+        },
+        {
+            "id": 6,
+            "reading": "Fe - Ze - A"
+        },
+        {
+            "id": 7,
+            "reading": "Ha - Me - De"
+        },
+        {
+            "id": 8,
+            "reading": "Se - Ce - De"
+        },
+        {
+            "id": 9,
+            "reading": "Ra - Ke - Be"
+        },
+        {
+            "id": 10,
+            "reading": "Za - He - Be"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Elongated pronunciation of letters",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Qaa - La"
+        },
+        {
+            "id": 2,
+            "reading": "Jaa - A"
+        },
+        {
+            "id": 3,
+            "reading": "Maa - La"
+        }
+    ]
+}

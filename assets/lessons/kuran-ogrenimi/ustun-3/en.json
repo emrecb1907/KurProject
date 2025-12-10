@@ -1,0 +1,44 @@
+{
+    "words": [
+        {
+            "id": 1,
+            "reading": "Ka - Fa - Ra"
+        },
+        {
+            "id": 2,
+            "reading": "Gha - Fa - Ra"
+        },
+        {
+            "id": 3,
+            "reading": "Na - Sa - Ra"
+        },
+        {
+            "id": 4,
+            "reading": "Fa - Ta - Ha"
+        },
+        {
+            "id": 5,
+            "reading": "Sha - Ra - Ha"
+        },
+        {
+            "id": 6,
+            "reading": "Ma - Na - 'A"
+        },
+        {
+            "id": 7,
+            "reading": "Ha - Fi - Za"
+        },
+        {
+            "id": 8,
+            "reading": "Ra - Ha - Ma"
+        },
+        {
+            "id": 9,
+            "reading": "Na - Ha - La"
+        },
+        {
+            "id": 10,
+            "reading": "Ka - Ra - Ma"
+        }
+    ]
+}

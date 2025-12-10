@@ -11,6 +11,13 @@ import { useUser } from '@/store';
 import { lessons } from '@/data/lessons';
 import { getLessonData } from '@/data/kuran';
 import { KuranLessonContent } from '@/data/kuran/types';
+import { useTranslation } from 'react-i18next';
+
+import elifBaTr from '../../../assets/lessons/kuran-ogrenimi/elif-ba/tr.json';
+import elifBaEn from '../../../assets/lessons/kuran-ogrenimi/elif-ba/en.json';
+
+import { PrimaryButton } from '@/components/ui/PrimaryButton';
+import { HeaderButton } from '@/components/ui/HeaderButton';
 
 export default function UnifiedKuranLessonScreen() {
     const { id } = useLocalSearchParams();
@@ -22,6 +29,15 @@ export default function UnifiedKuranLessonScreen() {
     // State
     const stopSoundRef = useRef<(() => void) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
+
+    const { t, i18n } = useTranslation();
+
+    // Explanation Content (Specific to Lesson 101)
+    const explanationData = useMemo(() => {
+        if (lessonId !== 101) return null;
+        const data = i18n.language.startsWith('en') ? elifBaEn : elifBaTr;
+        return data.lessonInfo;
+    }, [lessonId, i18n.language]);
 
     // Derived Data
     const lessonData = useMemo(() => getLessonData(lessonId), [lessonId]);
@@ -49,14 +65,9 @@ export default function UnifiedKuranLessonScreen() {
             borderBottomColor: colors.border,
             backgroundColor: colors.surface,
         },
-        backButton: {
-            padding: 8,
-            marginRight: 8,
-            borderRadius: 12,
-            backgroundColor: colors.backgroundLighter,
-        },
         titleContainer: {
             flex: 1,
+            marginLeft: 12,
         },
         title: {
             fontSize: 20,
@@ -162,35 +173,24 @@ export default function UnifiedKuranLessonScreen() {
         checkIcon: {
             opacity: 1.0, // Full opacity for CheckCircle
         },
-        // Complete Button
-        completeButton: {
-            backgroundColor: colors.primary,
-            paddingVertical: 16,
-            paddingHorizontal: 24,
-            borderRadius: 12,
-            alignItems: 'center',
-            marginHorizontal: 16,
-            marginTop: 24,
-            marginBottom: 16,
-            borderBottomWidth: 4,
-            borderBottomColor: colors.primaryDark,
+        infoCard: {
+            backgroundColor: colors.surface,
+            borderRadius: 16,
+            padding: 20,
+            marginBottom: 24,
+            borderWidth: 1,
+            borderColor: colors.border,
+            shadowColor: colors.shadow || '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.05,
+            shadowRadius: 8,
+            elevation: 2,
         },
-        completeButtonDisabled: {
-            backgroundColor: colors.backgroundLighter,
-            borderBottomColor: colors.border,
-            opacity: 0.5,
-        },
-        completeButtonPressed: {
-            transform: [{ translateY: 2 }],
-            borderBottomWidth: 2,
-        },
-        completeButtonText: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: colors.textOnPrimary,
-        },
-        completeButtonTextDisabled: {
-            color: colors.textSecondary,
+        infoText: {
+            fontSize: 16,
+            lineHeight: 26,
+            color: colors.textPrimary,
+            marginBottom: 12,
         }
     }), [themeVersion]);
 
@@ -315,19 +315,24 @@ export default function UnifiedKuranLessonScreen() {
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
             <View style={styles.header}>
-                <Pressable
-                    style={styles.backButton}
+                <HeaderButton
+                    title={t('common.back')}
                     onPress={() => router.back()}
-                >
-                    <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-                </Pressable>
+                />
                 <View style={styles.titleContainer}>
-                    <Text style={styles.title}>{lessonInfo?.title || `Ders ${lessonId}`}</Text>
-                    <Text style={styles.subtitle}>{lessonInfo?.description || 'Kuran Öğrenimi'}</Text>
+                    <Text style={styles.title}>{t(`lessons.kuranOgrenimi.${lessonId}.title`, { defaultValue: lessonInfo?.title || `Ders ${lessonId}` })}</Text>
+                    <Text style={styles.subtitle}>{t(`lessons.kuranOgrenimi.${lessonId}.description`, { defaultValue: lessonInfo?.description || 'Kuran Öğrenimi' })}</Text>
                 </View>
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
+                {explanationData && (
+                    <View style={styles.infoCard}>
+                        {explanationData.map((text: string, index: number) => (
+                            <Text key={index} style={styles.infoText}>{text}</Text>
+                        ))}
+                    </View>
+                )}
                 <View style={styles.grid}>
                     {lessonData.map((item) => (
                         <Pressable
@@ -344,22 +349,19 @@ export default function UnifiedKuranLessonScreen() {
                     ))}
                 </View>
 
-                <Pressable
+                <PrimaryButton
+                    title={t('common.completeLesson')}
                     disabled={!allItemsPlayed}
-                    style={({ pressed }) => [
-                        styles.completeButton,
-                        !allItemsPlayed && styles.completeButtonDisabled,
-                        pressed && allItemsPlayed && styles.completeButtonPressed
-                    ]}
                     onPress={handleComplete}
-                >
-                    <Text style={[
-                        styles.completeButtonText,
-                        !allItemsPlayed && styles.completeButtonTextDisabled
-                    ]}>
-                        Dersi Tamamla!
-                    </Text>
-                </Pressable>
+                    style={{
+                        marginHorizontal: 16,
+                        marginTop: 24,
+                        marginBottom: 16,
+                        opacity: !allItemsPlayed ? 0.5 : 1,
+                        backgroundColor: !allItemsPlayed ? colors.backgroundLighter : colors.primary
+                    }}
+                    textStyle={!allItemsPlayed && { color: colors.textSecondary }}
+                />
             </ScrollView>
         </SafeAreaView>
     );

@@ -1,0 +1,25 @@
+{
+    "description": "Cezm işareti sessiz harfleri gösterir",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Min"
+        },
+        {
+            "id": 2,
+            "reading": "An"
+        },
+        {
+            "id": 3,
+            "reading": "Len"
+        },
+        {
+            "id": 4,
+            "reading": "Kem"
+        },
+        {
+            "id": 5,
+            "reading": "Bel"
+        }
+    ]
+}

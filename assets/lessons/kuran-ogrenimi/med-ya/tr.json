@@ -1,0 +1,17 @@
+{
+    "description": "Ya ile med uzatması",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Fii - Hi"
+        },
+        {
+            "id": 2,
+            "reading": "Bii - Hi"
+        },
+        {
+            "id": 3,
+            "reading": "Kii - Le"
+        }
+    ]
+}

@@ -8,6 +8,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import * as Haptics from 'expo-haptics';
 import { StatusBar } from 'expo-status-bar';
+import { HeaderButton } from '@/components/ui/HeaderButton';
 
 export default function PremiumScreen() {
     const { activeTheme } = useTheme();
@@ -90,19 +91,18 @@ export default function PremiumScreen() {
 
                 {/* Header */}
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
-                        <Text style={styles.backButtonText}>{t('common.back')}</Text>
-                    </TouchableOpacity>
+                    <HeaderButton
+                        title={t('common.back')}
+                        onPress={() => router.back()}
+                    />
                     <Text style={[styles.headerTitle, { color: premiumColors.text }]}>{t('premiumpaywall.headerTitle')}</Text>
-                    <TouchableOpacity
-                        style={styles.premiumButton}
+                    <HeaderButton
+                        title={t('premiumpaywall.cta')}
                         onPress={() => {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                             router.push('/premiumCenter');
                         }}
-                    >
-                        <Text style={styles.premiumButtonText}>{t('premiumpaywall.cta')}</Text>
-                    </TouchableOpacity>
+                    />
                 </View>
 
                 {/* Hero Title */}
@@ -216,32 +216,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         gap: 6,
-    },
-    backButton: {
-        backgroundColor: '#FF9600',
-        borderRadius: 20,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-    },
-    backButtonText: {
-        color: '#000000',
-        fontSize: 14,
-        fontWeight: '600',
-    },
-    premiumButton: {
-        backgroundColor: '#FF9600',
-        borderRadius: 20,
-        paddingVertical: 8,
-        paddingHorizontal: 16,
-    },
-    premiumButtonText: {
-        color: '#000000',
-        fontSize: 14,
-        fontWeight: '600',
-    },
-    backText: {
-        fontSize: 16,
-        fontWeight: '500',
     },
     headerTitle: {
         fontSize: 16,

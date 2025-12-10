@@ -4,6 +4,8 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@constants/colors';
 import { ArrowLeft, BookOpen } from 'phosphor-react-native';
+import { HeaderButton } from '@/components/ui/HeaderButton';
+import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
@@ -45,14 +47,9 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
       borderBottomColor: colors.border,
       backgroundColor: colors.surface,
     },
-    backButton: {
-      padding: 8,
-      marginRight: 8,
-      borderRadius: 12,
-      backgroundColor: colors.backgroundLighter,
-    },
     titleContainer: {
       flex: 1,
+      marginLeft: 12,
     },
     title: {
       fontSize: 20,
@@ -146,21 +143,7 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
       color: colors.textPrimary,
       marginBottom: 12,
     },
-    completeButton: {
-      backgroundColor: colors.primary,
-      paddingVertical: 16,
-      paddingHorizontal: 24,
-      borderRadius: 12,
-      alignItems: 'center',
-      marginTop: 24,
-      borderBottomWidth: 4,
-      borderBottomColor: colors.primaryDark,
-    },
-    completeButtonText: {
-      fontSize: 18,
-      fontWeight: 'bold',
-      color: colors.textOnPrimary,
-    },
+
   }), [themeVersion]);
 
   const { mutate: completeGame, isPending } = useCompleteGameMutation();
@@ -195,15 +178,13 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
       <View style={styles.header}>
-        <Pressable
-          style={styles.backButton}
+        <HeaderButton
+          title={t('common.back')}
           onPress={() => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             router.back();
           }}
-        >
-          <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-        </Pressable>
+        />
         <View style={styles.titleContainer}>
           <Text style={styles.title}>{t('lessons.islamicHistory.title')}</Text>
           <Text style={styles.subtitle}>{lesson.title}</Text>
@@ -271,12 +252,11 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
           </View>
         ))}
 
-        <Pressable
-          style={styles.completeButton}
+        <PrimaryButton
+          title={t('common.completeLesson')}
           onPress={handleComplete}
-        >
-          <Text style={styles.completeButtonText}>{t('lessons.islamicHistory.completeLesson')}</Text>
-        </Pressable>
+          style={{ marginTop: 24 }}
+        />
       </ScrollView>
     </SafeAreaView>
   );

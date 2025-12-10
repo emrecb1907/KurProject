@@ -1,0 +1,155 @@
+{
+    "lessonInfo": [
+        "The Holy Quran is a divine book revealed in Arabic. Therefore, the Quran is written with the letters of the Arabic alphabet. This alphabet consists of 28 letters. Unlike in Latin scripts, texts are written and read from right to left.",
+        "Lamelif ( لا ) is not actually a separate letter. It is formed by the combination of the letters Lam ( ل ) and Alif ( ا ).",
+        "Air filling the lungs is exhaled either as sound or breath. When breath, which is taken in and out involuntarily, vibrates the vocal cords, sound is produced. If this sound is emitted from a specific point in the mouth, throat, or tongue, a letter is formed. In every language, letters have a unique point of articulation. The point of articulation of a letter is called Mahraj.",
+        "Articulation Points of Letters (Mahraj)\nTo read the Quran correctly, letters must be pronounced according to their articulation points. Pronouncing a letter from the wrong place can cause the meaning of words to change."
+    ],
+    "letters": [
+        {
+            "id": 1,
+            "name": "Alif",
+            "trans": "A"
+        },
+        {
+            "id": 2,
+            "name": "Ba",
+            "trans": "B"
+        },
+        {
+            "id": 3,
+            "name": "Ta",
+            "trans": "T"
+        },
+        {
+            "id": 4,
+            "name": "Tha",
+            "trans": "Th"
+        },
+        {
+            "id": 5,
+            "name": "Jim",
+            "trans": "J"
+        },
+        {
+            "id": 6,
+            "name": "Ha",
+            "trans": "H"
+        },
+        {
+            "id": 7,
+            "name": "Kha",
+            "trans": "Kh"
+        },
+        {
+            "id": 8,
+            "name": "Dal",
+            "trans": "D"
+        },
+        {
+            "id": 9,
+            "name": "Dhal",
+            "trans": "Dh"
+        },
+        {
+            "id": 10,
+            "name": "Ra",
+            "trans": "R"
+        },
+        {
+            "id": 11,
+            "name": "Zay",
+            "trans": "Z"
+        },
+        {
+            "id": 12,
+            "name": "Sin",
+            "trans": "S"
+        },
+        {
+            "id": 13,
+            "name": "Shin",
+            "trans": "Sh"
+        },
+        {
+            "id": 14,
+            "name": "Sad",
+            "trans": "S"
+        },
+        {
+            "id": 15,
+            "name": "Dad",
+            "trans": "D"
+        },
+        {
+            "id": 16,
+            "name": "Ta",
+            "trans": "T"
+        },
+        {
+            "id": 17,
+            "name": "Za",
+            "trans": "Z"
+        },
+        {
+            "id": 18,
+            "name": "Ayn",
+            "trans": "'"
+        },
+        {
+            "id": 19,
+            "name": "Ghayn",
+            "trans": "Gh"
+        },
+        {
+            "id": 20,
+            "name": "Fa",
+            "trans": "F"
+        },
+        {
+            "id": 21,
+            "name": "Qaf",
+            "trans": "Q"
+        },
+        {
+            "id": 22,
+            "name": "Kaf",
+            "trans": "K"
+        },
+        {
+            "id": 23,
+            "name": "Lam",
+            "trans": "L"
+        },
+        {
+            "id": 24,
+            "name": "Mim",
+            "trans": "M"
+        },
+        {
+            "id": 25,
+            "name": "Nun",
+            "trans": "N"
+        },
+        {
+            "id": 26,
+            "name": "Waw",
+            "trans": "W"
+        },
+        {
+            "id": 27,
+            "name": "Ha",
+            "trans": "H"
+        },
+        {
+            "id": 28,
+            "name": "Lam Alif",
+            "trans": "LA"
+        },
+        {
+            "id": 29,
+            "name": "Ya",
+            "trans": "Y"
+        }
+    ]
+}

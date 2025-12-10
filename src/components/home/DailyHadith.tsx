@@ -5,8 +5,9 @@ import { BookOpen, ShareNetwork } from 'phosphor-react-native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
-// Import hadis JSON
-const hadisData = require('@assets/hadis/tr/hadis.json');
+// Import hadis JSONs
+const trHadith = require('@assets/hadis/tr/hadis.json');
+const enHadith = require('@assets/hadis/en/hadis.json');
 
 interface HadisItem {
     id: number;
@@ -43,7 +44,7 @@ function getHadisId(): number {
 }
 
 export function DailyHadith() {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const { themeVersion, activeTheme } = useTheme();
 
     // Light theme specific border color
@@ -52,8 +53,9 @@ export function DailyHadith() {
 
     // Get today's hadis dynamically
     const hadith = useMemo(() => {
+        const currentHadithData = i18n.language.startsWith('en') ? enHadith : trHadith;
         const hadisId = getHadisId();
-        const hadisItem = (hadisData as HadisItem[]).find(item => item.id === hadisId);
+        const hadisItem = (currentHadithData as HadisItem[]).find(item => item.id === hadisId);
 
         if (hadisItem) {
             return {
@@ -64,10 +66,10 @@ export function DailyHadith() {
 
         // Fallback to first hadis if not found
         return {
-            text: hadisData[0]?.hadis || "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
-            source: hadisData[0]?.kaynak || "Buhârî",
+            text: currentHadithData[0]?.hadis || "Mü'minin en fazîletlisi, ahlâkı en güzel olanıdır.",
+            source: currentHadithData[0]?.kaynak || "Buhârî",
         };
-    }, []);
+    }, [i18n.language]);
 
     // Dynamic styles
     const styles = useMemo(() => StyleSheet.create({

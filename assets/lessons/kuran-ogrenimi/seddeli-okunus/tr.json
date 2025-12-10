@@ -1,0 +1,17 @@
+{
+    "description": "Şeddeli harflerin okunuşu",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Eb - Bun"
+        },
+        {
+            "id": 2,
+            "reading": "Um - Mun"
+        },
+        {
+            "id": 3,
+            "reading": "Rab - Bun"
+        }
+    ]
+}

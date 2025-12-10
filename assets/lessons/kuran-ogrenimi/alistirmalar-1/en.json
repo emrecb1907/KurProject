@@ -1,0 +1,17 @@
+{
+    "description": "Basic reading exercises",
+    "exercises": [
+        {
+            "id": 1,
+            "type": "reading"
+        },
+        {
+            "id": 2,
+            "type": "listening"
+        },
+        {
+            "id": 3,
+            "type": "practice"
+        }
+    ]
+}

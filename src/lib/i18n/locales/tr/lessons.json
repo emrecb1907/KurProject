@@ -1,4 +1,194 @@
 {
+    "common": {
+        "searchPlaceholder": "Ders ara...",
+        "allCategories": "Tüm Kategoriler",
+        "lesson": "Ders",
+        "level": "Seviye"
+    },
+    "kuranOgrenimi": {
+        "groupTitle": "Kuran Öğrenimi",
+        "groupDescription": "Elif-Ba'dan tecvid temeline",
+        "101": {
+            "title": "Elif-Ba",
+            "description": "Arapça harfleri öğren"
+        },
+        "102": {
+            "title": "Harekeler",
+            "description": "Üstün, Esre, Ötre"
+        },
+        "103": {
+            "title": "Harflerin Konumu",
+            "description": "Baş, orta, son konumları"
+        },
+        "104": {
+            "title": "Üstün-1",
+            "description": "Üstün harekesi ile kelimeler"
+        },
+        "105": {
+            "title": "Üstün-2",
+            "description": "Üstün harekesi alıştırmaları"
+        },
+        "106": {
+            "title": "Üstün-3",
+            "description": "İleri seviye üstün çalışmaları"
+        },
+        "107": {
+            "title": "Esre",
+            "description": "Esre harekesi öğrenimi"
+        },
+        "108": {
+            "title": "Ötre",
+            "description": "Ötre harekesi öğrenimi"
+        },
+        "109": {
+            "title": "Harflerin Cezmli Okunuşu",
+            "description": "Cezm ile okuma teknikleri"
+        },
+        "110": {
+            "title": "Cezm",
+            "description": "Cezm işareti ve kullanımı"
+        },
+        "111": {
+            "title": "Alıştırmalar - 1",
+            "description": "Temel okuma alıştırmaları"
+        },
+        "112": {
+            "title": "Harflerin Uzatılarak Okunuşu",
+            "description": "Med ile okuma teknikleri"
+        },
+        "113": {
+            "title": "Med (Uzatma) Harfi: Elif",
+            "description": "Elif ile uzatma çalışmaları"
+        },
+        "114": {
+            "title": "Med (Uzatma) Harfi: Ya",
+            "description": "Ya ile uzatma çalışmaları"
+        },
+        "115": {
+            "title": "Med (Uzatma) Harfi: Vav",
+            "description": "Vav ile uzatma çalışmaları"
+        },
+        "116": {
+            "title": "Alıştırmalar-2",
+            "description": "Med alıştırmaları"
+        },
+        "117": {
+            "title": "Harflerin Şeddeli Okunuşu",
+            "description": "Şedde ile okuma teknikleri"
+        },
+        "118": {
+            "title": "Şedde",
+            "description": "Şedde işareti ve kullanımı"
+        },
+        "119": {
+            "title": "Alıştırmalar 3",
+            "description": "Şedde alıştırmaları"
+        },
+        "120": {
+            "title": "İki Üstün",
+            "description": "Tenvin - İki üstün öğrenimi"
+        },
+        "121": {
+            "title": "İki Esre",
+            "description": "Tenvin - İki esre öğrenimi"
+        },
+        "122": {
+            "title": "İki Ötre",
+            "description": "Tenvin - İki ötre öğrenimi"
+        },
+        "123": {
+            "title": "Çeker",
+            "description": "Çeker işareti ve kullanımı"
+        },
+        "124": {
+            "title": "Vav ve Ya şeklinde Yazılan Elif",
+            "description": "Özel elif yazımları"
+        },
+        "125": {
+            "title": "Zamir",
+            "description": "Zamir öğrenimi"
+        },
+        "126": {
+            "title": "El Takısı",
+            "description": "El takısı ve kullanımı"
+        },
+        "127": {
+            "title": "Okunmayan Elif ve Elif Lam",
+            "description": "Sessiz elif kuralları"
+        },
+        "128": {
+            "title": "Lafzatullah Mukattaa Med harfleri",
+            "description": "Özel med harfleri"
+        }
+    },
+    "namazDualari": {
+        "groupTitle": "Namaz Duaları",
+        "groupDescription": "Sübhaneke, Ettehiyyatü..."
+    },
+    "sureler": {
+        "groupTitle": "Sureler",
+        "groupDescription": "Kısa surelerden başlayarak"
+    },
+    "islamiKavramlar": {
+        "groupTitle": "İslami Kavramlar",
+        "groupDescription": "Temel kavramlar, terimler"
+    },
+    "islamTarihi": {
+        "groupTitle": "İslam Tarihi",
+        "groupDescription": "Peygamberlik öncesinden günümüze",
+        "401": {
+            "title": "Cahiliye dönemi",
+            "description": "İslam öncesi dönem"
+        },
+        "402": {
+            "title": "Peygamberlik Öncesi Hz.Muhammed",
+            "description": "Peygamberlik öncesi hayatı"
+        },
+        "403": {
+            "title": "Peygamberlik Dönemi (610-632)",
+            "description": "Mekke ve Medine dönemi"
+        },
+        "404": {
+            "title": "Hulefâ-i Râşidîn Dönemi (632–661)",
+            "description": "Dört Halife Dönemi"
+        },
+        "405": {
+            "title": "Erken İslam Devletleri ve Emevîler Dönemi (661–750)",
+            "description": "Emeviler"
+        },
+        "406": {
+            "title": "Abbâsîler Dönemi ve İslam'ın Altın Çağı (750–1258)",
+            "description": "Abbasiler"
+        },
+        "407": {
+            "title": "Endülüs Emevîleri ve Avrupa ile Etkileşim (711–1492)",
+            "description": "Endülüs Emevileri"
+        },
+        "408": {
+            "title": "Orta Çağ İslam Coğrafyasında Bölgesel Devletler",
+            "description": "Bölgesel Devletler"
+        },
+        "409": {
+            "title": "Haçlı Seferleri Dönemi ve İslam Dünyasının Durumu (11.–13. yüzyıllar)",
+            "description": "Haçlı Seferleri"
+        },
+        "410": {
+            "title": "Moğol İstilaları ve İslam Dünyasında Dönüşüm (13. yüzyıl)",
+            "description": "Moğol İstilaları"
+        },
+        "411": {
+            "title": "Geç Dönem İslam Devletleri (1300–1900)",
+            "description": "Geç Dönem"
+        },
+        "412": {
+            "title": "Modern Çağda İslam Dünyası (1800–Günümüz)",
+            "description": "Modern Çağ"
+        },
+        "413": {
+            "title": "İslam Medeniyetinin Evrensel Katkıları",
+            "description": "İslam Medeniyeti"
+        }
+    },
     "islamicHistory": {
         "title": "İslam Tarihi",
         "completeLesson": "Dersi Tamamla",
@@ -6,4 +196,3 @@
         "lessonSummary": "Ders Özeti"
     }
 }
-

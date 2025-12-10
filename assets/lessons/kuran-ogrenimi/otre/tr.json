@@ -1,0 +1,36 @@
+{
+    "words": [
+        {
+            "id": 1,
+            "reading": "Bu - Ru - Cu"
+        },
+        {
+            "id": 2,
+            "reading": "Ku - Tu - Bu"
+        },
+        {
+            "id": 3,
+            "reading": "Nu - Zu - Lu"
+        },
+        {
+            "id": 4,
+            "reading": "Hu - Du - Du"
+        },
+        {
+            "id": 5,
+            "reading": "Ru - Su - Lu"
+        },
+        {
+            "id": 6,
+            "reading": "Şu - Ku - Ru"
+        },
+        {
+            "id": 7,
+            "reading": "Su - Cu - Du"
+        },
+        {
+            "id": 8,
+            "reading": "Du - Hu - Lu"
+        }
+    ]
+}

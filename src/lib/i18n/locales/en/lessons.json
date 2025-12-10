@@ -1,4 +1,194 @@
 {
+    "common": {
+        "searchPlaceholder": "Search lessons...",
+        "allCategories": "All Categories",
+        "lesson": "Lesson",
+        "level": "Level"
+    },
+    "kuranOgrenimi": {
+        "groupTitle": "Quran Learning",
+        "groupDescription": "From Alif-Ba to Tajweed",
+        "101": {
+            "title": "Arabic Alphabet",
+            "description": "Learn Arabic letters"
+        },
+        "102": {
+            "title": "Vowel Marks",
+            "description": "Fatha, Kasra, Damma"
+        },
+        "103": {
+            "title": "Letter Positions",
+            "description": "Initial, medial, final positions"
+        },
+        "104": {
+            "title": "Fatha-1",
+            "description": "Words with Fatha vowel mark"
+        },
+        "105": {
+            "title": "Fatha-2",
+            "description": "Fatha vowel exercises"
+        },
+        "106": {
+            "title": "Fatha-3",
+            "description": "Advanced Fatha exercises"
+        },
+        "107": {
+            "title": "Kasra",
+            "description": "Learning the Kasra vowel"
+        },
+        "108": {
+            "title": "Damma",
+            "description": "Learning the Damma vowel"
+        },
+        "109": {
+            "title": "Letters with Sukun",
+            "description": "Reading techniques with Sukun"
+        },
+        "110": {
+            "title": "Sukun",
+            "description": "Sukun mark and its usage"
+        },
+        "111": {
+            "title": "Exercises - 1",
+            "description": "Basic reading exercises"
+        },
+        "112": {
+            "title": "Elongated Letter Pronunciation",
+            "description": "Reading techniques with Madd"
+        },
+        "113": {
+            "title": "Madd (Elongation) Letter: Alif",
+            "description": "Elongation exercises with Alif"
+        },
+        "114": {
+            "title": "Madd (Elongation) Letter: Ya",
+            "description": "Elongation exercises with Ya"
+        },
+        "115": {
+            "title": "Madd (Elongation) Letter: Waw",
+            "description": "Elongation exercises with Waw"
+        },
+        "116": {
+            "title": "Exercises-2",
+            "description": "Madd exercises"
+        },
+        "117": {
+            "title": "Letters with Shaddah",
+            "description": "Reading techniques with Shaddah"
+        },
+        "118": {
+            "title": "Shaddah",
+            "description": "Shaddah mark and its usage"
+        },
+        "119": {
+            "title": "Exercises 3",
+            "description": "Shaddah exercises"
+        },
+        "120": {
+            "title": "Double Fatha (Tanween)",
+            "description": "Learning Tanween - Double Fatha"
+        },
+        "121": {
+            "title": "Double Kasra (Tanween)",
+            "description": "Learning Tanween - Double Kasra"
+        },
+        "122": {
+            "title": "Double Damma (Tanween)",
+            "description": "Learning Tanween - Double Damma"
+        },
+        "123": {
+            "title": "Madd Lazim",
+            "description": "Madd Lazim mark and its usage"
+        },
+        "124": {
+            "title": "Alif Written as Waw and Ya",
+            "description": "Special Alif spellings"
+        },
+        "125": {
+            "title": "Pronouns",
+            "description": "Learning pronouns"
+        },
+        "126": {
+            "title": "The Definite Article (Al)",
+            "description": "Al prefix and its usage"
+        },
+        "127": {
+            "title": "Silent Alif and Alif Lam",
+            "description": "Rules for silent Alif"
+        },
+        "128": {
+            "title": "Lafzatullah Muqatta'at Madd Letters",
+            "description": "Special Madd letters"
+        }
+    },
+    "namazDualari": {
+        "groupTitle": "Prayer Duas",
+        "groupDescription": "Subhaneke, Ettehiyyatu..."
+    },
+    "sureler": {
+        "groupTitle": "Surahs",
+        "groupDescription": "Starting with short Surahs"
+    },
+    "islamiKavramlar": {
+        "groupTitle": "Islamic Concepts",
+        "groupDescription": "Basic concepts and terms"
+    },
+    "islamTarihi": {
+        "groupTitle": "Islamic History",
+        "groupDescription": "From pre-prophethood to present",
+        "401": {
+            "title": "The Age of Ignorance (Jahiliyyah)",
+            "description": "Pre-Islamic era"
+        },
+        "402": {
+            "title": "Prophet Muhammad Before Prophethood",
+            "description": "Life before prophethood"
+        },
+        "403": {
+            "title": "The Prophetic Period (610-632)",
+            "description": "Meccan and Medinan periods"
+        },
+        "404": {
+            "title": "The Rightly Guided Caliphs (632–661)",
+            "description": "The Four Caliphs Period"
+        },
+        "405": {
+            "title": "Early Islamic States and the Umayyad Period (661–750)",
+            "description": "The Umayyads"
+        },
+        "406": {
+            "title": "The Abbasid Period and Islam's Golden Age (750–1258)",
+            "description": "The Abbasids"
+        },
+        "407": {
+            "title": "Andalusian Umayyads and Interaction with Europe (711–1492)",
+            "description": "Andalusian Umayyads"
+        },
+        "408": {
+            "title": "Regional States in Medieval Islamic Geography",
+            "description": "Regional States"
+        },
+        "409": {
+            "title": "The Crusades Period and the Islamic World (11th–13th centuries)",
+            "description": "The Crusades"
+        },
+        "410": {
+            "title": "Mongol Invasions and Transformation in the Islamic World (13th century)",
+            "description": "Mongol Invasions"
+        },
+        "411": {
+            "title": "Late Period Islamic States (1300–1900)",
+            "description": "Late Period"
+        },
+        "412": {
+            "title": "The Islamic World in Modern Times (1800–Present)",
+            "description": "Modern Era"
+        },
+        "413": {
+            "title": "Universal Contributions of Islamic Civilization",
+            "description": "Islamic Civilization"
+        }
+    },
     "islamicHistory": {
         "title": "Islamic History",
         "completeLesson": "Complete Lesson",
@@ -6,4 +196,3 @@
         "lessonSummary": "Lesson Summary"
     }
 }
-

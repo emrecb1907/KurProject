@@ -9,11 +9,19 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { playSound, releaseAudioPlayer } from '@/utils/audio';
 import { ARABIC_LETTERS, LETTER_AUDIO_FILES, type Letter } from '@/data/elifBaLetters';
 import { useUser } from '@/store';
+import { useTranslation } from 'react-i18next';
+
+import trData from '../../../assets/lessons/kuran-ogrenimi/elif-ba/tr.json';
+import enData from '../../../assets/lessons/kuran-ogrenimi/elif-ba/en.json';
 
 export default function ElifBaIntroductionScreen() {
     const router = useRouter();
     const { themeVersion } = useTheme();
     const { completeLesson } = useUser();
+    const { i18n } = useTranslation();
+
+    const lessonData = i18n.language.startsWith('en') ? enData : trData;
+
     const stopSoundRef = useRef<(() => void) | null>(null);
     const [playedLetters, setPlayedLetters] = useState<Set<number>>(new Set());
 
@@ -147,6 +155,25 @@ export default function ElifBaIntroductionScreen() {
         },
         completeButtonTextDisabled: {
             color: colors.textSecondary,
+        },
+        infoCard: {
+            backgroundColor: colors.surface,
+            borderRadius: 16,
+            padding: 20,
+            marginBottom: 24,
+            borderWidth: 1,
+            borderColor: colors.border,
+            shadowColor: colors.shadow || '#000',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.05,
+            shadowRadius: 8,
+            elevation: 2,
+        },
+        infoText: {
+            fontSize: 16,
+            lineHeight: 26,
+            color: colors.textPrimary,
+            marginBottom: 12,
         }
     }), [themeVersion]);
 
@@ -197,6 +224,14 @@ export default function ElifBaIntroductionScreen() {
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
+                {lessonData?.lessonInfo && (
+                    <View style={styles.infoCard}>
+                        {lessonData.lessonInfo.map((text: string, index: number) => (
+                            <Text key={index} style={styles.infoText}>{text}</Text>
+                        ))}
+                    </View>
+                )}
+
                 <View style={styles.grid}>
                     {ARABIC_LETTERS.map((letter) => (
                         <Pressable

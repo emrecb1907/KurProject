@@ -1,0 +1,17 @@
+{
+    "description": "Harflerin uzatılarak okunması",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Kaa - Le"
+        },
+        {
+            "id": 2,
+            "reading": "Caa - E"
+        },
+        {
+            "id": 3,
+            "reading": "Maa - Le"
+        }
+    ]
+}

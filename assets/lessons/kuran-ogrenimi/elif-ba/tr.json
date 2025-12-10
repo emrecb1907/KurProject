@@ -1,0 +1,155 @@
+{
+    "lessonInfo": [
+        "Kur’an-ı Kerim, Arapça olarak indirilmiş ilahî bir kitaptır. Dolayısıyla Kur’an, Arap alfabesindeki harflerle yazılmıştır. Bu alfabe 28 harften oluşur. Türkçeden farklı olarak metinler sağdan sola doğru yazılır ve okunur.",
+        "Lamelif ( لا ), aslında ayrı bir harf değildir. Lam ( ل ) ve elif ( ا ) harflerinin bir araya gelmesiyle oluşmuştur.",
+        "Akciğerlere dolan hava dışarıya ya ses ya da nefes hâlinde çıkar. İrade dışında alıp verilmekte olan nefes, ses tellerini titreştirerek çıkarıldığında ses meydana gelir. Bu ses ağız, boğaz veya dilin belli bir noktasından çıkarılırsa harf meydana gelir. Her dilde harflerin kendine özgü bir çıkış yeri vardır. Harflerin çıkış yerine mahreç denir.",
+        "Harflerin Mahreçleri (Çıkış Yerleri)\nKur’an’ı doğru okuyabilmek için harfler mahreçlerine uygun olarak telaffuz edilmelidir. Çünkü harfin yanlış yerden çıkarılması, kelimelerin anlamlarının bozulmasına sebep olabilir."
+    ],
+    "letters": [
+        {
+            "id": 1,
+            "name": "Elif",
+            "trans": "E"
+        },
+        {
+            "id": 2,
+            "name": "Be",
+            "trans": "B"
+        },
+        {
+            "id": 3,
+            "name": "Te",
+            "trans": "T"
+        },
+        {
+            "id": 4,
+            "name": "Se",
+            "trans": "S"
+        },
+        {
+            "id": 5,
+            "name": "Cim",
+            "trans": "C"
+        },
+        {
+            "id": 6,
+            "name": "Ha",
+            "trans": "H"
+        },
+        {
+            "id": 7,
+            "name": "Hı",
+            "trans": "H"
+        },
+        {
+            "id": 8,
+            "name": "Dal",
+            "trans": "D"
+        },
+        {
+            "id": 9,
+            "name": "Zel",
+            "trans": "Z"
+        },
+        {
+            "id": 10,
+            "name": "Ra",
+            "trans": "R"
+        },
+        {
+            "id": 11,
+            "name": "Ze",
+            "trans": "Z"
+        },
+        {
+            "id": 12,
+            "name": "Sin",
+            "trans": "S"
+        },
+        {
+            "id": 13,
+            "name": "Şın",
+            "trans": "Ş"
+        },
+        {
+            "id": 14,
+            "name": "Sad",
+            "trans": "S"
+        },
+        {
+            "id": 15,
+            "name": "Dad",
+            "trans": "D"
+        },
+        {
+            "id": 16,
+            "name": "Tı",
+            "trans": "T"
+        },
+        {
+            "id": 17,
+            "name": "Zı",
+            "trans": "Z"
+        },
+        {
+            "id": 18,
+            "name": "Ayn",
+            "trans": "A"
+        },
+        {
+            "id": 19,
+            "name": "Gayn",
+            "trans": "G"
+        },
+        {
+            "id": 20,
+            "name": "Fe",
+            "trans": "F"
+        },
+        {
+            "id": 21,
+            "name": "Kaf",
+            "trans": "K"
+        },
+        {
+            "id": 22,
+            "name": "Kef",
+            "trans": "K"
+        },
+        {
+            "id": 23,
+            "name": "Lam",
+            "trans": "L"
+        },
+        {
+            "id": 24,
+            "name": "Mim",
+            "trans": "M"
+        },
+        {
+            "id": 25,
+            "name": "Nun",
+            "trans": "N"
+        },
+        {
+            "id": 26,
+            "name": "Vav",
+            "trans": "V"
+        },
+        {
+            "id": 27,
+            "name": "He",
+            "trans": "H"
+        },
+        {
+            "id": 28,
+            "name": "Lam Elif",
+            "trans": "LA"
+        },
+        {
+            "id": 29,
+            "name": "Ye",
+            "trans": "Y"
+        }
+    ]
+}

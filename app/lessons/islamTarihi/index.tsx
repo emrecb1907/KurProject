@@ -61,7 +61,7 @@ export default function IslamTarihiLessonsListScreen() {
                     <Text style={styles.backButtonText}>Geri</Text>
                 </Pressable>
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitle}>İslam Tarihi</Text>
+                    <Text style={styles.headerTitle}>{t('lessons.islamTarihi.groupTitle', { defaultValue: 'İslam Tarihi' })}</Text>
                 </View>
                 <View style={{ width: 100 }} />
             </View>
@@ -122,7 +122,7 @@ export default function IslamTarihiLessonsListScreen() {
 
                                     {/* Text Info */}
                                     <View style={styles.textContainer}>
-                                        <Text style={styles.cardTitle}>{lesson.title}</Text>
+                                        <Text style={styles.cardTitle}>{t(`lessons.islamTarihi.${lesson.id}.title`, { defaultValue: lesson.title })}</Text>
                                     </View>
 
                                     {/* Arrow */}

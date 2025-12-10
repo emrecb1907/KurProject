@@ -147,19 +147,13 @@ export function GameScreen({
 
     // Play sound effect (correct or wrong)
     // Note: Sounds will not play if device is in silent mode (playsInSilentModeIOS: false)
-    // Play sound effect (correct or wrong)
     const playSoundEffect = (isCorrect: boolean) => {
         try {
-            // Stop previous effect sound
-            if (stopEffectSoundRef.current) {
-                stopEffectSoundRef.current();
-                stopEffectSoundRef.current = null;
-            }
-
             // Get the appropriate sound file
             const soundFile = isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND;
 
             // Play the sound effect using game sound manager
+            // Note: No need to stop previous sound - playGameSound handles seekTo(0) internally
             const stop = playGameSound(soundFile);
             stopEffectSoundRef.current = stop;
         } catch (error) {

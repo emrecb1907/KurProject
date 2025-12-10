@@ -1,0 +1,25 @@
+{
+    "description": "Sukun mark indicates silent letters",
+    "words": [
+        {
+            "id": 1,
+            "reading": "Min"
+        },
+        {
+            "id": 2,
+            "reading": "An"
+        },
+        {
+            "id": 3,
+            "reading": "Lan"
+        },
+        {
+            "id": 4,
+            "reading": "Kam"
+        },
+        {
+            "id": 5,
+            "reading": "Bal"
+        }
+    ]
+}

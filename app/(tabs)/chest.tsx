@@ -8,6 +8,8 @@ import { useUser } from '@/store';
 import { Heart, Lightbulb, Video, ArrowLeft, Play, Gift, Calendar, Star, CaretDown, CaretUp } from 'phosphor-react-native';
 
 import { useTranslation } from 'react-i18next';
+import { HeaderButton } from '@/components/ui/HeaderButton';
+import { PrimaryButton } from '@/components/ui/PrimaryButton';
 
 export default function ChestScreen() {
   const { t } = useTranslation();
@@ -132,9 +134,10 @@ export default function ChestScreen() {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable onPress={() => router.back()} style={styles.backButtonContainer}>
-          <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-        </Pressable>
+        <HeaderButton
+          title={t('common.back')}
+          onPress={() => router.back()}
+        />
         <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
         <View style={{ width: 40 }} />
       </View>
@@ -203,15 +206,20 @@ export default function ChestScreen() {
                   {getAdSlotRenewalText(index, slotStatus)}
                 </Text>
               </View>
-              <Pressable
-                style={[styles.adButton, isUsed && styles.adButtonUsed, isLocked && !isUsed && styles.adButtonDisabled]}
+              <PrimaryButton
+                title={isUsed ? t('rewards.used') : t('rewards.watchAd')}
                 onPress={handleWatchAd}
                 disabled={isLocked}
-              >
-                <Text style={[styles.adButtonText, isUsed && styles.adButtonUsedText]}>
-                  {isUsed ? t('rewards.used') : t('rewards.watchAd')}
-                </Text>
-              </Pressable>
+                style={[
+                  { paddingVertical: 8, paddingHorizontal: 16, minWidth: 70, height: 36 },
+                  isUsed && styles.adButtonUsed,
+                  isLocked && !isUsed && styles.adButtonDisabled
+                ]}
+                textStyle={[
+                  { fontSize: 13 },
+                  isUsed && styles.adButtonUsedText
+                ]}
+              />
             </View>
           );
         })}
@@ -228,9 +236,11 @@ export default function ChestScreen() {
             <Text style={styles.bonusCardTitle}>{t('rewards.inviteFriend.title')}</Text>
             <Text style={styles.bonusCardReward}>{t('rewards.inviteFriend.reward')}</Text>
           </View>
-          <Pressable style={styles.bonusButton}>
-            <Text style={styles.bonusButtonText}>{t('rewards.inviteFriend.button')}</Text>
-          </Pressable>
+          <PrimaryButton
+            title={t('rewards.inviteFriend.button')}
+            style={{ paddingVertical: 8, paddingHorizontal: 16, minWidth: 90, height: 36 }}
+            textStyle={{ fontSize: 13 }}
+          />
         </View>
 
         {/* 3 Day Consecutive Login */}
@@ -256,9 +266,11 @@ export default function ChestScreen() {
             <Text style={styles.bonusCardTitle}>{t('rewards.dailyTask.title')}</Text>
             <Text style={styles.bonusCardReward}>{t('rewards.dailyTask.reward')}</Text>
           </View>
-          <Pressable style={styles.bonusButton}>
-            <Text style={styles.bonusButtonText}>{t('rewards.dailyTask.button')}</Text>
-          </Pressable>
+          <PrimaryButton
+            title={t('rewards.dailyTask.button')}
+            style={{ paddingVertical: 8, paddingHorizontal: 16, minWidth: 90, height: 36 }}
+            textStyle={{ fontSize: 13 }}
+          />
         </View>
 
         {/* How It Works - Collapsible */}
@@ -307,12 +319,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     paddingBottom: 12,
     backgroundColor: colors.backgroundDarker,
   },
-  backButtonContainer: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -447,28 +454,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     fontSize: 12,
     color: colors.textSecondary,
   },
-  adButton: {
-    backgroundColor: colors.xpGold,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
-    minWidth: 70,
-    alignItems: 'center',
-  },
-  adButtonUsed: {
-    backgroundColor: colors.locked,
-  },
-  adButtonDisabled: {
-    backgroundColor: colors.locked,
-  },
-  adButtonText: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#000000',
-  },
-  adButtonUsedText: {
-    color: colors.textSecondary,
-  },
+
   // Bonus Cards
   bonusCard: {
     flexDirection: 'row',
@@ -507,19 +493,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     fontSize: 12,
     color: colors.textSecondary,
   },
-  bonusButton: {
-    backgroundColor: colors.xpGold,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
-    minWidth: 90,
-    alignItems: 'center',
-  },
-  bonusButtonText: {
-    fontSize: 13,
-    fontWeight: '600',
-    color: '#000000',
-  },
+
   bonusButtonClaimed: {
     backgroundColor: '#22C55E',
     paddingHorizontal: 16,

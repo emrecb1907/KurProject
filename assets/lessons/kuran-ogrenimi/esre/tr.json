@@ -1,0 +1,36 @@
+{
+    "words": [
+        {
+            "id": 1,
+            "reading": "Bi - Ri - Ki"
+        },
+        {
+            "id": 2,
+            "reading": "Si - Li - Mi"
+        },
+        {
+            "id": 3,
+            "reading": "Fi - Li - Mi"
+        },
+        {
+            "id": 4,
+            "reading": "Ki - Ti - Bi"
+        },
+        {
+            "id": 5,
+            "reading": "Hi - Li - Mi"
+        },
+        {
+            "id": 6,
+            "reading": "Ki - Ri - Mi"
+        },
+        {
+            "id": 7,
+            "reading": "Ni - Hi - Li"
+        },
+        {
+            "id": 8,
+            "reading": "Di - Ri - Si"
+        }
+    ]
+}

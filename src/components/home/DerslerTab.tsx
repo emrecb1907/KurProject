@@ -78,8 +78,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     const categories: CategoryItem[] = [
         {
             id: '1',
-            title: "Kur'an Öğrenimi",
-            subtitle: "Elif-Ba'dan tecvid temeline",
+            title: t('lessons.kuranOgrenimi.groupTitle', { defaultValue: "Kur'an Öğrenimi" }),
+            subtitle: t('lessons.kuranOgrenimi.groupDescription', { defaultValue: "Elif-Ba'dan tecvid temeline" }),
             count: kuranCompleted,
             totalCount: kuranTotal,
             progress: kuranTotal > 0 ? kuranCompleted / kuranTotal : 0,
@@ -92,8 +92,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '2',
-            title: "Namaz Duaları",
-            subtitle: "Sübhaneke, Ettehiyyatü...",
+            title: t('lessons.namazDualari.groupTitle', { defaultValue: "Namaz Duaları" }),
+            subtitle: t('lessons.namazDualari.groupDescription', { defaultValue: "Sübhaneke, Ettehiyyatü..." }),
             count: 0,
             totalCount: 10,
             progress: 0,
@@ -105,8 +105,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '3',
-            title: "Sureler",
-            subtitle: "Kısa surelerden başlayarak",
+            title: t('lessons.sureler.groupTitle', { defaultValue: "Sureler" }),
+            subtitle: t('lessons.sureler.groupDescription', { defaultValue: "Kısa surelerden başlayarak" }),
             count: 0,
             totalCount: 15,
             progress: 0,
@@ -118,7 +118,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '4',
-            title: "İslam Tarihi",
+            title: t('lessons.islamTarihi.groupTitle', { defaultValue: "İslam Tarihi" }),
             subtitle: "Peygamberlik öncesinden günümüze",
             count: historyCompleted,
             totalCount: historyTotal,
@@ -132,8 +132,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '5',
-            title: "İslami Kavramlar",
-            subtitle: "Temel kavramlar, terimler",
+            title: t('lessons.islamiKavramlar.groupTitle', { defaultValue: "İslami Kavramlar" }),
+            subtitle: t('lessons.islamiKavramlar.groupDescription', { defaultValue: "Temel kavramlar, terimler" }),
             count: 0,
             totalCount: 20,
             progress: 0,
@@ -164,7 +164,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
                     <View style={styles.searchBar}>
                         <MagnifyingGlass size={20} color={colors.textSecondary} weight="bold" />
                         <TextInput
-                            placeholder="Ders ara..."
+                            placeholder={t('lessons.common.searchPlaceholder', { defaultValue: "Ders ara..." })}
                             placeholderTextColor={colors.textSecondary}
                             style={styles.searchInput}
                         />
@@ -173,7 +173,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
 
                 {/* Section Title */}
                 <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionTitle}>Tüm Kategoriler</Text>
+                    <Text style={styles.sectionTitle}>{t('lessons.common.allCategories', { defaultValue: "Tüm Kategoriler" })}</Text>
                 </View>
 
                 {/* Categories Grid */}

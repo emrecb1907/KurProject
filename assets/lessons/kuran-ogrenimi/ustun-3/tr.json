@@ -1,0 +1,44 @@
+{
+    "words": [
+        {
+            "id": 1,
+            "reading": "Ka - Fe - Re"
+        },
+        {
+            "id": 2,
+            "reading": "Ga - Fe - Re"
+        },
+        {
+            "id": 3,
+            "reading": "Na - Sa - Re"
+        },
+        {
+            "id": 4,
+            "reading": "Fe - Te - Ha"
+        },
+        {
+            "id": 5,
+            "reading": "Şe - Ra - Ha"
+        },
+        {
+            "id": 6,
+            "reading": "Me - Ne - A"
+        },
+        {
+            "id": 7,
+            "reading": "Ha - Fe - Za"
+        },
+        {
+            "id": 8,
+            "reading": "Ra - Ha - Me"
+        },
+        {
+            "id": 9,
+            "reading": "Ne - Ha - Le"
+        },
+        {
+            "id": 10,
+            "reading": "Ka - Re - Me"
+        }
+    ]
+}

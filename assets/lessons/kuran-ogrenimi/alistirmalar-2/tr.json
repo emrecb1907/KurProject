@@ -1,0 +1,13 @@
+{
+    "description": "Med alıştırmaları",
+    "exercises": [
+        {
+            "id": 1,
+            "type": "reading"
+        },
+        {
+            "id": 2,
+            "type": "practice"
+        }
+    ]
+}

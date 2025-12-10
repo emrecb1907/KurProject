@@ -1,0 +1,1827 @@
+[
+    {
+        "id": 1,
+        "hadis": "The best of believers is the one who has the best character.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 2,
+        "hadis": "Make things easy, do not make them difficult.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 3,
+        "hadis": "A good word is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 4,
+        "hadis": "He who does not show mercy will not be shown mercy.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 5,
+        "hadis": "Spread peace (Salam) among yourselves.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 6,
+        "hadis": "He who does not show mercy to our young ones is not one of us.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 7,
+        "hadis": "Smiling is charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 8,
+        "hadis": "The best of you is the one who is most beneficial to people.",
+        "kaynak": "Daraqutni"
+    },
+    {
+        "id": 9,
+        "hadis": "Be good to your neighbor.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 10,
+        "hadis": "Cleanliness is half of faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 11,
+        "hadis": "A believer is truthful.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 12,
+        "hadis": "Beware of arrogance.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 13,
+        "hadis": "Keep your promise.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 14,
+        "hadis": "Allah is Beautiful and He loves beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 15,
+        "hadis": "The best speech is the greeting of peace.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 16,
+        "hadis": "Exchange gifts, as that will lead to increasing your love to one another.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 17,
+        "hadis": "Even a small kindness is virtuous.",
+        "kaynak": "Ibn Hibban"
+    },
+    {
+        "id": 18,
+        "hadis": "Be good to your parents.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 19,
+        "hadis": "The most beloved deed to Allah is the most regular and constant one even if it were little.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 20,
+        "hadis": "Truthfulness brings peace.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 21,
+        "hadis": "A believer cannot be a liar.",
+        "kaynak": "Muwatta"
+    },
+    {
+        "id": 22,
+        "hadis": "The strong one is he who controls himself when angry.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 23,
+        "hadis": "Do not upset your believing brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 24,
+        "hadis": "Repel evil with what is better.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 25,
+        "hadis": "Show ease to people.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 26,
+        "hadis": "Kindness is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 27,
+        "hadis": "The best among you is the one who learns the Quran and teaches it.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 28,
+        "hadis": "Do not envy one another.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 29,
+        "hadis": "Anger is from Satan.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 30,
+        "hadis": "Be good to your relatives.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 31,
+        "hadis": "Allah is with those who are patient.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 32,
+        "hadis": "Smile at your believing brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 33,
+        "hadis": "Love the young, respect the old.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 34,
+        "hadis": "A believer is the one from whose tongue and hands Muslims are safe.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 35,
+        "hadis": "Treat others with kindness, and you will find kindness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 36,
+        "hadis": "Speak good words.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 37,
+        "hadis": "Beware of suspicion.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 38,
+        "hadis": "Pray for your believing brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 39,
+        "hadis": "Justice is the foundation of religion.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 40,
+        "hadis": "Do not get involved in evil.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 41,
+        "hadis": "Allah loves those who are merciful.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 42,
+        "hadis": "Be humble.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 43,
+        "hadis": "Do not belittle any good deed.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 44,
+        "hadis": "Gentle words unite hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 45,
+        "hadis": "Do not betray the trust.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 46,
+        "hadis": "Truthfulness leads to righteousness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 47,
+        "hadis": "Faith is good character.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 48,
+        "hadis": "Love goodness, stay away from evil.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 49,
+        "hadis": "Hearts soften with love.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 50,
+        "hadis": "Do not harm your believing brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 51,
+        "hadis": "Forgive so that you may be forgiven.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 52,
+        "hadis": "A believer never humiliates his brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 53,
+        "hadis": "Love your beloved moderately.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 54,
+        "hadis": "Good words unite hearts.",
+        "kaynak": "Daraqutni"
+    },
+    {
+        "id": 55,
+        "hadis": "A Muslim is safe from other Muslims.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 56,
+        "hadis": "Compassion is part of faith.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 57,
+        "hadis": "Whoever helps his brother, Allah helps him.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 58,
+        "hadis": "Do not underestimate any kindness.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 59,
+        "hadis": "A believer may make a mistake but does not abandon goodness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 60,
+        "hadis": "The best deed is good character.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 61,
+        "hadis": "Allah loves His generous servants.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 62,
+        "hadis": "Gentleness is beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 63,
+        "hadis": "If a believer loves his brother, let him tell him.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 64,
+        "hadis": "One who guides to something good has a reward similar to that of its doer.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 65,
+        "hadis": "A believer is pure in heart and tongue.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 66,
+        "hadis": "Patience is half of faith.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 67,
+        "hadis": "Making your brother happy is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 68,
+        "hadis": "A believer is a mirror to another believer.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 69,
+        "hadis": "Honesty comforts the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 70,
+        "hadis": "Smiling at people is kindness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 71,
+        "hadis": "Gifts increase love.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 72,
+        "hadis": "A believer does not hold grudges.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 73,
+        "hadis": "Be truthful.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 74,
+        "hadis": "Greeting softens the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 75,
+        "hadis": "A Muslim is merciful at heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 76,
+        "hadis": "The best friend is the one who reminds of goodness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 77,
+        "hadis": "Spreading goodness is a blessing.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 78,
+        "hadis": "Follow up a bad deed with a good deed.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 79,
+        "hadis": "Do not look down on your brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 80,
+        "hadis": "Mercy is a light from the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 81,
+        "hadis": "A believer is humble.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 82,
+        "hadis": "A smiling face is part of good character.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 83,
+        "hadis": "Goodness opens doors.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 84,
+        "hadis": "Holding grudges darkens the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 85,
+        "hadis": "A believer gives trust.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 86,
+        "hadis": "He who does good finds good.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 87,
+        "hadis": "Love is the beauty of faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 88,
+        "hadis": "He who shows mercy finds mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 89,
+        "hadis": "A believer has a pure heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 90,
+        "hadis": "Doing good is generosity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 91,
+        "hadis": "Being good to neighbors is from faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 92,
+        "hadis": "Gentleness beautifies everything.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 93,
+        "hadis": "A believer is true to his word.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 94,
+        "hadis": "Having a pure heart is a virtue.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 95,
+        "hadis": "Even a smile is acts of kindness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 96,
+        "hadis": "Love is a mercy from Allah.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 97,
+        "hadis": "A believer loves the truth.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 98,
+        "hadis": "Pray for your Muslim brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 99,
+        "hadis": "Sweet words bring peace to the heart.",
+        "kaynak": "Daraqutni"
+    },
+    {
+        "id": 100,
+        "hadis": "The best character is a smiling face.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 101,
+        "hadis": "Love beautifies the believer's heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 102,
+        "hadis": "A Muslim never hurts his brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 103,
+        "hadis": "Goodness softens hearts.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 104,
+        "hadis": "Honesty gives confidence.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 105,
+        "hadis": "A smiling face is charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 106,
+        "hadis": "He who upsets a believer upsets himself.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 107,
+        "hadis": "Patience is the ornament of religion.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 108,
+        "hadis": "Goodness brings one closer to Allah.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 109,
+        "hadis": "Stay away from evil.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 110,
+        "hadis": "Mercy is the light of the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 111,
+        "hadis": "A believer approaches with love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 112,
+        "hadis": "The most beautiful word is peace.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 113,
+        "hadis": "Do good for the one you love.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 114,
+        "hadis": "A believer is polite.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 115,
+        "hadis": "Protect and love the young.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 116,
+        "hadis": "Truthfulness leads to peace.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 117,
+        "hadis": "Approach with love, and you will be loved.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 118,
+        "hadis": "Goodness turns into beauty.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 119,
+        "hadis": "He who shows mercy receives mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 120,
+        "hadis": "A believer keeps his heart clean.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 121,
+        "hadis": "Do not give place to evil.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 122,
+        "hadis": "He who speaks the truth gains trust.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 123,
+        "hadis": "A believer does not leave his brother alone.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 124,
+        "hadis": "Sweet words increase love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 125,
+        "hadis": "Approach people with kindness.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 126,
+        "hadis": "A believer has an enlightened heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 127,
+        "hadis": "The patient one wins in the end.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 128,
+        "hadis": "Humility is the beauty of faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 129,
+        "hadis": "A believer forgives evil.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 130,
+        "hadis": "Approaching with love is charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 131,
+        "hadis": "Forgiving evil is goodness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 132,
+        "hadis": "Good behavior is from faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 133,
+        "hadis": "A believer does not hurt others.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 134,
+        "hadis": "Love to be loved.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 135,
+        "hadis": "One good deed brings another.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 136,
+        "hadis": "Mercy is the ornament of the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 137,
+        "hadis": "Good behavior unites hearts.",
+        "kaynak": "Daraqutni"
+    },
+    {
+        "id": 138,
+        "hadis": "Welcome your brother with joy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 139,
+        "hadis": "Doing good is worship.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 140,
+        "hadis": "A believer approaches with love.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 141,
+        "hadis": "Be smiling, earn rewards.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 142,
+        "hadis": "Being polite is part of beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 143,
+        "hadis": "He who does good finds good.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 144,
+        "hadis": "A believer is known for his politeness.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 145,
+        "hadis": "Let your heart be clean.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 146,
+        "hadis": "Help your Muslim brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 147,
+        "hadis": "Love revives the heart.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 148,
+        "hadis": "Increase goodness so that beauty increases.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 149,
+        "hadis": "Mercy strengthens the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 150,
+        "hadis": "Honesty opens every door.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 151,
+        "hadis": "Good words bring hearts closer.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 152,
+        "hadis": "A believer is faithful to the trust.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 153,
+        "hadis": "Protecting one's brother is from faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 154,
+        "hadis": "Goodness brings one closer to Allah.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 155,
+        "hadis": "A believer is gentle and soft.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 156,
+        "hadis": "Loving the young is from mercy.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 157,
+        "hadis": "Forgiveness magnifies the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 158,
+        "hadis": "The patient one always wins.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 159,
+        "hadis": "Goodness is the key to beauty.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 160,
+        "hadis": "Love strengthens faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 161,
+        "hadis": "Be smiling, earn rewards.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 162,
+        "hadis": "A believer acts gently towards his brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 163,
+        "hadis": "Approaching with kindness is a beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 164,
+        "hadis": "A heart growing with love is beautiful.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 165,
+        "hadis": "Every act of kindness is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 166,
+        "hadis": "Truthfulness brings peace.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 167,
+        "hadis": "The merciful one finds mercy.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 168,
+        "hadis": "Allah loves those who do good.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 169,
+        "hadis": "A believer does not break hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 170,
+        "hadis": "Even a small smile is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 171,
+        "hadis": "Greeting increases love.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 172,
+        "hadis": "A believer welcomes his brother with joy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 173,
+        "hadis": "Politeness is the beauty of faith.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 174,
+        "hadis": "Goodness polishes the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 175,
+        "hadis": "He who helps his brother receives help from Allah.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 176,
+        "hadis": "A believer neither hurts nor gets hurt.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 177,
+        "hadis": "He who does good does not regret.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 178,
+        "hadis": "Sweet speech is a smiling face.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 179,
+        "hadis": "Truthfulness adds beauty to every deed.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 180,
+        "hadis": "Love is the ornament of the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 181,
+        "hadis": "Kindness is the beauty of faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 182,
+        "hadis": "A believer protects and watches over his brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 183,
+        "hadis": "Good behavior brings one closer to Allah.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 184,
+        "hadis": "Be merciful, and you will find mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 185,
+        "hadis": "He who multiplies goodness finds blessings.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 186,
+        "hadis": "Speaking the truth is a virtue.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 187,
+        "hadis": "A believer has good character.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 188,
+        "hadis": "Making your brother happy is charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 189,
+        "hadis": "Doors of goodness open one another.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 190,
+        "hadis": "Love is Allah’s gift to His servants.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 191,
+        "hadis": "Do not hurt so that you are not hurt.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 192,
+        "hadis": "Good character is the essence of faith.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 193,
+        "hadis": "A believer prays for his brother.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 194,
+        "hadis": "Truthfulness brings mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 195,
+        "hadis": "Do good, find good.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 196,
+        "hadis": "Love unites hearts.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 197,
+        "hadis": "A merciful heart dispels darkness.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 198,
+        "hadis": "A believer is gentle-natured.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 199,
+        "hadis": "Goodness beautifies a person.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 200,
+        "hadis": "The most virtuous deed is good character.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 201,
+        "hadis": "A believer does not narrow, he expands.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 202,
+        "hadis": "Mercy is the key to the heart.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 203,
+        "hadis": "Good character is the greatest blessing.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 204,
+        "hadis": "Sweet words warm hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 205,
+        "hadis": "Increase goodness, decrease evil.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 206,
+        "hadis": "Love is the believer's ornament.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 207,
+        "hadis": "Truthfulness attracts mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 208,
+        "hadis": "A believer is a healer, not a breaker.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 209,
+        "hadis": "Be good to your brother, find goodness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 210,
+        "hadis": "Patience is the believer's shield.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 211,
+        "hadis": "Kindness beautifies faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 212,
+        "hadis": "A Muslim neither hurts nor gets hurt.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 213,
+        "hadis": "Being true brings peace.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 214,
+        "hadis": "Mercy expands the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 215,
+        "hadis": "Approaching with kindness gives happiness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 216,
+        "hadis": "Making your brother happy is goodness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 217,
+        "hadis": "A believer is the one with a clean heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 218,
+        "hadis": "Politeness is the beauty of faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 219,
+        "hadis": "Love softens the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 220,
+        "hadis": "Kindness stands in place of charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 221,
+        "hadis": "A smiling face is from faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 222,
+        "hadis": "Praying for your brother is kindness.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 223,
+        "hadis": "Truthfulness is the foundation of trust.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 224,
+        "hadis": "He who shows mercy finds peace.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 225,
+        "hadis": "Doing good enlightens the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 226,
+        "hadis": "A believer keeps his word.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 227,
+        "hadis": "Politeness is the key to peace.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 228,
+        "hadis": "Goodness gives birth to love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 229,
+        "hadis": "Acting mercifully is a virtue.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 230,
+        "hadis": "Correct speech unites hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 231,
+        "hadis": "Kindness gives peace to a person.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 232,
+        "hadis": "A believer has a smiling face.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 233,
+        "hadis": "Mercy is the light of the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 234,
+        "hadis": "Truthfulness is the beginning of beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 235,
+        "hadis": "Kindness increases reward.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 236,
+        "hadis": "A Muslim has a soft heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 237,
+        "hadis": "Love brings hearts closer.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 238,
+        "hadis": "Good behavior brings reward.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 239,
+        "hadis": "He who does good finds peace.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 240,
+        "hadis": "Mercy is the essence of beauty.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 241,
+        "hadis": "Truthful speech brings happiness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 242,
+        "hadis": "Kindness is the believer's ornament.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 243,
+        "hadis": "Acting mercifully strengthens the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 244,
+        "hadis": "Multiply goodness, reward increases.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 245,
+        "hadis": "Truthfulness is like light.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 246,
+        "hadis": "A believer mends, not breaks hearts.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 247,
+        "hadis": "Approaching with love softens the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 248,
+        "hadis": "The best of kindness is a smiling face.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 249,
+        "hadis": "Mercy is like light.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 250,
+        "hadis": "The truthful one rises.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 251,
+        "hadis": "A believer mends, does not hurt.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 252,
+        "hadis": "Kindness refreshes the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 253,
+        "hadis": "Approach with love, find love.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 254,
+        "hadis": "Mercy is the believer's adornment.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 255,
+        "hadis": "True speech brings beauty.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 256,
+        "hadis": "He who does good earns peace.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 257,
+        "hadis": "A smiling face is judged as charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 258,
+        "hadis": "Love brings hearts together.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 259,
+        "hadis": "A believer protects and watches over his brother.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 260,
+        "hadis": "Kindness brings blessings.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 261,
+        "hadis": "He who shows mercy finds mercy.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 262,
+        "hadis": "Truthfulness gives peace to the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 263,
+        "hadis": "Spreading goodness is beauty.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 264,
+        "hadis": "Love softens the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 265,
+        "hadis": "A believer keeps his heart clean.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 266,
+        "hadis": "Good intention brings goodness.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 267,
+        "hadis": "Good behavior brings reward.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 268,
+        "hadis": "Mercy illuminates the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 269,
+        "hadis": "Sweet speech warms the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 270,
+        "hadis": "Kindness is the believer's adornment.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 271,
+        "hadis": "A smiling face gives peace to the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 272,
+        "hadis": "Love connects hearts.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 273,
+        "hadis": "True speech elevates a person.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 274,
+        "hadis": "Kindness is love's brother.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 275,
+        "hadis": "One who is merciful is beautiful.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 276,
+        "hadis": "Kindness is the sign of a believer.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 277,
+        "hadis": "Patience brings beauty.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 278,
+        "hadis": "A believer is constructive, not breaking.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 279,
+        "hadis": "Truthfulness relieves the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 280,
+        "hadis": "Mercy matures the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 281,
+        "hadis": "Kindness is like a flower; it blooms.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 282,
+        "hadis": "A smiling face gives birth to love.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 283,
+        "hadis": "Being true gives confidence.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 284,
+        "hadis": "Love beautifies the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 285,
+        "hadis": "He who does good does not regret.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 286,
+        "hadis": "A believer approaches with love.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 287,
+        "hadis": "Sweet words gain love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 288,
+        "hadis": "Mercy polishes the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 289,
+        "hadis": "Truthfulness opens every door.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 290,
+        "hadis": "Goodness widens its path.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 291,
+        "hadis": "A smiling face counts as charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 292,
+        "hadis": "A believer does not hurt the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 293,
+        "hadis": "Love is Allah's mercy.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 294,
+        "hadis": "Be truthful, and win.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 295,
+        "hadis": "Kindness beautifies and exalts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 296,
+        "hadis": "Mercy brings peace to the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 297,
+        "hadis": "Good character is a part of faith.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 298,
+        "hadis": "He who increases goodness finds beauty.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 299,
+        "hadis": "Love mends hearts.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 300,
+        "hadis": "Mercy is the core of faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 301,
+        "hadis": "Kindness leaves peace in the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 302,
+        "hadis": "Approaching with love is beauty.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 303,
+        "hadis": "Mercy illuminates the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 304,
+        "hadis": "True speech strengthens the heart.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 305,
+        "hadis": "Kindness is the believer's sign.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 306,
+        "hadis": "Showing a smiling face to your brother is charity.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 307,
+        "hadis": "He who shows mercy sees mercy.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 308,
+        "hadis": "Truthfulness is the heart's most beautiful ornament.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 309,
+        "hadis": "Love cleanses the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 310,
+        "hadis": "Goodness is a means to beauty.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 311,
+        "hadis": "A smiling face multiplies love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 312,
+        "hadis": "Mercy softens the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 313,
+        "hadis": "The one who behaves truly finds peace.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 314,
+        "hadis": "Kindness suits a believer.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 315,
+        "hadis": "Love is the food of the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 316,
+        "hadis": "Mercy is the believer's ornament.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 317,
+        "hadis": "Goodness comes to the one who does good.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 318,
+        "hadis": "Being truthful is a virtue.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 319,
+        "hadis": "Love is a mercy from Allah.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 320,
+        "hadis": "Kindness unites hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 321,
+        "hadis": "A smiling face brings peace.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 322,
+        "hadis": "Mercy is the ornament of the heart.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 323,
+        "hadis": "Truthfulness illuminates the heart.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 324,
+        "hadis": "Kindness increases beauty.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 325,
+        "hadis": "Love opens a way, hatred closes it.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 326,
+        "hadis": "A merciful heart radiates light.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 327,
+        "hadis": "Goodness widens its path.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 328,
+        "hadis": "The true one is exalted.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 329,
+        "hadis": "Approaching with love is mercy.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 330,
+        "hadis": "Kindness is the believer's most beautiful ornament.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 331,
+        "hadis": "Being smiling is charity.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 332,
+        "hadis": "Mercy beautifies the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 333,
+        "hadis": "True speech gives peace to the heart.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 334,
+        "hadis": "He who does good finds beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 335,
+        "hadis": "Love gives strength to the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 336,
+        "hadis": "Being merciful is a virtue.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 337,
+        "hadis": "He who does good gathers goodness.",
+        "kaynak": "Bayhaqi"
+    },
+    {
+        "id": 338,
+        "hadis": "Behaving truly beautifies the heart.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 339,
+        "hadis": "Love creates light in the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 340,
+        "hadis": "Kindness strengthens the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 341,
+        "hadis": "A smiling face unites hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 342,
+        "hadis": "Mercy cleanses the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 343,
+        "hadis": "Being true is a virtue.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 344,
+        "hadis": "Goodness is the source of peace.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 345,
+        "hadis": "Sevgi softens the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 346,
+        "hadis": "Mercy is the believer's garment.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 347,
+        "hadis": "Kindness gives birth to beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 348,
+        "hadis": "Truthfulness strengthens the heart.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 349,
+        "hadis": "Love unites hearts.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 350,
+        "hadis": "The best of kindness is gentleness.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 351,
+        "hadis": "Good character is the fruit of faith.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 352,
+        "hadis": "Mercy illuminates the heart.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 353,
+        "hadis": "True speech exalts a person.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 354,
+        "hadis": "Kindness begets love.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 355,
+        "hadis": "Love is the light of the believer's heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 356,
+        "hadis": "Being merciful is from beauty.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 357,
+        "hadis": "Kindness softens the heart.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 358,
+        "hadis": "Truthfulness brings trust.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 359,
+        "hadis": "Love refreshes the heart.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 360,
+        "hadis": "Kindness is the most beautiful ornament of a believer.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 361,
+        "hadis": "A smiling face increases beauty.",
+        "kaynak": "Tirmidhi"
+    },
+    {
+        "id": 362,
+        "hadis": "A merciful heart finds peace.",
+        "kaynak": "Tabarani"
+    },
+    {
+        "id": 363,
+        "hadis": "Being true gives birth to goodness.",
+        "kaynak": "Bukhari"
+    },
+    {
+        "id": 364,
+        "hadis": "He who does good never loses.",
+        "kaynak": "Muslim"
+    },
+    {
+        "id": 365,
+        "hadis": "Love is Allah's mercy to His servants.",
+        "kaynak": "Tirmidhi"
+    }
+]

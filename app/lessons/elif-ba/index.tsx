@@ -61,7 +61,7 @@ export default function ElifBaLessonsListScreen() {
                     <Text style={styles.backButtonText}>Geri</Text>
                 </Pressable>
                 <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitle}>Kur'an Öğrenimi</Text>
+                    <Text style={styles.headerTitle}>{t('lessons.kuranOgrenimi.groupTitle', { defaultValue: "Kur'an Öğrenimi" })}</Text>
                 </View>
                 <View style={{ width: 100 }} />
             </View>
@@ -73,7 +73,7 @@ export default function ElifBaLessonsListScreen() {
             >
                 {/* Section Title */}
                 <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionTitle}>Dersler</Text>
+                    <Text style={styles.sectionTitle}>{t('home.lessons', { defaultValue: "Dersler" })}</Text>
                 </View>
 
                 {/* Lessons List */}
@@ -121,7 +121,7 @@ export default function ElifBaLessonsListScreen() {
 
                                     {/* Text Info */}
                                     <View style={styles.textContainer}>
-                                        <Text style={styles.cardTitle}>{lesson.title}</Text>
+                                        <Text style={styles.cardTitle}>{t(`lessons.kuranOgrenimi.${lesson.id}.title`, { defaultValue: lesson.title })}</Text>
                                     </View>
 
                                     {/* Arrow */}
