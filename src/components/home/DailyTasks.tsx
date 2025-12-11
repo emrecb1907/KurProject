@@ -103,20 +103,21 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
     const handleClaimTaskReward = async (task: Task) => {
         if (task.completed && !task.claimed) {
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-
             // Determine type based on ID (1=lesson, 2=test)
             const type = task.id === 1 ? 'lesson' : 'test';
 
-            // Call server-first claim
-            await claimDailyTask(type, task.xp);
+            // Call server-first claim and check result
+            const success = await claimDailyTask(type, task.xp);
 
             // Refresh server progress
             await fetchServerProgress();
 
-            // Show reward modal
-            setClaimedReward({ xp: task.xp, taskName: task.text });
-            setShowRewardModal(true);
+            // Only show reward modal if claim was successful
+            if (success) {
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                setClaimedReward({ xp: task.xp, taskName: task.text });
+                setShowRewardModal(true);
+            }
         }
     };
 
@@ -408,18 +409,26 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                                     styles.xpButton,
                                     task.completed && !task.claimed && styles.xpButtonActive,
                                     task.claimed && styles.xpButtonClaimed,
-                                    pressed && !task.claimed && { opacity: 0.8 }
+                                    pressed && task.completed && !task.claimed && { opacity: 0.8 }
                                 ]}
                                 onPress={() => handleClaimTaskReward(task)}
                                 disabled={!task.completed || task.claimed}
                             >
-                                <Text style={[
-                                    styles.xpButtonText,
-                                    task.completed && !task.claimed && styles.xpButtonTextActive,
-                                    task.claimed && styles.xpButtonTextClaimed
-                                ]}>
-                                    {task.claimed ? t('home.dailyTasks.claimed') : `+${task.xp} XP`}
-                                </Text>
+                                {task.claimed ? (
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                                        <CheckCircle size={14} color={colors.success} weight="fill" />
+                                        <Text style={styles.xpButtonTextClaimed}>
+                                            {t('home.dailyTasks.claimed')}
+                                        </Text>
+                                    </View>
+                                ) : (
+                                    <Text style={[
+                                        styles.xpButtonText,
+                                        task.completed && styles.xpButtonTextActive,
+                                    ]}>
+                                        +{task.xp} XP
+                                    </Text>
+                                )}
                             </Pressable>
                         </View>
                     );

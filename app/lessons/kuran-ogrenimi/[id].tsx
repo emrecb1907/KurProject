@@ -219,7 +219,7 @@ export default function UnifiedKuranLessonScreen() {
         if (!allItemsPlayed) return;
         Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         completeLesson(String(lessonId));
-        router.push('/(tabs)');
+        router.back();
     };
 
     // Calculate Grid Item Size

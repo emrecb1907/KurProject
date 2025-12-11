@@ -50,7 +50,7 @@ export interface UserSlice {
 
   // Sync & Logic
   checkDailyReset: () => void;
-  claimDailyTask: (taskType: 'lesson' | 'test', xpReward: number) => Promise<void>;
+  claimDailyTask: (taskType: 'lesson' | 'test', xpReward: number) => Promise<boolean>;
 
   completeLesson: (lessonId: string, skipSync?: boolean) => Promise<void>;
   syncCompletedLessons: () => Promise<void>;
@@ -197,7 +197,7 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
           claimedTasks: [...currentState.dailyProgress.claimedTasks, taskType]
         }
       }));
-      return;
+      return true;
     }
 
     // Server-side claim (validates eligibility + grants XP atomically)
@@ -206,7 +206,7 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
       if (error) {
         console.error('Daily task claim failed:', error);
-        return;
+        return false;
       }
 
       const result = data as { success: boolean; xp_awarded?: number; error?: string };
@@ -221,11 +221,14 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
             claimedTasks: [...currentState.dailyProgress.claimedTasks, taskType]
           }
         }));
+        return true;
       } else {
         console.warn('Claim rejected by server:', result?.error);
+        return false;
       }
     } catch (err) {
       console.error('Daily task claim error:', err);
+      return false;
     }
   },
 

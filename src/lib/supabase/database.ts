@@ -391,5 +391,38 @@ export const database = {
       });
       return { data, error };
     }
+  },
+
+  // ==================== TIMEZONE ====================
+  timezone: {
+    // Get user's timezone
+    async get(userId: string) {
+      const { data, error } = await supabase
+        .from('users')
+        .select('timezone, timezone_updated_at')
+        .eq('id', userId)
+        .single();
+      return { data, error };
+    },
+
+    // Set timezone (initial setup, no cooldown check)
+    async set(userId: string, timezone: string) {
+      const { data, error } = await supabase
+        .from('users')
+        .update({ timezone })
+        .eq('id', userId)
+        .select('timezone')
+        .single();
+      return { data, error };
+    },
+
+    // Change timezone (with 30-day cooldown via RPC)
+    async change(userId: string, newTimezone: string) {
+      const { data, error } = await supabase.rpc('change_user_timezone', {
+        p_user_id: userId,
+        p_new_timezone: newTimezone
+      });
+      return { data, error };
+    }
   }
 };

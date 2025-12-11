@@ -408,8 +408,8 @@ export function GameScreen({
                         stopGameCompleteSoundRef.current = null;
                     }
 
-                    // Choose sound based on level up modal visibility
-                    const soundFile = showLevelUpModal ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
+                    // Choose sound based on level up status (not modal, to prevent double play)
+                    const soundFile = leveledUp ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
 
                     // Play sound using game sound manager
                     const stop = playGameSound(soundFile);
@@ -420,7 +420,7 @@ export function GameScreen({
                 }
             };
 
-            // Wait a bit for modal state to be set
+            // Wait a bit for state to settle
             const timer = setTimeout(() => {
                 playCompletionSound();
             }, 100);
@@ -435,7 +435,7 @@ export function GameScreen({
                 stopGameCompleteSoundRef.current = null;
             }
         };
-    }, [isGameComplete, showLevelUpModal]);
+    }, [isGameComplete, leveledUp]);
 
     // Animate XP bar when game completes
     useEffect(() => {

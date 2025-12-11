@@ -12,7 +12,6 @@ import {
   ArrowsClockwise
 } from 'phosphor-react-native';
 import { useAuth, useUser } from '@/store';
-import { Skeleton } from '@/components/ui';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { useOptimisticLeaderboard, useUserRank } from '@hooks';
@@ -145,21 +144,21 @@ export default function LeaderboardScreen() {
     <View style={styles.skeletonItem}>
       {/* Rank */}
       <View style={styles.rankContainer}>
-        <Skeleton width={24} height={24} borderRadius={4} />
+        <View style={{ width: 24, height: 24, borderRadius: 4, backgroundColor: colors.backgroundLighter }} />
       </View>
 
       {/* Avatar */}
-      <Skeleton variant="circular" height={44} style={styles.skeletonAvatar} />
+      <View style={[styles.avatar, styles.skeletonAvatar, { backgroundColor: colors.backgroundLighter }]} />
 
       {/* Username */}
       <View style={styles.skeletonUserInfo}>
-        <Skeleton width="70%" height={16} borderRadius={8} />
+        <View style={{ width: '70%', height: 16, borderRadius: 8, backgroundColor: colors.backgroundLighter }} />
       </View>
 
       {/* Score */}
       <View style={styles.skeletonScore}>
-        <Skeleton width={60} height={20} borderRadius={8} />
-        <Skeleton width={30} height={12} borderRadius={6} style={{ marginTop: 4 }} />
+        <View style={{ width: 60, height: 20, borderRadius: 8, backgroundColor: colors.backgroundLighter }} />
+        <View style={{ width: 30, height: 12, borderRadius: 6, backgroundColor: colors.backgroundLighter, marginTop: 4 }} />
       </View>
     </View>
   );

@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/store';
 import { supabase } from '@/lib/supabase/client';
 import { Button } from '@components/ui/Button';
+import { HeaderButton } from '@components/ui';
 
 export default function ChangePasswordScreen() {
     const { t } = useTranslation();
@@ -255,15 +256,13 @@ export default function ChangePasswordScreen() {
             <View style={{ flex: 1 }}>
                 {/* Header */}
                 <View style={styles.header}>
-                    <Pressable
-                        style={styles.backButton}
+                    <HeaderButton
+                        title={t('common.back')}
                         onPress={() => {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                             router.back();
                         }}
-                    >
-                        <X size={24} color={colors.textPrimary} weight="bold" />
-                    </Pressable>
+                    />
                     <Text style={styles.headerTitle}>{t('home.changePassword.title')}</Text>
                     <View style={styles.headerSpacer} />
                 </View>

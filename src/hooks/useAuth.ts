@@ -8,6 +8,32 @@ import { migrateLocalDataToDatabase } from '@lib/utils/dataMigration';
 import { User } from '@types/user.types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+// 🌍 Get device timezone
+function getDeviceTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+  } catch {
+    return 'UTC';
+  }
+}
+
+// 🌍 Detect and save timezone if not already set
+async function ensureTimezoneSet(userId: string): Promise<void> {
+  try {
+    const { data } = await database.timezone.get(userId);
+    const currentTz = data?.timezone;
+
+    // If timezone is NULL or still default 'UTC', set it to device timezone
+    if (!currentTz || currentTz === 'UTC') {
+      const deviceTz = getDeviceTimezone();
+      console.log('🌍 Setting user timezone:', deviceTz);
+      await database.timezone.set(userId, deviceTz);
+    }
+  } catch (error) {
+    console.error('Failed to set timezone:', error);
+  }
+}
+
 export function useAuthHook() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { user, setUser, setIsAuthenticated, setIsAnonymous, setIsLoading, logout } = useStore();
@@ -94,6 +120,9 @@ export function useAuthHook() {
             console.log('🔄 Database XP higher, updating local:', dbXP);
             useStore.getState().setTotalXP(dbXP);
           }
+
+          // 🌍 Ensure user timezone is set
+          await ensureTimezoneSet(fullUser.id);
         } else {
           console.log('ℹ️ User authenticated but no DB record found yet (Trigger might be slow)');
           // Ideally we should retry or show a loading state, but for now we wait

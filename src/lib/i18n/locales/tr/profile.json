@@ -50,7 +50,16 @@
             "title": "HESAP",
             "changePassword": "Şifre Değiştir",
             "preferences": "Tercihler",
-            "notifications": "Bildirimler"
+            "notifications": "Bildirimler",
+            "timezone": "Saat Dilimi"
+        },
+        "timezone": {
+            "title": "Saat Dilimi",
+            "current": "Mevcut Saat Dilimi",
+            "select": "Saat Dilimi Seç",
+            "cooldownWarning": "Saat dilimini {{days}} gün sonra değiştirebilirsiniz.",
+            "updateSuccess": "Saat diliminiz güncellendi.",
+            "loginRequired": "Giriş yapmanız gerekiyor"
         },
         "general": {
             "title": "GENEL",

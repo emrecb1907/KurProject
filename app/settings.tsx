@@ -12,6 +12,7 @@ import { useAuthHook } from '@/hooks';
 import { useAuth } from '@/store';
 import { supabase } from '@/lib/supabase/client';
 import { Modal } from '@components/ui/Modal';
+import { HeaderButton } from '@components/ui';
 import { getCurrentLanguage } from '@/lib/i18n';
 
 interface SettingsOption {
@@ -172,6 +173,14 @@ export default function SettingsScreen() {
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             // TODO: Navigate to notifications page
+          },
+        },
+        {
+          id: 'timezone',
+          title: t('profile.settings.account.timezone', 'Saat Dilimi'),
+          onPress: () => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            router.push('/timezone-settings');
           },
         },
       ],
@@ -495,15 +504,13 @@ export default function SettingsScreen() {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Pressable
-          style={styles.backButton}
+        <HeaderButton
+          title={t('common.back')}
           onPress={() => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             router.back();
           }}
-        >
-          <X size={24} color={colors.textPrimary} weight="bold" />
-        </Pressable>
+        />
         <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
         <View style={styles.headerSpacer} />
       </View>

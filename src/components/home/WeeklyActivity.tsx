@@ -115,6 +115,34 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             backgroundColor: colors.xpGold,
             borderColor: colors.xpGold,
         },
+        dayCircleFuture: {
+            backgroundColor: colors.surfaceLight, // Keep visible
+            opacity: 0.8, // Slightly faded but still visible
+            borderWidth: 1,
+            borderColor: colors.border, // Add subtle border for definition
+        },
+        // Reward Day Styles
+        rewardDayCircle: {
+            backgroundColor: '#FDE047', // Light Yellow (Yellow-300)
+            // 3D Button Effect
+            borderBottomWidth: 4,
+            borderBottomColor: '#EAB308', // Darker Yellow (Yellow-500) for depth
+            borderRadius: 18, // Ensure perfectly round
+            // Glow effect
+            shadowColor: '#FDE047',
+            shadowOffset: { width: 0, height: 4 }, // Push shadow down
+            shadowOpacity: 0.6,
+            shadowRadius: 12,
+            elevation: 8,
+        },
+        rewardDayCircleClaimed: {
+            backgroundColor: colors.success, // Green
+            borderColor: 'transparent',
+            borderBottomWidth: 0, // Reset 3D effect
+            shadowOpacity: 0, // Remove glow
+            elevation: 0,
+            opacity: 1,
+        },
         footer: {
             backgroundColor: 'rgba(88, 204, 2, 0.1)', // Light green bg
             paddingVertical: 12,
@@ -368,22 +396,44 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                     {weekData.map((dayData, index) => (
                         <View key={index} style={styles.dayContainer}>
                             <Text style={styles.dayLabel}>{dayData.day}</Text>
-                            <View
+                            <TouchableOpacity
+                                activeOpacity={index === 6 && dayData.completed ? 0.7 : 1}
+                                onPress={index === 6 && dayData.completed ? handleClaimReward : undefined}
                                 style={[
                                     styles.dayCircle,
+                                    dayData.isFuture && styles.dayCircleFuture,
                                     dayData.completed && styles.dayCircleCompleted,
                                     dayData.isToday && styles.dayCircleToday,
                                     (dayData.isToday && dayData.completed) && styles.dayCircleTodayCompleted,
+                                    // 7th Day Overrides
+                                    (index === 6 && dayData.completed) && styles.rewardDayCircle,
+                                    (index === 6 && dayData.completed && rewardClaimed) && styles.rewardDayCircleClaimed,
                                 ]}
                             >
-                                {dayData.completed && (
-                                    <Check
-                                        size={18}
-                                        color={dayData.isToday ? colors.textOnPrimary : colors.textOnPrimary} // Always white on completed
-                                        weight="bold"
-                                    />
+                                {dayData.completed ? (
+                                    index === 6 ? (
+                                        <TreasureChest
+                                            size={22}
+                                            color={rewardClaimed ? '#FFFFFF' : '#1E3A8A'} // White if claimed, Dark Blue if available
+                                            weight="fill"
+                                        />
+                                    ) : (
+                                        <Check
+                                            size={18}
+                                            color={colors.textOnPrimary}
+                                            weight="bold"
+                                        />
+                                    )
+                                ) : (
+                                    index === 6 && (
+                                        <TreasureChest
+                                            size={20}
+                                            color={dayData.isFuture ? colors.textDisabled : colors.textSecondary}
+                                            weight="regular"
+                                        />
+                                    )
                                 )}
-                            </View>
+                            </TouchableOpacity>
                         </View>
                     ))}
                 </View>

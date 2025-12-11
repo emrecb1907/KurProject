@@ -90,10 +90,10 @@ export function useCompleteGameMutation() {
                     const { error } = await database.lessons.complete(user.id, lessonId);
                     dbError = error;
 
+                    // Note: Server RPC already increments lessons_today in daily_progress table
+                    // We only need to update local completedLessons list for UI (no duplicate daily count)
                     if (!error) {
-                        // incrementDailyLessons(); Removed - Handled by completeLesson (or updateGameStats)
-                        completeLesson(lessonId, true); // Update local store. logic in userSlice handles dailyProgress increment.
-                        logger.info(`Daily lesson count handled by completeLesson (Lesson ID: ${lessonId})`);
+                        logger.info(`Lesson completed on server (Lesson ID: ${lessonId})`);
                     }
                 }
 

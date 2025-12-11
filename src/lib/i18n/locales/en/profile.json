@@ -50,7 +50,16 @@
             "title": "ACCOUNT",
             "changePassword": "Change Password",
             "preferences": "Preferences",
-            "notifications": "Notifications"
+            "notifications": "Notifications",
+            "timezone": "Timezone"
+        },
+        "timezone": {
+            "title": "Timezone",
+            "current": "Current Timezone",
+            "select": "Select Timezone",
+            "cooldownWarning": "You can change your timezone in {{days}} days.",
+            "updateSuccess": "Your timezone has been updated.",
+            "loginRequired": "Please login to continue"
         },
         "general": {
             "title": "GENERAL",
