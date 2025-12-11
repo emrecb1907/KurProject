@@ -55,7 +55,11 @@ export default function ChestScreen() {
     const nextReplenishTime = lastReplenishTime + (4 * 60 * 60 * 1000);
     const diff = nextReplenishTime - now;
 
-    if (diff <= 0) return '00:00:00';
+    if (diff <= 0) {
+      // Timer expired - trigger a sync to get updated energy from server
+      checkLifeRegeneration();
+      return '⏳'; // Show loading indicator while syncing
+    }
 
     const hours = Math.floor(diff / (1000 * 60 * 60));
     const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));

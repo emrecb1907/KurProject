@@ -47,4 +47,4 @@ export interface GameQuestion {
   audioFileId?: number; // For letters game - audio file number (1-29)
 }
 
-export type GameType = 'vocabulary' | 'letters' | 'verses' | 'quiz' | 'lesson';
+export type GameType = 'vocabulary' | 'letters' | 'verses' | 'quiz' | 'lesson' | 'islamTarihi' | 'namazBilgisi' | 'peygamberlerTarihi';

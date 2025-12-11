@@ -1,0 +1,3378 @@
+[
+  {
+    "question": "İlk insan ve ilk peygamber olarak kabul edilen kimdir?",
+    "A": "Hz. Âdem",
+    "B": "Hz. Nuh",
+    "C": "Hz. İbrahim",
+    "D": "Hz. Musa",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’in eşi kimdir?",
+    "A": "Hz. Hacer",
+    "B": "Hz. Havva",
+    "C": "Hz. Meryem",
+    "D": "Hz. Sara",
+    "correct": "B"
+  },
+  {
+    "question": "Hz. Âdem cennetten nereye indirildi?",
+    "A": "Dünya’ya",
+    "B": "Ay’a",
+    "C": "Güneş’e",
+    "D": "Yıldızlara",
+    "correct": "A"
+  },
+  {
+    "question": "İblis’in Hz. Âdem’e secde etmemesinin sebebi nedir?",
+    "A": "Unuttuğu için",
+    "B": "Kendini üstün gördüğü için",
+    "C": "Emri duymadığı için",
+    "D": "Melek olmadığı için",
+    "correct": "B"
+  },
+  {
+    "question": "Hz. Âdem’e öğretilen şeylerden biri nedir?",
+    "A": "İsimler",
+    "B": "Demircilik",
+    "C": "Ticaret",
+    "D": "Denizcilik",
+    "correct": "A"
+  },
+  {
+    "question": "Nübüvvet ne demektir?",
+    "A": "Peygamberlik",
+    "B": "Hilafet",
+    "C": "Saltanat",
+    "D": "Şehitlik",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler insanlara neyi ulaştırmakla görevlidir?",
+    "A": "Allah’ın vahyini",
+    "B": "Kendi fikirlerini",
+    "C": "Siyasi emirleri",
+    "D": "Haberleri",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin ortak görevi aşağıdakilerden hangisidir?",
+    "A": "İnsanları Allah’a kulluğa çağırmak",
+    "B": "Savaş çıkarmak",
+    "C": "Zengin olmak",
+    "D": "Şehir kurmak",
+    "correct": "A"
+  },
+  {
+    "question": "İlk gemiyi yapmasıyla bilinen peygamber kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. İdris",
+    "C": "Hz. İbrahim",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un kavmine gelen büyük azap nedir?",
+    "A": "Sel ve tufan",
+    "B": "Rüzgar",
+    "C": "Deprem",
+    "D": "Taş yağmuru",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un yaptığı gemiye kimler binmiştir?",
+    "A": "İnananlar ve hayvanlardan çiftler",
+    "B": "Sadece ailesi",
+    "C": "Sadece hayvanlar",
+    "D": "Bütün kavim",
+    "correct": "A"
+  },
+  {
+    "question": "Tufan olayı hangi peygamberle ilişkilidir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Lut",
+    "C": "Hz. İlyas",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler kaç sınıfa ayrılır?",
+    "A": "Resul ve nebi",
+    "B": "Şehit ve gazi",
+    "C": "Sultan ve alim",
+    "D": "Evliya ve veli",
+    "correct": "A"
+  },
+  {
+    "question": "Kendisine sayfalar verilen peygamberlerden biri kimdir?",
+    "A": "Hz. İdris",
+    "B": "Hz. Harun",
+    "C": "Hz. Yakup",
+    "D": "Hz. Lut",
+    "correct": "A"
+  },
+  {
+    "question": "Yaklaşık 950 yıl tebliğe devam eden peygamber kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. İbrahim",
+    "C": "Hz. Musa",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim hangi unvanla anılır?",
+    "A": "Halilullah (Allah’ın dostu)",
+    "B": "Kelîmullah",
+    "C": "Ruhullah",
+    "D": "Nefisullah",
+    "correct": "A"
+  },
+  {
+    "question": "Putları kırmasıyla meşhur peygamber kimdir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Yusuf",
+    "C": "Hz. İsa",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in babası ne işle uğraşıyordu?",
+    "A": "Put yapıcılığı",
+    "B": "Çiftçilik",
+    "C": "Denizcilik",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in ateşe atıldığı şehir olarak bilinen yer neresidir?",
+    "A": "Ur (Urfa rivayeti)",
+    "B": "Mekke",
+    "C": "Medine",
+    "D": "Kudüs",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in ateşe atıldığı olayda ne olmuştur?",
+    "A": "Ateş ona serin ve selamet olmuştur",
+    "B": "Ateş daha çok yanmıştır",
+    "C": "Yağmur yağmıştır",
+    "D": "Deprem olmuştur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in eşi ve Hz. İsmail’in annesi kimdir?",
+    "A": "Hz. Hacer",
+    "B": "Hz. Sara",
+    "C": "Hz. Havva",
+    "D": "Hz. Meryem",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in diğer eşi ve Hz. İshak’ın annesi kimdir?",
+    "A": "Hz. Sara",
+    "B": "Hz. Hacer",
+    "C": "Hz. Meryem",
+    "D": "Hz. Asiye",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in oğlu Hz. İsmail ile birlikte yaptığı önemli ibadet mekânı nedir?",
+    "A": "Kâbe’yi inşa etmek",
+    "B": "Mescid-i Aksa’yı yapmak",
+    "C": "Bir gemi yapmak",
+    "D": "Bir kale kurmak",
+    "correct": "A"
+  },
+  {
+    "question": "Hac ibadetindeki pek çok menasikin hangi peygamberle bağlantısı vardır?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Nuh",
+    "C": "Hz. Musa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Kavmi livata (eşcinsel sapkınlık) ile helak olan peygamber kimdir?",
+    "A": "Hz. Lut",
+    "B": "Hz. Yunus",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Zülkifl",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut’un kavmine gönderilen azap neydi?",
+    "A": "Şiddetli bir taş yağmuru ve alt üst oluş",
+    "B": "Tufan",
+    "C": "Rüzgar",
+    "D": "Çekirge afeti",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut hangi peygamberin zamanında yaşamıştır?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Nuh",
+    "C": "Hz. Musa",
+    "D": "Hz. Harun",
+    "correct": "A"
+  },
+  {
+    "question": "‘Üzeyr Allah’ın oğludur’ diyen bozulmuş inanç hangi dönemde ortaya çıkmıştır?",
+    "A": "İsrailoğulları’nda",
+    "B": "Semud’da",
+    "C": "Ad kavminde",
+    "D": "Ninova’da",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmine gönderilen peygamber kimdir?",
+    "A": "Hz. Salih",
+    "B": "Hz. Hud",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmine gönderilen mucize hangi hayvanla ilgilidir?",
+    "A": "Dişi deve",
+    "B": "Aslan",
+    "C": "Köpek",
+    "D": "Kartal",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmine gönderilen peygamber kimdir?",
+    "A": "Hz. Hud",
+    "B": "Hz. Salih",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Musa",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmine gönderilen azap ne türdür?",
+    "A": "Kasırga ve şiddetli rüzgar",
+    "B": "Tufan",
+    "C": "Taş yağmuru",
+    "D": "Çekirge afeti",
+    "correct": "A"
+  },
+  {
+    "question": "Medyen halkına gönderilen peygamber kimdir?",
+    "A": "Hz. Şuayb",
+    "B": "Hz. Hud",
+    "C": "Hz. Salih",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Şuayb’ın kavmine karşı uyardığı en önemli günah nedir?",
+    "A": "Ölçü ve tartıda hile",
+    "B": "Yalan söylemek",
+    "C": "Savaşmak",
+    "D": "Namazı terk",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un oğlu olup kıssasıyla meşhur peygamber kimdir?",
+    "A": "Hz. Yusuf",
+    "B": "Hz. Musa",
+    "C": "Hz. İsa",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşleri ona ne yapmıştır?",
+    "A": "Kuyuya atmışlardır",
+    "B": "Şehre götürmüşlerdir",
+    "C": "Ev kurmuşlardır",
+    "D": "Saray vermişlerdir",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf nerede zindana atılmıştır?",
+    "A": "Mısır’da",
+    "B": "Şam’da",
+    "C": "Mekke’de",
+    "D": "Medine’de",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un en belirgin özelliklerinden biri nedir?",
+    "A": "Güzel ahlak ve iffet",
+    "B": "Savaşçılık",
+    "C": "Demircilik",
+    "D": "Tıp bilgisi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un Mısır’da üstlendiği görev nedir?",
+    "A": "Hazine ve maliye sorumluluğu",
+    "B": "Komutanlık",
+    "C": "Kâhinlik",
+    "D": "Çobanlık",
+    "correct": "A"
+  },
+  {
+    "question": "‘Sabır ve tevekkül’ denince akla gelen, ağır imtihanlarla sınanan peygamber kimdir?",
+    "A": "Hz. Eyyub",
+    "B": "Hz. Yusuf",
+    "C": "Hz. Davud",
+    "D": "Hz. Süleyman",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub hangi imtihanlarla sınanmıştır?",
+    "A": "Mal, evlat ve beden sağlığıyla",
+    "B": "Savaşla",
+    "C": "Denizle",
+    "D": "Rüzgarla",
+    "correct": "A"
+  },
+  {
+    "question": "Deniz yarılması mucizesi hangi peygamberle ilgilidir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İsa",
+    "C": "Hz. Davud",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa hangi kavme peygamber olarak gönderilmiştir?",
+    "A": "İsrailoğulları’na",
+    "B": "Ad kavmine",
+    "C": "Semud kavmine",
+    "D": "Ninova halkına",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın Firavun ile mücadelesinde yanında olan kardeşi kimdir?",
+    "A": "Hz. Harun",
+    "B": "Hz. İdris",
+    "C": "Hz. Lut",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Asasıyla mucizeler gösteren peygamber kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Yusuf",
+    "C": "Hz. Davud",
+    "D": "Hz. Süleyman",
+    "correct": "A"
+  },
+  {
+    "question": "Tur dağında Allah ile konuşması nedeniyle ‘Kelîmullah’ diye anılan peygamber kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İbrahim",
+    "C": "Hz. İsa",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya gönderilen kutsal kitap hangisidir?",
+    "A": "Tevrat",
+    "B": "Zebur",
+    "C": "İncil",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’a verilen kutsal kitap hangisidir?",
+    "A": "Zebur",
+    "B": "Tevrat",
+    "C": "İncil",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hem peygamber hem hükümdar olup adaletle hükmedenlerden biri kimdir?",
+    "A": "Hz. Davud",
+    "B": "Hz. Yunus",
+    "C": "Hz. Lut",
+    "D": "Hz. Zekeriyya",
+    "correct": "A"
+  },
+  {
+    "question": "Rüzgar ve cinlere hükmetme nimeti verilen peygamber kimdir?",
+    "A": "Hz. Süleyman",
+    "B": "Hz. Davud",
+    "C": "Hz. Musa",
+    "D": "Hz. İsa",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın kıssalarında adı geçen kraliçe kimdir?",
+    "A": "Belkıs",
+    "B": "Asiye",
+    "C": "Hacer",
+    "D": "Meryem",
+    "correct": "A"
+  },
+  {
+    "question": "Balığın karnında dua eden peygamber kimdir?",
+    "A": "Hz. Yunus",
+    "B": "Hz. Eyyub",
+    "C": "Hz. Hud",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus hangi şehre gönderilmiştir?",
+    "A": "Ninova halkına",
+    "B": "Mekke halkına",
+    "C": "Medyen halkına",
+    "D": "Şam halkına",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yahya hangi peygamberin oğludur?",
+    "A": "Hz. Zekeriyya",
+    "B": "Hz. Davud",
+    "C": "Hz. Yakup",
+    "D": "Hz. Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yahya’nın annesi kısır olduğu halde Allah’ın izniyle doğan çocuk kimdir?",
+    "A": "Hz. Yahya",
+    "B": "Hz. İshak",
+    "C": "Hz. İsmail",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Babası olmayan mucizevi bir doğumla dünyaya gelen peygamber kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Musa",
+    "C": "Hz. İbrahim",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın annesi kimdir?",
+    "A": "Hz. Meryem",
+    "B": "Hz. Asiye",
+    "C": "Hz. Sara",
+    "D": "Hz. Hacer",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’ya verilen kutsal kitap hangisidir?",
+    "A": "İncil",
+    "B": "Tevrat",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "‘Ruhullah’ unvanı hangi peygambere aittir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Musa",
+    "C": "Hz. İbrahim",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Son peygamber kimdir?",
+    "A": "Hz. Muhammed (s.a.v.)",
+    "B": "Hz. İsa",
+    "C": "Hz. Musa",
+    "D": "Hz. İbrahim",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e kadar bütün peygamberlerin davet ettiği temel esas nedir?",
+    "A": "Tevhid (Allah’ın birliği)",
+    "B": "Sadece ahlak",
+    "C": "Sadece namaz",
+    "D": "Sadece oruç",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e vahiy hangi yaşta gelmeye başlamıştır?",
+    "A": "40 yaşında",
+    "B": "30 yaşında",
+    "C": "25 yaşında",
+    "D": "50 yaşında",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk vahiy nerede gelmiştir?",
+    "A": "Hira Mağarası’nda",
+    "B": "Mescid-i Nebevi’de",
+    "C": "Kâbe’nin içinde",
+    "D": "Mina’da",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk inen ayetler hangi suredendir?",
+    "A": "Alak suresi",
+    "B": "Fatiha suresi",
+    "C": "İhlas suresi",
+    "D": "Nas suresi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e gönderilen kitabın adı nedir?",
+    "A": "Kur’an-ı Kerim",
+    "B": "Tevrat",
+    "C": "İncil",
+    "D": "Zebur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in peygamberlikten önceki lakabı nedir?",
+    "A": "El-Emin",
+    "B": "El-Kâhir",
+    "C": "El-Melik",
+    "D": "El-Hakim",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin hepsinin ortak ahlaki özelliği nedir?",
+    "A": "Doğruluk (Sıdk)",
+    "B": "Zenginlik",
+    "C": "Savaşçılık",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin masum olması ne anlama gelir?",
+    "A": "Büyük günahlardan korunmuş olmaları",
+    "B": "Hiç yemek yememeleri",
+    "C": "Hiç konuşmamaları",
+    "D": "İnsan olmamaları",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin insan olması neyi gösterir?",
+    "A": "İnsanlara örnek olmaları gerektiğini",
+    "B": "Melek olduklarını",
+    "C": "Sadece rüya gördüklerini",
+    "D": "Sadece gece yaşayan varlıklar olduklarını",
+    "correct": "A"
+  },
+  {
+    "question": "‘Ulul azm’ peygamberlerden biri kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Harun",
+    "C": "Hz. Yakup",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Aşağıdakilerden hangisi ‘Ulul azm’ peygamberlerdendir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Lut",
+    "C": "Hz. Hud",
+    "D": "Hz. Salih",
+    "correct": "A"
+  },
+  {
+    "question": "‘Ulul azm’ peygamberlerden biri de:",
+    "A": "Hz. Musa",
+    "B": "Hz. Yusuf",
+    "C": "Hz. Davud",
+    "D": "Hz. Süleyman",
+    "correct": "A"
+  },
+  {
+    "question": "‘Ulul azm’ peygamberlerden bir diğeri kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. İdris",
+    "C": "Hz. İlyas",
+    "D": "Hz. Zekeriyya",
+    "correct": "A"
+  },
+  {
+    "question": "Son ‘Ulul azm’ peygamber kimdir?",
+    "A": "Hz. Muhammed (s.a.v.)",
+    "B": "Hz. Süleyman",
+    "C": "Hz. Yunus",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin mucizeleri neyi gösterir?",
+    "A": "Allah’ın izniyle olağanüstü olayların mümkün olduğunu",
+    "B": "Sihir yaptıklarını",
+    "C": "Sadece güçlü olduklarını",
+    "D": "Sadece zengin olduklarını",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin en büyük mucizesi nedir?",
+    "A": "Aldıkları vahiy ve getirdikleri din",
+    "B": "Savaş kazanmaları",
+    "C": "Zengin olmaları",
+    "D": "Uzun yaşamaları",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin gönderiliş amacı aşağıdakilerden hangisidir?",
+    "A": "İnsanları doğru yola davet etmek",
+    "B": "İnsanları zengin etmek",
+    "C": "İnsanlara savaş öğretmek",
+    "D": "İnsanlara sihir öğretmek",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler insanlara hangi konuda örnektir?",
+    "A": "İbadet, ahlak ve sabır konusunda",
+    "B": "Sadece spor konusunda",
+    "C": "Sadece sanat konusunda",
+    "D": "Sadece ticaret konusunda",
+    "correct": "A"
+  },
+  {
+    "question": "‘Sıdk’ peygamber sıfatı ne anlama gelir?",
+    "A": "Doğruluk",
+    "B": "Şefkat",
+    "C": "Güç",
+    "D": "Zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "‘Emanet’ peygamber sıfatı neyi ifade eder?",
+    "A": "Güvenilir olmak",
+    "B": "Hızlı olmak",
+    "C": "Savaşçı olmak",
+    "D": "Yalnız yaşamak",
+    "correct": "A"
+  },
+  {
+    "question": "‘Tebliğ’ peygamber sıfatı ne demektir?",
+    "A": "Vahyi eksiksiz iletmek",
+    "B": "Çok konuşmak",
+    "C": "Sürekli gezmek",
+    "D": "Savaşmak",
+    "correct": "A"
+  },
+  {
+    "question": "‘Fetanet’ peygamber sıfatı neyi ifade eder?",
+    "A": "Üstün akıl ve zeka",
+    "B": "Bedensel güç",
+    "C": "Çok yemek yemek",
+    "D": "Sessiz olmak",
+    "correct": "A"
+  },
+  {
+    "question": "‘İsmet’ peygamber sıfatı ne demektir?",
+    "A": "Günahlardan korunmuş olmak",
+    "B": "Hızlı yürümek",
+    "C": "Güçlü olmak",
+    "D": "Çok para kazanmak",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamber kıssaları Kur’an’da niçin anlatılır?",
+    "A": "İbret ve ders almak için",
+    "B": "Sadece tarih olsun diye",
+    "C": "Sadece merak için",
+    "D": "Sadece sayfa dolsun diye",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris hangi özelliğiyle bilinir?",
+    "A": "İlk defa yazı yazan ve terzilik yapan",
+    "B": "Deniz yarma mucizesiyle",
+    "C": "Balığın karnına girmesiyle",
+    "D": "Taş yağmuru ile",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmail hangi olayla meşhurdur?",
+    "A": "Kurban edilmeye razı oluşu",
+    "B": "Denizin yarılması",
+    "C": "Balık mucizesi",
+    "D": "Çamurdan kuş yapması",
+    "correct": "A"
+  },
+  {
+    "question": "Zemzem suyunun ortaya çıkışı hangi peygamber dönemiyle ilgilidir?",
+    "A": "Hz. İsmail ve Hz. Hacer",
+    "B": "Hz. Musa",
+    "C": "Hz. Nuh",
+    "D": "Hz. İsa",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un diğer bir ismi nedir?",
+    "A": "İsrail",
+    "B": "İmran",
+    "C": "Zekeriyya",
+    "D": "Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşleri onu babalarına ne diyerek kaybettiklerini söylemişlerdir?",
+    "A": "Kurttan bahsederek",
+    "B": "Denize düştü diyerek",
+    "C": "Köle oldu diyerek",
+    "D": "Kayboldu diyerek",
+    "correct": "A"
+  },
+  {
+    "question": "Firavun’un zulmü altında kalan kavim hangisidir?",
+    "A": "İsrailoğulları",
+    "B": "Ad kavmi",
+    "C": "Semud kavmi",
+    "D": "Medyen halkı",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın annesinin onu nereye bıraktığı Kur’an’da anlatılır?",
+    "A": "Nehirde bir sandığa",
+    "B": "Dağa",
+    "C": "Kuyuya",
+    "D": "Çöle",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın büyütüldüğü yer neresidir?",
+    "A": "Firavun’un sarayı",
+    "B": "Mina",
+    "C": "Medine",
+    "D": "Şam",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Harun, Hz. Musa’ya nasıl bir görevle eşlik etmiştir?",
+    "A": "Onunla birlikte kavme tebliğde bulunmuştur",
+    "B": "Sadece askerlik yapmıştır",
+    "C": "Sadece tercümanlık yapmıştır ama peygamber değildir",
+    "D": "Sadece imamlık yapmıştır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud hangi yeteneğiyle de bilinmektedir?",
+    "A": "Güzel sesle Zebur okuması",
+    "B": "Yüzme",
+    "C": "Tıp",
+    "D": "Denizcilik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın ordusunda hangi varlıklar da yer almıştır?",
+    "A": "Cinler ve kuşlar",
+    "B": "Sadece insanlar",
+    "C": "Sadece hayvanlar",
+    "D": "Sadece melekler",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus balığın karnında ne yapmıştır?",
+    "A": "Dua ve istiğfar etmiştir",
+    "B": "Uyumuştur",
+    "C": "Üzülüp susmuştur",
+    "D": "Şehir kurmuştur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya hangi duayı yapmıştır?",
+    "A": "Kendisine salih bir evlat vermesi için dua etmiştir",
+    "B": "Zenginlik istemiştir",
+    "C": "Uzun ömür istemiştir",
+    "D": "Savaş istemiştir",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın gösterdiği mucizelerden biri nedir?",
+    "A": "Allah’ın izniyle ölüleri diriltmesi",
+    "B": "Denizi yarması",
+    "C": "Gemiyi yönetmesi",
+    "D": "Rüzgara hükmetmesi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in doğduğu şehir neresidir?",
+    "A": "Mekke",
+    "B": "Medine",
+    "C": "Şam",
+    "D": "Kudüs",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in hicret ettiği şehir neresidir?",
+    "A": "Medine",
+    "B": "Kudüs",
+    "C": "Taif",
+    "D": "Şam",
+    "correct": "A"
+  },
+  {
+    "question": "İsra ve Miraç hadisesinde Hz. Peygamber hangi mescide götürülmüştür?",
+    "A": "Mescid-i Aksa",
+    "B": "Mescid-i Nebevi",
+    "C": "Mescid-i Haram dışı",
+    "D": "Mina Mescidi",
+    "correct": "A"
+  },
+  {
+    "question": "Miraç’ta farz kılınan ibadet hangisidir?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekât",
+    "D": "Hac",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Peygamber’in vefat ettiği şehir neresidir?",
+    "A": "Medine",
+    "B": "Mekke",
+    "C": "Kudüs",
+    "D": "Şam",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamber kıssaları bize özellikle ne öğretir?",
+    "A": "Sabır, şükür ve tevhid",
+    "B": "Sadece tarih bilgisi",
+    "C": "Sadece coğrafya",
+    "D": "Sadece dil bilgisi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’e verilen ilk görevlerden biri neydi?",
+    "A": "Yeryüzünü imar etmek",
+    "B": "Gemi yapmak",
+    "C": "Kale inşa etmek",
+    "D": "Savaş başlatmak",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’in çocuklarına öğrettiği en önemli değer hangisiydi?",
+    "A": "Allah’a iman",
+    "B": "Savaş taktikleri",
+    "C": "Ticaret yolları",
+    "D": "Altın yapımı",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin gönderiliş amacı hangi kelimeyle özetlenir?",
+    "A": "Tevhid",
+    "B": "Galibiyet",
+    "C": "Gelenek",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un kavmi peygamberine nasıl davranmıştır?",
+    "A": "Onu yalanlamışlardır",
+    "B": "Onu desteklemişlerdir",
+    "C": "Hemen inanmışlardır",
+    "D": "Hiç duymamışlardır",
+    "correct": "A"
+  },
+  {
+    "question": "Tufan olayından kurtulanlar kimlerdir?",
+    "A": "İnananlar",
+    "B": "Sadece zenginler",
+    "C": "Kavmin tamamı",
+    "D": "Hayvanlar",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un gemisine alınan hayvanlar nasıl alınmıştır?",
+    "A": "Her türden bir çift",
+    "B": "Sadece kuşlar",
+    "C": "Sadece koyunlar",
+    "D": "Sadece atlar",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Hud’un uyardığı kavmin en büyük hatası hangisiydi?",
+    "A": "Putlara tapmaları",
+    "B": "Tarım yapmaları",
+    "C": "Okuma yazma",
+    "D": "Seyahat etmeleri",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmi Hz. Salih’e neden karşı çıkmıştır?",
+    "A": "Onun tevhid çağrısına uymadıkları için",
+    "B": "Ona saygı duydukları için",
+    "C": "Onu kral yapmak istedikleri için",
+    "D": "Onu hiç tanımadıkları için",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Salih’in mucize olarak gösterilen hayvanı neydi?",
+    "A": "Dişi deve",
+    "B": "Fil",
+    "C": "Panter",
+    "D": "Kurt",
+    "correct": "A"
+  },
+  {
+    "question": "Dişi devenin zarar görmesi Semud kavmine ne getirmiştir?",
+    "A": "Azap",
+    "B": "Zafer",
+    "C": "Bayram",
+    "D": "Ganimet",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in putları kırması neyi gösterir?",
+    "A": "Tevhidi savunduğunu",
+    "B": "Savaşa hazır olduğunu",
+    "C": "Zengin olduğunu",
+    "D": "Putlardan korktuğunu",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in kavmine söylediği en önemli söz nedir?",
+    "A": "Putlar size hiçbir fayda vermez",
+    "B": "Putlar çok güçlüdür",
+    "C": "Putlara saygı duyun",
+    "D": "Putları süsleyin",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim ateşe atıldığında ne olmuştur?",
+    "A": "Ateş serin ve selamet olmuştur",
+    "B": "Ateş daha büyük yanmıştır",
+    "C": "Yağmur yağmıştır",
+    "D": "Hiçbir şey olmamıştır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmail’in en büyük erdemi hangisidir?",
+    "A": "Babasıyla birlikte Allah’ın emrine teslim olması",
+    "B": "Savaş kazanması",
+    "C": "Zenginliği",
+    "D": "Köşk yapması",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban ibadetinin hatırlattığı peygamber olayı hangisidir?",
+    "A": "Hz. İbrahim ve Hz. İsmail kıssası",
+    "B": "Hz. Musa’nın asası",
+    "C": "Hz. Yusuf’un kuyusu",
+    "D": "Hz. Yunus’un balığı",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut’un kavminin en büyük günahı nedir?",
+    "A": "Ahlaki bozulma",
+    "B": "Tarım ürünleri yetiştirme",
+    "C": "Ticaret",
+    "D": "Bilimle uğraşma",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut’un kavmine gelen azap nasıl olmuştur?",
+    "A": "Şiddetli taş yağmuru ve alt üst oluş",
+    "B": "Kova burcu",
+    "C": "Sel",
+    "D": "Kuraklık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un diğer ismi nedir?",
+    "A": "İsrail",
+    "B": "Harun",
+    "C": "İlyas",
+    "D": "Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kıssasından hangi ders çıkarılır?",
+    "A": "Sabır ve iffet",
+    "B": "Savaş ve zafer",
+    "C": "Ticaret ve mal",
+    "D": "Dünya zevki",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf nerede köle olarak satılmıştır?",
+    "A": "Mısır’da",
+    "B": "Şam’da",
+    "C": "Mekke’de",
+    "D": "Medine’de",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un rüyaları nasıl bir özelliğe sahiptir?",
+    "A": "Tabir olunur (yorumlanır)",
+    "B": "Yorumlanamaz",
+    "C": "Unutulur",
+    "D": "Sırdır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Şuayb’ın kavmine en çok hatırlattığı konu nedir?",
+    "A": "Ölçü ve tartıda dürüstlük",
+    "B": "Savaş",
+    "C": "Tarım",
+    "D": "Sanat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın çocukken bulunduğu yer neresidir?",
+    "A": "Nehirde bir sandık",
+    "B": "Kuyu",
+    "C": "Çöl",
+    "D": "Mağara",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya kim yardımcı olmuştur?",
+    "A": "Kardeşi Hz. Harun",
+    "B": "Hz. Yusuf",
+    "C": "Hz. İsa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Denizin yarılması mucizesi hangi peygamberle ilgilidir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İsa",
+    "C": "Hz. Süleyman",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın karşı karşıya geldiği zalim kimdir?",
+    "A": "Firavun",
+    "B": "Nemrut",
+    "C": "Kral Belkıs",
+    "D": "Babil Kralı",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’a verilen kitap nedir?",
+    "A": "Zebur",
+    "B": "Tevrat",
+    "C": "İncil",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’un özel yeteneklerinden biri nedir?",
+    "A": "Güzel ses",
+    "B": "Demircilik",
+    "C": "Denizcilik",
+    "D": "Yazı yazma",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın ordusunun içinde kimler vardır?",
+    "A": "Cinler ve kuşlar",
+    "B": "Melekler",
+    "C": "Devler",
+    "D": "Sadece insanlar",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman ile ilişkilendirilen kraliçe kimdir?",
+    "A": "Belkıs",
+    "B": "Asiye",
+    "C": "Hacer",
+    "D": "Meryem",
+    "correct": "A"
+  },
+  {
+    "question": "Balığın karnında kalan peygamber kimdir?",
+    "A": "Hz. Yunus",
+    "B": "Hz. Salih",
+    "C": "Hz. Lut",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un kavmine gönderildiği yer neresidir?",
+    "A": "Ninova",
+    "B": "Şam",
+    "C": "Mekke",
+    "D": "Medine",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub hangi özelliğiyle meşhurdur?",
+    "A": "Sabır",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Demircilik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub’un imtihanı neyle ilgilidir?",
+    "A": "Sağlık ve sabır",
+    "B": "Savaş",
+    "C": "Zenginlik",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya’nın yaptığı dua ne içindir?",
+    "A": "Salih bir çocuk",
+    "B": "Zafer",
+    "C": "Mal",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yahya’nın babası kimdir?",
+    "A": "Hz. Zekeriyya",
+    "B": "Hz. İbrahim",
+    "C": "Hz. İlyas",
+    "D": "Hz. Salih",
+    "correct": "A"
+  },
+  {
+    "question": "Babası olmadan mucizevi doğan peygamber kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Musa",
+    "C": "Hz. Yakup",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın annesi kimdir?",
+    "A": "Hz. Meryem",
+    "B": "Hz. Hacer",
+    "C": "Hz. Sara",
+    "D": "Hz. Asiye",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’ya indirilen kitap nedir?",
+    "A": "İncil",
+    "B": "Tevrat",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Son peygamber kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. İsa",
+    "C": "Hz. Musa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e vahyin geldiği yer neresidir?",
+    "A": "Hira Mağarası",
+    "B": "Mekke çarşısı",
+    "C": "Taif",
+    "D": "Mina",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk inen ayetler hangi suredendir?",
+    "A": "Alak suresi",
+    "B": "Fatiha suresi",
+    "C": "İhlas suresi",
+    "D": "Nas suresi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in peygamberlikten önceki lakabı nedir?",
+    "A": "El-Emin",
+    "B": "El-Halim",
+    "C": "El-Melik",
+    "D": "El-Mütekebbir",
+    "correct": "A"
+  },
+  {
+    "question": "Allah’ın birliğini savunmaya ne ad verilir?",
+    "A": "Tevhid",
+    "B": "Şirk",
+    "C": "Sünnet",
+    "D": "İcma",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin insanlara örnek olması neyi gösterir?",
+    "A": "Onların insan olduğunu",
+    "B": "Onların melek olduğunu",
+    "C": "Hiç hata yapmadıklarını",
+    "D": "Kalabalık yaşadıklarını",
+    "correct": "A"
+  },
+  {
+    "question": "‘Sıdk’ peygamber sıfatı ne anlama gelir?",
+    "A": "Doğruluk",
+    "B": "Cesaret",
+    "C": "Hız",
+    "D": "Güç",
+    "correct": "A"
+  },
+  {
+    "question": "‘Emanet’ sıfatı neyi ifade eder?",
+    "A": "Güvenilirlik",
+    "B": "Savaşçılık",
+    "C": "Zenginlik",
+    "D": "Uzun ömür",
+    "correct": "A"
+  },
+  {
+    "question": "‘Tebliğ’ sıfatı ne demektir?",
+    "A": "Vahyi iletmek",
+    "B": "Koşmak",
+    "C": "Gitmek",
+    "D": "Uyumak",
+    "correct": "A"
+  },
+  {
+    "question": "‘Fetanet’ peygamber sıfatı hangi özelliği anlatır?",
+    "A": "Üstün akıl",
+    "B": "Güç",
+    "C": "Ses",
+    "D": "Zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "‘İsmet’ peygamber sıfatı neyi anlatır?",
+    "A": "Günahlardan korunmuşluk",
+    "B": "Hız",
+    "C": "Görünmezlik",
+    "D": "Uçma",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Lut",
+    "C": "Hz. Yakup",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri hangisidir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Harun",
+    "C": "Hz. Davud",
+    "D": "Hz. Süleyman",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri daha kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Yusuf",
+    "C": "Hz. İlyas",
+    "D": "Hz. Zekeriyya",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Yakup",
+    "C": "Hz. Yunus",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerin sonuncusu kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Davud",
+    "C": "Hz. Harun",
+    "D": "Hz. İdris",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamber kıssalarının Kur’an’daki amacı nedir?",
+    "A": "Ders vermek ve ibret almak",
+    "B": "Sadece tarih anlatmak",
+    "C": "Savaş öğretmek",
+    "D": "Bilim öğretmek",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris neyle bilinir?",
+    "A": "Terzilik ve yazı",
+    "B": "Askerlik",
+    "C": "Denizcilik",
+    "D": "Tıp",
+    "correct": "A"
+  },
+  {
+    "question": "Zemzem suyunun çıkış kıssası kimle ilgilidir?",
+    "A": "Hz. Hacer ve Hz. İsmail",
+    "B": "Hz. Musa",
+    "C": "Hz. Nuh",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Kâbe’yi yeniden inşa eden peygamber kimdir?",
+    "A": "Hz. İbrahim ve Hz. İsmail",
+    "B": "Hz. Muhammed",
+    "C": "Hz. Musa",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın duasında ne istenmiştir?",
+    "A": "Eşsiz bir hükümranlık",
+    "B": "Savaş",
+    "C": "Zenginlik",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "‘Sabredenlerle beraber olun’ ayetleri hangi kıssalardan ders çıkarır?",
+    "A": "Hz. Eyyub",
+    "B": "Hz. Lut",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Firavun’un boğulması olayı hangi mucizenin ardından gerçekleşmiştir?",
+    "A": "Denizin yarılması",
+    "B": "Asanın yılan olması",
+    "C": "Elinin parlaması",
+    "D": "Taşın konuşması",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın karşısına çıkan büyücüler ne yapmıştır?",
+    "A": "Gerçeği anlayıp iman edenler olmuştur",
+    "B": "Savaş açmışlardır",
+    "C": "Merak edip gitmişlerdir",
+    "D": "Kaybolmuşlardır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşleri ona yaptıklarından dolayı ne hissetmiştir?",
+    "A": "Pişmanlık",
+    "B": "Gurur",
+    "C": "Sevinç",
+    "D": "Küçümseme",
+    "correct": "A"
+  },
+  {
+    "question": "Mucize kelimesi neyi ifade eder?",
+    "A": "Allah’ın izniyle olağanüstü olay",
+    "B": "Sihir",
+    "C": "Oyun",
+    "D": "Şans",
+    "correct": "A"
+  },
+  {
+    "question": "Nebî ile resul arasındaki fark nedir?",
+    "A": "Resule kitap verilmesi",
+    "B": "Nebinin savaşması",
+    "C": "Resulün hiç konuşmaması",
+    "D": "Nebinin melek olması",
+    "correct": "A"
+  },
+  {
+    "question": "‘Cennetin gençlerinin efendisi’ olarak anılan kimdir?",
+    "A": "Hz. Yahya",
+    "B": "Hz. Nuh",
+    "C": "Hz. Lut",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya’nın mesleği rivayetlere göre nedir?",
+    "A": "Marangozluk",
+    "B": "Çobanlık",
+    "C": "Denizcilik",
+    "D": "Demircilik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın en çok vurguladığı konu nedir?",
+    "A": "Tevhid ve merhamet",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Hayvancılık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed peygamber olmadan önce hangi meslekle uğraşmıştır?",
+    "A": "Ticaret",
+    "B": "Çobanlık",
+    "C": "Demircilik",
+    "D": "Kâhinlik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in çocukluğunda yaptığı işlerden biri nedir?",
+    "A": "Çobanlık",
+    "B": "Denizcilik",
+    "C": "Askerlik",
+    "D": "Saray görevi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Meryem’in hayatında önemli yer tutan mekan hangisidir?",
+    "A": "Mabed",
+    "B": "Saray",
+    "C": "Kuyu",
+    "D": "Deniz",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’un oğlu kimdir?",
+    "A": "Hz. Süleyman",
+    "B": "Hz. İshak",
+    "C": "Hz. Yakup",
+    "D": "Hz. Zülkifl",
+    "correct": "A"
+  },
+  {
+    "question": "Tevrat hangi peygambere verilmiştir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İsa",
+    "C": "Hz. Davud",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "‘Kelîmullah’ unvanı kime aittir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İbrahim",
+    "C": "Hz. İsa",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in babasının adı nedir?",
+    "A": "Azer",
+    "B": "Harun",
+    "C": "Meryem",
+    "D": "İmran",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmail’in annesi kimdir?",
+    "A": "Hz. Hacer",
+    "B": "Hz. Sara",
+    "C": "Hz. Meryem",
+    "D": "Hz. Havva",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un kaç oğlu vardır?",
+    "A": "12",
+    "B": "10",
+    "C": "7",
+    "D": "5",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un babası kimdir?",
+    "A": "Hz. Yakup",
+    "B": "Hz. Harun",
+    "C": "Hz. Lut",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın kavmi kimlerdir?",
+    "A": "İsrailoğulları",
+    "B": "Semud",
+    "C": "Ad",
+    "D": "Medyen",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’e Cennette yasaklanan şey neydi?",
+    "A": "Bir ağacın meyvesi",
+    "B": "Su içmek",
+    "C": "Konuşmak",
+    "D": "Yürümek",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’in ilk çocukları olan kardeşler kimdir?",
+    "A": "Habil ve Kabil",
+    "B": "Yusuf ve Bünyamin",
+    "C": "İshak ve İsmail",
+    "D": "Harun ve Musa",
+    "correct": "A"
+  },
+  {
+    "question": "İlk kan dökülmesi hangi olayla olmuştur?",
+    "A": "Kabil’in Habil’i öldürmesiyle",
+    "B": "Bir savaşta",
+    "C": "Denizde kaza",
+    "D": "Hastalık sonucu",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler insanlar arasında neyi sağlar?",
+    "A": "Doğru yolu gösterir",
+    "B": "Sadece ticaret yapar",
+    "C": "Sadece savaşır",
+    "D": "Sadece şehir kurar",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in mesleği rivayetlere göre nedir?",
+    "A": "Terzilik",
+    "B": "Çobanlık",
+    "C": "Demircilik",
+    "D": "Tüccarlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in yaşadığı döneme ait en büyük özellik nedir?",
+    "A": "İnsanlara kalemi öğretmesi",
+    "B": "Denizin yarılması",
+    "C": "Geminin yapılması",
+    "D": "Balığın konuşması",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un kavminin yaşadığı en büyük günah hangisiydi?",
+    "A": "Putperestlik",
+    "B": "Yalan",
+    "C": "Hırsızlık",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Tufan kaç gün sürdüğü rivayet edilir?",
+    "A": "40 gün",
+    "B": "7 gün",
+    "C": "3 gün",
+    "D": "1 yıl",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un gemisi nereye oturmuştur?",
+    "A": "Cudi Dağı’na",
+    "B": "Tûr Dağı’na",
+    "C": "Arafat’a",
+    "D": "Sina’ya",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmine gönderilen peygamber kimdir?",
+    "A": "Hz. Hud",
+    "B": "Hz. Salih",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Lut",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmi hangi azapla helak olmuştur?",
+    "A": "Şiddetli rüzgar",
+    "B": "Sel",
+    "C": "Hastalık",
+    "D": "Deprem",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmine gösterilen mucize neydi?",
+    "A": "Dişi deve",
+    "B": "Asa",
+    "C": "Su",
+    "D": "Güneş",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavminin peygamberi kimdir?",
+    "A": "Hz. Salih",
+    "B": "Hz. Hud",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Salih’in kavmi neden helak olmuştur?",
+    "A": "Mucize deveyi öldürdükleri için",
+    "B": "Fakir oldukları için",
+    "C": "Savaş kaybettikleri için",
+    "D": "Aç kaldıkları için",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim nerede doğmuştur?",
+    "A": "Ur",
+    "B": "Mekke",
+    "C": "Medine",
+    "D": "Şam",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in babası ne iş yapıyordu?",
+    "A": "Put yapıcısı",
+    "B": "Tüccar",
+    "C": "Denizci",
+    "D": "Doktor",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in putları kırmasındaki amaç nedir?",
+    "A": "Putların acizliğini göstermek",
+    "B": "Savaş başlatmak",
+    "C": "Zenginleşmek",
+    "D": "Kral olmak",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in ateşe atıldığı olay neyi gösterir?",
+    "A": "Allah’ın kudretini",
+    "B": "Ateşin gücünü",
+    "C": "Halkın sevgisini",
+    "D": "Putların gücünü",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in eşi Hz. Hacer ile oğlu Hz. İsmail nereye bırakılmıştır?",
+    "A": "Mekke vadisine",
+    "B": "Kudüs’e",
+    "C": "Ur’a",
+    "D": "Medine’ye",
+    "correct": "A"
+  },
+  {
+    "question": "Zemzem suyu hangi olayla çıkmıştır?",
+    "A": "Hz. Hacer’in koşması sonucu",
+    "B": "Asa mucizesiyle",
+    "C": "Tufanla",
+    "D": "Yağmurla",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmaill’in en büyük erdemi nedir?",
+    "A": "Teslimiyet",
+    "B": "Savaşçılık",
+    "C": "Zenginlik",
+    "D": "Göç",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban ibadeti kimin kıssasını hatırlatır?",
+    "A": "Hz. İbrahim ve İsmail",
+    "B": "Hz. Yusuf",
+    "C": "Hz. Musa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İshak’ın babası kimdir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Yakup",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un lakabı nedir?",
+    "A": "İsrail",
+    "B": "Şakir",
+    "C": "İdris",
+    "D": "Musa",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf hangi ülkede vezir olmuştur?",
+    "A": "Mısır",
+    "B": "Şam",
+    "C": "Medine",
+    "D": "Mekke",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un en bilinen özelliği nedir?",
+    "A": "Güzel ahlak ve sabır",
+    "B": "Savaşçılık",
+    "C": "Tıp bilgisi",
+    "D": "Demircilik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşleri ona hangi kötülüğü yapmıştır?",
+    "A": "Kuyuya atmışlardır",
+    "B": "Onu kral yapmışlardır",
+    "C": "Ev vermişlerdir",
+    "D": "Ziyafet vermişlerdir",
+    "correct": "A"
+  },
+  {
+    "question": "Medyen halkına gönderilen peygamber kimdir?",
+    "A": "Hz. Şuayb",
+    "B": "Hz. Salih",
+    "C": "Hz. Hud",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Şuayb’ın kavmi neden uyarılmıştır?",
+    "A": "Hileli ticaret yüzünden",
+    "B": "Savaş açtıkları için",
+    "C": "Putları kırdıkları için",
+    "D": "Göç ettikleri için",
+    "correct": "A"
+  },
+  {
+    "question": "Firavunun sarayında büyüyen peygamber kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Davud",
+    "C": "Hz. İlyas",
+    "D": "Hz. Lut",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın en büyük mucizelerinden biri nedir?",
+    "A": "Denizin yarılması",
+    "B": "Rüzgara hükmetmesi",
+    "C": "Ölüleri diriltmesi",
+    "D": "Kuşa can vermesi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya verilen kitap nedir?",
+    "A": "Tevrat",
+    "B": "İncil",
+    "C": "Kur’an",
+    "D": "Zebur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya kim eşlik etmiştir?",
+    "A": "Hz. Harun",
+    "B": "Hz. Yakup",
+    "C": "Hz. Davud",
+    "D": "Hz. Süleyman",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Harun’un görevi neydi?",
+    "A": "Tebliğde yardım",
+    "B": "Komutanlık",
+    "C": "Kral",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub hangi konuda örnektir?",
+    "A": "Sabır",
+    "B": "Hırs",
+    "C": "Savaş",
+    "D": "Zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub’un imtihanı neyle ilgilidir?",
+    "A": "Hastalık",
+    "B": "Savaş",
+    "C": "Deniz",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un mucizesi nedir?",
+    "A": "Balığın karnında kurtulması",
+    "B": "Denizi yarması",
+    "C": "Rüzgara hükmetmesi",
+    "D": "Asası",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un kavmine ne ad verilir?",
+    "A": "Ninova halkı",
+    "B": "Ad kavmi",
+    "C": "Semud kavmi",
+    "D": "Medyen",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus balığın karnındayken ne yapmıştır?",
+    "A": "Dua etmiştir",
+    "B": "Uyumuştur",
+    "C": "Yüzmüştür",
+    "D": "Gülmüştür",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’a verilen kitap nedir?",
+    "A": "Zebur",
+    "B": "Kur’an",
+    "C": "İncil",
+    "D": "Tevrat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud hangi özelliği ile bilinir?",
+    "A": "Güzel ses",
+    "B": "Gemi yapmak",
+    "C": "Demircilik",
+    "D": "Tıp",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın mucizesi nedir?",
+    "A": "Rüzgara ve cinlere hükmetmek",
+    "B": "Denizi yarma",
+    "C": "Asa",
+    "D": "Kuyu",
+    "correct": "A"
+  },
+  {
+    "question": "Belkıs hangi peygamberin kıssasında geçer?",
+    "A": "Hz. Süleyman",
+    "B": "Hz. İsa",
+    "C": "Hz. Yakup",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya ne istemiştir?",
+    "A": "Salih bir evlat",
+    "B": "Kral olmak",
+    "C": "Zenginlik",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya’nın oğlu kimdir?",
+    "A": "Hz. Yahya",
+    "B": "Hz. Musa",
+    "C": "Hz. İsa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Babası olmadan doğan peygamber kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. İsmail",
+    "C": "Hz. Yakup",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın annesi kimdir?",
+    "A": "Hz. Meryem",
+    "B": "Hz. Sara",
+    "C": "Hz. Hacer",
+    "D": "Hz. Havva",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’ya verilen kitap nedir?",
+    "A": "İncil",
+    "B": "Tevrat",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk vahiy nerede gelmiştir?",
+    "A": "Hira mağarası",
+    "B": "Mina",
+    "C": "Mescid-i Aksa",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed ne zaman peygamber olmuştur?",
+    "A": "40 yaşında",
+    "B": "25 yaşında",
+    "C": "60 yaşında",
+    "D": "7 yaşında",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in doğduğu yer neresidir?",
+    "A": "Mekke",
+    "B": "Medine",
+    "C": "Şam",
+    "D": "Kudüs",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in hicret ettiği yer neresidir?",
+    "A": "Medine",
+    "B": "Kudüs",
+    "C": "Şam",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "İsra ve Miraç hadiselerinde gidilen mescit hangisidir?",
+    "A": "Mescid-i Aksa",
+    "B": "Mescid-i Nebevi",
+    "C": "Mescid-i Haram dışı",
+    "D": "Eyyüb Camii",
+    "correct": "A"
+  },
+  {
+    "question": "Miraç’ta farz kılınan ibadet hangisidir?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Hac",
+    "D": "Zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Peygamber’in peygamberlikten önceki lakabı nedir?",
+    "A": "El-Emin",
+    "B": "El-Melik",
+    "C": "El-Kahir",
+    "D": "El-Mücahid",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin ortak mesajı nedir?",
+    "A": "Allah’ın birliğine iman",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Yakup",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri daha kimdir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Lut",
+    "C": "Hz. Salih",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden bir diğeri hangisidir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Yakup",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden bir diğeri kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Davud",
+    "C": "Hz. Süleyman",
+    "D": "Hz. Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerin sonuncusu kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. İdris",
+    "C": "Hz. Yakup",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa hangi kavme gönderilmiştir?",
+    "A": "İsrailoğulları",
+    "B": "Semud",
+    "C": "Ad",
+    "D": "Medyen",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut hangi peygamberin zamanında yaşamıştır?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Musa",
+    "C": "Hz. Yakup",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Hacer’in Safa-Merve arasında koşmasının adı nedir?",
+    "A": "Sa’y",
+    "B": "Tavaf",
+    "C": "Tekbir",
+    "D": "Rami",
+    "correct": "A"
+  },
+  {
+    "question": "Hac ibadetinde Arafat’ta durmaya ne denir?",
+    "A": "Vakıfe",
+    "B": "Sa’y",
+    "C": "Tavaf",
+    "D": "Rami",
+    "correct": "A"
+  },
+  {
+    "question": "Kabe’yi tavaf etmek neyi temsil eder?",
+    "A": "Allah’ın etrafında teslimiyet",
+    "B": "Koşu",
+    "C": "Yürüyüş",
+    "D": "Hız",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin en önemli vasfı nedir?",
+    "A": "Doğruluk",
+    "B": "Servet",
+    "C": "Saltanat",
+    "D": "Güç",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler vahyi nasıl iletir?",
+    "A": "Eksiksiz tebliğ",
+    "B": "Eksik bırakır",
+    "C": "Kendi yorumunu katar",
+    "D": "Gizler",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin masum olması ne demektir?",
+    "A": "Büyük günahlardan korunmuş olmak",
+    "B": "Hiç gülmemek",
+    "C": "Hiç konuşmamak",
+    "D": "Hiç yemek yememek",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in insanlara tebliğ ettiği ilk esas nedir?",
+    "A": "Allah’ın birliği",
+    "B": "Sadece oruç",
+    "C": "Sadece hac",
+    "D": "Sadece zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in hayatını incelemeye ne ad verilir?",
+    "A": "Siyer",
+    "B": "Fıkıh",
+    "C": "Kelam",
+    "D": "Tefsir",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler arası kardeşlik bağı ne üzerinden kurulur?",
+    "A": "Tevhid ve iman",
+    "B": "Soy bağı",
+    "C": "Şehir",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamber kıssaları neden hikaye gibi anlatılmaz?",
+    "A": "Gerçek olaylar olduğu için",
+    "B": "Eğlence olsun diye",
+    "C": "Sır olsun diye",
+    "D": "Zor olsun diye",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in duası ile ilgili en önemli kavram nedir?",
+    "A": "Teslimiyet",
+    "B": "Savaş",
+    "C": "Güç",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kuyudan kurtulmasına sebep olan olay nedir?",
+    "A": "Bir kervanın onu bulması",
+    "B": "Yağmur",
+    "C": "Rüzgar",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın Firavun’a tebliğinde en büyük engel neydi?",
+    "A": "Firavun’un kibri",
+    "B": "Savaş",
+    "C": "Açlık",
+    "D": "Hastalık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın kavmi hangi sınavları yaşamıştır?",
+    "A": "Açlık ve korku",
+    "B": "Saltanat",
+    "C": "Zenginlik",
+    "D": "Oyun",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın Belkıs’a gönderdiği mektupta ne vardır?",
+    "A": "Tevhid daveti",
+    "B": "Savaş ilanı",
+    "C": "Ticaret teklifi",
+    "D": "Kral olma önerisi",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’nın kavmine en çok anlattığı konu nedir?",
+    "A": "Allah’ın birliği ve merhamet",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Coğrafya",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Meryem hangi özelliği ile övülür?",
+    "A": "İffet ve teslimiyet",
+    "B": "Saltanat",
+    "C": "Savaş",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in insanlara gösterdiği en büyük mucize nedir?",
+    "A": "Kur’an",
+    "B": "Asa",
+    "C": "Deniz",
+    "D": "Kuyu",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin gönderildiği ortak mesaj nedir?",
+    "A": "Allah’a kulluk",
+    "B": "Saltanat kurmak",
+    "C": "Yol yapmak",
+    "D": "Savaş açmak",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’in yaratıldığı madde nedir?",
+    "A": "Toprak",
+    "B": "Ateş",
+    "C": "Hava",
+    "D": "Taş",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem ile Havva cennetten nereye gönderildi?",
+    "A": "Yeryüzüne",
+    "B": "Denize",
+    "C": "Güneşe",
+    "D": "Ay’a",
+    "correct": "A"
+  },
+  {
+    "question": "Âdem kelimesi ne anlama gelir?",
+    "A": "İnsan",
+    "B": "Deniz",
+    "C": "Ağaç",
+    "D": "Taş",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in adı hangi anlamı taşır?",
+    "A": "Ders alan",
+    "B": "Savaşçı",
+    "C": "Tüccar",
+    "D": "Genç",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in insanlara öğrettiği şeylerden biri nedir?",
+    "A": "Yazı yazmak",
+    "B": "Denizcilik",
+    "C": "Savaş",
+    "D": "Tarım",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un gemisi neden yapılmıştır?",
+    "A": "Kurtuluş için",
+    "B": "Ticaret için",
+    "C": "Savaş için",
+    "D": "Eğlence için",
+    "correct": "A"
+  },
+  {
+    "question": "Tufanın sebebi neydi?",
+    "A": "Kavmin inkârı",
+    "B": "Hava olayları",
+    "C": "Savaş",
+    "D": "Kıtlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un gemisine kaç hayvan alınmıştır?",
+    "A": "Her türden bir çift",
+    "B": "Sadece kuşlar",
+    "C": "On çift",
+    "D": "Hiç hayvan alınmadı",
+    "correct": "A"
+  },
+  {
+    "question": "Geminin oturduğu dağ nerede bulunur?",
+    "A": "Cudi Dağı",
+    "B": "Sina",
+    "C": "Nemrut",
+    "D": "Hira",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavminin helak sebebi nedir?",
+    "A": "Şiddetli rüzgar",
+    "B": "Yağmur",
+    "C": "Taş",
+    "D": "Deniz",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmine gönderilen peygamber kimdir?",
+    "A": "Hz. Hud",
+    "B": "Hz. Salih",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Lut",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmi neyle helak olmuştur?",
+    "A": "Şiddetli ses",
+    "B": "Yağmur",
+    "C": "Kar",
+    "D": "Açlık",
+    "correct": "A"
+  },
+  {
+    "question": "Dişi deve mucizesi hangi peygamberle ilgilidir?",
+    "A": "Hz. Salih",
+    "B": "Hz. Nuh",
+    "C": "Hz. Hud",
+    "D": "Hz. Musa",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Salih’in mucize devesine ne yapılmıştır?",
+    "A": "Öldürülmüştür",
+    "B": "Şehirde gezdirilmiştir",
+    "C": "Yarışa sokulmuştur",
+    "D": "Satılmıştır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim hangi şehirde doğmuştur?",
+    "A": "Ur",
+    "B": "Mekke",
+    "C": "Şam",
+    "D": "Kudüs",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in kavmine söylediği söz nedir?",
+    "A": "Putlar size fayda vermez",
+    "B": "Putlar güçlüdür",
+    "C": "Putlar sizi korur",
+    "D": "Putlar her şeyi bilir",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim ateşe atılınca ne olmuştur?",
+    "A": "Ateş serin olmuştur",
+    "B": "Ateş büyümüştür",
+    "C": "Ateş yok olmuştur",
+    "D": "Ateş taş olmuştur",
+    "correct": "A"
+  },
+  {
+    "question": "Zemzem suyu ne zaman çıkmıştır?",
+    "A": "Hz. Hacer koşarken",
+    "B": "Yağmur yağarken",
+    "C": "Deniz taşarken",
+    "D": "Asa vurulunca",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim Kabe’yi kimle inşa etmiştir?",
+    "A": "Hz. İsmail",
+    "B": "Hz. Musa",
+    "C": "Hz. İsa",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmail’in özelliği nedir?",
+    "A": "Teslimiyet",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Şehir",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban olayı hangi kıssaya dayanır?",
+    "A": "Hz. İbrahim ve İsmail",
+    "B": "Hz. Musa",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İshak kimin oğludur?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Yakup",
+    "C": "Hz. Yusuf",
+    "D": "Hz. İdris",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un lakabı nedir?",
+    "A": "İsrail",
+    "B": "Meryem",
+    "C": "İdris",
+    "D": "Hud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşleri ona nasıl davranmıştır?",
+    "A": "Kuyuya atarak",
+    "B": "Kral yaparak",
+    "C": "Ev vererek",
+    "D": "Ziyaret ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf hangi ülkede vezir olmuştur?",
+    "A": "Mısır",
+    "B": "Şam",
+    "C": "Medine",
+    "D": "Mekke",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kıssasından hangi ders çıkar?",
+    "A": "Sabır",
+    "B": "Savaş",
+    "C": "Kıskançlık",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Şuayb hangi kavme gönderilmiştir?",
+    "A": "Medyen",
+    "B": "Semud",
+    "C": "Ad",
+    "D": "Ninova",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa çocukken nereye bırakılmıştır?",
+    "A": "Nehirde sandığa",
+    "B": "Kuyuya",
+    "C": "Çöle",
+    "D": "Denize",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa hangi zalime karşı gelmiştir?",
+    "A": "Firavun",
+    "B": "Nemrut",
+    "C": "Belkıs",
+    "D": "Yunus",
+    "correct": "A"
+  },
+  {
+    "question": "Denizin yarılması mucizesi hangi peygamberle ilgilidir?",
+    "A": "Hz. Musa",
+    "B": "Hz. İsa",
+    "C": "Hz. Nuh",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya kim yardımcı olmuştur?",
+    "A": "Hz. Harun",
+    "B": "Hz. Yakup",
+    "C": "Hz. İshak",
+    "D": "Hz. İdris",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya hangi kitap verilmiştir?",
+    "A": "Tevrat",
+    "B": "İncil",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Harun’un görevi neydi?",
+    "A": "Tebliğe yardımcı",
+    "B": "Kral",
+    "C": "Tüccar",
+    "D": "Savaşçı",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub sabır imtihanını nasıl kazanmıştır?",
+    "A": "Şükrederek",
+    "B": "Savaşarak",
+    "C": "Kaçarak",
+    "D": "Saklanarak",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub’un imtihanı neyle ilgilidir?",
+    "A": "Hastalık",
+    "B": "Savaş",
+    "C": "Tarım",
+    "D": "Deniz",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un mucizesi nedir?",
+    "A": "Balığın karnında kurtulması",
+    "B": "Deniz yarılması",
+    "C": "Asa",
+    "D": "Zemzem",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus hangi şehirde tebliğ yapmıştır?",
+    "A": "Ninova",
+    "B": "Şam",
+    "C": "Mekke",
+    "D": "Medine",
+    "correct": "A"
+  },
+  {
+    "question": "Balığın karnında Hz. Yunus ne yapmıştır?",
+    "A": "Dua",
+    "B": "Uyku",
+    "C": "Yemek",
+    "D": "Gezinti",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’a hangi kitap verilmiştir?",
+    "A": "Zebur",
+    "B": "Kur’an",
+    "C": "İncil",
+    "D": "Tevrat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’un bilinen özelliği nedir?",
+    "A": "Güzel ses",
+    "B": "Denizcilik",
+    "C": "Savaş",
+    "D": "Tıp",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın mucizeleri nelerdir?",
+    "A": "Cinlere ve rüzgara hükmetmesi",
+    "B": "Deniz yarılması",
+    "C": "Zemzem",
+    "D": "Kuyu",
+    "correct": "A"
+  },
+  {
+    "question": "Belkıs hangi olayda geçer?",
+    "A": "Hz. Süleyman kıssasında",
+    "B": "Hz. Musa kıssasında",
+    "C": "Hz. Nuh kıssasında",
+    "D": "Hz. Yusuf kıssasında",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya ne için dua etmiştir?",
+    "A": "Salih evlat",
+    "B": "Saltanat",
+    "C": "Savaş",
+    "D": "Mal",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya’nın oğlu kimdir?",
+    "A": "Hz. Yahya",
+    "B": "Hz. Musa",
+    "C": "Hz. Davud",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Babası olmadan doğan peygamber kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. İsmail",
+    "C": "Hz. Yakup",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Meryem’in erdemi nedir?",
+    "A": "İffet",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’ya hangi kitap verilmiştir?",
+    "A": "İncil",
+    "B": "Tevrat",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Son peygamber kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Davud",
+    "C": "Hz. Musa",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk vahiy nerede gelmiştir?",
+    "A": "Hira mağarasında",
+    "B": "Mina’da",
+    "C": "Taif’te",
+    "D": "Arafat’ta",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in peygamberlikten önceki unvanı nedir?",
+    "A": "El-Emin",
+    "B": "El-Melik",
+    "C": "El-Hakim",
+    "D": "El-Kadir",
+    "correct": "A"
+  },
+  {
+    "question": "İsra olayı hangi mescit ile ilgilidir?",
+    "A": "Mescid-i Aksa",
+    "B": "Mescid-i Nebevi",
+    "C": "Mescid-i Haram",
+    "D": "Mescid-i Kuba",
+    "correct": "A"
+  },
+  {
+    "question": "Miraç’ta farz kılınan ibadet hangisidir?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Hac",
+    "D": "Zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Siyer hangi peygamberin hayatını anlatır?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Musa",
+    "C": "Hz. Yusuf",
+    "D": "Hz. İbrahim",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Yakup",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberler arasında kim vardır?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Hud",
+    "C": "Hz. Salih",
+    "D": "Hz. Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri daha kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Yakup",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri daha hangisidir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Lut",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerin sonuncusu kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Davud",
+    "C": "Hz. Süleyman",
+    "D": "Hz. Eyyub",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa hangi kavme gönderilmiştir?",
+    "A": "İsrailoğulları",
+    "B": "Semud",
+    "C": "Ad",
+    "D": "Ninova",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut’un gönderildiği kavim hangi ahlaki sorunla görüntülenir?",
+    "A": "Kötü ahlak",
+    "B": "Savaş",
+    "C": "Tarım",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Safa ve Merve arasında yapılan ibadetin adı nedir?",
+    "A": "Sa’y",
+    "B": "Tavaf",
+    "C": "Vakıfe",
+    "D": "Rami",
+    "correct": "A"
+  },
+  {
+    "question": "Arafat’ta durmanın adı nedir?",
+    "A": "Vakıfe",
+    "B": "Tavaf",
+    "C": "Sa’y",
+    "D": "Rami",
+    "correct": "A"
+  },
+  {
+    "question": "Kabe etrafında dönmenin adı nedir?",
+    "A": "Tavaf",
+    "B": "Sa’y",
+    "C": "Vakıfe",
+    "D": "Rami",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin en temel ahlaki özelliği nedir?",
+    "A": "Doğruluk",
+    "B": "Saltanat",
+    "C": "Ticaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin masumiyeti neyi ifade eder?",
+    "A": "Büyük günahlardan korunma",
+    "B": "Hiç uyumama",
+    "C": "Hiç konuşmama",
+    "D": "Hiç yeme içmeme",
+    "correct": "A"
+  },
+  {
+    "question": "Vahyi insanlara iletme görevi hangi sıfattır?",
+    "A": "Tebliğ",
+    "B": "Sıdk",
+    "C": "Emanet",
+    "D": "İsmet",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin güvenilir olması hangi sıfattır?",
+    "A": "Emanet",
+    "B": "Sıdk",
+    "C": "Tebliğ",
+    "D": "Fetanet",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin üstün akla sahip olması hangi sıfattır?",
+    "A": "Fetanet",
+    "B": "Sıdk",
+    "C": "Emanet",
+    "D": "İsmet",
+    "correct": "A"
+  },
+  {
+    "question": "‘Doğruluk’ hangi peygamber sıfatıdır?",
+    "A": "Sıdk",
+    "B": "Emanet",
+    "C": "Fetanet",
+    "D": "İsmet",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberler nasıl örnek olur?",
+    "A": "Davranışlarıyla",
+    "B": "Saltanatla",
+    "C": "Savaşla",
+    "D": "Zenginlikle",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin kardeşliği hangi kavrama dayanır?",
+    "A": "Tevhid",
+    "B": "Soy",
+    "C": "Şehir",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Kur’an’da peygamber kıssalarının amacı nedir?",
+    "A": "İbret",
+    "B": "Eğlence",
+    "C": "Masal",
+    "D": "Oyun",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un sabır sonucu elde ettiği konum nedir?",
+    "A": "Mısır’da vezirlik",
+    "B": "Kral olmak",
+    "C": "Çobanlık",
+    "D": "Tüccarlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’nın Firavun’a karşı kullandığı güç kaynağı nedir?",
+    "A": "Allah’ın yardımı",
+    "B": "Ordusu",
+    "C": "Ticaret",
+    "D": "Zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub sabrı sonucunda ne kazanmıştır?",
+    "A": "Şifa",
+    "B": "Saltanat",
+    "C": "Savaş",
+    "D": "Mal",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un duasının önemi nedir?",
+    "A": "Tevbe ve teslimiyet",
+    "B": "Hız",
+    "C": "Korku",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın mucizelerinin amacı nedir?",
+    "A": "Allah’ın kudretini göstermek",
+    "B": "Eğlenmek",
+    "C": "Savaş açmak",
+    "D": "Zenginleşmek",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa neyi en çok vurgulamıştır?",
+    "A": "Merhamet",
+    "B": "Savaş",
+    "C": "Zenginlik",
+    "D": "Şehir",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in en büyük mucizesi nedir?",
+    "A": "Kur’an",
+    "B": "Asa",
+    "C": "Deniz",
+    "D": "Kuyu",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin gönderiliş sebebi hangi kavramla ifade edilir?",
+    "A": "Hidayet",
+    "B": "Saltanat",
+    "C": "Ticaret",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "Hazreti Âdem’in eşi kimdir?",
+    "A": "Havva",
+    "B": "Hacer",
+    "C": "Sara",
+    "D": "Meryem",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’e meleklerin secde etmesinin sebebi nedir?",
+    "A": "Allah’ın emri",
+    "B": "İnsanların isteği",
+    "C": "Meleklerin kararı",
+    "D": "Şeytanın emri",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Âdem’e karşı gelen kimdir?",
+    "A": "İblis",
+    "B": "Azrail",
+    "C": "Mikail",
+    "D": "Cebrail",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in kıssasından alınan ders nedir?",
+    "A": "İlim ve sabır",
+    "B": "Mal ve güç",
+    "C": "Savaş ve saltanat",
+    "D": "Ticaret ve zenginlik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İdris’in insanlara öğrettiği önemli şeylerden biri nedir?",
+    "A": "Yazı yazma",
+    "B": "Madencilik",
+    "C": "Denizcilik",
+    "D": "Tarım",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un en çok tebliğ ettiği konu nedir?",
+    "A": "Allah’ın birliği",
+    "B": "Ticaret",
+    "C": "Savaş",
+    "D": "Giyim",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un kavmi kendisine nasıl davranmıştır?",
+    "A": "Yalanlamıştır",
+    "B": "Sevinmiştir",
+    "C": "Kral yapmıştır",
+    "D": "Desteklemiştir",
+    "correct": "A"
+  },
+  {
+    "question": "Tufandan kurtulanlar kimlerdir?",
+    "A": "İnananlar",
+    "B": "Zenginler",
+    "C": "Komutanlar",
+    "D": "Kâhinler",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Nuh’un gemisi nereye oturmuştur?",
+    "A": "Cudi Dağı’na",
+    "B": "Arafat’a",
+    "C": "Sina’ya",
+    "D": "Hud’a",
+    "correct": "A"
+  },
+  {
+    "question": "Ad kavmi hangi peygambere karşı gelmiştir?",
+    "A": "Hz. Hud",
+    "B": "Hz. Salih",
+    "C": "Hz. Şuayb",
+    "D": "Hz. Lut",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Hud’un kavminin helakı nasıl olmuştur?",
+    "A": "Şiddetli rüzgar",
+    "B": "Sel",
+    "C": "Açlık",
+    "D": "Hastalık",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavminin peygamberi kimdir?",
+    "A": "Hz. Salih",
+    "B": "Hz. Nuh",
+    "C": "Hz. Hud",
+    "D": "Hz. Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Dişi deve mucizesi neden gönderilmiştir?",
+    "A": "İnkar edenlere delil olarak",
+    "B": "Savaş için",
+    "C": "Ticaret için",
+    "D": "Eğlence için",
+    "correct": "A"
+  },
+  {
+    "question": "Semud kavmi hangi günahı işlemiştir?",
+    "A": "Mucize deveyi öldürmüştür",
+    "B": "Namazı bırakmıştır",
+    "C": "Ticaret yapmıştır",
+    "D": "Gemi yapmıştır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in babasının mesleği neydi?",
+    "A": "Put ustası",
+    "B": "Demirci",
+    "C": "Doktor",
+    "D": "Denizci",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in ateşe atılma olayı neyi gösterir?",
+    "A": "Allah’ın korumasını",
+    "B": "Ateşin gücünü",
+    "C": "Putların kuvvetini",
+    "D": "İnsanların sevgisini",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in en bilinen duası neyi anlatır?",
+    "A": "Teslimiyet",
+    "B": "Savaş",
+    "C": "Tarım",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsmail nerede büyümüştür?",
+    "A": "Mekke’de",
+    "B": "Kudüs’te",
+    "C": "Şam’da",
+    "D": "Ur’da",
+    "correct": "A"
+  },
+  {
+    "question": "Zemzem suyu hangi olayla çıkmıştır?",
+    "A": "Hz. Hacer’in koşması",
+    "B": "Deniz yarılması",
+    "C": "Balığın açılması",
+    "D": "Rüzgar",
+    "correct": "A"
+  },
+  {
+    "question": "Kabe’yi yeniden kim inşa etmiştir?",
+    "A": "Hz. İbrahim ve İsmail",
+    "B": "Hz. Nuh",
+    "C": "Hz. Musa",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İshak’ın kardeşi kimdir?",
+    "A": "Hz. İsmail",
+    "B": "Hz. Yusuf",
+    "C": "Hz. Yakup",
+    "D": "Hz. Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un diğer ismi nedir?",
+    "A": "İsrail",
+    "B": "Hud",
+    "C": "Salih",
+    "D": "Şuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’a kardeşleri ne yapmıştır?",
+    "A": "Kuyuya atmışlardır",
+    "B": "Kral yapmışlardır",
+    "C": "Ev vermişlerdir",
+    "D": "Kumandan yapmışlardır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un rüyaları nasıl bir özelliğe sahiptir?",
+    "A": "Tabir edilir",
+    "B": "Görülmez",
+    "C": "Yorumlanmaz",
+    "D": "Unutulur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf hangi konumda görev almıştır?",
+    "A": "Mısır’da vezir",
+    "B": "Kral",
+    "C": "Komutan",
+    "D": "Tüccar",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Şuayb’ın kavmi hangi hatayı işlemiştir?",
+    "A": "Ölçü ve tartıda hile",
+    "B": "Sabır",
+    "C": "Kölelik",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa nerede büyümüştür?",
+    "A": "Firavunun sarayında",
+    "B": "Ur’da",
+    "C": "Mekke’de",
+    "D": "Medine’de",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya eşlik eden kardeşi kimdir?",
+    "A": "Hz. Harun",
+    "B": "Hz. Davud",
+    "C": "Hz. İsa",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Denizin yarılması hangi olayı temsil eder?",
+    "A": "Allah’ın yardımı",
+    "B": "Savaş gücü",
+    "C": "Ticaret",
+    "D": "Şans",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa’ya verilen kitap hangisidir?",
+    "A": "Tevrat",
+    "B": "İncil",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Harun’un vazifesi neydi?",
+    "A": "Tebliğe yardım",
+    "B": "Kral olmak",
+    "C": "Tüccar olmak",
+    "D": "Komutanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub hangi imtihanla sınanmıştır?",
+    "A": "Hastalık",
+    "B": "Savaş",
+    "C": "Açlık",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub’un en büyük dersi nedir?",
+    "A": "Sabır",
+    "B": "Öfke",
+    "C": "Kıskançlık",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un mucizesi nedir?",
+    "A": "Balığın karnında kurtulması",
+    "B": "Deniz yarılması",
+    "C": "Asa",
+    "D": "Sa’y",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus nereye gönderilmiştir?",
+    "A": "Ninova",
+    "B": "Medyen",
+    "C": "Semud",
+    "D": "Ad",
+    "correct": "A"
+  },
+  {
+    "question": "Balığın karnında Hz. Yunus ne yapmıştır?",
+    "A": "Tevbe",
+    "B": "Gezinti",
+    "C": "Yemek",
+    "D": "Uyumak",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’un en bilinen özelliği nedir?",
+    "A": "Güzel ses",
+    "B": "Saltanat",
+    "C": "Tarım",
+    "D": "Denizcilik",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Davud’a verilen kutsal kitap nedir?",
+    "A": "Zebur",
+    "B": "Kur’an",
+    "C": "Tevrat",
+    "D": "İncil",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın mucizeleri neyi gösterir?",
+    "A": "Allah’ın kudretini",
+    "B": "Savaş gücünü",
+    "C": "Tarım",
+    "D": "Denizcilik",
+    "correct": "A"
+  },
+  {
+    "question": "Belkıs hangi kıssada tanınır?",
+    "A": "Hz. Süleyman",
+    "B": "Hz. Musa",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya ne istemiştir?",
+    "A": "Salih evlat",
+    "B": "Kral olmak",
+    "C": "Saltanat",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Zekeriyya’nın duasının sonucu doğan peygamber kimdir?",
+    "A": "Hz. Yahya",
+    "B": "Hz. Yusuf",
+    "C": "Hz. İsa",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Babası olmadan doğan peygamber kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Yakup",
+    "C": "Hz. Harun",
+    "D": "Hz. Nuh",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Meryem hangi yönüyle övülür?",
+    "A": "İffet",
+    "B": "Saltanat",
+    "C": "Savaş",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa’ya verilen kitap nedir?",
+    "A": "İncil",
+    "B": "Tevrat",
+    "C": "Zebur",
+    "D": "Kur’an",
+    "correct": "A"
+  },
+  {
+    "question": "Son peygamber kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Musa",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Davud",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed ilk vahyi nerede almıştır?",
+    "A": "Hira",
+    "B": "Arafat",
+    "C": "Sina",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’e ilk inen sure hangisidir?",
+    "A": "Alak suresi",
+    "B": "Fatiha",
+    "C": "İhlas",
+    "D": "Nas",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in peygamberlikten önceki lakabı nedir?",
+    "A": "El-Emin",
+    "B": "El-Hakim",
+    "C": "El-Melik",
+    "D": "El-Cebbar",
+    "correct": "A"
+  },
+  {
+    "question": "İsra olayı hangi mescit ile ilgilidir?",
+    "A": "Mescid-i Aksa",
+    "B": "Mescid-i Nebevi",
+    "C": "Mescid-i Kuba",
+    "D": "Kuba Mescidi",
+    "correct": "A"
+  },
+  {
+    "question": "Miraç’ta farz kılınan ibadet hangisidir?",
+    "A": "Namaz",
+    "B": "Hac",
+    "C": "Zekat",
+    "D": "Oruç",
+    "correct": "A"
+  },
+  {
+    "question": "Siyer hangi ilim alanıdır?",
+    "A": "Hz. Muhammed’in hayatı",
+    "B": "Coğrafya",
+    "C": "Tıp",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin ortak özelliği nedir?",
+    "A": "Doğruluk",
+    "B": "Saltanat",
+    "C": "Talep",
+    "D": "Mal",
+    "correct": "A"
+  },
+  {
+    "question": "‘Sıdk’ peygamber sıfatı neyi anlatır?",
+    "A": "Doğruluk",
+    "B": "Güç",
+    "C": "Zenginlik",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "‘Emanet’ peygamber sıfatı neyi anlatır?",
+    "A": "Güvenilirlik",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Tarım",
+    "correct": "A"
+  },
+  {
+    "question": "‘Tebliğ’ ne demektir?",
+    "A": "Vahyi iletmek",
+    "B": "Savaş",
+    "C": "Ticaret",
+    "D": "Saltanat",
+    "correct": "A"
+  },
+  {
+    "question": "‘İsmet’ sıfatı neyi ifade eder?",
+    "A": "Günahlardan korunma",
+    "B": "Hız",
+    "C": "Saltanat",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "‘Fetanet’ sıfatı neyi ifade eder?",
+    "A": "Üstün akıl",
+    "B": "Zenginlik",
+    "C": "Savaş",
+    "D": "Tarım",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. Nuh",
+    "B": "Hz. Harun",
+    "C": "Hz. Yakup",
+    "D": "Hz. Hur",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Şuayb",
+    "C": "Hz. Yakup",
+    "D": "Hz. Yusuf",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. Musa",
+    "B": "Hz. Lut",
+    "C": "Hz. Hud",
+    "D": "Hz. Zülkifl",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerden biri kimdir?",
+    "A": "Hz. İsa",
+    "B": "Hz. Harun",
+    "C": "Hz. Salih",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Ulul azm peygamberlerin sonuncusu kimdir?",
+    "A": "Hz. Muhammed",
+    "B": "Hz. Davud",
+    "C": "Hz. Süleyman",
+    "D": "Hz. İlyas",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Musa hangi kavme gönderilmiştir?",
+    "A": "İsrailoğulları",
+    "B": "Ad",
+    "C": "Semud",
+    "D": "Ninova",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Lut hangi peygamber ile aynı dönemde yaşamıştır?",
+    "A": "Hz. İbrahim",
+    "B": "Hz. Musa",
+    "C": "Hz. Yusuf",
+    "D": "Hz. Yakup",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in hanımı kimdir?",
+    "A": "Hz. Sara",
+    "B": "Hz. Hacer",
+    "C": "Hz. Meryem",
+    "D": "Hz. Havva",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İbrahim’in diğer hanımı kimdir?",
+    "A": "Hz. Hacer",
+    "B": "Hz. Meryem",
+    "C": "Hz. Havva",
+    "D": "Hz. Sara",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yakup’un kaç oğlu vardır?",
+    "A": "12",
+    "B": "7",
+    "C": "5",
+    "D": "10",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yusuf’un kardeşi kimdir?",
+    "A": "Bünyamin",
+    "B": "İshak",
+    "C": "Musa",
+    "D": "Harun",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamberlerin ortak mesajı hangi kelime ile özetlenir?",
+    "A": "Tevhid",
+    "B": "Saltanat",
+    "C": "Ticaret",
+    "D": "Savaş",
+    "correct": "A"
+  },
+  {
+    "question": "Peygamber kıssalarından alınan en büyük ders nedir?",
+    "A": "Sabır ve iman",
+    "B": "Savaş",
+    "C": "Hız",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Eyyub’un sabrı hangi kavramla özetlenir?",
+    "A": "Teslimiyet",
+    "B": "Gurur",
+    "C": "Kıskançlık",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Yunus’un kavmi sonunda ne yapmıştır?",
+    "A": "İman etmiştir",
+    "B": "Göç etmiştir",
+    "C": "Savaşmıştır",
+    "D": "Ticaret yapmıştır",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Süleyman’ın mucizeleri neyi öğretir?",
+    "A": "Allah’ın kudreti",
+    "B": "Rüzgar gücü",
+    "C": "Saltanat",
+    "D": "Maden",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. İsa insanlara neyi öğretmiştir?",
+    "A": "Merhamet ve iman",
+    "B": "Savaş",
+    "C": "Tarım",
+    "D": "Ticaret",
+    "correct": "A"
+  },
+  {
+    "question": "Hz. Muhammed’in en büyük mucizesi nedir?",
+    "A": "Kur’an",
+    "B": "Asa",
+    "C": "Deniz",
+    "D": "Kuyu",
+    "correct": "A"
+  }
+]

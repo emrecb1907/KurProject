@@ -311,7 +311,23 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     try {
       const { data } = await database.energy.sync(state.boundUserId);
       if (data && (data as any).current_energy !== undefined) {
-        set({ currentLives: (data as any).current_energy });
+        const serverEnergy = (data as any).current_energy;
+        const serverReplenishTime = (data as any).last_update;
+
+        // Update energy
+        const updates: { currentLives: number; lastReplenishTime?: number } = {
+          currentLives: serverEnergy
+        };
+
+        // Update lastReplenishTime if server provides it, or if energy increased (regenerated)
+        if (serverReplenishTime) {
+          updates.lastReplenishTime = new Date(serverReplenishTime).getTime();
+        } else if (serverEnergy > state.currentLives && serverEnergy < state.maxLives) {
+          // Energy increased but not full, so regeneration just happened
+          updates.lastReplenishTime = Date.now();
+        }
+
+        set(updates);
       }
     } catch (e) {
       // Server sync failed - keep current value, DON'T regenerate locally

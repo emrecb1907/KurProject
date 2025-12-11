@@ -9,6 +9,487 @@
     "accuracy": "Accuracy",
     "timeSpent": "Time Spent",
     "question": "Question",
-    "playAgain": "Play Again"
+    "playAgain": "Play Again",
+    "feedback": {
+        "low": {
+            "correct": [
+                {
+                    "title": "Nice!",
+                    "message": "Good step with this correct answer."
+                },
+                {
+                    "title": "Well done!",
+                    "message": "You continue your progress with this answer."
+                },
+                {
+                    "title": "You got it right!",
+                    "message": "Let's continue, next question is ready."
+                },
+                {
+                    "title": "Good job!",
+                    "message": "This correct answer made a nice contribution."
+                },
+                {
+                    "title": "You did it!",
+                    "message": "Super, we can move to the next question."
+                },
+                {
+                    "title": "Congratulations!",
+                    "message": "You added another nice correct answer."
+                },
+                {
+                    "title": "Keep going!",
+                    "message": "You got the correct answer, next one coming."
+                },
+                {
+                    "title": "Pretty good!",
+                    "message": "Solving this question correctly is good progress."
+                },
+                {
+                    "title": "Right choice!",
+                    "message": "Come on, let's continue without breaking the flow."
+                },
+                {
+                    "title": "Great step!",
+                    "message": "This correct answer contributed to your path."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Let's continue.",
+                    "message": "You can do better with a little more attention."
+                },
+                {
+                    "title": "No problem.",
+                    "message": "But let's focus a bit more on the next question."
+                },
+                {
+                    "title": "Alright.",
+                    "message": "Come on, let's try to be more careful this time."
+                },
+                {
+                    "title": "Normal.",
+                    "message": "You'll get better as you continue, let's go to the next question."
+                },
+                {
+                    "title": "Come on, continue.",
+                    "message": "Show a little more care this time."
+                },
+                {
+                    "title": "It happens.",
+                    "message": "But I think you'll do better on the next one."
+                },
+                {
+                    "title": "Okay, moving on.",
+                    "message": "A little more attention can take you higher."
+                },
+                {
+                    "title": "Next!",
+                    "message": "Every question is an opportunity, this time can be better."
+                },
+                {
+                    "title": "Everything is fine.",
+                    "message": "You'll see progress with a little more effort."
+                },
+                {
+                    "title": "No worries.",
+                    "message": "But let's pay more attention to the next one."
+                }
+            ]
+        },
+        "mid": {
+            "correct": [
+                {
+                    "title": "Going well!",
+                    "message": "You get stronger with every correct answer."
+                },
+                {
+                    "title": "Good work!",
+                    "message": "You are getting most of them right, keep it up."
+                },
+                {
+                    "title": "Great progress!",
+                    "message": "You solved this question correctly too."
+                },
+                {
+                    "title": "Quite successful!",
+                    "message": "Your progress looks quite good."
+                },
+                {
+                    "title": "Nice rhythm.",
+                    "message": "You'll be much better if you continue with this tempo."
+                },
+                {
+                    "title": "Rising step by step.",
+                    "message": "Every correct answer increases your performance."
+                },
+                {
+                    "title": "Not bad, quite good!",
+                    "message": "With a little more attention you'll go much higher."
+                },
+                {
+                    "title": "Going steadily.",
+                    "message": "You're getting the hang of it as you solve."
+                },
+                {
+                    "title": "Progressing well.",
+                    "message": "You'll learn a lot if you continue at this level."
+                },
+                {
+                    "title": "Approaching success.",
+                    "message": "Getting this question right is part of it."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Let's keep going.",
+                    "message": "You'll be much better with a little more attention."
+                },
+                {
+                    "title": "Alright.",
+                    "message": "But a little more care is important in these types of questions."
+                },
+                {
+                    "title": "Not bad.",
+                    "message": "If you pay a bit more attention your performance will increase."
+                },
+                {
+                    "title": "Continue!",
+                    "message": "You need to be a bit clearer at this level."
+                },
+                {
+                    "title": "Next question!",
+                    "message": "You'll recover easily if you focus a bit more."
+                },
+                {
+                    "title": "No problem.",
+                    "message": "But your potential is higher, I know."
+                },
+                {
+                    "title": "Don't lose rhythm.",
+                    "message": "Increase your attention a bit, next question coming."
+                },
+                {
+                    "title": "One more step.",
+                    "message": "We know you can do better."
+                },
+                {
+                    "title": "Come on.",
+                    "message": "I expect a little more attention this time."
+                },
+                {
+                    "title": "You're doing well.",
+                    "message": "But we can reduce small mistakes."
+                }
+            ]
+        },
+        "high": {
+            "correct": [
+                {
+                    "title": "Excellent!",
+                    "message": "You solved this question wonderfully too."
+                },
+                {
+                    "title": "Going super!",
+                    "message": "Your performance is really very good."
+                },
+                {
+                    "title": "Bullseye!",
+                    "message": "Correct answers started coming one after another."
+                },
+                {
+                    "title": "Legendary!",
+                    "message": "You really grasped the subject very well."
+                },
+                {
+                    "title": "Bravo!",
+                    "message": "Continuing at this level is a great success."
+                },
+                {
+                    "title": "Tremendous!",
+                    "message": "You are going almost error-free."
+                },
+                {
+                    "title": "Great job!",
+                    "message": "This performance is really impressive."
+                },
+                {
+                    "title": "Top notch!",
+                    "message": "The lesson is practically flowing with you."
+                },
+                {
+                    "title": "Going very well!",
+                    "message": "The number of correct answers is impressive."
+                },
+                {
+                    "title": "Congratulations!",
+                    "message": "Your success in this test is very high."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Mistakes happen.",
+                    "message": "But you are very good, you shouldn't have missed this."
+                },
+                {
+                    "title": "No problem.",
+                    "message": "But more attention is expected at this level."
+                },
+                {
+                    "title": "A small situation.",
+                    "message": "You can do better with this performance."
+                },
+                {
+                    "title": "Normal.",
+                    "message": "But fewer errors are expected at your level."
+                },
+                {
+                    "title": "Everything is fine.",
+                    "message": "But you usually get these types of questions right."
+                },
+                {
+                    "title": "Don't break the rhythm.",
+                    "message": "Let's make up for this mistake while going so well."
+                },
+                {
+                    "title": "Alright.",
+                    "message": "But your attention level should be high."
+                },
+                {
+                    "title": "It happens.",
+                    "message": "Still, I expected a clearer answer from you."
+                },
+                {
+                    "title": "Small mistake.",
+                    "message": "This was a bit unexpected for this level."
+                },
+                {
+                    "title": "You're doing well.",
+                    "message": "But don't let small mistakes break the rhythm."
+                }
+            ]
+        }
+    },
+    "completionFeedback": {
+        "range_0_10": [
+            {
+                "title": "Keep Going!",
+                "message": "This is just the beginning, progress takes time."
+            },
+            {
+                "title": "No Problem.",
+                "message": "Every attempt moves you a bit further."
+            },
+            {
+                "title": "Keep Trying.",
+                "message": "A few repetitions make a big difference."
+            },
+            {
+                "title": "Let's Continue.",
+                "message": "You can get a better result in the next test."
+            },
+            {
+                "title": "First Steps.",
+                "message": "You are just starting, you will show improvement."
+            }
+        ],
+        "range_11_20": [
+            {
+                "title": "A Good Start.",
+                "message": "Every correct answer is an important step."
+            },
+            {
+                "title": "Not Bad.",
+                "message": "You are progressing slowly, let's continue."
+            },
+            {
+                "title": "There is Progress.",
+                "message": "You get a bit stronger with every question."
+            },
+            {
+                "title": "It's Happening!",
+                "message": "Better results will come if you continue."
+            },
+            {
+                "title": "A Little More.",
+                "message": "You have potential, keep building on it."
+            }
+        ],
+        "range_21_30": [
+            {
+                "title": "Not Going Badly.",
+                "message": "Correct answers started to increase."
+            },
+            {
+                "title": "Showing Progress.",
+                "message": "Every test takes you higher."
+            },
+            {
+                "title": "Could Be Better.",
+                "message": "You'll get strong results with a little more attention."
+            },
+            {
+                "title": "Keep Going!",
+                "message": "No giving up at this stage, you are progressing."
+            },
+            {
+                "title": "Nice Steps.",
+                "message": "You'll climb higher with regular practice."
+            }
+        ],
+        "range_31_40": [
+            {
+                "title": "Nice Effort!",
+                "message": "The increase in correct answers is promising."
+            },
+            {
+                "title": "You're Getting Close.",
+                "message": "Focusing a little more is enough."
+            },
+            {
+                "title": "Not Bad at All.",
+                "message": "It's only a matter of time before you pass this level."
+            },
+            {
+                "title": "Going Quite Well.",
+                "message": "I know you can do better."
+            },
+            {
+                "title": "Let's Level Up.",
+                "message": "You'll be much better by building on this."
+            }
+        ],
+        "range_41_50": [
+            {
+                "title": "Progressing Well.",
+                "message": "Very close to passing this level."
+            },
+            {
+                "title": "Pretty Good.",
+                "message": "Strong results come with a little more attention."
+            },
+            {
+                "title": "There is Potential!",
+                "message": "You are very close to better performance."
+            },
+            {
+                "title": "Nice Result.",
+                "message": "Now is the time to improve this."
+            },
+            {
+                "title": "Found the Balance.",
+                "message": "A little more focus will take you to the top level."
+            }
+        ],
+        "range_51_60": [
+            {
+                "title": "Very Good!",
+                "message": "Reaching this level is a nice development."
+            },
+            {
+                "title": "Successful Performance.",
+                "message": "You'll rise even higher if you continue."
+            },
+            {
+                "title": "You Worked Well.",
+                "message": "It will be much better with a little more attention."
+            },
+            {
+                "title": "Going Well.",
+                "message": "You'll reach the top level if you maintain this tempo."
+            },
+            {
+                "title": "Great Steps.",
+                "message": "You are rising steadily."
+            }
+        ],
+        "range_61_70": [
+            {
+                "title": "Strong Performance!",
+                "message": "It's not easy to reach this level."
+            },
+            {
+                "title": "Great Job!",
+                "message": "Small touches are enough for higher."
+            },
+            {
+                "title": "Successful Result.",
+                "message": "You'll be much better at this speed."
+            },
+            {
+                "title": "Quite Good!",
+                "message": "Your performance is seriously strong."
+            },
+            {
+                "title": "Nice Success!",
+                "message": "One more step takes you to the top level."
+            }
+        ],
+        "range_71_80": [
+            {
+                "title": "Great Job!",
+                "message": "You achieved better than expected."
+            },
+            {
+                "title": "Going Perfectly!",
+                "message": "This success deserves appreciation."
+            },
+            {
+                "title": "Impressive Performance.",
+                "message": "You passed an almost perfect test."
+            },
+            {
+                "title": "Very Strong!",
+                "message": "This result really deserves praise."
+            },
+            {
+                "title": "Bravo!",
+                "message": "You signed a great success."
+            }
+        ],
+        "range_81_90": [
+            {
+                "title": "Perfect Performance!",
+                "message": "Reaching this level is really impressive."
+            },
+            {
+                "title": "A Great Result.",
+                "message": "This performance is very high level."
+            },
+            {
+                "title": "Super Success!",
+                "message": "You really did a very good job."
+            },
+            {
+                "title": "Legendary Level.",
+                "message": "This performance is not ordinary."
+            },
+            {
+                "title": "Almost Flawless!",
+                "message": "Simply wonderful."
+            }
+        ],
+        "range_91_100": [
+            {
+                "title": "Top Level Success!",
+                "message": "This result is extraordinary."
+            },
+            {
+                "title": "Flawless Performance!",
+                "message": "You really did a great job."
+            },
+            {
+                "title": "Peak Level!",
+                "message": "This level is a result that not everyone can achieve."
+            },
+            {
+                "title": "Definition of Perfection!",
+                "message": "Almost no mistakes."
+            },
+            {
+                "title": "Wonderful Job!",
+                "message": "You displayed a performance to be proud of."
+            }
+        ]
+    }
 }
-

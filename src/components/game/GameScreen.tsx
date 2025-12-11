@@ -28,6 +28,7 @@ import {
     GAME_COMPLETE_SOUND,
     LEVEL_UP_SOUND
 } from '@/utils/gameSound';
+import { getFeedbackPath, getCompletionFeedbackPath, FeedbackMessage } from '@/constants/feedbackMessages';
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import * as Network from 'expo-network';
@@ -98,8 +99,31 @@ export function GameScreen({
     const animatedXPWidth = useSharedValue(0);
     const [xpBarInitialized, setXpBarInitialized] = useState(false);
 
+    // Feedback Message State
+    const [feedbackMessage, setFeedbackMessage] = useState<FeedbackMessage | null>(null);
+    const [completionMessage, setCompletionMessage] = useState<FeedbackMessage | null>(null);
+
     const currentQuestion = questions[currentQuestionIndex];
     const styles = useMemo(() => getStyles(), [themeVersion]);
+
+    // Calculate completion feedback when game completes
+    useEffect(() => {
+        if (isGameComplete) {
+            const percentage = questions.length > 0 ? (correctAnswersCount / questions.length) * 100 : 0;
+            const feedbackPath = getCompletionFeedbackPath(percentage);
+            const messages = t(feedbackPath, { returnObjects: true }) as FeedbackMessage[];
+
+            if (Array.isArray(messages) && messages.length > 0) {
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                setCompletionMessage(randomMessage);
+            } else {
+                setCompletionMessage({
+                    title: t('gameUI.congratulations', "Tebrikler!"),
+                    message: t('gameUI.goodJob', "İyi iş çıkardın!")
+                });
+            }
+        }
+    }, [isGameComplete, correctAnswersCount, questions.length, t]);
 
     // Cleanup audio when component unmounts
     useEffect(() => {
@@ -172,6 +196,27 @@ export function GameScreen({
 
         setIsCorrect(correct);
         setIsAnswered(true);
+
+        // Calculate success percentage including this question
+        // correctAnswersCount is not updated yet, so we add 1 if current answer is correct
+        const currentCorrectCount = correct ? correctAnswersCount + 1 : correctAnswersCount;
+        const currentQuestionCount = currentQuestionIndex + 1;
+        const percentage = (currentCorrectCount / currentQuestionCount) * 100;
+
+        // Get feedback path and select random message from translations
+        const feedbackPath = getFeedbackPath(percentage, correct);
+        const messages = t(feedbackPath, { returnObjects: true }) as FeedbackMessage[];
+
+        if (Array.isArray(messages) && messages.length > 0) {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            setFeedbackMessage(randomMessage);
+        } else {
+            // Fallback if translation fails or returns string
+            setFeedbackMessage({
+                title: correct ? t('gameUI.congratulations') : t('gameUI.wrongAnswer', "Yanlış Cevap"),
+                message: correct ? t('gameUI.goodJob') : t('gameUI.tryAgain', "Bir sonraki soruya geçelim!")
+            });
+        }
 
         if (correct) {
             hapticSuccess();
@@ -531,9 +576,9 @@ export function GameScreen({
                         </Text>
                     </View>
 
-                    <Text style={styles.completeTitle}>Harika İş!</Text>
+                    <Text style={styles.completeTitle}>{completionMessage?.title || "Harika İş!"}</Text>
                     <Text style={styles.completeText}>
-                        Beklenenden çok daha iyisini yaptın.
+                        {completionMessage?.message || "Beklenenden çok daha iyisini yaptın."}
                     </Text>
 
                     {/* XP Progress Bar */}
@@ -676,8 +721,8 @@ export function GameScreen({
                     <View style={styles.footer}>
                         {isCorrect ? (
                             <>
-                                <Text style={styles.footerTitle}>Tebrikler!</Text>
-                                <Text style={styles.footerMessage}>Bravo, böyle devam et!</Text>
+                                <Text style={styles.footerTitle}>{feedbackMessage?.title || "Tebrikler!"}</Text>
+                                <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bravo, böyle devam et!"}</Text>
                             </>
                         ) : isTimeUp ? (
                             <>
@@ -686,8 +731,8 @@ export function GameScreen({
                             </>
                         ) : (
                             <>
-                                <Text style={styles.footerTitle}>Yanlış Cevap</Text>
-                                <Text style={styles.footerMessage}>Bir sonraki soruya geçelim!</Text>
+                                <Text style={styles.footerTitle}>{feedbackMessage?.title || "Yanlış Cevap"}</Text>
+                                <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bir sonraki soruya geçelim!"}</Text>
                             </>
                         )}
                         <Pressable

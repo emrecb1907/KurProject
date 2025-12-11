@@ -18,29 +18,25 @@
         }
     },
     "vocabulary": {
-        "title": "Kelime Hazinesi",
-        "description": "Yeni kelimeler öğren",
+        "title": "İbadet Bilgisi",
+        "description": "İbadet hakkında bilgini test et",
         "tests": {
-            "1": "Temel Kelimeler",
-            "2": "Günlük Hayat",
-            "3": "İbadet"
+            "1": "Genel İbadet Bilgisi"
         },
         "format": {
-            "title": "Oyun Formatı",
-            "text": "Kartları eşleştirerek kelimeleri öğren"
+            "title": "Test Formatı",
+            "text": "10 rastgele soru ile bilgini ölç"
         }
     },
     "verses": {
-        "title": "Ayet Ezberle",
-        "description": "Kısa sureleri ve ayetleri ezberle",
+        "title": "Ahlak ve Edep Bilgisi",
+        "description": "İslam ahlakı ve edep hakkında bilgini test et",
         "tests": {
-            "1": "Fatiha Suresi",
-            "2": "İhlas Suresi",
-            "3": "Kevser Suresi"
+            "1": "Genel Ahlak ve Edep Bilgisi"
         },
-        "features": {
-            "title": "Özellikler",
-            "text": "Ayetleri dinle ve tekrar et"
+        "format": {
+            "title": "Test Formatı",
+            "text": "10 rastgele soru ile bilgini ölç"
         }
     },
     "quiz": {
@@ -66,14 +62,15 @@
             "1": "Genel Namaz Bilgisi"
         }
     },
-    "speed": {
-        "title": "Hız Testi",
-        "description": "Hızlı düşün, hızlı cevapla",
+    "peygamberlerTarihi": {
+        "title": "Peygamberler Tarihi",
+        "description": "Peygamberler hakkında bilgini test et",
         "tests": {
-            "1": "Başlangıç",
-            "2": "Orta",
-            "3": "İleri"
+            "1": "Genel Peygamberler Tarihi"
+        },
+        "format": {
+            "title": "Test Formatı",
+            "text": "10 rastgele soru ile bilgini ölç"
         }
     }
 }
-

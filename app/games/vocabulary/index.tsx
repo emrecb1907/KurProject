@@ -9,9 +9,7 @@ export default function VocabularyGameScreen() {
   const { t } = useTranslation();
 
   const tests = [
-    { id: '1', title: t('games.vocabulary.tests.1'), words: 20, level: 1, completed: false },
-    { id: '2', title: t('games.vocabulary.tests.2'), words: 20, level: 2, completed: false, locked: true },
-    { id: '3', title: t('games.vocabulary.tests.3'), words: 20, level: 3, completed: false, locked: true },
+    { id: '1', title: t('games.vocabulary.tests.1'), questions: 10, level: 1, completed: false },
   ];
 
   return (
@@ -40,15 +38,11 @@ export default function VocabularyGameScreen() {
               <View style={styles.lessonInfo}>
                 <Text style={styles.lessonTitle}>{test.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {test.words} {t('common.word')} • {t('games.common.level')} {test.level}
+                  {test.questions} {t('common.question')} • {t('games.common.level')} {test.level}
                 </Text>
               </View>
 
-              {test.locked ? (
-                <View style={styles.lockedBadge}>
-                  <Text style={styles.lockedText}>🔒</Text>
-                </View>
-              ) : test.completed ? (
+              {test.completed ? (
                 <View style={styles.completedBadge}>
                   <Text style={styles.completedText}>✓</Text>
                 </View>

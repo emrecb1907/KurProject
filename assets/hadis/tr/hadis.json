@@ -1,403 +1,1827 @@
 [
-  { "id": 1, "hadis": "Müminin en hayırlısı, ahlakı en güzel olanıdır.", "kaynak": "Buhari" },
-  { "id": 2, "hadis": "Kolaylaştırın, zorlaştırmayın.", "kaynak": "Buhari" },
-  { "id": 3, "hadis": "Güzel söz sadakadır.", "kaynak": "Buhari" },
-  { "id": 4, "hadis": "Merhamet etmeyene merhamet olunmaz.", "kaynak": "Buhari" },
-  { "id": 5, "hadis": "Selamı yayınız.", "kaynak": "Müslim" },
-  { "id": 6, "hadis": "Küçüklere merhamet etmeyen bizden değildir.", "kaynak": "Tirmizi" },
-  { "id": 7, "hadis": "Gülümsemek sadakadır.", "kaynak": "Tirmizi" },
-  { "id": 8, "hadis": "En hayırlınız, insanlara faydalı olandır.", "kaynak": "Darekutni" },
-  { "id": 9, "hadis": "Komşuna iyilik et.", "kaynak": "Müslim" },
-  { "id": 10, "hadis": "Temizlik imandandır.", "kaynak": "Müslim" },
-
-  { "id": 11, "hadis": "Mümin doğru sözlü olur.", "kaynak": "Tirmizi" },
-  { "id": 12, "hadis": "Kibirden sakının.", "kaynak": "Müslim" },
-  { "id": 13, "hadis": "Sözünde dur.", "kaynak": "Buhari" },
-  { "id": 14, "hadis": "Allah güzeldir, güzeli sever.", "kaynak": "Müslim" },
-  { "id": 15, "hadis": "Sözün en güzeli selamdır.", "kaynak": "Tirmizi" },
-  { "id": 16, "hadis": "Hediyeleşin, birbirinizi sevin.", "kaynak": "Buhari" },
-  { "id": 17, "hadis": "Küçük iyilik bile faziletlidir.", "kaynak": "İbn Hibban" },
-  { "id": 18, "hadis": "Anne babaya iyilik edin.", "kaynak": "Buhari" },
-  { "id": 19, "hadis": "En hayırlı amel, az da olsa devamlı olandır.", "kaynak": "Buhari" },
-  { "id": 20, "hadis": "Doğruluk huzur verir.", "kaynak": "Müslim" },
-
-  { "id": 21, "hadis": "Yalancı mümin olmaz.", "kaynak": "Muvatta" },
-  { "id": 22, "hadis": "Güçlü olan öfkesini yutandır.", "kaynak": "Buhari" },
-  { "id": 23, "hadis": "Mümin kardeşini üzme.", "kaynak": "Tirmizi" },
-  { "id": 24, "hadis": "Kötülüğü iyilikle sav.", "kaynak": "Tirmizi" },
-  { "id": 25, "hadis": "İnsanlara kolaylık göster.", "kaynak": "Müslim" },
-  { "id": 26, "hadis": "İyilik sadakadır.", "kaynak": "Buhari" },
-  { "id": 27, "hadis": "En hayırlınız, Kur’an’ı öğrenendir.", "kaynak": "Buhari" },
-  { "id": 28, "hadis": "Birbirinizi kıskanmayın.", "kaynak": "Müslim" },
-  { "id": 29, "hadis": "Öfke şeytandandır.", "kaynak": "Tirmizi" },
-  { "id": 30, "hadis": "Akrabana iyilik et.", "kaynak": "Müslim" },
-
-  { "id": 31, "hadis": "Allah, sabredenlerle beraberdir.", "kaynak": "Buhari" },
-  { "id": 32, "hadis": "Mümin kardeşine tebessüm et.", "kaynak": "Tirmizi" },
-  { "id": 33, "hadis": "Küçüğü sev, büyüğe saygı göster.", "kaynak": "Tirmizi" },
-  { "id": 34, "hadis": "Mümin, elinden dilinden emin olandır.", "kaynak": "Buhari" },
-  { "id": 35, "hadis": "İyilikle davran, iyilik bulursun.", "kaynak": "Tirmizi" },
-  { "id": 36, "hadis": "Sözü güzel söyle.", "kaynak": "Tirmizi" },
-  { "id": 37, "hadis": "Kötü zandan sakının.", "kaynak": "Buhari" },
-  { "id": 38, "hadis": "Mümin kardeşine dua et.", "kaynak": "Müslim" },
-  { "id": 39, "hadis": "Adalet dinin temelidir.", "kaynak": "Tirmizi" },
-  { "id": 40, "hadis": "Kötülüğe bulaşma.", "kaynak": "Müslim" },
-
-  { "id": 41, "hadis": "Allah merhamet edenleri sever.", "kaynak": "Tirmizi" },
-  { "id": 42, "hadis": "Mütevazı olun.", "kaynak": "Müslim" },
-  { "id": 43, "hadis": "Küçük iyilik bile boşa gitmez.", "kaynak": "Buhari" },
-  { "id": 44, "hadis": "Tatlı dil kalpleri birleştirir.", "kaynak": "Tirmizi" },
-  { "id": 45, "hadis": "Emanete ihanet etmeyin.", "kaynak": "Buhari" },
-  { "id": 46, "hadis": "Doğruluk güzelliğe götürür.", "kaynak": "Buhari" },
-  { "id": 47, "hadis": "İman, güzel ahlaktır.", "kaynak": "Taberani" },
-  { "id": 48, "hadis": "İyiliği sev, kötülükten uzak dur.", "kaynak": "Tirmizi" },
-  { "id": 49, "hadis": "Kalpler sevgiyle yumuşar.", "kaynak": "Müslim" },
-  { "id": 50, "hadis": "Mümin kardeşine zarar verme.", "kaynak": "Tirmizi" },
-  
-  { "id": 51, "hadis": "Affedin ki affedilesiniz.", "kaynak": "Tirmizi" },
-  { "id": 52, "hadis": "Mümin, kardeşini asla aşağılamaz.", "kaynak": "Müslim" },
-  { "id": 53, "hadis": "Sevdiğini ölçülü sev.", "kaynak": "Tirmizi" },
-  { "id": 54, "hadis": "Sözün güzeli kalpleri birleştirir.", "kaynak": "Darekutni" },
-  { "id": 55, "hadis": "Müslüman, diğer Müslümanların emniyetindedir.", "kaynak": "Tirmizi" },
-  { "id": 56, "hadis": "Şefkat imandandır.", "kaynak": "Taberani" },
-  { "id": 57, "hadis": "Kardeşine yardım eden Allah’a yardım eder.", "kaynak": "Müslim" },
-  { "id": 58, "hadis": "Bir iyiliği küçümseme.", "kaynak": "Müslim" },
-  { "id": 59, "hadis": "Mümin hata yapar ama iyiliği bırakmaz.", "kaynak": "Tirmizi" },
-  { "id": 60, "hadis": "En güzel amel, güzel ahlaktır.", "kaynak": "Buhari" },
-
-  { "id": 61, "hadis": "Allah cömert kullarını sever.", "kaynak": "Tirmizi" },
-  { "id": 62, "hadis": "Yumuşak huylu olmak güzelliktir.", "kaynak": "Müslim" },
-  { "id": 63, "hadis": "Mümin, kardeşini sevdiğini söylesin.", "kaynak": "Tirmizi" },
-  { "id": 64, "hadis": "Hayra vesile olan, hayrı yapan gibidir.", "kaynak": "Tirmizi" },
-  { "id": 65, "hadis": "Mümin, kalbiyle ve diliyle temizdir.", "kaynak": "Taberani" },
-  { "id": 66, "hadis": "Sabır imanın yarısıdır.", "kaynak": "Beyhaki" },
-  { "id": 67, "hadis": "Kardeşini sevindirmek sadakadır.", "kaynak": "Buhari" },
-  { "id": 68, "hadis": "Mümin, mümine ayna gibidir.", "kaynak": "Tirmizi" },
-  { "id": 69, "hadis": "Dürüstlük gönülleri rahatlatır.", "kaynak": "Müslim" },
-  { "id": 70, "hadis": "İnsanlara tebessüm etmek iyiliktir.", "kaynak": "Tirmizi" },
-
-  { "id": 71, "hadis": "Hediye sevgiyi artırır.", "kaynak": "Buhari" },
-  { "id": 72, "hadis": "Mümin kin tutmaz.", "kaynak": "Tirmizi" },
-  { "id": 73, "hadis": "Doğru sözlü olun.", "kaynak": "Buhari" },
-  { "id": 74, "hadis": "Selam vermek kalbi yumuşatır.", "kaynak": "Müslim" },
-  { "id": 75, "hadis": "Müslüman, kalbiyle merhametlidir.", "kaynak": "Taberani" },
-  { "id": 76, "hadis": "En hayırlı dost, iyiliği hatırlatandır.", "kaynak": "Tirmizi" },
-  { "id": 77, "hadis": "İyiliği yaymak berekettir.", "kaynak": "Buhari" },
-  { "id": 78, "hadis": "Bir kötülüğü iyilikle düzelt.", "kaynak": "Tirmizi" },
-  { "id": 79, "hadis": "Kardeşini küçük görme.", "kaynak": "Müslim" },
-  { "id": 80, "hadis": "Merhamet kalpten gelen bir nurdur.", "kaynak": "Taberani" },
-
-  { "id": 81, "hadis": "Mümin alçakgönüllü olur.", "kaynak": "Buhari" },
-  { "id": 82, "hadis": "Güler yüz, güzel ahlaktandır.", "kaynak": "Tirmizi" },
-  { "id": 83, "hadis": "İyilik kapılarını açar.", "kaynak": "Müslim" },
-  { "id": 84, "hadis": "Kindarlık kalbi karartır.", "kaynak": "Tirmizi" },
-  { "id": 85, "hadis": "Mümin güven verir.", "kaynak": "Buhari" },
-  { "id": 86, "hadis": "İyilik yapan iyilik bulur.", "kaynak": "Tirmizi" },
-  { "id": 87, "hadis": "Sevgi imanın güzelliğindendir.", "kaynak": "Müslim" },
-  { "id": 88, "hadis": "Merhamet eden, merhamet bulur.", "kaynak": "Tirmizi" },
-  { "id": 89, "hadis": "Mümin temiz kalplidir.", "kaynak": "Taberani" },
-  { "id": 90, "hadis": "İyilik yapmak cömertliktir.", "kaynak": "Buhari" },
-
-  { "id": 91, "hadis": "Komşuya iyilik imandandır.", "kaynak": "Müslim" },
-  { "id": 92, "hadis": "Yumuşak huyluluk her işi güzelleştirir.", "kaynak": "Tirmizi" },
-  { "id": 93, "hadis": "Mümin sözüne sadıktır.", "kaynak": "Buhari" },
-  { "id": 94, "hadis": "Temiz kalpli olmak fazilettir.", "kaynak": "Müslim" },
-  { "id": 95, "hadis": "Bir tebessüm bile iyiliktir.", "kaynak": "Tirmizi" },
-  { "id": 96, "hadis": "Sevgi Allah’ın bir rahmetidir.", "kaynak": "Taberani" },
-  { "id": 97, "hadis": "Mümin hakkı sever.", "kaynak": "Buhari" },
-  { "id": 98, "hadis": "Müslüman kardeşine dua et.", "kaynak": "Müslim" },
-  { "id": 99, "hadis": "Tatlı söz gönüle huzur verir.", "kaynak": "Darekutni" },
-  { "id": 100, "hadis": "En güzel ahlak, güler yüzdür.", "kaynak": "Tirmizi" },
-  
-  { "id": 101, "hadis": "Sevgi, müminin kalbini güzelleştirir.", "kaynak": "Taberani" },
-  { "id": 102, "hadis": "Müslüman, kardeşini asla kırmaz.", "kaynak": "Tirmizi" },
-  { "id": 103, "hadis": "İyilik kalpleri yumuşatır.", "kaynak": "Müslim" },
-  { "id": 104, "hadis": "Doğru söz güven verir.", "kaynak": "Buhari" },
-  { "id": 105, "hadis": "Güler yüz sadakadır.", "kaynak": "Tirmizi" },
-  { "id": 106, "hadis": "Mümini üzen, kendini üzer.", "kaynak": "Müslim" },
-  { "id": 107, "hadis": "Sabır dinin süsüdür.", "kaynak": "Beyhaki" },
-  { "id": 108, "hadis": "İyilik, Allah’a yaklaştırır.", "kaynak": "Tirmizi" },
-  { "id": 109, "hadis": "Kötülükten uzak durun.", "kaynak": "Müslim" },
-  { "id": 110, "hadis": "Merhamet kalbin nurudur.", "kaynak": "Taberani" },
-
-  { "id": 111, "hadis": "Mümin sevgiyle yaklaşır.", "kaynak": "Tirmizi" },
-  { "id": 112, "hadis": "En güzel söz selamdır.", "kaynak": "Müslim" },
-  { "id": 113, "hadis": "Sevdiğin için iyilik yap.", "kaynak": "Buhari" },
-  { "id": 114, "hadis": "Mümin nezaket sahibidir.", "kaynak": "Taberani" },
-  { "id": 115, "hadis": "Küçükleri koruyun, sevin.", "kaynak": "Tirmizi" },
-  { "id": 116, "hadis": "Doğruluk huzura götürür.", "kaynak": "Müslim" },
-  { "id": 117, "hadis": "Sevgiyle yaklaşın, sevilirsiniz.", "kaynak": "Tirmizi" },
-  { "id": 118, "hadis": "İyilik güzelliğe dönüşür.", "kaynak": "Buhari" },
-  { "id": 119, "hadis": "Merhamet eden, merhamet bulur.", "kaynak": "Tirmizi" },
-  { "id": 120, "hadis": "Mümin kalbi temiz tutar.", "kaynak": "Taberani" },
-
-  { "id": 121, "hadis": "Kötülüğe yer vermeyin.", "kaynak": "Müslim" },
-  { "id": 122, "hadis": "Doğru konuşan güven kazanır.", "kaynak": "Tirmizi" },
-  { "id": 123, "hadis": "Mümin kardeşini yalnız bırakmaz.", "kaynak": "Buhari" },
-  { "id": 124, "hadis": "Tatlı dil sevgiyi artırır.", "kaynak": "Tirmizi" },
-  { "id": 125, "hadis": "İnsanlara iyilikle yaklaşın.", "kaynak": "Müslim" },
-  { "id": 126, "hadis": "Mümin gönlü aydınlık olandır.", "kaynak": "Taberani" },
-  { "id": 127, "hadis": "Sabreden sonunda kazanır.", "kaynak": "Beyhaki" },
-  { "id": 128, "hadis": "Tevazu imanın güzelliğidir.", "kaynak": "Tirmizi" },
-  { "id": 129, "hadis": "Mümin kötülüğü affeder.", "kaynak": "Müslim" },
-  { "id": 130, "hadis": "Sevgiyle yaklaşmak sadakadır.", "kaynak": "Tirmizi" },
-
-  { "id": 131, "hadis": "Kötülüğü affetmek iyiliktir.", "kaynak": "Buhari" },
-  { "id": 132, "hadis": "İyi davranış imandandır.", "kaynak": "Müslim" },
-  { "id": 133, "hadis": "Mümin başkasını incitmez.", "kaynak": "Tirmizi" },
-  { "id": 134, "hadis": "Sevilmek için sevin.", "kaynak": "Taberani" },
-  { "id": 135, "hadis": "Bir iyilik başka iyiliği getirir.", "kaynak": "Müslim" },
-  { "id": 136, "hadis": "Merhamet kalbin süsüdür.", "kaynak": "Tirmizi" },
-  { "id": 137, "hadis": "Güzel davranış gönülleri birleştirir.", "kaynak": "Darekutni" },
-  { "id": 138, "hadis": "Kardeşini sevinçle karşılayın.", "kaynak": "Tirmizi" },
-  { "id": 139, "hadis": "İyilik yapmak ibadettir.", "kaynak": "Buhari" },
-  { "id": 140, "hadis": "Mümin sevgiyle yaklaşır.", "kaynak": "Taberani" },
-
-  { "id": 141, "hadis": "Güler yüzlü olun, sevap kazanırsınız.", "kaynak": "Tirmizi" },
-  { "id": 142, "hadis": "Kibar olmak güzelliktendir.", "kaynak": "Müslim" },
-  { "id": 143, "hadis": "İyilik eden, iyilik bulur.", "kaynak": "Buhari" },
-  { "id": 144, "hadis": "Mümin kibarlığıyla tanınır.", "kaynak": "Taberani" },
-  { "id": 145, "hadis": "Kalbiniz temiz olsun.", "kaynak": "Müslim" },
-  { "id": 146, "hadis": "Müslüman kardeşine yardım et.", "kaynak": "Tirmizi" },
-  { "id": 147, "hadis": "Sevgi kalbi canlandırır.", "kaynak": "Beyhaki" },
-  { "id": 148, "hadis": "İyiliği çoğaltın, güzellik artsın.", "kaynak": "Tirmizi" },
-  { "id": 149, "hadis": "Merhamet kalbi güçlendirir.", "kaynak": "Taberani" },
-  { "id": 150, "hadis": "Doğruluk her kapıyı açar.", "kaynak": "Müslim" },
-  
-  { "id": 151, "hadis": "Güzel söz gönülleri yaklaştırır.", "kaynak": "Tirmizi" },
-  { "id": 152, "hadis": "Mümin emanete sadık olur.", "kaynak": "Buhari" },
-  { "id": 153, "hadis": "Kardeşini korumak imandandır.", "kaynak": "Müslim" },
-  { "id": 154, "hadis": "İyilik, Allah’a yaklaştırır.", "kaynak": "Taberani" },
-  { "id": 155, "hadis": "Mümin nazik ve yumuşaktır.", "kaynak": "Tirmizi" },
-  { "id": 156, "hadis": "Küçüğü sevmek merhamettendir.", "kaynak": "Buhari" },
-  { "id": 157, "hadis": "Affetmek kalbi büyütür.", "kaynak": "Tirmizi" },
-  { "id": 158, "hadis": "Sabreden her zaman kazanır.", "kaynak": "Müslim" },
-  { "id": 159, "hadis": "İyilik, güzelliğin anahtarıdır.", "kaynak": "Beyhaki" },
-  { "id": 160, "hadis": "Sevgi imanı güçlendirir.", "kaynak": "Tirmizi" },
-
-  { "id": 161, "hadis": "Güler yüzlü olun, sevap kazanırsınız.", "kaynak": "Buhari" },
-  { "id": 162, "hadis": "Mümin kardeşine yumuşak davranır.", "kaynak": "Tirmizi" },
-  { "id": 163, "hadis": "İyilikle yaklaşmak güzelliktir.", "kaynak": "Müslim" },
-  { "id": 164, "hadis": "Sevgiyle büyüyen kalp güzeldir.", "kaynak": "Taberani" },
-  { "id": 165, "hadis": "Her iyilik sadaka sayılır.", "kaynak": "Buhari" },
-  { "id": 166, "hadis": "Doğru sözlülük huzur getirir.", "kaynak": "Tirmizi" },
-  { "id": 167, "hadis": "Merhametli olan merhamet bulur.", "kaynak": "Müslim" },
-  { "id": 168, "hadis": "İyilik yapanı Allah sever.", "kaynak": "Taberani" },
-  { "id": 169, "hadis": "Mümin kalbi kırmaz.", "kaynak": "Tirmizi" },
-  { "id": 170, "hadis": "Küçük güler yüz bile sadakadır.", "kaynak": "Buhari" },
-
-  { "id": 171, "hadis": "Selam vermek sevgiyi artırır.", "kaynak": "Müslim" },
-  { "id": 172, "hadis": "Mümin kardeşini sevinçle karşılar.", "kaynak": "Tirmizi" },
-  { "id": 173, "hadis": "Nezaket imanın güzelliğindendir.", "kaynak": "Taberani" },
-  { "id": 174, "hadis": "İyilik kalbi parlatır.", "kaynak": "Müslim" },
-  { "id": 175, "hadis": "Kardeşine yardım eden Allah’tan yardım görür.", "kaynak": "Buhari" },
-  { "id": 176, "hadis": "Mümin incitmez, incinmez.", "kaynak": "Tirmizi" },
-  { "id": 177, "hadis": "İyilik yapan pişman olmaz.", "kaynak": "Müslim" },
-  { "id": 178, "hadis": "Tatlı dil güler yüzdür.", "kaynak": "Tirmizi" },
-  { "id": 179, "hadis": "Doğruluk her işe güzellik katar.", "kaynak": "Buhari" },
-  { "id": 180, "hadis": "Sevgi kalbin süsüdür.", "kaynak": "Taberani" },
-
-  { "id": 181, "hadis": "İyilik, imanın güzelliğidir.", "kaynak": "Tirmizi" },
-  { "id": 182, "hadis": "Mümin kardeşini korur ve gözetir.", "kaynak": "Müslim" },
-  { "id": 183, "hadis": "Güzel davranış Allah’a yaklaştırır.", "kaynak": "Buhari" },
-  { "id": 184, "hadis": "Merhametli olun, merhamet bulursunuz.", "kaynak": "Tirmizi" },
-  { "id": 185, "hadis": "İyiliği çoğaltan bereket bulur.", "kaynak": "Müslim" },
-  { "id": 186, "hadis": "Doğru konuşmak fazilettir.", "kaynak": "Buhari" },
-  { "id": 187, "hadis": "Mümin, güzel ahlaklı olur.", "kaynak": "Taberani" },
-  { "id": 188, "hadis": "Kardeşini mutlu etmek sadakadır.", "kaynak": "Tirmizi" },
-  { "id": 189, "hadis": "İyilik kapıları birbirini açar.", "kaynak": "Müslim" },
-  { "id": 190, "hadis": "Sevgi Allah’ın kullarına hediyesidir.", "kaynak": "Beyhaki" },
-
-  { "id": 191, "hadis": "İncitmeyin ki incitilmesiniz.", "kaynak": "Tirmizi" },
-  { "id": 192, "hadis": "Güzel ahlak imanın özüdür.", "kaynak": "Buhari" },
-  { "id": 193, "hadis": "Mümin kardeşine dua eder.", "kaynak": "Müslim" },
-  { "id": 194, "hadis": "Doğruluk rahmet getirir.", "kaynak": "Tirmizi" },
-  { "id": 195, "hadis": "İyilik yap, iyilik bul.", "kaynak": "Buhari" },
-  { "id": 196, "hadis": "Sevgi, kalpleri birleştirir.", "kaynak": "Taberani" },
-  { "id": 197, "hadis": "Merhametli kalp karanlığı dağıtır.", "kaynak": "Beyhaki" },
-  { "id": 198, "hadis": "Mümin yumuşak huylu olur.", "kaynak": "Tirmizi" },
-  { "id": 199, "hadis": "İyilik insanı güzelleştirir.", "kaynak": "Müslim" },
-  { "id": 200, "hadis": "En faziletli amel, güzel ahlaktır.", "kaynak": "Taberani" },
-  
-  { "id": 201, "hadis": "Mümin daraltmaz, genişletir.", "kaynak": "Tirmizi" },
-  { "id": 202, "hadis": "Merhamet kalbin anahtarıdır.", "kaynak": "Beyhaki" },
-  { "id": 203, "hadis": "Güzel ahlak, en büyük nimettir.", "kaynak": "Buhari" },
-  { "id": 204, "hadis": "Tatlı dil, kalpleri ısıtır.", "kaynak": "Tirmizi" },
-  { "id": 205, "hadis": "İyiliği çoğalt, kötülüğü azalt.", "kaynak": "Müslim" },
-  { "id": 206, "hadis": "Sevgi, müminin süsüdür.", "kaynak": "Taberani" },
-  { "id": 207, "hadis": "Doğruluk, rahmeti çeker.", "kaynak": "Tirmizi" },
-  { "id": 208, "hadis": "Mümin, kırıcı değil onarıcıdır.", "kaynak": "Müslim" },
-  { "id": 209, "hadis": "Kardeşine iyilik et, iyilik bul.", "kaynak": "Buhari" },
-  { "id": 210, "hadis": "Sabır, müminin zırhıdır.", "kaynak": "Beyhaki" },
-
-  { "id": 211, "hadis": "İyilik imanı güzelleştirir.", "kaynak": "Tirmizi" },
-  { "id": 212, "hadis": "Müslüman incitmez ve incinmez.", "kaynak": "Müslim" },
-  { "id": 213, "hadis": "Doğru olmak huzur getirir.", "kaynak": "Buhari" },
-  { "id": 214, "hadis": "Merhamet kalbi genişletir.", "kaynak": "Taberani" },
-  { "id": 215, "hadis": "İyilikle yaklaşmak mutluluk verir.", "kaynak": "Tirmizi" },
-  { "id": 216, "hadis": "Kardeşini mutlu etmek iyiliktir.", "kaynak": "Buhari" },
-  { "id": 217, "hadis": "Mümin, kalbiyle temiz olandır.", "kaynak": "Müslim" },
-  { "id": 218, "hadis": "Nezaket imanın güzelliğidir.", "kaynak": "Tirmizi" },
-  { "id": 219, "hadis": "Sevgi, kalbi yumuşatır.", "kaynak": "Taberani" },
-  { "id": 220, "hadis": "İyilik sadaka yerine geçer.", "kaynak": "Buhari" },
-
-  { "id": 221, "hadis": "Güler yüz imandandır.", "kaynak": "Tirmizi" },
-  { "id": 222, "hadis": "Kardeşine dua etmek iyiliktir.", "kaynak": "Müslim" },
-  { "id": 223, "hadis": "Doğruluk, güvenin temelidir.", "kaynak": "Buhari" },
-  { "id": 224, "hadis": "Merhamet eden, huzur bulur.", "kaynak": "Tirmizi" },
-  { "id": 225, "hadis": "İyilik yapmak gönlü aydınlatır.", "kaynak": "Müslim" },
-  { "id": 226, "hadis": "Mümin, sözünde durandır.", "kaynak": "Buhari" },
-  { "id": 227, "hadis": "Nezaket huzurun anahtarıdır.", "kaynak": "Taberani" },
-  { "id": 228, "hadis": "İyilik sevgi doğurur.", "kaynak": "Tirmizi" },
-  { "id": 229, "hadis": "Merhametli davranmak fazilettir.", "kaynak": "Müslim" },
-  { "id": 230, "hadis": "Doğru söz kalpleri birleştirir.", "kaynak": "Tirmizi" },
-
-  { "id": 231, "hadis": "İyilik insana huzur verir.", "kaynak": "Buhari" },
-  { "id": 232, "hadis": "Mümin güler yüzlü olur.", "kaynak": "Taberani" },
-  { "id": 233, "hadis": "Merhamet kalbin ışığıdır.", "kaynak": "Tirmizi" },
-  { "id": 234, "hadis": "Doğruluk güzelliğin başlangıcıdır.", "kaynak": "Müslim" },
-  { "id": 235, "hadis": "İyilik sevabı artırır.", "kaynak": "Buhari" },
-  { "id": 236, "hadis": "Müslüman gönlü yumuşak olandır.", "kaynak": "Tirmizi" },
-  { "id": 237, "hadis": "Sevgi, kalpleri yakınlaştırır.", "kaynak": "Taberani" },
-  { "id": 238, "hadis": "Güzel davranış mükâfat getirir.", "kaynak": "Müslim" },
-  { "id": 239, "hadis": "İyilik yapan huzur bulur.", "kaynak": "Beyhaki" },
-  { "id": 240, "hadis": "Merhamet güzelliğin özüdür.", "kaynak": "Tirmizi" },
-
-  { "id": 241, "hadis": "Doğru söz mutluluk getirir.", "kaynak": "Buhari" },
-  { "id": 242, "hadis": "İyilik, müminin süsüdür.", "kaynak": "Müslim" },
-  { "id": 243, "hadis": "Merhametli davranmak kalbi güçlendirir.", "kaynak": "Taberani" },
-  { "id": 244, "hadis": "İyiliği çoğalt, sevabı artar.", "kaynak": "Tirmizi" },
-  { "id": 245, "hadis": "Doğruluk ışık gibidir.", "kaynak": "Buhari" },
-  { "id": 246, "hadis": "Mümin kalbi kırmaz ve onarır.", "kaynak": "Müslim" },
-  { "id": 247, "hadis": "Sevgiyle yaklaşmak kalbi yumuşatır.", "kaynak": "Tirmizi" },
-  { "id": 248, "hadis": "İyiliğin en güzeli güler yüzdür.", "kaynak": "Taberani" },
-  { "id": 249, "hadis": "Merhamet nur gibidir.", "kaynak": "Beyhaki" },
-  { "id": 250, "hadis": "Doğru olan yükselir.", "kaynak": "Buhari" },
-  
-  { "id": 251, "hadis": "Mümin gönlü incitmez, onarır.", "kaynak": "Tirmizi" },
-  { "id": 252, "hadis": "İyilik kalbi ferahlatır.", "kaynak": "Müslim" },
-  { "id": 253, "hadis": "Sevgiyle yaklaş, sevgi bul.", "kaynak": "Taberani" },
-  { "id": 254, "hadis": "Merhamet, müminin ziynetidir.", "kaynak": "Tirmizi" },
-  { "id": 255, "hadis": "Doğru söz güzellik getirir.", "kaynak": "Buhari" },
-  { "id": 256, "hadis": "İyilik yapan huzur kazanır.", "kaynak": "Müslim" },
-  { "id": 257, "hadis": "Güler yüz sadaka hükmündedir.", "kaynak": "Tirmizi" },
-  { "id": 258, "hadis": "Sevgi, kalpleri bir araya getirir.", "kaynak": "Taberani" },
-  { "id": 259, "hadis": "Mümin kardeşini korur ve gözetir.", "kaynak": "Buhari" },
-  { "id": 260, "hadis": "İyilik bereket getirir.", "kaynak": "Tirmizi" },
-
-  { "id": 261, "hadis": "Merhamet eden, merhamet bulur.", "kaynak": "Müslim" },
-  { "id": 262, "hadis": "Doğruluk kalbe huzur verir.", "kaynak": "Tirmizi" },
-  { "id": 263, "hadis": "İyiliği yaymak güzelliktir.", "kaynak": "Buhari" },
-  { "id": 264, "hadis": "Sevgi kalbi yumuşatır.", "kaynak": "Taberani" },
-  { "id": 265, "hadis": "Mümin kalbi temiz tutar.", "kaynak": "Müslim" },
-  { "id": 266, "hadis": "İyi niyet, iyilik getirir.", "kaynak": "Tirmizi" },
-  { "id": 267, "hadis": "Güzel davranış sevap getirir.", "kaynak": "Buhari" },
-  { "id": 268, "hadis": "Merhamet kalbi aydınlatır.", "kaynak": "Taberani" },
-  { "id": 269, "hadis": "Tatlı söz kalbi ısıtır.", "kaynak": "Tirmizi" },
-  { "id": 270, "hadis": "İyilik, müminin ziynetidir.", "kaynak": "Müslim" },
-
-  { "id": 271, "hadis": "Güler yüz gönle huzur verir.", "kaynak": "Tirmizi" },
-  { "id": 272, "hadis": "Sevgi kalpleri bağlar.", "kaynak": "Taberani" },
-  { "id": 273, "hadis": "Doğru söz insanı yükseltir.", "kaynak": "Buhari" },
-  { "id": 274, "hadis": "İyilik, sevginin kardeşidir.", "kaynak": "Tirmizi" },
-  { "id": 275, "hadis": "Merhametli olan güzeldir.", "kaynak": "Müslim" },
-  { "id": 276, "hadis": "İyilik, müminin işaretidir.", "kaynak": "Taberani" },
-  { "id": 277, "hadis": "Sabır güzelliği getirir.", "kaynak": "Beyhaki" },
-  { "id": 278, "hadis": "Mümin kırıcı değil, yapıcıdır.", "kaynak": "Tirmizi" },
-  { "id": 279, "hadis": "Doğruluk gönlü ferahlatır.", "kaynak": "Müslim" },
-  { "id": 280, "hadis": "Merhamet kalbi olgunlaştırır.", "kaynak": "Taberani" },
-
-  { "id": 281, "hadis": "İyilik çiçek gibidir, açar.", "kaynak": "Tirmizi" },
-  { "id": 282, "hadis": "Güler yüz sevgi doğurur.", "kaynak": "Müslim" },
-  { "id": 283, "hadis": "Doğru olmak güven verir.", "kaynak": "Buhari" },
-  { "id": 284, "hadis": "Sevgi kalbi güzelleştirir.", "kaynak": "Taberani" },
-  { "id": 285, "hadis": "İyilik yapan pişman olmaz.", "kaynak": "Tirmizi" },
-  { "id": 286, "hadis": "Mümin sevgiyle yaklaşır.", "kaynak": "Beyhaki" },
-  { "id": 287, "hadis": "Tatlı söz sevgi kazandırır.", "kaynak": "Tirmizi" },
-  { "id": 288, "hadis": "Merhamet kalbi parlatır.", "kaynak": "Müslim" },
-  { "id": 289, "hadis": "Doğruluk her kapıyı açar.", "kaynak": "Buhari" },
-  { "id": 290, "hadis": "İyilik yolunu genişletir.", "kaynak": "Taberani" },
-
-  { "id": 291, "hadis": "Güler yüz sadaka sayılır.", "kaynak": "Tirmizi" },
-  { "id": 292, "hadis": "Mümin kalbi incitmez.", "kaynak": "Müslim" },
-  { "id": 293, "hadis": "Sevgi Allah’ın rahmetidir.", "kaynak": "Beyhaki" },
-  { "id": 294, "hadis": "Doğru sözlü olun, kazanın.", "kaynak": "Buhari" },
-  { "id": 295, "hadis": "İyilik güzelleştirir, yüceltir.", "kaynak": "Tirmizi" },
-  { "id": 296, "hadis": "Merhamet kalbe huzur getirir.", "kaynak": "Taberani" },
-  { "id": 297, "hadis": "Güzel ahlak imanın parçasıdır.", "kaynak": "Müslim" },
-  { "id": 298, "hadis": "İyiliği artıran güzellik bulur.", "kaynak": "Tirmizi" },
-  { "id": 299, "hadis": "Sevgi kalpleri onarır.", "kaynak": "Buhari" },
-  { "id": 300, "hadis": "Merhamet imanın özüdür.", "kaynak": "Tirmizi" },
-
-  { "id": 301, "hadis": "İyilik kalpte huzur bırakır.", "kaynak": "Müslim" },
-  { "id": 302, "hadis": "Sevgiyle yaklaşmak güzelliktir.", "kaynak": "Tirmizi" },
-  { "id": 303, "hadis": "Merhamet kalbi nurlandırır.", "kaynak": "Taberani" },
-  { "id": 304, "hadis": "Doğru söz kalbi güçlendirir.", "kaynak": "Buhari" },
-  { "id": 305, "hadis": "İyilik, müminin işaretidir.", "kaynak": "Tirmizi" },
-  { "id": 306, "hadis": "Kardeşine güler yüz göstermek sadakadır.", "kaynak": "Buhari" },
-  { "id": 307, "hadis": "Merhamet eden, merhamet görür.", "kaynak": "Müslim" },
-  { "id": 308, "hadis": "Doğruluk kalbin en güzel süsüdür.", "kaynak": "Tirmizi" },
-  { "id": 309, "hadis": "Sevgi kalbi temizler.", "kaynak": "Taberani" },
-  { "id": 310, "hadis": "İyilik güzelliğe vesiledir.", "kaynak": "Beyhaki" },
-
-  { "id": 311, "hadis": "Güler yüz sevgiyi çoğaltır.", "kaynak": "Tirmizi" },
-  { "id": 312, "hadis": "Merhamet kalbi yumuşatır.", "kaynak": "Müslim" },
-  { "id": 313, "hadis": "Doğru davranan huzur bulur.", "kaynak": "Buhari" },
-  { "id": 314, "hadis": "İyilik mümine yakışandır.", "kaynak": "Tirmizi" },
-  { "id": 315, "hadis": "Sevgi kalbin gıdasıdır.", "kaynak": "Taberani" },
-  { "id": 316, "hadis": "Merhamet müminin süsüdür.", "kaynak": "Tirmizi" },
-  { "id": 317, "hadis": "İyilik yapana iyilik gelir.", "kaynak": "Müslim" },
-  { "id": 318, "hadis": "Doğru sözlü olmak fazilettir.", "kaynak": "Buhari" },
-  { "id": 319, "hadis": "Sevgi, Allah’ın bir rahmetidir.", "kaynak": "Taberani" },
-  { "id": 320, "hadis": "İyilik kalpleri birleştirir.", "kaynak": "Tirmizi" },
-
-  { "id": 321, "hadis": "Güler yüz huzur verir.", "kaynak": "Müslim" },
-  { "id": 322, "hadis": "Merhamet kalbin süsüdür.", "kaynak": "Beyhaki" },
-  { "id": 323, "hadis": "Doğruluk gönlü aydınlatır.", "kaynak": "Buhari" },
-  { "id": 324, "hadis": "İyilik güzelliği artırır.", "kaynak": "Tirmizi" },
-  { "id": 325, "hadis": "Sevgi yol açar, kin kapatır.", "kaynak": "Müslim" },
-  { "id": 326, "hadis": "Merhametli kalp ışık saçar.", "kaynak": "Taberani" },
-  { "id": 327, "hadis": "İyilik yolunu genişletir.", "kaynak": "Tirmizi" },
-  { "id": 328, "hadis": "Doğru olan yücelir.", "kaynak": "Buhari" },
-  { "id": 329, "hadis": "Sevgiyle yaklaşmak rahmettir.", "kaynak": "Tirmizi" },
-  { "id": 330, "hadis": "İyilik, müminin en güzel süsüdür.", "kaynak": "Müslim" },
-
-  { "id": 331, "hadis": "Güler yüzlü olmak sadakadır.", "kaynak": "Tirmizi" },
-  { "id": 332, "hadis": "Merhamet kalbi güzelleştirir.", "kaynak": "Taberani" },
-  { "id": 333, "hadis": "Doğru söz gönle huzur verir.", "kaynak": "Buhari" },
-  { "id": 334, "hadis": "İyilik yapan güzellik bulur.", "kaynak": "Müslim" },
-  { "id": 335, "hadis": "Sevgi, kalbe güç verir.", "kaynak": "Tirmizi" },
-  { "id": 336, "hadis": "Merhametli olmak fazilettir.", "kaynak": "Tirmizi" },
-  { "id": 337, "hadis": "İyilik eden, iyilik toplar.", "kaynak": "Beyhaki" },
-  { "id": 338, "hadis": "Doğru davranmak kalbi güzelleştirir.", "kaynak": "Buhari" },
-  { "id": 339, "hadis": "Sevgi kalpte nur oluşturur.", "kaynak": "Taberani" },
-  { "id": 340, "hadis": "İyilik kalbi kuvvetlendirir.", "kaynak": "Müslim" },
-
-  { "id": 341, "hadis": "Güler yüz gönülleri birleştirir.", "kaynak": "Tirmizi" },
-  { "id": 342, "hadis": "Merhamet kalbi temizler.", "kaynak": "Müslim" },
-  { "id": 343, "hadis": "Doğru olmak erdemdir.", "kaynak": "Tirmizi" },
-  { "id": 344, "hadis": "İyilik huzurun kaynağıdır.", "kaynak": "Buhari" },
-  { "id": 345, "hadis": "Sevgi kalbi yumuşatır.", "kaynak": "Taberani" },
-  { "id": 346, "hadis": "Merhamet müminin elbisesidir.", "kaynak": "Tirmizi" },
-  { "id": 347, "hadis": "İyilik güzelliği doğurur.", "kaynak": "Müslim" },
-  { "id": 348, "hadis": "Doğruluk kalbi kuvvetlendirir.", "kaynak": "Buhari" },
-  { "id": 349, "hadis": "Sevgi kalpleri birleştirir.", "kaynak": "Tirmizi" },
-  { "id": 350, "hadis": "İyiliğin en güzeli yumuşaklıktır.", "kaynak": "Taberani" },
-  
-  { "id": 351, "hadis": "Güzel ahlak imanın meyvesidir.", "kaynak": "Tirmizi" },
-  { "id": 352, "hadis": "Merhamet kalbi aydınlatır.", "kaynak": "Müslim" },
-  { "id": 353, "hadis": "Doğru söz kişiyi yüceltir.", "kaynak": "Buhari" },
-  { "id": 354, "hadis": "İyilik sevgi doğurur.", "kaynak": "Tirmizi" },
-  { "id": 355, "hadis": "Sevgi, müminin kalp nurudur.", "kaynak": "Taberani" },
-  { "id": 356, "hadis": "Merhametli olmak güzelliktendir.", "kaynak": "Müslim" },
-  { "id": 357, "hadis": "İyilik kalbi yumuşatır.", "kaynak": "Tirmizi" },
-  { "id": 358, "hadis": "Doğruluk güven getirir.", "kaynak": "Buhari" },
-  { "id": 359, "hadis": "Sevgi kalbi ferahlatır.", "kaynak": "Taberani" },
-  { "id": 360, "hadis": "İyilik müminin en güzel süsüdür.", "kaynak": "Müslim" },
-
-  { "id": 361, "hadis": "Güler yüz güzelliği artırır.", "kaynak": "Tirmizi" },
-  { "id": 362, "hadis": "Merhametli kalp huzur bulur.", "kaynak": "Taberani" },
-  { "id": 363, "hadis": "Doğru olmak iyiliği doğurur.", "kaynak": "Buhari" },
-  { "id": 364, "hadis": "İyilik yapan asla kaybetmez.", "kaynak": "Müslim" },
-  { "id": 365, "hadis": "Sevgi Allah’ın kullarına rahmetidir.", "kaynak": "Tirmizi" }
+  {
+    "id": 1,
+    "hadis": "Müminin en hayırlısı, ahlakı en güzel olanıdır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 2,
+    "hadis": "Kolaylaştırın, zorlaştırmayın; müjdeleyin, nefret ettirmeyin.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 3,
+    "hadis": "Güler yüz sadakadır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 4,
+    "hadis": "Merhamet etmeyene merhamet olunmaz.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 5,
+    "hadis": "Allah güzeldir, güzelliği sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 6,
+    "hadis": "Temizlik imandandır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 7,
+    "hadis": "Selamı yayın.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 8,
+    "hadis": "Küçüklere merhamet etmeyen bizden değildir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 9,
+    "hadis": "Bir mümin kardeşini sevdiğinde ona söyle.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 10,
+    "hadis": "Müminler birbirini sever, birbirine acır ve korur.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 11,
+    "hadis": "Kolaylık dini kolaylıktır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 12,
+    "hadis": "Güzel söz sadakadır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 13,
+    "hadis": "Allah yumuşak davrananı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 14,
+    "hadis": "Mümin, elinden ve dilinden insanların güvende olduğu kimsedir.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 15,
+    "hadis": "İnsanların en hayırlısı, insanlara faydalı olandır.",
+    "kaynak": "Darekutni"
+  },
+  {
+    "id": 16,
+    "hadis": "Kardeşine yardım eden kimseye Allah yardım eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 17,
+    "hadis": "Bir iyilik on katıyla yazılır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 18,
+    "hadis": "Allah sabredenlerle beraberdir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 19,
+    "hadis": "Hediyeleşin, birbirinizi sevin.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 20,
+    "hadis": "Komşusuna iyilik eden imanını güzelleştirmiş olur.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 21,
+    "hadis": "Bir mümini sevindirmek sadakadır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 22,
+    "hadis": "Allah affedicidir, affı sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 23,
+    "hadis": "Bir hurmayla bile olsa sadaka ver.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 24,
+    "hadis": "Kim kolaylık gösterirse Allah ona kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 25,
+    "hadis": "Güzel davranış imandandır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 26,
+    "hadis": "Allah yumuşaklığı sever, sertliği sevmez.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 27,
+    "hadis": "Her iyilik sadakadır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 28,
+    "hadis": "İnsanlara kolaylık gösterin.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 29,
+    "hadis": "Güzel söz gönlü aydınlatır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 30,
+    "hadis": "Bir mümin kardeşini güler yüzle karşılaman sadakadır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 31,
+    "hadis": "Mümin mümine aynadır.",
+    "kaynak": "Ebu Davud"
+  },
+  {
+    "id": 32,
+    "hadis": "Mümin kardeşini ayıplama ki Allah seni korusun.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 33,
+    "hadis": "İnsanlara merhamet edenlere Allah merhamet eder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 34,
+    "hadis": "Küçüklerinize merhamet edin, büyüklerinizi sayın.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 35,
+    "hadis": "Müminin kalbi yumuşaktır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 36,
+    "hadis": "Bir müminin sıkıntısını gidermek büyük bir iyiliktir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 37,
+    "hadis": "Mümin sabırlı ve şefkatlidir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 38,
+    "hadis": "Allah tevbe edenleri sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 39,
+    "hadis": "Kim alçak gönüllü olursa Allah onu yükseltir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 40,
+    "hadis": "Müminlerin sevgisi birbirine bağlıdır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 41,
+    "hadis": "Allah sizin şeklinize değil kalbinize bakar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 42,
+    "hadis": "Yumuşaklık bir şeyde olursa onu güzelleştirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 43,
+    "hadis": "İman, güzel ahlaktır.",
+    "kaynak": "Hakim"
+  },
+  {
+    "id": 44,
+    "hadis": "Kolaylık gösteren kimseye Allah kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 45,
+    "hadis": "Allah, kulları için rahmeti dileyendir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 46,
+    "hadis": "Mümin kardeşine tebessüm etmen sadakadır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 47,
+    "hadis": "Merhamet, imanın bir parçasıdır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 48,
+    "hadis": "Mümin helal lokma ile beslenir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 49,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 50,
+    "hadis": "Mümin, kardeşi için istediğini kendisi için de ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 51,
+    "hadis": "Allah hoşlanmadığı şeyleri gizli tutan kulunu örter.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 52,
+    "hadis": "Kim bir mümini sevindirirse Allah onu sevindirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 53,
+    "hadis": "Müminler bir beden gibidir; biri acı çekerse diğerleri de hisseder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 54,
+    "hadis": "İnsanlara iyilik edin ki siz de iyilik görün.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 55,
+    "hadis": "Güzel ahlak, mizanın en ağır gelenidir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 56,
+    "hadis": "Kolaylık göstereni Allah kolaylaştırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 57,
+    "hadis": "Kardeşine dua etmek sadakadır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 58,
+    "hadis": "Mümin yumuşak huyludur, kırılmaz ve kırmaz.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 59,
+    "hadis": "Allah güzel davranışı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 60,
+    "hadis": "İhlasla yapılan her iş bereketlidir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 61,
+    "hadis": "Bir mümin diğerine zarar vermez.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 62,
+    "hadis": "Müslüman, insanların selamette olduğu kimsedir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 63,
+    "hadis": "Bir kardeşinin ihtiyacını karşılayanın işini Allah görür.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 64,
+    "hadis": "Allah, işini sağlam yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 65,
+    "hadis": "Mümin ne güzel arkadaştır, ne güzel dosttur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 66,
+    "hadis": "Kim güzel bir söz söylerse onun için sadaka yazılır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 67,
+    "hadis": "Mümin hoşgörülüdür; affetmek büyüklüktür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 68,
+    "hadis": "Allah kalbi temiz olan kullarını sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 69,
+    "hadis": "Güzel ahlak sahibi cennete yakındır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 70,
+    "hadis": "İnsanlara kolaylık tanıyan kolaylık bulur.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 71,
+    "hadis": "Allah sevdiği kulunu insanların kalbine sevdirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 72,
+    "hadis": "Bir mümin kardeşini koruyanı Allah korur.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 73,
+    "hadis": "Mümin öfkeden kaçınır, sabrı seçer.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 74,
+    "hadis": "Kim kibirden uzak olursa Allah onu yükseltir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 75,
+    "hadis": "Müminin sözü güzeldir, kalbi yumuşaktır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 76,
+    "hadis": "Bir iyilik yapanın karşılığı iyiliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 77,
+    "hadis": "Kim kardeşine dua ederse melek 'Amin' der.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 78,
+    "hadis": "Allah merhameti yüz parçaya böldü; bir parçasını kullarına verdi.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 79,
+    "hadis": "Yumuşaklık güzelliği artırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 80,
+    "hadis": "Güzel davranış insanı yüceltir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 81,
+    "hadis": "Mümin, kardeşi için iyilik ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 82,
+    "hadis": "Allah temiz olanları sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 83,
+    "hadis": "Hoşgörü bereket getirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 84,
+    "hadis": "Sabreden kazanır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 85,
+    "hadis": "Mümin sevildiği zaman alçak gönüllüdür.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 86,
+    "hadis": "Allah, güzel yüzlü ve güzel sözlü kulu sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 87,
+    "hadis": "Bir mümine tebessüm etmek sadakadır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 88,
+    "hadis": "Allah, kulunun tövbesine sevinir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 89,
+    "hadis": "Kim affederse Allah onu affeder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 90,
+    "hadis": "Mümin güzel huyludur, insanlara umut verir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 91,
+    "hadis": "İman, kolaylaştırmak ve iyilik yapmaktır.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 92,
+    "hadis": "Allah kullarına rahmet etmeyi sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 93,
+    "hadis": "Merhamet kalbi güzelleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 94,
+    "hadis": "Mümin verdiği sözü tutar.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 95,
+    "hadis": "Kim gönül alırsa Allah onun gönlünü alır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 96,
+    "hadis": "Allah iyi niyetle yapılan işleri sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 97,
+    "hadis": "Mümin eliyle ve diliyle kimseyi incitmez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 98,
+    "hadis": "Her güler yüz bir iyiliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 99,
+    "hadis": "Allah, mütevazı kullarına karşı çok lütufkârdır.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 100,
+    "hadis": "Mümin, kendisi için istediğini kardeşi için de ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 101,
+    "hadis": "Allah, kullarının hata etmesini değil affedilmesini ister.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 102,
+    "hadis": "Güzel söz gönlü ferahlatır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 103,
+    "hadis": "Mümin başkalarını incitmez, incitilse de sabreder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 104,
+    "hadis": "Allah, kulunun güzel niyetini sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 105,
+    "hadis": "Mümin huzur verendir; yanında rahat edilir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 106,
+    "hadis": "Kim bir müminin ihtiyacını giderirse Allah onun ihtiyacını giderir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 107,
+    "hadis": "Allah, merhamet eden kullarını sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 108,
+    "hadis": "Mümin kardeşine dua etmek iyiliktir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 109,
+    "hadis": "Kalpler güzel sözle yumuşar.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 110,
+    "hadis": "Kim iyiliği teşvik ederse iyiliğe ortak olur.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 111,
+    "hadis": "Allah, iyiliği çoğaltır ve güzelleştirir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 112,
+    "hadis": "Mümin doğrulukla yaşar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 113,
+    "hadis": "Kardeşine tebessüm etmen iyiliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 114,
+    "hadis": "Sabır, aydınlıktır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 115,
+    "hadis": "Allah, kalbi temiz kullarını sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 116,
+    "hadis": "Mümin kırıcı değildir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 117,
+    "hadis": "Affedin ki affedilesiniz.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 118,
+    "hadis": "Allah, iyilik yapanın işini bereketlendirir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 119,
+    "hadis": "Mümin gönlü yormaz, gönül alır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 120,
+    "hadis": "Kim başkasını sevindirirse Allah onu sevindirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 121,
+    "hadis": "Allah yumuşaklıkla davrananı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 122,
+    "hadis": "Mümin güler yüzlüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 123,
+    "hadis": "Kim insanlara rahmetle yaklaşırsa Allah ona rahmet eder.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 124,
+    "hadis": "Doğruluk huzur getirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 125,
+    "hadis": "Allah iyi kalpli kullarını sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 126,
+    "hadis": "Mümin, kalbi kırık olana destek olur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 127,
+    "hadis": "İyilik güzelliği artırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 128,
+    "hadis": "Allah sabırlı kullarını sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 129,
+    "hadis": "Mümin kardeşinin kusurunu örter.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 130,
+    "hadis": "Merhamet kalplerin süsüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 131,
+    "hadis": "Allah, kulunun küçük iyiliklerini bile boşa çıkarmaz.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 132,
+    "hadis": "Mümin incitmez, incitilse de sabreder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 133,
+    "hadis": "Doğruluk güzelliğe götürür.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 134,
+    "hadis": "Allah, birbirini seven kullarını sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 135,
+    "hadis": "Güzel ahlak, mümini güzelleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 136,
+    "hadis": "Kim affederse Allah onu yükseltir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 137,
+    "hadis": "Mümin iyilikte yarışır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 138,
+    "hadis": "Kötülüğü iyilikle savmak güzelliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 139,
+    "hadis": "Allah, sevgiyi kullarının kalbine koyar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 140,
+    "hadis": "Mümin insanlara umut olur.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 141,
+    "hadis": "En hayırlınız, ahlakı en güzel olanınızdır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 142,
+    "hadis": "Allah alçak gönüllü kullarını sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 143,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 144,
+    "hadis": "Güzel söz, kalpleri yaklaştırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 145,
+    "hadis": "Mümin bağışlayıcıdır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 146,
+    "hadis": "Kim kolaylaştırırsa Allah ona kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 147,
+    "hadis": "İyilik eden iyilik bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 148,
+    "hadis": "Allah güzel davranışı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 149,
+    "hadis": "Mümin kalbiyle, diliyle ve davranışıyla güzeldir.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 150,
+    "hadis": "Allah’ın rahmeti yumuşak olanlara yakındır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 151,
+    "hadis": "Mümin her işinde doğruluğu gözetir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 152,
+    "hadis": "Allah iyiliği sever, kötülüğü sevmez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 153,
+    "hadis": "Kim bir müminin yükünü hafifletirse Allah da onun yükünü hafifletir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 154,
+    "hadis": "Mümin başkasına kolaylık gösterir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 155,
+    "hadis": "Allah mütevazı kullarını yükseltir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 156,
+    "hadis": "İyilik güzel ahlaktır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 157,
+    "hadis": "Mümin kalbiyle ve diliyle güzeldir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 158,
+    "hadis": "Kim gönül yaparsa Allah onun gönlünü yapar.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 159,
+    "hadis": "Sabır imanın yarısıdır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 160,
+    "hadis": "Allah temiz kalpli kullarını sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 161,
+    "hadis": "Merhamet kalbin süsüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 162,
+    "hadis": "Mümin kardeşini sever ve ona zarar vermez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 163,
+    "hadis": "Kim affederse Allah onu affeder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 164,
+    "hadis": "Güzel söz kalpleri birleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 165,
+    "hadis": "Allah kulları için rahmeti dileyendir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 166,
+    "hadis": "Mümin güler yüzlüdür, çevresine huzur verir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 167,
+    "hadis": "Kardeşiniz için kolaylaştırın.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 168,
+    "hadis": "Hoşgörü güzelliği artırır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 169,
+    "hadis": "Allah sabreden kulunu sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 170,
+    "hadis": "Mümin başkasının hatasını örtmekle yücelir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 171,
+    "hadis": "Kim bir iyiliğe vesile olursa sevabı onunladır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 172,
+    "hadis": "Allah gönlü temiz olanı sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 173,
+    "hadis": "Mümin kırıcı değildir, kırılanı onarır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 174,
+    "hadis": "Sevgi Allah’ın kullarına bir lütfudur.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 175,
+    "hadis": "Güzel ahlak sahibinin derecesi yüksektir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 176,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 177,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 178,
+    "hadis": "Mümin kalbiyle ve haliyle huzur verir.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 179,
+    "hadis": "Kim güzel davranırsa karşılığını da güzel alır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 180,
+    "hadis": "Allah kullarını affetmeyi sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 181,
+    "hadis": "Mümin kimseyi kırmaz, kırılanı da onarır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 182,
+    "hadis": "Allah iyi niyeti sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 183,
+    "hadis": "Müminin kalbi yumuşaktır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 184,
+    "hadis": "Kim bir gönül kazanırsa büyük bir iyilik yapmış olur.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 185,
+    "hadis": "Allah merhameti sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 186,
+    "hadis": "Mümin affetmekten yorulmaz.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 187,
+    "hadis": "Güzel davranış huzur getirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 188,
+    "hadis": "Kim iyiliğe niyet ederse sevap kazanır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 189,
+    "hadis": "Allah sevgiyi kullarının kalbine koyar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 190,
+    "hadis": "Mümin kardeşini sever ve onun için dua eder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 191,
+    "hadis": "Kim başkasına kolaylık sağlarsa Allah ona kolaylık sağlar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 192,
+    "hadis": "Merhamet kalplerin nurudur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 193,
+    "hadis": "Allah temiz kalbi sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 194,
+    "hadis": "Güzel ahlak mümini güzelleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 195,
+    "hadis": "Mümin iyi söz söyleyerek iyiliği artırır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 196,
+    "hadis": "Allah, affedici olan kulunu sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 197,
+    "hadis": "Mümin insanlara huzur kaynağıdır.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 198,
+    "hadis": "Kim güzel niyetle iş yaparsa bereket bulur.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 199,
+    "hadis": "Allah sabredenleri destekler.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 200,
+    "hadis": "Mümin kardeşinin iyiliğini ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 201,
+    "hadis": "Mümin selam vermeyi sever ve yayar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 202,
+    "hadis": "Allah güzel niyeti kabul eder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 203,
+    "hadis": "Kim mümin kardeşini sevindirirse sevap kazanır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 204,
+    "hadis": "Güzel ahlak sahibinin derecesi yüksektir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 205,
+    "hadis": "Allah yumuşak davrananı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 206,
+    "hadis": "Mümin insanlara faydalı olandır.",
+    "kaynak": "Darekutni"
+  },
+  {
+    "id": 207,
+    "hadis": "Affetmek güzelliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 208,
+    "hadis": "Allah güzel sözü sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 209,
+    "hadis": "Mümin kardeşinin derdini paylaşır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 210,
+    "hadis": "Güleryüz sadakadır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 211,
+    "hadis": "Kim iyilik yaparsa iyilik bulur.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 212,
+    "hadis": "Allah’ın rahmeti geniştir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 213,
+    "hadis": "Mümin kötü söz söylemez.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 214,
+    "hadis": "Güzel davranış huzur getirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 215,
+    "hadis": "Allah temiz olanı sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 216,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 217,
+    "hadis": "Mümin kardeşine dua eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 218,
+    "hadis": "Sabır güzelliktir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 219,
+    "hadis": "Allah küçük iyilikleri bile kabul eder.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 220,
+    "hadis": "Mümin kardeşine kolaylık sağlar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 221,
+    "hadis": "Güzel ahlak mümini güzelleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 222,
+    "hadis": "Allah sevdiği kulunu insanların kalbine sevdirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 223,
+    "hadis": "İhlasla yapılan iş bereketlidir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 224,
+    "hadis": "Mümin kalbiyle, diliyle ve haliyle güzeldir.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 225,
+    "hadis": "Kim bir gönül kazanırsa büyük bir iyilik yapmış olur.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 226,
+    "hadis": "Allah iyi niyetle yapılan işleri sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 227,
+    "hadis": "Mümin kimseye zarar vermez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 228,
+    "hadis": "Güzel söz gönlü aydınlatır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 229,
+    "hadis": "Allah affedicidir, affı sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 230,
+    "hadis": "Mümin sabırla güzelleşir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 231,
+    "hadis": "Kim kolaylaştırırsa Allah ona kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 232,
+    "hadis": "Merhamet kalbin süsüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 233,
+    "hadis": "Allah temiz kalbi sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 234,
+    "hadis": "Mümin güler yüzlüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 235,
+    "hadis": "İyilik yapan iyilik bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 236,
+    "hadis": "Allah sevgiyi kullarının kalbine koyar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 237,
+    "hadis": "Mümin kardeşinin kusurunu örter.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 238,
+    "hadis": "Hoşgörü bereket getirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 239,
+    "hadis": "Allah sabredenleri sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 240,
+    "hadis": "Mümin kalbi yumuşaktır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 241,
+    "hadis": "Güzel söz sadakadır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 242,
+    "hadis": "Allah merhamet eden kullarını sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 243,
+    "hadis": "Mümin yumuşak huyludur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 244,
+    "hadis": "Kim bir mümini sevindirirse Allah onu sevindirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 245,
+    "hadis": "Güzel ahlak imandandır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 246,
+    "hadis": "Allah mütevazı kullarını sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 247,
+    "hadis": "Mümin doğrulukla yaşar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 248,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 249,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 250,
+    "hadis": "Mümin kardeşi için iyilik ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 251,
+    "hadis": "Mümin güzel huyludur, kırmaz ve kırılmaz.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 252,
+    "hadis": "Allah temizliği sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 253,
+    "hadis": "Kim güzel bir söz söylerse sadaka vermiş olur.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 254,
+    "hadis": "Mümin kardeşine karşı yumuşaktır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 255,
+    "hadis": "Allah iyi kalpleri sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 256,
+    "hadis": "Güzel davranış imanın işaretidir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 257,
+    "hadis": "Mümin kalpleri birleştirir.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 258,
+    "hadis": "Allah, merhamet edenleri sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 259,
+    "hadis": "Kim bir mümini sevindirirse sevap kazanır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 260,
+    "hadis": "Mümin dilinden hayır duyulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 261,
+    "hadis": "Kim affederse Allah onu affeder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 262,
+    "hadis": "Güzel söz gönülleri birleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 263,
+    "hadis": "Allah sabırlı kullarını sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 264,
+    "hadis": "Mümin kardeşine dua eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 265,
+    "hadis": "İyilik güzelliği artırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 266,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 267,
+    "hadis": "Mümin kalbiyle huzur verir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 268,
+    "hadis": "Merhamet kalbin süsüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 269,
+    "hadis": "Kim kolaylaştırırsa Allah ona kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 270,
+    "hadis": "Mümin gönül alır, gönül kırmaz.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 271,
+    "hadis": "Allah mütevazı kullarını sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 272,
+    "hadis": "Mümin doğru sözlüdür.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 273,
+    "hadis": "Kim iyiliğe niyet ederse sevap kazanır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 274,
+    "hadis": "Hoşgörü bereket getirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 275,
+    "hadis": "Mümin kardeşini sever ve ona dua eder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 276,
+    "hadis": "Allah temiz kalbi sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 277,
+    "hadis": "Güzel ahlak imandandır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 278,
+    "hadis": "Mümin kardeşinin kusurunu örter.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 279,
+    "hadis": "İyilik yapan iyilik bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 280,
+    "hadis": "Allah rahmetiyle muamele eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 281,
+    "hadis": "Mümin kırıcı değildir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 282,
+    "hadis": "Sabreden güzelliğe ulaşır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 283,
+    "hadis": "Allah güzel niyeti sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 284,
+    "hadis": "Güzel söz sadakadır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 285,
+    "hadis": "Mümin yumuşaktır, sert değildir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 286,
+    "hadis": "Kim gönül kazanırsa Allah onu sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 287,
+    "hadis": "Allah affı sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 288,
+    "hadis": "Mümin kardeşine zarar vermez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 289,
+    "hadis": "Allah sevgiyi kullarının kalbine yerleştirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 290,
+    "hadis": "Mümin kalbi yumuşaktır ve yumuşaklığı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 291,
+    "hadis": "İyilik kalbi güzelleştirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 292,
+    "hadis": "Allah sabreden kulunu sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 293,
+    "hadis": "Mümin kardeşine iyilik ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 294,
+    "hadis": "Güzel davranış güzellik getirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 295,
+    "hadis": "Allah iyi niyete karşılık verir.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 296,
+    "hadis": "Mümin kimseyi incitmez.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 297,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 298,
+    "hadis": "Allah doğruluğu sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 299,
+    "hadis": "Mümin güzel huyludur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 300,
+    "hadis": "Güzel söz gönülleri yakınlaştırır.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 301,
+    "hadis": "Mümin başkasına huzur verir, huzur bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 302,
+    "hadis": "Allah güzel davranışı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 303,
+    "hadis": "Güzel söz sadakadır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 304,
+    "hadis": "Mümin affedicidir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 305,
+    "hadis": "Allah iyilik yapanı sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 306,
+    "hadis": "Mümin kardeşinin yükünü hafifletir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 307,
+    "hadis": "Allah temiz kalpleri sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 308,
+    "hadis": "İyilik güzelliğe götürür.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 309,
+    "hadis": "Mümin kardeşine dua eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 310,
+    "hadis": "Güler yüz sadakadır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 311,
+    "hadis": "Allah merhamet eden kullarını sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 312,
+    "hadis": "Mümin kalbiyle yumuşaktır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 313,
+    "hadis": "Kim kolaylaştırırsa Allah da ona kolaylık verir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 314,
+    "hadis": "Güzel ahlak sahibinin derecesi yüksektir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 315,
+    "hadis": "Allah affı sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 316,
+    "hadis": "Mümin gönül alır, gönül kırmaz.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 317,
+    "hadis": "Güzel davranış huzur getirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 318,
+    "hadis": "Allah iyi niyeti sever.",
+    "kaynak": "Nesai"
+  },
+  {
+    "id": 319,
+    "hadis": "Mümin kardeşine zarar vermez.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 320,
+    "hadis": "Güzel söz gönülleri birleştirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 321,
+    "hadis": "Allah sabreden kullarını sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 322,
+    "hadis": "Mümin doğru sözlüdür.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 323,
+    "hadis": "Kim bir mümini sevindirirse Allah onu sevindirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 324,
+    "hadis": "Hoşgörü bereket getirir.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 325,
+    "hadis": "Allah sevgiyi kullarının kalbine koyar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 326,
+    "hadis": "Mümin iyi söz söyler.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 327,
+    "hadis": "Merhamet kalbin süsüdür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 328,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 329,
+    "hadis": "Mümin kimseyi incitmez.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 330,
+    "hadis": "Güzel ahlak imanı tamamlar.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 331,
+    "hadis": "Allah temiz olanları sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 332,
+    "hadis": "Mümin kalbiyle ve diliyle güzeldir.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 333,
+    "hadis": "İyilik yapan iyilik bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 334,
+    "hadis": "Allah mütevazı kulunu yükseltir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 335,
+    "hadis": "Güzel söz kalpleri yumuşatır.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 336,
+    "hadis": "Mümin sabırlıdır ve sabrı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 337,
+    "hadis": "Kim iyiliğe niyet ederse sevap kazanır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 338,
+    "hadis": "Allah iyi kalpleri sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 339,
+    "hadis": "Mümin kardeşinin kusurunu örter.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 340,
+    "hadis": "Güzel davranış güzellik getirir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 341,
+    "hadis": "Allah affedeni sever.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 342,
+    "hadis": "Mümin başkasına umut olur.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 343,
+    "hadis": "Kim bir gönül kazanırsa büyük bir iyilik yapmış olur.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 344,
+    "hadis": "Allah rahmetiyle muamele eder.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 345,
+    "hadis": "Güler yüz güzelliktir.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 346,
+    "hadis": "Mümin insanlara faydalı olandır.",
+    "kaynak": "Darekutni"
+  },
+  {
+    "id": 347,
+    "hadis": "Allah doğru olanı sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 348,
+    "hadis": "Merhamet eden merhamet bulur.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 349,
+    "hadis": "Mümin kalbiyle, diliyle ve haliyle güzeldir.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 350,
+    "hadis": "Güzel ahlak sahibinin mükafatı büyüktür.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 351,
+    "hadis": "Müminin kalbi yumuşaktır, incitmez.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 352,
+    "hadis": "Allah merhameti sever.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 353,
+    "hadis": "Güzel söz gönlü aydınlatır.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 354,
+    "hadis": "Mümin kardeşi için iyilik ister.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 355,
+    "hadis": "Allah işini güzel yapanı sever.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 356,
+    "hadis": "Hoşgörü güzelliği artırır.",
+    "kaynak": "Beyhaki"
+  },
+  {
+    "id": 357,
+    "hadis": "Mümin doğru sözlüdür.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 358,
+    "hadis": "Kim affederse Allah onu affeder.",
+    "kaynak": "Tirmizi"
+  },
+  {
+    "id": 359,
+    "hadis": "Güzel davranış huzur getirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 360,
+    "hadis": "Allah temiz kalpleri sever.",
+    "kaynak": "İbn Mace"
+  },
+  {
+    "id": 361,
+    "hadis": "Kalpler Allah’ın elindedir; O dilediği gibi yönlendirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 362,
+    "hadis": "İyilik kalbi güzelleştirir.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 363,
+    "hadis": "Allah sabreden kulunu sever.",
+    "kaynak": "Buhari"
+  },
+  {
+    "id": 364,
+    "hadis": "Mümin her işinde hayır arar.",
+    "kaynak": "Müslim"
+  },
+  {
+    "id": 365,
+    "hadis": "Allah’ın rahmeti, kalbi yumuşak olanlara yakındır.",
+    "kaynak": "Tirmizi"
+  }
 ]

@@ -2,147 +2,75 @@ import { useState, useMemo } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { GameScreen } from '@components/game';
 import { GameQuestion } from '@/types/game.types';
+import { useTranslation } from 'react-i18next';
 
-export default function VocabularyGamePlayScreen() {
+// Type definition for questions from JSON
+interface IbadetQuestion {
+  question: string;
+  A: string;
+  B: string;
+  C: string;
+  D: string;
+  correct: 'A' | 'B' | 'C' | 'D';
+}
+
+// Import questions from JSON
+import ibadetBilgisiQuestionsTrRaw from '../../../assets/questions/tr/ibadetBilgisi.json';
+import ibadetBilgisiQuestionsEnRaw from '../../../assets/questions/en/ibadetBilgisi.json';
+
+const ibadetBilgisiQuestionsTr = ibadetBilgisiQuestionsTrRaw as IbadetQuestion[];
+const ibadetBilgisiQuestionsEn = ibadetBilgisiQuestionsEnRaw as IbadetQuestion[];
+
+// Utility function to shuffle an array
+const shuffleArray = <T,>(array: T[]): T[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
+export default function IbadetBilgisiGamePlayScreen() {
   const { id } = useLocalSearchParams();
+  const { i18n } = useTranslation();
 
-  // Mock questions - 20 total, 10 will be randomly selected
-  const allMockQuestions: GameQuestion[] = [
-    {
-      id: '1',
-      question: 'Kitap',
-      correctAnswer: 'كِتَاب',
-      options: ['كِتَاب', 'قَلَم', 'دَرْس', 'مَدْرَسَة'],
-    },
-    {
-      id: '2',
-      question: 'Kalem',
-      correctAnswer: 'قَلَم',
-      options: ['قَلَم', 'كِتَاب', 'دَفْتَر', 'مِفْتَاح'],
-    },
-    {
-      id: '3',
-      question: 'Ders',
-      correctAnswer: 'دَرْس',
-      options: ['دَرْس', 'مَدْرَسَة', 'مُعَلِّم', 'طَالِب'],
-    },
-    {
-      id: '4',
-      question: 'Okul',
-      correctAnswer: 'مَدْرَسَة',
-      options: ['مَدْرَسَة', 'بَيْت', 'مَسْجِد', 'سُوق'],
-    },
-    {
-      id: '5',
-      question: 'Öğretmen',
-      correctAnswer: 'مُعَلِّم',
-      options: ['مُعَلِّم', 'طَالِب', 'طَبِيب', 'مُهَنْدِس'],
-    },
-    {
-      id: '6',
-      question: 'Öğrenci',
-      correctAnswer: 'طَالِب',
-      options: ['طَالِب', 'مُعَلِّم', 'وَالِد', 'أَخ'],
-    },
-    {
-      id: '7',
-      question: 'Ev',
-      correctAnswer: 'بَيْت',
-      options: ['بَيْت', 'مَدْرَسَة', 'مَسْجِد', 'حَدِيقَة'],
-    },
-    {
-      id: '8',
-      question: 'Cami',
-      correctAnswer: 'مَسْجِد',
-      options: ['مَسْجِد', 'كَنِيسَة', 'بَيْت', 'مَدْرَسَة'],
-    },
-    {
-      id: '9',
-      question: 'Su',
-      correctAnswer: 'مَاء',
-      options: ['مَاء', 'حَلِيب', 'عَصِير', 'شَاي'],
-    },
-    {
-      id: '10',
-      question: 'Ekmek',
-      correctAnswer: 'خُبْز',
-      options: ['خُبْز', 'لَحْم', 'أَرُزّ', 'فَاكِهَة'],
-    },
-    {
-      id: '11',
-      question: 'صَلَاة',
-      correctAnswer: 'Namaz',
-      options: ['Namaz', 'Oruç', 'Zekât', 'Hac'],
-    },
-    {
-      id: '12',
-      question: 'صَوْم',
-      correctAnswer: 'Oruç',
-      options: ['Oruç', 'Namaz', 'Dua', 'Tesbih'],
-    },
-    {
-      id: '13',
-      question: 'زَكَاة',
-      correctAnswer: 'Zekât',
-      options: ['Zekât', 'Sadaka', 'Hac', 'Umre'],
-    },
-    {
-      id: '14',
-      question: 'حَجّ',
-      correctAnswer: 'Hac',
-      options: ['Hac', 'Umre', 'Ziyaret', 'Seyahat'],
-    },
-    {
-      id: '15',
-      question: 'قُرْآن',
-      correctAnswer: 'Kuran',
-      options: ['Kuran', 'Tevrat', 'İncil', 'Zebur'],
-    },
-    {
-      id: '16',
-      question: 'نَبِيّ',
-      correctAnswer: 'Peygamber',
-      options: ['Peygamber', 'Melek', 'İnsan', 'Sahabe'],
-    },
-    {
-      id: '17',
-      question: 'مَلَك',
-      correctAnswer: 'Melek',
-      options: ['Melek', 'Peygamber', 'Cin', 'İnsan'],
-    },
-    {
-      id: '18',
-      question: 'جَنَّة',
-      correctAnswer: 'Cennet',
-      options: ['Cennet', 'Cehennem', 'Dünya', 'Ahiret'],
-    },
-    {
-      id: '19',
-      question: 'نَار',
-      correctAnswer: 'Cehennem',
-      options: ['Cehennem', 'Cennet', 'Ateş', 'Azap'],
-    },
-    {
-      id: '20',
-      question: 'إِيمَان',
-      correctAnswer: 'İman',
-      options: ['İman', 'İslam', 'İhsan', 'İbadet'],
-    },
-  ];
+  // Select questions based on language
+  const questionsSource = useMemo(() => {
+    return i18n.language === 'tr' ? ibadetBilgisiQuestionsTr : ibadetBilgisiQuestionsEn;
+  }, [i18n.language]);
 
-  // Select 10 random questions on component mount
-  const [mockQuestions] = useState(() => {
-    const shuffled = [...allMockQuestions].sort(() => Math.random() - 0.5);
-    return shuffled.slice(0, 10);
+  // Select 10 random questions and shuffle options
+  // We use key based on language to reset state when language changes
+  const [questions] = useState<GameQuestion[]>(() => {
+    // Shuffle all questions and pick 10
+    const shuffledQuestions = shuffleArray(questionsSource).slice(0, 10);
+
+    // Transform to GameQuestion format with shuffled options
+    return shuffledQuestions.map((q, index) => {
+      const options = [q.A, q.B, q.C, q.D];
+      const correctAnswer = q[q.correct as 'A' | 'B' | 'C' | 'D'];
+
+      // Shuffle options
+      const shuffledOptions = shuffleArray(options);
+
+      return {
+        id: String(index + 1),
+        question: q.question,
+        correctAnswer: correctAnswer,
+        options: shuffledOptions,
+      };
+    });
   });
 
   return (
     <GameScreen
+      key={i18n.language} // Force re-render when language changes
       lessonId={id as string}
       gameType="vocabulary"
       source="test"
-      questions={mockQuestions}
-      timerDuration={10}
+      questions={questions}
+      timerDuration={15}
       hasLatinToggle={false}
     />
   );

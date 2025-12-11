@@ -1,0 +1,3770 @@
+[
+  {
+    "question": "Selam vermek İslam'da neden önemlidir?",
+    "A": "Barış ve kardeşlik sağlar",
+    "B": "Ticaret getirir",
+    "C": "Savaş başlatır",
+    "D": "Sadece bayramlarda yapılır",
+    "correct": "A"
+  },
+  {
+    "question": "Birine iyilik yaparken nasıl davranmak gerekir?",
+    "A": "Güzel sözle",
+    "B": "Bağırarak",
+    "C": "Zorlayarak",
+    "D": "Kibirle",
+    "correct": "A"
+  },
+  {
+    "question": "Komşuya yapılması gereken doğru davranış nedir?",
+    "A": "İyi geçinmek",
+    "B": "Kötülük yapmak",
+    "C": "Kapısını çalmak",
+    "D": "Kavgaya girmek",
+    "correct": "A"
+  },
+  {
+    "question": "Verilen söze sadık kalmak hangi ahlak özelliğidir?",
+    "A": "Emanet",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da insanlara nasıl davranılır?",
+    "A": "Güler yüzle",
+    "B": "Kibirle",
+    "C": "Kötü sözle",
+    "D": "Alay ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin hakkını almak ne olarak bilinir?",
+    "A": "Kul hakkı",
+    "B": "İyilik",
+    "C": "Sadaka",
+    "D": "Temizlik",
+    "correct": "A"
+  },
+  {
+    "question": "Kul hakkıyla ilgili doğru davranış nedir?",
+    "A": "Helalleşmek",
+    "B": "Gizlemek",
+    "C": "Saklamak",
+    "D": "Övünmek",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da temizliğin önemi nedir?",
+    "A": "İmanın yarısıdır",
+    "B": "Boş bir iş",
+    "C": "Gereksizdir",
+    "D": "Sadece bayramda olur",
+    "correct": "A"
+  },
+  {
+    "question": "Büyüklerle konuşurken nasıl davranılmalıdır?",
+    "A": "Saygılı",
+    "B": "Kaba",
+    "C": "Alaycı",
+    "D": "Kavgacı",
+    "correct": "A"
+  },
+  {
+    "question": "Akrabalık bağlarını korumaya ne denir?",
+    "A": "Sıla-i rahim",
+    "B": "Kıskançlık",
+    "C": "Yalan",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da doğruluk hangi davranışı temsil eder?",
+    "A": "Yalan söylememek",
+    "B": "Kibir yapmak",
+    "C": "Söz vermemek",
+    "D": "Kimseyi dinlememek",
+    "correct": "A"
+  },
+  {
+    "question": "Kötülüğe karşı hangi davranış tavsiye edilir?",
+    "A": "İyilikle karşılık vermek",
+    "B": "Kavga çıkarmak",
+    "C": "Bağırmak",
+    "D": "Hakaret etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Birine hediye vermek neyi artırır?",
+    "A": "Sevgi",
+    "B": "Kavga",
+    "C": "Kıskançlık",
+    "D": "Korku",
+    "correct": "A"
+  },
+  {
+    "question": "Güzel söz söylemek neyin sadakasıdır?",
+    "A": "Dil sadakası",
+    "B": "El sadakası",
+    "C": "Göz sadakası",
+    "D": "Kulak sadakası",
+    "correct": "A"
+  },
+  {
+    "question": "Verilen emanet nasıl korunmalıdır?",
+    "A": "Hakkıyla",
+    "B": "Kaybolarak",
+    "C": "Satılarak",
+    "D": "Unutularak",
+    "correct": "A"
+  },
+  {
+    "question": "Kibirli davranışın sonucu nedir?",
+    "A": "İnsanları uzaklaştırır",
+    "B": "Dostluk sağlar",
+    "C": "Sevgi getirir",
+    "D": "Mutluluk verir",
+    "correct": "A"
+  },
+  {
+    "question": "Selam almanın hükmü nedir?",
+    "A": "Farz-ı kifaye",
+    "B": "Sünnet değil",
+    "C": "Günah",
+    "D": "Boş",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da yalan söylemek neden kötüdür?",
+    "A": "Güveni yok eder",
+    "B": "Sevgi artırır",
+    "C": "Adalet sağlar",
+    "D": "Dostluk kurar",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin arkasından kötü konuşmaya ne denir?",
+    "A": "Gıybet",
+    "B": "Sabır",
+    "C": "İlim",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Gıybetten kaçınmanın doğru yolu nedir?",
+    "A": "Susmak ve kötü konuşmamak",
+    "B": "Bağırmak",
+    "C": "Kavga etmek",
+    "D": "Alay etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü alışkanlıkları bırakmaya ne denir?",
+    "A": "Tevbe",
+    "B": "Öfke",
+    "C": "Kıskançlık",
+    "D": "Kibir",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da bağışlamak neden tavsiye edilir?",
+    "A": "Kalpleri yumuşatır",
+    "B": "Düşmanlık artırır",
+    "C": "Kavga çıkarır",
+    "D": "Zarar verir",
+    "correct": "A"
+  },
+  {
+    "question": "Anne ve babaya nasıl davranılmalıdır?",
+    "A": "Saygı ve sevgiyle",
+    "B": "Bağırarak",
+    "C": "Küçümseyerek",
+    "D": "Görmezden gelerek",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara yardım etmek neyi artırır?",
+    "A": "Merhamet",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Kibar davranmak hangi ahlaki özelliktir?",
+    "A": "Nezaket",
+    "B": "Kıskançlık",
+    "C": "Alay",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken hangi niyet doğru olur?",
+    "A": "Allah rızası",
+    "B": "Gösteriş",
+    "C": "Övünmek",
+    "D": "Korkutmak",
+    "correct": "A"
+  },
+  {
+    "question": "Misafire nasıl davranılır?",
+    "A": "İkramla",
+    "B": "Kötü sözle",
+    "C": "Azarlayarak",
+    "D": "Hakaretle",
+    "correct": "A"
+  },
+  {
+    "question": "İslami ahlakta sabır neyi güçlendirir?",
+    "A": "İmanı",
+    "B": "Kavgayı",
+    "C": "Kibri",
+    "D": "Hileyi",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış yaptığında ne yapmak gerekir?",
+    "A": "Özür dilemek",
+    "B": "Saklamak",
+    "C": "İnkar etmek",
+    "D": "Kavga etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Söz verirken nasıl davranılmalıdır?",
+    "A": "Dürüst olmak",
+    "B": "Yalan söylemek",
+    "C": "Abartmak",
+    "D": "Kandırmak",
+    "correct": "A"
+  },
+  {
+    "question": "Bir şeye sinirlenince ne yapmak doğru olur?",
+    "A": "Sakinleşmek",
+    "B": "Bağırmak",
+    "C": "Hakaret etmek",
+    "D": "Kavga etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Kardeşlik duygusu hangi davranışla güçlenir?",
+    "A": "Paylaşmak",
+    "B": "Kıskanmak",
+    "C": "Kötülük yapmak",
+    "D": "Hakaret etmek",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara karşı saygı nasıl gösterilir?",
+    "A": "Dinlemek",
+    "B": "Bağırmak",
+    "C": "Alay etmek",
+    "D": "Kötü konuşmak",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu alanlarda nasıl davranılır?",
+    "A": "Gürültü yapmamak",
+    "B": "Kavga etmek",
+    "C": "Bağırmak",
+    "D": "Hakaret etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Yardıma ihtiyacı olana ne yapılır?",
+    "A": "Yardım edilir",
+    "B": "Görmezden gelinir",
+    "C": "Dalga geçilir",
+    "D": "Zarar verilir",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da kibirli davranışa ne denir?",
+    "A": "Gurur",
+    "B": "Sabır",
+    "C": "Adalet",
+    "D": "Nezaket",
+    "correct": "A"
+  },
+  {
+    "question": "Hediyeleşmek hangi duyguyu artırır?",
+    "A": "Sevgi",
+    "B": "Kavga",
+    "C": "Öfke",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Yoldan geçenlere nasıl davranılır?",
+    "A": "Yolu açarak",
+    "B": "Engelleyerek",
+    "C": "Dalga geçerek",
+    "D": "Bağırarak",
+    "correct": "A"
+  },
+  {
+    "question": "Yalan söylemenin sonucu nedir?",
+    "A": "Güven kaybı",
+    "B": "Dostluk",
+    "C": "Sevgi",
+    "D": "Övgü",
+    "correct": "A"
+  },
+  {
+    "question": "Bir şey ödünç alınca ne yapılır?",
+    "A": "Zamanında geri verilir",
+    "B": "Kaybedilir",
+    "C": "Unutulur",
+    "D": "Satılır",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken ne yapılmaz?",
+    "A": "Söz kesmek",
+    "B": "Dinlemek",
+    "C": "Saygı göstermek",
+    "D": "Göz teması kurmak",
+    "correct": "A"
+  },
+  {
+    "question": "Kardeşlik ve dostluk ne ile güçlenir?",
+    "A": "Empati",
+    "B": "Hakaret",
+    "C": "Alay",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Kalp kırmamak için nasıl konuşulmalıdır?",
+    "A": "Kibar",
+    "B": "Kaba",
+    "C": "Bağırarak",
+    "D": "Alay ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sorun çıktığında ne yapmak doğru olur?",
+    "A": "Konuşarak çözmek",
+    "B": "Bağırmak",
+    "C": "Hakaret etmek",
+    "D": "Kaçmak",
+    "correct": "A"
+  },
+  {
+    "question": "Yemeğe nasıl başlanır?",
+    "A": "Besmele ile",
+    "B": "Bağırarak",
+    "C": "Kızarak",
+    "D": "Sessizce gitmek",
+    "correct": "A"
+  },
+  {
+    "question": "Birine teşekkür etmek hangi güzel davranıştır?",
+    "A": "Şükran",
+    "B": "Öfke",
+    "C": "Kibir",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da güzel ahlakın temeli nedir?",
+    "A": "İman",
+    "B": "Kibir",
+    "C": "Gurur",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken doğru davranış nedir?",
+    "A": "Sözünü kesmemek",
+    "B": "Alay etmek",
+    "C": "Yüksek sesle gülmek",
+    "D": "Göz devirmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptığında özür dilemek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Kibir",
+    "C": "İnat",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da komşuya yardım etmek hangi değerdir?",
+    "A": "Merhamet",
+    "B": "Gurur",
+    "C": "Kıskançlık",
+    "D": "Hile",
+    "correct": "A"
+  },
+  {
+    "question": "Misafir geldiğinde yapılan ilk güzel davranış nedir?",
+    "A": "Selam vermek",
+    "B": "Kötü bakmak",
+    "C": "Azarlamak",
+    "D": "Kapıyı kapatmak",
+    "correct": "A"
+  },
+  {
+    "question": "Haksızlık karşısında sessiz kalmamak hangi değerdir?",
+    "A": "Adalet",
+    "B": "Kibir",
+    "C": "Hile",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşlar arasında tartışma olduğunda ne yapılmalı?",
+    "A": "Barıştırmaya çalışmak",
+    "B": "Kavga ettirmek",
+    "C": "Gıybet etmek",
+    "D": "Dalga geçmek",
+    "correct": "A"
+  },
+  {
+    "question": "Birisi seni kızdırırsa ilk yapılması gereken nedir?",
+    "A": "Sakin olmak",
+    "B": "Bağırmak",
+    "C": "Hakaret etmek",
+    "D": "Küsmek",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarını küçümsemek hangi kötü davranıştır?",
+    "A": "Kibir",
+    "B": "Sabır",
+    "C": "Nezaket",
+    "D": "Empati",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşına hediye vermek neyi artırır?",
+    "A": "Dostluk",
+    "B": "Öfke",
+    "C": "Korku",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da kardeşlik duygusunun adı nedir?",
+    "A": "Uhuvvet",
+    "B": "Gıybet",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken övünmek hangi duygudur?",
+    "A": "Gösteriş",
+    "B": "Sabır",
+    "C": "Merhamet",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Gösteriş için yapılan yardıma ne denir?",
+    "A": "Riya",
+    "B": "Nezaket",
+    "C": "Helalleşme",
+    "D": "Sadakat",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da dil ile yapılan iyiliğe örnek nedir?",
+    "A": "Güzel söz söylemek",
+    "B": "Bağırmak",
+    "C": "Alay etmek",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Gıybet neden kötüdür?",
+    "A": "İnsanları kırar",
+    "B": "Sevgi artırır",
+    "C": "Barış getirir",
+    "D": "Övgü sağlar",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin sırrını saklamak neyi gösterir?",
+    "A": "Güvenilirlik",
+    "B": "Yalan",
+    "C": "Gurur",
+    "D": "Hile",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım istemeyen birine zorla yardım etmek ne olur?",
+    "A": "Yanlış",
+    "B": "Övgü",
+    "C": "Kibir",
+    "D": "Gösteriş",
+    "correct": "A"
+  },
+  {
+    "question": "Birine teşekkür etmek neden güzeldir?",
+    "A": "İyi niyet gösterir",
+    "B": "Kavga çıkarır",
+    "C": "Kibir artırır",
+    "D": "Hakaret eder",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşlık ilişkilerini güçlendiren davranış nedir?",
+    "A": "Paylaşmak",
+    "B": "Kıskanmak",
+    "C": "Hakaret",
+    "D": "Susmak",
+    "correct": "A"
+  },
+  {
+    "question": "Sözünde durmak neyi gösterir?",
+    "A": "Sadakat",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Sabır hangi durumlarda gerekir?",
+    "A": "Zorluklarda",
+    "B": "Sevinçte",
+    "C": "Bayramda",
+    "D": "Gezmede",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü söz söylemek neden yanlıştır?",
+    "A": "Kalp kırar",
+    "B": "Sevgi artırır",
+    "C": "Barış sağlar",
+    "D": "Övgü getirir",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla alay etmek hangi davranıştır?",
+    "A": "Saygısızlık",
+    "B": "Nezaket",
+    "C": "Merhamet",
+    "D": "Sadakat",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının eşyasını izinsiz almak ne olur?",
+    "A": "Haksızlık",
+    "B": "İyilik",
+    "C": "Sadaka",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir toplulukta söz alırken ne yapılır?",
+    "A": "İzin istenir",
+    "B": "Bağırılır",
+    "C": "Hakaret edilir",
+    "D": "Görmezden gelinir",
+    "correct": "A"
+  },
+  {
+    "question": "Güler yüzle davranmak neyi artırır?",
+    "A": "Sevgi",
+    "B": "Kavga",
+    "C": "Öfke",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Emaneti korumak neden önemlidir?",
+    "A": "Güven sağlar",
+    "B": "Kavga çıkarır",
+    "C": "Korku verir",
+    "D": "Kıskançlık yapar",
+    "correct": "A"
+  },
+  {
+    "question": "Bir kişinin arkasından yalan söylemek ne olur?",
+    "A": "İftira",
+    "B": "Tevbe",
+    "C": "Adalet",
+    "D": "Güven",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış gördüğünde nasıl davranmak gerekir?",
+    "A": "Güzelce uyarmak",
+    "B": "Hakaret etmek",
+    "C": "Dalga geçmek",
+    "D": "Küsmek",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da en büyük ahlaki değerlerden biri nedir?",
+    "A": "Adalet",
+    "B": "Hile",
+    "C": "Alay",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşını kıskanmak neye yol açar?",
+    "A": "Düşmanlığa",
+    "B": "Dostluğa",
+    "C": "Merhamete",
+    "D": "Paylaşıma",
+    "correct": "A"
+  },
+  {
+    "question": "Birini utandırmak hangi davranıştır?",
+    "A": "Saygısızlık",
+    "B": "Empati",
+    "C": "Merhamet",
+    "D": "Nezaket",
+    "correct": "A"
+  },
+  {
+    "question": "Öfke kontrolü neden güzeldir?",
+    "A": "Sorunları çözer",
+    "B": "Kavga çıkarır",
+    "C": "Hakaret eder",
+    "D": "Kırıcı olur",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işi ertelemek neye sebep olur?",
+    "A": "Sorunlara",
+    "B": "Başarıya",
+    "C": "Dostluğa",
+    "D": "Paylaşıma",
+    "correct": "A"
+  },
+  {
+    "question": "Sesli konuşmak nerede yanlıştır?",
+    "A": "Kütüphane",
+    "B": "Bahçe",
+    "C": "Park",
+    "D": "Yol",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da konuşma adabı nedir?",
+    "A": "Yumuşak söz söylemek",
+    "B": "Bağırmak",
+    "C": "Alay etmek",
+    "D": "Hakaret etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir eşya ödünç alınca ne yapılır?",
+    "A": "Geri verilir",
+    "B": "Kaybedilir",
+    "C": "Satılır",
+    "D": "Gizlenir",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da kibirli davranış neden kötüdür?",
+    "A": "Kimseyi küçümsememek gerekir",
+    "B": "Kavga çıkarır",
+    "C": "Hakaret eder",
+    "D": "Kimseyi sevmez",
+    "correct": "A"
+  },
+  {
+    "question": "Birini sevindiren davranış nedir?",
+    "A": "Güzel söz",
+    "B": "Hakaret",
+    "C": "Alay",
+    "D": "Yalan",
+    "correct": "A"
+  },
+  {
+    "question": "Sürekli kötü konuşan biri ne kaybeder?",
+    "A": "Saygı",
+    "B": "Ün",
+    "C": "Para",
+    "D": "Kuvvet",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının fikrini dinlemek neyi gösterir?",
+    "A": "Saygı",
+    "B": "Kıskançlık",
+    "C": "Gurur",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu taşımada nasıl davranmak gerekir?",
+    "A": "Yer vermek",
+    "B": "İtmek",
+    "C": "Bağırmak",
+    "D": "Engellemek",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da paylaşmanın önemi nedir?",
+    "A": "Kardeşliği artırır",
+    "B": "Kavga çıkarır",
+    "C": "Kibir yapar",
+    "D": "Hile getirir",
+    "correct": "A"
+  },
+  {
+    "question": "Aile içinde tartışma olduğunda ne yapılır?",
+    "A": "Sakin konuşmak",
+    "B": "Hakaret",
+    "C": "Bağırmak",
+    "D": "Dalga geçmek",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara iyilik yapmanın karşılığı nedir?",
+    "A": "Sevgi ve dua",
+    "B": "Hakaret",
+    "C": "Gıybet",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Yemeğe oturmadan önce ne yapılır?",
+    "A": "Eller yıkanır",
+    "B": "Kavga edilir",
+    "C": "Bağırılır",
+    "D": "Hakaret edilir",
+    "correct": "A"
+  },
+  {
+    "question": "Başkasının fikrine saygı göstermek neyi sağlar?",
+    "A": "Anlayış",
+    "B": "Kavga",
+    "C": "Kıskançlık",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım teklif ederken nasıl konuşulur?",
+    "A": "Nazikçe",
+    "B": "Emrederek",
+    "C": "Bağırarak",
+    "D": "Hakaret ederek",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'da başkalarını affetmek neyi artırır?",
+    "A": "Barış",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Korku",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının üzüldüğünü görünce ne yapmak doğru olur?",
+    "A": "Teselli etmek",
+    "B": "Alay etmek",
+    "C": "Görmezden gelmek",
+    "D": "Kızmak",
+    "correct": "A"
+  },
+  {
+    "question": "Bir eşyayı paylaşmak hangi duyguyu güçlendirir?",
+    "A": "Paylaşım",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Utanç",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşının hatasını yüzüne vurmak ne olabilir?",
+    "A": "Kırıcı",
+    "B": "Nazik",
+    "C": "Güzel",
+    "D": "Adaletli",
+    "correct": "A"
+  },
+  {
+    "question": "Bir şey anlatırken nasıl konuşmak gerekir?",
+    "A": "Açık ve nazik",
+    "B": "Hızlı ve bağırarak",
+    "C": "Kopuk",
+    "D": "Alaycı",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kusurunu gizlemek neyi gösterir?",
+    "A": "Güzel ahlak",
+    "B": "Kötülük",
+    "C": "Alay",
+    "D": "Hile",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşınla sorun yaşadığında ilk adım nedir?",
+    "A": "Konuşmak",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Kırıcı bir söz söylemeden önce ne yapılır?",
+    "A": "Düşünmek",
+    "B": "Bağırmak",
+    "C": "Kızmak",
+    "D": "İnat etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Kalbini kırdığın birinden özür dilemek neyi temsil eder?",
+    "A": "Alçak gönüllülük",
+    "B": "Gurur",
+    "C": "Kıskançlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlar arasında ayrım yapmak hangi davranıştır?",
+    "A": "Adaletsizlik",
+    "B": "Sabır",
+    "C": "Merhamet",
+    "D": "Sevgi",
+    "correct": "A"
+  },
+  {
+    "question": "Kavgadan kaçınmak hangi değerdir?",
+    "A": "Barış",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken göz teması kurmak neyi gösterir?",
+    "A": "İlgi",
+    "B": "İnat",
+    "C": "Gurur",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının eşyasını izinsiz kullanmamak ne demektir?",
+    "A": "Emanete saygı",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birini yanlış yönlendirmek ne olur?",
+    "A": "Kötü davranış",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Düşeni kaldırmak hangi davranıştır?",
+    "A": "Yardımlaşma",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "İyiliği gizlice yapmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Gösteriş",
+    "C": "Kıskançlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşını dinlemek hangi davranışın göstergesidir?",
+    "A": "Saygı",
+    "B": "Kibir",
+    "C": "İnat",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da başkasının hakkını almamak ne demektir?",
+    "A": "Adalet",
+    "B": "Gıybet",
+    "C": "Kıskançlık",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Birini yalanla suçlamak ne olur?",
+    "A": "İftira",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Dua",
+    "correct": "A"
+  },
+  {
+    "question": "Birine iyilik yapmak sonra onunla övünmek ne olur?",
+    "A": "Riya",
+    "B": "Sadakat",
+    "C": "Adalet",
+    "D": "Empati",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının fikrine katılmıyorsan nasıl konuşursun?",
+    "A": "Nazikçe",
+    "B": "Hakaretle",
+    "C": "Alayla",
+    "D": "Kıskançlıkla",
+    "correct": "A"
+  },
+  {
+    "question": "Bir söz verdiğinde tutmak neyi gösterir?",
+    "A": "Güvenilirlik",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Şüphe",
+    "correct": "A"
+  },
+  {
+    "question": "Paylaşmamak hangi davranıştır?",
+    "A": "Bencillik",
+    "B": "Merhamet",
+    "C": "Paylaşmak",
+    "D": "Sabır",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının üzülmesine neden olan davranış nedir?",
+    "A": "Kötü söz",
+    "B": "Güler yüz",
+    "C": "Teşekkür",
+    "D": "Empati",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı korumak ve savunmak neyi gösterir?",
+    "A": "Dostluk",
+    "B": "Kıskançlık",
+    "C": "Gurur",
+    "D": "Gösteriş",
+    "correct": "A"
+  },
+  {
+    "question": "Toplulukta ses tonunu ayarlamak hangi değerdir?",
+    "A": "Adap",
+    "B": "Öfke",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Zor durumdaki birine yardım etmek ne olur?",
+    "A": "Sadaka",
+    "B": "Alay",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara sevgiyle yaklaşmak hangi sonucu getirir?",
+    "A": "Dostluk",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının mutluluğuna sevinmek neyi gösterir?",
+    "A": "İyi niyet",
+    "B": "Kıskançlık",
+    "C": "Gurur",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Kıskançlık hangi sonuca yol açar?",
+    "A": "Düşmanlık",
+    "B": "Barış",
+    "C": "Dostluk",
+    "D": "Mutluluk",
+    "correct": "A"
+  },
+  {
+    "question": "İyiliğe iyilikle karşılık vermek ne olur?",
+    "A": "Güzel ahlak",
+    "B": "İnat",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Kötülüğe bile iyilikle karşılık vermek hangi değerdir?",
+    "A": "Olgunluk",
+    "B": "Kibir",
+    "C": "Gıybet",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birini utandırmadan uyarmak ne olur?",
+    "A": "Nezaket",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Aile büyüklerine hediye vermek neyi artırır?",
+    "A": "Sevgi",
+    "B": "Kıskançlık",
+    "C": "Gurur",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir eşyayı kaybeden birine yardım etmek ne olur?",
+    "A": "Yardımlaşma",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Yavaş konuşmak bazen neden önemlidir?",
+    "A": "Anlaşılır olmak",
+    "B": "Kızmak",
+    "C": "Gizlemek",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın iyi yönlerini söylemek neyi artırır?",
+    "A": "Motivasyon",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının sözünü bitirmesini beklemek neyi gösterir?",
+    "A": "Saygı",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Küçük hata için büyük tepki vermek ne olur?",
+    "A": "Aşırılık",
+    "B": "Nezaket",
+    "C": "Olgunluk",
+    "D": "Paylaşım",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla dalga geçmek hangi davranıştır?",
+    "A": "Saygısızlık",
+    "B": "Empati",
+    "C": "Adalet",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın seni yanlış anladığında ne yapılır?",
+    "A": "Açıklama yapmak",
+    "B": "Hakaret",
+    "C": "Alay",
+    "D": "Bağırmak",
+    "correct": "A"
+  },
+  {
+    "question": "Bir topluluk içinde yüksek sesle konuşmak ne olur?",
+    "A": "Rahatsızlık",
+    "B": "Nezaket",
+    "C": "Adalet",
+    "D": "Sabır",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan teşekkür ettiğinde cevap ne olur?",
+    "A": "Rica ederim",
+    "B": "Boş ver",
+    "C": "Sus",
+    "D": "Git",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlemeden yargılamak ne olur?",
+    "A": "Haksızlık",
+    "B": "Adalet",
+    "C": "Empati",
+    "D": "Nezaket",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken sözünü kesmemek neyi gösterir?",
+    "A": "Saygı",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının sevindiği bir olaya sevinmek ne olur?",
+    "A": "Paylaşmak",
+    "B": "Kıskançlık",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken hangi söz kullanılabilir?",
+    "A": "Sana yardım edebilir miyim?",
+    "B": "Yerini ver!",
+    "C": "Ben bilirim",
+    "D": "Yapamazsın",
+    "correct": "A"
+  },
+  {
+    "question": "Yaşça küçüklerle nasıl konuşmak gerekir?",
+    "A": "Nazikçe",
+    "B": "Bağırarak",
+    "C": "Alay ederek",
+    "D": "Hakaretle",
+    "correct": "A"
+  },
+  {
+    "question": "Zorluklarla karşılaşınca ne yapmak doğru olur?",
+    "A": "Sabretmek",
+    "B": "Kızmak",
+    "C": "Bağırmak",
+    "D": "İsyan etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işte başarıyı kiminle paylaşmak güzeldir?",
+    "A": "Arkadaşlarla",
+    "B": "Kötülük yapanlarla",
+    "C": "Hakaret edenlerle",
+    "D": "Dalga geçenlerle",
+    "correct": "A"
+  },
+  {
+    "question": "Evine gelen misafire ilk yapılan güzel davranış nedir?",
+    "A": "Hoş geldin demek",
+    "B": "Kapıyı kapamak",
+    "C": "Görmezden gelmek",
+    "D": "Azarlamak",
+    "correct": "A"
+  },
+  {
+    "question": "Yaptığın iyiliği anlatmak hangi davranıştır?",
+    "A": "Gösteriş",
+    "B": "Nezaket",
+    "C": "Paylaşmak",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmayı çözmek için ilk adım nedir?",
+    "A": "Sakin konuşmak",
+    "B": "Kavga etmek",
+    "C": "Bağırmak",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin arkasından konuşmamak hangi değere girer?",
+    "A": "Ahlak",
+    "B": "Kibir",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "İyilik yaparken karşılık beklememek ne demektir?",
+    "A": "Samimiyet",
+    "B": "Gurur",
+    "C": "Kızgınlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birine haksızlık yaptığında ne yapılmalıdır?",
+    "A": "Helallik istemek",
+    "B": "Saklamak",
+    "C": "Kızmak",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanları küçümsemek hangi davranıştır?",
+    "A": "Kibir",
+    "B": "Empati",
+    "C": "Merhamet",
+    "D": "Dostluk",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım ederken yüz ifadesi nasıl olmalıdır?",
+    "A": "Güler yüzlü",
+    "B": "Kızgın",
+    "C": "Asık surat",
+    "D": "Alaycı",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken dikkat dağıtıcı şeyler yapmak ne olur?",
+    "A": "Saygısızlık",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Selam vermek neden güzeldir?",
+    "A": "Barış başlatır",
+    "B": "Kavga çıkarır",
+    "C": "Hakaret olur",
+    "D": "Gizlilik sağlar",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu taşımada yaşlı birine yer vermek neyi gösterir?",
+    "A": "Saygı",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken göz teması neden önemlidir?",
+    "A": "İlgi gösterir",
+    "B": "Kızgınlık gösterir",
+    "C": "İnat gösterir",
+    "D": "Gurur gösterir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşına yardım etmek önce ne yapmayı gerektirir?",
+    "A": "İzin istemek",
+    "B": "Zorlamak",
+    "C": "Alay etmek",
+    "D": "İtmek",
+    "correct": "A"
+  },
+  {
+    "question": "Adil davranmak neyi sağlar?",
+    "A": "Güven",
+    "B": "Kavga",
+    "C": "Düşmanlık",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Birine teşekkür etmek hangi davranıştır?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Gıybet",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Hata yaptığında kabul etmek hangi değerdir?",
+    "A": "Olgunluk",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Aile bireylerine nasıl davranılmalıdır?",
+    "A": "Sevgiyle",
+    "B": "Hakaretle",
+    "C": "Bağırarak",
+    "D": "Kıskanarak",
+    "correct": "A"
+  },
+  {
+    "question": "Yanlış bir bilgiyi söylememek hangi değerle ilgilidir?",
+    "A": "Doğruluk",
+    "B": "Gıybet",
+    "C": "İnat",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşın üzgün olduğunda ne yapmak gerekir?",
+    "A": "Yanında olmak",
+    "B": "Küsmek",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanın kalbini kırmamak için nasıl konuşmak gerekir?",
+    "A": "Nazik",
+    "B": "Kaba",
+    "C": "Kızgın",
+    "D": "İnatçı",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlar arasında ayrım yapmamak hangi değerdir?",
+    "A": "Adalet",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birisi seni eleştirdiğinde ne yapmak doğru olur?",
+    "A": "Düşünmek",
+    "B": "Bağırmak",
+    "C": "Hakaret",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının görüşüne saygı göstermek neyi güçlendirir?",
+    "A": "Dostluk",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Tevazu sahibi olmak neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Gurur",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Emanete ihanet etmek ne olur?",
+    "A": "Günah",
+    "B": "Merhamet",
+    "C": "Paylaşım",
+    "D": "Empati",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da kötü söz söylemek neden sakıncalıdır?",
+    "A": "Kalp kırar",
+    "B": "Dostluk kurar",
+    "C": "Barış sağlar",
+    "D": "Sevgi artırır",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşına iyilik yaptığında ne yapmak güzeldir?",
+    "A": "Gizli tutmak",
+    "B": "Övünmek",
+    "C": "Hakaret",
+    "D": "Kıskanmak",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü alışkanlıkları bırakmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "İnat",
+    "C": "Gurur",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının eşyasına zarar vermemek ne olur?",
+    "A": "Sorumluluk",
+    "B": "İnat",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işte başarısız olan arkadaşa nasıl davranılır?",
+    "A": "Destek olmak",
+    "B": "Alay etmek",
+    "C": "Kıskanmak",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken hangi sözlerden kaçınmak gerekir?",
+    "A": "Kırıcı sözlerden",
+    "B": "Teşekkürden",
+    "C": "Güzel sözden",
+    "D": "Dostluktan",
+    "correct": "A"
+  },
+  {
+    "question": "Başkasını dinlerken telefonu kullanmak ne olur?",
+    "A": "Saygısızlık",
+    "B": "Empati",
+    "C": "Nezaket",
+    "D": "Barış",
+    "correct": "A"
+  },
+  {
+    "question": "Haklı olduğunu bilsen bile nasıl davranmak gerekir?",
+    "A": "Nazik",
+    "B": "Hakaret",
+    "C": "Kızgın",
+    "D": "İnatçı",
+    "correct": "A"
+  },
+  {
+    "question": "Birine sürpriz yapmak neyi artırır?",
+    "A": "Sevgi",
+    "B": "Kavga",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir problem konuşarak çözülemezse ne yapılır?",
+    "A": "Sakin kalmak",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "İyilik yapmak için özel gün beklemek gerekir mi?",
+    "A": "Hayır",
+    "B": "Evet",
+    "C": "Bayramda",
+    "D": "Sadece tatilde",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken yüzünü çevirmemek ne olur?",
+    "A": "Saygı",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan çok konuşuyorsa ne yapmak naziktir?",
+    "A": "Sabırla dinlemek",
+    "B": "Hakaret",
+    "C": "Gülmek",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Başkasının başarısını tebrik etmek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Kıskançlık",
+    "C": "İnat",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Yanlış anlaşılmayı düzeltmek için ne yapılır?",
+    "A": "Açık konuşmak",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Zor durumda kalan birini görmezden gelmek ne olur?",
+    "A": "Kötü davranış",
+    "B": "Nezaket",
+    "C": "Barış",
+    "D": "Sabır",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü bir davranışı değiştirmek ilk olarak ne ister?",
+    "A": "Niyet",
+    "B": "Kibir",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Birine doğruyu söylemek bazen ne ister?",
+    "A": "Cesaret",
+    "B": "Kavga",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken dikkatle bakmak neyi gösterir?",
+    "A": "Saygı",
+    "B": "İnat",
+    "C": "Gurur",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın yorulmuşsa ne yapmak doğru olur?",
+    "A": "Yardım etmek",
+    "B": "Görmezden gelmek",
+    "C": "Alay etmek",
+    "D": "Bağırmak",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara karşı sabırlı olmak hangi değerdir?",
+    "A": "Olgunluk",
+    "B": "Hırs",
+    "C": "Alay",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yerde gürültü yapmamak hangi davranıştır?",
+    "A": "Adap",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan seni kırdığında ilk ne yapılabilir?",
+    "A": "Konuşmak",
+    "B": "Hakaret",
+    "C": "Alay",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının duygularını anlamaya çalışmak ne olur?",
+    "A": "Empati",
+    "B": "Kibir",
+    "C": "İnat",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir söz verirken düşünerek vermek neyi gösterir?",
+    "A": "Sorumluluk",
+    "B": "Hırs",
+    "C": "Alay",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşın sana bir sır verdiyse ne yapılır?",
+    "A": "Gizlenir",
+    "B": "Herkese anlatılır",
+    "C": "Dalga geçilir",
+    "D": "Kavga edilir",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin kötü davranışını düzeltmek için ne yapılmalıdır?",
+    "A": "Nazikçe uyarmak",
+    "B": "Hakaret",
+    "C": "Bağırmak",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşı kıskanmak neye yol açar?",
+    "A": "Düşmanlığa",
+    "B": "Dostluğa",
+    "C": "Sevgiye",
+    "D": "Adalete",
+    "correct": "A"
+  },
+  {
+    "question": "Yanlış anlaşılmayı fark edersen ilk ne yapılır?",
+    "A": "Açıklamak",
+    "B": "Kavga etmek",
+    "C": "Gizlemek",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana öneri verirken nasıl konuşulur?",
+    "A": "Nazikçe",
+    "B": "Emrederek",
+    "C": "Alayla",
+    "D": "Bağırarak",
+    "correct": "A"
+  },
+  {
+    "question": "Kalp kırmamak için nasıl davranılır?",
+    "A": "Kibar",
+    "B": "Kaba",
+    "C": "Kızgın",
+    "D": "İnatçı",
+    "correct": "A"
+  },
+  {
+    "question": "Birine dua etmek neyi gösterir?",
+    "A": "İyi niyet",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Paylaşmak hangi sonucu getirir?",
+    "A": "Kardeşlik",
+    "B": "Düşmanlık",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken yüz ifadesi nasıl olmalıdır?",
+    "A": "Güler yüzlü",
+    "B": "Somurtkan",
+    "C": "Kızgın",
+    "D": "Alaycı",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sorun çıktığında ilk yapılması gereken nedir?",
+    "A": "Sakin kalmak",
+    "B": "Hakaret",
+    "C": "Bağırmak",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşını yanlış yaparken görünce ne yapılır?",
+    "A": "Uyarılır",
+    "B": "Alay edilir",
+    "C": "Kıskanılır",
+    "D": "Görmezden gelinir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın emanetini korumak neyi gösterir?",
+    "A": "Güvenilirlik",
+    "B": "Hırs",
+    "C": "Öfke",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Zayıf olan birini korumak ne olur?",
+    "A": "Merhamet",
+    "B": "İnat",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken kızgın sözlerden kaçınmak neyi sağlar?",
+    "A": "Barış",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken telefonla uğraşmamak neyi gösterir?",
+    "A": "Saygı",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı kıskanmamak neyi artırır?",
+    "A": "Dostluk",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "Korku",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı utandırarak düzeltmek ne olur?",
+    "A": "Kırıcı",
+    "B": "Nezaket",
+    "C": "Dostluk",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Kızgın olduğunda ne yapmak en doğru davranıştır?",
+    "A": "Sakinleşmek",
+    "B": "Bağırmak",
+    "C": "Hakaret",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın iyiliğini istemek hangi değerdir?",
+    "A": "İyi niyet",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birine teşekkür ettikten sonra ne denir?",
+    "A": "Rica ederim",
+    "B": "Sus",
+    "C": "Git",
+    "D": "Konuşma",
+    "correct": "A"
+  },
+  {
+    "question": "Bir eşyayı izinsiz almak ne olur?",
+    "A": "Haksızlık",
+    "B": "Paylaşmak",
+    "C": "Nezaket",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işi başkası yapamadığında dalga geçmek ne olur?",
+    "A": "Saygısızlık",
+    "B": "Empati",
+    "C": "Sabır",
+    "D": "Olgunluk",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın duygularını anlamaya çalışmak ne sağlar?",
+    "A": "Yakınlık",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşına yardım ettikten sonra ne yapmak güzeldir?",
+    "A": "Onu tebrik etmek",
+    "B": "Övünmek",
+    "C": "Alay etmek",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken sessiz olmak neyi sağlar?",
+    "A": "Anlayış",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Her zaman doğruyu söylemek hangi değerdir?",
+    "A": "Doğruluk",
+    "B": "Gıybet",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hata yapan birini bağırarak uyarmamak ne olur?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın özür dilemesini kabul etmek neyi gösterir?",
+    "A": "Affedicilik",
+    "B": "Gurur",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sözleşmeye sadık kalmak hangi değerdir?",
+    "A": "Güvenilirlik",
+    "B": "Gıybet",
+    "C": "İftira",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla alay etmek nasıl bir davranıştır?",
+    "A": "Saygısızlık",
+    "B": "Merhamet",
+    "C": "Sabır",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Zorda kalan birine yardım etmek neyi artırır?",
+    "A": "Dostluk",
+    "B": "Düşmanlık",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla tartışırken sesini yükseltmemek ne olur?",
+    "A": "Adap",
+    "B": "Gurur",
+    "C": "Hırs",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Birine doğruyu söylemek hangi sonuç verir?",
+    "A": "Güven",
+    "B": "Öfke",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İnsana güzel söz söylemek neyin sadakasıdır?",
+    "A": "Dil sadakası",
+    "B": "El sadakası",
+    "C": "Göz sadakası",
+    "D": "Kulak sadakası",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işte sabırlı olmak hangi sonucu getirir?",
+    "A": "Başarı",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşa yardım etmeyi ertelemek neye sebep olur?",
+    "A": "Kırgınlık",
+    "B": "Mutluluk",
+    "C": "Dostluk",
+    "D": "Sevgi",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın görüşünü dinlemek hangi değerdir?",
+    "A": "Saygı",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının arkasından iyi konuşmak neyi artırır?",
+    "A": "İtibar",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana yardım edip ona yük olmamak ne olur?",
+    "A": "Nezaket",
+    "B": "Gıybet",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Birine hediye vermek hangi duyguyu artırır?",
+    "A": "Sevgi",
+    "B": "Düşmanlık",
+    "C": "Hırs",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Hoşuna gitmeyen sözü sakin dinlemek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "İnat",
+    "C": "Alay",
+    "D": "Kibir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sohbet sırasında herkese söz hakkı vermek nedir?",
+    "A": "Adalet",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken onu dinlemek neyi gösterir?",
+    "A": "Değer vermek",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "İyiliğe iyilikle karşılık vermek hangi davranıştır?",
+    "A": "Güzel ahlak",
+    "B": "Öfke",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken sözünü kesmek ne olur?",
+    "A": "Saygısızlık",
+    "B": "Nezaket",
+    "C": "Adalet",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının isteklerini önemsemek neyi gösterir?",
+    "A": "Empati",
+    "B": "Kibir",
+    "C": "İnat",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın arkasından iyi konuşmak hangi davranıştır?",
+    "A": "Güzel söz",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış gördüğünde susmadan uyarmak neyi gösterir?",
+    "A": "Dürüstlük",
+    "B": "Dalga",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Sır saklamak hangi değerin gereğidir?",
+    "A": "Güven",
+    "B": "Hırs",
+    "C": "Alay",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara kırıcı söz söylememek hangi davranıştır?",
+    "A": "Nezaket",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana yardım etmeyi teklif etmek ne sağlar?",
+    "A": "Dostluk",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işi yaparken sabırlı olmak neyi artırır?",
+    "A": "Başarı",
+    "B": "Kavga",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan üzgünse ona yaklaşmak ne olur?",
+    "A": "Merhamet",
+    "B": "Kibir",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Güzel söz söylemek neden önemlidir?",
+    "A": "Kalpleri yumuşatır",
+    "B": "Kavga çıkarır",
+    "C": "Kıskançlık yapar",
+    "D": "Hakaret eder",
+    "correct": "A"
+  },
+  {
+    "question": "Bir toplulukta yüksek sesle konuşmamak neyi gösterir?",
+    "A": "Saygı",
+    "B": "Hırs",
+    "C": "Gıybet",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kusurunu gizlemek hangi davranıştır?",
+    "A": "İyi ahlak",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşına hediye vermek hangi sonucu getirir?",
+    "A": "Sevgi",
+    "B": "Düşmanlık",
+    "C": "Öfke",
+    "D": "Korku",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış anlaşılmayı düzeltmek neyi sağlar?",
+    "A": "Barış",
+    "B": "Gıybet",
+    "C": "Kavga",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Hata yapan birine bağırmadan söylemek ne olur?",
+    "A": "Nezaket",
+    "B": "Hırs",
+    "C": "Hakaret",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Affetmek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Hırs",
+    "C": "Kıskançlık",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Birini dinlerken başka işle uğraşmamak ne olur?",
+    "A": "Saygı",
+    "B": "Kibir",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım teklifini reddeden birine nasıl davranılır?",
+    "A": "Saygıyla",
+    "B": "Hakaretle",
+    "C": "Alayla",
+    "D": "İnatla",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işi adaletle paylaşmak neyi güçlendirir?",
+    "A": "Güven",
+    "B": "Düşmanlık",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birini utanacak şekilde eleştirmemek ne olur?",
+    "A": "Terbiye",
+    "B": "Öfke",
+    "C": "Alay",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sevincine ortak olmak hangi davranıştır?",
+    "A": "Paylaşmak",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işi zorla yaptırmamak hangi değeri gösterir?",
+    "A": "Nezaket",
+    "B": "İnat",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Selam vermek neyi artırır?",
+    "A": "Kardeşlik",
+    "B": "Öfke",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana beddua etmemek hangi değerdir?",
+    "A": "Ahlak",
+    "B": "Kızgınlık",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan yardım ettiğinde teşekkür etmek ne olur?",
+    "A": "Nezaket",
+    "B": "İftira",
+    "C": "Sitem",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken telefonu bırakmak neyi gösterir?",
+    "A": "Ciddiyet",
+    "B": "Hırs",
+    "C": "Alay",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir konuyu anlamayan birine bağırmamak ne olur?",
+    "A": "Sabır",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının hatalarına sabırlı olmak hangi değerdir?",
+    "A": "Merhamet",
+    "B": "Hakaret",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken yumuşak söz söylemek ne olur?",
+    "A": "Güzel ahlak",
+    "B": "Hırs",
+    "C": "Alay",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Toplum içinde kavga etmek yerine konuşmak ne sağlar?",
+    "A": "Barış",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarını kıskanmamak hangi sonucu getirir?",
+    "A": "Dostluk",
+    "B": "Düşmanlık",
+    "C": "Alay",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın fikrini dinlemek hangi değerdir?",
+    "A": "Saygı",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken sabırlı olmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Hırs",
+    "C": "Öfke",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım etmek için fırsat kollamak neyi artırır?",
+    "A": "Sevgi",
+    "B": "Hakaret",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Haksızlık görünce susmamak hangi değerdir?",
+    "A": "Adalet",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarına örnek olacak davranış sergilemek ne olur?",
+    "A": "İyi ahlak",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın duygularını anlamaya çalışmak hangi sonucu getirir?",
+    "A": "Yakınlık",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sözünü kesmeden dinlemek ne olur?",
+    "A": "Terbiye",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Güzel bir davranışı gizlice yapmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Övünmek",
+    "C": "Kıskanmak",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının kusurlarını yüzüne vurmak ne olur?",
+    "A": "Kırıcı",
+    "B": "Nezaket",
+    "C": "Adalet",
+    "D": "Sabır",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken alay etmemek neyi sağlar?",
+    "A": "Kırılmamak",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "İhtiyacı olana yardım etmek neyin göstergesidir?",
+    "A": "Merhamet",
+    "B": "Hakaret",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmada sakin kalmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının mutluluğuna sevinmek hangi değeri gösterir?",
+    "A": "Güzel ahlak",
+    "B": "İnat",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Güzel davranışları başkalarına yaymak ne olur?",
+    "A": "Örnek olmak",
+    "B": "Gıybet",
+    "C": "Hırs",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kalbini kırmamak için nasıl konuşulmalıdır?",
+    "A": "Yumuşak sözle",
+    "B": "Bağırarak",
+    "C": "Hakaretle",
+    "D": "Alay ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptıysan özür dilemek neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Gurur",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın hata yaptığında ne yapmak doğru olur?",
+    "A": "Nazikçe uyarmak",
+    "B": "Alay etmek",
+    "C": "Hakaret etmek",
+    "D": "Küsmek",
+    "correct": "A"
+  },
+  {
+    "question": "Birine hediye verirken hangi duygu önemlidir?",
+    "A": "Samimiyet",
+    "B": "Kıskançlık",
+    "C": "Gurur",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşlar arasında sorun çıktığında ne yapılmalıdır?",
+    "A": "Arayı düzeltmek",
+    "B": "Kavga ettirmek",
+    "C": "Gıybet yapmak",
+    "D": "Görmezden gelmek",
+    "correct": "A"
+  },
+  {
+    "question": "İhtiyacı olan birini görünce ilk yapılacak davranış nedir?",
+    "A": "Yardım etmek",
+    "B": "Alay etmek",
+    "C": "Onu suçlamak",
+    "D": "Kaçmak",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana karşı güler yüzlü olmak neden önemlidir?",
+    "A": "Kalbi yumuşatır",
+    "B": "Kavga çıkarır",
+    "C": "Kıskançlık yapar",
+    "D": "Hüzün verir",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının kusurlarını araştırmamak hangi değerdir?",
+    "A": "Ahlak",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Selam alıp vermek toplumda ne sağlar?",
+    "A": "Birlik",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın arkasından kötü konuşmak ne olur?",
+    "A": "Gıybet",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Hediyedir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sorun olduğunda bağırmak yerine konuşmak ne sağlar?",
+    "A": "Çözüm",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu taşımada yaşlı birine yer vermek hangi davranıştır?",
+    "A": "Saygı",
+    "B": "Kızgınlık",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken alay etmemek neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Kızgınlık",
+    "C": "Öfke",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Başkasının mutluluğuna sevinmek hangi değerdir?",
+    "A": "İyi niyet",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Birine öğüt verirken nasıl konuşulmalıdır?",
+    "A": "Yumuşak sözle",
+    "B": "Bağırarak",
+    "C": "Hakaret ederek",
+    "D": "Dalga geçerek",
+    "correct": "A"
+  },
+  {
+    "question": "Yalan söylememek hangi değerdir?",
+    "A": "Doğruluk",
+    "B": "Hırs",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü söz söylememek neyi gösterir?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Öfke",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla tartışırken sakin kalmak ne sağlar?",
+    "A": "Barış",
+    "B": "Gıybet",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Yanlış bir davranışı değiştirmek ilk olarak ne ister?",
+    "A": "Niyet",
+    "B": "Kibir",
+    "C": "Kızgınlık",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken yüzüne bakmak neyi gösterir?",
+    "A": "İlgi",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir iş yaparken başkasını küçümsememek ne olur?",
+    "A": "Ahlak",
+    "B": "Kibir",
+    "C": "Hakaret",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanların ayıplarını gizlemek neyin sonucudur?",
+    "A": "Terbiye",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının eşyasını izinsiz almak ne olur?",
+    "A": "Haksızlık",
+    "B": "Sadaka",
+    "C": "Nezaket",
+    "D": "Cesaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana teşekkür etmek neden önemlidir?",
+    "A": "İyi ilişki kurar",
+    "B": "Düşmanlık kurar",
+    "C": "Hakaret olur",
+    "D": "Kıskançlık yapar",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken diğer kişiyi dinlemek neyi sağlar?",
+    "A": "Anlayış",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Affetmek neden güzeldir?",
+    "A": "Barışı güçlendirir",
+    "B": "Kavga çıkarır",
+    "C": "Hakaret eder",
+    "D": "Düşmanlık artırır",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım teklif etmek hangi davranıştır?",
+    "A": "Nezaket",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Gösteriş için yapılan iyiliğe ne denir?",
+    "A": "Riya",
+    "B": "Sabır",
+    "C": "Empati",
+    "D": "Doğruluk",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla dalga geçmek hangi davranıştır?",
+    "A": "Saygısızlık",
+    "B": "Nezaket",
+    "C": "Dostluk",
+    "D": "Adalet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sevincini paylaşmak ne yapar?",
+    "A": "Sevgi artırır",
+    "B": "Kavga çıkarır",
+    "C": "Hakaret eder",
+    "D": "Öfke artırır",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım istemeyen birine zorla yardım etmek ne olur?",
+    "A": "Yanlış",
+    "B": "Güzel",
+    "C": "Doğru",
+    "D": "Zorunlu",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan seni eleştirdiğinde ne yapmak gerekir?",
+    "A": "Dinlemek",
+    "B": "Hakaret",
+    "C": "Dalga geçmek",
+    "D": "Küsmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir toplulukta herkesin fikrine değer vermek neyi gösterir?",
+    "A": "Adalet",
+    "B": "Kıskançlık",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışma sırasında bağırmamak hangi değerdir?",
+    "A": "Sabır",
+    "B": "Düşmanlık",
+    "C": "Öfke",
+    "D": "Kibir",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin hata yaptığını fark ettiğinde nasıl söylemek doğrudur?",
+    "A": "Nazikçe",
+    "B": "Bağırarak",
+    "C": "Alay ederek",
+    "D": "Hakaret ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir iş yaparken aceleci olmamak neyi artırır?",
+    "A": "Başarı",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara karşı sabırlı davranmak hangi değerdir?",
+    "A": "Merhamet",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana doğruyu söylemek hangi sonucu verir?",
+    "A": "Güven",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ettiğinde karşılık beklememek neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Öfke",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın başarısını tebrik etmek hangi değerdir?",
+    "A": "Olgunluk",
+    "B": "Kıskançlık",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": " Sosyal ortamda yüksek sesle konuşmamak neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanların fikirlerine değer vermek hangi sonucu getirir?",
+    "A": "Dostluk",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının kusurlarını araştırmamak hangi davranıştır?",
+    "A": "Güzel ahlak",
+    "B": "Hırs",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara karşı kibirli davranmamak neden önemlidir?",
+    "A": "Herkes eşittir",
+    "B": "Daha güçlü olmak için",
+    "C": "Daha zengin görünmek için",
+    "D": "Hak kazanmak için",
+    "correct": "A"
+  },
+  {
+    "question": "Tartışmaktan kaçınmak neyi gösterir?",
+    "A": "Barışçılık",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü söze kötü sözle karşılık vermemek hangi değerdir?",
+    "A": "Olgunluk",
+    "B": "Öfke",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptığında özür dilemek hangi değerdir?",
+    "A": "Alçak gönüllülük",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken başkalarının sözünü kesmemek hangi değerdir?",
+    "A": "Saygı",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken onu dinlemek neden önemlidir?",
+    "A": "Değer verdiğini gösterir",
+    "B": "Kavga çıkarır",
+    "C": "Onu küçümser",
+    "D": "Görmezden gelmek olur",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının eşyasına izin almadan dokunmak ne olur?",
+    "A": "Haksızlık",
+    "B": "Sadaka",
+    "C": "Yardım",
+    "D": "Nezaket",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın üzüntüsünü paylaşmak neyi gösterir?",
+    "A": "Merhamet",
+    "B": "Gurur",
+    "C": "Hırs",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Toplum içinde kavga etmek yerine konuşmak ne sağlar?",
+    "A": "Barış",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sevincini paylaşmak hangi sonucu doğurur?",
+    "A": "Sevgi",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım ederken yüz ifadesi nasıl olmalıdır?",
+    "A": "Güler yüzlü",
+    "B": "Kızgın",
+    "C": "Kaba",
+    "D": "Alaycı",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı azarlamak yerine ne yapmak daha doğrudur?",
+    "A": "Nazikçe uyarmak",
+    "B": "Görmezden gelmek",
+    "C": "Hakaret etmek",
+    "D": "Dalga geçmek",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının hata yapma hakkı olduğunu bilmek ne sağlar?",
+    "A": "Sabır",
+    "B": "Kıskançlık",
+    "C": "Kavga",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşını zor durumda görünce ne yapılır?",
+    "A": "Yardım edilir",
+    "B": "Dalga geçilir",
+    "C": "Suçlanır",
+    "D": "Kaçılır",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın arkasından kötü konuşmamak ne olur?",
+    "A": "Güzel ahlak",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü söze kötü sözle karşılık vermemek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Birine iyilik yaptığında ne beklememek gerekir?",
+    "A": "Karşılık",
+    "B": "Teşekkür",
+    "C": "Sevgi",
+    "D": "Selam",
+    "correct": "A"
+  },
+  {
+    "question": "Paylaşmayı bilmek hangi değerdir?",
+    "A": "Nezaket",
+    "B": "Kibir",
+    "C": "Hırs",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptığında ne yapmak gerekir?",
+    "A": "Özür dilemek",
+    "B": "Gizlemek",
+    "C": "Bağırmak",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarını küçümsemeden konuşmak ne sağlar?",
+    "A": "Dostluk",
+    "B": "Kavga",
+    "C": "Gıybet",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşının fikrine katılmasan bile ne yapılmalıdır?",
+    "A": "Saygı duymak",
+    "B": "Hakaret etmek",
+    "C": "Alay etmek",
+    "D": "Kızmak",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kusurunu yüzüne vurmak neden yanlıştır?",
+    "A": "Kalp kırar",
+    "B": "Dostluk kurar",
+    "C": "Barış sağlar",
+    "D": "Sevgi artırır",
+    "correct": "A"
+  },
+  {
+    "question": "İyiliği gizlice yapmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Kibir",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana yardım ederken niyet nasıl olmalıdır?",
+    "A": "Sadece Allah rızası",
+    "B": "Övülmek",
+    "C": "Görünmek",
+    "D": "Şöhret",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşını dinlerken sessiz olmak neyi sağlar?",
+    "A": "Anlayış",
+    "B": "Hakaret",
+    "C": "Gıybet",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken sözünü kesmemek hangi değerdir?",
+    "A": "Saygı",
+    "B": "Hırs",
+    "C": "Gurur",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının duygularını anlamak için ne gerekir?",
+    "A": "Empati",
+    "B": "Öfke",
+    "C": "İftira",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla dalga geçmeden konuşmak neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Kıskançlık hangi kötü sonuca yol açar?",
+    "A": "Düşmanlık",
+    "B": "Barış",
+    "C": "Sevgi",
+    "D": "Paylaşım",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla tartışırken bağırmamak neden önemlidir?",
+    "A": "Sakinlik sağlar",
+    "B": "Kavga çıkarır",
+    "C": "Hırs yapar",
+    "D": "Korku yayar",
+    "correct": "A"
+  },
+  {
+    "question": "Birine güzel söz söylemek hangi davranıştır?",
+    "A": "Dil sadakası",
+    "B": "İftira",
+    "C": "Küçümseme",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanı dinlerken telefonu kullanmak ne olur?",
+    "A": "Saygısızlık",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir eşyayı ödünç aldığında ne yapmak gerekir?",
+    "A": "Zamanında geri vermek",
+    "B": "Kaybetmek",
+    "C": "Saklamak",
+    "D": "Satmak",
+    "correct": "A"
+  },
+  {
+    "question": "Toplum içinde alay etmek ne olur?",
+    "A": "Saygısızlık",
+    "B": "Merhamet",
+    "C": "Doğruluk",
+    "D": "İyilik",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü alışkanlıkları bırakmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Hırs",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşına tavsiye verirken nasıl konuşmak gerekir?",
+    "A": "Yumuşak sözle",
+    "B": "Bağırarak",
+    "C": "Hakaret ederek",
+    "D": "Alay ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Birini sabırla dinlemek hangi değerdir?",
+    "A": "Nezaket",
+    "B": "İftira",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla görüş ayrılığı yaşayınca ne yapılabilir?",
+    "A": "Saygılı davranmak",
+    "B": "Hakaret etmek",
+    "C": "Bağırmak",
+    "D": "Dalga geçmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kalbini kırmamak için önce ne yapılmalıdır?",
+    "A": "Düşünmek",
+    "B": "Bağırmak",
+    "C": "Kızmak",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Haklı olsan bile kibirli davranmamak ne olur?",
+    "A": "Terbiye",
+    "B": "Hırs",
+    "C": "İnat",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptıysan kabul etmek neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının işine gereksiz karışmamak hangi değerdir?",
+    "A": "Ahlak",
+    "B": "İftira",
+    "C": "Hırs",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın sevinince ne yapmak güzeldir?",
+    "A": "Onunla sevinmek",
+    "B": "Kıskanmak",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir kişinin fikrini dinlemek ne sağlar?",
+    "A": "İletişim",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarını sürekli eleştirmek ne olur?",
+    "A": "Kırıcı",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Kimse yokken de güzel davranmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmayı büyütmemek hangi davranıştır?",
+    "A": "Olgunluk",
+    "B": "İnat",
+    "C": "Hırs",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının hatalarıyla dalga geçmemek neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım ederken gizlemek hangi değerdir?",
+    "A": "Samediyeti",
+    "B": "Gıybet",
+    "C": "Hırs",
+    "D": "Riya",
+    "correct": "A"
+  },
+  {
+    "question": "Toplum içinde yüksek sesle gülmek ne olur?",
+    "A": "Adap dışıdır",
+    "B": "Nezaket",
+    "C": "Dostluk",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın özrünü kabul etmek neyi gösterir?",
+    "A": "Affedicilik",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken sözünü kesmemek neden önemlidir?",
+    "A": "Saygı gösterir",
+    "B": "Onu kızdırır",
+    "C": "Alay olur",
+    "D": "Korku verir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın üzüldüğünde ilk yapılacak davranış nedir?",
+    "A": "Teselli etmek",
+    "B": "Görmezden gelmek",
+    "C": "Dalga geçmek",
+    "D": "Kızmak",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının fikrine saygı duymak neyi artırır?",
+    "A": "Dostluk",
+    "B": "Düşmanlık",
+    "C": "Öfke",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın arkasından kötü konuşmak hangi davranıştır?",
+    "A": "Gıybet",
+    "B": "Nezaket",
+    "C": "Sabır",
+    "D": "Barış",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım teklif etmek hangi değerdir?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Kavga",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmada bağırmadan konuşmak neyi sağlar?",
+    "A": "Sakinlik",
+    "B": "Öfke",
+    "C": "Kavga",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana doğruyu söylemek hangi sonucu doğurur?",
+    "A": "Güven",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hata yaptığında özür dilemek neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Gurur",
+    "C": "İnat",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşının başarısını tebrik etmek ne sağlar?",
+    "A": "Sevgi",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu taşıma aracında yaşlılara yer vermek hangi davranıştır?",
+    "A": "Saygı",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Kötülüğe iyilikle karşılık vermek hangi değeri gösterir?",
+    "A": "Olgunluk",
+    "B": "Öfke",
+    "C": "İnat",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın duygusunu anlamaya çalışmak ne sağlar?",
+    "A": "Empati",
+    "B": "İftira",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Kimse yokken de iyi davranmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Gurur",
+    "D": "Gösteriş",
+    "correct": "A"
+  },
+  {
+    "question": "Birini üzmeden uyarmak hangi davranıştır?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlar arası güveni ne güçlendirir?",
+    "A": "Doğruluk",
+    "B": "İftira",
+    "C": "Gıybet",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanların görüşlerini dinlemek neyi artırır?",
+    "A": "Anlayış",
+    "B": "Gurur",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının duygularını önemsemek hangi değerdir?",
+    "A": "Merhamet",
+    "B": "İnat",
+    "C": "Kıskançlık",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kusurlarını gizlemek neyi gösterir?",
+    "A": "Güzel ahlak",
+    "B": "Hakaret",
+    "C": "Kavga",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış anlaşılmayı konuşarak çözmek ne sağlar?",
+    "A": "Barış",
+    "B": "Hakaret",
+    "C": "Gıybet",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sevincine ortak olmak neyi artırır?",
+    "A": "Kardeşlik",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insana haksızlık yapmamak ne demektir?",
+    "A": "Adalet",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken kibirli olmamak neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Öfke",
+    "C": "Kıskançlık",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Bir kişi konuşurken ona bakmak neyi sağlar?",
+    "A": "İlgi",
+    "B": "Korku",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara kötü söz söylememek neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Hırs",
+    "C": "Kıskançlık",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşın zorlandığında ne yapılır?",
+    "A": "Destek olunur",
+    "B": "Alay edilir",
+    "C": "Görmezden gelinir",
+    "D": "Küçümser",
+    "correct": "A"
+  },
+  {
+    "question": "Bir işte sabırlı olmak hangi sonucu getirir?",
+    "A": "Başarı",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "Düşmanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının eşyasını korumak neyi gösterir?",
+    "A": "Sorumluluk",
+    "B": "İftira",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla konuşurken alay etmemek ne olur?",
+    "A": "Nezaket",
+    "B": "Öfke",
+    "C": "Hırs",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın fikrine değer vermek neyi artırır?",
+    "A": "Dostluk",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlara selam vermek toplumda ne oluşturur?",
+    "A": "Birlik",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Korku",
+    "correct": "A"
+  },
+  {
+    "question": "Bir olay karşısında sabırlı olmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Öfke",
+    "C": "Hırs",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmayı büyütmeden çözmek ne sağlar?",
+    "A": "Barış",
+    "B": "İftira",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Arkadaşını eleştirirken nasıl davranmak gerekir?",
+    "A": "Nazikçe",
+    "B": "Hakaret ederek",
+    "C": "Bağırarak",
+    "D": "Alay ederek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın kalbini kırmamak için önce ne gerekir?",
+    "A": "Düşünmek",
+    "B": "Bağırmak",
+    "C": "Hakaret etmek",
+    "D": "Görmezden gelmek",
+    "correct": "A"
+  },
+  {
+    "question": "Birine teşekkür etmek hangi değerin göstergesidir?",
+    "A": "Nezaket",
+    "B": "Hırs",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla tartışırken onun fikrini dinlemek ne sağlar?",
+    "A": "Anlayış",
+    "B": "Hakaret",
+    "C": "Öfke",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Toplu ortamda bağırarak konuşmamak neyi gösterir?",
+    "A": "Adap",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın başarısına sevinmek hangi davranıştır?",
+    "A": "Olgunluk",
+    "B": "Kıskançlık",
+    "C": "Hırs",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Birine yardım ederken gösteriş yapmamak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Alay",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının hatalarını araştırmamak hangi değerin gereğidir?",
+    "A": "Güzel ahlak",
+    "B": "Hırs",
+    "C": "İftira",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla konuşurken söz hakkı vermek neyi gösterir?",
+    "A": "Saygı",
+    "B": "Hakaret",
+    "C": "Öfke",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan özür dilediğinde kabul etmek hangi değerdir?",
+    "A": "Affedicilik",
+    "B": "Kıskançlık",
+    "C": "İnat",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın eşyasını saklamak hangi davranıştır?",
+    "A": "Haksızlık",
+    "B": "Nezaket",
+    "C": "Sadaka",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken yumuşak söz kullanmak ne sağlar?",
+    "A": "Sevgi",
+    "B": "Hakaret",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin hatasını yüzüne vurarak söylemek neden yanlıştır?",
+    "A": "Kalbini kırar",
+    "B": "Barış sağlar",
+    "C": "Dostluk artırır",
+    "D": "Merhamet gösterir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir hatayı tatlı dille söylemek neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin sevincine katılmak hangi değerdir?",
+    "A": "Paylaşmak",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Birini kırmadan eleştirmek neyi sağlar?",
+    "A": "Dostluk",
+    "B": "Hakaret",
+    "C": "Kavga",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan konuşurken onu dinlemek hangi değeri gösterir?",
+    "A": "Saygı",
+    "B": "Öfke",
+    "C": "İnat",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İyiliği gizli yapmak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Gösteriş",
+    "C": "Kibir",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir kişiye yardımı karşılıksız yapmak ne denir?",
+    "A": "İyilik",
+    "B": "Sadaka istemek",
+    "C": "Kavga",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Selam vermek toplumda neyi artırır?",
+    "A": "Kardeşlik",
+    "B": "İftira",
+    "C": "Düşmanlık",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Öfkelendiğinde susmak hangi değerdir?",
+    "A": "Sabır",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarını küçümsememek neyi gösterir?",
+    "A": "Güzel ahlak",
+    "B": "Kibir",
+    "C": "İnat",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir yanlış gördüğünde nazikçe uyarmak hangi değerdir?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Kıskançlık",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanların duygularını anlamak hangi değerin göstergesidir?",
+    "A": "Empati",
+    "B": "Alay",
+    "C": "Öfke",
+    "D": "Gurur",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan yorulduğunda ona yardım etmek ne olur?",
+    "A": "Merhamet",
+    "B": "Kıskançlık",
+    "C": "Dalga",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü bir söz duyduğunda nasıl davranmak güzeldir?",
+    "A": "Sakin kalmak",
+    "B": "Bağırmak",
+    "C": "Alay etmek",
+    "D": "Hakaret etmek",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşı yargılamadan dinlemek ne sağlar?",
+    "A": "Güven",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insan özrünü kabul etmek hangi değerdir?",
+    "A": "Affedicilik",
+    "B": "İnat",
+    "C": "Kavga",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Aşırı yüksek sesle konuşmamak hangi değeri gösterir?",
+    "A": "Terbiye",
+    "B": "Kavga",
+    "C": "İftira",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının kusurunu aramamak neyi gösterir?",
+    "A": "Ahlak",
+    "B": "Kibir",
+    "C": "Gıybet",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Bir söz söylerken kırıcı olmamak neyi sağlar?",
+    "A": "Barış",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Doğruyu söylemek hangi değerdir?",
+    "A": "Dürüstlük",
+    "B": "Kıskançlık",
+    "C": "Gıybet",
+    "D": "İnat",
+    "correct": "A"
+  },
+  {
+    "question": "Emanete sadık olmak neyi gösterir?",
+    "A": "Güvenilirlik",
+    "B": "Kibir",
+    "C": "Alay",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın sevincini paylaşmak hangi davranıştır?",
+    "A": "Paylaşmak",
+    "B": "Gıybet",
+    "C": "Kavga",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla yumuşak sözle konuşmak hangi değerdir?",
+    "A": "Nezaket",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Hata yapan birini bağırmadan uyarmak neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Dalga",
+    "C": "Hakaret",
+    "D": "Alay",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşa hediye vermek neyi artırır?",
+    "A": "Sevgi",
+    "B": "Düşmanlık",
+    "C": "Hakaret",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Yardım istemeyen birini zorlamamak hangi değerdir?",
+    "A": "Saygı",
+    "B": "İftira",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir tartışmada karşı tarafı dinlemek ne sağlar?",
+    "A": "Anlayış",
+    "B": "Kavga",
+    "C": "Öfke",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının eşyasına zarar vermemek neyi gösterir?",
+    "A": "Sorumluluk",
+    "B": "Dalga",
+    "C": "Kıskançlık",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Bir arkadaşıyla tartıştıktan sonra barışmak hangi davranıştır?",
+    "A": "Olgunluk",
+    "B": "Öfke",
+    "C": "Kıskançlık",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Kimse yokken de kötü davranmamak neyi gösterir?",
+    "A": "Samimiyet",
+    "B": "Riya",
+    "C": "Gıybet",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Küçük kardeşlerle nazik davranmak hangi değerdir?",
+    "A": "Merhamet",
+    "B": "Hırs",
+    "C": "Dalga",
+    "D": "Kıskançlık",
+    "correct": "A"
+  },
+  {
+    "question": "Tartışmayı büyütmemek ne sağlar?",
+    "A": "Barış",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "Gıybet",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla konuşurken alay etmemek neyi gösterir?",
+    "A": "Terbiye",
+    "B": "Gıybet",
+    "C": "Dalga",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Birini kıskanmamak hangi sonucu doğurur?",
+    "A": "Dostluk",
+    "B": "Kavga",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Başkasının ayıbını gizlemek hangi değerdir?",
+    "A": "Güzel ahlak",
+    "B": "Kıskançlık",
+    "C": "İnat",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanlarla düzgün iletişim kurmak neyi artırır?",
+    "A": "Barış",
+    "B": "Kıskançlık",
+    "C": "Gıybet",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir sorunu büyütmeden çözmek neyi gösterir?",
+    "A": "Olgunluk",
+    "B": "Öfke",
+    "C": "Dalga",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü söz söylemekten kaçınmak hangi değerdir?",
+    "A": "Nezaket",
+    "B": "Hakaret",
+    "C": "Gıybet",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin sevincini bozmamak neyi gösterir?",
+    "A": "Saygı",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Hakaret",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanla konuşurken göz teması kurmak ne sağlar?",
+    "A": "İlgi",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının hatalarını affetmek neyi artırır?",
+    "A": "Sevgi",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın eşyasını izinsiz almak hangi davranıştır?",
+    "A": "Haksızlık",
+    "B": "Sadaka",
+    "C": "Övgü",
+    "D": "Merhamet",
+    "correct": "A"
+  },
+  {
+    "question": "Konuşurken bağırmamak neyi gösterir?",
+    "A": "Adap",
+    "B": "Dalga",
+    "C": "Öfke",
+    "D": "Hırs",
+    "correct": "A"
+  },
+  {
+    "question": "Bir durum karşısında sabırlı olmak neyi sağlar?",
+    "A": "Başarı",
+    "B": "Kıskançlık",
+    "C": "Hakaret",
+    "D": "Kavga",
+    "correct": "A"
+  },
+  {
+    "question": "Birinin fikrini dinlemek neyi artırır?",
+    "A": "Anlayış",
+    "B": "Öfke",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "Başkalarının arkasından kötü konuşmamak hangi değerdir?",
+    "A": "Ahlak",
+    "B": "Kıskançlık",
+    "C": "İftira",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Kötü davranan birine bile güzel söz söylemek neyi gösterir?",
+    "A": "Yüce ahlak",
+    "B": "Kibir",
+    "C": "Öfke",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Hata yaptığında özür dilemeyi bilmek neyi gösterir?",
+    "A": "Alçak gönüllülük",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Dalga",
+    "correct": "A"
+  },
+  {
+    "question": "Bir insanın arkasından iyi konuşmak hangi değerdir?",
+    "A": "Güzel söz",
+    "B": "Gıybet",
+    "C": "Hakaret",
+    "D": "İftira",
+    "correct": "A"
+  },
+  {
+    "question": "İnsanların hatalarına karşı sabırlı olmak neyi gösterir?",
+    "A": "Merhamet",
+    "B": "Kıskançlık",
+    "C": "Öfke",
+    "D": "Dalga",
+    "correct": "A"
+  }
+]

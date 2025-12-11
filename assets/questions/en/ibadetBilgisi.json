@@ -1,0 +1,3786 @@
+﻿[
+    {
+        "question": "How many times is the ritual prayer performed daily?",
+        "A": "3 times",
+        "B": "4 times",
+        "C": "5 times",
+        "D": "6 times",
+        "correct": "C"
+    },
+    {
+        "question": "Which act of worship is obligatory in the month of Ramadan?",
+        "A": "Ritual Prayer",
+        "B": "Fasting",
+        "C": "Zakah",
+        "D": "Hajj",
+        "correct": "B"
+    },
+    {
+        "question": "What is the Qibla direction we face during ritual prayer?",
+        "A": "Jerusalem",
+        "B": "Kaaba",
+        "C": "Medina",
+        "D": "Damascus",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is one of the obligatory acts of ablution?",
+        "A": "Changing clothes",
+        "B": "Washing the face",
+        "C": "Applying perfume",
+        "D": "Reciting Adhan",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is one of the obligatory acts of full ablution?",
+        "A": "Covering the head",
+        "B": "Rinsing the mouth",
+        "C": "Using Siwak",
+        "D": "Listening to Adhan",
+        "correct": "B"
+    },
+    {
+        "question": "How many rak'ahs is the obligatory part of the Morning Prayer?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "B"
+    },
+    {
+        "question": "Which part of the body is washed first in ablution?",
+        "A": "Hands",
+        "B": "Head",
+        "C": "Feet",
+        "D": "Face",
+        "correct": "A"
+    },
+    {
+        "question": "What does the Adhan announce?",
+        "A": "Eid",
+        "B": "Prayer time",
+        "C": "Suhoor time",
+        "D": "Hajj season",
+        "correct": "B"
+    },
+    {
+        "question": "When is the intention for fasting made?",
+        "A": "After sunset",
+        "B": "At night or before dawn (Imsak)",
+        "C": "At noon",
+        "D": "On Eid morning",
+        "correct": "B"
+    },
+    {
+        "question": "In which situation is Tayammum performed?",
+        "A": "If water is not found",
+        "B": "If there is no sound",
+        "C": "If Adhan is not recited",
+        "D": "If Qibla is unknown",
+        "correct": "A"
+    },
+    {
+        "question": "During which Eid is the sacrifice worship performed?",
+        "A": "Eid al-Fitr",
+        "B": "Eid al-Adha",
+        "C": "Mawlid al-Nabi",
+        "D": "Laylat al-Bara'at",
+        "correct": "B"
+    },
+    {
+        "question": "To whom is Zakah given?",
+        "A": "To the rich",
+        "B": "To the poor",
+        "C": "To politicians",
+        "D": "To the Imam",
+        "correct": "B"
+    },
+    {
+        "question": "How many times is prostration (Sajdah) performed in one rak'ah?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is one of the conditions of ritual prayer?",
+        "A": "Being hungry",
+        "B": "Cleanliness",
+        "C": "Reading aloud",
+        "D": "Serving food",
+        "correct": "B"
+    },
+    {
+        "question": "How is the head wiped during ablution?",
+        "A": "Water is poured",
+        "B": "Wiped with wet hands",
+        "C": "Wiped with salt",
+        "D": "Oil is applied",
+        "correct": "B"
+    },
+    {
+        "question": "At what time is the fast broken?",
+        "A": "At Imsak",
+        "B": "At Evening Adhan (Maghrib)",
+        "C": "At Noon",
+        "D": "At Tarawih",
+        "correct": "B"
+    },
+    {
+        "question": "When is Zakat al-Fitr given?",
+        "A": "At the beginning of Ramadan",
+        "B": "Before or on Eid morning",
+        "C": "During Hajj",
+        "D": "On holy nights",
+        "correct": "B"
+    },
+    {
+        "question": "Where is the Kaaba located?",
+        "A": "Mecca",
+        "B": "Medina",
+        "C": "Jerusalem",
+        "D": "Konya",
+        "correct": "A"
+    },
+    {
+        "question": "What are the short chapters recited in ritual prayer called?",
+        "A": "Hadith",
+        "B": "Dua",
+        "C": "Surah",
+        "D": "Dhikr",
+        "correct": "C"
+    },
+    {
+        "question": "Which month does the Tarawih prayer belong to?",
+        "A": "Rajab",
+        "B": "Ramadan",
+        "C": "Muharram",
+        "D": "Shaban",
+        "correct": "B"
+    },
+    {
+        "question": "Which animal can be sacrificed for Qurban?",
+        "A": "Cat",
+        "B": "Cow",
+        "C": "Lion",
+        "D": "Eagle",
+        "correct": "B"
+    },
+    {
+        "question": "What type of worship is Zakah?",
+        "A": "Financial worship",
+        "B": "Verbal worship",
+        "C": "Social worship",
+        "D": "Spatial worship",
+        "correct": "A"
+    },
+    {
+        "question": "How are the feet washed during ablution?",
+        "A": "Wiped",
+        "B": "Washed with water",
+        "C": "Cleaned with cloth",
+        "D": "Dusted",
+        "correct": "B"
+    },
+    {
+        "question": "How many rak'ahs is the Friday prayer (obligatory)?",
+        "A": "2",
+        "B": "3",
+        "C": "4",
+        "D": "6",
+        "correct": "A"
+    },
+    {
+        "question": "Who is obligated to fast in Ramadan?",
+        "A": "Children",
+        "B": "Sane and pubescent Muslims",
+        "C": "Travelers",
+        "D": "The sick",
+        "correct": "B"
+    },
+    {
+        "question": "At what time is the Eid prayer performed?",
+        "A": "Evening",
+        "B": "Morning (after sunrise)",
+        "C": "Noon",
+        "D": "Afternoon",
+        "correct": "B"
+    },
+    {
+        "question": "What does giving Zakah strengthen?",
+        "A": "Physical strength",
+        "B": "Social solidarity",
+        "C": "Voice",
+        "D": "Running speed",
+        "correct": "B"
+    },
+    {
+        "question": "Where is the Hajj worship performed?",
+        "A": "Jerusalem",
+        "B": "Mecca",
+        "C": "Medina",
+        "D": "Damascus",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following invalidates ablution?",
+        "A": "Laughing",
+        "B": "Sleeping",
+        "C": "Speaking",
+        "D": "Eating food",
+        "correct": "B"
+    },
+    {
+        "question": "What is done when starting the ritual prayer?",
+        "A": "Subhanaka is recited",
+        "B": "Takbir (Allahu Akbar) is said",
+        "C": "Adhan is recited",
+        "D": "Salam is given",
+        "correct": "B"
+    },
+    {
+        "question": "What does 'Obligatory' (Fard) mean?",
+        "A": "Mandatory to perform",
+        "B": "Good to perform",
+        "C": "Optional",
+        "D": "Forbidden",
+        "correct": "A"
+    },
+    {
+        "question": "What does 'Necessary' (Wajib) mean?",
+        "A": "Optional",
+        "B": "Not a condition",
+        "C": "Religiously required",
+        "D": "Disliked (Makruh)",
+        "correct": "C"
+    },
+    {
+        "question": "What does 'Makruh' mean?",
+        "A": "Seen as good",
+        "B": "Disliked / Not preferred",
+        "C": "Mandatory",
+        "D": "Free",
+        "correct": "B"
+    },
+    {
+        "question": "What does 'Haram' mean?",
+        "A": "Recommended",
+        "B": "Forbidden to do",
+        "C": "Seen as good",
+        "D": "Free",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following requires full ablution (Ghusl)?",
+        "A": "Eating hot food",
+        "B": "Being in a state of major impurity (Janabah)",
+        "C": "Laughter",
+        "D": "Walking",
+        "correct": "B"
+    },
+    {
+        "question": "What is Ruku in ritual prayer?",
+        "A": "Standing",
+        "B": "Bowing",
+        "C": "Sitting",
+        "D": "Giving Salam",
+        "correct": "B"
+    },
+    {
+        "question": "What is done at the end of the ritual prayer?",
+        "A": "Ablution is performed again",
+        "B": "Salam is given",
+        "C": "Adhan is recited",
+        "D": "Prostration is performed",
+        "correct": "B"
+    },
+    {
+        "question": "In which month is the Night of Power (Laylat al-Qadr)?",
+        "A": "Rajab",
+        "B": "Ramadan",
+        "C": "Muharram",
+        "D": "Shaban",
+        "correct": "B"
+    },
+    {
+        "question": "What is breaking the fast called?",
+        "A": "Suhoor",
+        "B": "Iftar",
+        "C": "Zakat al-Fitr",
+        "D": "Zakah",
+        "correct": "B"
+    },
+    {
+        "question": "When is Suhoor performed?",
+        "A": "Evening",
+        "B": "Before Imsak (Dawn)",
+        "C": "Noon",
+        "D": "Eid morning",
+        "correct": "B"
+    },
+    {
+        "question": "How many Ruku are there in one rak'ah?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "A"
+    },
+    {
+        "question": "How many Sajdah (prostrations) are there in one rak'ah?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "B"
+    },
+    {
+        "question": "From which wealth is Zakah given?",
+        "A": "Imaginary wealth",
+        "B": "Real wealth and money",
+        "C": "Pictures",
+        "D": "Goods",
+        "correct": "B"
+    },
+    {
+        "question": "What is the animal sacrificed as an offering called?",
+        "A": "Aqiqah",
+        "B": "Qurban",
+        "C": "Sadaqah",
+        "D": "Zakah",
+        "correct": "B"
+    },
+    {
+        "question": "In which months is the Hajj worship performed?",
+        "A": "Ramadan",
+        "B": "Shawwal-Dhul-Hijjah",
+        "C": "Rajab",
+        "D": "Muharram",
+        "correct": "B"
+    },
+    {
+        "question": "What is done before performing ritual prayer?",
+        "A": "Eating food",
+        "B": "Performing ablution",
+        "C": "Celebrating Eid",
+        "D": "Contemplation",
+        "correct": "B"
+    },
+    {
+        "question": "When is the Prayer of Gratitude (Salat al-Shukr) performed?",
+        "A": "Upon receiving good news",
+        "B": "On Eid",
+        "C": "At Iftar",
+        "D": "At Suhoor",
+        "correct": "A"
+    },
+    {
+        "question": "What is rinsing the mouth during ablution called?",
+        "A": "Istilam",
+        "B": "Madmadah",
+        "C": "Wiping",
+        "D": "Taharah",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is one of the obligatory acts of ablution?",
+        "A": "Combing hair",
+        "B": "Washing arms up to elbows",
+        "C": "Performing prayer",
+        "D": "Washing with rose water",
+        "correct": "B"
+    },
+    {
+        "question": "What is the prayer performed during Ramadan nights called?",
+        "A": "Witr",
+        "B": "Tarawih",
+        "C": "Eid",
+        "D": "Friday",
+        "correct": "B"
+    },
+    {
+        "question": "When can a fasting person eat?",
+        "A": "At Morning Prayer",
+        "B": "When Evening Adhan is recited",
+        "C": "At Noon Adhan",
+        "D": "Always",
+        "correct": "B"
+    },
+    {
+        "question": "What is the purpose of Zakah?",
+        "A": "Hosting guests",
+        "B": "Ensuring financial solidarity",
+        "C": "Doing sports",
+        "D": "Traveling",
+        "correct": "B"
+    },
+    {
+        "question": "In which city is Hajj performed?",
+        "A": "Jerusalem",
+        "B": "Medina",
+        "C": "Mecca",
+        "D": "Taif",
+        "correct": "C"
+    },
+    {
+        "question": "Which movement comes after standing recitation in ritual prayer?",
+        "A": "Ruku",
+        "B": "Sajdah",
+        "C": "Salam",
+        "D": "Takbir",
+        "correct": "A"
+    },
+    {
+        "question": "With which words does a Muslim intend for fasting?",
+        "A": "Allahu Akbar",
+        "B": "I am fasting",
+        "C": "I intend to fast for Ramadan",
+        "D": "Alhamdulillah",
+        "correct": "C"
+    },
+    {
+        "question": "On which day is Friday prayer performed?",
+        "A": "Monday",
+        "B": "Thursday",
+        "C": "Friday",
+        "D": "Sunday",
+        "correct": "C"
+    },
+    {
+        "question": "What is the name of the charity given before Eid prayer?",
+        "A": "Zakat al-Fitr",
+        "B": "Fidyah",
+        "C": "Zakah",
+        "D": "Sadaqah Jariyah",
+        "correct": "A"
+    },
+    {
+        "question": "Why is washing the whole body done in Ghusl?",
+        "A": "Because cleanliness is obligatory",
+        "B": "For Eid",
+        "C": "For visiting the mosque",
+        "D": "For sports",
+        "correct": "A"
+    },
+    {
+        "question": "Paying Zakah is a condition of which worship?",
+        "A": "Faith (Iman)",
+        "B": "Islam",
+        "C": "Adhan",
+        "D": "Dua",
+        "correct": "B"
+    },
+    {
+        "question": "What does the Salam given at the end of prayer signify?",
+        "A": "That it has ended",
+        "B": "That it has started",
+        "C": "That it is Ruku",
+        "D": "That fasting is observed",
+        "correct": "A"
+    },
+    {
+        "question": "Where is Surah Al-Fatiha recited in ritual prayer?",
+        "A": "While sitting",
+        "B": "While standing (Qiyam)",
+        "C": "In Sajdah",
+        "D": "In Salam",
+        "correct": "B"
+    },
+    {
+        "question": "From what material is Tayammum performed?",
+        "A": "Stone",
+        "B": "Clean soil",
+        "C": "Wood",
+        "D": "Iron",
+        "correct": "B"
+    },
+    {
+        "question": "After which prayer is Witr prayer performed?",
+        "A": "Noon",
+        "B": "Afternoon",
+        "C": "Night (Isha)",
+        "D": "Morning",
+        "correct": "C"
+    },
+    {
+        "question": "Who recites the Adhan?",
+        "A": "Muezzin",
+        "B": "Sultan",
+        "C": "Mukhtar",
+        "D": "Teacher",
+        "correct": "A"
+    },
+    {
+        "question": "Up to where are the arms washed in ablution?",
+        "A": "Including elbows",
+        "B": "Shoulder",
+        "C": "Hand",
+        "D": "Fingertips",
+        "correct": "A"
+    },
+    {
+        "question": "What does Imsak time signify?",
+        "A": "Time to sleep",
+        "B": "Start of fasting",
+        "C": "Evening",
+        "D": "Afternoon time",
+        "correct": "B"
+    },
+    {
+        "question": "When is Iftar time?",
+        "A": "Noon",
+        "B": "Afternoon",
+        "C": "Evening Adhan",
+        "D": "Midnight",
+        "correct": "C"
+    },
+    {
+        "question": "Which animal cannot be sacrificed as Qurban?",
+        "A": "Camel",
+        "B": "Sheep",
+        "C": "Goat",
+        "D": "Cat",
+        "correct": "D"
+    },
+    {
+        "question": "What is Aqiqah sacrifice for?",
+        "A": "Wedding",
+        "B": "For a newborn child",
+        "C": "Travel",
+        "D": "Circumcision",
+        "correct": "B"
+    },
+    {
+        "question": "What is the call that shows prayer time has come?",
+        "A": "Siren",
+        "B": "Adhan",
+        "C": "Announcement",
+        "D": "Cleaning",
+        "correct": "B"
+    },
+    {
+        "question": "What is the call recited by the Muezzin before prayer starts called?",
+        "A": "Iqamah",
+        "B": "Khutbah",
+        "C": "Sermon",
+        "D": "Dua",
+        "correct": "A"
+    },
+    {
+        "question": "Who delivers the sermon (Khutbah) in Friday prayer?",
+        "A": "Muezzin",
+        "B": "Imam",
+        "C": "Teacher",
+        "D": "Mukhtar",
+        "correct": "B"
+    },
+    {
+        "question": "What is done after Ruku in ritual prayer?",
+        "A": "Sitting",
+        "B": "Standing up again",
+        "C": "Going to Sajdah",
+        "D": "Giving Salam",
+        "correct": "C"
+    },
+    {
+        "question": "What is reciting a Surah in prayer called?",
+        "A": "Contemplation",
+        "B": "Recitation (Tilawah/Qira'at)",
+        "C": "Congratulation",
+        "D": "Glorification",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is one of the Sunnahs of ablution?",
+        "A": "Using Siwak",
+        "B": "Wearing a watch",
+        "C": "Cutting nails",
+        "D": "Wearing a hat",
+        "correct": "A"
+    },
+    {
+        "question": "Which of the following invalidates fasting?",
+        "A": "Sleeping",
+        "B": "Performing ablution",
+        "C": "Eating intentionally",
+        "D": "Walking",
+        "correct": "C"
+    },
+    {
+        "question": "What is sniffing water into the nose during ablution called?",
+        "A": "Istinshaq",
+        "B": "Qira'at",
+        "C": "Tayammum",
+        "D": "Tahiyyat",
+        "correct": "A"
+    },
+    {
+        "question": "In which language is the ritual prayer performed?",
+        "A": "English",
+        "B": "Arabic",
+        "C": "Turkish",
+        "D": "Persian",
+        "correct": "B"
+    },
+    {
+        "question": "Which is the first Surah recited in ritual prayer?",
+        "A": "Fatiha",
+        "B": "Nas",
+        "C": "Ikhlas",
+        "D": "Asr",
+        "correct": "A"
+    },
+    {
+        "question": "How many times are obligatory prayers performed daily?",
+        "A": "3",
+        "B": "4",
+        "C": "5",
+        "D": "6",
+        "correct": "C"
+    },
+    {
+        "question": "From which wealth is Zakah given?",
+        "A": "Wardrobe",
+        "B": "Money and goods",
+        "C": "Chair",
+        "D": "Wall",
+        "correct": "B"
+    },
+    {
+        "question": "What is the person performing Hajj called?",
+        "A": "Muezzin",
+        "B": "Hajji",
+        "C": "Traveler",
+        "D": "Witness",
+        "correct": "B"
+    },
+    {
+        "question": "Is intention in the heart sufficient for fasting?",
+        "A": "No",
+        "B": "Yes",
+        "C": "Sometimes",
+        "D": "Only if written",
+        "correct": "B"
+    },
+    {
+        "question": "In which year was Zakah made obligatory?",
+        "A": "2nd year",
+        "B": "3rd year",
+        "C": "9th year",
+        "D": "13th year",
+        "correct": "C"
+    },
+    {
+        "question": "At what time does a fasting person eat Suhoor?",
+        "A": "Evening",
+        "B": "Before Imsak",
+        "C": "Noon",
+        "D": "Afternoon",
+        "correct": "B"
+    },
+    {
+        "question": "How many days can sacrifice be offered during Eid al-Adha?",
+        "A": "1",
+        "B": "2",
+        "C": "3 (some say 4)",
+        "D": "6",
+        "correct": "C"
+    },
+    {
+        "question": "How many prostrations (Sajdah) are obligatory in prayer? (per rak'ah)",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "B"
+    },
+    {
+        "question": "Which of the following is an obligatory act of worship?",
+        "A": "Sleeping",
+        "B": "Tarawih",
+        "C": "Ritual Prayer",
+        "D": "Traveling",
+        "correct": "C"
+    },
+    {
+        "question": "What does giving Sadaqah increase?",
+        "A": "Speed",
+        "B": "Sharing",
+        "C": "Height",
+        "D": "Family",
+        "correct": "B"
+    },
+    {
+        "question": "What is the cleaning of the whole body called?",
+        "A": "Tayammum",
+        "B": "Ghusl",
+        "C": "Taharah",
+        "D": "Touch",
+        "correct": "B"
+    },
+    {
+        "question": "What is the sitting position in prayer called?",
+        "A": "Contemplation",
+        "B": "Qa'dah",
+        "C": "Takbir",
+        "D": "Tahir",
+        "correct": "B"
+    },
+    {
+        "question": "How many parts does the Friday Sermon consist of?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "5",
+        "correct": "B"
+    },
+    {
+        "question": "What does giving Salam to the right and left in prayer signify?",
+        "A": "The prayer has ended",
+        "B": "It has started",
+        "C": "Middle part",
+        "D": "Ruku",
+        "correct": "A"
+    },
+    {
+        "question": "To which month is the obligatory fasting specific?",
+        "A": "Rajab",
+        "B": "Ramadan",
+        "C": "Shaban",
+        "D": "Muharram",
+        "correct": "B"
+    },
+    {
+        "question": "Towards which direction is Sajdah performed in prayer?",
+        "A": "Right and left",
+        "B": "Towards Qibla",
+        "C": "Towards Sun",
+        "D": "Towards North",
+        "correct": "B"
+    },
+    {
+        "question": "What is the purpose of worship in Islam?",
+        "A": "Doing sports",
+        "B": "Servitude to Allah",
+        "C": "Earning money",
+        "D": "Gaining prestige",
+        "correct": "B"
+    },
+    {
+        "question": "Which is the most important pillar of prayer?",
+        "A": "Sajdah",
+        "B": "Sitting",
+        "C": "Takbir",
+        "D": "Walking",
+        "correct": "A"
+    },
+    {
+        "question": "What does a fasting person not do after Imsak?",
+        "A": "Drink water",
+        "B": "Eat or drink",
+        "C": "Use Siwak",
+        "D": "Wait for Iftar",
+        "correct": "B"
+    },
+    {
+        "question": "How many rak'ahs is the obligatory part of Evening Prayer (Maghrib)?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "C"
+    },
+    {
+        "question": "How many rak'ahs is the obligatory part of Night Prayer (Isha)?",
+        "A": "1",
+        "B": "2",
+        "C": "3",
+        "D": "4",
+        "correct": "D"
+    },
+{
+    "question": "How many rak'ahs is the obligatory part of Noon Prayer (Dhuhr)?",
+    "A": "4",
+    "B": "3",
+    "C": "2",
+    "D": "6",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is the obligatory part of Afternoon Prayer (Asr)?",
+    "A": "2",
+    "B": "4",
+    "C": "6",
+    "D": "3",
+    "correct": "B"
+},
+{
+    "question": "Which of the following is one of the obligatory prayers?",
+    "A": "Witr",
+    "B": "Eid Prayer",
+    "C": "Friday Prayer",
+    "D": "Tasbih Prayer",
+    "correct": "C"
+},
+{
+    "question": "When does fasting end?",
+    "A": "When the sun rises",
+    "B": "When Evening Adhan is recited",
+    "C": "At Noon",
+    "D": "When the sun reaches zenith",
+    "correct": "B"
+},
+{
+    "question": "What is the meal eaten during Ramadan nights called?",
+    "A": "Iftar",
+    "B": "Suhoor",
+    "C": "Zakat al-Fitr",
+    "D": "Zakah",
+    "correct": "B"
+},
+{
+    "question": "In which situations is Tayammum performed?",
+    "A": "If the mosque is full",
+    "B": "If there is no water",
+    "C": "If Adhan passed",
+    "D": "At Imsak time",
+    "correct": "B"
+},
+{
+    "question": "Which of the following is not obligatory but Sunnah in ablution?",
+    "A": "Using Siwak",
+    "B": "Washing arms",
+    "C": "Wiping head",
+    "D": "Washing face",
+    "correct": "A"
+},
+{
+    "question": "Which condition is not required for performing prayer?",
+    "A": "Cleanliness",
+    "B": "Facing Qibla",
+    "C": "Being hungry",
+    "D": "Covering Awrah",
+    "correct": "C"
+},
+{
+    "question": "When is Hajj worship performed?",
+    "A": "Every day of the year",
+    "B": "In the month of Dhul-Hijjah",
+    "C": "In Ramadan",
+    "D": "In the month of Shaban",
+    "correct": "B"
+},
+{
+    "question": "Which of the following is a suitable animal for sacrifice?",
+    "A": "Goat",
+    "B": "Bird",
+    "C": "Cat",
+    "D": "Rooster",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah not given?",
+    "A": "To the needy",
+    "B": "To debtors",
+    "C": "To the rich",
+    "D": "To travelers",
+    "correct": "C"
+},
+{
+    "question": "What is most recommended when breaking the fast?",
+    "A": "Sweets",
+    "B": "Water and dates",
+    "C": "Rice",
+    "D": "Bread",
+    "correct": "B"
+},
+{
+    "question": "How many rak'ahs is Witr prayer?",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "7",
+    "correct": "B"
+},
+{
+    "question": "What is one type of worship performed on holy nights (Kandil)?",
+    "A": "Contemplation",
+    "B": "Dhikr",
+    "C": "Walking",
+    "D": "Sports",
+    "correct": "B"
+},
+{
+    "question": "How many days is Ramadan fasting observed?",
+    "A": "15",
+    "B": "20",
+    "C": "29 or 30",
+    "D": "40",
+    "correct": "C"
+},
+{
+    "question": "What is the morning meal of a fasting person called?",
+    "A": "Iftar",
+    "B": "Suhoor",
+    "C": "Feast",
+    "D": "Eid",
+    "correct": "B"
+},
+{
+    "question": "What is the Takbir recited before starting prayer called?",
+    "A": "Takbir al-Awwal",
+    "B": "Opening Takbir",
+    "C": "Takbir al-Iftitah",
+    "D": "Ramadan Takbir",
+    "correct": "C"
+},
+{
+    "question": "What does saying 'Allahu Akbar' in prayer mean?",
+    "A": "Allah is the Greatest",
+    "B": "Allah is Compassionate",
+    "C": "Allah is Forgiving",
+    "D": "Allah is One",
+    "correct": "A"
+},
+{
+    "question": "What does abandoning obligatory prayer mean?",
+    "A": "Leaving a recommended worship",
+    "B": "Leaving a mandatory worship",
+    "C": "Helping",
+    "D": "Traveling",
+    "correct": "B"
+},
+{
+    "question": "Why is prayer recited in Arabic?",
+    "A": "Because it is easy",
+    "B": "Because it is the language of the Quran",
+    "C": "Because it is loud",
+    "D": "Because it is historical",
+    "correct": "B"
+},
+{
+    "question": "Where are hands raised while making Dua in prayer?",
+    "A": "To the back",
+    "B": "To the side",
+    "C": "To chest level",
+    "D": "To waist level",
+    "correct": "C"
+},
+{
+    "question": "What does Zakah mean literally?",
+    "A": "Purification and increase",
+    "B": "Hunger",
+    "C": "Travel",
+    "D": "Sports",
+    "correct": "A"
+},
+{
+    "question": "Who is not obligated to fast?",
+    "A": "Those who are sick",
+    "B": "Those who are healthy",
+    "C": "Those who are pubescent",
+    "D": "Those who are sane",
+    "correct": "A"
+},
+{
+    "question": "What does Qira'at mean in prayer?",
+    "A": "Reciting Quran",
+    "B": "Giving Salam",
+    "C": "Reciting Adhan",
+    "D": "Walking",
+    "correct": "A"
+},
+{
+    "question": "What does Taharah mean?",
+    "A": "Cleanliness",
+    "B": "Salam",
+    "C": "World",
+    "D": "Eid",
+    "correct": "A"
+},
+{
+    "question": "How many pillars of Islam are there?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "C"
+},
+{
+    "question": "What does fasting teach?",
+    "A": "Patience and sharing",
+    "B": "Speed",
+    "C": "Earning money",
+    "D": "Physics study",
+    "correct": "A"
+},
+{
+    "question": "With what intention is sacrifice performed?",
+    "A": "Show off",
+    "B": "Loyalty and servitude",
+    "C": "Fun",
+    "D": "Sports",
+    "correct": "B"
+},
+{
+    "question": "Which Dua is recited before reciting a Surah in prayer?",
+    "A": "Takbir",
+    "B": "Fatiha",
+    "C": "Salam",
+    "D": "Subhanaka",
+    "correct": "D"
+},
+{
+    "question": "In which time frame is Witr prayer performed?",
+    "A": "Noon",
+    "B": "Afternoon",
+    "C": "After Night Prayer (Isha)",
+    "D": "Morning",
+    "correct": "C"
+},
+{
+    "question": "What is the recitation of Quran in circles during Ramadan nights called?",
+    "A": "Tarawih",
+    "B": "Muqabalah",
+    "C": "Suhoor",
+    "D": "Iftar",
+    "correct": "B"
+},
+{
+    "question": "What happens if a fasting person eats by mistake?",
+    "A": "Fast is broken",
+    "B": "Fast is not broken",
+    "C": "It is a sin",
+    "D": "Expiation is required",
+    "correct": "B"
+},
+{
+    "question": "On which days is giving Zakah valid?",
+    "A": "Only Ramadan",
+    "B": "Always",
+    "C": "Only Eid",
+    "D": "Only Friday",
+    "correct": "B"
+},
+{
+    "question": "What is the first thing to break the fast with?",
+    "A": "Dates",
+    "B": "Meat",
+    "C": "Rice",
+    "D": "Sweets",
+    "correct": "A"
+},
+{
+    "question": "On which days can sacrifice be performed?",
+    "A": "1st, 2nd, and 3rd days of Eid",
+    "B": "1st day of Eid",
+    "C": "End of Ramadan",
+    "D": "Only on Sunday",
+    "correct": "A"
+},
+{
+    "question": "What is the direction of Qibla? (For Turkey)",
+    "A": "North",
+    "B": "South",
+    "C": "East",
+    "D": "South-Southeast",
+    "correct": "D"
+},
+{
+    "question": "What type of worship is using prayer beads (Tesbih)?",
+    "A": "Dhikr",
+    "B": "Fasting",
+    "C": "Hajj",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Which of the following is one of the five daily prayers?",
+    "A": "Witr",
+    "B": "Tarawih",
+    "C": "Afternoon (Asr)",
+    "D": "Tahajjud",
+    "correct": "C"
+},
+{
+    "question": "When does fasting start?",
+    "A": "Noon",
+    "B": "Imsak",
+    "C": "Iftar",
+    "D": "Eid",
+    "correct": "B"
+},
+{
+    "question": "What is said when giving Salam to the right and left in prayer?",
+    "A": "Alhamdulillah",
+    "B": "As-salamu alaykum wa rahmatullah",
+    "C": "Allahu Akbar",
+    "D": "Amin",
+    "correct": "B"
+},
+{
+    "question": "What does a fasting person not do during the day?",
+    "A": "Eat food",
+    "B": "Sleep",
+    "C": "Use Siwak",
+    "D": "Make Dua",
+    "correct": "A"
+},
+{
+    "question": "How many times is the face washed in ablution? (Sunnah)",
+    "A": "Once",
+    "B": "Three times",
+    "C": "Four times",
+    "D": "Five times",
+    "correct": "B"
+},
+{
+    "question": "In which worship is Qibla direction important?",
+    "A": "Ritual Prayer",
+    "B": "Fasting",
+    "C": "Zakah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Which of the following places is visited during Hajj?",
+    "A": "Arafat",
+    "B": "Nimrod",
+    "C": "Uludag",
+    "D": "Erciyes",
+    "correct": "A"
+},
+{
+    "question": "What type of worship is Zakah?",
+    "A": "Financial worship",
+    "B": "Sports worship",
+    "C": "Verbal worship",
+    "D": "Silent worship",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is Eid prayer?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "A"
+},
+{
+    "question": "Up to where are feet washed in ablution?",
+    "A": "To knees",
+    "B": "To heels/ankles",
+    "C": "To ankle bone",
+    "D": "To toes",
+    "correct": "C"
+},
+{
+    "question": "What is the slaughtering made to get closer to Allah called?",
+    "A": "Sadaqah",
+    "B": "Qurban",
+    "C": "Zakah",
+    "D": "Tarawih",
+    "correct": "B"
+},
+{
+    "question": "For whom is the sacrifice made?",
+    "A": "For showing off",
+    "B": "For the sake of Allah",
+    "C": "For fame",
+    "D": "For profit",
+    "correct": "B"
+},
+{
+    "question": "What is the contemplation and worship performed during Ramadan nights called?",
+    "A": "Dhikr",
+    "B": "Tarawih",
+    "C": "Sleep",
+    "D": "Hajj",
+    "correct": "B"
+},
+{
+    "question": "Why is having Suhoor important?",
+    "A": "Increases strength",
+    "B": "For Barakah (blessing)",
+    "C": "For Iftar",
+    "D": "For password",
+    "correct": "B"
+},
+{
+    "question": "What is breaking the fast called?",
+    "A": "Zakat al-Fitr",
+    "B": "Iftar",
+    "C": "Zakah",
+    "D": "Hajj",
+    "correct": "B"
+},
+{
+    "question": "Which of the following invalidates ablution?",
+    "A": "Sleeping",
+    "B": "Praying",
+    "C": "Laughing",
+    "D": "Reading",
+    "correct": "A"
+},
+{
+    "question": "Who recites the Friday Sermon?",
+    "A": "Muezzin",
+    "B": "Imam",
+    "C": "Mukhtar",
+    "D": "Teacher",
+    "correct": "B"
+},
+{
+    "question": "What is recited after Fatiha in prayer?",
+    "A": "Salam",
+    "B": "A short Surah",
+    "C": "Eid prayer",
+    "D": "Adhan",
+    "correct": "B"
+},
+{
+    "question": "What is the cleaning of the entire body called?",
+    "A": "Tayammum",
+    "B": "Ghusl",
+    "C": "Taharah",
+    "D": "Sajdah",
+    "correct": "B"
+},
+{
+    "question": "To whom can the sacrifice meat be distributed?",
+    "A": "To the poor",
+    "B": "To the rich",
+    "C": "Only to neighbors",
+    "D": "Only to relatives",
+    "correct": "A"
+},
+{
+    "question": "What is the call indicating prayer time has arrived?",
+    "A": "Announcement",
+    "B": "Sound",
+    "C": "Adhan",
+    "D": "Light",
+    "correct": "C"
+},
+{
+    "question": "When is Iqamah recited?",
+    "A": "Immediately before prayer starts",
+    "B": "After Eid",
+    "C": "After fasting",
+    "D": "Before Hajj",
+    "correct": "A"
+},
+{
+    "question": "What is the mosque used for?",
+    "A": "Entertainment",
+    "B": "Shopping",
+    "C": "Worship",
+    "D": "Eating",
+    "correct": "C"
+},
+{
+    "question": "What is the last thing done in prayer?",
+    "A": "Sajdah",
+    "B": "Salam",
+    "C": "Ruku",
+    "D": "Takbir",
+    "correct": "B"
+},
+{
+    "question": "How is the first day of Ramadan determined?",
+    "A": "Calendar",
+    "B": "Sighting of the moon",
+    "C": "Wind",
+    "D": "Sun",
+    "correct": "B"
+},
+{
+    "question": "Is there a specific time to give Zakah?",
+    "A": "No, it can be given anytime",
+    "B": "Only in Ramadan",
+    "C": "Only on Eid",
+    "D": "Only on Friday",
+    "correct": "A"
+},
+{
+    "question": "What should a person who cannot fast (due to valid excuse) do?",
+    "A": "Give Iftar",
+    "B": "Give Fidyah",
+    "C": "Perform Hajj",
+    "D": "Sacrifice an animal",
+    "correct": "B"
+},
+{
+    "question": "One obligatory act of ablution is washing the face, what is another?",
+    "A": "Washing eyes",
+    "B": "Wiping head",
+    "C": "Combing hair",
+    "D": "Laughing",
+    "correct": "B"
+},
+{
+    "question": "What does fasting strengthen?",
+    "A": "Trust",
+    "B": "Patience",
+    "C": "Walking",
+    "D": "Holiday",
+    "correct": "B"
+},
+{
+    "question": "With what intention is sacrifice cut?",
+    "A": "For the sake of Allah",
+    "B": "For show",
+    "C": "For points",
+    "D": "For fun",
+    "correct": "A"
+},
+{
+    "question": "Which worship can be performed if ablution cannot be taken?",
+    "A": "Washing",
+    "B": "Tayammum",
+    "C": "Sleeping",
+    "D": "Traveling",
+    "correct": "B"
+},
+{
+    "question": "When is Iftar done?",
+    "A": "Morning",
+    "B": "At Evening Adhan",
+    "C": "Noon",
+    "D": "Midday",
+    "correct": "B"
+},
+{
+    "question": "When is Tahiyyat recited?",
+    "A": "Standing",
+    "B": "In Ruku",
+    "C": "While sitting",
+    "D": "In Sajdah",
+    "correct": "C"
+},
+{
+    "question": "In which city is the Kaaba located?",
+    "A": "Medina",
+    "B": "Mecca",
+    "C": "Jerusalem",
+    "D": "Istanbul",
+    "correct": "B"
+},
+{
+    "question": "When is Fidyah given?",
+    "A": "For those who cannot fast",
+    "B": "Before Hajj",
+    "C": "After Eid",
+    "D": "At wedding",
+    "correct": "A"
+},
+{
+    "question": "What is important when giving Zakah?",
+    "A": "Show off",
+    "B": "Intention",
+    "C": "Advertisement",
+    "D": "Argument",
+    "correct": "B"
+},
+{
+    "question": "Which festival is celebrated at the end of Ramadan?",
+    "A": "Eid al-Adha",
+    "B": "Eid al-Fitr",
+    "C": "New Year",
+    "D": "Nowruz",
+    "correct": "B"
+},
+{
+    "question": "Which Surah is obligatory to recite in prayer?",
+    "A": "Fatiha",
+    "B": "Ikhlas",
+    "C": "Asr",
+    "D": "Nas",
+    "correct": "A"
+},
+{
+    "question": "Which worship gathers all Muslims together?",
+    "A": "Hajj",
+    "B": "Fasting",
+    "C": "Prayer",
+    "D": "Zakah",
+    "correct": "A"
+},
+{
+    "question": "In which month is Tarawih prayer performed?",
+    "A": "Rajab",
+    "B": "Ramadan",
+    "C": "Shaban",
+    "D": "Muharram",
+    "correct": "B"
+},
+{
+    "question": "How many rak'ahs is standard Witr prayer?",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "7",
+    "correct": "B"
+},
+{
+    "question": "What is recommended after ablution?",
+    "A": "Reciting Quran",
+    "B": "Eating",
+    "C": "Sleeping",
+    "D": "Sports",
+    "correct": "A"
+},
+{
+    "question": "What is done between Adhan and Iqamah?",
+    "A": "Prayer is performed",
+    "B": "Preparation",
+    "C": "Sacrifice",
+    "D": "Sleep",
+    "correct": "B"
+},
+{
+    "question": "Why is worship performed in Islam?",
+    "A": "For servitude to Allah",
+    "B": "For money",
+    "C": "For fame",
+    "D": "For fun",
+    "correct": "A"
+},
+{
+    "question": "Which option is not obligatory in ablution?",
+    "A": "Washing face",
+    "B": "Washing arms",
+    "C": "Combing hair",
+    "D": "Wiping head",
+    "correct": "C"
+},
+{
+    "question": "At what time is Eid prayer performed?",
+    "A": "Morning (after sunrise)",
+    "B": "Noon",
+    "C": "Afternoon",
+    "D": "Evening",
+    "correct": "A"
+},
+{
+    "question": "What is sought in the last ten nights of Ramadan?",
+    "A": "Eid",
+    "B": "Laylat al-Qadr",
+    "C": "Tarawih",
+    "D": "Qurban",
+    "correct": "B"
+},
+{
+    "question": "What is the Dua said when entering the mosque called?",
+    "A": "Mosque Dua",
+    "B": "Salam Dua",
+    "C": "Thanksgiving Dua",
+    "D": "Entrance Dua",
+    "correct": "D"
+},
+{
+    "question": "What is done with the meat of the sacrifice?",
+    "A": "Only owner eats",
+    "B": "It is distributed",
+    "C": "It is hidden",
+    "D": "It is sold",
+    "correct": "B"
+},
+{
+    "question": "What does Imsak signify?",
+    "A": "Start of fasting",
+    "B": "End of fasting",
+    "C": "Eid time",
+    "D": "Tarawih time",
+    "correct": "A"
+},
+{
+    "question": "What does Sadaqah strengthen?",
+    "A": "Sharing",
+    "B": "Running",
+    "C": "Argument",
+    "D": "Wind",
+    "correct": "A"
+},
+{
+    "question": "In which position is Sajdah performed?",
+    "A": "Sitting",
+    "B": "Standing",
+    "C": "Postrating on the ground",
+    "D": "Running",
+    "correct": "C"
+},
+{
+    "question": "What is said during Ruku in prayer?",
+    "A": "Amin",
+    "B": "Subhana Rabbiyal Azim",
+    "C": "Allahu Akbar",
+    "D": "Bismillah",
+    "correct": "B"
+},
+{
+    "question": "How many rak'ahs is the Sunnah of Morning Prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+},
+{
+    "question": "Which Takbir is taken when going to Sajdah?",
+    "A": "Allahu Akbar",
+    "B": "Alhamdulillah",
+    "C": "Subhanallah",
+    "D": "Bismillah",
+    "correct": "A"
+},
+{
+    "question": "To which side is Salam given at the end of prayer?",
+    "A": "First right then left",
+    "B": "First left then right",
+    "C": "Upwards",
+    "D": "Downwards",
+    "correct": "A"
+},
+{
+    "question": "How many daily prayers are obligatory for a Muslim?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "C"
+},
+{
+    "question": "What is putting water in the mouth during ablution called?",
+    "A": "Madmadah",
+    "B": "Istinshaq",
+    "C": "Wiping",
+    "D": "Taharah",
+    "correct": "A"
+},
+{
+    "question": "What is putting water in the nose during ablution called?",
+    "A": "Madmadah",
+    "B": "Istinshaq",
+    "C": "Tayammum",
+    "D": "Tahiyyat",
+    "correct": "B"
+},
+{
+    "question": "What does a fasting person do in the morning?",
+    "A": "Has Suhoor",
+    "B": "Has Iftar",
+    "C": "Sacrifices animal",
+    "D": "Distributes Zakat al-Fitr",
+    "correct": "A"
+},
+{
+    "question": "When is Iftar performed?",
+    "A": "At Imsak",
+    "B": "At Evening Adhan",
+    "C": "At Noon Adhan",
+    "D": "At Midnight",
+    "correct": "B"
+},
+{
+    "question": "In which months is fasting observed?",
+    "A": "Ramadan",
+    "B": "Muharram",
+    "C": "Shaban",
+    "D": "Rajab",
+    "correct": "A"
+},
+{
+    "question": "Who leads the prayer in the mosque?",
+    "A": "Muezzin",
+    "B": "Imam",
+    "C": "Staff",
+    "D": "Mukhtar",
+    "correct": "B"
+},
+{
+    "question": "Who recites the Adhan?",
+    "A": "Imam",
+    "B": "Muezzin",
+    "C": "Khatib",
+    "D": "Teacher",
+    "correct": "B"
+},
+{
+    "question": "Is Khutbah recited in Eid prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Sometimes",
+    "D": "Only in Ramadan",
+    "correct": "A"
+},
+{
+    "question": "Towards where is the Qibla direction?",
+    "A": "Towards Kaaba",
+    "B": "Towards Medina",
+    "C": "Towards Jerusalem",
+    "D": "Towards the mountain",
+    "correct": "A"
+},
+{
+    "question": "What does Zamm-i Surah mean in prayer?",
+    "A": "Long Surah",
+    "B": "Short Surah recited after Fatiha",
+    "C": "Adhan",
+    "D": "Salam",
+    "correct": "B"
+},
+{
+    "question": "How many rak'ahs can Tarawih prayer be?",
+    "A": "12",
+    "B": "20",
+    "C": "8",
+    "D": "All of them",
+    "correct": "D"
+},
+{
+    "question": "In which months is Hajj worship performed?",
+    "A": "Dhul-Hijjah",
+    "B": "Ramadan",
+    "C": "Muharram",
+    "D": "Shaban",
+    "correct": "A"
+},
+{
+    "question": "What is the purpose of Sadaqah in Islam?",
+    "A": "Sharing and helping",
+    "B": "Shopping",
+    "C": "Sports",
+    "D": "Eating sweets",
+    "correct": "A"
+},
+{
+    "question": "How is sacrifice meat utilized?",
+    "A": "It is distributed",
+    "B": "Only sold",
+    "C": "Eaten by oneself",
+    "D": "Thrown into sea",
+    "correct": "A"
+},
+{
+    "question": "Which night is sought in the last nights of Ramadan?",
+    "A": "Bara'at",
+    "B": "Qadr (Power)",
+    "C": "Miraj",
+    "D": "Mawlid",
+    "correct": "B"
+},
+{
+    "question": "When is Zakat al-Fitr given?",
+    "A": "Before Eid al-Fitr",
+    "B": "Before Eid al-Adha",
+    "C": "Before Tarawih",
+    "D": "At Suhoor",
+    "correct": "A"
+},
+{
+    "question": "Why is Fatiha important in prayer?",
+    "A": "Because it is obligatory (Fard)",
+    "B": "Because it is long",
+    "C": "Because it is Kandil",
+    "D": "Because it is Dua",
+    "correct": "A"
+},
+{
+    "question": "What is collective Quran reading during Ramadan nights called?",
+    "A": "Muqabalah",
+    "B": "Mawlid",
+    "C": "Sermon",
+    "D": "Lesson",
+    "correct": "A"
+},
+{
+    "question": "Which one is not a Fard (obligatory act) of ablution?",
+    "A": "Washing face",
+    "B": "Wiping head",
+    "C": "Using Siwak",
+    "D": "Washing arms",
+    "correct": "C"
+},
+{
+    "question": "How many Ruku are there in prayer? (per rak'ah)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+},
+{
+    "question": "How many Sajdah are there in prayer? (per rak'ah)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+},
+{
+    "question": "What is most recommended when breaking the fast?",
+    "A": "Dates",
+    "B": "Meat",
+    "C": "Honey",
+    "D": "Rice",
+    "correct": "A"
+},
+{
+    "question": "Where is Friday prayer performed?",
+    "A": "In congregation at the mosque",
+    "B": "At home alone",
+    "C": "In the garden",
+    "D": "At the market",
+    "correct": "A"
+},
+{
+    "question": "After which prayer is Witr prayer performed?",
+    "A": "Afternoon",
+    "B": "Night (Isha)",
+    "C": "Friday",
+    "D": "Morning",
+    "correct": "B"
+},
+{
+    "question": "For which situation is Tayammum performed?",
+    "A": "When water cannot be found",
+    "B": "If house is messy",
+    "C": "If there is no phone",
+    "D": "If there is no pen",
+    "correct": "A"
+},
+{
+    "question": "How can a fasting person clean their mouth?",
+    "A": "With Siwak",
+    "B": "With food",
+    "C": "Drinking water",
+    "D": "With vinegar",
+    "correct": "A"
+},
+{
+    "question": "What is the ruling of Witr prayer according to Hanafi school?",
+    "A": "Makruh",
+    "B": "Wajib",
+    "C": "Sunnah",
+    "D": "Mubah",
+    "correct": "B"
+},
+{
+    "question": "When does performing Hajj become obligatory?",
+    "A": "When one has the means (financially and physically)",
+    "B": "When an invitation comes",
+    "C": "When going with a friend",
+    "D": "When it is summer",
+    "correct": "A"
+},
+{
+    "question": "What does giving Zakah purify?",
+    "A": "Financial status / Wealth",
+    "B": "Daily clothes",
+    "C": "House",
+    "D": "Notebook",
+    "correct": "A"
+},
+{
+    "question": "What does a person giving Sadaqah earn?",
+    "A": "Reward (Thawab)",
+    "B": "Money",
+    "C": "Sports",
+    "D": "Food",
+    "correct": "A"
+},
+{
+    "question": "When is Eid prayer performed?",
+    "A": "After sunrise",
+    "B": "At Imsak",
+    "C": "Night",
+    "D": "Evening",
+    "correct": "A"
+},
+{
+    "question": "What happens if one eats unintentionally while fasting?",
+    "A": "Fast is not broken",
+    "B": "Expiation is required",
+    "C": "Sadaqah is required",
+    "D": "Hajj is required",
+    "correct": "A"
+},
+{
+    "question": "Ablution is a condition for which worship?",
+    "A": "Ritual Prayer",
+    "B": "Fasting",
+    "C": "Zakah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Where is Tarawih prayer performed?",
+    "A": "Mosque or home",
+    "B": "Only in mosque",
+    "C": "Only at home",
+    "D": "In the street",
+    "correct": "A"
+},
+{
+    "question": "Which Eid is sacrificing animal related to?",
+    "A": "Eid al-Adha",
+    "B": "Eid al-Fitr",
+    "C": "Nowruz",
+    "D": "Holiday",
+    "correct": "A"
+},
+{
+    "question": "Where are hands raised in prayer?",
+    "A": "To chest level (or ears)",
+    "B": "Over head",
+    "C": "Waist level",
+    "D": "Foot level",
+    "correct": "A"
+},
+{
+    "question": "How is Ramadan being 30 days determined?",
+    "A": "According to the moon",
+    "B": "Sun",
+    "C": "Wind",
+    "D": "Calendar",
+    "correct": "A"
+},
+{
+    "question": "Why are rows (Saff) arranged in the mosque?",
+    "A": "For orderly worship",
+    "B": "For eating",
+    "C": "For library",
+    "D": "For meeting",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah not given?",
+    "A": "To the poor",
+    "B": "To the rich",
+    "C": "To debtors",
+    "D": "To travelers",
+    "correct": "B"
+},
+{
+    "question": "What does Sajdah in prayer signify?",
+    "A": "Submission to Allah",
+    "B": "Eid",
+    "C": "Fasting",
+    "D": "Zakah",
+    "correct": "A"
+},
+{
+    "question": "What is the call recited by Muezzin after Adhan called?",
+    "A": "Iqamah",
+    "B": "Khutbah",
+    "C": "Sermon",
+    "D": "Mawlid",
+    "correct": "A"
+},
+{
+    "question": "Which day of the week is Friday prayer?",
+    "A": "Friday",
+    "B": "Thursday",
+    "C": "Monday",
+    "D": "Sunday",
+    "correct": "A"
+},
+{
+    "question": "Which worship is prioritized most in Ramadan?",
+    "A": "Fasting",
+    "B": "Hajj",
+    "C": "Sacrifice",
+    "D": "Sports",
+    "correct": "A"
+},
+{
+    "question": "What is the name of the first Takbir taken when starting prayer?",
+    "A": "Takbir al-Sharif",
+    "B": "Opening Takbir (Takbir al-Iftitah)",
+    "C": "Dua Takbir",
+    "D": "Amin Takbir",
+    "correct": "B"
+},
+{
+    "question": "When is intention made while performing ablution?",
+    "A": "At the end",
+    "B": "Before starting",
+    "C": "In Ruku",
+    "D": "In Sajdah",
+    "correct": "B"
+},
+{
+    "question": "At what time does fasting start?",
+    "A": "Iftar",
+    "B": "Imsak",
+    "C": "Evening",
+    "D": "Morning",
+    "correct": "B"
+},
+{
+    "question": "What is standing in prayer called?",
+    "A": "Qiyam",
+    "B": "Ruku",
+    "C": "Sajdah",
+    "D": "Qa'dah",
+    "correct": "A"
+},
+{
+    "question": "What does Qa'dah mean?",
+    "A": "Sitting",
+    "B": "Walking",
+    "C": "Qibla",
+    "D": "Khutbah",
+    "correct": "A"
+},
+{
+    "question": "What are the fasts kept after Ramadan called?",
+    "A": "Arafah fast",
+    "B": "Shawwal fast",
+    "C": "Bara'at fast",
+    "D": "Qadr fast",
+    "correct": "B"
+},
+{
+    "question": "In which wealth is Zakah applicable?",
+    "A": "Money and goods",
+    "B": "Only house",
+    "C": "Transportation vehicles",
+    "D": "Mixed items",
+    "correct": "A"
+},
+{
+    "question": "With what intention is Sadaqah given?",
+    "A": "To earn reward (Thawab)",
+    "B": "Show off",
+    "C": "For vacation",
+    "D": "Doing sports",
+    "correct": "A"
+},
+{
+    "question": "What is standing at Arafat during Hajj called?",
+    "A": "Istiqamah",
+    "B": "Waqfah",
+    "C": "Takbir",
+    "D": "Rukn",
+    "correct": "B"
+},
+{
+    "question": "How many days is Eid al-Fitr?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "C"
+},
+{
+    "question": "How many days is Eid al-Adha?",
+    "A": "1",
+    "B": "2",
+    "C": "4",
+    "D": "5",
+    "correct": "C"
+},
+{
+    "question": "Which pillar is bowing down with head in prayer?",
+    "A": "Sajdah",
+    "B": "Ruku",
+    "C": "Qiyam",
+    "D": "Salam",
+    "correct": "B"
+},
+{
+    "question": "What does a fasting person do in the morning?",
+    "A": "Suhoor",
+    "B": "Iftar",
+    "C": "Hajj",
+    "D": "Sacrifice",
+    "correct": "A"
+},
+{
+    "question": "When is Tarawih prayer performed?",
+    "A": "Ramadan nights",
+    "B": "Eid morning",
+    "C": "Friday",
+    "D": "In Rajab",
+    "correct": "A"
+},
+{
+    "question": "What is said in Sajdah in prayer?",
+    "A": "Subhana Rabbiyal Ala",
+    "B": "Alhamdulillah",
+    "C": "Bismillah",
+    "D": "Takbir",
+    "correct": "A"
+},
+{
+    "question": "With what is the head wiped in ablution?",
+    "A": "Dry hand",
+    "B": "Wet hand",
+    "C": "Cloth",
+    "D": "Stone",
+    "correct": "B"
+},
+{
+    "question": "With which time is Witr prayer associated?",
+    "A": "After Night Prayer",
+    "B": "After Morning",
+    "C": "After Noon",
+    "D": "After Evening",
+    "correct": "A"
+},
+{
+    "question": "What is Muqabalah?",
+    "A": "Reciting Quran reciprocally",
+    "B": "Tarawih",
+    "C": "Sajdah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Which of the following is one of the Sunnahs of ablution?",
+    "A": "Using Siwak",
+    "B": "Reciting Adhan",
+    "C": "Performing Sajdah",
+    "D": "Laughing",
+    "correct": "A"
+},
+{
+    "question": "In which part is Fatiha recited in prayer?",
+    "A": "Standing",
+    "B": "Sitting",
+    "C": "In Ruku",
+    "D": "In Sajdah",
+    "correct": "A"
+},
+{
+    "question": "When does Zakah become obligatory?",
+    "A": "When one becomes rich (nisab level)",
+    "B": "When going to Hajj",
+    "C": "When sleeping",
+    "D": "When traveling",
+    "correct": "A"
+},
+{
+    "question": "What is the help given to the poor in Ramadan called?",
+    "A": "Zakat al-Fitr",
+    "B": "Sadaqah",
+    "C": "Qurban",
+    "D": "Zakah",
+    "correct": "A"
+},
+{
+    "question": "Where is the longest pause in prayer?",
+    "A": "Qiyam",
+    "B": "Sajdah",
+    "C": "Ruku",
+    "D": "Salam",
+    "correct": "A"
+},
+{
+    "question": "Which limb is washed last in ablution?",
+    "A": "Arm",
+    "B": "Foot",
+    "C": "Face",
+    "D": "Head",
+    "correct": "B"
+},
+{
+    "question": "Who must perform obligatory prayer?",
+    "A": "Sane and pubescent Muslims",
+    "B": "Only elderly",
+    "C": "Children",
+    "D": "Travelers",
+    "correct": "A"
+},
+{
+    "question": "When does Suhoor time end?",
+    "A": "At Imsak",
+    "B": "In the evening",
+    "C": "At noon",
+    "D": "In the afternoon",
+    "correct": "A"
+},
+{
+    "question": "What is the purpose of distributing sacrifice meat?",
+    "A": "Sharing",
+    "B": "Selling",
+    "C": "Collecting",
+    "D": "Hiding",
+    "correct": "A"
+},
+{
+    "question": "What is the last sitting in prayer called?",
+    "A": "Last Qa'dah",
+    "B": "Last Ruku",
+    "C": "Last Sajdah",
+    "D": "Last Takbir",
+    "correct": "A"
+},
+{
+    "question": "To whom is Hajj obligatory?",
+    "A": "Those who have the means",
+    "B": "All children",
+    "C": "Travelers",
+    "D": "Vacationers",
+    "correct": "A"
+},
+{
+    "question": "What type of worship is fasting?",
+    "A": "Physical worship",
+    "B": "Financial worship",
+    "C": "Vocal worship",
+    "D": "Social worship",
+    "correct": "A"
+},
+{
+    "question": "Which category of worship does Zakah fall into?",
+    "A": "Financial worship",
+    "B": "Physical worship",
+    "C": "Verbal worship",
+    "D": "Hidden worship",
+    "correct": "A"
+},
+{
+    "question": "Which is the first pillar of Islam?",
+    "A": "Shahada",
+    "B": "Prayer",
+    "C": "Fasting",
+    "D": "Hajj",
+    "correct": "A"
+},
+{
+    "question": "Towards where does one turn during prayer?",
+    "A": "Kaaba",
+    "B": "Mountain",
+    "C": "Sun",
+    "D": "Moon",
+    "correct": "A"
+},
+{
+    "question": "Which limbs are wiped in Tayammum?",
+    "A": "Face and arms",
+    "B": "Feet",
+    "C": "Waist",
+    "D": "Neck",
+    "correct": "A"
+},
+{
+    "question": "Which fast is recommended on the Day of Arafah?",
+    "A": "Arafah fast",
+    "B": "Qadr fast",
+    "C": "Hajj fast",
+    "D": "Friday fast",
+    "correct": "A"
+},
+{
+    "question": "What is done when exiting prayer?",
+    "A": "Salam is given",
+    "B": "Qa'dah is performed",
+    "C": "Takbir is taken",
+    "D": "Ruku is performed",
+    "correct": "A"
+},
+{
+    "question": "Which worship is given more importance in the middle of Ramadan?",
+    "A": "Tarawih and Muqabalah",
+    "B": "Hajj",
+    "C": "Walking",
+    "D": "Painting",
+    "correct": "A"
+},
+{
+    "question": "What is the purpose of worship in Islam?",
+    "A": "Servitude to Allah",
+    "B": "Prestige",
+    "C": "Deed",
+    "D": "Holiday",
+    "correct": "A"
+},
+{
+    "question": "Which one is not necessary for performing prayer?",
+    "A": "Combing hair",
+    "B": "Ablution",
+    "C": "Qibla",
+    "D": "Covering Awrah",
+    "correct": "A"
+},
+{
+    "question": "How is Zakah given?",
+    "A": "Voluntarily and secretly",
+    "B": "Forced",
+    "C": "Loudly",
+    "D": "Collectively",
+    "correct": "A"
+},
+{
+    "question": "In which month is Laylat al-Qadr definitely known to be?",
+    "A": "Ramadan",
+    "B": "Rajab",
+    "C": "Shaban",
+    "D": "Dhul-Hijjah",
+    "correct": "A"
+},
+{
+    "question": "How many nights is Tarawih prayer performed?",
+    "A": "Throughout Ramadan",
+    "B": "On Eid",
+    "C": "On Arafah",
+    "D": "On Kandil",
+    "correct": "A"
+},
+{
+    "question": "How many Takbirs are taken in Eid prayer? (Hanafi)",
+    "A": "6",
+    "B": "8",
+    "C": "10",
+    "D": "2",
+    "correct": "A"
+},
+{
+    "question": "When does Sadaka-i Fitr become Wajib?",
+    "A": "End of Ramadan",
+    "B": "Hajj time",
+    "C": "After Eid",
+    "D": "After Tarawih",
+    "correct": "A"
+},
+{
+    "question": "Which worship is performed on the Day of Arafah?",
+    "A": "Standing at Arafat (Waqfah)",
+    "B": "Eid",
+    "C": "Tarawih",
+    "D": "Sacrifice",
+    "correct": "A"
+},
+{
+    "question": "From which material is Tayammum performed?",
+    "A": "Clean soil or stone",
+    "B": "Water",
+    "C": "Oil",
+    "D": "Herbs",
+    "correct": "A"
+},
+{
+    "question": "Who should be considered first when giving Zakah?",
+    "A": "Real needy people",
+    "B": "The rich",
+    "C": "Friends",
+    "D": "Celebrities",
+    "correct": "A"
+},
+{
+    "question": "How many times is Salam given in prayer?",
+    "A": "1 time",
+    "B": "2 times",
+    "C": "3 times",
+    "D": "4 times",
+    "correct": "B"
+},
+{
+    "question": "Why is water put in the mouth during ablution?",
+    "A": "For cleanliness",
+    "B": "For beauty",
+    "C": "For voice",
+    "D": "Habit",
+    "correct": "A"
+},
+{
+    "question": "Which worship is given more importance in Ramadan?",
+    "A": "Tarawih and Fasting",
+    "B": "Friday",
+    "C": "Sacrifice",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "Where is it wiped first in Tayammum?",
+    "A": "Arm",
+    "B": "Face",
+    "C": "Foot",
+    "D": "Head",
+    "correct": "B"
+},
+{
+    "question": "Which worship is performed on Eid al-Adha?",
+    "A": "Sacrificing animal",
+    "B": "Fasting",
+    "C": "Muqabalah",
+    "D": "Tarawih",
+    "correct": "A"
+},
+{
+    "question": "What is turning towards Kaaba called?",
+    "A": "Qibla",
+    "B": "Qira'at",
+    "C": "Sajdah",
+    "D": "Takbir",
+    "correct": "A"
+},
+{
+    "question": "What does Iftar signify?",
+    "A": "Time to break fast",
+    "B": "Suhoor time",
+    "C": "Eid time",
+    "D": "Friday time",
+    "correct": "A"
+},
+{
+    "question": "In which position is Ruku performed in prayer?",
+    "A": "While standing",
+    "B": "While sitting",
+    "C": "In Sajdah",
+    "D": "In Salam",
+    "correct": "A"
+},
+{
+    "question": "Why is giving Sadaqah important?",
+    "A": "Encourages sharing",
+    "B": "Provides prestige",
+    "C": "Wins race",
+    "D": "For sports",
+    "correct": "A"
+},
+{
+    "question": "Which Surah is obligatory to recite in prayer?",
+    "A": "Fatiha",
+    "B": "Ikhlas",
+    "C": "Nas",
+    "D": "Asr",
+    "correct": "A"
+},
+{
+    "question": "When is Suhoor performed?",
+    "A": "Before Imsak",
+    "B": "At Iftar",
+    "C": "At noon",
+    "D": "On Eid",
+    "correct": "A"
+},
+{
+    "question": "What is the speech read in Friday prayer called?",
+    "A": "Khutbah",
+    "B": "Iqamah",
+    "C": "Dua",
+    "D": "Contemplation",
+    "correct": "A"
+},
+{
+    "question": "How is sacrifice meat utilized?",
+    "A": "It is distributed",
+    "B": "It is sold",
+    "C": "It is hidden",
+    "D": "It is thrown away",
+    "correct": "A"
+},
+{
+    "question": "What is the long night worship performed in Ramadan called?",
+    "A": "Tarawih",
+    "B": "Qurban",
+    "C": "Friday",
+    "D": "Arafah",
+    "correct": "A"
+},
+{
+    "question": "Which worship cannot be performed without ablution?",
+    "A": "Ritual Prayer",
+    "B": "Fasting",
+    "C": "Zakah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "In which month is Hajj performed?",
+    "A": "Dhul-Hijjah",
+    "B": "Ramadan",
+    "C": "Rajab",
+    "D": "Shaban",
+    "correct": "A"
+},
+{
+    "question": "On which day does Eid al-Fitr start?",
+    "A": "The day after Arafah",
+    "B": "On Arafah day",
+    "C": "On Friday",
+    "D": "On Tuesday",
+    "correct": "A"
+},
+{
+    "question": "At which time is Witr prayer performed?",
+    "A": "After Night Prayer",
+    "B": "After Noon",
+    "C": "After Afternoon",
+    "D": "After Morning",
+    "correct": "A"
+},
+{
+    "question": "Which worship category does giving Zakah fall into?",
+    "A": "Financial worship",
+    "B": "Physical worship",
+    "C": "Verbal worship",
+    "D": "Symbolic worship",
+    "correct": "A"
+},
+{
+    "question": "What is reciting Quran collectively in Ramadan called?",
+    "A": "Muqabalah",
+    "B": "Sajdah",
+    "C": "Tawaf",
+    "D": "Waqfah",
+    "correct": "A"
+},
+{
+    "question": "In which situation is Tayammum performed?",
+    "A": "If water is not found",
+    "B": "If very hot",
+    "C": "When hungry",
+    "D": "When sleeping",
+    "correct": "A"
+},
+{
+    "question": "Which one is not a Fard of ablution?",
+    "A": "Siwak",
+    "B": "Washing face",
+    "C": "Washing arm",
+    "D": "Wiping head",
+    "correct": "A"
+},
+{
+    "question": "What is most recommended when breaking the fast?",
+    "A": "Dates",
+    "B": "Sweets",
+    "C": "Rice",
+    "D": "Tea",
+    "correct": "A"
+},
+{
+    "question": "What is done at the end of prayer?",
+    "A": "Salam is given",
+    "B": "Takbir is taken",
+    "C": "Sermon is read",
+    "D": "Dua is made",
+    "correct": "A"
+},
+{
+    "question": "What does Qiyam mean?",
+    "A": "Standing",
+    "B": "Sitting",
+    "C": "Bowing",
+    "D": "Salam",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah not given?",
+    "A": "To the rich",
+    "B": "To the poor",
+    "C": "To debtors",
+    "D": "To travelers",
+    "correct": "A"
+},
+{
+    "question": "What worship is sacrificing animal?",
+    "A": "Getting closer to Allah",
+    "B": "Friday",
+    "C": "Tarawih",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "Why is Suhoor done?",
+    "A": "To prepare for fasting",
+    "B": "For Eid",
+    "C": "For sacrifice",
+    "D": "For sports",
+    "correct": "A"
+},
+{
+    "question": "In which part is Dua made in prayer?",
+    "A": "Only sitting",
+    "B": "Sajdah",
+    "C": "Ruku",
+    "D": "Standing",
+    "correct": "A"
+},
+{
+    "question": "Where is Friday prayer performed?",
+    "A": "In congregation at mosque",
+    "B": "At home",
+    "C": "In forest",
+    "D": "On the road",
+    "correct": "A"
+},
+{
+    "question": "For what purpose is Zakat al-Fitr given?",
+    "A": "Helping the poor",
+    "B": "Travel",
+    "C": "Sacrifice",
+    "D": "Fasting",
+    "correct": "A"
+},
+{
+    "question": "When is intention made in Tayammum?",
+    "A": "At the beginning",
+    "B": "At the end",
+    "C": "In Sajdah",
+    "D": "In Ruku",
+    "correct": "A"
+},
+{
+    "question": "Which worship is performed on the Day of Arafah?",
+    "A": "Standing at Arafat",
+    "B": "Eid",
+    "C": "Tarawih",
+    "D": "Hajj Tawaf",
+    "correct": "A"
+},
+{
+    "question": "Which worship is done in the month of Dhul-Hijjah?",
+    "A": "Hajj",
+    "B": "Fasting",
+    "C": "Tarawih",
+    "D": "Zakat al-Fitr",
+    "correct": "A"
+},
+{
+    "question": "What does giving Sadaqah earn?",
+    "A": "Reward (Thawab)",
+    "B": "Money",
+    "C": "Items",
+    "D": "Sports",
+    "correct": "A"
+},
+{
+    "question": "To how many sides is Salam given in prayer?",
+    "A": "2",
+    "B": "1",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+},
+{
+    "question": "In which case is Fidyah given?",
+    "A": "For those who cannot fast",
+    "B": "For sacrifice",
+    "C": "For Hajj",
+    "D": "For Friday",
+    "correct": "A"
+},
+{
+    "question": "What is the name of night worship performed in Ramadan?",
+    "A": "Tarawih",
+    "B": "Muqabalah",
+    "C": "Sajdah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "What is recommended to do at the end of ablution?",
+    "A": "Dua",
+    "B": "Eating",
+    "C": "Sleeping",
+    "D": "Traveling",
+    "correct": "A"
+},
+{
+    "question": "What is reciting Quran while standing in prayer called?",
+    "A": "Qira'at",
+    "B": "Qibla",
+    "C": "Qa'dah",
+    "D": "Sajdah",
+    "correct": "A"
+},
+{
+    "question": "What feeling does giving Zakah strengthen?",
+    "A": "Sharing",
+    "B": "Anger",
+    "C": "Rage",
+    "D": "Competition",
+    "correct": "A"
+},
+{
+    "question": "What are animals sacrificed called?",
+    "A": "Qurban (Sacrificial)",
+    "B": "Cat",
+    "C": "Bird",
+    "D": "Horse",
+    "correct": "A"
+},
+{
+    "question": "What is the essence of worship in Islam?",
+    "A": "Intention",
+    "B": "Sound",
+    "C": "Speed",
+    "D": "Shape",
+    "correct": "A"
+},
+{
+    "question": "Which day is the first day of Eid al-Fitr?",
+    "A": "Candy Holiday day",
+    "B": "Arafah day",
+    "C": "Sacrifice day",
+    "D": "Friday",
+    "correct": "A"
+},
+{
+    "question": "What material is required for Tayammum?",
+    "A": "Clean soil",
+    "B": "Water",
+    "C": "Wood",
+    "D": "Iron",
+    "correct": "A"
+},
+{
+    "question": "Where does one look first in prayer?",
+    "A": "Place of Sajdah",
+    "B": "Right",
+    "C": "Left",
+    "D": "Sky",
+    "correct": "A"
+},
+{
+    "question": "Which worship can be done after taking ablution?",
+    "A": "Prayer",
+    "B": "Shopping",
+    "C": "Sports",
+    "D": "Eating",
+    "correct": "A"
+},
+{
+    "question": "What does Qiyam signify in prayer?",
+    "A": "Standing",
+    "B": "Sitting",
+    "C": "Sajdah",
+    "D": "Ruku",
+    "correct": "A"
+},
+{
+    "question": "What is the first meal eaten after breaking fast called?",
+    "A": "Iftar",
+    "B": "Suhoor",
+    "C": "Zakat al-Fitr",
+    "D": "Zakah",
+    "correct": "A"
+},
+{
+    "question": "How many washings are Fard in ablution?",
+    "A": "4",
+    "B": "2",
+    "C": "3",
+    "D": "6",
+    "correct": "A"
+},
+{
+    "question": "With what is Tayammum performed?",
+    "A": "Clean soil",
+    "B": "Water",
+    "C": "Oil",
+    "D": "Soap",
+    "correct": "A"
+},
+{
+    "question": "What is done after Ruku in prayer?",
+    "A": "Going to Sajdah",
+    "B": "Sitting",
+    "C": "Giving Salam",
+    "D": "Making Intention",
+    "correct": "A"
+},
+{
+    "question": "Which value does giving Zakah strengthen?",
+    "A": "Kindness and sharing",
+    "B": "Argument",
+    "C": "Competition",
+    "D": "Anger",
+    "correct": "A"
+},
+{
+    "question": "Why is Suhoor done?",
+    "A": "To be able to fast all day",
+    "B": "For Eid",
+    "C": "For sports",
+    "D": "For sacrifice",
+    "correct": "A"
+},
+{
+    "question": "What is the first thing to be done in ablution?",
+    "A": "Intention",
+    "B": "Sajdah",
+    "C": "Salam",
+    "D": "Takbir",
+    "correct": "A"
+},
+{
+    "question": "With which worship is Witr prayer related?",
+    "A": "Night worship",
+    "B": "Friday",
+    "C": "Hajj",
+    "D": "Sacrifice",
+    "correct": "A"
+},
+{
+    "question": "Which type of worship increases in Ramadan?",
+    "A": "Fasting",
+    "B": "Hajj",
+    "C": "Sacrifice",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "Where are hands raised in prayer?",
+    "A": "To chest level",
+    "B": "To foot level",
+    "C": "Over head",
+    "D": "To waist level",
+    "correct": "A"
+},
+{
+    "question": "At which time is Friday prayer performed?",
+    "A": "Noon time",
+    "B": "Morning time",
+    "C": "Evening time",
+    "D": "Afternoon time",
+    "correct": "A"
+},
+{
+    "question": "To whom can sacrifice meat be distributed?",
+    "A": "To the poor",
+    "B": "To pets",
+    "C": "Only to neighbors",
+    "D": "To rich",
+    "correct": "A"
+},
+{
+    "question": "To whom is fasting obligatory?",
+    "A": "Sane and pubescent Muslims",
+    "B": "Children",
+    "C": "Non-Muslims who are not sick",
+    "D": "Guests",
+    "correct": "A"
+},
+{
+    "question": "When is Zakat al-Fitr given?",
+    "A": "End of Ramadan",
+    "B": "During Eid al-Adha",
+    "C": "In Hajj",
+    "D": "In Suhoor",
+    "correct": "A"
+},
+{
+    "question": "What does Salam signify in prayer?",
+    "A": "That prayer has ended",
+    "B": "That prayer has started",
+    "C": "That Ruku is done",
+    "D": "That it is Dua",
+    "correct": "A"
+},
+{
+    "question": "Where can Tarawih prayer be performed in Ramadan?",
+    "A": "Mosque or home",
+    "B": "Only in mosque",
+    "C": "Only at home",
+    "D": "In the street",
+    "correct": "A"
+},
+{
+    "question": "What is done first when breaking fast?",
+    "A": "Saying Bismillah",
+    "B": "Taking Takbir",
+    "C": "Performing prayer",
+    "D": "Reciting Adhan",
+    "correct": "A"
+},
+{
+    "question": "Which one is Sunnah of ablution?",
+    "A": "Washing three times",
+    "B": "Washing once",
+    "C": "Reading aloud",
+    "D": "Washing eyes",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah given with priority?",
+    "A": "Close circle and poor",
+    "B": "Rich people",
+    "C": "Only acquaintances",
+    "D": "Equal to everyone",
+    "correct": "A"
+},
+{
+    "question": "Who recites the Friday Sermon?",
+    "A": "Imam",
+    "B": "Muezzin",
+    "C": "Teacher",
+    "D": "Mukhtar",
+    "correct": "A"
+},
+{
+    "question": "In which worship is Qibla mandatory?",
+    "A": "Ritual Prayer",
+    "B": "Fasting",
+    "C": "Zakah",
+    "D": "Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Which limb is cleaned first in Tayammum?",
+    "A": "Face",
+    "B": "Foot",
+    "C": "Leg",
+    "D": "Chest",
+    "correct": "A"
+},
+{
+    "question": "What is the part recited while standing in prayer called?",
+    "A": "Qira'at",
+    "B": "Tahiyyat",
+    "C": "Takbir",
+    "D": "Sermon",
+    "correct": "A"
+},
+{
+    "question": "Why are the last ten days of Ramadan important?",
+    "A": "For Laylat al-Qadr",
+    "B": "For sacrifice",
+    "C": "For Hajj",
+    "D": "For Friday",
+    "correct": "A"
+},
+{
+    "question": "What is done to the head during ablution?",
+    "A": "It is wiped (Mesh)",
+    "B": "It is washed",
+    "C": "It is dried",
+    "D": "Oil is applied",
+    "correct": "A"
+},
+{
+    "question": "At which time is Eid prayer performed?",
+    "A": "After sunrise",
+    "B": "At Imsak",
+    "C": "In afternoon",
+    "D": "Night",
+    "correct": "A"
+},
+{
+    "question": "What does Sadaqah increase?",
+    "A": "Reward",
+    "B": "Fight",
+    "C": "Speed",
+    "D": "Voice",
+    "correct": "A"
+},
+{
+    "question": "Which Surah is definitely recited in prayer?",
+    "A": "Fatiha",
+    "B": "Ikhlas",
+    "C": "Asr",
+    "D": "Nas",
+    "correct": "A"
+},
+{
+    "question": "Which Eid does sacrificing animal belong to?",
+    "A": "Eid al-Adha",
+    "B": "Eid al-Fitr",
+    "C": "Friday",
+    "D": "Arafah",
+    "correct": "A"
+},
+{
+    "question": "What type of worship is fasting?",
+    "A": "Physical worship",
+    "B": "Financial worship",
+    "C": "Tongue worship",
+    "D": "Social worship",
+    "correct": "A"
+},
+{
+    "question": "What should be done when ablution is broken?",
+    "A": "Take ablution again",
+    "B": "Make Dua",
+    "C": "Perform Hajj",
+    "D": "Give Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "Is having Suhoor Sunnah?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Sometimes",
+    "D": "On Friday",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is Witr prayer? (Hanafi)",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "1",
+    "correct": "A"
+},
+{
+    "question": "Where are hands raised at the end of prayer?",
+    "A": "To chest level for Dua",
+    "B": "To waist level",
+    "C": "To foot level",
+    "D": "To head level",
+    "correct": "A"
+},
+{
+    "question": "Who is Zakat al-Fitr for?",
+    "A": "Helping the poor",
+    "B": "Gift to rich",
+    "C": "Treat to children",
+    "D": "Treat to guest",
+    "correct": "A"
+},
+{
+    "question": "What is the special prayer performed during Ramadan nights called?",
+    "A": "Tarawih",
+    "B": "Friday",
+    "C": "Eid",
+    "D": "Hajj",
+    "correct": "A"
+},
+{
+    "question": "What becomes easier after taking ablution?",
+    "A": "Performing prayer",
+    "B": "Doing sports",
+    "C": "Eating food",
+    "D": "Chatting",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is Friday prayer? (Fard)",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "A"
+},
+{
+    "question": "For which worship is Tayammum used?",
+    "A": "Ritual Prayer",
+    "B": "Travel",
+    "C": "Eid",
+    "D": "Sacrifice",
+    "correct": "A"
+},
+{
+    "question": "What is the dictionary meaning of Zakah?",
+    "A": "Purification and increase",
+    "B": "Travel",
+    "C": "Sports",
+    "D": "Race",
+    "correct": "A"
+},
+{
+    "question": "What is the purpose of dividing sacrifice meat into three?",
+    "A": "Sharing with family, relatives and poor",
+    "B": "Selling",
+    "C": "Hiding",
+    "D": "Show off",
+    "correct": "A"
+},
+{
+    "question": "Which Dua is recited while sitting in prayer?",
+    "A": "Tahiyyat",
+    "B": "Ikhlas",
+    "C": "Asr",
+    "D": "Falaq",
+    "correct": "A"
+},
+{
+    "question": "Which month is the month where fasting is obligatory?",
+    "A": "Ramadan",
+    "B": "Hajj",
+    "C": "Sacrifice",
+    "D": "Gratitude",
+    "correct": "A"
+},
+{
+    "question": "Where can ablution be performed?",
+    "A": "Everywhere clean",
+    "B": "Only in mosque",
+    "C": "Only at home",
+    "D": "Only in bathroom",
+    "correct": "A"
+},
+{
+    "question": "In which month is Laylat al-Qadr sought?",
+    "A": "Ramadan",
+    "B": "Muharram",
+    "C": "Shaban",
+    "D": "Rajab",
+    "correct": "A"
+},
+{
+    "question": "What element encourages giving Sadaqah?",
+    "A": "Reward and sharing",
+    "B": "Race",
+    "C": "Show off",
+    "D": "Social media",
+    "correct": "A"
+},
+{
+    "question": "What is said when rising from Ruku in prayer?",
+    "A": "Sami'Allahu liman hamidah",
+    "B": "Subhana Rabbiyal Ala",
+    "C": "Amin",
+    "D": "Bismillah",
+    "correct": "A"
+},
+{
+    "question": "What does Imsak signify?",
+    "A": "Start of fasting",
+    "B": "End of fasting",
+    "C": "Eid time",
+    "D": "Friday time",
+    "correct": "A"
+},
+{
+    "question": "In which situation is Tayammum preferred?",
+    "A": "When water is not found",
+    "B": "When tired",
+    "C": "When full",
+    "D": "When hot",
+    "correct": "A"
+},
+{
+    "question": "What is the voluntary help done in Ramadan called?",
+    "A": "Zakat al-Fitr",
+    "B": "Sacrifice",
+    "C": "Travel",
+    "D": "Tawaf",
+    "correct": "A"
+},
+{
+    "question": "How many times is the face washed during ablution? (Sunnah)",
+    "A": "Three times",
+    "B": "One time",
+    "C": "Two times",
+    "D": "Four times",
+    "correct": "A"
+},
+{
+    "question": "Which Takbir is taken when going to Sajdah?",
+    "A": "Allahu Akbar",
+    "B": "Amin",
+    "C": "Bismillah",
+    "D": "Subhanallah",
+    "correct": "A"
+},
+{
+    "question": "What does Zakah aim for?",
+    "A": "Purification of wealth",
+    "B": "Rising of voice",
+    "C": "Doing sports",
+    "D": "Traveling",
+    "correct": "A"
+},
+{
+    "question": "Who is one part given to when dividing sacrifice meat?",
+    "A": "To the poor",
+    "B": "To the butcher",
+    "C": "Only to family",
+    "D": "To the seller",
+    "correct": "A"
+},
+{
+    "question": "In which month is Tarawih prayer performed?",
+    "A": "Ramadan",
+    "B": "Shaban",
+    "C": "Rajab",
+    "D": "Muharram",
+    "correct": "A"
+},
+{
+    "question": "Which Dua is recited while sitting in prayer?",
+    "A": "Tahiyyat",
+    "B": "Ikhlas",
+    "C": "Qadr",
+    "D": "Falaq",
+    "correct": "A"
+},
+{
+    "question": "What is the ruling of having Suhoor?",
+    "A": "Sunnah",
+    "B": "Fard",
+    "C": "Wajib",
+    "D": "Holiday",
+    "correct": "A"
+},
+{
+    "question": "When does fasting end?",
+    "A": "When Evening Adhan is recited",
+    "B": "When Noon Adhan is recited",
+    "C": "At Afternoon time",
+    "D": "Midnight",
+    "correct": "A"
+},
+{
+    "question": "Why is Zakat al-Fitr given?",
+    "A": "To support the poor",
+    "B": "For sports",
+    "C": "for travel",
+    "D": "For Eid",
+    "correct": "A"
+},
+{
+    "question": "Where is Hajj worship performed?",
+    "A": "Mecca",
+    "B": "Jerusalem",
+    "C": "Damascus",
+    "D": "Medina",
+    "correct": "A"
+},
+{
+    "question": "Which one is not a Fard of prayer?",
+    "A": "Tasbih",
+    "B": "Ruku",
+    "C": "Sajdah",
+    "D": "Qiyam",
+    "correct": "A"
+},
+{
+    "question": "Up to where are arms washed in ablution?",
+    "A": "Up to elbows",
+    "B": "Up to shoulders",
+    "C": "Up to palms",
+    "D": "Up to fingertips",
+    "correct": "A"
+},
+{
+    "question": "What is paid most attention to in Ramadan?",
+    "A": "Observing fast",
+    "B": "Traveling",
+    "C": "Having fun",
+    "D": "Eating food",
+    "correct": "A"
+},
+{
+    "question": "What type of worship is Zakah?",
+    "A": "Financial worship",
+    "B": "Social worship",
+    "C": "Vocal worship",
+    "D": "Thought worship",
+    "correct": "A"
+},
+{
+    "question": "How many times is prayer performed?",
+    "A": "5 times",
+    "B": "3 times",
+    "C": "7 times",
+    "D": "6 times",
+    "correct": "A"
+},
+{
+    "question": "What does sacrificing animal signify?",
+    "A": "Getting closer to Allah",
+    "B": "Taking vacation",
+    "C": "Talking",
+    "D": "Walking",
+    "correct": "A"
+},
+{
+    "question": "What is done when ablution is broken?",
+    "A": "Ablution is taken again",
+    "B": "Go to Sajdah",
+    "C": "Pray Tarawih",
+    "D": "Recite Dua",
+    "correct": "A"
+},
+{
+    "question": "When is Friday sermon (Khutbah) recited?",
+    "A": "Before Fard prayer",
+    "B": "After prayer",
+    "C": "Morning",
+    "D": "Evening",
+    "correct": "A"
+},
+{
+    "question": "Who is Zakat al-Fitr obligatory for?",
+    "A": "Muslims with financial means",
+    "B": "Children",
+    "C": "Non-Muslims",
+    "D": "Those who are not sick",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah given?",
+    "A": "To those in need",
+    "B": "To the rich",
+    "C": "To teachers",
+    "D": "To tradesmen",
+    "correct": "A"
+},
+{
+    "question": "With which limbs is Tayammum performed?",
+    "A": "Face and arms",
+    "B": " Feet and knees",
+    "C": "Head and neck",
+    "D": "Back and waist",
+    "correct": "A"
+},
+{
+    "question": "When is Iftar performed?",
+    "A": "When Evening Adhan is recited",
+    "B": "When Noon Adhan is recited",
+    "C": "When sun rises",
+    "D": "At Night Adhan",
+    "correct": "A"
+},
+{
+    "question": "What does Sadaqah increase?",
+    "A": "Reward",
+    "B": "Voice",
+    "C": "Argument",
+    "D": "Speed",
+    "correct": "A"
+},
+{
+    "question": "How many times is Sajdah performed in prayer? (per rak'ah)",
+    "A": "2 times",
+    "B": "1 time",
+    "C": "3 times",
+    "D": "4 times",
+    "correct": "A"
+},
+{
+    "question": "How many days does Ramadan last?",
+    "A": "29-30 days",
+    "B": "25 days",
+    "C": "40 days",
+    "D": "15 days",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is Eid prayer?",
+    "A": "2 rak'ahs",
+    "B": "3 rak'ahs",
+    "C": "4 rak'ahs",
+    "D": "6 rak'ahs",
+    "correct": "A"
+},
+{
+    "question": "After which time is Witr prayer performed?",
+    "A": "Night (Isha)",
+    "B": "Noon",
+    "C": "Afternoon",
+    "D": "Morning",
+    "correct": "A"
+},
+{
+    "question": "On which days is sacrifice performed?",
+    "A": "On days of Eid al-Adha",
+    "B": "In Ramadan",
+    "C": "On Friday",
+    "D": "On Arafah day",
+    "correct": "A"
+},
+{
+    "question": "What does giving Zakah contribute to?",
+    "A": "Community solidarity",
+    "B": "Race",
+    "C": "Argument",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "When is Suhoor performed?",
+    "A": "Before Imsak",
+    "B": "After Iftar",
+    "C": "Evening",
+    "D": "Noon",
+    "correct": "A"
+},
+{
+    "question": "What does Ruku signify in prayer?",
+    "A": "Bowing",
+    "B": "Running",
+    "C": "Sitting",
+    "D": "Walking",
+    "correct": "A"
+},
+{
+    "question": "What type of cleanliness is ablution?",
+    "A": "Religious cleanliness",
+    "B": "Mandatory meal",
+    "C": "Social activity",
+    "D": "Entertainment",
+    "correct": "A"
+},
+{
+    "question": "What type of prayer is Tarawih?",
+    "A": "Performed on Ramadan nights",
+    "B": "Performed every day",
+    "C": "Performed only on Friday",
+    "D": "Performed during travel",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakat al-Fitr Wajib?",
+    "A": "Muslims with financial means",
+    "B": "Children",
+    "C": "Non-Muslims",
+    "D": "Those who are not sick",
+    "correct": "A"
+},
+{
+    "question": "How many days does Eid al-Fitr last?",
+    "A": "3 days",
+    "B": "1 day",
+    "C": "2 days",
+    "D": "4 days",
+    "correct": "A"
+},
+{
+    "question": "How many days does Eid al-Adha last?",
+    "A": "4 days",
+    "B": "3 days",
+    "C": "2 days",
+    "D": "1 day",
+    "correct": "A"
+},
+{
+    "question": "Which one is Fard in ablution?",
+    "A": "Washing face",
+    "B": "Combing hair",
+    "C": "Reading aloud",
+    "D": "Laughing",
+    "correct": "A"
+},
+{
+    "question": "Which feeling does giving Sadaqah develop?",
+    "A": "Compassion",
+    "B": "Anger",
+    "C": "Competition",
+    "D": "Secrecy",
+    "correct": "A"
+},
+{
+    "question": "What is the number of rak'ahs of Witr prayer? (Hanafi)",
+    "A": "3",
+    "B": "1",
+    "C": "2",
+    "D": "4",
+    "correct": "A"
+},
+{
+    "question": "Which part of prayer is Qiyam?",
+    "A": "Standing",
+    "B": "Ruku",
+    "C": "Sajdah",
+    "D": "Sitting",
+    "correct": "A"
+},
+{
+    "question": "What is required for Tayammum?",
+    "A": "Clean soil",
+    "B": "Water",
+    "C": "Sugar",
+    "D": "Wood",
+    "correct": "A"
+},
+{
+    "question": "Which worship category does sacrificing animal fall into?",
+    "A": "Worship to get closer to Allah",
+    "B": "Social activity",
+    "C": "Sports",
+    "D": "Entertainment",
+    "correct": "A"
+},
+{
+    "question": "Which worship is Zakat al-Fitr related to?",
+    "A": "Ramadan fasting",
+    "B": "Friday prayer",
+    "C": "Sacrifice",
+    "D": "Hajj",
+    "correct": "A"
+},
+{
+    "question": "Which worship becomes possible after taking ablution?",
+    "A": "Performing prayer",
+    "B": "Painting",
+    "C": "Doing sports",
+    "D": "Raising voice",
+    "correct": "A"
+},
+{
+    "question": "What is the sign given to right and left at end of prayer called?",
+    "A": "Salam",
+    "B": "Sajdah",
+    "C": "Ruku",
+    "D": "Takbir",
+    "correct": "A"
+},
+{
+    "question": "For which situation is ablution mandatory?",
+    "A": "Performing prayer",
+    "B": "Fasting",
+    "C": "Giving Sadaqah",
+    "D": "Sacrificing animal",
+    "correct": "A"
+},
+{
+    "question": "With what does Suhoor time end?",
+    "A": "Imsak",
+    "B": "Evening Adhan",
+    "C": "Noon time",
+    "D": "Midnight",
+    "correct": "A"
+},
+{
+    "question": "With what intention is sacrifice performed?",
+    "A": "For sake of Allah",
+    "B": "For gift",
+    "C": "For holiday",
+    "D": "For travel",
+    "correct": "A"
+},
+{
+    "question": "Which worship is specific to Ramadan month?",
+    "A": "Fasting",
+    "B": "Hajj",
+    "C": "Friday",
+    "D": "Sacrifice",
+    "correct": "A"
+},
+{
+    "question": "What is the other name of Zakah?",
+    "A": "Sadaqah",
+    "B": "Zakat al-Fitr",
+    "C": "Sadaqah al-Fitr",
+    "D": "Cleanliness",
+    "correct": "D"
+},
+{
+    "question": "Which worship does Tayammum enable?",
+    "A": "Performing prayer",
+    "B": "Performing Hajj",
+    "C": "Celebrating Eid",
+    "D": "Giving Sadaqah",
+    "correct": "A"
+},
+{
+    "question": "What is the special Dua and prayer performed at night in Ramadan called?",
+    "A": "Tarawih",
+    "B": "Arafah",
+    "C": "Tahajjud",
+    "D": "Friday",
+    "correct": "A"
+},
+{
+    "question": "What does giving Zakat al-Fitr aim for?",
+    "A": "Supporting the poor",
+    "B": "Travel",
+    "C": "Game",
+    "D": "Eid meal",
+    "correct": "A"
+},
+{
+    "question": "Which part is washed last in ablution?",
+    "A": "Feet",
+    "B": "Arms",
+    "C": "Face",
+    "D": "Head",
+    "correct": "A"
+},
+{
+    "question": "When is Iftar opened?",
+    "A": "With Evening Adhan",
+    "B": "With Noon Adhan",
+    "C": "Midnight",
+    "D": "Morning",
+    "correct": "A"
+},
+{
+    "question": "To whom is Sadaqah given?",
+    "A": "To those in need",
+    "B": "To the rich",
+    "C": "Only to neighbors",
+    "D": "To those not wanting",
+    "correct": "A"
+},
+{
+    "question": "How many basic movements does prayer consist of?",
+    "A": "Qiyam, Ruku, Sajdah, Qa'dah",
+    "B": "Running and jumping",
+    "C": "Walking",
+    "D": "Sleeping",
+    "correct": "A"
+},
+{
+    "question": "In which month is Laylat al-Qadr sought?",
+    "A": "Ramadan",
+    "B": "Rajab",
+    "C": "Muharram",
+    "D": "Shaban",
+    "correct": "A"
+},
+{
+    "question": "What is done to head in ablution?",
+    "A": "It is wiped (Mesh)",
+    "B": "Oil is applied",
+    "C": "It is painted",
+    "D": "It is cut",
+    "correct": "A"
+},
+{
+    "question": "To whom is Zakah not given?",
+    "A": "To the rich",
+    "B": "To the poor",
+    "C": "To orphans",
+    "D": "To traveler",
+    "correct": "A"
+},
+{
+    "question": "How many days does Eid al-Fitr last?",
+    "A": "3 days",
+    "B": "1 day",
+    "C": "4 days",
+    "D": "7 days",
+    "correct": "A"
+},
+{
+    "question": "What is the sacrifice slaughtered in Eid al-Adha called?",
+    "A": "Qurban (Sacrificial)",
+    "B": "Slaughter",
+    "C": "Gift",
+    "D": "Zakat al-Fitr",
+    "correct": "A"
+},
+{
+    "question": "What is the basic thing avoided while fasting?",
+    "A": "Eating and drinking",
+    "B": "Talking",
+    "C": "Sleeping",
+    "D": "Silence",
+    "correct": "A"
+},
+{
+    "question": "How are prayer times determined?",
+    "A": "According to condition of sun",
+    "B": "Lunar calendar",
+    "C": "Hours",
+    "D": "Wind",
+    "correct": "A"
+},
+{
+    "question": "After which time is Witr prayer performed?",
+    "A": "Night (Isha)",
+    "B": "Evening",
+    "C": "Noon",
+    "D": "Morning",
+    "correct": "A"
+},
+{
+    "question": "Which one is Fard in ablution?",
+    "A": "Washing face",
+    "B": "Combing hair",
+    "C": "Changing clothes",
+    "D": "Running",
+    "correct": "A"
+},
+{
+    "question": "Which limbs are wiped in Tayammum?",
+    "A": "Face and arms",
+    "B": "Feet",
+    "C": "Head",
+    "D": "Chest",
+    "correct": "A"
+},
+{
+    "question": "What is done with sacrifice meat?",
+    "A": "Distributed to poor",
+    "B": "Only sold",
+    "C": "Spoiled",
+    "D": "Thrown away",
+    "correct": "A"
+},
+{
+    "question": "Which worship is Zakat al-Fitr related to?",
+    "A": "Ramadan fasting",
+    "B": "Sacrifice",
+    "C": "Hajj",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "What is the Quran reading activity done in Ramadan called?",
+    "A": "Muqabalah",
+    "B": "Sermon",
+    "C": "Mawlid",
+    "D": "Friday",
+    "correct": "A"
+},
+{
+    "question": "Where is intention made in ablution?",
+    "A": "At the beginning",
+    "B": "In the middle",
+    "C": "At the end",
+    "D": "In Sajdah",
+    "correct": "A"
+},
+{
+    "question": "What is the part done while sitting in prayer called?",
+    "A": "Qa'dah",
+    "B": "Qiyam",
+    "C": "Ruku",
+    "D": "Tawaf",
+    "correct": "A"
+},
+{
+    "question": "Which social value does giving Zakah support?",
+    "A": "Solidarity",
+    "B": "Competition",
+    "C": "Argument",
+    "D": "Race",
+    "correct": "A"
+},
+{
+    "question": "Which animals are sacrifice made from?",
+    "A": "Sheep, goat, cattle, camel",
+    "B": "Horse",
+    "C": "Cat",
+    "D": "Rabbit",
+    "correct": "A"
+},
+{
+    "question": "What is most suggested in Suhoor?",
+    "A": "Intending with abundance",
+    "B": "Not sleeping",
+    "C": "Running",
+    "D": "Going out",
+    "correct": "A"
+},
+{
+    "question": "Towards which direction is prayer performed?",
+    "A": "Towards Kaaba",
+    "B": "Towards Sun",
+    "C": "Towards Moon",
+    "D": "Towards Wind",
+    "correct": "A"
+},
+{
+    "question": "What is recommended when opening Iftar?",
+    "A": "Opening with dates",
+    "B": "Opening with sweets",
+    "C": "Opening with water",
+    "D": "Opening with tea",
+    "correct": "A"
+},
+{
+    "question": "How many rak'ahs is Witr prayer? (Hanafi)",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "6",
+    "correct": "A"
+},
+{
+    "question": "What does giving Zakat al-Fitr signify?",
+    "A": "Fitra charity / helping poor",
+    "B": "Exchanging gifts",
+    "C": "Fasting",
+    "D": "Travel",
+    "correct": "A"
+},
+{
+    "question": "What does giving Sadaqah clean?",
+    "A": "Intention and heart",
+    "B": "Houses",
+    "C": "Animals",
+    "D": "Sky",
+    "correct": "A"
+},
+{
+    "question": "What is recited after Fatiha in prayer?",
+    "A": "Short Surah",
+    "B": "Salam",
+    "C": "Dua",
+    "D": "Takbir",
+    "correct": "A"
+},
+{
+    "question": "From where to where are feet washed in ablution?",
+    "A": "Including heels/ankles",
+    "B": "Fingertips",
+    "C": "Up to knees",
+    "D": "Waist level",
+    "correct": "A"
+},
+{
+    "question": "How is sacrifice meat distributed?",
+    "A": "Dividing into three",
+    "B": "Dividing into two",
+    "C": "One piece",
+    "D": "Hiding",
+    "correct": "A"
+},
+{
+    "question": "Which type of soil is chosen for Tayammum?",
+    "A": "Clean soil",
+    "B": "Muddy soil",
+    "C": "Mixed soil",
+    "D": "Stony soil",
+    "correct": "A"
+},
+{
+    "question": "Which worship category is fasting in?",
+    "A": "Physical worship",
+    "B": "Financial worship",
+    "C": "Social worship",
+    "D": "Tongue worship",
+    "correct": "A"
+},
+{
+    "question": "Which calendar determines Ramadan month?",
+    "A": "Hijri calendar",
+    "B": "Gregorian calendar",
+    "C": "Wind calendar",
+    "D": "Star calendar",
+    "correct": "A"
+},
+{
+    "question": "Which one is not Fard of prayer?",
+    "A": "Tasbih",
+    "B": "Ruku",
+    "C": "Sajdah",
+    "D": "Qiyam",
+    "correct": "A"
+},
+{
+    "question": "When should Zakat al-Fitr be given?",
+    "A": "Before Eid prayer",
+    "B": "After Eid",
+    "C": "After Arafah",
+    "D": "After sacrifice",
+    "correct": "A"
+},
+{
+    "question": "What is the essence of Zakah?",
+    "A": "Sharing",
+    "B": "Competing",
+    "C": "Talking",
+    "D": "Writing",
+    "correct": "A"
+},
+{
+    "question": "Which worships is sacrificing animal connected to?",
+    "A": "Eid al-Adha and Hajj",
+    "B": "Ramadan",
+    "C": "Friday",
+    "D": "Tarawih",
+    "correct": "A"
+},
+{
+    "question": "In which part is Dua made in prayer?",
+    "A": "Last sitting (Qa'dah)",
+    "B": "Ruku",
+    "C": "Sajdah",
+    "D": "Qiyam",
+    "correct": "A"
+}
+]

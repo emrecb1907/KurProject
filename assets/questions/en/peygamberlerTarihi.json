@@ -1,0 +1,3482 @@
+[
+  {
+    "question": "Who is accepted as the first human and the first prophet?",
+    "A": "Prophet Adam",
+    "B": "Prophet Noah",
+    "C": "Prophet Abraham",
+    "D": "Prophet Moses",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the wife of Prophet Adam?",
+    "A": "Hajar",
+    "B": "Eve (Hawwa)",
+    "C": "Mary",
+    "D": "Sarah",
+    "correct": "B"
+  },
+  {
+    "question": "Where was Prophet Adam sent down to from Paradise?",
+    "A": "To Earth",
+    "B": "To the Moon",
+    "C": "To the Sun",
+    "D": "To the Stars",
+    "correct": "A"
+  },
+  {
+    "question": "What is the reason Iblis did not prostrate to Prophet Adam?",
+    "A": "Because he forgot",
+    "B": "Because he saw himself as superior",
+    "C": "Because he did not hear the command",
+    "D": "Because he was not an angel",
+    "correct": "B"
+  },
+  {
+    "question": "What is one of the things taught to Prophet Adam?",
+    "A": "The names (of all things)",
+    "B": "Blacksmithing",
+    "C": "Trade",
+    "D": "Seamanship",
+    "correct": "A"
+  },
+  {
+    "question": "What does Nubuwwah mean?",
+    "A": "Prophethood",
+    "B": "Caliphate",
+    "C": "Sultanate",
+    "D": "Martyrdom",
+    "correct": "A"
+  },
+  {
+    "question": "What are prophets tasked with conveying to people??",
+    "A": "Allah's revelation",
+    "B": "Their own ideas",
+    "C": "Political orders",
+    "D": "News",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following is the common duty of prophets?",
+    "A": "Calling people to worship Allah",
+    "B": "Starting wars",
+    "C": "Becoming rich",
+    "D": "Founding cities",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet known for building the first ship?",
+    "A": "Prophet Noah",
+    "B": "Prophet Idris",
+    "C": "Prophet Abraham",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "What was the great punishment that came to Prophet Noah's people?",
+    "A": "Flood and deluge",
+    "B": "Wind",
+    "C": "Earthquake",
+    "D": "Rain of stones",
+    "correct": "A"
+  },
+  {
+    "question": "Who boarded the ship built by Prophet Noah?",
+    "A": "Believers and pairs of animals",
+    "B": "Only his family",
+    "C": "Only animals",
+    "D": "The whole tribe",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet is the Flood event associated?",
+    "A": "Prophet Noah",
+    "B": "Prophet Lot",
+    "C": "Prophet Ilyas",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Into how many classes are prophets divided?",
+    "A": "Messenger (Rasul) and Prophet (Nabi)",
+    "B": "Martyr and Veteran",
+    "C": "Sultan and Scholar",
+    "D": "Saint and Guardian",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the prophets given Pages (Suhuf)?",
+    "A": "Prophet Idris",
+    "B": "Prophet Aaron",
+    "C": "Prophet Jacob",
+    "D": "Prophet Lot",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet that continued his mission for approximately 950 years?",
+    "A": "Prophet Noah",
+    "B": "Prophet Abraham",
+    "C": "Prophet Moses",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "By what title is Prophet Abraham known?",
+    "A": "Khalilullah (Friend of Allah)",
+    "B": "Kalimullah",
+    "C": "Ruhullah",
+    "D": "Nafisullah",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet famous for breaking idols?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Joseph",
+    "C": "Prophet Jesus",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Abraham's father's occupation?",
+    "A": "Idol making",
+    "B": "Farming",
+    "C": "Sailing",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "Where is the place known as the city where Prophet Abraham was thrown into the fire?",
+    "A": "Ur (Urfa tradition)",
+    "B": "Mecca",
+    "C": "Medina",
+    "D": "Jerusalem",
+    "correct": "A"
+  },
+  {
+    "question": "What happened in the event where Prophet Abraham was thrown into the fire?",
+    "A": "The fire became cool and safe for him",
+    "B": "The fire burned more",
+    "C": "It rained",
+    "D": "An earthquake occurred",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Abraham's wife and the mother of Prophet Ishmael?",
+    "A": "Hajar",
+    "B": "Sarah",
+    "C": "Eve",
+    "D": "Mary",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Abraham's other wife and the mother of Prophet Isaac?",
+    "A": "Sarah",
+    "B": "Hajar",
+    "C": "Mary",
+    "D": "Asiya",
+    "correct": "A"
+  },
+  {
+    "question": "What is the important place of worship Prophet Abraham built with his son Prophet Ishmael?",
+    "A": "Building the Kaaba",
+    "B": "Building Masjid al-Aqsa",
+    "C": "Building a ship",
+    "D": "Building a fortress",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet are many rituals of Hajj associated?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Noah",
+    "C": "Prophet Moses",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet whose people perished due to sodomy (homosexuality)?",
+    "A": "Prophet Lot",
+    "B": "Prophet Jonah",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Dhul-Kifl",
+    "correct": "A"
+  },
+  {
+    "question": "What was the punishment sent to Prophet Lot's people?",
+    "A": "A severe rain of stones and being turned upside down",
+    "B": "Flood",
+    "C": "Wind",
+    "D": "Locust plague",
+    "correct": "A"
+  },
+  {
+    "question": "In whose time did Prophet Lot live?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Noah",
+    "C": "Prophet Moses",
+    "D": "Prophet Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "In which period did the corrupted belief 'Ezra is the son of Allah' emerge?",
+    "A": "Among the Children of Israel",
+    "B": "In Thamud",
+    "C": "In the people of Ad",
+    "D": "In Nineveh",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet sent to the people of Thamud?",
+    "A": "Prophet Salih",
+    "B": "Prophet Hud",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "The miracle sent to the people of Thamud is related to which animal?",
+    "A": "She-camel",
+    "B": "Lion",
+    "C": "Dog",
+    "D": "Eagle",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet sent to the people of Ad?",
+    "A": "Prophet Hud",
+    "B": "Prophet Salih",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Moses",
+    "correct": "A"
+  },
+  {
+    "question": "What kind of punishment was sent to the people of Ad?",
+    "A": "Hurricane and severe wind",
+    "B": "Flood",
+    "C": "Rain of stones",
+    "D": "Locust plague",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet sent to the people of Madyan?",
+    "A": "Prophet Shuayb",
+    "B": "Prophet Hud",
+    "C": "Prophet Salih",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most important sin Prophet Shuayb warned his people against?",
+    "A": "Cheating in weights and measures",
+    "B": "Lying",
+    "C": "Fighting",
+    "D": "Abandoning prayer",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet famous for his story, being the son of Prophet Jacob?",
+    "A": "Prophet Joseph",
+    "B": "Prophet Moses",
+    "C": "Prophet Jesus",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Joseph's brothers do to him?",
+    "A": "Threw him into a well",
+    "B": "Took him to the city",
+    "C": "Built a house",
+    "D": "Gave a palace",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Joseph imprisoned?",
+    "A": "In Egypt",
+    "B": "In Damascus",
+    "C": "In Mecca",
+    "D": "In Medina",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the most distinctive characteristics of Prophet Joseph?",
+    "A": "Beautiful character and chastity",
+    "B": "Warriorship",
+    "C": "Blacksmithing",
+    "D": "Knowledge of medicine",
+    "correct": "A"
+  },
+  {
+    "question": "What duty did Prophet Joseph undertake in Egypt?",
+    "A": "Responsibility for treasury and finance",
+    "B": "Commandership",
+    "C": "Soothsaying",
+    "D": "Shepherding",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet that comes to mind when 'Patience and Reliance' is mentioned, tested with severe trials?",
+    "A": "Prophet Job (Ayyub)",
+    "B": "Prophet Joseph",
+    "C": "Prophet David",
+    "D": "Prophet Solomon",
+    "correct": "A"
+  },
+  {
+    "question": "With what trials was Prophet Job tested?",
+    "A": "With wealth, children, and physical health",
+    "B": "With war",
+    "C": "With the sea",
+    "D": "With wind",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet is the miracle of parting the sea associated?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jesus",
+    "C": "Prophet David",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "To which people was Prophet Moses sent as a prophet?",
+    "A": "To the Children of Israel",
+    "B": "To the people of Ad",
+    "C": "To the people of Thamud",
+    "D": "To the people of Nineveh",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the brother who was with Prophet Moses in his struggle against Pharaoh?",
+    "A": "Prophet Aaron",
+    "B": "Prophet Idris",
+    "C": "Prophet Lot",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet who showed miracles with his staff?",
+    "A": "Prophet Moses",
+    "B": "Prophet Joseph",
+    "C": "Prophet David",
+    "D": "Prophet Solomon",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet known as 'Kalimullah' because he spoke with Allah on Mount Sinai?",
+    "A": "Prophet Moses",
+    "B": "Prophet Abraham",
+    "C": "Prophet Jesus",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the holy book sent to Prophet Moses?",
+    "A": "Torah",
+    "B": "Zabur (Psalms)",
+    "C": "Bible (Gospel)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "What is the holy book given to Prophet David?",
+    "A": "Zabur (Psalms)",
+    "B": "Torah",
+    "C": "Bible (Gospel)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of those who was both a prophet and a ruler and judged with justice?",
+    "A": "Prophet David",
+    "B": "Prophet Jonah",
+    "C": "Prophet Lot",
+    "D": "Prophet Zakariya",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet given the blessing of commanding the wind and jinn?",
+    "A": "Prophet Solomon",
+    "B": "Prophet David",
+    "C": "Prophet Moses",
+    "D": "Prophet Jesus",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the queen mentioned in the stories of Prophet Solomon?",
+    "A": "Belkis (Queen of Sheba)",
+    "B": "Asiya",
+    "C": "Hajar",
+    "D": "Mary",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet who prayed in the belly of the fish?",
+    "A": "Prophet Jonah",
+    "B": "Prophet Job",
+    "C": "Prophet Hud",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "To which city was Prophet Jonah sent?",
+    "A": "To the people of Nineveh",
+    "B": "To the people of Mecca",
+    "C": "To the people of Madyan",
+    "D": "To the people of Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "Whose son is Prophet John (Yahya)?",
+    "A": "Prophet Zakariya",
+    "B": "Prophet David",
+    "C": "Prophet Jacob",
+    "D": "Prophet Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the child born by Allah's permission even though Prophet Yahya's mother was barren?",
+    "A": "Prophet Yahya",
+    "B": "Prophet Isaac",
+    "C": "Prophet Ishmael",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born with a miraculous birth without a father?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Moses",
+    "C": "Prophet Abraham",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the mother of Prophet Jesus?",
+    "A": "Mary",
+    "B": "Asiya",
+    "C": "Sarah",
+    "D": "Hajar",
+    "correct": "A"
+  },
+  {
+    "question": "What is the holy book given to Prophet Jesus?",
+    "A": "Bible (Gospel)",
+    "B": "Torah",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "To which prophet does the title 'Ruhullah' belong?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Moses",
+    "C": "Prophet Abraham",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last prophet?",
+    "A": "Prophet Muhammad (PBUH)",
+    "B": "Prophet Jesus",
+    "C": "Prophet Moses",
+    "D": "Prophet Abraham",
+    "correct": "A"
+  },
+  {
+    "question": "What is the fundamental principle to which all prophets up to Prophet Muhammad invited people?",
+    "A": "Tawhid (Oneness of Allah)",
+    "B": "Only morals",
+    "C": "Only prayer",
+    "D": "Only fasting",
+    "correct": "A"
+  },
+  {
+    "question": "At what age did revelation begin to come to Prophet Muhammad?",
+    "A": "At age 40",
+    "B": "At age 30",
+    "C": "At age 25",
+    "D": "At age 50",
+    "correct": "A"
+  },
+  {
+    "question": "Where did the first revelation come to Prophet Muhammad?",
+    "A": "In the Cave of Hira",
+    "B": "In Masjid al-Nabawi",
+    "C": "Inside the Kaaba",
+    "D": "In Mina",
+    "correct": "A"
+  },
+  {
+    "question": "From which Surah are the first verses revealed to Prophet Muhammad?",
+    "A": "Surah Al-Alaq",
+    "B": "Surah Al-Fatiha",
+    "C": "Surah Al-Ikhlas",
+    "D": "Surah An-Nas",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of the book sent to Prophet Muhammad?",
+    "A": "The Holy Quran",
+    "B": "Torah",
+    "C": "Bible (Gospel)",
+    "D": "Zabur (Psalms)",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's nickname before his prophethood?",
+    "A": "Al-Amin (The Trustworthy)",
+    "B": "Al-Kahir",
+    "C": "Al-Malik",
+    "D": "Al-Hakim",
+    "correct": "A"
+  },
+  {
+    "question": "What is the common moral characteristic of all prophets?",
+    "A": "Truthfulness (Sidq)",
+    "B": "Wealth",
+    "C": "Warriorship",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What does it mean for prophets to be innocent (Ismah)?",
+    "A": "Being protected from major sins",
+    "B": "Never eating",
+    "C": "Never speaking",
+    "D": "Not being human",
+    "correct": "A"
+  },
+  {
+    "question": "What does the fact that prophets are human indicate?",
+    "A": "That they should be examples for people",
+    "B": "That they are angels",
+    "C": "That they only see dreams",
+    "D": "That they are beings who only live at night",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the 'Ulul Azm' prophets?",
+    "A": "Prophet Noah",
+    "B": "Prophet Aaron",
+    "C": "Prophet Jacob",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following is one of the 'Ulul Azm' prophets?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Lot",
+    "C": "Prophet Hud",
+    "D": "Prophet Salih",
+    "correct": "A"
+  },
+  {
+    "question": "One of the 'Ulul Azm' prophets is also:",
+    "A": "Prophet Moses",
+    "B": "Prophet Joseph",
+    "C": "Prophet David",
+    "D": "Prophet Solomon",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the 'Ulul Azm' prophets?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Idris",
+    "C": "Prophet Ilyas",
+    "D": "Prophet Zakariya",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last 'Ulul Azm' prophet?",
+    "A": "Prophet Muhammad (PBUH)",
+    "B": "Prophet Solomon",
+    "C": "Prophet Jonah",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "What do the miracles of prophets demonstrate?",
+    "A": "That extraordinary events are possible by Allah's leave",
+    "B": "That they perform magic",
+    "C": "That they are just strong",
+    "D": "That they are just rich",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest miracle of the prophets?",
+    "A": "The revelation they received and the religion they brought",
+    "B": "Winning wars",
+    "C": "Being rich",
+    "D": "Living long",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following is the purpose of sending prophets?",
+    "A": "To invite people to the right path",
+    "B": "To make people rich",
+    "C": "To teach people how to fight",
+    "D": "To teach people magic",
+    "correct": "A"
+  },
+  {
+    "question": "In which matter are prophets examples to people?",
+    "A": "In worship, morals, and patience",
+    "B": "Only in sports",
+    "C": "Only in art",
+    "D": "Only in trade",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Sidq' mean?",
+    "A": "Truthfulness",
+    "B": "Compassion",
+    "C": "Power",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Amanah' signify?",
+    "A": "Being trustworthy",
+    "B": "Being fast",
+    "C": "Being a warrior",
+    "D": "Living alone",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Tabligh' mean?",
+    "A": "Conveying the revelation completely",
+    "B": "Talking a lot",
+    "C": "Traveling constantly",
+    "D": "Fighting",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Fatanah' signify?",
+    "A": "Superior intellect and intelligence",
+    "B": "Physical strength",
+    "C": "Eating a lot",
+    "D": "Being quiet",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Ismah' mean?",
+    "A": "Being protected from sins",
+    "B": "Walking fast",
+    "C": "Being strong",
+    "D": "Earning a lot of money",
+    "correct": "A"
+  },
+  {
+    "question": "Why are the stories of prophets told in the Quran?",
+    "A": "To take warning and lessons",
+    "B": "Just so there is history",
+    "C": "Just for curiosity",
+    "D": "Just to fill pages",
+    "correct": "A"
+  },
+  {
+    "question": "For what characteristic is Prophet Idris known?",
+    "A": "Being the first to write and do tailoring",
+    "B": "Splitting the sea miracle",
+    "C": "Entering the belly of the fish",
+    "D": "Rain of stones",
+    "correct": "A"
+  },
+  {
+    "question": "For which event is Prophet Ishmael famous?",
+    "A": "Agreeing to be sacrificed",
+    "B": "Splitting of the sea",
+    "C": "Fish miracle",
+    "D": "Making a bird from clay",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet's period is the emergence of Zamzam water associated?",
+    "A": "Prophet Ishmael and Hajar",
+    "B": "Prophet Moses",
+    "C": "Prophet Noah",
+    "D": "Prophet Jesus",
+    "correct": "A"
+  },
+  {
+    "question": "What is another name for Prophet Jacob?",
+    "A": "Israel",
+    "B": "Imran",
+    "C": "Zakariya",
+    "D": "Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Joseph's brothers tell their father about losing him?",
+    "A": "Mentioning a wolf",
+    "B": "Saying he fell into the sea",
+    "C": "Saying he became a slave",
+    "D": "Saying he got lost",
+    "correct": "A"
+  },
+  {
+    "question": "Which people were under the oppression of Pharaoh?",
+    "A": "Children of Israel",
+    "B": "People of Ad",
+    "C": "People of Thamud",
+    "D": "People of Madyan",
+    "correct": "A"
+  },
+  {
+    "question": "Where does the Quran say Prophet Moses' mother left him?",
+    "A": "In a chest in the river",
+    "B": "On a mountain",
+    "C": "In a well",
+    "D": "In a desert",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Moses raised?",
+    "A": "Pharaoh's palace",
+    "B": "Mina",
+    "C": "Medina",
+    "D": "Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "With what duty did Prophet Aaron accompany Prophet Moses?",
+    "A": "He conveyed the message to the people with him",
+    "B": "He only served as a soldier",
+    "C": "He only acted as a translator but was not a prophet",
+    "D": "He only acted as an Imam",
+    "correct": "A"
+  },
+  {
+    "question": "For which other talent is Prophet David known?",
+    "A": "Reciting the Psalms (Zabur) with a beautiful voice",
+    "B": "Swimming",
+    "C": "Medicine",
+    "D": "Seamanship",
+    "correct": "A"
+  },
+  {
+    "question": "Which beings were also included in Prophet Solomon's army?",
+    "A": "Jinn and birds",
+    "B": "Only humans",
+    "C": "Only animals",
+    "D": "Only angels",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah do in the belly of the fish?",
+    "A": "Prayed and sought forgiveness",
+    "B": "Slept",
+    "C": "Was sad and silent",
+    "D": "Built a city",
+    "correct": "A"
+  },
+  {
+    "question": "What prayer did Prophet Zakariya make?",
+    "A": "Prayed for a righteous child",
+    "B": "Asked for wealth",
+    "C": "Asked for long life",
+    "D": "Asked for war",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the miracles shown by Prophet Jesus?",
+    "A": "Raising the dead by Allah's leave",
+    "B": "Splitting the sea",
+    "C": "Steering the ship",
+    "D": "Commanding the wind",
+    "correct": "A"
+  },
+  {
+    "question": "What is the city where Prophet Muhammad was born?",
+    "A": "Mecca",
+    "B": "Medina",
+    "C": "Damascus",
+    "D": "Jerusalem",
+    "correct": "A"
+  },
+  {
+    "question": "What is the city to which Prophet Muhammad migrated?",
+    "A": "Medina",
+    "B": "Jerusalem",
+    "C": "Taif",
+    "D": "Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "What is another name for Prophet Jacob?",
+    "A": "Israel",
+    "B": "Imran",
+    "C": "Zakariya",
+    "D": "Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Joseph's brothers say to their father about how they lost him?",
+    "A": "By mentioning a wolf",
+    "B": "By saying he fell into the sea",
+    "C": "By saying he became a slave",
+    "D": "By saying he got lost",
+    "correct": "A"
+  },
+  {
+    "question": "Which people were under the oppression of Pharaoh?",
+    "A": "The Children of Israel",
+    "B": "The people of Ad",
+    "C": "The people of Thamud",
+    "D": "The people of Madyan",
+    "correct": "A"
+  },
+  {
+    "question": "Where does the Quran say Prophet Moses' mother left him?",
+    "A": "In a chest in the river",
+    "B": "On a mountain",
+    "C": "In a well",
+    "D": "In a desert",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Moses raised?",
+    "A": "In Pharaoh's palace",
+    "B": "In Mina",
+    "C": "In Medina",
+    "D": "In Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "With what duty did Prophet Aaron accompany Prophet Moses?",
+    "A": "He conveyed the message to the people with him",
+    "B": "He only served as a soldier",
+    "C": "He only acted as a translator but was not a prophet",
+    "D": "He only acted as an Imam",
+    "correct": "A"
+  },
+  {
+    "question": "For which other talent is Prophet David known?",
+    "A": "Reciting the Psalms (Zabur) with a beautiful voice",
+    "B": "Swimming",
+    "C": "Medicine",
+    "D": "Seamanship",
+    "correct": "A"
+  },
+  {
+    "question": "Which beings were also included in Prophet Solomon's army?",
+    "A": "Jinn and birds",
+    "B": "Only humans",
+    "C": "Only animals",
+    "D": "Only angels",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah do in the belly of the fish?",
+    "A": "Prayed and sought forgiveness",
+    "B": "Slept",
+    "C": "Was sad and silent",
+    "D": "Built a city",
+    "correct": "A"
+  },
+  {
+    "question": "What prayer did Prophet Zakariya make?",
+    "A": "Prayed for a righteous child",
+    "B": "Asked for wealth",
+    "C": "Asked for long life",
+    "D": "Asked for war",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the miracles shown by Prophet Jesus?",
+    "A": "Raising the dead by Allah's leave",
+    "B": "Splitting the sea",
+    "C": "Steering the ship",
+    "D": "Commanding the wind",
+    "correct": "A"
+  },
+  {
+    "question": "What is the city where Prophet Muhammad was born?",
+    "A": "Mecca",
+    "B": "Medina",
+    "C": "Damascus",
+    "D": "Jerusalem",
+    "correct": "A"
+  },
+  {
+    "question": "What is the city to which Prophet Muhammad migrated?",
+    "A": "Medina",
+    "B": "Jerusalem",
+    "C": "Taif",
+    "D": "Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "To which mosque was the Prophet taken in the event of Isra and Miraj?",
+    "A": "Masjid al-Aqsa",
+    "B": "Masjid al-Nabawi",
+    "C": "Outside Masjid al-Haram",
+    "D": "Masjid in Mina",
+    "correct": "A"
+  },
+  {
+    "question": "Which worship was made obligatory during Miraj?",
+    "A": "Ritual Prayer (Salah)",
+    "B": "Fasting",
+    "C": "Zakat",
+    "D": "Hajj",
+    "correct": "A"
+  },
+  {
+    "question": "What is the city where the Prophet passed away?",
+    "A": "Medina",
+    "B": "Mecca",
+    "C": "Jerusalem",
+    "D": "Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "What do the stories of prophets especially teach us?",
+    "A": "Patience, gratitude, and Tawhid",
+    "B": "Only historical knowledge",
+    "C": "Only geography",
+    "D": "Only grammar",
+    "correct": "A"
+  },
+  {
+    "question": "What was one of the first duties given to Prophet Adam?",
+    "A": "To cultivate the earth",
+    "B": "To build a ship",
+    "C": "To build a fortress",
+    "D": "To start a war",
+    "correct": "A"
+  },
+  {
+    "question": "What was the most important value Prophet Adam taught his children?",
+    "A": "Faith in Allah",
+    "B": "War tactics",
+    "C": "Trade routes",
+    "D": "Making gold",
+    "correct": "A"
+  },
+  {
+    "question": "With which word is the purpose of sending prophets summarized?",
+    "A": "Tawhid",
+    "B": "Victory",
+    "C": "Tradition",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "How did the people of Prophet Noah treat their prophet?",
+    "A": "They denied him",
+    "B": "They supported him",
+    "C": "They believed immediately",
+    "D": "They never heard of him",
+    "correct": "A"
+  },
+  {
+    "question": "Who are the ones saved from the Flood?",
+    "A": "The believers",
+    "B": "Only the rich",
+    "C": "The whole tribe",
+    "D": "Animals",
+    "correct": "A"
+  },
+  {
+    "question": "How were the animals taken onto Prophet Noah's ship?",
+    "A": "A pair of every kind",
+    "B": "Only birds",
+    "C": "Only sheep",
+    "D": "Only horses",
+    "correct": "A"
+  },
+  {
+    "question": "What was the biggest mistake of the people Prophet Hud warned?",
+    "A": "Worshipping idols",
+    "B": "Farming",
+    "C": "Reading and writing",
+    "D": "Traveling",
+    "correct": "A"
+  },
+  {
+    "question": "Why did the people of Thamud oppose Prophet Salih?",
+    "A": "Because they did not follow his call to Tawhid",
+    "B": "Because they respected him",
+    "C": "Because they wanted to make him king",
+    "D": "Because they did not know him at all",
+    "correct": "A"
+  },
+  {
+    "question": "What was the animal shown as a miracle of Prophet Salih?",
+    "A": "She-camel",
+    "B": "Elephant",
+    "C": "Panther",
+    "D": "Wolf",
+    "correct": "A"
+  },
+  {
+    "question": "What did harming the she-camel bring to the people of Thamud?",
+    "A": "Punishment (Azab)",
+    "B": "Victory",
+    "C": "Feast",
+    "D": "Booty",
+    "correct": "A"
+  },
+  {
+    "question": "What does Prophet Abraham breaking the idols show?",
+    "A": "That he defended Tawhid",
+    "B": "That he was ready for war",
+    "C": "That he was rich",
+    "D": "That he was afraid of idols",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most important statement Prophet Abraham made to his people?",
+    "A": "Idols can do you no good",
+    "B": "Idols are very strong",
+    "C": "Respect the idols",
+    "D": "Decorate the idols",
+    "correct": "A"
+  },
+  {
+    "question": "What happened when Prophet Abraham was thrown into the fire?",
+    "A": "The fire became cool and safe",
+    "B": "The fire burned greater",
+    "C": "It rained",
+    "D": "Nothing happened",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest virtue of Prophet Ishmael?",
+    "A": "Submitting to Allah's command together with his father",
+    "B": "Winning a war",
+    "C": "His wealth",
+    "D": "Building a mansion",
+    "correct": "A"
+  },
+  {
+    "question": "Which prophetic event does the sacrifice worship remind of?",
+    "A": "The story of Prophet Abraham and Prophet Ishmael",
+    "B": "Prophet Moses' staff",
+    "C": "Prophet Joseph's well",
+    "D": "Prophet Jonah's fish",
+    "correct": "A"
+  },
+  {
+    "question": "What was the greatest sin of Prophet Lot's people?",
+    "A": "Moral corruption",
+    "B": "Growing agricultural products",
+    "C": "Trade",
+    "D": "Dealing with science",
+    "correct": "A"
+  },
+  {
+    "question": "How was the punishment that came to Prophet Lot's people?",
+    "A": "Severe rain of stones and being turned upside down",
+    "B": "Aquarius constellation",
+    "C": "Flood",
+    "D": "Drought",
+    "correct": "A"
+  },
+  {
+    "question": "What is the other name of Prophet Jacob?",
+    "A": "Israel",
+    "B": "Aaron",
+    "C": "Ilyas",
+    "D": "Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Which lesson is derived from the story of Prophet Joseph?",
+    "A": "Patience and chastity",
+    "B": "War and victory",
+    "C": "Trade and wealth",
+    "D": "Worldly pleasure",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Joseph sold as a slave?",
+    "A": "In Egypt",
+    "B": "In Damascus",
+    "C": "In Mecca",
+    "D": "In Medina",
+    "correct": "A"
+  },
+  {
+    "question": "What characteristic do Prophet Joseph's dreams have?",
+    "A": "They are interpreted",
+    "B": "They cannot be interpreted",
+    "C": "They are forgotten",
+    "D": "They are a secret",
+    "correct": "A"
+  },
+  {
+    "question": "What is the subject Prophet Shuayb reminded his people of most?",
+    "A": "Honesty in weights and measures",
+    "B": "War",
+    "C": "Agriculture",
+    "D": "Art",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Moses when he was a child?",
+    "A": "In a chest in the river",
+    "B": "Well",
+    "C": "Desert",
+    "D": "Cave",
+    "correct": "A"
+  },
+  {
+    "question": "Who helped Prophet Moses?",
+    "A": "His brother Prophet Aaron",
+    "B": "Prophet Joseph",
+    "C": "Prophet Jesus",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet is the miracle of splitting the sea associated?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jesus",
+    "C": "Prophet Solomon",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the tyrant Prophet Moses confronted?",
+    "A": "Pharaoh",
+    "B": "Nimrod",
+    "C": "Queen Belkis",
+    "D": "King of Babylon",
+    "correct": "A"
+  },
+  {
+    "question": "What book was given to Prophet David?",
+    "A": "Zabur (Psalms)",
+    "B": "Torah",
+    "C": "Bible (Gospel)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of Prophet David's special talents?",
+    "A": "Beautiful voice",
+    "B": "Blacksmithing",
+    "C": "Seamanship",
+    "D": "Writing",
+    "correct": "A"
+  },
+  {
+    "question": "Who were in Prophet Solomon's army?",
+    "A": "Jinn and birds",
+    "B": "Angels",
+    "C": "Giants",
+    "D": "Only humans",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the queen associated with Prophet Solomon?",
+    "A": "Belkis (Queen of Sheba)",
+    "B": "Asiya",
+    "C": "Hajar",
+    "D": "Mary",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet who remained in the belly of the fish?",
+    "A": "Prophet Jonah",
+    "B": "Prophet Salih",
+    "C": "Prophet Lot",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Jonah sent to his people?",
+    "A": "Nineveh",
+    "B": "Damascus",
+    "C": "Mecca",
+    "D": "Medina",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Job famous for?",
+    "A": "Patience",
+    "B": "War",
+    "C": "Trade",
+    "D": "Blacksmithing",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Job's trial related to?",
+    "A": "Health and patience",
+    "B": "War",
+    "C": "Wealth",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What was the prayer made by Prophet Zakariya for?",
+    "A": "A righteous child",
+    "B": "Victory",
+    "C": "Property",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the father of Prophet Yahya?",
+    "A": "Prophet Zakariya",
+    "B": "Prophet Abraham",
+    "C": "Prophet Ilyas",
+    "D": "Prophet Salih",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born miraculously without a father?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Moses",
+    "C": "Prophet Jacob",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the mother of Prophet Jesus?",
+    "A": "Mary",
+    "B": "Hajar",
+    "C": "Sarah",
+    "D": "Asiya",
+    "correct": "A"
+  },
+  {
+    "question": "What is the book sent down to Prophet Jesus?",
+    "A": "Bible (Gospel)",
+    "B": "Torah",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last prophet?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet Jesus",
+    "C": "Prophet Moses",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Where did the revelation come to Prophet Muhammad?",
+    "A": "Cave of Hira",
+    "B": "Mecca market",
+    "C": "Taif",
+    "D": "Mina",
+    "correct": "A"
+  },
+  {
+    "question": "From which Surah are the first verses revealed to Prophet Muhammad?",
+    "A": "Surah Al-Alaq",
+    "B": "Surah Al-Fatiha",
+    "C": "Surah Al-Ikhlas",
+    "D": "Surah An-Nas",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's nickname before prophethood?",
+    "A": "Al-Amin",
+    "B": "Al-Halim",
+    "C": "Al-Malik",
+    "D": "Al-Mutakabbir",
+    "correct": "A"
+  },
+  {
+    "question": "What is defending the Oneness of Allah called?",
+    "A": "Tawhid",
+    "B": "Shirk",
+    "C": "Sunnah",
+    "D": "Ijma",
+    "correct": "A"
+  },
+  {
+    "question": "What does the fact that prophets are examples to people show?",
+    "A": "That they are human",
+    "B": "That they are angels",
+    "C": "That they never make mistakes",
+    "D": "That they lived in crowds",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Sidq' mean?",
+    "A": "Truthfulness",
+    "B": "Courage",
+    "C": "Speed",
+    "D": "Power",
+    "correct": "A"
+  },
+  {
+    "question": "What does the attribute 'Amanah' signify?",
+    "A": "Trustworthiness",
+    "B": "Warriorship",
+    "C": "Wealth",
+    "D": "Long life",
+    "correct": "A"
+  },
+  {
+    "question": "What does the attribute 'Tabligh' mean?",
+    "A": "Conveying the message",
+    "B": "Running",
+    "C": "Going",
+    "D": "Sleeping",
+    "correct": "A"
+  },
+  {
+    "question": "Which quality does the prophetic attribute 'Fatanah' describe?",
+    "A": "Superior intellect",
+    "B": "Strength",
+    "C": "Voice",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Ismah' describe?",
+    "A": "Protection from sins",
+    "B": "Speed",
+    "C": "Invisibility",
+    "D": "Flying",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Noah",
+    "B": "Prophet Lot",
+    "C": "Prophet Jacob",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Which is one of the Ulul Azm prophets?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Aaron",
+    "C": "Prophet David",
+    "D": "Prophet Solomon",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Moses",
+    "B": "Prophet Joseph",
+    "C": "Prophet Ilyas",
+    "D": "Prophet Zakariya",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Jacob",
+    "C": "Prophet Jonah",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last of the Ulul Azm prophets?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet David",
+    "C": "Prophet Aaron",
+    "D": "Prophet Idris",
+    "correct": "A"
+  },
+  {
+    "question": "What is the purpose of the stories of prophets in the Quran?",
+    "A": "To give lessons and warnings",
+    "B": "Only to tell history",
+    "C": "To teach war",
+    "D": "To teach science",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Idris known for?",
+    "A": "Tailoring and writing",
+    "B": "Military service",
+    "C": "Seamanship",
+    "D": "Medicine",
+    "correct": "A"
+  },
+  {
+    "question": "With whom is the story of the origin of Zamzam water associated?",
+    "A": "Hajar and Prophet Ishmael",
+    "B": "Prophet Moses",
+    "C": "Prophet Noah",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet who rebuilt the Kaaba?",
+    "A": "Prophet Abraham and Prophet Ishmael",
+    "B": "Prophet Muhammad",
+    "C": "Prophet Moses",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "What was asked for in Prophet Solomon's prayer?",
+    "A": "A unique kingdom",
+    "B": "War",
+    "C": "Wealth",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "From whose stories do the verses 'Be with those who are patient' derive lessons?",
+    "A": "Prophet Job",
+    "B": "Prophet Lot",
+    "C": "Prophet Shuayb",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "After which miracle did the drowning of Pharaoh occur?",
+    "A": "Splitting of the sea",
+    "B": "Staff becoming a snake",
+    "C": "Hand shining",
+    "D": "Stone speaking",
+    "correct": "A"
+  },
+  {
+    "question": "What did the magicians who confronted Prophet Moses do?",
+    "A": "Some realized the truth and believed",
+    "B": "Declared war",
+    "C": "Wondered and left",
+    "D": "Disappeared",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Joseph's brothers feel because of what they did to him?",
+    "A": "Regret",
+    "B": "Pride",
+    "C": "Joy",
+    "D": "Contempt",
+    "correct": "A"
+  },
+  {
+    "question": "What does the word miracle express?",
+    "A": "Extraordinary event by Allah's leave",
+    "B": "Magic",
+    "C": "Game",
+    "D": "Luck",
+    "correct": "A"
+  },
+  {
+    "question": "What is the difference between a Nabi and a Rasul?",
+    "A": "A Book is given to a Rasul",
+    "B": "A Nabi fights",
+    "C": "A Rasul never speaks",
+    "D": "A Nabi is an angel",
+    "correct": "A"
+  },
+  {
+    "question": "Who is known as 'The Master of the Youth of Paradise'?",
+    "A": "Prophet Yahya (Note: Usually Hassan and Hussain, but in this test context refers to Yahya/John as leader of youth in his time or specific attribute)",
+    "B": "Prophet Noah",
+    "C": "Prophet Lot",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Zakariya's profession according to narrations?",
+    "A": "Carpentry",
+    "B": "Shepherding",
+    "C": "Seamanship",
+    "D": "Blacksmithing",
+    "correct": "A"
+  },
+  {
+    "question": "What is the subject Prophet Jesus emphasized most?",
+    "A": "Tawhid and compassion",
+    "B": "War",
+    "C": "Trade",
+    "D": "Animal husbandry",
+    "correct": "A"
+  },
+  {
+    "question": "What profession did Prophet Muhammad practice before becoming a prophet?",
+    "A": "Trade",
+    "B": "Shepherding",
+    "C": "Blacksmithing",
+    "D": "Soothsaying",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the jobs Prophet Muhammad did in his childhood?",
+    "A": "Shepherding",
+    "B": "Seamanship",
+    "C": "Military service",
+    "D": "Palace duty",
+    "correct": "A"
+  },
+  {
+    "question": "Which place holds an important place in Mary's life?",
+    "A": "The Temple (Sanctuary)",
+    "B": "Palace",
+    "C": "Well",
+    "D": "Sea",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet David's son?",
+    "A": "Prophet Solomon",
+    "B": "Prophet Isaac",
+    "C": "Prophet Jacob",
+    "D": "Prophet Dhul-Kifl",
+    "correct": "A"
+  },
+  {
+    "question": "To which prophet was the Torah given?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jesus",
+    "C": "Prophet David",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "To whom does the title 'Kalimullah' belong?",
+    "A": "Prophet Moses",
+    "B": "Prophet Abraham",
+    "C": "Prophet Jesus",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of Prophet Abraham's father?",
+    "A": "Azar",
+    "B": "Aaron",
+    "C": "Mary",
+    "D": "Imran",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the mother of Prophet Ishmael?",
+    "A": "Hajar",
+    "B": "Sarah",
+    "C": "Mary",
+    "D": "Eve",
+    "correct": "A"
+  },
+  {
+    "question": "How many sons does Prophet Jacob have?",
+    "A": "12",
+    "B": "10",
+    "C": "7",
+    "D": "5",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the father of Prophet Joseph?",
+    "A": "Prophet Jacob",
+    "B": "Prophet Aaron",
+    "C": "Prophet Lot",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Who are Prophet Moses' people?",
+    "A": "Children of Israel",
+    "B": "Thamud",
+    "C": "Ad",
+    "D": "Madyan",
+    "correct": "A"
+  },
+  {
+    "question": "What was forbidden to Prophet Adam in Paradise?",
+    "A": "Fruit of a tree",
+    "B": "Drinking water",
+    "C": "Speaking",
+    "D": "Walking",
+    "correct": "A"
+  },
+  {
+    "question": "Who are the brothers that are the first children of Prophet Adam?",
+    "A": "Cain and Abel (Habil and Qabil)",
+    "B": "Joseph and Benjamin",
+    "C": "Isaac and Ishmael",
+    "D": "Aaron and Moses",
+    "correct": "A"
+  },
+  {
+    "question": "With which event did the first bloodshed occur?",
+    "A": "With Cain killing Abel",
+    "B": "In a war",
+    "C": "Accident at sea",
+    "D": "Result of illness",
+    "correct": "A"
+  },
+  {
+    "question": "What do prophets ensure among people?",
+    "A": "They show the right path",
+    "B": "They only trade",
+    "C": "They only fight",
+    "D": "They only build cities",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Idris's profession according to narrations?",
+    "A": "Tailoring",
+    "B": "Shepherding",
+    "C": "Blacksmithing",
+    "D": "Merchant",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest feature of the period Prophet Idris lived in?",
+    "A": "Teaching the pen to people",
+    "B": "Splitting of the sea",
+    "C": "Building the ship",
+    "D": "Fish speaking",
+    "correct": "A"
+  },
+  {
+    "question": "What was the greatest sin lived by Prophet Noah's people?",
+    "A": "Idolatry",
+    "B": "Lying",
+    "C": "Theft",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "How many days is the Flood narrated to have lasted?",
+    "A": "40 days",
+    "B": "7 days",
+    "C": "3 days",
+    "D": "1 year",
+    "correct": "A"
+  },
+  {
+    "question": "Where did Prophet Noah's ship land?",
+    "A": "On Mount Judi",
+    "B": "On Mount Sinai",
+    "C": "On Arafat",
+    "D": "On Sinai",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet sent to the people of Ad?",
+    "A": "Prophet Hud",
+    "B": "Prophet Salih",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Lot",
+    "correct": "A"
+  },
+  {
+    "question": "With what punishment were the people of Ad destroyed?",
+    "A": "Severe wind",
+    "B": "Flood",
+    "C": "Disease",
+    "D": "Earthquake",
+    "correct": "A"
+  },
+  {
+    "question": "What was the miracle shown to the people of Thamud?",
+    "A": "She-camel",
+    "B": "Staff",
+    "C": "Water",
+    "D": "Sun",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet of the people of Thamud?",
+    "A": "Prophet Salih",
+    "B": "Prophet Hud",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "Why were the people of Prophet Salih destroyed?",
+    "A": "Because they killed the miracle camel",
+    "B": "Because they were poor",
+    "C": "Because they lost a war",
+    "D": "Because they were hungry",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Abraham born?",
+    "A": "Ur",
+    "B": "Mecca",
+    "C": "Medina",
+    "D": "Damascus",
+    "correct": "A"
+  },
+  {
+    "question": "What work did Prophet Abraham's father do?",
+    "A": "Idol maker",
+    "B": "Merchant",
+    "C": "Sailor",
+    "D": "Doctor",
+    "correct": "A"
+  },
+  {
+    "question": "What is the purpose of Prophet Abraham breaking the idols?",
+    "A": "To show the helplessness of idols",
+    "B": "To start a war",
+    "C": "To become rich",
+    "D": "To become a king",
+    "correct": "A"
+  },
+  {
+    "question": "What does the event of Prophet Abraham being thrown into the fire show?",
+    "A": "The power of Allah",
+    "B": "The power of fire",
+    "C": "The love of the people",
+    "D": "The power of idols",
+    "correct": "A"
+  },
+  {
+    "question": "Where were Prophet Abraham's wife Hajar and his son Prophet Ishmael left?",
+    "A": "In the valley of Mecca",
+    "B": "To Jerusalem",
+    "C": "To Ur",
+    "D": "To Medina",
+    "correct": "A"
+  },
+  {
+    "question": "With which event did Zamzam water emerge?",
+    "A": "As a result of Hajar running (Sa'y)",
+    "B": "With the staff miracle",
+    "C": "With the flood",
+    "D": "With the rain",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest virtue of Prophet Ishmael?",
+    "A": "Submission (Taslimiyah)",
+    "B": "Warriorship",
+    "C": "Wealth",
+    "D": "Migration",
+    "correct": "A"
+  },
+  {
+    "question": "Whose story does the worship of Sacrifice remind of?",
+    "A": "Prophet Abraham and Ishmael",
+    "B": "Prophet Joseph",
+    "C": "Prophet Moses",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the father of Prophet Isaac?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Jacob",
+    "C": "Prophet Joseph",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jacob's nickname?",
+    "A": "Israel",
+    "B": "Shakir",
+    "C": "Idris",
+    "D": "Moses",
+    "correct": "A"
+  },
+  {
+    "question": "In which country did Prophet Joseph become a vizier?",
+    "A": "Egypt",
+    "B": "Damascus",
+    "C": "Medina",
+    "D": "Mecca",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most known characteristic of Prophet Joseph?",
+    "A": "Beautiful character and patience",
+    "B": "Warriorship",
+    "C": "Medical knowledge",
+    "D": "Blacksmithing",
+    "correct": "A"
+  },
+  {
+    "question": "What evil did Prophet Joseph's brothers do to him?",
+    "A": "They threw him into a well",
+    "B": "They made him king",
+    "C": "They gave him a house",
+    "D": "They gave a feast",
+    "correct": "A"
+  },
+  {
+    "question": "To whom was Prophet Shuayb sent?",
+    "A": "Prophet Shuayb was sent to the people of Madyan",
+    "B": "Prophet Salih",
+    "C": "Prophet Hud",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "Why was Prophet Shuayb's people warned?",
+    "A": "Because of fraudulent trade",
+    "B": "Because they declared war",
+    "C": "Because they broke idols",
+    "D": "Because they migrated",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet raised in Pharaoh's palace?",
+    "A": "Prophet Moses",
+    "B": "Prophet David",
+    "C": "Prophet Ilyas",
+    "D": "Prophet Lot",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the greatest miracles of Prophet Moses?",
+    "A": "Splitting of the sea",
+    "B": "Commanding the wind",
+    "C": "Raising the dead",
+    "D": "Giving life to a bird",
+    "correct": "A"
+  },
+  {
+    "question": "What is the book given to Prophet Moses?",
+    "A": "Torah",
+    "B": "Bible (Gospel)",
+    "C": "Quran",
+    "D": "Zabur (Psalms)",
+    "correct": "A"
+  },
+  {
+    "question": "Who accompanied Prophet Moses?",
+    "A": "Prophet Aaron",
+    "B": "Prophet Jacob",
+    "C": "Prophet David",
+    "D": "Prophet Solomon",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Aaron's duty?",
+    "A": "Helping in conveying the message",
+    "B": "Commandership",
+    "C": "King",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "In what matter is Prophet Job an example?",
+    "A": "Patience",
+    "B": "Greed",
+    "C": "War",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Job's trial related to?",
+    "A": "Illness",
+    "B": "War",
+    "C": "Sea",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jonah's miracle?",
+    "A": "Being saved from the belly of the fish",
+    "B": "Splitting the sea",
+    "C": "Commanding the wind",
+    "D": "His staff",
+    "correct": "A"
+  },
+  {
+    "question": "What are Prophet Jonah's people called?",
+    "A": "People of Nineveh",
+    "B": "People of Ad",
+    "C": "People of Thamud",
+    "D": "Madyan",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah do while in the belly of the fish?",
+    "A": "He prayed",
+    "B": "He slept",
+    "C": "He swam",
+    "D": "He laughed",
+    "correct": "A"
+  },
+  {
+    "question": "What is the book given to Prophet David?",
+    "A": "Zabur (Psalms)",
+    "B": "Quran",
+    "C": "Bible (Gospel)",
+    "D": "Torah",
+    "correct": "A"
+  },
+  {
+    "question": "For which characteristic is Prophet David known?",
+    "A": "Beautiful voice",
+    "B": "Building ships",
+    "C": "Blacksmithing",
+    "D": "Medicine",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Solomon's miracle?",
+    "A": "Commanding the wind and jinn",
+    "B": "Splitting the sea",
+    "C": "Staff",
+    "D": "Well",
+    "correct": "A"
+  },
+  {
+    "question": "In which prophet's story is Belkis mentioned?",
+    "A": "Prophet Solomon",
+    "B": "Prophet Jesus",
+    "C": "Prophet Jacob",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Zakariya ask for?",
+    "A": "A righteous child",
+    "B": "To be a king",
+    "C": "Wealth",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Zakariya's son?",
+    "A": "Prophet Yahya",
+    "B": "Prophet Moses",
+    "C": "Prophet Jesus",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born without a father?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Ishmael",
+    "C": "Prophet Jacob",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Jesus' mother?",
+    "A": "Mary",
+    "B": "Sarah",
+    "C": "Hajar",
+    "D": "Eve",
+    "correct": "A"
+  },
+  {
+    "question": "What is the book given to Prophet Jesus?",
+    "A": "Bible (Gospel)",
+    "B": "Torah",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "Where did the first revelation come to Prophet Muhammad?",
+    "A": "Cave of Hira",
+    "B": "Mina",
+    "C": "Masjid al-Aqsa",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "When did Prophet Muhammad become a prophet?",
+    "A": "At age 40",
+    "B": "At age 25",
+    "C": "At age 60",
+    "D": "At age 7",
+    "correct": "A"
+  },
+  {
+    "question": "Where is Prophet Muhammad's birthplace?",
+    "A": "Mecca",
+    "B": "Medina",
+    "C": "Damascus",
+    "D": "Jerusalem",
+    "correct": "A"
+  },
+  {
+    "question": "Where is the place Prophet Muhammad migrated to?",
+    "A": "Medina",
+    "B": "Jerusalem",
+    "C": "Damascus",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "Which mosque was visited in the Isra and Miraj events?",
+    "A": "Masjid al-Aqsa",
+    "B": "Masjid al-Nabawi",
+    "C": "Outside Masjid al-Haram",
+    "D": "Ayyub Mosque",
+    "correct": "A"
+  },
+  {
+    "question": "Which worship was made obligatory during Miraj?",
+    "A": "Ritual Prayer (Salah)",
+    "B": "Fasting",
+    "C": "Hajj",
+    "D": "Zakat",
+    "correct": "A"
+  },
+  {
+    "question": "What is the Prophet's nickname before prophethood?",
+    "A": "Al-Amin",
+    "B": "Al-Malik",
+    "C": "Al-Kahir",
+    "D": "Al-Mujahid",
+    "correct": "A"
+  },
+  {
+    "question": "What is the common message of prophets?",
+    "A": "Belief in the Oneness of Allah",
+    "B": "War",
+    "C": "Trade",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Noah",
+    "B": "Prophet Jacob",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Lot",
+    "C": "Prophet Salih",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jacob",
+    "C": "Prophet Joseph",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Jesus",
+    "B": "Prophet David",
+    "C": "Prophet Solomon",
+    "D": "Prophet Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last of the Ulul Azm prophets?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet Idris",
+    "C": "Prophet Jacob",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "To which people was Prophet Moses sent?",
+    "A": "Children of Israel",
+    "B": "Thamud",
+    "C": "Ad",
+    "D": "Madyan",
+    "correct": "A"
+  },
+  {
+    "question": "In whose time did Prophet Lot live?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Moses",
+    "C": "Prophet Jacob",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of Hajar running between Safa and Marwa?",
+    "A": "Sa'y",
+    "B": "Tawaf",
+    "C": "Takbir",
+    "D": "Ramy",
+    "correct": "A"
+  },
+  {
+    "question": "What is standing at Arafat in Hajj called?",
+    "A": "Waqfah",
+    "B": "Sa'y",
+    "C": "Tawaf",
+    "D": "Ramy",
+    "correct": "A"
+  },
+  {
+    "question": "What does circumambulating the Kaaba represent?",
+    "A": "Submission around Allah",
+    "B": "Running",
+    "C": "Walking",
+    "D": "Speed",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most important attribute of prophets?",
+    "A": "Truthfulness",
+    "B": "Wealth",
+    "C": "Sultanate",
+    "D": "Power",
+    "correct": "A"
+  },
+  {
+    "question": "How do prophets convey revelation?",
+    "A": "Complete conveyance",
+    "B": "Leaves it incomplete",
+    "C": "Adds their own interpretation",
+    "D": "Hides it",
+    "correct": "A"
+  },
+  {
+    "question": "What does it mean for prophets to be innocent?",
+    "A": "Being protected from major sins",
+    "B": "Never laughing",
+    "C": "Never speaking",
+    "D": "Never eating",
+    "correct": "A"
+  },
+  {
+    "question": "What is the first principle Prophet Muhammad conveyed to people?",
+    "A": "Oneness of Allah",
+    "B": "Only fasting",
+    "C": "Only Hajj",
+    "D": "Only Zakat",
+    "correct": "A"
+  },
+  {
+    "question": "What is the study of Prophet Muhammad's life called?",
+    "A": "Sirah",
+    "B": "Fiqh",
+    "C": "Kalam",
+    "D": "Tafsir",
+    "correct": "A"
+  },
+  {
+    "question": "On what is the bond of brotherhood between prophets based?",
+    "A": "Tawhid and faith",
+    "B": "Bloodline",
+    "C": "City",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "Why are the stories of prophets not told like fairy tales?",
+    "A": "Because they are real events",
+    "B": "For entertainment",
+    "C": "To remain a secret",
+    "D": "To be difficult",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most important concept related to Prophet Abraham's prayer?",
+    "A": "Submission",
+    "B": "War",
+    "C": "Power",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What event caused Prophet Joseph to be saved from the well?",
+    "A": "A caravan finding him",
+    "B": "Rain",
+    "C": "Wind",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "What was the biggest obstacle in Prophet Moses' conveyance to Pharaoh?",
+    "A": "Pharaoh's arrogance",
+    "B": "War",
+    "C": "Hunger",
+    "D": "Illness",
+    "correct": "A"
+  },
+  {
+    "question": "What trials did Prophet Moses' people go through?",
+    "A": "Hunger and fear",
+    "B": "Sultanate",
+    "C": "Wealth",
+    "D": "Game",
+    "correct": "A"
+  },
+  {
+    "question": "What is in the letter Prophet Solomon sent to Belkis?",
+    "A": "Invitation to Tawhid",
+    "B": "Declaration of war",
+    "C": "Trade offer",
+    "D": "Offer to be king",
+    "correct": "A"
+  },
+  {
+    "question": "What is the subject Prophet Jesus explained most to his people?",
+    "A": "Oneness of Allah and mercy",
+    "B": "War",
+    "C": "Trade",
+    "D": "Geography",
+    "correct": "A"
+  },
+  {
+    "question": "For which characteristic is Mary praised?",
+    "A": "Chastity and submission",
+    "B": "Sultanate",
+    "C": "War",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest miracle Prophet Muhammad showed to people?",
+    "A": "Quran",
+    "B": "Staff",
+    "C": "Sea",
+    "D": "Well",
+    "correct": "A"
+  },
+  {
+    "question": "What is the common message prophets were sent with?",
+    "A": "Worship to Allah",
+    "B": "Establishing a sultanate",
+    "C": "Building roads",
+    "D": "Declaring war",
+    "correct": "A"
+  },
+  {
+    "question": "From what substance was Prophet Adam created?",
+    "A": "Earth/Clay",
+    "B": "Fire",
+    "C": "Air",
+    "D": "Stone",
+    "correct": "A"
+  },
+  {
+    "question": "Where were Prophet Adam and Eve sent from Paradise?",
+    "A": "To Earth",
+    "B": "To the sea",
+    "C": "To the sun",
+    "D": "To the moon",
+    "correct": "A"
+  },
+  {
+    "question": "What does the word Adam mean?",
+    "A": "Human",
+    "B": "Sea",
+    "C": "Tree",
+    "D": "Stone",
+    "correct": "A"
+  },
+  {
+    "question": "What meaning does Prophet Idris's name carry?",
+    "A": "One who takes lessons (Dars)",
+    "B": "Warrior",
+    "C": "Merchant",
+    "D": "Young",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the things Prophet Idris taught people?",
+    "A": "Writing",
+    "B": "Seamanship",
+    "C": "War",
+    "D": "Agriculture",
+    "correct": "A"
+  },
+  {
+    "question": "Why was Prophet Noah's ship built?",
+    "A": "For salvation",
+    "B": "For trade",
+    "C": "For war",
+    "D": "For entertainment",
+    "correct": "A"
+  },
+  {
+    "question": "What was the cause of the flood?",
+    "A": "Denial of the people",
+    "B": "Weather events",
+    "C": "War",
+    "D": "Famine",
+    "correct": "A"
+  },
+  {
+    "question": "How many animals were taken onto Prophet Noah's ship?",
+    "A": "A pair of every kind",
+    "B": "Only birds",
+    "C": "Ten pairs",
+    "D": "No animals were taken",
+    "correct": "A"
+  },
+  {
+    "question": "Where is the mountain where the ship landed?",
+    "A": "Mount Judi",
+    "B": "Sinai",
+    "C": "Nimrod",
+    "D": "Hira",
+    "correct": "A"
+  },
+  {
+    "question": "What is the cause of destruction of the people of Ad?",
+    "A": "Severe wind",
+    "B": "Rain",
+    "C": "Stone",
+    "D": "Sea",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet sent to the people of Ad?",
+    "A": "Prophet Hud",
+    "B": "Prophet Salih",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Lot",
+    "correct": "A"
+  },
+  {
+    "question": "With what were the people of Thamud destroyed?",
+    "A": "Severe sound / Blast",
+    "B": "Rain",
+    "C": "Snow",
+    "D": "Hunger",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet is the miracle of the she-camel associated?",
+    "A": "Prophet Salih",
+    "B": "Prophet Noah",
+    "C": "Prophet Hud",
+    "D": "Prophet Moses",
+    "correct": "A"
+  },
+  {
+    "question": "What happened to Prophet Salih's miracle camel?",
+    "A": "It was killed",
+    "B": "It was paraded in the city",
+    "C": "It was entered in a race",
+    "D": "It was sold",
+    "correct": "A"
+  },
+  {
+    "question": "In which city was Prophet Abraham born?",
+    "A": "Ur",
+    "B": "Mecca",
+    "C": "Damascus",
+    "D": "Jerusalem",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Abraham say to his people?",
+    "A": "Idols give you no benefit",
+    "B": "Idols are strong",
+    "C": "Idols protect you",
+    "D": "Idols know everything",
+    "correct": "A"
+  },
+  {
+    "question": "What happened when Prophet Abraham was thrown into the fire?",
+    "A": "The fire became cool",
+    "B": "The fire grew",
+    "C": "The fire disappeared",
+    "D": "The fire turned to stone",
+    "correct": "A"
+  },
+  {
+    "question": "When did the Zamzam water appear?",
+    "A": "While Hajar was running",
+    "B": "While it was raining",
+    "C": "While the sea was overflowing",
+    "D": "When the staff was struck",
+    "correct": "A"
+  },
+  {
+    "question": "With whom did Prophet Abraham build the Kaaba?",
+    "A": "Prophet Ishmael",
+    "B": "Prophet Moses",
+    "C": "Prophet Jesus",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Ishmael's characteristic?",
+    "A": "Submission",
+    "B": "War",
+    "C": "Trade",
+    "D": "City",
+    "correct": "A"
+  },
+  {
+    "question": "On which story is the event of sacrifice based?",
+    "A": "Prophet Abraham and Ishmael",
+    "B": "Prophet Moses",
+    "C": "Prophet Joseph",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Whose son is Prophet Isaac?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Jacob",
+    "C": "Prophet Joseph",
+    "D": "Prophet Idris",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jacob's nickname?",
+    "A": "Israel",
+    "B": "Mary",
+    "C": "Idris",
+    "D": "Hud",
+    "correct": "A"
+  },
+  {
+    "question": "How did Prophet Joseph's brothers treat him?",
+    "A": "By throwing him into a well",
+    "B": "By making him king",
+    "C": "By giving him a house",
+    "D": "By visiting him",
+    "correct": "A"
+  },
+  {
+    "question": "In which country did Prophet Joseph become a vizier?",
+    "A": "Egypt",
+    "B": "Damascus",
+    "C": "Medina",
+    "D": "Mecca",
+    "correct": "A"
+  },
+  {
+    "question": "Which lesson is derived from Prophet Joseph's story?",
+    "A": "Patience",
+    "B": "War",
+    "C": "Jealousy",
+    "D": "Anger",
+    "correct": "A"
+  },
+  {
+    "question": "To which people was Prophet Shuayb sent?",
+    "A": "Madyan",
+    "B": "Thamud",
+    "C": "Ad",
+    "D": "Nineveh",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Moses left when he was a child?",
+    "A": "In a chest in the river",
+    "B": "In a well",
+    "C": "In the desert",
+    "D": "In the sea",
+    "correct": "A"
+  },
+  {
+    "question": "Which tyrant did Prophet Moses oppose?",
+    "A": "Pharaoh",
+    "B": "Nimrod",
+    "C": "Belkis",
+    "D": "Jonah",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet is the miracle of splitting the sea associated?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jesus",
+    "C": "Prophet Noah",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who helped Prophet Moses?",
+    "A": "Prophet Aaron",
+    "B": "Prophet Jacob",
+    "C": "Prophet Isaac",
+    "D": "Prophet Idris",
+    "correct": "A"
+  },
+  {
+    "question": "Which book was given to Prophet Moses?",
+    "A": "Torah",
+    "B": "Bible (Gospel)",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Aaron's duty?",
+    "A": "Helping in conveying the message",
+    "B": "King",
+    "C": "Merchant",
+    "D": "Warrior",
+    "correct": "A"
+  },
+  {
+    "question": "How did Prophet Job win the trial of patience?",
+    "A": "By being grateful",
+    "B": "By fighting",
+    "C": "By fleeing",
+    "D": "By hiding",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Job's trial related to?",
+    "A": "Illness",
+    "B": "War",
+    "C": "Agriculture",
+    "D": "Sea",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jonah's miracle?",
+    "A": "Being saved from the belly of the fish",
+    "B": "Splitting of the sea",
+    "C": "Staff",
+    "D": "Zamzam",
+    "correct": "A"
+  },
+  {
+    "question": "In which city did Prophet Jonah convey his message?",
+    "A": "Nineveh",
+    "B": "Damascus",
+    "C": "Mecca",
+    "D": "Medina",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah do in the belly of the fish?",
+    "A": "Supplication (Dua)",
+    "B": "Sleep",
+    "C": "Eat",
+    "D": "Sightseeing",
+    "correct": "A"
+  },
+  {
+    "question": "Which book was given to Prophet David?",
+    "A": "Zabur (Psalms)",
+    "B": "Quran",
+    "C": "Bible (Gospel)",
+    "D": "Torah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the known characteristic of Prophet David?",
+    "A": "Beautiful voice",
+    "B": "Seamanship",
+    "C": "War",
+    "D": "Medicine",
+    "correct": "A"
+  },
+  {
+    "question": "What are Prophet Solomon's miracles?",
+    "A": "Commanding the jinn and the wind",
+    "B": "Splitting of the sea",
+    "C": "Zamzam",
+    "D": "Well",
+    "correct": "A"
+  },
+  {
+    "question": "In which event does Belkis appear?",
+    "A": "In the story of Prophet Solomon",
+    "B": "In the story of Prophet Moses",
+    "C": "In the story of Prophet Noah",
+    "D": "In the story of Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Zakariya pray for?",
+    "A": "A righteous child",
+    "B": "Sultanate",
+    "C": "War",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Zakariya's son?",
+    "A": "Prophet Yahya",
+    "B": "Prophet Moses",
+    "C": "Prophet David",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born without a father?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Ishmael",
+    "C": "Prophet Jacob",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "What is Mary's virtue?",
+    "A": "Chastity",
+    "B": "War",
+    "C": "Trade",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "Which book was given to Prophet Jesus?",
+    "A": "Bible (Gospel)",
+    "B": "Torah",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last prophet?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet David",
+    "C": "Prophet Moses",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "Where did the first revelation come to Prophet Muhammad?",
+    "A": "In the Cave of Hira",
+    "B": "In Mina",
+    "C": "In Taif",
+    "D": "In Arafat",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's title before prophethood?",
+    "A": "Al-Amin",
+    "B": "Al-Malik",
+    "C": "Al-Hakim",
+    "D": "Al-Qadir",
+    "correct": "A"
+  },
+  {
+    "question": "With which mosque is the event of Isra related?",
+    "A": "Masjid al-Aqsa",
+    "B": "Masjid al-Nabawi",
+    "C": "Masjid al-Haram",
+    "D": "Masjid Quba",
+    "correct": "A"
+  },
+  {
+    "question": "Which worship was made obligatory during Miraj?",
+    "A": "Ritual Prayer (Salah)",
+    "B": "Fasting",
+    "C": "Hajj",
+    "D": "Zakat",
+    "correct": "A"
+  },
+  {
+    "question": "Which prophet's life does Sirah tell?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet Moses",
+    "C": "Prophet Joseph",
+    "D": "Prophet Abraham",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Noah",
+    "B": "Prophet Jacob",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Job",
+    "correct": "A"
+  },
+  {
+    "question": "Who is among the Ulul Azm prophets?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Hud",
+    "C": "Prophet Salih",
+    "D": "Prophet Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Moses",
+    "B": "Prophet Jacob",
+    "C": "Prophet Joseph",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Who is another one of the Ulul Azm prophets?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Lot",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last of the Ulul Azm prophets?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet David",
+    "C": "Prophet Solomon",
+    "D": "Prophet Ilyas",
+    "correct": "A"
+  },
+  {
+    "question": "To which people was Prophet Moses sent?",
+    "A": "Children of Israel",
+    "B": "Semud",
+    "C": "Ad",
+    "D": "Nineveh",
+    "correct": "A"
+  },
+  {
+    "question": "With which moral problem is the people Prophet Lot was sent to portrayed?",
+    "A": "Bad morals / Immorality",
+    "B": "War",
+    "C": "Agriculture",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of the worship performed between Safa and Marwa?",
+    "A": "Sa'y",
+    "B": "Tawaf",
+    "C": "Waqfah",
+    "D": "Ramy",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of standing at Arafat?",
+    "A": "Waqfah",
+    "B": "Tawaf",
+    "C": "Sa'y",
+    "D": "Ramy",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of circumambulating around the Kaaba?",
+    "A": "Tawaf",
+    "B": "Sa'y",
+    "C": "Waqfah",
+    "D": "Ramy",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most fundamental moral characteristic of prophets?",
+    "A": "Truthfulness",
+    "B": "Sultanate",
+    "C": "Trade",
+    "D": "Jealousy",
+    "correct": "A"
+  },
+  {
+    "question": "What does the innocence of prophets express?",
+    "A": "Protection from major sins",
+    "B": "Never sleeping",
+    "C": "Never speaking",
+    "D": "Never eating or drinking",
+    "correct": "A"
+  },
+  {
+    "question": "Which attribute is the duty of conveying revelation to people?",
+    "A": "Tabligh",
+    "B": "Sidq",
+    "C": "Amanah",
+    "D": "Ismah",
+    "correct": "A"
+  },
+  {
+    "question": "Which attribute corresponds to prophets being trustworthy?",
+    "A": "Amanah",
+    "B": "Sidq",
+    "C": "Tabligh",
+    "D": "Fetanah",
+    "correct": "A"
+  },
+  {
+    "question": "Which attribute corresponds to prophets having superior intellect?",
+    "A": "Fetanah",
+    "B": "Sidq",
+    "C": "Amanah",
+    "D": "Ismah",
+    "correct": "A"
+  },
+  {
+    "question": "Which prophetic attribute is 'Truthfulness'?",
+    "A": "Sidq",
+    "B": "Amanah",
+    "C": "Fetanah",
+    "D": "Ismah",
+    "correct": "A"
+  },
+  {
+    "question": "How do prophets set an example?",
+    "A": "With their behaviors",
+    "B": "With sultanate",
+    "C": "With war",
+    "D": "With wealth",
+    "correct": "A"
+  },
+  {
+    "question": "On which concept is the brotherhood of prophets based?",
+    "A": "Tawhid",
+    "B": "Lineage",
+    "C": "City",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is the purpose of the stories of prophets in the Quran?",
+    "A": "Lesson (Ibrah)",
+    "B": "Entertainment",
+    "C": "Fairy tale",
+    "D": "Game",
+    "correct": "A"
+  },
+  {
+    "question": "What is the position Prophet Joseph obtained as a result of patience?",
+    "A": "Viziership in Egypt",
+    "B": "Becoming a King",
+    "C": "Shepherding",
+    "D": "Merchandising",
+    "correct": "A"
+  },
+  {
+    "question": "What is the source of power Prophet Moses used against Pharaoh?",
+    "A": "Allah's help",
+    "B": "His army",
+    "C": "Trade",
+    "D": "Wealth",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Job gain as a result of his patience?",
+    "A": "Healing",
+    "B": "Sultanate",
+    "C": "War",
+    "D": "Property",
+    "correct": "A"
+  },
+  {
+    "question": "What is the importance of Prophet Jonah's prayer?",
+    "A": "Repentance and submission",
+    "B": "Speed",
+    "C": "Fear",
+    "D": "Anger",
+    "correct": "A"
+  },
+  {
+    "question": "What is the purpose of Prophet Solomon's miracles?",
+    "A": "To show Allah's power",
+    "B": "To have fun",
+    "C": "To declare war",
+    "D": "To get rich",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jesus emphasize most?",
+    "A": "Mercy",
+    "B": "War",
+    "C": "Wealth",
+    "D": "City",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's greatest miracle?",
+    "A": "Quran",
+    "B": "Staff",
+    "C": "Sea",
+    "D": "Well",
+    "correct": "A"
+  },
+  {
+    "question": "With which concept is the reason for sending prophets expressed?",
+    "A": "Guidance (Hidayah)",
+    "B": "Sultanate",
+    "C": "Trade",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Adam's wife?",
+    "A": "Eve (Hawwa)",
+    "B": "Hajar",
+    "C": "Sarah",
+    "D": "Mary",
+    "correct": "A"
+  },
+  {
+    "question": "What is the reason angels prostrated to Prophet Adam?",
+    "A": "Allah's command",
+    "B": "People's wish",
+    "C": "Angels' decision",
+    "D": "Satan's command",
+    "correct": "A"
+  },
+  {
+    "question": "Who opposed Prophet Adam?",
+    "A": "Iblis",
+    "B": "Azrael",
+    "C": "Michael",
+    "D": "Gabriel",
+    "correct": "A"
+  },
+  {
+    "question": "What is the lesson taken from Prophet Idris's story?",
+    "A": "Knowledge and patience",
+    "B": "Property and power",
+    "C": "War and sultanate",
+    "D": "Trade and wealth",
+    "correct": "A"
+  },
+  {
+    "question": "What is one of the important things Prophet Idris taught people?",
+    "A": "Writing",
+    "B": "Mining",
+    "C": "Seamanship",
+    "D": "Agriculture",
+    "correct": "A"
+  },
+  {
+    "question": "What is the subject Prophet Noah conveyed most?",
+    "A": "Oneness of Allah",
+    "B": "Trade",
+    "C": "War",
+    "D": "Clothing",
+    "correct": "A"
+  },
+  {
+    "question": "How did Prophet Noah's people treat him?",
+    "A": "Denied him",
+    "B": "Rejoiced",
+    "C": "Made him king",
+    "D": "Supported him",
+    "correct": "A"
+  },
+  {
+    "question": "Who are the ones saved from the flood?",
+    "A": "The believers",
+    "B": "The rich",
+    "C": "Commanders",
+    "D": "Soothsayers",
+    "correct": "A"
+  },
+  {
+    "question": "Where did Prophet Noah's ship land?",
+    "A": "On Mount Judi",
+    "B": "On Arafat",
+    "C": "On Sinai",
+    "D": "On Hud",
+    "correct": "A"
+  },
+  {
+    "question": "Which prophet did the people of Ad oppose?",
+    "A": "Prophet Hud",
+    "B": "Prophet Salih",
+    "C": "Prophet Shuayb",
+    "D": "Prophet Lot",
+    "correct": "A"
+  },
+  {
+    "question": "How was the destruction of Prophet Hud's people?",
+    "A": "Severe wind",
+    "B": "Flood",
+    "C": "Hunger",
+    "D": "Illness",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet of the people of Thamud?",
+    "A": "Prophet Salih",
+    "B": "Prophet Noah",
+    "C": "Prophet Hud",
+    "D": "Prophet Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "Why was the she-camel miracle sent?",
+    "A": "As proof to those who denied",
+    "B": "For war",
+    "C": "For trade",
+    "D": "For entertainment",
+    "correct": "A"
+  },
+  {
+    "question": "Which sin did the people of Thamud commit?",
+    "A": "They killed the miracle camel",
+    "B": "They abandoned prayer",
+    "C": "They traded",
+    "D": "They built a ship",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Abraham's father's profession?",
+    "A": "Master idol maker",
+    "B": "Blacksmith",
+    "C": "Doctor",
+    "D": "Sailor",
+    "correct": "A"
+  },
+  {
+    "question": "What does the event of Prophet Abraham being thrown into fire show?",
+    "A": "Allah's protection",
+    "B": "Power of fire",
+    "C": "Strength of idols",
+    "D": "Love of people",
+    "correct": "A"
+  },
+  {
+    "question": "What does Prophet Abraham's best known prayer recount?",
+    "A": "Submission",
+    "B": "War",
+    "C": "Agriculture",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "Where did Prophet Ishmael grow up?",
+    "A": "In Mecca",
+    "B": "In Jerusalem",
+    "C": "In Damascus",
+    "D": "In Ur",
+    "correct": "A"
+  },
+  {
+    "question": "With which event did the Zamzam water come out?",
+    "A": "Hajar's running",
+    "B": "Splitting of the sea",
+    "C": "Fish opening",
+    "D": "Wind",
+    "correct": "A"
+  },
+  {
+    "question": "Who rebuilt the Kaaba?",
+    "A": "Prophet Abraham and Ishmael",
+    "B": "Prophet Noah",
+    "C": "Prophet Moses",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Isaac's brother?",
+    "A": "Prophet Ishmael",
+    "B": "Prophet Joseph",
+    "C": "Prophet Jacob",
+    "D": "Prophet Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jacob's other name?",
+    "A": "Israel",
+    "B": "Hud",
+    "C": "Salih",
+    "D": "Shuayb",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Joseph's brothers do to him?",
+    "A": "They threw him into a well",
+    "B": "They made him king",
+    "C": "They gave him a house",
+    "D": "They made him a commander",
+    "correct": "A"
+  },
+  {
+    "question": "What feature do Prophet Joseph's dreams have?",
+    "A": "They are interpreted",
+    "B": "They are not seen",
+    "C": "They are not interpreted",
+    "D": "They are forgotten",
+    "correct": "A"
+  },
+  {
+    "question": "In what position did Prophet Joseph serve?",
+    "A": "Vizier in Egypt",
+    "B": "King",
+    "C": "Commander",
+    "D": "Merchant",
+    "correct": "A"
+  },
+  {
+    "question": "Which mistake did Prophet Shuayb's people commit?",
+    "A": "Fraud in weights and measures",
+    "B": "Patience",
+    "C": "Slavery",
+    "D": "Trade (In general, not fraud)",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Moses raised?",
+    "A": "In Pharaoh's palace",
+    "B": "In Ur",
+    "C": "In Mecca",
+    "D": "In Medina",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the brother accompanying Prophet Moses?",
+    "A": "Prophet Aaron",
+    "B": "Prophet David",
+    "C": "Prophet Jesus",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Which event does the splitting of the sea represent?",
+    "A": "Allah's help",
+    "B": "War power",
+    "C": "Trade",
+    "D": "Luck",
+    "correct": "A"
+  },
+  {
+    "question": "Which book is given to Prophet Moses?",
+    "A": "Torah",
+    "B": "Bible (Gospel)",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "What was Prophet Aaron's duty?",
+    "A": "Help in tabligh (conveying message)",
+    "B": "Be a king",
+    "C": "Be a merchant",
+    "D": "Commandership",
+    "correct": "A"
+  },
+  {
+    "question": "With which trial was Prophet Job tested?",
+    "A": "Illness",
+    "B": "War",
+    "C": "Hunger",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Job's greatest lesson?",
+    "A": "Patience",
+    "B": "Anger",
+    "C": "Jealousy",
+    "D": "Pride",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Jonah's miracle?",
+    "A": "Being saved from the belly of the fish",
+    "B": "Splitting of the sea",
+    "C": "Staff",
+    "D": "Sa'y",
+    "correct": "A"
+  },
+  {
+    "question": "Where was Prophet Jonah sent?",
+    "A": "Nineveh",
+    "B": "Madyan",
+    "C": "Thamud",
+    "D": "Ad",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah do in the belly of the fish?",
+    "A": "Repentance (Tawbah)",
+    "B": "Sightseeing",
+    "C": "Eating",
+    "D": "Sleeping",
+    "correct": "A"
+  },
+  {
+    "question": "What is the most known characteristic of Prophet David?",
+    "A": "Beautiful voice",
+    "B": "Sultanate",
+    "C": "Agriculture",
+    "D": "Seamanship",
+    "correct": "A"
+  },
+  {
+    "question": "What is the holy book given to Prophet David?",
+    "A": "Zabur (Psalms)",
+    "B": "Quran",
+    "C": "Torah",
+    "D": "Bible (Gospel)",
+    "correct": "A"
+  },
+  {
+    "question": "What do Prophet Solomon's miracles show?",
+    "A": "Allah's power",
+    "B": "Power of war",
+    "C": "Agriculture",
+    "D": "Seamanship",
+    "correct": "A"
+  },
+  {
+    "question": "In which story is Belkis known?",
+    "A": "Prophet Solomon",
+    "B": "Prophet Moses",
+    "C": "Prophet Joseph",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Zakariya ask for?",
+    "A": "A righteous child",
+    "B": "To be a king",
+    "C": "Sultanate",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born as a result of Prophet Zakariya's prayer?",
+    "A": "Prophet Yahya",
+    "B": "Prophet Joseph",
+    "C": "Prophet Jesus",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the prophet born without a father?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Jacob",
+    "C": "Prophet Aaron",
+    "D": "Prophet Noah",
+    "correct": "A"
+  },
+  {
+    "question": "For which aspect is Mary praised?",
+    "A": "Chastity",
+    "B": "Sultanate",
+    "C": "War",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is the book given to Prophet Jesus?",
+    "A": "Bible (Gospel)",
+    "B": "Torah",
+    "C": "Zabur (Psalms)",
+    "D": "Quran",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last prophet?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet Moses",
+    "C": "Prophet Joseph",
+    "D": "Prophet David",
+    "correct": "A"
+  },
+  {
+    "question": "Where did Prophet Muhammad receive the first revelation?",
+    "A": "Hira",
+    "B": "Arafat",
+    "C": "Sinai",
+    "D": "Taif",
+    "correct": "A"
+  },
+  {
+    "question": "Which is the first Surah revealed to Prophet Muhammad?",
+    "A": "Surah Al-Alaq",
+    "B": "Fatiha",
+    "C": "Ikhlas",
+    "D": "Nas",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's nickname before prophethood?",
+    "A": "Al-Amin",
+    "B": "Al-Hakim",
+    "C": "Al-Malik",
+    "D": "Al-Jabbar",
+    "correct": "A"
+  },
+  {
+    "question": "With which mosque is the event of Isra related?",
+    "A": "Masjid al-Aqsa",
+    "B": "Masjid al-Nabawi",
+    "C": "Masjid Quba",
+    "D": "Quba Mosque",
+    "correct": "A"
+  },
+  {
+    "question": "Which worship was made obligatory during Miraj?",
+    "A": "Ritual Prayer (Salah)",
+    "B": "Hajj",
+    "C": "Zakat",
+    "D": "Fasting",
+    "correct": "A"
+  },
+  {
+    "question": "Which field of science is Sirah?",
+    "A": "Life of Prophet Muhammad",
+    "B": "Geography",
+    "C": "Medicine",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is the common characteristic of prophets?",
+    "A": "Truthfulness",
+    "B": "Sultanate",
+    "C": "Demand",
+    "D": "Property",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Sidq' describe?",
+    "A": "Truthfulness",
+    "B": "Power",
+    "C": "Wealth",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What does the prophetic attribute 'Amanah' describe?",
+    "A": "Trustworthiness",
+    "B": "War",
+    "C": "Trade",
+    "D": "Agriculture",
+    "correct": "A"
+  },
+  {
+    "question": "What does 'Tabligh' mean?",
+    "A": "Conveying the revelation",
+    "B": "War",
+    "C": "Trade",
+    "D": "Sultanate",
+    "correct": "A"
+  },
+  {
+    "question": "What does the attribute 'Ismah' express?",
+    "A": "Protection from sins",
+    "B": "Speed",
+    "C": "Sultanate",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "What does the attribute 'Fatanah' express?",
+    "A": "Superior intellect",
+    "B": "Wealth",
+    "C": "War",
+    "D": "Agriculture",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Noah",
+    "B": "Prophet Aaron",
+    "C": "Prophet Jacob",
+    "D": "Prophet Hur",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Shuayb",
+    "C": "Prophet Jacob",
+    "D": "Prophet Joseph",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Moses",
+    "B": "Prophet Lot",
+    "C": "Prophet Hud",
+    "D": "Prophet Dhul-Kifl",
+    "correct": "A"
+  },
+  {
+    "question": "Who is one of the Ulul Azm prophets?",
+    "A": "Prophet Jesus",
+    "B": "Prophet Aaron",
+    "C": "Prophet Salih",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Who is the last of the Ulul Azm prophets?",
+    "A": "Prophet Muhammad",
+    "B": "Prophet David",
+    "C": "Prophet Solomon",
+    "D": "Prophet Ilyas",
+    "correct": "A"
+  },
+  {
+    "question": "To which people was Prophet Moses sent?",
+    "A": "Children of Israel",
+    "B": "Ad",
+    "C": "Thamud",
+    "D": "Nineveh",
+    "correct": "A"
+  },
+  {
+    "question": "With which prophet did Prophet Lot live in the same period?",
+    "A": "Prophet Abraham",
+    "B": "Prophet Moses",
+    "C": "Prophet Joseph",
+    "D": "Prophet Jacob",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Abraham's wife?",
+    "A": "Sarah",
+    "B": "Hajar",
+    "C": "Mary",
+    "D": "Eve",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Abraham's other wife?",
+    "A": "Hajar",
+    "B": "Mary",
+    "C": "Eve",
+    "D": "Sarah",
+    "correct": "A"
+  },
+  {
+    "question": "How many sons does Prophet Jacob have?",
+    "A": "12",
+    "B": "7",
+    "C": "5",
+    "D": "10",
+    "correct": "A"
+  },
+  {
+    "question": "Who is Prophet Joseph's brother?",
+    "A": "Benjamin (Bunyamin)",
+    "B": "Isaac",
+    "C": "Moses",
+    "D": "Aaron",
+    "correct": "A"
+  },
+  {
+    "question": "With which word is the common message of prophets summarized?",
+    "A": "Tawhid",
+    "B": "Sultanate",
+    "C": "Trade",
+    "D": "War",
+    "correct": "A"
+  },
+  {
+    "question": "What is the greatest lesson taken from the stories of prophets?",
+    "A": "Patience and faith",
+    "B": "War",
+    "C": "Speed",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "With which concept is Prophet Job's patience summarized?",
+    "A": "Submission",
+    "B": "Pride",
+    "C": "Jealousy",
+    "D": "Anger",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jonah's people do in the end?",
+    "A": "They believed",
+    "B": "They migrated",
+    "C": "They fought",
+    "D": "They traded",
+    "correct": "A"
+  },
+  {
+    "question": "What do Prophet Solomon's miracles teach?",
+    "A": "Allah's power",
+    "B": "Wind power",
+    "C": "Sultanate",
+    "D": "Mine",
+    "correct": "A"
+  },
+  {
+    "question": "What did Prophet Jesus teach people?",
+    "A": "Mercy and faith",
+    "B": "War",
+    "C": "Agriculture",
+    "D": "Trade",
+    "correct": "A"
+  },
+  {
+    "question": "What is Prophet Muhammad's greatest miracle?",
+    "A": "Quran",
+    "B": "Staff",
+    "C": "Sea",
+    "D": "Well",
+    "correct": "A"
+  }
+]

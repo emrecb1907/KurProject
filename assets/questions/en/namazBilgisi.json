@@ -1,0 +1,3562 @@
+[
+  {
+    "question": "Which of the following is one of the obligatory acts (Farz) of the Ritual Prayer?",
+    "A": "Reciting Tasbih",
+    "B": "Standing (Qiyam)",
+    "C": "Giving Salam",
+    "D": "Being an Imam",
+    "correct": "B"
+  },
+  {
+    "question": "How many obligatory acts (Farz) does Ablution have?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is NOT one of the obligatory acts (Farz) of Ablution?",
+    "A": "Washing the face",
+    "B": "Wiping the head (Masah)",
+    "C": "Making intention (Niyyah)",
+    "D": "Washing the arms",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is one of the obligatory acts (Farz) of Full Ablution (Ghusl)?",
+    "A": "Putting water into the nose",
+    "B": "Washing the face",
+    "C": "Wiping the head",
+    "D": "Washing arms up to elbows",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following is one of the conditions (Shart) of Ritual Prayer?",
+    "A": "Praying in congregation",
+    "B": "Covering the private parts (Satr al-Awrah)",
+    "C": "Reading aloud",
+    "D": "Long standing",
+    "correct": "B"
+  },
+  {
+    "question": "What does 'Satr al-Awrah' mean?",
+    "A": "Praying hastily",
+    "B": "Covering the parts of the body that must be covered",
+    "C": "Praying in congregation",
+    "D": "Reading silently",
+    "correct": "B"
+  },
+  {
+    "question": "Which of the following is one of the pillars (Farz) inside the Ritual Prayer?",
+    "A": "Saying Takbir",
+    "B": "Bowing (Ruku)",
+    "C": "Tasbihat",
+    "D": "Qunut supplication",
+    "correct": "B"
+  },
+  {
+    "question": "Which practice is Necessary (Wajib) in the Witr prayer?",
+    "A": "Praying three rak'ahs",
+    "B": "Prolonging the standing",
+    "C": "Reciting Qunut supplication",
+    "D": "Praying in congregation",
+    "correct": "C"
+  },
+  {
+    "question": "What does the Salam given at the end of the Ritual Prayer signify?",
+    "A": "Completion of the prayer",
+    "B": "Start of Tasbih",
+    "C": "Completion of the obligatory part",
+    "D": "Start of a new rak'ah",
+    "correct": "A"
+  },
+  {
+    "question": "Which situation constitutes a state that breaks Ablution?",
+    "A": "Dozing off",
+    "B": "Giving blood",
+    "C": "Losing consciousness",
+    "D": "Supplicating",
+    "correct": "C"
+  },
+  {
+    "question": "Which situation invalidates Ablution?",
+    "A": "Laughing",
+    "B": "Laughing aloud (inside the prayer)",
+    "C": "Applying perfume",
+    "D": "Drinking water while standing",
+    "correct": "B"
+  },
+  {
+    "question": "Which situation requires Full Ablution (Ghusl) for women?",
+    "A": "Performing ablution",
+    "B": "Entering of prayer time",
+    "C": "Ending of menstruation (Hayd)",
+    "D": "Combing hair",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is one of the situations that break Ablution?",
+    "A": "Sleep",
+    "B": "Cleaning the nose",
+    "C": "Flowing of blood",
+    "D": "Drinking water",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on drinking water while standing?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is one of the Necessary (Wajib) acts of Ritual Prayer?",
+    "A": "Bowing (Ruku)",
+    "B": "Opening Takbir",
+    "C": "Reciting Al-Fatiha",
+    "D": "Salam",
+    "correct": "C"
+  },
+  {
+    "question": "Which constitutes a Sunnah act?",
+    "A": "Abandoning prayer",
+    "B": "Using Miswak",
+    "C": "Reading Quran without ablution",
+    "D": "Leaving the congregation",
+    "correct": "B"
+  },
+  {
+    "question": "Which is one of the times whenever prayer is Disliked (Karahat)?",
+    "A": "While the sun is rising",
+    "B": "After Asr",
+    "C": "After Isha",
+    "D": "Before the morning adhan",
+    "correct": "A"
+  },
+  {
+    "question": "Which is one of the situations that invalidate the Ritual Prayer?",
+    "A": "Turning to Qibla",
+    "B": "Laughing",
+    "C": "Yawning",
+    "D": "Standing",
+    "correct": "B"
+  },
+  {
+    "question": "Which action is Disliked (Makruh) in Ritual Prayer?",
+    "A": "Raising hands",
+    "B": "Looking right and left",
+    "C": "Going to prostration",
+    "D": "Sitting in Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on constantly shifting eyes right and left in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Permissible",
+    "correct": "C"
+  },
+  {
+    "question": "Which prayer is not Obligatory to perform in congregation but is Sunnah?",
+    "A": "Fajr",
+    "B": "Zuhr",
+    "C": "Witr",
+    "D": "Jumu'ah",
+    "correct": "C"
+  },
+  {
+    "question": "How many rak'ahs is the Jumu'ah (Friday) prayer?",
+    "A": "2 Obligatory",
+    "B": "4 Obligatory",
+    "C": "3 Obligatory",
+    "D": "1 Obligatory",
+    "correct": "A"
+  },
+  {
+    "question": "Which is one of the conditions for Jumu'ah prayer to be Obligatory?",
+    "A": "Fasting",
+    "B": "Being resident (Mukim)",
+    "C": "Being a traveler",
+    "D": "Not making intention",
+    "correct": "B"
+  },
+  {
+    "question": "What cannot a person with a valid excuse perform?",
+    "A": "Jumu'ah prayer",
+    "B": "Isha prayer",
+    "C": "Tarawih prayer",
+    "D": "Fajr prayer",
+    "correct": "A"
+  },
+  {
+    "question": "How many rak'ahs does a traveler perform for the 4-rak'ah Obligatory prayers?",
+    "A": "Full",
+    "B": "3 rak'ahs",
+    "C": "2 rak'ahs",
+    "D": "1 rak'ah",
+    "correct": "C"
+  },
+  {
+    "question": "At how many km does the journey status (being a traveler) begin?",
+    "A": "30 km",
+    "B": "60 km",
+    "C": "90 km",
+    "D": "150 km",
+    "correct": "C"
+  },
+  {
+    "question": "In which situation is Tayammum performed?",
+    "A": "When Friday time comes",
+    "B": "If there is no water or it cannot be used",
+    "C": "While fasting",
+    "D": "On Eid morning",
+    "correct": "B"
+  },
+  {
+    "question": "How many obligatory acts does Tayammum have?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Which of the following is one of the obligatory acts of Tayammum?",
+    "A": "Doing it standing",
+    "B": "Striking hand on soil",
+    "C": "Making intention",
+    "D": "Drinking water",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on unnecessary movement to the right or left during Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Permissible",
+    "C": "Disliked (Makruh)",
+    "D": "Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on speaking without excuse during Ritual Prayer?",
+    "A": "It invalidates the prayer",
+    "B": "It is Sunnah",
+    "C": "It is not objectionable",
+    "D": "It is Necessary",
+    "correct": "A"
+  },
+  {
+    "question": "What does excessive movement in Ritual Prayer cause?",
+    "A": "Gaining reward",
+    "B": "Invalidation of prayer",
+    "C": "Requiring Full Ablution",
+    "D": "Becoming Obligatory",
+    "correct": "B"
+  },
+  {
+    "question": "What is the first condition before starting Ritual Prayer?",
+    "A": "Performing Ablution",
+    "B": "Giving Salam",
+    "C": "Standing",
+    "D": "Performing Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "In to which prayers is reading Al-Fatiha Necessary (Wajib)?",
+    "A": "In Obligatory prayers",
+    "B": "In Witr",
+    "C": "Only in Fajr prayer",
+    "D": "Only in Tarawih",
+    "correct": "A"
+  },
+  {
+    "question": "What is the name of the first Takbir said at the beginning of Ritual Prayer?",
+    "A": "Qunut Takbir",
+    "B": "Tashahhud Takbir",
+    "C": "Opening (Iftitah) Takbir",
+    "D": "Sunnah Takbir",
+    "correct": "C"
+  },
+  {
+    "question": "With how many limbs touching the ground is Prostration (Sajdah) completed?",
+    "A": "4",
+    "B": "5",
+    "C": "7",
+    "D": "8",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is one of the limbs required for Prostration in Ritual Prayer?",
+    "A": "Knee",
+    "B": "Hip",
+    "C": "Heel",
+    "D": "Shoulder",
+    "correct": "A"
+  },
+  {
+    "question": "What is Obligatory to do in Bowing (Ruku)?",
+    "A": "Reciting Tasbih",
+    "B": "Bowing down",
+    "C": "Supplicating",
+    "D": "Raising hand",
+    "correct": "B"
+  },
+  {
+    "question": "When is the Tashahhud sitting performed?",
+    "A": "Only in obligatory prayers",
+    "B": "In the last sitting",
+    "C": "In the first and last sittings",
+    "D": "In Jumu'ah prayer",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on scratching during Ritual Prayer?",
+    "A": "It invalidates the prayer",
+    "B": "It is Sunnah",
+    "C": "It is Disliked unless necessary",
+    "D": "It is Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What does one do if they do not know the Qibla for prayer?",
+    "A": "Abandons the prayer",
+    "B": "Turns randomly",
+    "C": "Turns to the direction they deem most likely",
+    "D": "Only supplicates",
+    "correct": "C"
+  },
+  {
+    "question": "In which situation is Ritual Prayer left to be made up (Qada)?",
+    "A": "Oversleeping",
+    "B": "During meal time",
+    "C": "During class",
+    "D": "On a trip",
+    "correct": "A"
+  },
+  {
+    "question": "For which situation is Make-up (Qada) prayer valid?",
+    "A": "Renewal",
+    "B": "Missed time prayer",
+    "C": "Sunnah prayer",
+    "D": "Witr prayer",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if the Ritual Prayer is invalidated?",
+    "A": "Continue",
+    "B": "Only supplicate",
+    "C": "Start over",
+    "D": "Sit down",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on toes facing the Qibla in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following is one of the necessary conditions for Ritual Prayer?",
+    "A": "Fasting",
+    "B": "Turning to Qibla",
+    "C": "Finding a congregation",
+    "D": "Praying Tarawih",
+    "correct": "B"
+  },
+  {
+    "question": "Which of the following is one of the conditions outside the Ritual Prayer?",
+    "A": "Standing (Qiyam)",
+    "B": "Turning to Qibla",
+    "C": "Bowing (Ruku)",
+    "D": "Prostration (Sajdah)",
+    "correct": "B"
+  },
+  {
+    "question": "Which pillar is Obligatory inside the Ritual Prayer?",
+    "A": "Reciting Subhanaka",
+    "B": "Standing (Qiyam)",
+    "C": "Tashahhud supplication",
+    "D": "Reciting Salawat",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on intention in Ablution?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "How is the face washed in Ablution?",
+    "A": "From under the chin to the hairline",
+    "B": "From chest to ears",
+    "C": "Only around eyes",
+    "D": "Up to behind the ears",
+    "correct": "A"
+  },
+  {
+    "question": "In which situation is taking Full Ablution (Ghusl) Obligatory?",
+    "A": "Shaving",
+    "B": "Entering the sea",
+    "C": "State of major impurity (Janabah)",
+    "D": "Sleep",
+    "correct": "C"
+  },
+  {
+    "question": "Which is one of the places where water must reach in Full Ablution?",
+    "A": "Hair roots",
+    "B": "Kneecaps",
+    "C": "Fingers",
+    "D": "Eyelids",
+    "correct": "A"
+  },
+  {
+    "question": "What are the short surahs or verses read after Al-Fatiha in Ritual Prayer called?",
+    "A": "Recitation",
+    "B": "Zamm-i Surah",
+    "C": "Khatm",
+    "D": "Dua",
+    "correct": "B"
+  },
+  {
+    "question": "In which prayers is Zamm-i Surah recited?",
+    "A": "In the first two rak'ahs of Obligatory prayers",
+    "B": "Only in Isha",
+    "C": "Only in Fajr water",
+    "D": "Only in Tarawih",
+    "correct": "A"
+  },
+  {
+    "question": "What is rising from Bowing called in Ritual Prayer?",
+    "A": "Qawmah",
+    "B": "Jalsah",
+    "C": "Ruku",
+    "D": "Iftitah",
+    "correct": "A"
+  },
+  {
+    "question": "What is transitioning from Prostration to sitting called?",
+    "A": "Qawmah",
+    "B": "Qiyam",
+    "C": "Jalsah",
+    "D": "Tashahhud",
+    "correct": "C"
+  },
+  {
+    "question": "What is the name of the short sitting between two prostrations in Ritual Prayer?",
+    "A": "Jalsah",
+    "B": "Qiyam",
+    "C": "Ruku",
+    "D": "Tahiyyat",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on reciting Al-Fatiha behind the Imam in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Tahriman Makruh according to Hanafi)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "In which situation is Prostration of Recitation (Tilawah Sajdah) performed?",
+    "A": "When ablution is taken",
+    "B": "When a verse of prostration is recited",
+    "C": "When prayer ends",
+    "D": "When traveling",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling if Prostration of Recitation is performed without ablution?",
+    "A": "Reward increases",
+    "B": "It becomes Disliked",
+    "C": "It is not permissible",
+    "D": "It breaks",
+    "correct": "C"
+  },
+  {
+    "question": "Which situation invalidates Ritual Prayer?",
+    "A": "Yawning",
+    "B": "Sneezing",
+    "C": "Eating",
+    "D": "Crying (out of fear of Allah)",
+    "correct": "C"
+  },
+  {
+    "question": "What is placing a barrier against the Qibla in Ritual Prayer called?",
+    "A": "Rukn",
+    "B": "Sutra",
+    "C": "Sunnah",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is the purpose of the Sutra in Ritual Prayer?",
+    "A": "Make shade",
+    "B": "Protect the Imam",
+    "C": "Prevent someone passing in front",
+    "D": "Form a congregation",
+    "correct": "C"
+  },
+  {
+    "question": "What result does abandoning a pillar (Rukn) in Ritual Prayer lead to?",
+    "A": "Prayer becomes valid",
+    "B": "Prayer becomes Disliked",
+    "C": "Prayer becomes invalid",
+    "D": "Reward increases",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on forgetting and abandoning a Necessary (Wajib) act in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Nothing required",
+    "C": "Prostration of Forgetfulness (Sahw Sajdah) is performed",
+    "D": "Prayer is repeated",
+    "correct": "C"
+  },
+  {
+    "question": "When is the Prostration of Forgetfulness done?",
+    "A": "When Ruku is forgotten",
+    "B": "When a Necessary act is abandoned",
+    "C": "When congregation is crowded",
+    "D": "When Sunnah is abandoned",
+    "correct": "B"
+  },
+  {
+    "question": "At what stage of Ritual Prayer is Prostration of Forgetfulness done?",
+    "A": "Before prayer",
+    "B": "During prayer",
+    "C": "After Salam",
+    "D": "Before Tashahhud",
+    "correct": "C"
+  },
+  {
+    "question": "How does someone in doubt complete their prayer?",
+    "A": "Always takes the highest rak'ah",
+    "B": "Always bases on the lowest likely rak'ah",
+    "C": "Invalidates the prayer",
+    "D": "Does not continue",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on passing in front of a person praying?",
+    "A": "Sunnah",
+    "B": "Permissible",
+    "C": "Sinful",
+    "D": "Allowed",
+    "correct": "C"
+  },
+  {
+    "question": "What is done to prevent passing in front of someone in the mosque?",
+    "A": "One stops",
+    "B": "Sutra is placed",
+    "C": "Salam is given",
+    "D": "Prayer is broken",
+    "correct": "B"
+  },
+  {
+    "question": "At which time is praying Disliked (Makruh)?",
+    "A": "Close to sunset",
+    "B": "After Asr",
+    "C": "While sun is rising",
+    "D": "All of them",
+    "correct": "D"
+  },
+  {
+    "question": "How many rak'ahs of Sunnah does Fajr prayer have?",
+    "A": "4",
+    "B": "2",
+    "C": "6",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "What is the main purpose of Sunnah prayers?",
+    "A": "Dropping the Obligatory",
+    "B": "Gaining extra reward",
+    "C": "Shortening the prayer",
+    "D": "Delaying the Obligatory",
+    "correct": "B"
+  },
+  {
+    "question": "Which remembrance (Dhikr) is encouraged after Obligatory prayer?",
+    "A": "Istikhara",
+    "B": "Tasbihat",
+    "C": "Tarawih",
+    "D": "Sacrifice",
+    "correct": "B"
+  },
+  {
+    "question": "Which prayer is performed only in the month of Ramadan?",
+    "A": "Witr",
+    "B": "Tarawih",
+    "C": "Duha",
+    "D": "Mid-morning",
+    "correct": "B"
+  },
+  {
+    "question": "How many rak'ahs is the Tarawih prayer?",
+    "A": "10",
+    "B": "20",
+    "C": "12",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on praying Tarawih in congregation?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What type of prayer is Eid prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "How many Takbirs are there in Eid prayer?",
+    "A": "3+3",
+    "B": "7+5",
+    "C": "2+2",
+    "D": "10+10",
+    "correct": "B"
+  },
+  {
+    "question": "How many rak'ahs is the Eid prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of the Eid sermon (Khutbah)?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "How many Takbirs are in the Funeral Prayer?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of the Funeral Prayer?",
+    "A": "Farz al-Ayn (Individual Obligation)",
+    "B": "Necessary",
+    "C": "Farz al-Kifayah (Communal Obligation)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "Is there bowing and prostration in Funeral Prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Sometimes",
+    "D": "Only for Imam",
+    "correct": "B"
+  },
+  {
+    "question": "What is practiced after the Funeral Prayer?",
+    "A": "Takbir",
+    "B": "Supplication",
+    "C": "Bowing",
+    "D": "Prostration of Forgetfulness",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of Witr prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "In which rak'ah is Qunut supplication recited in Witr?",
+    "A": "First",
+    "B": "Second",
+    "C": "Third",
+    "D": "Fourth",
+    "correct": "C"
+  },
+  {
+    "question": "What is sitting with the right foot upright and left foot flat called in Ritual Prayer?",
+    "A": "Tahiyyat",
+    "B": "Iftirash",
+    "C": "Tashahhud",
+    "D": "Jalsah",
+    "correct": "B"
+  },
+  {
+    "question": "Where is Tashahhud supplication recited in Ritual Prayer?",
+    "A": "Only at the end",
+    "B": "Only at the beginning",
+    "C": "In the first and last sitting",
+    "D": "In bowing",
+    "correct": "C"
+  },
+  {
+    "question": "Which supplication is recited after Tashahhud?",
+    "A": "Subhanaka",
+    "B": "Iftitah",
+    "C": "Salawat (Salli-Barik)",
+    "D": "Adhan",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the obligatory acts of Ritual Prayer comes before Standing (Qiyam)?",
+    "A": "Qunut",
+    "B": "Intention",
+    "C": "Prostration",
+    "D": "Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "With which organ is intention made?",
+    "A": "Tongue",
+    "B": "Heart alone (is sufficient)",
+    "C": "Foot",
+    "D": "Eye",
+    "correct": "B"
+  },
+  {
+    "question": "In which situation does the Ritual Prayer end without giving Salam?",
+    "A": "Fainting",
+    "B": "Yawning",
+    "C": "Dispersal of congregation",
+    "D": "Time running out",
+    "correct": "A"
+  },
+  {
+    "question": "In which directions is Salam given in Ritual Prayer?",
+    "A": "Right and left",
+    "B": "Only right",
+    "C": "Only left",
+    "D": "To Qibla",
+    "correct": "A"
+  },
+  {
+    "question": "Up to where are arms washed in Ablution?",
+    "A": "Up to wrists",
+    "B": "Including elbows",
+    "C": "Up to shoulder",
+    "D": "Only hands",
+    "correct": "B"
+  },
+  {
+    "question": "How is the head wiped (Masah) in Ablution?",
+    "A": "By submerging completely",
+    "B": "By wiping one fourth of the head",
+    "C": "By washing hair tips",
+    "D": "By washing face",
+    "correct": "B"
+  },
+  {
+    "question": "What does Masah mean?",
+    "A": "To wash",
+    "B": "To wipe",
+    "C": "To dry",
+    "D": "To remove",
+    "correct": "B"
+  },
+  {
+    "question": "Which is one of the conditions for leather socks (Khuff) to be wiped?",
+    "A": "Allowing water through",
+    "B": "Being a sock",
+    "C": "Covering the heel",
+    "D": "Being fancy",
+    "correct": "C"
+  },
+  {
+    "question": "What is the duration of wiping over leather socks for a traveler?",
+    "A": "12 hours",
+    "B": "24 hours",
+    "C": "48 hours",
+    "D": "72 hours",
+    "correct": "D"
+  },
+  {
+    "question": "How many hours is the duration of wiping over leather socks for a resident?",
+    "A": "24",
+    "B": "48",
+    "C": "72",
+    "D": "12",
+    "correct": "A"
+  },
+  {
+    "question": "How are the feet washed in Ablution?",
+    "A": "Up to the ankles",
+    "B": "Up to the calves",
+    "C": "Up to the knees",
+    "D": "Only the toe tips",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following is NOT one of the prayer times?",
+    "A": "Asr",
+    "B": "Isha",
+    "C": "Tarawih",
+    "D": "Fajr",
+    "correct": "C"
+  },
+  {
+    "question": "How many Obligatory (Farz) rak'ahs does Fajr prayer have?",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "1",
+    "correct": "B"
+  },
+  {
+    "question": "How many Obligatory (Farz) rak'ahs does Zuhr prayer have?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "C"
+  },
+  {
+    "question": "How many Obligatory (Farz) rak'ahs does Asr prayer have?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "How many Obligatory (Farz) rak'ahs does Maghrib prayer have?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "B"
+  },
+  {
+    "question": "How many Obligatory (Farz) rak'ahs does Isha prayer have?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Which prayer does not have a final Sunnah?",
+    "A": "Fajr",
+    "B": "Zuhr",
+    "C": "Asr",
+    "D": "Isha",
+    "correct": "C"
+  },
+  {
+    "question": "How much distance should be between feet while praying?",
+    "A": "30 cm",
+    "B": "Shoulder width",
+    "C": "Very wide",
+    "D": "Joined together",
+    "correct": "B"
+  },
+  {
+    "question": "Where should the toes of the right foot point in Ritual Prayer?",
+    "A": "Right",
+    "B": "Left",
+    "C": "To Qibla",
+    "D": "Up",
+    "correct": "C"
+  },
+  {
+    "question": "What is said when rising from Bowing (Ruku)?",
+    "A": "Subhana Rabbiyal Azim",
+    "B": "Sami Allahu liman hamidah",
+    "C": "Allahu Akbar",
+    "D": "Allahummaghfirli",
+    "correct": "B"
+  },
+  {
+    "question": "What is done in Bowing (Ruku)?",
+    "A": "Standing",
+    "B": "Bowing down",
+    "C": "Sitting",
+    "D": "Prostrating",
+    "correct": "B"
+  },
+  {
+    "question": "What is done in Prostration (Sajdah)?",
+    "A": "Bowing",
+    "B": "Standing",
+    "C": "Putting the face on the ground",
+    "D": "Sitting",
+    "correct": "C"
+  },
+  {
+    "question": "With how many limbs is Prostration performed?",
+    "A": "4",
+    "B": "5",
+    "C": "6",
+    "D": "7",
+    "correct": "D"
+  },
+  {
+    "question": "What is the ruling on scratching during Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Necessary",
+    "C": "Obligatory",
+    "D": "Rewardable",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on spreading arms to the sides in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Obligatory",
+    "correct": "A"
+  },
+  {
+    "question": "What does excessive movement in Ritual Prayer cause?",
+    "A": "Prayer may be invalidated",
+    "B": "Reward increases",
+    "C": "Prize is won",
+    "D": "Prayer strengthens",
+    "correct": "A"
+  },
+  {
+    "question": "What is done at the end of the Ritual Prayer?",
+    "A": "Takbir is said",
+    "B": "Salam is given",
+    "C": "Bowing is done",
+    "D": "Sunnah is performed",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if forgetfulness occurs in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "One speaks aloud",
+    "C": "Prostration of Forgetfulness (Sahw Sajdah) is performed",
+    "D": "Prostration is abandoned",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of Salawat recited after Tashahhud?",
+    "A": "Sunnah",
+    "B": "Necessary (Wajib)",
+    "C": "Obligatory",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "In which prayer is Qunut supplication Necessary (Wajib)?",
+    "A": "Fajr",
+    "B": "Asr",
+    "C": "Witr",
+    "D": "Maghrib",
+    "correct": "C"
+  },
+  {
+    "question": "How many rak'ahs is the Witr prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "C"
+  },
+  {
+    "question": "What is the name of the Takbir said when starting Ritual Prayer?",
+    "A": "Tahiyyat",
+    "B": "Qira'at",
+    "C": "Iftitah (Opening)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "What is done during Recitation (Qira'at) in Ritual Prayer?",
+    "A": "Bowing",
+    "B": "Quran is recited",
+    "C": "Sitting",
+    "D": "Salam is given",
+    "correct": "B"
+  },
+  {
+    "question": "What is said when straightening up from Bowing?",
+    "A": "Allahu Akbar",
+    "B": "Subhana Rabbiyal Azim",
+    "C": "Sami Allahu liman hamidah",
+    "D": "Rabbana lakal hamd",
+    "correct": "C"
+  },
+  {
+    "question": "Where are hands placed (folded) in Ritual Prayer?",
+    "A": "On chest",
+    "B": "Below navel",
+    "C": "Above navel",
+    "D": "On ground",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of reciting Al-Fatiha in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary (Wajib)",
+    "C": "Obligatory",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "In which rak'ahs is Recitation performed in Ritual Prayer?",
+    "A": "In every rak'ah",
+    "B": "In the first two rak'ahs",
+    "C": "In the last rak'ah",
+    "D": "Only in Obligatory ones",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on not reciting Zamm-i Surah in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Disliked",
+    "C": "Abandoning a Necessary act",
+    "D": "Abandoning an Obligatory act",
+    "correct": "C"
+  },
+  {
+    "question": "What should one do if they space out in Ritual Prayer?",
+    "A": "Invalidate the prayer",
+    "B": "Speak aloud",
+    "C": "Continue and perform Prostration of Forgetfulness at the end",
+    "D": "Pray again",
+    "correct": "C"
+  },
+  {
+    "question": "Which of the following invalidates Ritual Prayer?",
+    "A": "Yawning",
+    "B": "Leaning slightly forward",
+    "C": "Talking",
+    "D": "Standing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on keeping eyes constantly closed in Ritual Prayer?",
+    "A": "Permissible",
+    "B": "Obligatory",
+    "C": "Disliked (Makruh)",
+    "D": "Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What does the Imam do if the Qibla changes in Ritual Prayer?",
+    "A": "Ends the prayer",
+    "B": "Informs the congregation and turns",
+    "C": "Supplicates",
+    "D": "Recites Quran",
+    "correct": "B"
+  },
+  {
+    "question": "To how many directions is Salam given at the end of Ritual Prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on playing with beard in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Necessary",
+    "C": "Obligatory",
+    "D": "Permissible",
+    "correct": "A"
+  },
+  {
+    "question": "What does speaking loudly in Ritual Prayer do?",
+    "A": "Increases reward",
+    "B": "Invalidates the prayer",
+    "C": "It is Sunnah",
+    "D": "It is Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "Which of the following is NOT one of the Necessary acts of Ritual Prayer?",
+    "A": "Reciting Al-Fatiha",
+    "B": "Reciting Zamm-i Surah",
+    "C": "Recitation (Qira'at)",
+    "D": "Performing Bowing",
+    "correct": "D"
+  },
+  {
+    "question": "Towards where are hands raised while saying Takbir in Ritual Prayer?",
+    "A": "To head",
+    "B": "To chest level",
+    "C": "To ear level",
+    "D": "To waist level",
+    "correct": "C"
+  },
+  {
+    "question": "How should the back be in Bowing (Ruku)?",
+    "A": "Bent very forward",
+    "B": "Slightly curved",
+    "C": "Straight",
+    "D": "Fully upright",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of forehead and nose touching the ground in Prostration?",
+    "A": "Sunnah",
+    "B": "Disliked",
+    "C": "Obligatory (Forehead), Necessary (Nose)",
+    "D": "Necessary (Wajib)",
+    "correct": "C"
+  },
+  {
+    "question": "Where are hands folded in Ritual Prayer?",
+    "A": "On chest",
+    "B": "Below navel",
+    "C": "Under arm",
+    "D": "On knees",
+    "correct": "B"
+  },
+  {
+    "question": "How does the right foot stand in Ritual Prayer?",
+    "A": "Toes pointing left",
+    "B": "Flat",
+    "C": "Toes pointing to Qibla",
+    "D": "Pointing back",
+    "correct": "C"
+  },
+  {
+    "question": "How does the left foot stand in Ritual Prayer?",
+    "A": "Spread flat on ground",
+    "B": "Pressed on toe",
+    "C": "Held upright",
+    "D": "Pointing to Qibla",
+    "correct": "A"
+  },
+  {
+    "question": "Placing hands on knees relates to which posture in Ritual Prayer?",
+    "A": "Rising",
+    "B": "Sitting",
+    "C": "Prostration",
+    "D": "Bowing (Ruku)",
+    "correct": "D"
+  },
+  {
+    "question": "Prostration is done twice because...",
+    "A": "It is Sunnah",
+    "B": "It is Necessary",
+    "C": "It is Obligatory",
+    "D": "It is a pillar of prayer",
+    "correct": "D"
+  },
+  {
+    "question": "What does Qiyam mean in Ritual Prayer?",
+    "A": "Standing",
+    "B": "Sitting",
+    "C": "Bowing",
+    "D": "Giving Salam",
+    "correct": "A"
+  },
+  {
+    "question": "In which position is Recitation performed in Ritual Prayer?",
+    "A": "Standing",
+    "B": "In prostration",
+    "C": "In bowing",
+    "D": "In sitting",
+    "correct": "A"
+  },
+  {
+    "question": "In which prayers is reading aloud done?",
+    "A": "Fajr, Maghrib, Isha",
+    "B": "Zuhr, Asr",
+    "C": "Jumu'ah and Tarawih",
+    "D": "In all of them",
+    "correct": "A"
+  },
+  {
+    "question": "In which prayers is reading silently done?",
+    "A": "Fajr and Isha",
+    "B": "Maghrib and Tarawih",
+    "C": "Zuhr and Asr",
+    "D": "In all of them",
+    "correct": "C"
+  },
+  {
+    "question": "Which phrase is said while saying Takbir in Ritual Prayer?",
+    "A": "Allahu Akbar (God is Great)",
+    "B": "Subhanallah",
+    "C": "La ilaha illallah",
+    "D": "Alhamdulillah",
+    "correct": "A"
+  },
+  {
+    "question": "Where is Tahiyyat supplication recited?",
+    "A": "Standing",
+    "B": "In prostration",
+    "C": "In the first and last sittings",
+    "D": "In bowing",
+    "correct": "C"
+  },
+  {
+    "question": "What is generally read after Attahiyyat?",
+    "A": "Supplication",
+    "B": "Salawat (Salli-Barik)",
+    "C": "Zamm-i Surah",
+    "D": "Fatiha",
+    "correct": "B"
+  },
+  {
+    "question": "What does giving Salam to the right in Ritual Prayer signify?",
+    "A": "The beginning",
+    "B": "The ending",
+    "C": "The pillar",
+    "D": "The Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "What does the congregation do when the Imam recites Al-Fatiha aloud?",
+    "A": "Listens silently",
+    "B": "Repeats",
+    "C": "Skips",
+    "D": "Recites Zamm-i Surah",
+    "correct": "A"
+  },
+  {
+    "question": "Why are hands raised to ear level in Ritual Prayer?",
+    "A": "To be heard better",
+    "B": "Because it is Sunnah",
+    "C": "To strengthen the body",
+    "D": "To prolong the prayer",
+    "correct": "B"
+  },
+  {
+    "question": "What is required if a pillar (Rukn) is forgotten in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Prostration of Forgetfulness",
+    "C": "Fasting",
+    "D": "Congregation",
+    "correct": "A"
+  },
+  {
+    "question": "What is done if a Necessary (Wajib) act is forgotten in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Prostration of Forgetfulness is performed",
+    "C": "Ablution is taken",
+    "D": "Repeated",
+    "correct": "B"
+  },
+  {
+    "question": "With which organ is intention made when starting Ritual Prayer?",
+    "A": "Tongue",
+    "B": "Heart",
+    "C": "Eye",
+    "D": "Foot",
+    "correct": "B"
+  },
+  {
+    "question": "What is the duty of the Imam?",
+    "A": "To lead the congregation",
+    "B": "To pray alone",
+    "C": "To do everything silently",
+    "D": "To pray fast",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on moving before the Imam in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Disliked (Tahriman Makruh)",
+    "C": "Obligatory",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is moving together with the Imam called?",
+    "A": "Iqtida (Following)",
+    "B": "Isar",
+    "C": "Ilham",
+    "D": "Ikhlas",
+    "correct": "A"
+  },
+  {
+    "question": "What is more virtuous than praying alone?",
+    "A": "Praying alone",
+    "B": "Praying in congregation",
+    "C": "Praying at home",
+    "D": "Praying at a disliked time",
+    "correct": "B"
+  },
+  {
+    "question": "How many times more is the reward of praying in congregation compared to praying alone?",
+    "A": "10",
+    "B": "17",
+    "C": "27",
+    "D": "100",
+    "correct": "C"
+  },
+  {
+    "question": "How should the row alignment be behind the congregation in the mosque?",
+    "A": "Disorganized",
+    "B": "Tight and straight",
+    "C": "Spaced out",
+    "D": "In a circle",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of the Takbir taken at the beginning of Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on reciting Zamm-i Surah in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if the Qibla direction is lost in Ritual Prayer?",
+    "A": "Prayer is abandoned",
+    "B": "One turns to (estimated) Qibla",
+    "C": "Salam is given",
+    "D": "Supplication is made",
+    "correct": "B"
+  },
+  {
+    "question": "What does speaking without excuse do in Ritual Prayer?",
+    "A": "Earns reward",
+    "B": "Invalidates the prayer",
+    "C": "Counts as Tasbihat",
+    "D": "Becomes Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on eating in Ritual Prayer?",
+    "A": "Disliked",
+    "B": "Invalidates the prayer",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on yawning in Ritual Prayer?",
+    "A": "Disliked",
+    "B": "Obligatory",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "Can one scratch in Ritual Prayer?",
+    "A": "Yes, but not excessively (Amal-i Kathir invalidates)",
+    "B": "No, it is forbidden",
+    "C": "It is Necessary",
+    "D": "It is Obligatory",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on feet pointing to Qibla in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Disliked",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What does covering the body fall under in Ritual Prayer?",
+    "A": "Obligatory (Satr al-Awrah)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on turning to Qibla in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Obligatory (Shart)",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What does one do if their ablution breaks in the middle of Ritual Prayer?",
+    "A": "Continues",
+    "B": "Leaves the prayer and prays again",
+    "C": "Supplicates",
+    "D": "Speaks",
+    "correct": "B"
+  },
+  {
+    "question": "How does a person who cannot stand pray?",
+    "A": "Sits",
+    "B": "Lies down",
+    "C": "With gestures",
+    "D": "Does not pray",
+    "correct": "A"
+  },
+  {
+    "question": "How is Bowing done while sitting?",
+    "A": "Head is slightly bowed",
+    "B": "Done standing",
+    "C": "Goes to prostration",
+    "D": "Not done at all",
+    "correct": "A"
+  },
+  {
+    "question": "How is Prostration done while sitting?",
+    "A": "Head is bowed more (than Ruku)",
+    "B": "Done normally",
+    "C": "Done standing",
+    "D": "Hands are raised",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on laughing in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Breaks ablution (if aloud)",
+    "D": "Earns reward",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on putting water in the mouth during Ablution?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on putting water in the nose during Ablution?",
+    "A": "Sunnah",
+    "B": "Obligatory",
+    "C": "Disliked",
+    "D": "Necessary",
+    "correct": "A"
+  },
+  {
+    "question": "In which Madhhab is the order (Tartib) in Ablution Obligatory?",
+    "A": "Shafi'i",
+    "B": "Hanafi",
+    "C": "Maliki",
+    "D": "Hanbali",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on making intention for Ablution according to Hanafi Madhhab?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Not permissible",
+    "correct": "C"
+  },
+  {
+    "question": "Which is one of the areas water must reach when washing the face in Ablution?",
+    "A": "Behind the ear",
+    "B": "Between forehead and chin",
+    "C": "Chest",
+    "D": "Hair tips",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on rubbing between fingers in Ablution?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on water reaching hair roots in Full Ablution?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "A"
+  },
+  {
+    "question": "What must be done to get rid of Major Impurity (Janabah)?",
+    "A": "Ablution",
+    "B": "Full Ablution (Ghusl)",
+    "C": "Tayammum",
+    "D": "Supplication",
+    "correct": "B"
+  },
+  {
+    "question": "With which materials is Tayammum performed?",
+    "A": "Water",
+    "B": "Soil-like materials",
+    "C": "Wood",
+    "D": "Glass",
+    "correct": "B"
+  },
+  {
+    "question": "Which of the following is one of the obligatory acts of Tayammum?",
+    "A": "Intention",
+    "B": "Washing hands",
+    "C": "Washing body",
+    "D": "Taking Takbir",
+    "correct": "A"
+  },
+  {
+    "question": "When is Tayammum invalidated?",
+    "A": "When water is found",
+    "B": "When wind blows",
+    "C": "When sun sets",
+    "D": "When moon rises",
+    "correct": "A"
+  },
+  {
+    "question": "What is performing the prayer on time called?",
+    "A": "Repetition (I'adah)",
+    "B": "Make-up (Qada)",
+    "C": "Performance (Ada)",
+    "D": "Substitute (Badal)",
+    "correct": "C"
+  },
+  {
+    "question": "What happens if prayer is not performed on time?",
+    "A": "Prize is given",
+    "B": "It is made up (Qada)",
+    "C": "It becomes Sunnah",
+    "D": "Reward decreases",
+    "correct": "B"
+  },
+  {
+    "question": "What determines the entry of prayer time?",
+    "A": "Adhan",
+    "B": "Position of the sun",
+    "C": "Imam",
+    "D": "Hodja",
+    "correct": "B"
+  },
+  {
+    "question": "With which event does the Fajr prayer time end?",
+    "A": "When sun rises",
+    "B": "When sun sets",
+    "C": "When noon time enters",
+    "D": "When evening comes",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling if the distance between Imam and congregation becomes too wide?",
+    "A": "Prayer becomes invalid",
+    "B": "It becomes Sunnah",
+    "C": "Prostration of Forgetfulness is required",
+    "D": "Nothing happens",
+    "correct": "A"
+  },
+  {
+    "question": "How should the row alignment be in congregational prayer?",
+    "A": "Straight and tight",
+    "B": "Mixed",
+    "C": "Circular",
+    "D": "Disorganized",
+    "correct": "A"
+  },
+  {
+    "question": "How many times more is the reward of congregational prayer compared to solitary prayer?",
+    "A": "5",
+    "B": "17",
+    "C": "27",
+    "D": "40",
+    "correct": "C"
+  },
+  {
+    "question": "To whom is Jumu'ah prayer Obligatory?",
+    "A": "Women",
+    "B": "Travelers",
+    "C": "Resident men",
+    "D": "Children",
+    "correct": "C"
+  },
+  {
+    "question": "Which prayer is not performed on Friday?",
+    "A": "Zuhr Obligatory (replaced by Jumu'ah)",
+    "B": "Jumu'ah Obligatory",
+    "C": "Sunnah",
+    "D": "Tasbih",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling of the Sermon (Khutbah) in Jumu'ah prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib) acts as condition",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "How many parts does the Jumu'ah Sermon (Khutbah) consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "How many rak'ahs is the Eid prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "In which rak'ahs are the extra Takbirs taken in Eid prayer?",
+    "A": "First rak'ah",
+    "B": "Last rak'ah",
+    "C": "Both rak'ahs",
+    "D": "None",
+    "correct": "C"
+  },
+  {
+    "question": "With how many Takbirs is the Funeral Prayer performed?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Is there Bowing and Prostration in Funeral Prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Only prostration",
+    "D": "Only bowing",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of the Funeral Prayer?",
+    "A": "Farz al-Ayn (Individual Obligation)",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Farz al-Kifayah (Communal Obligation)",
+    "correct": "D"
+  },
+  {
+    "question": "What must be done upon hearing a verse of prostration (Sajdah verse)?",
+    "A": "Bowing",
+    "B": "Prostration",
+    "C": "Sitting",
+    "D": "Standing",
+    "correct": "B"
+  },
+  {
+    "question": "Is ablution a condition for Prostration of Recitation?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Varies by jurists",
+    "D": "Only in Fajr prayer",
+    "correct": "A"
+  },
+  {
+    "question": "What does laughing aloud without excuse break in Ritual Prayer?",
+    "A": "Only the prayer",
+    "B": "Only the ablution",
+    "C": "Both prayer and ablution",
+    "D": "Neither",
+    "correct": "C"
+  },
+  {
+    "question": "What result does excessive movement in Ritual Prayer lead to?",
+    "A": "Prayer may be invalidated",
+    "B": "Reward increases",
+    "C": "It becomes Tasbih",
+    "D": "It becomes Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "What does Qiyam mean?",
+    "A": "Prostration",
+    "B": "Standing",
+    "C": "Sitting",
+    "D": "Bowing",
+    "correct": "B"
+  },
+  {
+    "question": "Which pillar is Recitation (Qira'at)?",
+    "A": "Reciting Quran",
+    "B": "Bowing",
+    "C": "Prostration",
+    "D": "Tasbih",
+    "correct": "A"
+  },
+  {
+    "question": "In which prayer is Qunut supplication recited?",
+    "A": "Fajr",
+    "B": "Maghrib",
+    "C": "Witr",
+    "D": "Zuhr",
+    "correct": "C"
+  },
+  {
+    "question": "How many rak'ahs is the Witr prayer?",
+    "A": "1",
+    "B": "3",
+    "C": "4",
+    "D": "2",
+    "correct": "B"
+  },
+  {
+    "question": "How is Intention made in Ritual Prayer?",
+    "A": "With tongue",
+    "B": "With heart",
+    "C": "Standing",
+    "D": "While sitting",
+    "correct": "B"
+  },
+  {
+    "question": "To how many sides is Salam given at the end of Ritual Prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on going to Bowing before the Imam in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Obligatory",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "What is following the Imam's movements in Ritual Prayer called?",
+    "A": "Isar",
+    "B": "Iqtida",
+    "C": "Ikhlas",
+    "D": "Ijma",
+    "correct": "B"
+  },
+  {
+    "question": "Why is the proper alignment of rows important?",
+    "A": "Good appearance",
+    "B": "Increasing congregation reward",
+    "C": "Sunnah",
+    "D": "Compulsion",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on scratching in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Necessary",
+    "C": "Obligatory",
+    "D": "Not permissible",
+    "correct": "A"
+  },
+  {
+    "question": "What is done if one turns to the wrong Qibla in Ritual Prayer?",
+    "A": "Prayer is abandoned",
+    "B": "One turns to the correct direction",
+    "C": "Supplication is made",
+    "D": "Prostration of Forgetfulness is performed",
+    "correct": "B"
+  },
+  {
+    "question": "What result does talking in Ritual Prayer bring?",
+    "A": "Reward increases",
+    "B": "Becomes Disliked",
+    "C": "Prayer becomes invalid",
+    "D": "Becomes Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What should one do if they cannot satisfy the Qibla condition in Ritual Prayer?",
+    "A": "Leaves the prayer",
+    "B": "Turns to the direction they deem likely",
+    "C": "Qibla is ignored",
+    "D": "Supplicates",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on sitting without excuse in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked",
+    "D": "Permissible",
+    "correct": "C"
+  },
+  {
+    "question": "In which rak'ah is sitting Necessary (Wajib) in Ritual Prayer?",
+    "A": "First sitting",
+    "B": "Last sitting",
+    "C": "Every sitting",
+    "D": "None",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling of the last sitting in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Obligatory (Rukn)",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "When is Prostration of Forgetfulness NOT done?",
+    "A": "When Necessary act is abandoned",
+    "B": "When Sunnah is abandoned",
+    "C": "When in doubt",
+    "D": "When rak'ahs are confused",
+    "correct": "B"
+  },
+  {
+    "question": "How many prostrations does Prostration of Forgetfulness consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling if Prostration of Forgetfulness is done before Salam?",
+    "A": "Not permissible",
+    "B": "Prayer becomes invalid",
+    "C": "It becomes Sunnah",
+    "D": "Prayer is valid",
+    "correct": "D"
+  },
+  {
+    "question": "What is the ruling on toes touching the ground during Prostration?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on turning the head right or left without excuse in Ritual Prayer?",
+    "A": "Permissible",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Allowed",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on folding hands while standing in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "In which pillar is Recitation (Qira'at) included?",
+    "A": "Standing",
+    "B": "Reciting",
+    "C": "Bowing",
+    "D": "Prostration",
+    "correct": "B"
+  },
+  {
+    "question": "What is sitting briefly between two prostrations called?",
+    "A": "Qawmah",
+    "B": "Jalsah",
+    "C": "Qiyam",
+    "D": "Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of the Jalsah sitting?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What breaks the connection between Imam and congregation in Ritual Prayer?",
+    "A": "Sneezing",
+    "B": "Coughing",
+    "C": "An obstacle intervening (that prevents following)",
+    "D": "Yawning",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on turning to the side without excuse in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked",
+    "D": "Permissible",
+    "correct": "C"
+  },
+  {
+    "question": "What does not fully turning to Qibla cause in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Reward decreases",
+    "C": "Becomes Necessary",
+    "D": "Becomes Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on raising hands in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Disliked",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is pausing briefly after Bowing called?",
+    "A": "Qiyam",
+    "B": "Qawmah",
+    "C": "Jalsah",
+    "D": "Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on saying 'Rabbana lakal hamd' after rising from Bowing?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What does Ruku signify in Ritual Prayer?",
+    "A": "Bowing",
+    "B": "Sitting",
+    "C": "Giving Salam",
+    "D": "Standing",
+    "correct": "A"
+  },
+  {
+    "question": "What does Sajdah signify in Ritual Prayer?",
+    "A": "Sitting",
+    "B": "Prostrating on ground",
+    "C": "Bowing",
+    "D": "Standing",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on giving Salam in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary (Wajib)",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "Why is Tashahhud supplication recited in Ritual Prayer?",
+    "A": "To end the prayer",
+    "B": "To complete the sitting",
+    "C": "Because it is Sunnah",
+    "D": "For Bowing",
+    "correct": "B"
+  },
+  {
+    "question": "Where is 'Attahiyyat' supplication recited in Ritual Prayer?",
+    "A": "In Bowing",
+    "B": "In Prostration",
+    "C": "In Sitting",
+    "D": "Standing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of 'Salli and Barik' prayers in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Obligatory",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on feet pointing to Qibla in Ritual Prayer?",
+    "A": "Necessary",
+    "B": "Sunnah",
+    "C": "Obligatory",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "What is done after giving Salam in Ritual Prayer?",
+    "A": "Prayer ends",
+    "B": "Bowing is done",
+    "C": "Prostration is done",
+    "D": "Standing again",
+    "correct": "A"
+  },
+  {
+    "question": "What is the dhikr done after prayer known as?",
+    "A": "Khatm",
+    "B": "Tasbihat",
+    "C": "Tahajjud",
+    "D": "Witr",
+    "correct": "B"
+  },
+  {
+    "question": "In which times is Recitation done silently in Ritual Prayer?",
+    "A": "Fajr",
+    "B": "Maghrib",
+    "C": "Zuhr and Asr",
+    "D": "Isha",
+    "correct": "C"
+  },
+  {
+    "question": "In which times is Recitation done aloud in Ritual Prayer?",
+    "A": "Zuhr",
+    "B": "Asr",
+    "C": "Fajr, Maghrib, Isha",
+    "D": "Zuhr and Isha",
+    "correct": "C"
+  },
+  {
+    "question": "How many prostrations does one rak'ah of Ritual Prayer contain?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on reciting Al-Fatiha behind the Imam in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Tahriman Makruh in Hanafi)",
+    "D": "Not permissible",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on saying 'Amin' in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What does laughing with a mouthful break in Ritual Prayer?",
+    "A": "Only the prayer",
+    "B": "Only the ablution",
+    "C": "Both ablution and prayer",
+    "D": "Nothing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on yawning in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Disliked",
+    "D": "Obligatory",
+    "correct": "C"
+  },
+  {
+    "question": "What should one do if they do not know the Qibla in Ritual Prayer?",
+    "A": "Abandon prayer",
+    "B": "Turn randomly",
+    "C": "Turn to the direction they deem likely",
+    "D": "Only supplicate",
+    "correct": "C"
+  },
+  {
+    "question": "What is done for a forgotten Necessary act in Ritual Prayer?",
+    "A": "Prayer is ended",
+    "B": "Prostration of Forgetfulness is performed",
+    "C": "It is repeated",
+    "D": "Ablution is taken",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on shortening the standing (Qiyam) in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Permissible",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "When is Qunut supplication recited in Witr prayer?",
+    "A": "After Bowing (Shafi'i) / Before Bowing (Hanafi)",
+    "B": "After Bowing",
+    "C": "After Salam",
+    "D": "Before starting prayer",
+    "correct": "A"
+  },
+  {
+    "question": "In which situation is crying permissible in Ritual Prayer?",
+    "A": "For worldly matters",
+    "B": "For fear of Hereafter",
+    "C": "When bored",
+    "D": "When yawning",
+    "correct": "B"
+  },
+  {
+    "question": "What do disturbing thoughts in Ritual Prayer amount to?",
+    "A": "Invalidate the prayer",
+    "B": "Increase reward",
+    "C": "Considered Whispers (Waswasa)",
+    "D": "Become Obligatory",
+    "correct": "C"
+  },
+  {
+    "question": "What should be done when Waswasa comes in Ritual Prayer?",
+    "A": "Prayer is abandoned",
+    "B": "One speaks aloud",
+    "C": "One continues",
+    "D": "Prostration of Forgetfulness is done",
+    "correct": "C"
+  },
+  {
+    "question": "What does a person do if they cannot stand in Ritual Prayer?",
+    "A": "Abandons prayer",
+    "B": "Prays sitting",
+    "C": "Waits standing",
+    "D": "Prays without Bowing",
+    "correct": "B"
+  },
+  {
+    "question": "How is Prostration done while sitting?",
+    "A": "Head is bowed more (than Ruku)",
+    "B": "Head is not bowed",
+    "C": "Done standing",
+    "D": "Hands are raised",
+    "correct": "A"
+  },
+  {
+    "question": "Which Obligatory prayers does a traveler shorten?",
+    "A": "2-rak'ah ones",
+    "B": "4-rak'ah Obligatory prayers",
+    "C": "All Sunnahs",
+    "D": "Only Witr",
+    "correct": "B"
+  },
+  {
+    "question": "At how many km does the journey (traveler status) begin?",
+    "A": "30 km",
+    "B": "60 km",
+    "C": "90 km",
+    "D": "150 km",
+    "correct": "C"
+  },
+  {
+    "question": "What are the non-Obligatory but complementary elements of Ritual Prayer called?",
+    "A": "Necessary",
+    "B": "Sunnah",
+    "C": "Disliked",
+    "D": "Obligatory",
+    "correct": "B"
+  },
+  {
+    "question": "When is the first sitting done in Ritual Prayer?",
+    "A": "In every rak'ah",
+    "B": "In two-rak'ah prayers",
+    "C": "After the second rak'ah in four-rak'ah prayers",
+    "D": "At the end of prayer",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of the last sitting in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the short pause immediately after Bowing called?",
+    "A": "Qawmah",
+    "B": "Jalsah",
+    "C": "Tashahhud",
+    "D": "Iftitah",
+    "correct": "A"
+  },
+  {
+    "question": "What is rising from Prostration and sitting briefly called?",
+    "A": "Jalsah",
+    "B": "Qiyam",
+    "C": "Tashahhud",
+    "D": "Ruku",
+    "correct": "A"
+  },
+  {
+    "question": "What is completing the prayer by performing only Obligatory and Necessary acts called?",
+    "A": "Ada",
+    "B": "Ifa (Fulfilling)",
+    "C": "Ijma",
+    "D": "Idrak",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on raising hands to shoulder level in Ritual Prayer?",
+    "A": "Disliked",
+    "B": "Obligatory",
+    "C": "Sunnah",
+    "D": "Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on turning to Qibla in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Obligatory",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on closing eyes in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Disliked (Makruh, unless for concentration)",
+    "C": "Obligatory",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "What situation substitutes for Standing (Qiyam) in Ritual Prayer?",
+    "A": "Sitting",
+    "B": "Lying down",
+    "C": "Praying with gestures",
+    "D": "Prostrating",
+    "correct": "A"
+  },
+  {
+    "question": "Who may not perform Standing (Qiyam)?",
+    "A": "Traveler",
+    "B": "Sick person",
+    "C": "Child",
+    "D": "Imam",
+    "correct": "B"
+  },
+  {
+    "question": "What does a person do who cannot pray standing fully?",
+    "A": "Abandons prayer",
+    "B": "Prays sitting",
+    "C": "Prays another time",
+    "D": "Skips Standing",
+    "correct": "B"
+  },
+  {
+    "question": "How is Bowing done while sitting?",
+    "A": "Putting hands on knees",
+    "B": "Head slightly bowed",
+    "C": "Done standing",
+    "D": "Closing on ground",
+    "correct": "B"
+  },
+  {
+    "question": "How is Prostration done while sitting?",
+    "A": "Done standing",
+    "B": "Head bowed more than usual (or more than bowing)",
+    "C": "Only signaled with eyes",
+    "D": "Nothing is done",
+    "correct": "B"
+  },
+  {
+    "question": "What is the solution for forgetting a pillar (Rukn) in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Prostration of Forgetfulness is done",
+    "C": "Supplication is made",
+    "D": "Sunnah is added",
+    "correct": "A"
+  },
+  {
+    "question": "What is done when a Necessary act is abandoned?",
+    "A": "Nothing happens",
+    "B": "Prayer becomes invalid",
+    "C": "Prostration of Forgetfulness is done",
+    "D": "Imam is changed",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on thinking about something in Ritual Prayer?",
+    "A": "Invalidates prayer",
+    "B": "Permissible",
+    "C": "Whisper (Waswasa)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "What should be done when a Whisper (Waswasa) comes?",
+    "A": "Prayer becomes invalid",
+    "B": "One continues",
+    "C": "Salam is given",
+    "D": "Qibla is changed",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on coughing in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Permissible",
+    "C": "Disliked (if unnecessary)",
+    "D": "Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What does laughing with a mouthful break in Ritual Prayer?",
+    "A": "Only the prayer",
+    "B": "Only the ablution",
+    "C": "Both prayer and ablution",
+    "D": "Nothing",
+    "correct": "C"
+  },
+  {
+    "question": "What does laughing slightly break in Ritual Prayer?",
+    "A": "The prayer",
+    "B": "The ablution",
+    "C": "The reward",
+    "D": "Nothing",
+    "correct": "A"
+  },
+  {
+    "question": "What result does speaking in Ritual Prayer cause?",
+    "A": "It becomes Disliked",
+    "B": "It invalidates the prayer",
+    "C": "It becomes Necessary",
+    "D": "It becomes Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on speaking intentionally in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Invalidates the prayer",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What does involuntary laughing cause in Ritual Prayer?",
+    "A": "Nothing",
+    "B": "Ablution breaks",
+    "C": "Prayer breaks",
+    "D": "Sin",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on dozing off in Ritual Prayer?",
+    "A": "Prayer breaks",
+    "B": "Ablution breaks",
+    "C": "Permissible",
+    "D": "Disliked",
+    "correct": "D"
+  },
+  {
+    "question": "What should a person do if they mix up the rak'ahs in Ritual Prayer?",
+    "A": "Abandon prayer",
+    "B": "Base on the least certain number",
+    "C": "Take the most number",
+    "D": "Give Salam",
+    "correct": "B"
+  },
+  {
+    "question": "What is the alternative if standing is not possible in Ritual Prayer?",
+    "A": "Not praying",
+    "B": "Sitting",
+    "C": "Lying down",
+    "D": "Signaling",
+    "correct": "B"
+  },
+  {
+    "question": "In which situation is praying with gestures permissible?",
+    "A": "When healthy",
+    "B": "For patients who cannot stand or sit",
+    "C": "When wanting to prolong prayer",
+    "D": "When no space in congregation",
+    "correct": "B"
+  },
+  {
+    "question": "Why is row alignment important?",
+    "A": "For aesthetics",
+    "B": "For congregation reward",
+    "C": "To finish fast",
+    "D": "For privacy",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on leaving gaps between rows?",
+    "A": "Sunnah",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Obligatory",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on passing the Imam?",
+    "A": "Obligatory",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on saying Takbir simultaneously with the Imam?",
+    "A": "Sunnah",
+    "B": "Permissible",
+    "C": "Disliked (Should be after)",
+    "D": "Necessary",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on bowing (going to Ruku) before the Imam?",
+    "A": "Obligatory",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Permissible",
+    "correct": "B"
+  },
+  {
+    "question": "What does a person joining the congregation late follow?",
+    "A": "The nearest rak'ah",
+    "B": "The position of the Imam",
+    "C": "The wish of the congregation",
+    "D": "Their own estimation",
+    "correct": "B"
+  },
+  {
+    "question": "What does a person do who joins the congregation late?",
+    "A": "Abandons prayer",
+    "B": "Continues with the Imam",
+    "C": "Prays alone",
+    "D": "Waits",
+    "correct": "B"
+  },
+  {
+    "question": "What does the latecomer do when the Imam gives Salam in congregational prayer?",
+    "A": "Leaves the prayer",
+    "B": "Completes their missing rak'ahs",
+    "C": "Takes ablution",
+    "D": "Supplicates",
+    "correct": "B"
+  },
+  {
+    "question": "Where is the place for women in the congregation?",
+    "A": "First row",
+    "B": "Middle row",
+    "C": "Last row",
+    "D": "Next to Imam",
+    "correct": "C"
+  },
+  {
+    "question": "What does the congregation do if the Imam recites incorrectly?",
+    "A": "Corrects him (Luqmah)",
+    "B": "Continues",
+    "C": "Breaks the prayer",
+    "D": "Remains silent",
+    "correct": "A"
+  },
+  {
+    "question": "What is required if an extra prostration is done by mistake in Ritual Prayer?",
+    "A": "Prayer is invalidated",
+    "B": "Prostration of Forgetfulness is done",
+    "C": "Repeated",
+    "D": "Nothing",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if one rak'ah is missed by mistake in Ritual Prayer?",
+    "A": "Prayer is finished",
+    "B": "Remaining rak'ah is completed",
+    "C": "Ablution is taken",
+    "D": "Prayer is invalidated",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if extra rak'ahs are prayed by mistake in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Prostration of Forgetfulness is done",
+    "C": "Prayer is left incomplete",
+    "D": "Repeated",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on forgetting Zamm-i Surah in Ritual Prayer?",
+    "A": "Abandoning Obligatory",
+    "B": "Abandoning Necessary",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "What does forgetting Al-Fatiha in Ritual Prayer require?",
+    "A": "Prostration of Forgetfulness",
+    "B": "Breaking prayer and repeating",
+    "C": "Only supplicating",
+    "D": "Giving Salam",
+    "correct": "B"
+  },
+  {
+    "question": "What should a person do who does not know the Qibla in Ritual Prayer?",
+    "A": "Leave the prayer",
+    "B": "Turn to the direction estimated to be correct",
+    "C": "Wait for Imam",
+    "D": "Turn to any direction",
+    "correct": "B"
+  },
+  {
+    "question": "What is the term for covering the required parts in Ritual Prayer?",
+    "A": "Satr al-Awrah",
+    "B": "Tasattur",
+    "C": "Hijab",
+    "D": "Ihram",
+    "correct": "A"
+  },
+  {
+    "question": "What is the limit of Satr al-Awrah for men?",
+    "A": "Between navel and knee",
+    "B": "Shoulders",
+    "C": "Feet",
+    "D": "Head",
+    "correct": "A"
+  },
+  {
+    "question": "What is Satr al-Awrah for women?",
+    "A": "Entire body except face and hands",
+    "B": "Only head",
+    "C": "Only legs",
+    "D": "Only arms",
+    "correct": "A"
+  },
+  {
+    "question": "What does uncovering one-third of a limb in Ritual Prayer cause?",
+    "A": "Becomes Necessary",
+    "B": "Prayer becomes Disliked",
+    "C": "Prayer becomes invalid",
+    "D": "Supplication required",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling if clothes tear but Awrah is not revealed in Ritual Prayer?",
+    "A": "Prayer becomes invalid",
+    "B": "Becomes Disliked",
+    "C": "Prayer remains valid",
+    "D": "Prostration of Forgetfulness required",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling if clothes are tight and Awrah shape is visible in Ritual Prayer?",
+    "A": "Becomes Sunnah",
+    "B": "Disliked (Makruh)",
+    "C": "Prayer becomes invalid",
+    "D": "Vacip",
+    "correct": "C"
+  },
+  {
+    "question": "Is prostration done without bowing in Ritual Prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Only in funeral",
+    "D": "In Isha",
+    "correct": "B"
+  },
+  {
+    "question": "What is the minimum duration to stay in Bowing?",
+    "A": "Amount of one Tasbih",
+    "B": "10 seconds",
+    "C": "1 minute",
+    "D": "No need to stay",
+    "correct": "A"
+  },
+  {
+    "question": "What is the minimum duration to stay in Prostration?",
+    "A": "One breath",
+    "B": "Amount of one Tasbih",
+    "C": "3 minutes",
+    "D": "None",
+    "correct": "B"
+  },
+  {
+    "question": "What does reading Quran in Ritual Prayer fall under?",
+    "A": "Prostration",
+    "B": "Recitation (Qira'at)",
+    "C": "Qawmah",
+    "D": "Jalsah",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on saying 'Allahu Akbar' in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Obligatory",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What is the name of the Takbir taken when starting Ritual Prayer?",
+    "A": "Opening (Iftitah) Takbir",
+    "B": "Tahiyyat Takbir",
+    "C": "Qunut Takbir",
+    "D": "Tilawah Takbir",
+    "correct": "A"
+  },
+  {
+    "question": "What does standing in Ritual Prayer signify?",
+    "A": "Bowing",
+    "B": "Standing (Qiyam)",
+    "C": "Prostration",
+    "D": "Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "Where is the place for hands to be folded for men in Ritual Prayer?",
+    "A": "Below navel",
+    "B": "Above chest",
+    "C": "Knee level",
+    "D": "Shoulder level",
+    "correct": "A"
+  },
+  {
+    "question": "What breaks the connection between Imam and congregation in Ritual Prayer?",
+    "A": "Sneezing",
+    "B": "Intervening obstacle",
+    "C": "Congregation moving forward",
+    "D": "Prostrating",
+    "correct": "B"
+  },
+  {
+    "question": "What result does rising before the Imam in Ritual Prayer cause?",
+    "A": "Becomes Necessary",
+    "B": "Prayer is considered finished",
+    "C": "Becomes Disliked (Makruh)",
+    "D": "Reward increases",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on moving simultaneously with the Imam?",
+    "A": "Sunnah",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Obligatory",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on moving after the Imam?",
+    "A": "Sunnah",
+    "B": "Obligatory",
+    "C": "Permissible",
+    "D": "Necessary",
+    "correct": "A"
+  },
+  {
+    "question": "What is the person who starts prayer with the Imam called?",
+    "A": "Mudrik",
+    "B": "Mulhaq",
+    "C": "Mukallaf",
+    "D": "Musalli",
+    "correct": "A"
+  },
+  {
+    "question": "What is the person who joins the congregation late called?",
+    "A": "Mudrik",
+    "B": "Mulhaq (Masbuq)",
+    "C": "Mukallaf",
+    "D": "Muntazir",
+    "correct": "B"
+  },
+  {
+    "question": "What does the latecomer do when the Imam gives Salam?",
+    "A": "Leaves prayer",
+    "B": "Completes their missing rak'ahs",
+    "C": "Renews ablution",
+    "D": "Does nothing",
+    "correct": "B"
+  },
+  {
+    "question": "To whom is Jumu'ah prayer NOT Obligatory?",
+    "A": "Resident male",
+    "B": "Woman",
+    "C": "Healthy male",
+    "D": "Male in city",
+    "correct": "B"
+  },
+  {
+    "question": "How many rak'ahs of Sunnah are prayed before Jumu'ah prayer?",
+    "A": "2",
+    "B": "4",
+    "C": "6",
+    "D": "8",
+    "correct": "B"
+  },
+  {
+    "question": "How many rak'ahs is the Obligatory (Farz) of Jumu'ah prayer?",
+    "A": "2",
+    "B": "4",
+    "C": "1",
+    "D": "3",
+    "correct": "A"
+  },
+  {
+    "question": "How many rak'ahs is the Eid prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "How many extra Takbirs are there in Eid prayer?",
+    "A": "3+3",
+    "B": "4+4",
+    "C": "5+5",
+    "D": "7+7",
+    "correct": "A"
+  },
+  {
+    "question": "Is there Bowing in Funeral Prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Sometimes",
+    "D": "Only Imam does",
+    "correct": "B"
+  },
+  {
+    "question": "What is the Obligatory act of Funeral Prayer?",
+    "A": "Salam",
+    "B": "Recitation",
+    "C": "Four Takbirs",
+    "D": "Bowing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of Funeral Prayer?",
+    "A": "Farz al-Ayn",
+    "B": "Farz al-Kifayah",
+    "C": "Sunnah",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "Is ablution required for Prostration of Recitation?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Only in morning",
+    "D": "Not on Friday",
+    "correct": "A"
+  },
+  {
+    "question": "When is Prostration of Recitation done?",
+    "A": "After Bowing",
+    "B": "When a verse of prostration is heard",
+    "C": "When prayer ends",
+    "D": "When Adhan is recited",
+    "correct": "B"
+  },
+  {
+    "question": "What result does speaking without excuse in Ritual Prayer cause?",
+    "A": "Reward is gained",
+    "B": "Prayer is invalidated",
+    "C": "Becomes Disliked",
+    "D": "Becomes Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on excessive movement in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Obligatory",
+    "correct": "C"
+  },
+  {
+    "question": "What does making more than three consecutive movements in Ritual Prayer break?",
+    "A": "The prize",
+    "B": "The prayer",
+    "C": "The ablution",
+    "D": "The Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "In which rak'ahs is Recitation Necessary (Wajib) in Ritual Prayer?",
+    "A": "First two rak'ahs",
+    "B": "Last two rak'ahs",
+    "C": "Every rak'ah",
+    "D": "Only Witr",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on reciting Zamm-i Surah in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "Can another Surah be read instead of Al-Fatiha in Ritual Prayer?",
+    "A": "Yes",
+    "B": "No (Fatiha is Wajib)",
+    "C": "Only in journey",
+    "D": "Only Imam",
+    "correct": "B"
+  },
+  {
+    "question": "When is Tasbih said in Ritual Prayer?",
+    "A": "In Bowing",
+    "B": "In Prostration",
+    "C": "In Sitting",
+    "D": "In all of them (There are different tasbihs)",
+    "correct": "D"
+  },
+  {
+    "question": "When is 'Subhanaka' supplication read in Ritual Prayer?",
+    "A": "In Standing (at start)",
+    "B": "In Prostration",
+    "C": "In Bowing",
+    "D": "After Salam",
+    "correct": "A"
+  },
+  {
+    "question": "In which sitting is 'Attahiyyat' read in Ritual Prayer?",
+    "A": "First",
+    "B": "Last",
+    "C": "In both",
+    "D": "Neither",
+    "correct": "C"
+  },
+  {
+    "question": "What is read after Tashahhud supplication?",
+    "A": "Salawat",
+    "B": "Zamm-i Surah",
+    "C": "Fatiha",
+    "D": "Ayat al-Kursi",
+    "correct": "A"
+  },
+  {
+    "question": "Which of the following invalidates Ritual Prayer?",
+    "A": "Yawning",
+    "B": "Coughing",
+    "C": "Talking",
+    "D": "Sneezing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on feet pointing to Qibla in Ritual Prayer?",
+    "A": "Necessary",
+    "B": "Obligatory",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "Which is NOT one of the conditions of Ritual Prayer?",
+    "A": "Turning to Qibla",
+    "B": "Entry of Time",
+    "C": "Standing",
+    "D": "Ablution",
+    "correct": "C"
+  },
+  {
+    "question": "Which is NOT one of the pillars inside Ritual Prayer?",
+    "A": "Standing",
+    "B": "Bowing",
+    "C": "Turning to Qibla (Condition)",
+    "D": "Prostration",
+    "correct": "C"
+  },
+  {
+    "question": "How many Obligatory acts (Farz) are there in Ritual Prayer? (Hanafi)",
+    "A": "6",
+    "B": "12 (6 inside, 6 outside)",
+    "C": "12",
+    "D": "14",
+    "correct": "B"
+  },
+  {
+    "question": "Which is one of the preconditions (outside/conditions) of Ritual Prayer?",
+    "A": "Standing",
+    "B": "Intention",
+    "C": "Recitation",
+    "D": "Prostration",
+    "correct": "B"
+  },
+  {
+    "question": "Which is one of the pillars (inside) of Ritual Prayer?",
+    "A": "Covering Awrah",
+    "B": "Turning to Qibla",
+    "C": "Standing",
+    "D": "Time",
+    "correct": "C"
+  },
+  {
+    "question": "In which rak'ahs is Recitation Obligatory (Farz) in Ritual Prayer?",
+    "A": "In every rak'ah",
+    "B": "In the first two rak'ahs",
+    "C": "In the last two rak'ahs",
+    "D": "Only in Witr",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of Bowing in Ritual Prayer?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling of performing two prostrations in Ritual Prayer?",
+    "A": "Obligatory (Farz)",
+    "B": "Sunnah",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling of sitting at the end of Ritual Prayer?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on reciting Zamm-i Surah in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary (Wajib)",
+    "C": "Disliked",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on making Intention with the heart?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on uttering Intention with the tongue?",
+    "A": "Obligatory",
+    "B": "Sunnah (Mustahabb)",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on making Intention for Ablution in Hanafi Madhhab?",
+    "A": "Obligatory",
+    "B": "Sunnah",
+    "C": "Disliked",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on putting water in the mouth in Full Ablution (Ghusl) in Hanafi Madhhab?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on putting water in the nose in Full Ablution (Ghusl) in Hanafi Madhhab?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on making water reach hair roots in Full Ablution?",
+    "A": "Obligatory (Farz)",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Permissible",
+    "correct": "A"
+  },
+  {
+    "question": "With which materials is Tayammum performed?",
+    "A": "Water",
+    "B": "Soil-based materials",
+    "C": "Wood",
+    "D": "Glass",
+    "correct": "B"
+  },
+  {
+    "question": "How many obligatory acts does Tayammum have? (Hanafi)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "What is one of the obligatory acts of Tayammum?",
+    "A": "Ablution",
+    "B": "Wiping the face",
+    "C": "Prostration",
+    "D": "Standing",
+    "correct": "B"
+  },
+  {
+    "question": "Which is NOT one of the obligatory acts of Ablution?",
+    "A": "Washing face",
+    "B": "Washing arms with elbows",
+    "C": "Washing feet",
+    "D": "Combing beard three times",
+    "correct": "D"
+  },
+  {
+    "question": "What is one of the obligatory acts of Ablution?",
+    "A": "Wiping the whole head",
+    "B": "Wiping one-fourth of the head",
+    "C": "Washing chest",
+    "D": "Wiping ears",
+    "correct": "B"
+  },
+  {
+    "question": "Which is NOT one of the Sunnahs of Ablution?",
+    "A": "Rinsing mouth",
+    "B": "Rinsing nose",
+    "C": "Wiping feet",
+    "D": "Using Miswak",
+    "correct": "C"
+  },
+  {
+    "question": "What invalidates Ablution?",
+    "A": "Laughing",
+    "B": "Sleeping",
+    "C": "Passing gas",
+    "D": "Yawning",
+    "correct": "C"
+  },
+  {
+    "question": "What is done if Ablution breaks during Ritual Prayer?",
+    "A": "Continue",
+    "B": "Prayer is invalidated",
+    "C": "Sit down",
+    "D": "Prostration of Forgetfulness is done",
+    "correct": "B"
+  },
+  {
+    "question": "How many times more is the reward of congregational prayer compared to solitary prayer?",
+    "A": "7",
+    "B": "17",
+    "C": "27",
+    "D": "37",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling of congregational prayer?",
+    "A": "Necessary",
+    "B": "Emphasized Sunnah (Sunnah Muakkadah)",
+    "C": "Farz al-Kifayah",
+    "D": "Farz al-Ayn",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on standing behind the Imam in congregational prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on keeping rows tight?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on leaving gaps in rows?",
+    "A": "Disliked (Makruh)",
+    "B": "Necessary",
+    "C": "Obligatory",
+    "D": "Rewardable",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on acting before the Imam in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Disliked (Makruh)",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "What should the congregation do when the Imam goes to Bowing?",
+    "A": "First prostrate",
+    "B": "Go to Bowing after him",
+    "C": "Wait silently",
+    "D": "Give Salam",
+    "correct": "B"
+  },
+  {
+    "question": "What is the latecomer to congregation called?",
+    "A": "Mulhaq (Masbuq)",
+    "B": "Mudrik",
+    "C": "Musalli",
+    "D": "Mukim",
+    "correct": "A"
+  },
+  {
+    "question": "What does the latecomer do when the Imam gives Salam?",
+    "A": "Breaks prayer",
+    "B": "Completes (missing rak'ahs)",
+    "C": "Sits",
+    "D": "Waits",
+    "correct": "B"
+  },
+  {
+    "question": "To whom is Jumu'ah prayer Obligatory?",
+    "A": "Men who are sane and resident",
+    "B": "Women",
+    "C": "Children",
+    "D": "Travelers",
+    "correct": "A"
+  },
+  {
+    "question": "How many rak'ahs is Jumu'ah prayer?",
+    "A": "2 (Obligatory)",
+    "B": "4",
+    "C": "3",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "How many rak'ahs is Eid prayer?",
+    "A": "1",
+    "B": "2",
+    "C": "4",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "How many extra Takbirs are there in Eid prayer?",
+    "A": "3+3",
+    "B": "4+4",
+    "C": "5+5",
+    "D": "7+7",
+    "correct": "A"
+  },
+  {
+    "question": "How many rak'ahs is Witr prayer?",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "2",
+    "correct": "B"
+  },
+  {
+    "question": "Which supplication is recited in Witr prayer?",
+    "A": "Qunut supplication",
+    "B": "Tawhid supplication",
+    "C": "Salat al-Tafrijiyah",
+    "D": "Ayat al-Kursi",
+    "correct": "A"
+  },
+  {
+    "question": "When is Qunut supplication recited?",
+    "A": "Before Bowing",
+    "B": "After Bowing (Shafi'i) / Before Bowing (Hanafi)",
+    "C": "In Prostration",
+    "D": "After Salam",
+    "correct": "B"
+  },
+  {
+    "question": "How many prostrations does Prostration of Recitation consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "When does Prostration of Recitation become Obligatory?",
+    "A": "When a verse of prostration is recited",
+    "B": "When Adhan is recited",
+    "C": "Only if Imam recites",
+    "D": "Only in Fajr prayer",
+    "correct": "A"
+  },
+  {
+    "question": "With how many Takbirs is Funeral Prayer performed?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "B"
+  },
+  {
+    "question": "Is there Bowing in Funeral Prayer?",
+    "A": "Yes",
+    "B": "No",
+    "C": "Sometimes",
+    "D": "Only Imam does",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling of Funeral Prayer?",
+    "A": "Farz al-Ayn",
+    "B": "Farz al-Kifayah",
+    "C": "Sunnah",
+    "D": "Vacip",
+    "correct": "B"
+  },
+  {
+    "question": "Which behavior should be avoided in Ritual Prayer?",
+    "A": "Standing calmly",
+    "B": "Moving unnecessarily",
+    "C": "Turning to Qibla",
+    "D": "Reciting Tasbih",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on slight coughing in Ritual Prayer?",
+    "A": "Invalidates prayer",
+    "B": "Disliked (Makruh, if unnecessary, otherwise permissible)",
+    "C": "Obligatory",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What does speaking loudly break in Ritual Prayer?",
+    "A": "Only the reward",
+    "B": "The prayer",
+    "C": "The ablution",
+    "D": "Nothing",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on yawning in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Obligatory",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "A"
+  },
+  {
+    "question": "When can one sit instead of Standing in Ritual Prayer?",
+    "A": "In case of illness",
+    "B": "When congregation is crowded",
+    "C": "When sun sets",
+    "D": "When mosque is small",
+    "correct": "A"
+  },
+  {
+    "question": "What does a person do who cannot Bow (Ruku) in Ritual Prayer?",
+    "A": "Cannot pray",
+    "B": "Performs with gestures (Im'a)",
+    "C": "Does Tayammum",
+    "D": "Makes up later",
+    "correct": "B"
+  },
+  {
+    "question": "How does a person who cannot Prostrate signal in Ritual Prayer?",
+    "A": "With eyes",
+    "B": "By bowing head more (than for Ruku)",
+    "C": "With hand",
+    "D": "Only by intention",
+    "correct": "B"
+  },
+  {
+    "question": "How does a traveler perform four-rak'ah Obligatory prayers?",
+    "A": "Prays fully",
+    "B": "Shortens to two rak'ahs",
+    "C": "Does not pray",
+    "D": "Only prays Witr",
+    "correct": "B"
+  },
+  {
+    "question": "What is the distance limit for being a traveler?",
+    "A": "60 km",
+    "B": "90 km",
+    "C": "120 km",
+    "D": "150 km",
+    "correct": "B"
+  },
+  {
+    "question": "Which prayer cannot be made up (Qada)?",
+    "A": "Obligatory prayer",
+    "B": "Witr",
+    "C": "Jumu'ah prayer",
+    "D": "Eid prayer",
+    "correct": "C"
+  },
+  {
+    "question": "Which prayer is performed instead of Jumu'ah prayer (if missed)?",
+    "A": "Fajr prayer",
+    "B": "Zuhr prayer",
+    "C": "Witr prayer",
+    "D": "Tahajjud",
+    "correct": "B"
+  },
+  {
+    "question": "How many parts does the Jumu'ah Sermon consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "How many Takbirs does Eid prayer contain (including extra ones)?",
+    "A": "6",
+    "B": "7",
+    "C": "8",
+    "D": "9",
+    "correct": "C"
+  },
+  {
+    "question": "How many Obligatory acts (Farz) does Funeral Prayer have?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "D"
+  },
+  {
+    "question": "Which pillar is NOT present in Funeral Prayer?",
+    "A": "Takbir",
+    "B": "Standing",
+    "C": "Recitation (Qira'at - technically Dua in Hanafi)",
+    "D": "Salawat",
+    "correct": "C"
+  },
+  {
+    "question": "What is the Obligatory act of Funeral Prayer?",
+    "A": "Recitation",
+    "B": "Bowing",
+    "C": "Prostration",
+    "D": "Four Takbirs",
+    "correct": "D"
+  },
+  {
+    "question": "What is the ruling of Funeral Prayer?",
+    "A": "Farz al-Ayn",
+    "B": "Farz al-Kifayah",
+    "C": "Necessary",
+    "D": "Sunnah",
+    "correct": "B"
+  },
+  {
+    "question": "How many prostrations does Prostration of Recitation consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "When is Prostration of Recitation done?",
+    "A": "When Adhan is recited",
+    "B": "When a verse of prostration is recited or heard",
+    "C": "When prayer ends",
+    "D": "During Bowing",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on stroking the beard in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Disliked (Makruh)",
+    "C": "Obligatory",
+    "D": "Necessary",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on turning the face right or left in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "What should a person do who abandons a pillar (Rukn) in Ritual Prayer?",
+    "A": "Continue",
+    "B": "Do Prostration of Forgetfulness",
+    "C": "Break prayer and repeat",
+    "D": "Supplicate",
+    "correct": "C"
+  },
+  {
+    "question": "What is the most important Obligatory act (Farz) of Ritual Prayer?",
+    "A": "Prostration (closer to Allah)",
+    "B": "Standing",
+    "C": "Recitation",
+    "D": "Intention (Condition)",
+    "correct": "D"
+  },
+  {
+    "question": "What type of Takbir is saying 'Allahu Akbar' in Ritual Prayer?",
+    "A": "Opening (Iftitah) Takbir",
+    "B": "Qunut Takbir",
+    "C": "Tilawah Takbir",
+    "D": "Tashriq Takbir",
+    "correct": "A"
+  },
+  {
+    "question": "What is moving together with the congregation in Ritual Prayer called?",
+    "A": "Iqtida",
+    "B": "Ijma",
+    "C": "Isar",
+    "D": "Ifrat",
+    "correct": "A"
+  },
+  {
+    "question": "What is the ruling on moving way before the Imam?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked (Makruh)",
+    "correct": "D"
+  },
+  {
+    "question": "What is the ruling on leaving large gaps between rows?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Sunnah",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on raising hands (except for Opening Takbir) in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Sunnah (according to Shafi'i, but Hanafi says only at start)",
+    "C": "Necessary",
+    "D": "Disliked",
+    "correct": "B"
+  },
+  {
+    "question": "What is bowing without bending knees in Ritual Prayer called?",
+    "A": "Prostration",
+    "B": "Bowing (Ruku)",
+    "C": "Standing",
+    "D": "Tashahhud",
+    "correct": "B"
+  },
+  {
+    "question": "What is sitting between two prostrations called?",
+    "A": "Qawmah",
+    "B": "Jalsah",
+    "C": "Ruku",
+    "D": "Recitation",
+    "correct": "B"
+  },
+  {
+    "question": "What is rising from Bowing called in Ritual Prayer?",
+    "A": "Qawmah",
+    "B": "Jalsah",
+    "C": "Recitation",
+    "D": "Tashahhud",
+    "correct": "A"
+  },
+  {
+    "question": "Where is 'Subhana Rabbiyal Azim' recited in Ritual Prayer?",
+    "A": "In Standing",
+    "B": "In Bowing",
+    "C": "In Prostration",
+    "D": "In Sitting",
+    "correct": "B"
+  },
+  {
+    "question": "Where is 'Subhana Rabbiyal A'la' recited in Ritual Prayer?",
+    "A": "In Bowing",
+    "B": "In Prostration",
+    "C": "In Standing",
+    "D": "In Sitting",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on feet pointing to Qibla in Ritual Prayer?",
+    "A": "Obligatory",
+    "B": "Necessary",
+    "C": "Sunnah",
+    "D": "Disliked",
+    "correct": "C"
+  },
+  {
+    "question": "What does abandoning Qibla completely break in Ritual Prayer?",
+    "A": "Nothing",
+    "B": "Only the reward",
+    "C": "The prayer",
+    "D": "The sitting",
+    "correct": "C"
+  },
+  {
+    "question": "When is 'Attahiyyat' supplication recited in Ritual Prayer?",
+    "A": "In Standing",
+    "B": "In Bowing",
+    "C": "In Sitting",
+    "D": "In Prostration",
+    "correct": "C"
+  },
+  {
+    "question": "In which sitting is 'Salli-Barik' recited in Ritual Prayer?",
+    "A": "First sitting",
+    "B": "Last sitting",
+    "C": "Only in prostration",
+    "D": "In Standing",
+    "correct": "B"
+  },
+  {
+    "question": "When is Prostration of Forgetfulness necessary in Ritual Prayer?",
+    "A": "When Obligatory act is abandoned",
+    "B": "When Necessary (Wajib) act is abandoned",
+    "C": "When Sunnah is abandoned",
+    "D": "When Tasbihat is forgotten",
+    "correct": "B"
+  },
+  {
+    "question": "How many prostrations does Prostration of Forgetfulness consist of?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "When is Prostration of Forgetfulness done?",
+    "A": "At start of prayer",
+    "B": "After Salam",
+    "C": "Before Salam (Shafi'i) / After Salam (Hanafi)",
+    "D": "During Bowing",
+    "correct": "C"
+  },
+  {
+    "question": "What is the solution if one rak'ah is missed in Ritual Prayer?",
+    "A": "Prayer is invalidated",
+    "B": "Missing rak'ah is completed",
+    "C": "Nothing is done",
+    "D": "Supplication is enough",
+    "correct": "B"
+  },
+  {
+    "question": "What is done if extra rak'ahs are prayed in Ritual Prayer?",
+    "A": "Prayer is cancelled",
+    "B": "Prostration of Forgetfulness is done",
+    "C": "Repeated",
+    "D": "Nothing required",
+    "correct": "B"
+  },
+  {
+    "question": "What does congregation do if Imam recites incorrectly?",
+    "A": "Remains silent",
+    "B": "Corrects him (Luqmah)",
+    "C": "Leaves prayer",
+    "D": "Repeats",
+    "correct": "B"
+  },
+  {
+    "question": "What is the ruling on swaying excessively while Standing in Ritual Prayer?",
+    "A": "Sunnah",
+    "B": "Necessary",
+    "C": "Disliked (Makruh)",
+    "D": "Obligatory",
+    "correct": "C"
+  },
+  {
+    "question": "What is the ruling on closing eyes in Ritual Prayer?",
+    "A": "Disliked (Makruh)",
+    "B": "Obligatory",
+    "C": "Sunnah",
+    "D": "Permissible",
+    "correct": "A"
+  }
+]

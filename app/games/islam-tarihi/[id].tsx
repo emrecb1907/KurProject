@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { GameScreen } from '@components/game';
 import { GameQuestion } from '@/types/game.types';
+import { useTranslation } from 'react-i18next';
 
 // Import JSON using require for better React Native compatibility
-const islamTarihiQuestions = require('@assets/questions/tr/islamTarihi.json');
+const islamTarihiQuestionsTr = require('@assets/questions/tr/islamTarihi.json');
+const islamTarihiQuestionsEn = require('@assets/questions/en/islamTarihi.json');
 
 interface QuestionData {
     question: string;
@@ -18,11 +20,17 @@ interface QuestionData {
 
 export default function IslamTarihiTestScreen() {
     const { id } = useLocalSearchParams();
+    const { i18n } = useTranslation();
+
+    // Select questions based on language
+    const questionsSource = useMemo(() => {
+        return i18n.language === 'tr' ? islamTarihiQuestionsTr : islamTarihiQuestionsEn;
+    }, [i18n.language]);
 
     // Convert JSON questions to GameQuestion format and select 10 random questions
     const [questions] = useState<GameQuestion[]>(() => {
-        const allQuestions = islamTarihiQuestions as QuestionData[];
-        
+        const allQuestions = questionsSource as QuestionData[];
+
         // Add id to each question if not present
         const questionsWithId = allQuestions.map((q, index) => ({
             ...q,
@@ -37,13 +45,13 @@ export default function IslamTarihiTestScreen() {
         return selected.map((q, index) => {
             // Get the correct answer text based on the correct letter
             const correctAnswerText = q[q.correct as 'A' | 'B' | 'C' | 'D'];
-            
+
             // Create options array in order A, B, C, D
             const options = [q.A, q.B, q.C, q.D];
-            
+
             // Shuffle options but keep track of correct answer
             const shuffledOptions = [...options].sort(() => Math.random() - 0.5);
-            
+
             return {
                 id: `islam-tarihi-${q.id || index + 1}`,
                 question: q.question,
@@ -55,6 +63,7 @@ export default function IslamTarihiTestScreen() {
 
     return (
         <GameScreen
+            key={i18n.language}
             lessonId={id as string}
             gameType="quiz"
             source="test"

@@ -1,0 +1,3778 @@
+[
+  {
+    "question": "Namaz kaç vakittir?",
+    "A": "3 vakit",
+    "B": "4 vakit",
+    "C": "5 vakit",
+    "D": "6 vakit",
+    "correct": "C"
+  },
+  {
+    "question": "Ramazan ayında farz olan ibadet hangisidir?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekat",
+    "D": "Hac",
+    "correct": "B"
+  },
+  {
+    "question": "Namaz kılarken yöneldiğimiz kıble neresidir?",
+    "A": "Kudüs",
+    "B": "Kabe",
+    "C": "Medine",
+    "D": "Şam",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin farzlarından biri hangisidir?",
+    "A": "Elbiseyi değiştirmek",
+    "B": "Yüzü yıkamak",
+    "C": "Parfüm sürmek",
+    "D": "Ezan okumak",
+    "correct": "B"
+  },
+  {
+    "question": "Guslün farzlarından biri hangisidir?",
+    "A": "Baş örtmek",
+    "B": "Ağza su vermek",
+    "C": "Misvak kullanmak",
+    "D": "Ezan dinlemek",
+    "correct": "B"
+  },
+  {
+    "question": "Sabah namazının farzı kaç rekattır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte ilk yıkanan uzuv hangisidir?",
+    "A": "Eller",
+    "B": "Baş",
+    "C": "Ayaklar",
+    "D": "Yüz",
+    "correct": "A"
+  },
+  {
+    "question": "Ezan neyi bildirir?",
+    "A": "Bayramı",
+    "B": "Namaz vaktini",
+    "C": "Sahur zamanını",
+    "D": "Hac mevsimini",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutarken niyet ne zaman yapılır?",
+    "A": "Güneş battıktan sonra",
+    "B": "Gece veya imsaktan önce",
+    "C": "Öğle vakti",
+    "D": "Bayram sabahı",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmüm hangi durumda yapılır?",
+    "A": "Su bulunmuyorsa",
+    "B": "Ses yoksa",
+    "C": "Ezan okunmazsa",
+    "D": "Kıble bilinmezse",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban ibadeti hangi bayramda yapılır?",
+    "A": "Ramazan Bayramı",
+    "B": "Kurban Bayramı",
+    "C": "Mevlid Kandili",
+    "D": "Berat Kandili",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât kimlere verilir?",
+    "A": "Zenginlere",
+    "B": "Fakirlere",
+    "C": "Siyasetçilere",
+    "D": "İmam’a",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda secde kaç kez yapılır? (bir rekât)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın şartlarından biri hangisidir?",
+    "A": "Aç olmak",
+    "B": "Temizlik",
+    "C": "Sesli okumak",
+    "D": "İkram yapmak",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte başa nasıl mesh edilir?",
+    "A": "Su dökülür",
+    "B": "Islak elle mesh edilir",
+    "C": "Tuzla silinir",
+    "D": "Yağ sürülür",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç hangi vakitte açılır?",
+    "A": "İmsakta",
+    "B": "Akşam ezanında",
+    "C": "Öğlen",
+    "D": "Teravihte",
+    "correct": "B"
+  },
+  {
+    "question": "Fitre ne zaman verilir?",
+    "A": "Ramazan başında",
+    "B": "Bayram sabahı veya öncesi",
+    "C": "Hac zamanı",
+    "D": "Kandillerde",
+    "correct": "B"
+  },
+  {
+    "question": "Kabe nerededir?",
+    "A": "Mekke",
+    "B": "Medine",
+    "C": "Kudüs",
+    "D": "Konya",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda okunan kısa surelere ne denir?",
+    "A": "Hadis",
+    "B": "Dua",
+    "C": "Sure",
+    "D": "Zikir",
+    "correct": "C"
+  },
+  {
+    "question": "Teravih namazı hangi aya aittir?",
+    "A": "Recep",
+    "B": "Ramazan",
+    "C": "Muharrem",
+    "D": "Şaban",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban keserken hangi hayvan kurban edilebilir?",
+    "A": "Kedi",
+    "B": "İnek",
+    "C": "Aslan",
+    "D": "Kartal",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât ne tür bir ibadettir?",
+    "A": "Mali ibadet",
+    "B": "Sözlü ibadet",
+    "C": "Sosyal ibadet",
+    "D": "Mekânsal ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken ayaklar nasıl yıkanır?",
+    "A": "Mesh edilir",
+    "B": "Su ile yıkanır",
+    "C": "Silinir",
+    "D": "Tozlanır",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma namazı kaç rekattır? (farz)",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan orucu kimlere farzdır?",
+    "A": "Küçüklere",
+    "B": "Akıllı ve ergen Müslümanlara",
+    "C": "Yolculara",
+    "D": "Hastaya",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazı hangi vakitte kılınır?",
+    "A": "Akşam",
+    "B": "Sabah",
+    "C": "Öğle",
+    "D": "İkindi",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât vermek neyi güçlendirir?",
+    "A": "Gücü",
+    "B": "Toplumsal dayanışmayı",
+    "C": "Sesi",
+    "D": "Hızlı koşmayı",
+    "correct": "B"
+  },
+  {
+    "question": "Hac ibadeti nerede yapılır?",
+    "A": "Kudüs",
+    "B": "Mekke",
+    "C": "Medine",
+    "D": "Şam",
+    "correct": "B"
+  },
+  {
+    "question": "Abdest bozan hallerden biri hangisidir?",
+    "A": "Gülmek",
+    "B": "Uyumak",
+    "C": "Konuşmak",
+    "D": "Yemek yemek",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza başlarken ne yapılır?",
+    "A": "Sübhane çekilir",
+    "B": "Tekbir alınır",
+    "C": "Ezan okunur",
+    "D": "Selam verilir",
+    "correct": "B"
+  },
+  {
+    "question": "Farz ne demektir?",
+    "A": "Yapılması zorunlu",
+    "B": "Yapılması güzel",
+    "C": "Yapılmazsa olur",
+    "D": "Yasak olan",
+    "correct": "A"
+  },
+  {
+    "question": "Vacip ne demektir?",
+    "A": "Serbest",
+    "B": "Şart değil",
+    "C": "Yapılması gerekli",
+    "D": "Mekruh",
+    "correct": "C"
+  },
+  {
+    "question": "Mekruh ne demektir?",
+    "A": "Güzel görülen",
+    "B": "Hoş olmayan",
+    "C": "Zorunlu",
+    "D": "Serbest",
+    "correct": "B"
+  },
+  {
+    "question": "Haram ne demektir?",
+    "A": "Tavsiye edilen",
+    "B": "Yapılması yasak",
+    "C": "Güzel görülen",
+    "D": "Serbest",
+    "correct": "B"
+  },
+  {
+    "question": "Guslü gerektiren hallerden biri hangisidir?",
+    "A": "Sıcak yemek",
+    "B": "Cünüp olmak",
+    "C": "Kahkaha",
+    "D": "Yürümek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rükû nedir?",
+    "A": "Ayakta durmak",
+    "B": "Eğilmek",
+    "C": "Oturmak",
+    "D": "Selam vermek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın sonunda ne yapılır?",
+    "A": "Tekrar abdest alınır",
+    "B": "Selam verilir",
+    "C": "Ezan okunur",
+    "D": "Secde yapılır",
+    "correct": "B"
+  },
+  {
+    "question": "Kadir Gecesi hangi ay içindedir?",
+    "A": "Recep",
+    "B": "Ramazan",
+    "C": "Muharrem",
+    "D": "Şaban",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç açmaya ne denir?",
+    "A": "Sahur",
+    "B": "İftar",
+    "C": "Fitre",
+    "D": "Zekat",
+    "correct": "B"
+  },
+  {
+    "question": "Sahur ne zaman yapılır?",
+    "A": "Akşam",
+    "B": "İmsaktan önce",
+    "C": "Öğle vakti",
+    "D": "Bayram sabahı",
+    "correct": "B"
+  },
+  {
+    "question": "Bir rekâtta kaç rükû vardır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Bir rekâtta kaç secde vardır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât hangi mallardan verilir?",
+    "A": "Hayali mal",
+    "B": "Gerçek mal ve para",
+    "C": "Resim",
+    "D": "Eşyalar",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban olarak kesilen hayvana ne denir?",
+    "A": "Akika",
+    "B": "Kurban",
+    "C": "Sadaka",
+    "D": "Zekat",
+    "correct": "B"
+  },
+  {
+    "question": "Hac ibadeti hangi aylarda yapılır?",
+    "A": "Ramazan",
+    "B": "Şevval-Zilhicce",
+    "C": "Recep",
+    "D": "Muharrem",
+    "correct": "B"
+  },
+  {
+    "question": "Namaz kılmadan önce ne yapılır?",
+    "A": "Yemek yenir",
+    "B": "Abdest alınır",
+    "C": "Bayram yapılır",
+    "D": "Tefekkür edilir",
+    "correct": "B"
+  },
+  {
+    "question": "Şükür namazı ne zaman kılınır?",
+    "A": "Hayırlı bir haber alınca",
+    "B": "Bayramda",
+    "C": "İftarda",
+    "D": "Sahurda",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken ağıza su vermeye ne denir?",
+    "A": "İstilam",
+    "B": "Mazmaza",
+    "C": "Meshetmek",
+    "D": "Taharet",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin farzlarından biri hangisidir?",
+    "A": "Saç taramak",
+    "B": "Kolları dirseğe kadar yıkamak",
+    "C": "Namaz kılmak",
+    "D": "Gül suyuyla yıkamak",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan gecelerinde kılınan namaza ne denir?",
+    "A": "Vitir",
+    "B": "Teravih",
+    "C": "Bayram",
+    "D": "Cuma",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutan kişi ne zaman yemek yiyebilir?",
+    "A": "Sabah namazında",
+    "B": "Akşam ezanı okunduğunda",
+    "C": "Öğle ezanında",
+    "D": "Her zaman",
+    "correct": "B"
+  },
+  {
+    "question": "Zekâtın amacı nedir?",
+    "A": "Misafir ağırlamak",
+    "B": "Mali yardımlaşma sağlamak",
+    "C": "Spor yapmak",
+    "D": "Seyahat etmek",
+    "correct": "B"
+  },
+  {
+    "question": "Hac ibadeti hangi şehirde yapılır?",
+    "A": "Kudüs",
+    "B": "Medine",
+    "C": "Mekke",
+    "D": "Taif",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda hangi hareket ayakta yapılan okuma sonrası gelir?",
+    "A": "Rükû",
+    "B": "Secde",
+    "C": "Selam",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Bir Müslüman oruca hangi sözle niyet eder?",
+    "A": "Allahuekber",
+    "B": "Oruç tutuyorum",
+    "C": "Niyet ettim Ramazan orucuna",
+    "D": "Elhamdülillah",
+    "correct": "C"
+  },
+  {
+    "question": "Cuma namazı hangi gün kılınır?",
+    "A": "Pazartesi",
+    "B": "Perşembe",
+    "C": "Cuma",
+    "D": "Pazar",
+    "correct": "C"
+  },
+  {
+    "question": "Bayram namazından önce verilen sadakanın adı nedir?",
+    "A": "Fitre",
+    "B": "Fidye",
+    "C": "Zekat",
+    "D": "Sadaka-i cariye",
+    "correct": "A"
+  },
+  {
+    "question": "Gusülde bütün vücudu yıkamak ne için yapılır?",
+    "A": "Temizlik farz olduğu için",
+    "B": "Bayram için",
+    "C": "Cami ziyareti için",
+    "D": "Spor için",
+    "correct": "A"
+  },
+  {
+    "question": "Zekat vermek hangi ibadetin şartıdır?",
+    "A": "İmanın",
+    "B": "İslam’ın",
+    "C": "Ezanın",
+    "D": "Duânın",
+    "correct": "B"
+  },
+  {
+    "question": "Namaz sonunda verilen selam neyi ifade eder?",
+    "A": "Bittiğini",
+    "B": "Başladığını",
+    "C": "Rükû olduğunu",
+    "D": "Oruç tutulduğunu",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda Fatiha suresi nerede okunur?",
+    "A": "Otururken",
+    "B": "Ayakta",
+    "C": "Secdede",
+    "D": "Selamda",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmüm hangi maddeden yapılır?",
+    "A": "Taş",
+    "B": "Temiz toprak",
+    "C": "Ahşap",
+    "D": "Demir",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı hangi namazdan sonra kılınır?",
+    "A": "Öğle",
+    "B": "İkindi",
+    "C": "Yatsı",
+    "D": "Sabah",
+    "correct": "C"
+  },
+  {
+    "question": "Ezanı kim okur?",
+    "A": "Müezzin",
+    "B": "Padişah",
+    "C": "Muhtar",
+    "D": "Öğretmen",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte kollar nereye kadar yıkanır?",
+    "A": "Dirsek dahil",
+    "B": "Omuz",
+    "C": "El",
+    "D": "Parmak ucu",
+    "correct": "A"
+  },
+  {
+    "question": "İmsak vakti neyi ifade eder?",
+    "A": "Uyku zamanını",
+    "B": "Oruç başlangıcını",
+    "C": "Akşamı",
+    "D": "İkindi vaktini",
+    "correct": "B"
+  },
+  {
+    "question": "İftar vakti ne zaman olur?",
+    "A": "Öğle",
+    "B": "İkindi",
+    "C": "Akşam ezanı",
+    "D": "Gece yarısı",
+    "correct": "C"
+  },
+  {
+    "question": "Kurban olarak hangi hayvan kesilemez?",
+    "A": "Deve",
+    "B": "Koyun",
+    "C": "Keçi",
+    "D": "Kedi",
+    "correct": "D"
+  },
+  {
+    "question": "Akika kurbanı ne içindir?",
+    "A": "Düğün",
+    "B": "Doğan çocuk için",
+    "C": "Seyahat",
+    "D": "Sünnet",
+    "correct": "B"
+  },
+  {
+    "question": "Namaz vaktinin geldiğini gösteren çağrı nedir?",
+    "A": "Siren",
+    "B": "Ezan",
+    "C": "İlan",
+    "D": "Temizlik",
+    "correct": "B"
+  },
+  {
+    "question": "Müezzinin ezandan sonra okuduğu davete ne denir?",
+    "A": "Kamet",
+    "B": "Hutbe",
+    "C": "Vaaz",
+    "D": "Dua",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazında hutbeyi kim okur?",
+    "A": "Müezzin",
+    "B": "İmam",
+    "C": "Öğretmen",
+    "D": "Muhtar",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda rükûdan sonra ne yapılır?",
+    "A": "Oturulur",
+    "B": "Tekrar ayakta durulur",
+    "C": "Secdeye gidilir",
+    "D": "Selam verilir",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda sûre okumaya ne denir?",
+    "A": "Tefekkür",
+    "B": "Tilavet",
+    "C": "Tebrik",
+    "D": "Tesbih",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin sünnetlerinden biri hangisidir?",
+    "A": "Misvak kullanmak",
+    "B": "Saat takmak",
+    "C": "Tırnak kesmek",
+    "D": "Şapka takmak",
+    "correct": "A"
+  },
+  {
+    "question": "Orucu bozan şeylerden biri hangisidir?",
+    "A": "Uyumak",
+    "B": "Abdest almak",
+    "C": "Bilerek yemek",
+    "D": "Yürümek",
+    "correct": "C"
+  },
+  {
+    "question": "Abdest alırken burna su vermeye ne denir?",
+    "A": "İstinşak",
+    "B": "Kıraat",
+    "C": "Teyemmüm",
+    "D": "Tahiyyat",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz hangi dilde kılınır?",
+    "A": "İngilizce",
+    "B": "Arapça",
+    "C": "Türkçe",
+    "D": "Farsça",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda okunan ilk sûre hangisidir?",
+    "A": "Fatiha",
+    "B": "Nas",
+    "C": "İhlas",
+    "D": "Asr",
+    "correct": "A"
+  },
+  {
+    "question": "Farz namazlar günde kaç kez kılınır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Zekât hangi mallardan verilir?",
+    "A": "Dolap",
+    "B": "Para ve mal",
+    "C": "Sandalye",
+    "D": "Duvar",
+    "correct": "B"
+  },
+  {
+    "question": "Hac yapan kişiye ne ad verilir?",
+    "A": "Müezzin",
+    "B": "Hacı",
+    "C": "Seferî",
+    "D": "Şâhit",
+    "correct": "B"
+  },
+  {
+    "question": "Orucun niyeti kalben yeterli midir?",
+    "A": "Hayır",
+    "B": "Evet",
+    "C": "Bazen",
+    "D": "Sadece yazılı olursa",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât hangi yılda farz kılınmıştır? (kolay bilgi)",
+    "A": "2. yıl",
+    "B": "3. yıl",
+    "C": "9. yıl",
+    "D": "13. yıl",
+    "correct": "C"
+  },
+  {
+    "question": "Oruçlu olan kişi hangi vakitte sahur yapar?",
+    "A": "Akşam",
+    "B": "İmsaktan önce",
+    "C": "Öğle",
+    "D": "İkindi",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban bayramında kaç gün kurban kesilebilir?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kaç secde yapılması farzdır? (rekât)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Farz ibadetlerden biri hangisidir?",
+    "A": "Uyumak",
+    "B": "Teravih",
+    "C": "Namaz",
+    "D": "Gezmek",
+    "correct": "C"
+  },
+  {
+    "question": "Sadaka vermek neyi artırır?",
+    "A": "Hızı",
+    "B": "Paylaşmayı",
+    "C": "Boyu",
+    "D": "Ailesini",
+    "correct": "B"
+  },
+  {
+    "question": "Vücudu tamamen yıkayarak yapılan temizlik ne adla anılır?",
+    "A": "Teyemmüm",
+    "B": "Gusül",
+    "C": "Taharet",
+    "D": "Temas",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda yapılan oturuşa ne denir?",
+    "A": "Tefekkür",
+    "B": "Ka'de",
+    "C": "Tekbir",
+    "D": "Tahir",
+    "correct": "B"
+  },
+  {
+    "question": "Cuma hutbesi kaç kısımdan oluşur?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "5",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sağa ve sola selam verme neyi ifade eder?",
+    "A": "Namaz bitti",
+    "B": "Başladı",
+    "C": "Orta bölümü",
+    "D": "Rükû",
+    "correct": "A"
+  },
+  {
+    "question": "Farz olan oruç hangi aya özeldir?",
+    "A": "Recep",
+    "B": "Ramazan",
+    "C": "Şaban",
+    "D": "Muharrem",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda secde hangi yönlere yapılır?",
+    "A": "Sağa sola",
+    "B": "Kıbleye doğru",
+    "C": "Güneşe doğru",
+    "D": "Kuzeye doğru",
+    "correct": "B"
+  },
+  {
+    "question": "İslam’da ibadet etme amacı nedir?",
+    "A": "Spor yapmak",
+    "B": "Allah’a kulluk",
+    "C": "Para kazanmak",
+    "D": "Prestij kazanmak",
+    "correct": "B"
+  },
+  {
+    "question": "Namazın en önemli rüknü hangisidir?",
+    "A": "Secde",
+    "B": "Oturmak",
+    "C": "Tekbir",
+    "D": "Yürümek",
+    "correct": "A"
+  },
+  {
+    "question": "İmsaktan sonra oruçlu kişi ne yapmaz?",
+    "A": "Su içer",
+    "B": "Yemez içmez",
+    "C": "Misvak kullanır",
+    "D": "İftar bekler",
+    "correct": "B"
+  },
+  {
+    "question": "Akşam namazı farzı kaç rekattır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "C"
+  },
+  {
+    "question": "Yatsı namazı farzı kaç rekattır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "D"
+  },
+  {
+    "question": "Öğle namazı farzı kaç rekattır?",
+    "A": "4",
+    "B": "3",
+    "C": "2",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "İkindi namazı farzı kaç rekattır?",
+    "A": "2",
+    "B": "4",
+    "C": "6",
+    "D": "3",
+    "correct": "B"
+  },
+  {
+    "question": "Farz namazlarından biri hangisidir?",
+    "A": "Vitir",
+    "B": "Bayram namazı",
+    "C": "Cuma namazı",
+    "D": "Tesbih namazı",
+    "correct": "C"
+  },
+  {
+    "question": "Oruç hangi vakitte sona erer?",
+    "A": "Güneş doğunca",
+    "B": "Akşam ezanı okununca",
+    "C": "Öğle vaktinde",
+    "D": "Güneş tepeye çıkınca",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan gecelerinde yapılan yemek ne adla anılır?",
+    "A": "İftar",
+    "B": "Sahur",
+    "C": "Fitre",
+    "D": "Zekat",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmüm hangi durumlarda yapılır?",
+    "A": "Cami doluysa",
+    "B": "Su yoksa",
+    "C": "Ezan geçse",
+    "D": "İmsak vakti",
+    "correct": "B"
+  },
+  {
+    "question": "Abdest alırken farz olmayan ama sünnet olan nedir?",
+    "A": "Misvak",
+    "B": "Kol yıkamak",
+    "C": "Mesh",
+    "D": "Yüz yıkamak",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz kılmak için gerekli olmayan şart hangisidir?",
+    "A": "Temizlik",
+    "B": "Kıbleye yönelmek",
+    "C": "Aç olmak",
+    "D": "Setr-i avret",
+    "correct": "C"
+  },
+  {
+    "question": "Hac ibadeti ne zaman yapılır?",
+    "A": "Yılın her günü",
+    "B": "Zilhicce ayında",
+    "C": "Ramazan’da",
+    "D": "Şaban ayında",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban kesmek için uygun hayvanlardan biri hangisidir?",
+    "A": "Keçi",
+    "B": "Kuş",
+    "C": "Kedi",
+    "D": "Horoz",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere verilmez?",
+    "A": "Muhtaçlara",
+    "B": "Borçlulara",
+    "C": "Zenginlere",
+    "D": "Yolda kalmışa",
+    "correct": "C"
+  },
+  {
+    "question": "Oruç açılırken en çok tavsiye edilen nedir?",
+    "A": "Tatlı",
+    "B": "Su ve hurma",
+    "C": "Pilav",
+    "D": "Ekmek",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı kaç rekattır?",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "7",
+    "correct": "B"
+  },
+  {
+    "question": "Kandillerde yapılan ibadet türlerinden biri nedir?",
+    "A": "Tefekkür",
+    "B": "Zikir",
+    "C": "Yürüyüş",
+    "D": "Spor",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan orucu kaç gün tutulur?",
+    "A": "15",
+    "B": "20",
+    "C": "29 veya 30",
+    "D": "40",
+    "correct": "C"
+  },
+  {
+    "question": "Oruç tutan kişinin sabah yemeğine ne denir?",
+    "A": "İftar",
+    "B": "Sahur",
+    "C": "Ziyafet",
+    "D": "Bayram",
+    "correct": "B"
+  },
+  {
+    "question": "Namaza başlamadan önce alınan tekbire ne denir?",
+    "A": "Tekbir-i evvel",
+    "B": "Açılış tekbiri",
+    "C": "İftitah tekbiri",
+    "D": "Ramazan tekbiri",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda ‘Allahu Ekber’ demek ne anlama gelir?",
+    "A": "Allah en büyüktür",
+    "B": "Allah şefkatlidir",
+    "C": "Allah affedicidir",
+    "D": "Allah birdir",
+    "correct": "A"
+  },
+  {
+    "question": "Farz namazı terk etmek ne anlama gelir?",
+    "A": "Önerilen ibadeti bırakmak",
+    "B": "Zorunlu ibadeti bırakmak",
+    "C": "Yardım etmek",
+    "D": "Gezmek",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda Arapça okunmasının nedeni nedir?",
+    "A": "Kolay olduğu için",
+    "B": "Kur’an’ın dili olduğu için",
+    "C": "Sesli olduğu için",
+    "D": "Tarihî olduğu için",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda dua ederken eller nereye kaldırılır?",
+    "A": "Arkaya",
+    "B": "Yana",
+    "C": "Göğüs hizasına",
+    "D": "Bel hizasına",
+    "correct": "C"
+  },
+  {
+    "question": "Zekât sözlükte ne demektir?",
+    "A": "Temizlik ve artma",
+    "B": "Açlık",
+    "C": "Seyahat",
+    "D": "Spor",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç kimlere farz değildir?",
+    "A": "Hasta olanlara",
+    "B": "Sağlıklı olanlara",
+    "C": "Ergen olanlara",
+    "D": "Akıllı olanlara",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıraat ne demektir?",
+    "A": "Kur’an okumak",
+    "B": "Selam vermek",
+    "C": "Ezan okumak",
+    "D": "Yürümek",
+    "correct": "A"
+  },
+  {
+    "question": "Taharet ne demektir?",
+    "A": "Temizlik",
+    "B": "Selam",
+    "C": "Dünya",
+    "D": "Bayram",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’ın kaç şartı vardır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Oruç tutmak neyi öğretir?",
+    "A": "Sabır ve paylaşım",
+    "B": "Hız",
+    "C": "Para kazanmak",
+    "D": "Fizik çalışmak",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi niyetle yapılır?",
+    "A": "Gösteriş",
+    "B": "Sadakat ve kulluk",
+    "C": "Eğlence",
+    "D": "Spor",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sure okumadan önce hangi dua okunur?",
+    "A": "Tekbir",
+    "B": "Fatiha",
+    "C": "Selam",
+    "D": "Tahiyyat",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı hangi zaman diliminde kılınır?",
+    "A": "Öğle",
+    "B": "İkindi",
+    "C": "Yatsıdan sonra",
+    "D": "Sabah",
+    "correct": "C"
+  },
+  {
+    "question": "Ramazan’da geceleri okunan hatme ne denir?",
+    "A": "Teravih",
+    "B": "Mukabele",
+    "C": "Sahur",
+    "D": "İftar",
+    "correct": "B"
+  },
+  {
+    "question": "Oruçlunun yanlışlıkla yemek yemesi ne olur?",
+    "A": "Oruç bozulur",
+    "B": "Oruç bozulmaz",
+    "C": "Günah olur",
+    "D": "Kefaret gerekir",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât vermek hangi günlerde geçerlidir?",
+    "A": "Sadece Ramazan",
+    "B": "Her zaman",
+    "C": "Sadece bayram",
+    "D": "Sadece cuma",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç açmaya ilk ne ile başlanır?",
+    "A": "Hurmayla",
+    "B": "Etle",
+    "C": "Pilavla",
+    "D": "Tatlıyla",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban hangi günlerde kesilebilir?",
+    "A": "Bayramın 1-2-3. günleri",
+    "B": "Bayramın 1. günü",
+    "C": "Ramazan sonunda",
+    "D": "Sadece pazarda",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıble ne tarafa doğrudur? (Türkiye için)",
+    "A": "Kuzey",
+    "B": "Güney",
+    "C": "Doğu",
+    "D": "Güneybatı",
+    "correct": "D"
+  },
+  {
+    "question": "Tespih çekmek ne tür ibadettir?",
+    "A": "Zikir",
+    "B": "Oruç",
+    "C": "Hac",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Günlük beş vakit namazdan biri hangisidir?",
+    "A": "Vitir",
+    "B": "Teravih",
+    "C": "İkindi",
+    "D": "Teheccüd",
+    "correct": "C"
+  },
+  {
+    "question": "Oruç tutmaya ne zaman başlanır?",
+    "A": "Öğle",
+    "B": "İmsak",
+    "C": "İftar",
+    "D": "Bayram",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda sağa ve sola selam verilirken ne söylenir?",
+    "A": "Elhamdülillah",
+    "B": "Es selamu aleyküm",
+    "C": "Allahu Ekber",
+    "D": "Amin",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutan kişi gündüz ne yapmaz?",
+    "A": "Yemek yer",
+    "B": "Uyur",
+    "C": "Misvak kullanır",
+    "D": "Dua eder",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken yüz kaç kez yıkanır? (sünnet)",
+    "A": "Bir kez",
+    "B": "Üç kez",
+    "C": "Dört kez",
+    "D": "Beş kez",
+    "correct": "B"
+  },
+  {
+    "question": "Kıble yönü hangi ibadette önemlidir?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekat",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Hacda ziyaret edilen yerlerden biri hangisidir?",
+    "A": "Arafat",
+    "B": "Nemrut",
+    "C": "Uludağ",
+    "D": "Erciyes",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât ne tür bir ibadettir?",
+    "A": "Mali ibadet",
+    "B": "Spor ibadeti",
+    "C": "Sözlü ibadet",
+    "D": "Sessiz ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı kaç rekattır?",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte ayaklar nereye kadar yıkanır?",
+    "A": "Dizlere",
+    "B": "Topuklara",
+    "C": "Ayak bileğine",
+    "D": "Parmak uçlarına",
+    "correct": "C"
+  },
+  {
+    "question": "Allah'a yaklaşmak için yapılan kesime ne denir?",
+    "A": "Sadaka",
+    "B": "Kurban",
+    "C": "Zekat",
+    "D": "Teravih",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban kesimi kim için yapılır?",
+    "A": "Gösteriş için",
+    "B": "Allah rızası için",
+    "C": "Şöhret için",
+    "D": "Kazanç için",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan gecelerinde yapılan tefekkür ve ibadete ne denir?",
+    "A": "Zikir",
+    "B": "Teravih",
+    "C": "Uyku",
+    "D": "Hac",
+    "correct": "B"
+  },
+  {
+    "question": "Sahur yapmak neden önemlidir?",
+    "A": "Gücü artırır",
+    "B": "Bereket için",
+    "C": "İftar için",
+    "D": "Şifre için",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç açmaya ne denir?",
+    "A": "Fitre",
+    "B": "İftar",
+    "C": "Zekat",
+    "D": "Hac",
+    "correct": "B"
+  },
+  {
+    "question": "Abdest bozan durumlardan biri hangisidir?",
+    "A": "Uyumak",
+    "B": "Dua etmek",
+    "C": "Gülmek",
+    "D": "Okumak",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma hutbesini kim okur?",
+    "A": "Müezzin",
+    "B": "İmam",
+    "C": "Muhtar",
+    "D": "Öğretmen",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda Fatiha’dan sonra ne okunur?",
+    "A": "Selam",
+    "B": "Kısa bir sure",
+    "C": "Bayram duası",
+    "D": "Ezan",
+    "correct": "B"
+  },
+  {
+    "question": "Tüm vücudu yıkamayla yapılan temizlik ne adla anılır?",
+    "A": "Teyemmüm",
+    "B": "Gusül",
+    "C": "Taharet",
+    "D": "Secde",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban kimlere dağıtılabilir?",
+    "A": "Fakirlere",
+    "B": "Zenginlere",
+    "C": "Sadece komşuya",
+    "D": "Sadece akrabaya",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz vaktinin geldiğini gösteren çağrı nedir?",
+    "A": "Anons",
+    "B": "Ses",
+    "C": "Ezan",
+    "D": "Işık",
+    "correct": "C"
+  },
+  {
+    "question": "Kamet ne zaman okunur?",
+    "A": "Namaz başlamadan hemen önce",
+    "B": "Bayramdan sonra",
+    "C": "Oruçtan sonra",
+    "D": "Hacdan önce",
+    "correct": "A"
+  },
+  {
+    "question": "Cami ne için kullanılan bir yerdir?",
+    "A": "Eğlence",
+    "B": "Alışveriş",
+    "C": "İbadet",
+    "D": "Yemek",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda son yapılan şey nedir?",
+    "A": "Secde",
+    "B": "Selam",
+    "C": "Rükû",
+    "D": "Tekbir",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan orucunun ilk günü neye göre belirlenir?",
+    "A": "Takvim",
+    "B": "Ayın görülmesi",
+    "C": "Rüzgar",
+    "D": "Güneş",
+    "correct": "B"
+  },
+  {
+    "question": "Zekâtın verilme vakti var mıdır?",
+    "A": "Hayır, her zaman verilebilir",
+    "B": "Sadece ramazanda",
+    "C": "Sadece bayramda",
+    "D": "Sadece cuma günü",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç tutmayan kişi ne yapmalıdır? (mazeretli ise)",
+    "A": "İftar vermeli",
+    "B": "Fidye vermeli",
+    "C": "Hac yapmalı",
+    "D": "Kurban kesmeli",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestin farzlarından biri yüzü yıkamaktır, diğeri nedir?",
+    "A": "Gözü yıkamak",
+    "B": "Başın mesh",
+    "C": "Saç taramak",
+    "D": "Gülmek",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutmak neyi kuvvetlendirir?",
+    "A": "Güven",
+    "B": "Sabır",
+    "C": "Yürüyüş",
+    "D": "Tatil",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban hangi niyetle kesilir?",
+    "A": "Allah rızası için",
+    "B": "Gösteriş için",
+    "C": "Puan için",
+    "D": "Eğlence için",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınmıyorsa hangi ibadet yapılabilir?",
+    "A": "Yıkanmak",
+    "B": "Teyemmüm",
+    "C": "Uyumak",
+    "D": "Gezmek",
+    "correct": "B"
+  },
+  {
+    "question": "İftar ne zaman yapılır?",
+    "A": "Sabah",
+    "B": "Akşam ezanında",
+    "C": "Öğle",
+    "D": "Gün ortasında",
+    "correct": "B"
+  },
+  {
+    "question": "Tahiyyat ne zaman okunur?",
+    "A": "Ayakta",
+    "B": "Rükûda",
+    "C": "Otururken",
+    "D": "Secdede",
+    "correct": "C"
+  },
+  {
+    "question": "Kabe hangi şehirde bulunur?",
+    "A": "Medine",
+    "B": "Mekke",
+    "C": "Kudüs",
+    "D": "İstanbul",
+    "correct": "B"
+  },
+  {
+    "question": "Fidye ne zaman verilir?",
+    "A": "Oruç tutamayanlar için",
+    "B": "Hacdan önce",
+    "C": "Bayramdan sonra",
+    "D": "Düğünde",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât verirken ne önemlidir?",
+    "A": "Gösteriş",
+    "B": "Niyet",
+    "C": "Reklam",
+    "D": "Tartışma",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan ayının sonunda kutlanan bayram hangisidir?",
+    "A": "Kurban Bayramı",
+    "B": "Ramazan Bayramı",
+    "C": "Yılbaşı",
+    "D": "Nevruz",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda okunması farz olan sure hangisidir?",
+    "A": "Fatiha",
+    "B": "İhlas",
+    "C": "Asr",
+    "D": "Nas",
+    "correct": "A"
+  },
+  {
+    "question": "Tüm Müslümanların bir araya geldiği ibadet çeşidi hangisidir?",
+    "A": "Hac",
+    "B": "Oruç",
+    "C": "Namaz",
+    "D": "Zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih namazı hangi ayda kılınır?",
+    "A": "Recep",
+    "B": "Ramazan",
+    "C": "Şaban",
+    "D": "Muharrem",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı kaç rekattır? (standart)",
+    "A": "1",
+    "B": "3",
+    "C": "5",
+    "D": "7",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestten sonra ne yapılması tavsiye edilir?",
+    "A": "Kur’an okumak",
+    "B": "Yemek",
+    "C": "Uyumak",
+    "D": "Spor",
+    "correct": "A"
+  },
+  {
+    "question": "Ezan ile kamet arasında ne yapılır?",
+    "A": "Namaz kılınır",
+    "B": "Hazırlık yapılır",
+    "C": "Kurban kesilir",
+    "D": "Uyunur",
+    "correct": "B"
+  },
+  {
+    "question": "İslam’da ibadet niçin yapılır?",
+    "A": "Allah’a kulluk için",
+    "B": "Para için",
+    "C": "Şöhret için",
+    "D": "Eğlence için",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin farzı olmayan seçenek hangisidir?",
+    "A": "Yüz yıkamak",
+    "B": "Kol yıkamak",
+    "C": "Saç taramak",
+    "D": "Baş mesh",
+    "correct": "C"
+  },
+  {
+    "question": "Bayram namazı hangi vakitte kılınır?",
+    "A": "Sabah",
+    "B": "Öğle",
+    "C": "İkindi",
+    "D": "Akşam",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazanın son on gecesinde ne aranır?",
+    "A": "Bayram",
+    "B": "Kadir Gecesi",
+    "C": "Teravih",
+    "D": "Kurban",
+    "correct": "B"
+  },
+  {
+    "question": "Camiye girerken söylenen duaya ne denir?",
+    "A": "Cami duası",
+    "B": "Selâm duası",
+    "C": "Teşekkür duası",
+    "D": "Giriş duası",
+    "correct": "D"
+  },
+  {
+    "question": "Kurban eti ne yapılır?",
+    "A": "Sadece sahibi yer",
+    "B": "Paylaştırılır",
+    "C": "Saklanır",
+    "D": "Satılır",
+    "correct": "B"
+  },
+  {
+    "question": "İmsak neyi ifade eder?",
+    "A": "Oruç başlangıcı",
+    "B": "Oruç bitişi",
+    "C": "Bayram zamanı",
+    "D": "Teravih vakti",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka neyi güçlendirir?",
+    "A": "Paylaşmayı",
+    "B": "Koşmayı",
+    "C": "Tartışmayı",
+    "D": "Rüzgarı",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda secde hangi pozisyonda yapılır?",
+    "A": "Otururken",
+    "B": "Ayakta",
+    "C": "Yere kapanarak",
+    "D": "Koşarak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda rükû yaparken ne söylenir?",
+    "A": "Amin",
+    "B": "Subhane Rabbiyel Azim",
+    "C": "Allahu Ekber",
+    "D": "Bismillah",
+    "correct": "B"
+  },
+  {
+    "question": "Sabah namazının sünneti kaç rekattır?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda secdeye giderken hangi tekbir alınır?",
+    "A": "Allahu Ekber",
+    "B": "Elhamdülillah",
+    "C": "Subhanallah",
+    "D": "Bismillah",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın sonunda verilen selam hangi tarafa verilir?",
+    "A": "Önce sağa sonra sola",
+    "B": "Önce sola sonra sağa",
+    "C": "Yukarıya",
+    "D": "Aşağıya",
+    "correct": "A"
+  },
+  {
+    "question": "Bir Müslümanın günlük kaç vakit namaz kılması farzdır?",
+    "A": "3",
+    "B": "4",
+    "C": "5",
+    "D": "6",
+    "correct": "C"
+  },
+  {
+    "question": "Abdest alırken ağıza su vermeye ne denir?",
+    "A": "Mazmaza",
+    "B": "İstinşak",
+    "C": "Meshetmek",
+    "D": "Taharet",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte burna su vermeye ne denir?",
+    "A": "Mazmaza",
+    "B": "İstinşak",
+    "C": "Teyemmüm",
+    "D": "Tahiyyat",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutan kişi sabah ne yapar?",
+    "A": "Sahur yapar",
+    "B": "İftar yapar",
+    "C": "Kurban keser",
+    "D": "Fitre dağıtır",
+    "correct": "A"
+  },
+  {
+    "question": "İftar ne zaman yapılır?",
+    "A": "İmsakta",
+    "B": "Akşam ezanında",
+    "C": "Öğle ezanında",
+    "D": "Gece yarısı",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç hangi aylarda tutulur?",
+    "A": "Ramazan",
+    "B": "Muharrem",
+    "C": "Şaban",
+    "D": "Recep",
+    "correct": "A"
+  },
+  {
+    "question": "Camide namazı kim yönetir?",
+    "A": "Müezzin",
+    "B": "İmam",
+    "C": "Görevli",
+    "D": "Muhtar",
+    "correct": "B"
+  },
+  {
+    "question": "Ezanı kim okur?",
+    "A": "İmam",
+    "B": "Müezzin",
+    "C": "Hatip",
+    "D": "Öğretmen",
+    "correct": "B"
+  },
+  {
+    "question": "Bayram namazında hutbe okunur mu?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Bazen",
+    "D": "Sadece Ramazan’da",
+    "correct": "A"
+  },
+  {
+    "question": "Kıble yönü nereye doğrudur?",
+    "A": "Kabe’ye",
+    "B": "Medine’ye",
+    "C": "Kudüs’e",
+    "D": "Dağa",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda zamm-ı sure ne demektir?",
+    "A": "Uzun sure",
+    "B": "Fatiha’dan sonra okunan kısa sure",
+    "C": "Ezan",
+    "D": "Selam",
+    "correct": "B"
+  },
+  {
+    "question": "Teravih namazı kaç rekat kılınabilir?",
+    "A": "12",
+    "B": "20",
+    "C": "8",
+    "D": "Hepsi olabilir",
+    "correct": "D"
+  },
+  {
+    "question": "Hac ibadeti hangi aylarda yapılır?",
+    "A": "Zilhicce",
+    "B": "Ramazan",
+    "C": "Muharrem",
+    "D": "Şaban",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da sadakanın amacı nedir?",
+    "A": "Paylaşım ve yardım",
+    "B": "Alışveriş",
+    "C": "Spor",
+    "D": "Tatlı yemek",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti nasıl değerlendirilir?",
+    "A": "Paylaştırılır",
+    "B": "Sadece satılır",
+    "C": "Kendi yenir",
+    "D": "Denize atılır",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayının son gecelerinde aranan gece hangisidir?",
+    "A": "Berat",
+    "B": "Kadir",
+    "C": "Mirac",
+    "D": "Mevlid",
+    "correct": "B"
+  },
+  {
+    "question": "Fitre ne zaman verilir?",
+    "A": "Ramazan Bayramı öncesi",
+    "B": "Kurban Bayramı öncesi",
+    "C": "Teravih öncesi",
+    "D": "Sahurda",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda Fatiha neden önemlidir?",
+    "A": "Farz olduğu için",
+    "B": "Uzun olduğu için",
+    "C": "Kandil olduğu için",
+    "D": "Dua olduğu için",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan’da gece yapılan toplu Kur’an okumaya ne denir?",
+    "A": "Mukabele",
+    "B": "Mevlid",
+    "C": "Vaaz",
+    "D": "Ders",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin farzlarından biri değildir?",
+    "A": "Yüz yıkamak",
+    "B": "Baş mesh",
+    "C": "Misvak kullanmak",
+    "D": "Kollar yıkamak",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda kaç rükû vardır? (rekât)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kaç secde vardır? (rekât)",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "B"
+  },
+  {
+    "question": "İftar açılırken en çok ne tavsiye edilir?",
+    "A": "Hurma",
+    "B": "Et",
+    "C": "Bal",
+    "D": "Pilav",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı nerede kılınır?",
+    "A": "Cemaatle camide",
+    "B": "Evde tek başına",
+    "C": "Bahçede",
+    "D": "Pazarda",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı hangi namazdan sonra kılınır?",
+    "A": "İkindi",
+    "B": "Yatsı",
+    "C": "Cuma",
+    "D": "Sabah",
+    "correct": "B"
+  },
+  {
+    "question": "Teyemmüm hangi durum için yapılır?",
+    "A": "Su bulunamadığında",
+    "B": "Ev dağınıksa",
+    "C": "Telefon yoksa",
+    "D": "Kalem yoksa",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç tutan kişi ağzını nasıl temizleyebilir?",
+    "A": "Misvak ile",
+    "B": "Yemekle",
+    "C": "Su içerek",
+    "D": "Sirke ile",
+    "correct": "A"
+  },
+  {
+    "question": "Hanefi mezhebine göre vitir namazı hükmü nedir?",
+    "A": "Mekruh",
+    "B": "Vacip",
+    "C": "Sünnet",
+    "D": "Mubah",
+    "correct": "B"
+  },
+  {
+    "question": "Hac yapmak hangi şart yerine geldiğinde farz olur?",
+    "A": "Gücü yettiğinde",
+    "B": "Davet geldiğinde",
+    "C": "Arkadaşla gittiğinde",
+    "D": "Yazın olduğunda",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât vermek neyi temizler?",
+    "A": "Mali durumu",
+    "B": "Günlük kıyafeti",
+    "C": "Evi",
+    "D": "Defteri",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka veren kişi ne kazanır?",
+    "A": "Sevap",
+    "B": "Para",
+    "C": "Spor",
+    "D": "Yemek",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı ne zaman kılınır?",
+    "A": "Güneş doğduktan sonra",
+    "B": "İmsakta",
+    "C": "Gece",
+    "D": "Akşam",
+    "correct": "A"
+  },
+  {
+    "question": "Oruçluyken istemeden yemek yenirse ne olur?",
+    "A": "Oruç bozulmaz",
+    "B": "Kefaret gerekir",
+    "C": "Sadaka gerekir",
+    "D": "Hac gerekir",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest hangi ibadet için şarttır?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekat",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih namazı nerede kılınır?",
+    "A": "Cami veya evde",
+    "B": "Sadece camide",
+    "C": "Sadece evde",
+    "D": "Sokakta",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi bayramla ilgilidir?",
+    "A": "Kurban Bayramı",
+    "B": "Ramazan Bayramı",
+    "C": "Nevruz",
+    "D": "Tatil",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda eller nereye kaldırılır?",
+    "A": "Göğüs hizasına",
+    "B": "Baş üstüne",
+    "C": "Bel hizasına",
+    "D": "Ayak hizasına",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayının 30 gün olması neye göre belirlenir?",
+    "A": "Ayın durumuna",
+    "B": "Güneşe",
+    "C": "Rüzgara",
+    "D": "Takvime",
+    "correct": "A"
+  },
+  {
+    "question": "Camide saflar ne için düzenlenir?",
+    "A": "Düzenli ibadet için",
+    "B": "Yemek için",
+    "C": "Kütüphane için",
+    "D": "Toplantı için",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere verilmez?",
+    "A": "Fakirlere",
+    "B": "Zenginlere",
+    "C": "Borçlulara",
+    "D": "Yolda kalmışa",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda secde neyi ifade eder?",
+    "A": "Allah’a teslimiyet",
+    "B": "Bayram",
+    "C": "Oruç",
+    "D": "Zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Müezzinin ezandan sonra okuduğu çağrıya ne denir?",
+    "A": "Kamet",
+    "B": "Hutbe",
+    "C": "Vaaz",
+    "D": "Mevlid",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı haftanın hangi günüdür?",
+    "A": "Cuma",
+    "B": "Perşembe",
+    "C": "Pazartesi",
+    "D": "Pazar",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan’da en çok hangi ibadete dikkat edilir?",
+    "A": "Oruç",
+    "B": "Hac",
+    "C": "Kurban",
+    "D": "Spor",
+    "correct": "A"
+  },
+  {
+    "question": "Namaza başlarken alınan ilk tekbirin adı nedir?",
+    "A": "Tekbir-i Şerif",
+    "B": "İftitah Tekbiri",
+    "C": "Dua Tekbiri",
+    "D": "Amin Tekbiri",
+    "correct": "B"
+  },
+  {
+    "question": "Abdest alırken niyet ne zaman edilir?",
+    "A": "Sonda",
+    "B": "Başlamadan önce",
+    "C": "Rükûda",
+    "D": "Secdede",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç hangi vakitte başlar?",
+    "A": "İftar",
+    "B": "İmsak",
+    "C": "Akşam",
+    "D": "Sabah",
+    "correct": "B"
+  },
+  {
+    "question": "Namazda ayakta durmaya ne isim verilir?",
+    "A": "Kıyam",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Kade",
+    "correct": "A"
+  },
+  {
+    "question": "Kade ne demektir?",
+    "A": "Oturmak",
+    "B": "Yürümek",
+    "C": "Kıble",
+    "D": "Hutbe",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan’dan sonra tutulan oruçlara ne denir?",
+    "A": "Arefe orucu",
+    "B": "Şevval orucu",
+    "C": "Berat orucu",
+    "D": "Kadir orucu",
+    "correct": "B"
+  },
+  {
+    "question": "Zekât hangi mallarda geçerlidir?",
+    "A": "Para ve mal",
+    "B": "Sadece ev",
+    "C": "Ulaşım araçları",
+    "D": "Karma eşyalar",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka hangi niyetle verilir?",
+    "A": "Sevap kazanmak",
+    "B": "Gösteriş",
+    "C": "Tatil yapmak",
+    "D": "Spor yapmak",
+    "correct": "A"
+  },
+  {
+    "question": "Hac sırasında Arafat’ta durmaya ne denir?",
+    "A": "İstikamet",
+    "B": "Vakıfe",
+    "C": "Tekbir",
+    "D": "Rükûn",
+    "correct": "B"
+  },
+  {
+    "question": "Ramazan Bayramı kaç gündür?",
+    "A": "1",
+    "B": "2",
+    "C": "3",
+    "D": "4",
+    "correct": "C"
+  },
+  {
+    "question": "Kurban Bayramı kaç gündür?",
+    "A": "1",
+    "B": "2",
+    "C": "4",
+    "D": "5",
+    "correct": "C"
+  },
+  {
+    "question": "Namazda başın öne eğilerek yapılan rükün hangisidir?",
+    "A": "Secde",
+    "B": "Rükû",
+    "C": "Kıyam",
+    "D": "Selam",
+    "correct": "B"
+  },
+  {
+    "question": "Oruç tutan kişi sabah ne yapar?",
+    "A": "Sahur",
+    "B": "İftar",
+    "C": "Hac",
+    "D": "Kurban",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih namazı ne zaman kılınır?",
+    "A": "Ramazan geceleri",
+    "B": "Bayram sabahı",
+    "C": "Cuma günü",
+    "D": "Recep ayında",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda secdede ne söylenir?",
+    "A": "Subhane Rabbiyel Ala",
+    "B": "Elhamdülillah",
+    "C": "Bismillah",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte baş neyle mesh edilir?",
+    "A": "Kuru elle",
+    "B": "Islak elle",
+    "C": "Kumaşla",
+    "D": "Taşla",
+    "correct": "B"
+  },
+  {
+    "question": "Vitir namazı hangi vakit ile bağlantılıdır?",
+    "A": "Yatsı sonrası",
+    "B": "Sabah sonrası",
+    "C": "Öğle sonrası",
+    "D": "Akşam sonrası",
+    "correct": "A"
+  },
+  {
+    "question": "Mukabele nedir?",
+    "A": "Kur’an’ı karşılıklı okumak",
+    "B": "Teravih",
+    "C": "Secde",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin sünnetlerinden biri hangisidir?",
+    "A": "Misvak kullanmak",
+    "B": "Ezan okumak",
+    "C": "Secde yapmak",
+    "D": "Gülmek",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda okunan Fatiha hangi bölümde okunur?",
+    "A": "Ayakta",
+    "B": "Otururken",
+    "C": "Rükûda",
+    "D": "Secdede",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât ne zaman farz olur?",
+    "A": "Zengin olunca",
+    "B": "Hacca gidince",
+    "C": "Uyuyunca",
+    "D": "Seyahat edince",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan’da fakirlere verilen yardım nedir?",
+    "A": "Fitre",
+    "B": "Sadaka",
+    "C": "Kurban",
+    "D": "Zekat",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda en uzun süre nerede beklenir?",
+    "A": "Kıyam",
+    "B": "Secde",
+    "C": "Rükû",
+    "D": "Selam",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınırken en son hangi uzuv yıkanır?",
+    "A": "Kol",
+    "B": "Ayak",
+    "C": "Yüz",
+    "D": "Baş",
+    "correct": "B"
+  },
+  {
+    "question": "Farz namazı kim kılmak zorundadır?",
+    "A": "Akıllı ve ergen Müslüman",
+    "B": "Sadece yaşlılar",
+    "C": "Çocuklar",
+    "D": "Yolcular",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur vakti ne zaman biter?",
+    "A": "İmsakta",
+    "B": "Akşamda",
+    "C": "Öğlende",
+    "D": "İkindide",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti dağıtımında amaç nedir?",
+    "A": "Paylaşmak",
+    "B": "Satmak",
+    "C": "Toplamak",
+    "D": "Gizlemek",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda son oturuşa ne denir?",
+    "A": "Son kade",
+    "B": "Son rükû",
+    "C": "Son secde",
+    "D": "Son tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Hac kimlere farzdır?",
+    "A": "Gücü yetenlere",
+    "B": "Tüm çocuklara",
+    "C": "Seyahat edenlere",
+    "D": "Tatilcilere",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç hangi tür ibadettir?",
+    "A": "Bedeni ibadet",
+    "B": "Mali ibadet",
+    "C": "Sesli ibadet",
+    "D": "Sosyal ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât hangi tür ibadet kategorisine girer?",
+    "A": "Mali ibadet",
+    "B": "Bedeni ibadet",
+    "C": "Sözlü ibadet",
+    "D": "Gizli ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "İslam'ın ilk ibadet şartı hangisidir?",
+    "A": "Kelime-i Şehadet",
+    "B": "Namaz",
+    "C": "Oruç",
+    "D": "Hac",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz kılarken nereye doğru dönülür?",
+    "A": "Kabe",
+    "B": "Dağ",
+    "C": "Güneş",
+    "D": "Ay",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmümde hangi uzuvlara mesh edilir?",
+    "A": "Yüz ve kollar",
+    "B": "Ayaklar",
+    "C": "Bel",
+    "D": "Boyun",
+    "correct": "A"
+  },
+  {
+    "question": "Arefe günü hangi oruç tavsiye edilir?",
+    "A": "Arefe orucu",
+    "B": "Kadir orucu",
+    "C": "Hac orucu",
+    "D": "Cuma orucu",
+    "correct": "A"
+  },
+  {
+    "question": "Namazdan çıkarken ne yapılır?",
+    "A": "Selam verilir",
+    "B": "Kade yapılır",
+    "C": "Tekbir alınır",
+    "D": "Rükû yapılır",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayının ortasında hangi ibadete daha çok önem verilir?",
+    "A": "Teravih ve mukabele",
+    "B": "Hac",
+    "C": "Yürüyüş",
+    "D": "Resim",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da ibadetin amacı nedir?",
+    "A": "Allah’a kulluk",
+    "B": "Prestij",
+    "C": "Senet",
+    "D": "Tatil",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz kılmak için gerekli olmayan hangisidir?",
+    "A": "Saç taramak",
+    "B": "Abdest",
+    "C": "Kıble",
+    "D": "Setr-i avret",
+    "correct": "A"
+  },
+  {
+    "question": "Zekâtın verilme şekli nasıldır?",
+    "A": "Gönüllü ve gizli",
+    "B": "Zorla",
+    "C": "Sesli",
+    "D": "Toplu",
+    "correct": "A"
+  },
+  {
+    "question": "Kadir gecesinin hangi ayda olduğu kesin olarak bilinir?",
+    "A": "Ramazan",
+    "B": "Recep",
+    "C": "Şaban",
+    "D": "Zilhicce",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih namazı kaç gece kılınır?",
+    "A": "Ramazan boyunca",
+    "B": "Bayramda",
+    "C": "Arefede",
+    "D": "Kandilde",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazında kaç tekbir alınır? (Hanefi)",
+    "A": "6",
+    "B": "8",
+    "C": "10",
+    "D": "2",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka-i fıtr ne zaman vacip olur?",
+    "A": "Ramazan sonu",
+    "B": "Hac zamanı",
+    "C": "Bayramdan sonra",
+    "D": "Teravihten sonra",
+    "correct": "A"
+  },
+  {
+    "question": "Arefe günü hangi ibadet yapılır?",
+    "A": "Arafat’ta durmak",
+    "B": "Bayram",
+    "C": "Teravih",
+    "D": "Kurban",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi maddeden yapılır?",
+    "A": "Temiz toprak veya taş",
+    "B": "Su",
+    "C": "Yağ",
+    "D": "Otlardan",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât verirken ilk düşünülmesi gereken kimdir?",
+    "A": "Gerçek ihtiyaç sahipleri",
+    "B": "Zenginler",
+    "C": "Arkadaşlar",
+    "D": "Ünlüler",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kaç kez selam verilir?",
+    "A": "1 kez",
+    "B": "2 kez",
+    "C": "3 kez",
+    "D": "4 kez",
+    "correct": "B"
+  },
+  {
+    "question": "Abdestte ağıza su vermek neden yapılır?",
+    "A": "Temizlik için",
+    "B": "Güzellik için",
+    "C": "Ses için",
+    "D": "Alışkanlık",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında hangi ibadete daha fazla önem verilir?",
+    "A": "Teravih ve oruç",
+    "B": "Cuma",
+    "C": "Kurban",
+    "D": "Seyahat",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmümde önce nereye mesh edilir?",
+    "A": "Kol",
+    "B": "Yüz",
+    "C": "Ayak",
+    "D": "Baş",
+    "correct": "B"
+  },
+  {
+    "question": "Kurban Bayramı’nda hangi ibadet yapılır?",
+    "A": "Kurban kesmek",
+    "B": "Oruç",
+    "C": "Mukabele",
+    "D": "Teravih",
+    "correct": "A"
+  },
+  {
+    "question": "Kabe’ye yönelmeye ne denir?",
+    "A": "Kıble",
+    "B": "Kıraat",
+    "C": "Secde",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "İftar neyi ifade eder?",
+    "A": "Oruç açma vakti",
+    "B": "Sahur vakti",
+    "C": "Bayram vakti",
+    "D": "Cuma vakti",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükû hangi durumda yapılır?",
+    "A": "Ayakta iken",
+    "B": "Otururken",
+    "C": "Secdede",
+    "D": "Selamda",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka vermek neden önemlidir?",
+    "A": "Paylaşmayı teşvik eder",
+    "B": "Prestij sağlar",
+    "C": "Yarış kazandırır",
+    "D": "Spor için",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda okunması farz olan sure hangisidir?",
+    "A": "Fatiha",
+    "B": "İhlas",
+    "C": "Nas",
+    "D": "Asr",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur ne zaman yapılır?",
+    "A": "İmsaktan önce",
+    "B": "İftarda",
+    "C": "Öğle vakti",
+    "D": "Bayramda",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazında okunan konuşma ne adla anılır?",
+    "A": "Hutbe",
+    "B": "Kamet",
+    "C": "Dua",
+    "D": "Tefekkür",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti nasıl değerlendirilir?",
+    "A": "Paylaştırılır",
+    "B": "Satılır",
+    "C": "Gizlenir",
+    "D": "Atılır",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında yapılan uzun gece ibadetine ne denir?",
+    "A": "Teravih",
+    "B": "Kurban",
+    "C": "Cuma",
+    "D": "Arefe",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest almadan hangi ibadet yapılamaz?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekat",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Hac hangi ayda yapılır?",
+    "A": "Zilhicce",
+    "B": "Ramazan",
+    "C": "Recep",
+    "D": "Şaban",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan Bayramı hangi gün başlar?",
+    "A": "Arefe’den sonraki gün",
+    "B": "Arefe günü",
+    "C": "Cuma günü",
+    "D": "Salı günü",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı hangi vakitte kılınır?",
+    "A": "Yatsı sonrası",
+    "B": "Öğle sonrası",
+    "C": "İkindi sonrası",
+    "D": "Sabah sonrası",
+    "correct": "A"
+  },
+  {
+    "question": "Zekat vermek hangi ibadet kategorisine girer?",
+    "A": "Mali ibadet",
+    "B": "Bedeni ibadet",
+    "C": "Sözlü ibadet",
+    "D": "Şekil ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında Kur’an’ı toplu okumaya ne denir?",
+    "A": "Mukabele",
+    "B": "Secde",
+    "C": "Tevaf",
+    "D": "Vakıfe",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi durumda yapılır?",
+    "A": "Su bulunmuyorsa",
+    "B": "Çok sıcaksa",
+    "C": "Acıkınca",
+    "D": "Uyuyunca",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin farzlarından biri değildir?",
+    "A": "Misvak",
+    "B": "Yüz yıkamak",
+    "C": "Kol yıkamak",
+    "D": "Baş mesh",
+    "correct": "A"
+  },
+  {
+    "question": "İftar açarken en çok ne tavsiye edilir?",
+    "A": "Hurma",
+    "B": "Tatlı",
+    "C": "Pilav",
+    "D": "Çay",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz sonunda ne yapılır?",
+    "A": "Selam verilir",
+    "B": "Tekbir alınır",
+    "C": "Hutbe okunur",
+    "D": "Dua edilir",
+    "correct": "A"
+  },
+  {
+    "question": "Kıyam ne demektir?",
+    "A": "Ayakta durmak",
+    "B": "Oturmak",
+    "C": "Eğilmek",
+    "D": "Selam",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere verilmez?",
+    "A": "Zenginlere",
+    "B": "Fakirlere",
+    "C": "Borçlulara",
+    "D": "Yolda kalmışa",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi ibadettir?",
+    "A": "Allah’a yaklaşma",
+    "B": "Cuma",
+    "C": "Teravih",
+    "D": "Seyahat",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur neden yapılır?",
+    "A": "Oruça hazırlanmak için",
+    "B": "Bayram için",
+    "C": "Kurban için",
+    "D": "Spor için",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda dua hangi bölümde yapılır?",
+    "A": "Son oturuş",
+    "B": "Secde",
+    "C": "Rükû",
+    "D": "Ayakta",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı nerede kılınır?",
+    "A": "Cemaatle camide",
+    "B": "Evde",
+    "C": "Ormanda",
+    "D": "Yolda",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre hangi amaçla verilir?",
+    "A": "Fakirlere yardım",
+    "B": "Seyahat",
+    "C": "Kurban",
+    "D": "Oruç",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmümde niyet ne zaman yapılır?",
+    "A": "Başta",
+    "B": "Sonda",
+    "C": "Secdede",
+    "D": "Rükûda",
+    "correct": "A"
+  },
+  {
+    "question": "Arefe günü hangi ibadet yapılır?",
+    "A": "Arafat’ta durmak",
+    "B": "Bayram",
+    "C": "Teravih",
+    "D": "Hac tavafı",
+    "correct": "A"
+  },
+  {
+    "question": "Zilhicce ayında yapılan ibadet hangisidir?",
+    "A": "Hac",
+    "B": "Oruç",
+    "C": "Teravih",
+    "D": "Fitre",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka veren kişi ne kazanır?",
+    "A": "Sevap",
+    "B": "Para",
+    "C": "Eşya",
+    "D": "Spor",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda selam kaç tarafa verilir?",
+    "A": "2",
+    "B": "1",
+    "C": "3",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Fidye hangi durumda verilir?",
+    "A": "Oruç tutamayanlar için",
+    "B": "Kurban için",
+    "C": "Hac için",
+    "D": "Cuma için",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan’da gece yapılan ibadetin adı nedir?",
+    "A": "Teravih",
+    "B": "Mukabele",
+    "C": "Secde",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest sonunda yapılması tavsiye edilen nedir?",
+    "A": "Dua",
+    "B": "Yemek",
+    "C": "Uyunmak",
+    "D": "Seyahat",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ayakta Kur’an okumaya ne denir?",
+    "A": "Kıraat",
+    "B": "Kıble",
+    "C": "Kade",
+    "D": "Secde",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât vermek hangi duyguyu güçlendirir?",
+    "A": "Paylaşma",
+    "B": "Sinir",
+    "C": "Öfke",
+    "D": "Yarış",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesilen hayvanlara ne denir?",
+    "A": "Kurbanlık",
+    "B": "Kedi",
+    "C": "Kuş",
+    "D": "At",
+    "correct": "A"
+  },
+  {
+    "question": "İslam’da ibadetin özü nedir?",
+    "A": "Niyet",
+    "B": "Ses",
+    "C": "Hız",
+    "D": "Şekil",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan Bayramı’nın ilk günü hangi gündür?",
+    "A": "Şeker Bayramı günü",
+    "B": "Arefe günü",
+    "C": "Kurban günü",
+    "D": "Cuma günü",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm için gerekli madde nedir?",
+    "A": "Temiz toprak",
+    "B": "Su",
+    "C": "Tahta",
+    "D": "Demir",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ilk nereye bakılır?",
+    "A": "Secde yerine",
+    "B": "Sağa",
+    "C": "Sola",
+    "D": "Göğe",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınca hangi ibadet yapılabilir?",
+    "A": "Namaz",
+    "B": "Alışveriş",
+    "C": "Spor",
+    "D": "Yemek",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda kıyam neyi ifade eder?",
+    "A": "Ayakta durmak",
+    "B": "Oturmak",
+    "C": "Secde",
+    "D": "Rükû",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç açıldıktan sonra yapılan ilk yemek ne adla anılır?",
+    "A": "İftar",
+    "B": "Sahur",
+    "C": "Fitre",
+    "D": "Zekât",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte farz olan yıkamalar kaç tanedir?",
+    "A": "4",
+    "B": "2",
+    "C": "3",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm ne ile yapılır?",
+    "A": "Temiz toprak",
+    "B": "Su",
+    "C": "Yağ",
+    "D": "Sabun",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükûdan sonra ne yapılır?",
+    "A": "Secdeye gidilir",
+    "B": "Oturulur",
+    "C": "Selam verilir",
+    "D": "Niyet edilir",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât vermek hangi değeri güçlendirir?",
+    "A": "İyilik ve paylaşma",
+    "B": "Tartışma",
+    "C": "Yarışma",
+    "D": "Öfke",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur ne için yapılır?",
+    "A": "Gün boyu oruç tutabilmek için",
+    "B": "Bayram için",
+    "C": "Spor için",
+    "D": "Kurban için",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken ilk yapılması gereken nedir?",
+    "A": "Niyet",
+    "B": "Secde",
+    "C": "Selam",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı hangi ibadetle ilgilidir?",
+    "A": "Gece ibadeti",
+    "B": "Cuma",
+    "C": "Hac",
+    "D": "Kurban",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında çoğalan ibadet türü nedir?",
+    "A": "Oruç",
+    "B": "Hac",
+    "C": "Kurban",
+    "D": "Seyahat",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda eller nereye kaldırılır?",
+    "A": "Göğüs hizasına",
+    "B": "Ayak hizasına",
+    "C": "Baş üstüne",
+    "D": "Bel hizasına",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı hangi vakitte kılınır?",
+    "A": "Öğle vakti",
+    "B": "Sabah vakti",
+    "C": "Akşam vakti",
+    "D": "İkindi vakti",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti kime dağıtılabilir?",
+    "A": "Fakirlere",
+    "B": "Evcil hayvana",
+    "C": "Sadece komşuya",
+    "D": "Zengine",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç kimlere farzdır?",
+    "A": "Akıllı ve ergen Müslümanlara",
+    "B": "Çocuklara",
+    "C": "Hasta olmayan gayrimüslimlere",
+    "D": "Misafirlere",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre hangi zamanda verilir?",
+    "A": "Ramazan sonunda",
+    "B": "Kurban bayramında",
+    "C": "Hacda",
+    "D": "Sahurda",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda selam ne ifade eder?",
+    "A": "Namazın bittiğini",
+    "B": "Namazın başladığını",
+    "C": "Rükû yapıldığını",
+    "D": "Dua olduğunu",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan'da teravih namazı nerede kılınabilir?",
+    "A": "Cami veya evde",
+    "B": "Sadece camide",
+    "C": "Sadece evde",
+    "D": "Yolda",
+    "correct": "A"
+  },
+  {
+    "question": "İftar açılırken ilk ne yapılır?",
+    "A": "Bismillah denir",
+    "B": "Tekbir alınır",
+    "C": "Namaz kılınır",
+    "D": "Ezan okunur",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin sünnetlerinden biri hangisidir?",
+    "A": "Üç kere yıkamak",
+    "B": "Bir kere yıkamak",
+    "C": "Sesli okumak",
+    "D": "Göz yıkamak",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere öncelikli verilir?",
+    "A": "Yakın çevre ve fakirlere",
+    "B": "Zenginlere",
+    "C": "Sadece tanıdıklara",
+    "D": "Herkese eşit",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma hutbesini kim okur?",
+    "A": "İmam",
+    "B": "Müezzin",
+    "C": "Öğretmen",
+    "D": "Muhtar",
+    "correct": "A"
+  },
+  {
+    "question": "Kıble hangi ibadette zorunludur?",
+    "A": "Namaz",
+    "B": "Oruç",
+    "C": "Zekât",
+    "D": "Sadaka",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmümde önce hangi uzuv temizlenir?",
+    "A": "Yüz",
+    "B": "Ayak",
+    "C": "Bacak",
+    "D": "Göğüs",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda ayakta okunan bölüme ne denir?",
+    "A": "Kıraat",
+    "B": "Tahiyyat",
+    "C": "Tekbir",
+    "D": "Hutbe",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayının son on günü neden önemlidir?",
+    "A": "Kadir gecesi için",
+    "B": "Kurban için",
+    "C": "Hac için",
+    "D": "Cuma için",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınırken başa ne yapılır?",
+    "A": "Mesh edilir",
+    "B": "Yıkanır",
+    "C": "Kurulanır",
+    "D": "Yağlanır",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı hangi vakitte kılınır?",
+    "A": "Güneş doğduktan sonra",
+    "B": "İmsakta",
+    "C": "İkindide",
+    "D": "Gece",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka neyi artırır?",
+    "A": "Sevabı",
+    "B": "Kavgayı",
+    "C": "Hızı",
+    "D": "Sesi",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda hangi sure kesin okunur?",
+    "A": "Fatiha",
+    "B": "İhlas",
+    "C": "Asr",
+    "D": "Nas",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi bayrama aittir?",
+    "A": "Kurban Bayramı",
+    "B": "Ramazan Bayramı",
+    "C": "Cuma",
+    "D": "Arefe",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç hangi ibadet türüdür?",
+    "A": "Bedeni ibadet",
+    "B": "Mali ibadet",
+    "C": "Dil ibadeti",
+    "D": "Sosyal ibadet",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest bozulunca ne yapılmalıdır?",
+    "A": "Yeniden abdest alınır",
+    "B": "Dua edilir",
+    "C": "Hac yapılır",
+    "D": "Sadaka verilir",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur yapmak sünnet midir?",
+    "A": "Evet",
+    "B": "Hayır",
+    "C": "Bazen",
+    "D": "Cuma günü",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı kaç rekattır? (Hanefi)",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "1",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz sonunda eller nereye kaldırılır?",
+    "A": "Dua için göğüs hizasına",
+    "B": "Bel hizasına",
+    "C": "Ayak hizasına",
+    "D": "Baş hizasına",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre kimler içindir?",
+    "A": "Yoksullara yardım",
+    "B": "Zenginlere hediye",
+    "C": "Çocuklara ikram",
+    "D": "Misafire ikram",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan gecelerinde yapılan özel namaza ne denir?",
+    "A": "Teravih",
+    "B": "Cuma",
+    "C": "Bayram",
+    "D": "Hac",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınca ne yapmak kolaylaşır?",
+    "A": "Namaz kılmak",
+    "B": "Spor yapmak",
+    "C": "Yemek yemek",
+    "D": "Sohbet",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma namazı kaç rekattır? (Farz)",
+    "A": "2",
+    "B": "3",
+    "C": "4",
+    "D": "5",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi ibadet için kullanılır?",
+    "A": "Namaz",
+    "B": "Seyahat",
+    "C": "Bayram",
+    "D": "Kurban",
+    "correct": "A"
+  },
+  {
+    "question": "Zekâtın sözlük anlamı nedir?",
+    "A": "Temizlik ve artma",
+    "B": "Seyahat",
+    "C": "Spor",
+    "D": "Yarış",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban etinin üçe bölünmesinin amacı nedir?",
+    "A": "Aile, akraba ve fakir paylaşımı",
+    "B": "Satmak",
+    "C": "Saklamak",
+    "D": "Gösteriş",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda hangi dua otururken okunur?",
+    "A": "Tahiyyat",
+    "B": "İhlas",
+    "C": "Asr",
+    "D": "Felak",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayı hangi ibadetin farz olduğu aydır?",
+    "A": "Oruç",
+    "B": "Hac",
+    "C": "Kurban",
+    "D": "Şükür",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest nerelerde alınabilir?",
+    "A": "Temiz olan her yerde",
+    "B": "Sadece camide",
+    "C": "Sadece evde",
+    "D": "Sadece banyoda",
+    "correct": "A"
+  },
+  {
+    "question": "Kadir Gecesi hangi ayda aranır?",
+    "A": "Ramazan",
+    "B": "Muharrem",
+    "C": "Şaban",
+    "D": "Recep",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka vermeyi teşvik eden unsur nedir?",
+    "A": "Sevap ve paylaşma",
+    "B": "Yarış",
+    "C": "Gösteriş",
+    "D": "Sosyal medya",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükûdan kalkınca hangi söz söylenir?",
+    "A": "Semiallahu limen hamideh",
+    "B": "Subhane Rabbiyel Ala",
+    "C": "Amin",
+    "D": "Bismillah",
+    "correct": "A"
+  },
+  {
+    "question": "İmsak neyi ifade eder?",
+    "A": "Oruç başlangıcını",
+    "B": "Oruç bitişini",
+    "C": "Bayram zamanını",
+    "D": "Cuma vaktini",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi durumda tercih edilir?",
+    "A": "Su bulunmadığında",
+    "B": "Yorgunken",
+    "C": "Tokken",
+    "D": "Sıcakken",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında yapılan gönüllü yardıma ne denir?",
+    "A": "Fitre",
+    "B": "Kurban",
+    "C": "Seyahat",
+    "D": "Tavaf",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken yüz kaç kez yıkanır? (Sünnet)",
+    "A": "Üç kez",
+    "B": "Bir kez",
+    "C": "İki kez",
+    "D": "Dört kez",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda secdeye giderken hangi tekbir alınır?",
+    "A": "Allahu Ekber",
+    "B": "Amin",
+    "C": "Bismillah",
+    "D": "Subhanallah",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât neyi amaçlar?",
+    "A": "Malların temizlenmesini",
+    "B": "Sesin yükselmesini",
+    "C": "Spor yapmayı",
+    "D": "Seyahat etmeyi",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti üçe bölünürken bir parça kime ayrılır?",
+    "A": "Fakirlere",
+    "B": "Kasaba",
+    "C": "Sadece aileye",
+    "D": "Satıcıya",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih namazı hangi ayda kılınır?",
+    "A": "Ramazan",
+    "B": "Şaban",
+    "C": "Recep",
+    "D": "Muharrem",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda oturarak okunan dua hangisidir?",
+    "A": "Tahiyyat",
+    "B": "İhlas",
+    "C": "Kadir",
+    "D": "Felak",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur yapmak hangi hükme girer?",
+    "A": "Sünnet",
+    "B": "Farz",
+    "C": "Vacip",
+    "D": "Tatil",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç hangi vakitte sona erer?",
+    "A": "Akşam ezanı okununca",
+    "B": "Öğle ezanı okununca",
+    "C": "İkindi vaktinde",
+    "D": "Gece yarısı",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre neden verilir?",
+    "A": "Fakirlere destek için",
+    "B": "Spor için",
+    "C": "Seyahat için",
+    "D": "Bayram için",
+    "correct": "A"
+  },
+  {
+    "question": "Hac ibadeti nerede yapılır?",
+    "A": "Mekke",
+    "B": "Kudüs",
+    "C": "Şam",
+    "D": "Medine",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın farzlarında olmayan hangisidir?",
+    "A": "Misvak",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Kıyam",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte kollar nereye kadar yıkanır?",
+    "A": "Dirseklere kadar",
+    "B": "Omuzlara kadar",
+    "C": "Avuçlara kadar",
+    "D": "Parmak uçlarına kadar",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan'da en çok neye dikkat edilir?",
+    "A": "Oruç tutmaya",
+    "B": "Seyahat etmeye",
+    "C": "Eğlenmeye",
+    "D": "Yemek yemeye",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât hangi tür ibadettir?",
+    "A": "Mali ibadet",
+    "B": "Sosyal ibadet",
+    "C": "Sesli ibadet",
+    "D": "Düşünce ibadeti",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz kaç vakittir?",
+    "A": "5 vakit",
+    "B": "3 vakit",
+    "C": "7 vakit",
+    "D": "6 vakit",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek neyi ifade eder?",
+    "A": "Allah’a yakınlaşmayı",
+    "B": "Tatil yapmayı",
+    "C": "Konuşmayı",
+    "D": "Yürümeyi",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest bozulduğunda ne yapılır?",
+    "A": "Yeniden abdest alınır",
+    "B": "Secdeye gidilir",
+    "C": "Teravih kılınır",
+    "D": "Dua okunur",
+    "correct": "A"
+  },
+  {
+    "question": "Cuma hutbesi ne zaman okunur?",
+    "A": "Farz namazdan önce",
+    "B": "Namazdan sonra",
+    "C": "Sabah",
+    "D": "Akşam",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere verilir?",
+    "A": "Muhtaç olanlara",
+    "B": "Zenginlere",
+    "C": "Öğretmenlere",
+    "D": "Esnafa",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm hangi uzuvlarla yapılır?",
+    "A": "Yüz ve kollar",
+    "B": "Ayak ve dizler",
+    "C": "Baş ve boyun",
+    "D": "Sırt ve bel",
+    "correct": "A"
+  },
+  {
+    "question": "İftar ne zaman yapılır?",
+    "A": "Akşam ezanı okununca",
+    "B": "Öğle ezanı okununca",
+    "C": "Güneş doğunca",
+    "D": "Yatsı ezanında",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka neyi artırır?",
+    "A": "Sevabı",
+    "B": "Sesi",
+    "C": "Kavgayı",
+    "D": "Hızı",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda secde kaç kez yapılır? (rekât)",
+    "A": "2 kez",
+    "B": "1 kez",
+    "C": "3 kez",
+    "D": "4 kez",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayı kaç gün sürer?",
+    "A": "29-30 gün",
+    "B": "25 gün",
+    "C": "40 gün",
+    "D": "15 gün",
+    "correct": "A"
+  },
+  {
+    "question": "Bayram namazı kaç rekattır?",
+    "A": "2 rekât",
+    "B": "3 rekât",
+    "C": "4 rekât",
+    "D": "6 rekât",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı hangi vaktin ardından kılınır?",
+    "A": "Yatsı",
+    "B": "Öğle",
+    "C": "İkindi",
+    "D": "Sabah",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban hangi günlerde kesilir?",
+    "A": "Kurban bayramı günlerinde",
+    "B": "Ramazan’da",
+    "C": "Cuma günü",
+    "D": "Arefe günü",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât vermek neye katkı sağlar?",
+    "A": "Toplum dayanışmasına",
+    "B": "Yarışa",
+    "C": "Tartışmaya",
+    "D": "Seyahate",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur ne zaman yapılır?",
+    "A": "İmsaktan önce",
+    "B": "İftardan sonra",
+    "C": "Akşam",
+    "D": "Öğle",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda rükû neyi ifade eder?",
+    "A": "Eğilmeyi",
+    "B": "Koşmayı",
+    "C": "Oturmayı",
+    "D": "Yürümeyi",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest hangi temizlik türüdür?",
+    "A": "Dini temizlik",
+    "B": "Zorunlu yemek",
+    "C": "Sosyal aktivite",
+    "D": "Eğlence",
+    "correct": "A"
+  },
+  {
+    "question": "Teravih hangi namaz türüdür?",
+    "A": "Ramazan gecelerinde kılınan",
+    "B": "Her gün kılınan",
+    "C": "Sadece cuma kılınan",
+    "D": "Seyahat sırasında kılınan",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre kimlere vaciptir?",
+    "A": "Maddi gücü olan Müslümanlara",
+    "B": "Çocuklara",
+    "C": "Gayrimüslimlere",
+    "D": "Hasta olmayanlara",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan Bayramı kaç gün sürer?",
+    "A": "3 gün",
+    "B": "1 gün",
+    "C": "2 gün",
+    "D": "4 gün",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban Bayramı kaç gün sürer?",
+    "A": "4 gün",
+    "B": "3 gün",
+    "C": "2 gün",
+    "D": "1 gün",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin farzlarından biri nedir?",
+    "A": "Yüzü yıkamak",
+    "B": "Saç taramak",
+    "C": "Sesli okumak",
+    "D": "Gülmek",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka vermek hangi duyguyu geliştirir?",
+    "A": "Merhamet",
+    "B": "Öfke",
+    "C": "Rekabet",
+    "D": "Gizlilik",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazının rekât sayısı kaçtır? (Hanefi)",
+    "A": "3",
+    "B": "1",
+    "C": "2",
+    "D": "4",
+    "correct": "A"
+  },
+  {
+    "question": "Kıyam namazın hangi bölümüdür?",
+    "A": "Ayakta durma",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Oturuş",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm için ne gereklidir?",
+    "A": "Temiz toprak",
+    "B": "Su",
+    "C": "Şeker",
+    "D": "Tahta",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi ibadet kategorisine girer?",
+    "A": "Allah’a yaklaşma ibadeti",
+    "B": "Sosyal aktivite",
+    "C": "Spor",
+    "D": "Eğlence",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre hangi ibadete bağlıdır?",
+    "A": "Ramazan orucuna",
+    "B": "Cuma namazına",
+    "C": "Kurban kesimine",
+    "D": "Haca",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınca hangi ibadet yapmak mümkün olur?",
+    "A": "Namaz kılmak",
+    "B": "Resim yapmak",
+    "C": "Spor yapmak",
+    "D": "Ses yükseltmek",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın sonunda sağa ve sola verilen işarete ne denir?",
+    "A": "Selam",
+    "B": "Secde",
+    "C": "Rükû",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest hangi durum için zorunludur?",
+    "A": "Namaz kılmak",
+    "B": "Oruç tutmak",
+    "C": "Sadaka vermek",
+    "D": "Kurban kesmek",
+    "correct": "A"
+  },
+  {
+    "question": "Sahur vakti ne ile biter?",
+    "A": "İmsak",
+    "B": "Akşam ezanı",
+    "C": "Öğle vakti",
+    "D": "Gece yarısı",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi niyetle yapılır?",
+    "A": "Allah rızası için",
+    "B": "Hediye için",
+    "C": "Tatil için",
+    "D": "Seyahat için",
+    "correct": "A"
+  },
+  {
+    "question": "Hangi ibadet Ramazan ayına özgüdür?",
+    "A": "Oruç",
+    "B": "Hac",
+    "C": "Cuma",
+    "D": "Kurban",
+    "correct": "A"
+  },
+  {
+    "question": "Zekâtın diğer adı nedir?",
+    "A": "Sadaka",
+    "B": "Fitre",
+    "C": "Fıtır sadakası",
+    "D": "Temizlik",
+    "correct": "D"
+  },
+  {
+    "question": "Teyemmüm hangi ibadeti mümkün kılar?",
+    "A": "Namaz kılmayı",
+    "B": "Hac yapmayı",
+    "C": "Bayram kutlamayı",
+    "D": "Sadaka vermeyi",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında gece yapılan özel dua ve namaza ne denir?",
+    "A": "Teravih",
+    "B": "Arefe",
+    "C": "Tahajjud",
+    "D": "Cuma",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre vermek neyi amaçlar?",
+    "A": "Fakirlere destek",
+    "B": "Seyahat",
+    "C": "Oyun",
+    "D": "Bayram yemeği",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alırken son yıkanan bölüm hangisidir?",
+    "A": "Ayaklar",
+    "B": "Kollar",
+    "C": "Yüz",
+    "D": "Baş",
+    "correct": "A"
+  },
+  {
+    "question": "İftar ne zaman açılır?",
+    "A": "Akşam ezanıyla",
+    "B": "Öğle ezanıyla",
+    "C": "Gece yarısı",
+    "D": "Sabah",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka kimlere verilir?",
+    "A": "İhtiyaç sahiplerine",
+    "B": "Zenginlere",
+    "C": "Sadece komşuya",
+    "D": "İstemeyenlere",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz kaç temel hareketten oluşur?",
+    "A": "Kıyam, rükû, secde, oturuş",
+    "B": "Koşu ve zıplama",
+    "C": "Yürüyüş",
+    "D": "Uyku",
+    "correct": "A"
+  },
+  {
+    "question": "Kadir Gecesi hangi ayda aranır?",
+    "A": "Ramazan",
+    "B": "Recep",
+    "C": "Muharrem",
+    "D": "Şaban",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestte başa ne yapılır?",
+    "A": "Mesh edilir",
+    "B": "Yağ sürülür",
+    "C": "Boyanır",
+    "D": "Kesilir",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât kimlere verilmez?",
+    "A": "Zenginlere",
+    "B": "Fakirlere",
+    "C": "Yetimlere",
+    "D": "Yolda kalmışa",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan Bayramı kaç gün sürer?",
+    "A": "3 gün",
+    "B": "1 gün",
+    "C": "4 gün",
+    "D": "7 gün",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban Bayramı'nda kesilen kurbana ne ad verilir?",
+    "A": "Kurbanlık",
+    "B": "Kesim",
+    "C": "Hediye",
+    "D": "Fitre",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç tutarken kaçınılan temel şey nedir?",
+    "A": "Yemek ve içmek",
+    "B": "Konuşmak",
+    "C": "Uyumak",
+    "D": "Sessizlik",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz vakitleri neye göre belirlenir?",
+    "A": "Güneşin durumuna",
+    "B": "Ay takvimine",
+    "C": "Saatlere",
+    "D": "Rüzgara",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı hangi vaktin ardından kılınır?",
+    "A": "Yatsı",
+    "B": "Akşam",
+    "C": "Öğle",
+    "D": "Sabah",
+    "correct": "A"
+  },
+  {
+    "question": "Abdestin farzlarından biri hangisidir?",
+    "A": "Yüzü yıkamak",
+    "B": "Saç taramak",
+    "C": "Elbiseyi değiştirmek",
+    "D": "Koşmak",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmümde hangi uzuvlara mesh edilir?",
+    "A": "Yüz ve kollar",
+    "B": "Ayaklar",
+    "C": "Baş",
+    "D": "Göğüs",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti ne yapılabilir?",
+    "A": "Fakirlere dağıtılır",
+    "B": "Sadece satılır",
+    "C": "Bozulur",
+    "D": "Atılır",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre hangi ibadetle ilgilidir?",
+    "A": "Ramazan orucuyla",
+    "B": "Kurbanla",
+    "C": "Hacla",
+    "D": "Seyahatle",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayında yapılan Kur’an okuma faaliyeti nedir?",
+    "A": "Mukabele",
+    "B": "Vaaz",
+    "C": "Mevlid",
+    "D": "Cuma",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınırken niyet nerde yapılır?",
+    "A": "Başlangıçta",
+    "B": "Ortada",
+    "C": "Sonda",
+    "D": "Secdede",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda oturarak yapılan bölüme ne denir?",
+    "A": "Kade",
+    "B": "Kıyam",
+    "C": "Rükû",
+    "D": "Tavaf",
+    "correct": "A"
+  },
+  {
+    "question": "Zekât vermek hangi sosyal değeri destekler?",
+    "A": "Dayanışma",
+    "B": "Rekabet",
+    "C": "Tartışma",
+    "D": "Yarış",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban hangi hayvanlardan olur?",
+    "A": "Koyun, keçi, sığır, deve",
+    "B": "At",
+    "C": "Kedi",
+    "D": "Tavşan",
+    "correct": "A"
+  },
+  {
+    "question": "Sahurda en çok önerilen şey nedir?",
+    "A": "Bereketli niyet etmek",
+    "B": "Uyumamak",
+    "C": "Koşmak",
+    "D": "Dışarı çıkmak",
+    "correct": "A"
+  },
+  {
+    "question": "Namaz hangi yön'e dönerek kılınır?",
+    "A": "Kabe yönüne",
+    "B": "Güneş yönüne",
+    "C": "Ay yönüne",
+    "D": "Rüzgar yönüne",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç açarken tavsiye edilen nedir?",
+    "A": "Hurma ile açmak",
+    "B": "Tatlı ile açmak",
+    "C": "Su ile açmak",
+    "D": "Çay ile açmak",
+    "correct": "A"
+  },
+  {
+    "question": "Vitir namazı kaç rekattır? (Hanefi)",
+    "A": "3",
+    "B": "2",
+    "C": "4",
+    "D": "6",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre vermek ne ifade eder?",
+    "A": "Fıtri yardımı",
+    "B": "Hediyeleşmeyi",
+    "C": "Oruç tutmayı",
+    "D": "Seyahati",
+    "correct": "A"
+  },
+  {
+    "question": "Sadaka vermek neyi temizler?",
+    "A": "Niyeti ve gönlü",
+    "B": "Evleri",
+    "C": "Hayvanları",
+    "D": "Gökyüzünü",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda Fatiha’dan sonra ne okunur?",
+    "A": "Kısa sure",
+    "B": "Selam",
+    "C": "Dua",
+    "D": "Tekbir",
+    "correct": "A"
+  },
+  {
+    "question": "Abdest alınırken ayaklar nereden nereye kadar yıkanır?",
+    "A": "Topuk dahil",
+    "B": "Parmak uçları",
+    "C": "Dizlere kadar",
+    "D": "Bel hizası",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban eti nasıl dağıtılır?",
+    "A": "Üçe bölünerek",
+    "B": "İkiye bölünerek",
+    "C": "Tek parça",
+    "D": "Saklanarak",
+    "correct": "A"
+  },
+  {
+    "question": "Teyemmüm için hangi tür toprak seçilir?",
+    "A": "Temiz toprak",
+    "B": "Çamurlu toprak",
+    "C": "Karışık toprak",
+    "D": "Taşlı toprak",
+    "correct": "A"
+  },
+  {
+    "question": "Oruç hangi ibadet kategorisindedir?",
+    "A": "Bedeni ibadet",
+    "B": "Mali ibadet",
+    "C": "Sosyal ibadet",
+    "D": "Dil ibadeti",
+    "correct": "A"
+  },
+  {
+    "question": "Ramazan ayı hangi takvime göre belirlenir?",
+    "A": "Hicri takvim",
+    "B": "Miladi takvim",
+    "C": "Rüzgar takvimi",
+    "D": "Yıldız takvimi",
+    "correct": "A"
+  },
+  {
+    "question": "Namazın farzı olmayan hangisidir?",
+    "A": "Tesbih",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Kıyam",
+    "correct": "A"
+  },
+  {
+    "question": "Fitre ne zaman verilmelidir?",
+    "A": "Bayram öncesi",
+    "B": "Bayram sonrası",
+    "C": "Arefe sonrası",
+    "D": "Kurban sonrası",
+    "correct": "A"
+  },
+  {
+    "question": "Zekâtın özü nedir?",
+    "A": "Paylaşmak",
+    "B": "Yarışmak",
+    "C": "Konuşmak",
+    "D": "Yazmak",
+    "correct": "A"
+  },
+  {
+    "question": "Kurban kesmek hangi ibadetlerle bağlantılıdır?",
+    "A": "Kurban Bayramı ve hac",
+    "B": "Ramazan",
+    "C": "Cuma",
+    "D": "Teravih",
+    "correct": "A"
+  },
+  {
+    "question": "Namazda dua hangi bölümde yapılır?",
+    "A": "Son oturuş",
+    "B": "Rükû",
+    "C": "Secde",
+    "D": "Kıyam",
+    "correct": "A"
+  }
+]

@@ -14,6 +14,8 @@ interface QuestionCardProps {
   onPlayAudio?: () => void;
 }
 
+import { useTranslation } from 'react-i18next';
+
 export function QuestionCard({
   question,
   questionNumber,
@@ -23,6 +25,7 @@ export function QuestionCard({
   onToggleFormat,
   onPlayAudio,
 }: QuestionCardProps) {
+  const { t } = useTranslation();
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
 
@@ -40,7 +43,7 @@ export function QuestionCard({
             />
           </View>
           <Text style={styles.progressText}>
-            Soru {questionNumber} / {totalQuestions}
+            {t('gameUI.question')} {questionNumber} / {totalQuestions}
           </Text>
         </View>
       )}

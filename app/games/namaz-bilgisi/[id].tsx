@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { GameScreen } from '@components/game';
 import { GameQuestion } from '@/types/game.types';
+import { useTranslation } from 'react-i18next';
 
-// Import JSON using require for better React Native compatibility
-const namazBilgisiQuestions = require('@assets/questions/tr/namazBilgisi.json');
+// Import JSONs
+const namazBilgisiQuestionsTr = require('@assets/questions/tr/namazBilgisi.json');
+const namazBilgisiQuestionsEn = require('@assets/questions/en/namazBilgisi.json');
 
 interface QuestionData {
     question: string;
@@ -18,11 +20,14 @@ interface QuestionData {
 
 export default function NamazBilgisiTestScreen() {
     const { id } = useLocalSearchParams();
+    const { i18n } = useTranslation();
 
-    // Convert JSON questions to GameQuestion format and select 10 random questions
-    const [questions] = useState<GameQuestion[]>(() => {
-        const allQuestions = namazBilgisiQuestions as QuestionData[];
-        
+    // Select questions based on language
+    const currentQuestions = i18n.language === 'en' ? namazBilgisiQuestionsEn : namazBilgisiQuestionsTr;
+
+    const questions = useMemo<GameQuestion[]>(() => {
+        const allQuestions = currentQuestions as QuestionData[];
+
         // Add id to each question if not present
         const questionsWithId = allQuestions.map((q, index) => ({
             ...q,
@@ -37,13 +42,13 @@ export default function NamazBilgisiTestScreen() {
         return selected.map((q, index) => {
             // Get the correct answer text based on the correct letter
             const correctAnswerText = q[q.correct as 'A' | 'B' | 'C' | 'D'];
-            
+
             // Create options array in order A, B, C, D
             const options = [q.A, q.B, q.C, q.D];
-            
+
             // Shuffle options but keep track of correct answer
             const shuffledOptions = [...options].sort(() => Math.random() - 0.5);
-            
+
             return {
                 id: `namaz-bilgisi-${q.id || index + 1}`,
                 question: q.question,
@@ -51,10 +56,11 @@ export default function NamazBilgisiTestScreen() {
                 options: shuffledOptions,
             };
         });
-    });
+    }, [currentQuestions]); // Re-calculate when language/questions change
 
     return (
         <GameScreen
+            key={i18n.language} // Force re-render on language change
             lessonId={id as string}
             gameType="quiz"
             source="test"

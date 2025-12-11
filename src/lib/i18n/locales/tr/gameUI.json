@@ -9,6 +9,487 @@
     "accuracy": "Doğruluk",
     "timeSpent": "Geçen Süre",
     "question": "Soru",
-    "playAgain": "Tekrar Oyna"
+    "playAgain": "Tekrar Oyna",
+    "feedback": {
+        "low": {
+            "correct": [
+                {
+                    "title": "Güzel!",
+                    "message": "Bu doğru cevapla iyi bir adım attın."
+                },
+                {
+                    "title": "Aferin!",
+                    "message": "Bu cevabınla ilerleyişini sürdürüyorsun."
+                },
+                {
+                    "title": "Doğru yaptın!",
+                    "message": "Devam edelim, sıradaki soru hazır."
+                },
+                {
+                    "title": "İyi iş!",
+                    "message": "Bu doğru cevap güzel bir katkı sağladı."
+                },
+                {
+                    "title": "Başardın!",
+                    "message": "Süper, bir sonraki soruya geçebiliriz."
+                },
+                {
+                    "title": "Tebrikler!",
+                    "message": "Güzel bir doğru cevap daha ekledin."
+                },
+                {
+                    "title": "Devam!",
+                    "message": "Doğru cevabı aldın, sıradaki geliyor."
+                },
+                {
+                    "title": "Gayet iyi!",
+                    "message": "Bu soruyu doğru çözmen güzel ilerleme."
+                },
+                {
+                    "title": "Doğru seçim!",
+                    "message": "Hadi akışı bozmadan devam edelim."
+                },
+                {
+                    "title": "Harika adım!",
+                    "message": "Bu doğru cevap yoluna katkı sağladı."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Devam edelim.",
+                    "message": "Biraz daha dikkatle daha iyisini yapabilirsin."
+                },
+                {
+                    "title": "Sorun değil.",
+                    "message": "Ama sonraki soruda biraz daha odaklanalım."
+                },
+                {
+                    "title": "Tamamdır.",
+                    "message": "Hadi bu kez daha dikkatli olmayı deneyelim."
+                },
+                {
+                    "title": "Normal.",
+                    "message": "Devam ettikçe daha iyi olacaksın, hadi sıradaki soru."
+                },
+                {
+                    "title": "Hadi devam.",
+                    "message": "Bu kez biraz daha özen göster."
+                },
+                {
+                    "title": "Olabilir.",
+                    "message": "Ama bence bir sonrakinde daha iyisini yaparsın."
+                },
+                {
+                    "title": "Tamam, geçiyoruz.",
+                    "message": "Biraz daha dikkat seni yukarı taşıyabilir."
+                },
+                {
+                    "title": "Sıradaki!",
+                    "message": "Her soru bir fırsat, bu kez daha iyi olabilir."
+                },
+                {
+                    "title": "Her şey yolunda.",
+                    "message": "Biraz daha gayretle ilerleme göreceksin."
+                },
+                {
+                    "title": "Dert değil.",
+                    "message": "Ama bir sonrakine daha dikkat edelim."
+                }
+            ]
+        },
+        "mid": {
+            "correct": [
+                {
+                    "title": "Güzel gidiyorsun!",
+                    "message": "Her doğru cevapla daha da güçleniyorsun."
+                },
+                {
+                    "title": "İyi iş!",
+                    "message": "Çoğunu doğru yapıyorsun, böyle devam et."
+                },
+                {
+                    "title": "Harika ilerleme!",
+                    "message": "Bu soruyu da doğru çözdün."
+                },
+                {
+                    "title": "Gayet başarılı!",
+                    "message": "İlerleyişin oldukça iyi görünüyor."
+                },
+                {
+                    "title": "Ritmin güzel.",
+                    "message": "Bu tempoyla devam edersen çok daha iyi olacaksın."
+                },
+                {
+                    "title": "Adım adım yükseliyorsun.",
+                    "message": "Her doğru cevap performansını artırıyor."
+                },
+                {
+                    "title": "Fena değil, gayet iyi!",
+                    "message": "Biraz daha dikkatle çok daha yukarılara çıkarsın."
+                },
+                {
+                    "title": "İstikrarlı gidiyorsun.",
+                    "message": "Çözdükçe elin açılıyor."
+                },
+                {
+                    "title": "İyi ilerliyorsun.",
+                    "message": "Bu seviyede devam edersen çok şey öğrenirsin."
+                },
+                {
+                    "title": "Başarıya yaklaşıyorsun.",
+                    "message": "Bu soruyu doğru yapmak da bunun bir parçası."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Hadi devam edelim.",
+                    "message": "Biraz daha dikkatle çok daha iyi olursun."
+                },
+                {
+                    "title": "Tamamdır.",
+                    "message": "Ama bu tür sorularda biraz daha özen önemli."
+                },
+                {
+                    "title": "Fena değil.",
+                    "message": "Bir tık daha dikkat edersen performansın artar."
+                },
+                {
+                    "title": "Devam!",
+                    "message": "Bu seviyede biraz daha net olman gerekiyor."
+                },
+                {
+                    "title": "Sıradaki soru!",
+                    "message": "Biraz daha odaklanırsan kolayca toparlarsın."
+                },
+                {
+                    "title": "Sorun değil.",
+                    "message": "Ama potansiyelin daha yüksek, biliyorum."
+                },
+                {
+                    "title": "Ritmi kaybetme.",
+                    "message": "Dikkatini biraz artır, sıradaki soru geliyor."
+                },
+                {
+                    "title": "Bir adım daha.",
+                    "message": "Daha iyisini yapabileceğini biliyoruz."
+                },
+                {
+                    "title": "Hadi bakalım.",
+                    "message": "Bu kez biraz daha dikkat bekliyorum."
+                },
+                {
+                    "title": "Gayet iyisin.",
+                    "message": "Ama ufak hataları azaltabiliriz."
+                }
+            ]
+        },
+        "high": {
+            "correct": [
+                {
+                    "title": "Mükemmel!",
+                    "message": "Bu soruyu da harika çözdün."
+                },
+                {
+                    "title": "Süper gidiyorsun!",
+                    "message": "Performansın gerçekten çok iyi."
+                },
+                {
+                    "title": "Tam isabet!",
+                    "message": "Art arda doğru cevaplar gelmeye başladı."
+                },
+                {
+                    "title": "Efsane!",
+                    "message": "Konuyu gerçekten çok iyi kavramışsın."
+                },
+                {
+                    "title": "Bravo!",
+                    "message": "Bu seviyede devam etmek büyük başarı."
+                },
+                {
+                    "title": "Muazzam!",
+                    "message": "Neredeyse hatasız gidiyorsun."
+                },
+                {
+                    "title": "Harika iş!",
+                    "message": "Bu performans gerçekten etkileyici."
+                },
+                {
+                    "title": "On numara!",
+                    "message": "Ders seninle akıyor resmen."
+                },
+                {
+                    "title": "Çok iyi gidiyorsun!",
+                    "message": "Doğru cevapların sayısı etkileyici."
+                },
+                {
+                    "title": "Tebrikler!",
+                    "message": "Bu testteki başarın çok yüksek."
+                }
+            ],
+            "wrong": [
+                {
+                    "title": "Hata olur.",
+                    "message": "Ama sen çok iyisin, bu soruyu kaçırmaman gerekirdi."
+                },
+                {
+                    "title": "Sorun değil.",
+                    "message": "Ama bu seviyede daha dikkat beklenir."
+                },
+                {
+                    "title": "Ufak bir durum.",
+                    "message": "Bu performansla daha iyisini yapabilirsin."
+                },
+                {
+                    "title": "Normal.",
+                    "message": "Ama senin düzeyinde daha az hata beklenir."
+                },
+                {
+                    "title": "Her şey yolunda.",
+                    "message": "Ama bu tür sorular sende genelde doğru çıkıyor."
+                },
+                {
+                    "title": "Ritmi bozma.",
+                    "message": "Bu kadar iyi giderken bu hatayı telafi edelim."
+                },
+                {
+                    "title": "Tamamdır.",
+                    "message": "Ama dikkat seviyen yüksek olmalı."
+                },
+                {
+                    "title": "Olabilir.",
+                    "message": "Yine de senden daha net bir cevap beklerdim."
+                },
+                {
+                    "title": "Küçük bir hata.",
+                    "message": "Bu seviye için biraz beklenmedik oldu."
+                },
+                {
+                    "title": "Gayet iyisin.",
+                    "message": "Ama küçük hatalar ritmi bozmasın."
+                }
+            ]
+        }
+    },
+    "completionFeedback": {
+        "range_0_10": [
+            {
+                "title": "Devam Et!",
+                "message": "Bu sadece başlangıç, ilerleme zaman alır."
+            },
+            {
+                "title": "Sorun Değil.",
+                "message": "Her deneme seni biraz daha ileri taşır."
+            },
+            {
+                "title": "Denemeye Devam.",
+                "message": "Birkaç tekrar çok fark yaratır."
+            },
+            {
+                "title": "Hadi Devam Edelim.",
+                "message": "Bir sonraki testte daha iyi sonuç alabilirsin."
+            },
+            {
+                "title": "İlk Adımlar.",
+                "message": "Yeni başlıyorsun, gelişim göstereceksin."
+            }
+        ],
+        "range_11_20": [
+            {
+                "title": "İyi Bir Başlangıç.",
+                "message": "Her doğru cevap önemli bir adım."
+            },
+            {
+                "title": "Fena Değil.",
+                "message": "Yavaş yavaş ilerliyorsun, devam edelim."
+            },
+            {
+                "title": "Gelişme Var.",
+                "message": "Her soruyla biraz daha güçleniyorsun."
+            },
+            {
+                "title": "Oluyor!",
+                "message": "Devam edersen daha iyi sonuçlar gelir."
+            },
+            {
+                "title": "Hadi Biraz Daha.",
+                "message": "Potansiyelin var, üzerine koymaya devam et."
+            }
+        ],
+        "range_21_30": [
+            {
+                "title": "Fena Gitmiyor.",
+                "message": "Doğru cevaplar artmaya başladı."
+            },
+            {
+                "title": "İlerleme Gösteriyorsun.",
+                "message": "Her test seni yukarı taşıyor."
+            },
+            {
+                "title": "Daha İyi Olabilir.",
+                "message": "Biraz daha dikkatle güçlü sonuçlar alırsın."
+            },
+            {
+                "title": "Devam Et!",
+                "message": "Bu aşamada bırakmak yok, ilerliyorsun."
+            },
+            {
+                "title": "Güzel Adımlar.",
+                "message": "Düzenli çalışmayla daha yukarılara çıkarsın."
+            }
+        ],
+        "range_31_40": [
+            {
+                "title": "Güzel Çaba!",
+                "message": "Doğru cevapların artışı umut verici."
+            },
+            {
+                "title": "Yaklaşıyorsun.",
+                "message": "Biraz daha odaklanman yeterli."
+            },
+            {
+                "title": "Fena Sayılmaz.",
+                "message": "Bu seviyeyi aşman an meselesi."
+            },
+            {
+                "title": "Gayet İyi Gidiyor.",
+                "message": "Daha iyisini yapabileceğini biliyorum."
+            },
+            {
+                "title": "Hadi Bir Üst Seviyeye.",
+                "message": "Bunun üzerine koyarak çok daha iyi olursun."
+            }
+        ],
+        "range_41_50": [
+            {
+                "title": "İyi İlerliyorsun.",
+                "message": "Bu seviyeyi geçmek için çok az kaldı."
+            },
+            {
+                "title": "Gayet Fena Değil.",
+                "message": "Biraz daha dikkatle güçlü sonuçlar gelir."
+            },
+            {
+                "title": "Potansiyel Var!",
+                "message": "Daha iyi performans için çok yakınsın."
+            },
+            {
+                "title": "Güzel Sonuç.",
+                "message": "Şimdi bunu geliştirmenin zamanı."
+            },
+            {
+                "title": "Dengeyi Buldun.",
+                "message": "Biraz daha odak seni üst seviyeye taşır."
+            }
+        ],
+        "range_51_60": [
+            {
+                "title": "Gayet İyi!",
+                "message": "Bu seviyeye gelmen güzel bir gelişme."
+            },
+            {
+                "title": "Başarılı Bir Performans.",
+                "message": "Devam edersen daha da yükselirsin."
+            },
+            {
+                "title": "İyi Çalışmışsın.",
+                "message": "Biraz daha dikkatle çok daha iyi olur."
+            },
+            {
+                "title": "Güzel Gidiyor.",
+                "message": "Bu tempoyu korursan üst seviyeye çıkarsın."
+            },
+            {
+                "title": "Harika Adımlar.",
+                "message": "İstikrarlı şekilde yükseliyorsun."
+            }
+        ],
+        "range_61_70": [
+            {
+                "title": "Güçlü Bir Performans!",
+                "message": "Bu seviyeye gelmek kolay değil."
+            },
+            {
+                "title": "Harika İş!",
+                "message": "Daha yukarısı için küçük dokunuşlar yeter."
+            },
+            {
+                "title": "Başarılı Sonuç.",
+                "message": "Bu hızla çok daha iyi olursun."
+            },
+            {
+                "title": "Oldukça İyi!",
+                "message": "Performansın ciddi anlamda güçlü."
+            },
+            {
+                "title": "Güzel Başarı!",
+                "message": "Bir adım daha seni üst seviyeye çıkarır."
+            }
+        ],
+        "range_71_80": [
+            {
+                "title": "Harika İş!",
+                "message": "Beklenenden daha iyisini elde ettin."
+            },
+            {
+                "title": "Mükemmel Gidiyorsun!",
+                "message": "Bu başarı takdiri hak ediyor."
+            },
+            {
+                "title": "Etkileyici Performans.",
+                "message": "Neredeyse kusursuz bir test geçtin."
+            },
+            {
+                "title": "Çok Güçlü!",
+                "message": "Bu sonuç gerçekten övgüyü hak ediyor."
+            },
+            {
+                "title": "Bravo!",
+                "message": "Büyük bir başarıya imza attın."
+            }
+        ],
+        "range_81_90": [
+            {
+                "title": "Mükemmel Performans!",
+                "message": "Bu seviyeye ulaşmak gerçekten etkileyici."
+            },
+            {
+                "title": "Harika Bir Sonuç.",
+                "message": "Bu performans çok üst düzey."
+            },
+            {
+                "title": "Süper Başarı!",
+                "message": "Gerçekten çok iyi iş çıkardın."
+            },
+            {
+                "title": "Efsanevi Düzey.",
+                "message": "Bu performans sıradan değil."
+            },
+            {
+                "title": "Neredeyse Kusursuz!",
+                "message": "Tek kelimeyle harika."
+            }
+        ],
+        "range_91_100": [
+            {
+                "title": "Üst Düzey Başarı!",
+                "message": "Bu sonuç olağanüstü."
+            },
+            {
+                "title": "Kusursuz Performans!",
+                "message": "Gerçekten harika iş çıkardın."
+            },
+            {
+                "title": "Zirve Seviyesi!",
+                "message": "Bu seviye herkesin başaramayacağı bir sonuç."
+            },
+            {
+                "title": "Mükemmelliğin Tanımı!",
+                "message": "Hiç hatasız neredeyse."
+            },
+            {
+                "title": "Şahane İş!",
+                "message": "Gurur duyulacak bir performans sergiledin."
+            }
+        ]
+    }
 }
-

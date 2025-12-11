@@ -18,29 +18,25 @@
         }
     },
     "vocabulary": {
-        "title": "Vocabulary Cards",
-        "description": "Learn Islamic keywords",
+        "title": "Acts of Worship",
+        "description": "Test your knowledge about worship",
         "tests": {
-            "1": "Basic Words",
-            "2": "Daily Life",
-            "3": "Worship"
+            "1": "General Acts of Worship"
         },
         "format": {
-            "title": "Game Format",
-            "text": "Learn words by matching cards"
+            "title": "Test Format",
+            "text": "Measure your knowledge with 10 random questions"
         }
     },
     "verses": {
-        "title": "Verse Completion",
-        "description": "Complete verses by finding missing words",
+        "title": "Morals and Manners",
+        "description": "Test your knowledge about Islamic morals and manners",
         "tests": {
-            "1": "Fatiha Surah",
-            "2": "Ikhlas Surah",
-            "3": "Kawthar Surah"
+            "1": "General Morals and Manners"
         },
-        "features": {
-            "title": "Features",
-            "text": "Listen to verses and repeat"
+        "format": {
+            "title": "Test Format",
+            "text": "Measure your knowledge with 10 random questions"
         }
     },
     "quiz": {
@@ -66,14 +62,15 @@
             "1": "General Prayer Knowledge"
         }
     },
-    "speed": {
-        "title": "Speed Round",
-        "description": "Quick practice with mixed questions",
+    "peygamberlerTarihi": {
+        "title": "Prophets' History",
+        "description": "Test your knowledge about prophets",
         "tests": {
-            "1": "Beginner",
-            "2": "Intermediate",
-            "3": "Advanced"
+            "1": "General Prophets' History"
+        },
+        "format": {
+            "title": "Test Format",
+            "text": "Measure your knowledge with 10 random questions"
         }
     }
 }
-

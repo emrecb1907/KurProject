@@ -6,16 +6,14 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 
-export default function VersesGameScreen() {
+export default function AhlakEdepGameScreen() {
   const router = useRouter();
   const { themeVersion } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
   const { t } = useTranslation();
 
   const tests = [
-    { id: '1', title: t('games.verses.tests.1'), verses: 5, level: 2, completed: false },
-    { id: '2', title: t('games.verses.tests.2'), verses: 5, level: 3, completed: false, locked: true },
-    { id: '3', title: t('games.verses.tests.3'), verses: 10, level: 2, completed: false },
+    { id: '1', title: t('games.verses.tests.1'), questions: 10, level: 1, completed: false },
   ];
 
   return (
@@ -38,15 +36,11 @@ export default function VersesGameScreen() {
               <View style={styles.lessonInfo}>
                 <Text style={styles.lessonTitle}>{test.title}</Text>
                 <Text style={styles.lessonMeta}>
-                  {test.verses} {t('games.common.verse')} • {t('games.common.level')} {test.level}
+                  {test.questions} {t('common.question')} • {t('games.common.level')} {test.level}
                 </Text>
               </View>
 
-              {test.locked ? (
-                <View style={styles.lockedBadge}>
-                  <Text style={styles.lockedText}>🔒</Text>
-                </View>
-              ) : test.completed ? (
+              {test.completed ? (
                 <View style={styles.completedBadge}>
                   <Text style={styles.completedText}>✓</Text>
                 </View>
@@ -63,9 +57,9 @@ export default function VersesGameScreen() {
       </View>
 
       <View style={styles.infoBox}>
-        <Text style={styles.infoTitle}>{t('games.verses.features.title')}</Text>
+        <Text style={styles.infoTitle}>{t('games.verses.format.title')}</Text>
         <Text style={styles.infoText}>
-          {t('games.verses.features.text')}
+          {t('games.verses.format.text')}
         </Text>
       </View>
     </View>
@@ -124,17 +118,6 @@ const getStyles = () => StyleSheet.create({
   lessonMeta: {
     fontSize: 14,
     color: colors.textSecondary,
-  },
-  lockedBadge: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    backgroundColor: colors.surfaceLight,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  lockedText: {
-    fontSize: 20,
   },
   completedBadge: {
     width: 40,
