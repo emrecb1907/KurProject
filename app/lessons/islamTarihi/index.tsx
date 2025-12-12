@@ -3,7 +3,7 @@ import { View, Text, ScrollView, Pressable, StyleSheet, Alert } from 'react-nati
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import * as Network from 'expo-network';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import {
@@ -33,12 +33,19 @@ export default function IslamTarihiLessonsListScreen() {
     const { themeVersion, activeTheme } = useTheme();
 
     // Get user data from Zustand store
-    const { completedLessons } = useUser();
+    const { completedLessons, syncCompletedLessons } = useUser();
 
     // Use data from file
     const lessons = islamicHistory;
 
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
+
+    // Force sync when screen comes into focus
+    useFocusEffect(
+        React.useCallback(() => {
+            syncCompletedLessons();
+        }, [])
+    );
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -57,8 +64,8 @@ export default function IslamTarihiLessonsListScreen() {
                         router.back();
                     }}
                 >
-                    <ArrowLeft size={18} color={colors.textPrimary} weight="bold" />
-                    <Text style={styles.backButtonText}>Geri</Text>
+                    <ArrowLeft size={18} color="#FFFFFF" weight="bold" />
+                    <Text style={styles.backButtonText}>{t('common.back')}</Text>
                 </Pressable>
                 <View style={styles.headerTitleContainer}>
                     <Text style={styles.headerTitle}>{t('lessons.islamTarihi.groupTitle', { defaultValue: 'İslam Tarihi' })}</Text>
@@ -73,7 +80,7 @@ export default function IslamTarihiLessonsListScreen() {
             >
                 {/* Section Title */}
                 <View style={styles.sectionHeader}>
-                    <Text style={styles.sectionTitle}>Dersler</Text>
+                    <Text style={styles.sectionTitle}>{t('lessons.sectionTitle')}</Text>
                 </View>
 
                 {/* Lessons List */}
@@ -171,7 +178,7 @@ const getStyles = (activeTheme: 'light' | 'dark') => StyleSheet.create({
     },
     backButtonText: {
         fontSize: 14,
-        color: '#000000',
+        color: '#FFFFFF',
         fontWeight: 'bold',
     },
     headerTitleContainer: {

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { GameScreen } from '@components/game';
 import { GameQuestion } from '@/types/game.types';
 import { ARABIC_LETTERS, type Letter } from '@/data/elifBaLetters';
 
 export default function LettersGamePlayScreen() {
   const { id } = useLocalSearchParams();
+  const { t } = useTranslation();
 
   // Generate 10 random questions from 29 letters
   const [questions] = useState<GameQuestion[]>(() => {
@@ -44,6 +46,7 @@ export default function LettersGamePlayScreen() {
       questions={questions}
       timerDuration={10}
       hasLatinToggle={false}
+      title={t('games.letters.title', 'Temel Harfler')}
     />
   );
 }

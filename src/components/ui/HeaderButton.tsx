@@ -1,6 +1,7 @@
 import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, StyleProp, ViewStyle, TextStyle, View } from 'react-native';
 import { colors } from '@/constants/colors';
 import { CaretLeft } from 'phosphor-react-native';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface HeaderButtonProps extends TouchableOpacityProps {
     title: string;
@@ -10,11 +11,17 @@ interface HeaderButtonProps extends TouchableOpacityProps {
 }
 
 export function HeaderButton({ title, style, textStyle, showIcon = true, ...props }: HeaderButtonProps) {
+    const { activeTheme } = useTheme();
+    const isLight = activeTheme === 'light';
+
+    // Light theme: white text, Dark theme: black text
+    const textColor = isLight ? '#FFFFFF' : '#000000';
+
     return (
         <TouchableOpacity style={[styles.button, style]} activeOpacity={0.7} {...props}>
             <View style={styles.content}>
-                {showIcon && <CaretLeft size={16} color="#000000" weight="bold" />}
-                <Text style={[styles.text, textStyle]}>{title}</Text>
+                {showIcon && <CaretLeft size={16} color={textColor} weight="bold" />}
+                <Text style={[styles.text, { color: textColor }, textStyle]}>{title}</Text>
             </View>
         </TouchableOpacity>
     );
@@ -35,7 +42,6 @@ const styles = StyleSheet.create({
         gap: 4,
     },
     text: {
-        color: '#000000', // Black text on Orange
         fontSize: 14,
         fontWeight: '600',
     },

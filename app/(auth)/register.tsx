@@ -64,10 +64,15 @@ export default function RegisterScreen() {
     const { error: signUpError } = await signUp(email, password, username);
 
     if (signUpError) {
-      // Translate error messages to user-friendly Turkish
+      // Translate error messages to user-friendly messages
       let errorMessage = t('auth.errors.registerFailed');
 
-      if (signUpError.message.includes('User already registered')) {
+      // 🛡️ Rate Limit kontrolü (429 Too Many Requests)
+      if (signUpError.message.includes('Too many requests') ||
+        signUpError.message.includes('rate limit') ||
+        signUpError.message.includes('Request rate limit')) {
+        errorMessage = t('errors.rateLimit.auth.message');
+      } else if (signUpError.message.includes('User already registered')) {
         errorMessage = t('auth.errors.emailAlreadyExists');
       } else if (signUpError.message.includes('kullanıcı adı zaten kullanılıyor')) {
         errorMessage = signUpError.message; // Already in Turkish

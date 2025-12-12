@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -11,6 +11,7 @@ import { useAuth } from '@/store';
 import { supabase } from '@/lib/supabase/client';
 import { Button } from '@components/ui/Button';
 import { HeaderButton } from '@components/ui';
+import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
 
 export default function ChangePasswordScreen() {
     const { t } = useTranslation();
@@ -108,7 +109,8 @@ export default function ChangePasswordScreen() {
 
         } catch (err: any) {
             console.error('Password update error:', err);
-            setError(err.message || t('home.changePassword.errors.general'));
+            // 🛡️ Kullanıcı dostu hata mesajı
+            setError(mapDatabaseError(err.message, t, t('home.changePassword.errors.general')));
         } finally {
             setIsLoading(false);
         }
@@ -224,27 +226,21 @@ export default function ChangePasswordScreen() {
             flex: 1,
         },
         updateButton: {
-            backgroundColor: colors.primary,
+            backgroundColor: '#FF9600',
             height: 56,
-            borderRadius: 16,
+            borderRadius: 30,
             justifyContent: 'center',
             alignItems: 'center',
             marginTop: 8,
-            shadowColor: colors.primary,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 4,
         },
         updateButtonText: {
-            color: colors.textOnPrimary,
+            color: '#000000',
             fontSize: 18,
             fontWeight: 'bold',
         },
         updateButtonDisabled: {
-            backgroundColor: colors.textDisabled,
-            shadowOpacity: 0,
-            elevation: 0,
+            backgroundColor: '#D1D5DB',
+            opacity: 0.6,
         },
     });
 
@@ -377,7 +373,7 @@ export default function ChangePasswordScreen() {
                     </View>
 
                     {/* Update Button */}
-                    <Pressable
+                    <TouchableOpacity
                         style={[
                             styles.updateButton,
                             (isLoading || !oldPassword || !newPassword || !confirmPassword) && styles.updateButtonDisabled
@@ -385,12 +381,10 @@ export default function ChangePasswordScreen() {
                         onPress={handleUpdatePassword}
                         disabled={isLoading || !oldPassword || !newPassword || !confirmPassword}
                     >
-                        {isLoading ? (
-                            <ActivityIndicator color={colors.textOnPrimary} />
-                        ) : (
-                            <Text style={styles.updateButtonText}>{t('home.changePassword.updateButton')}</Text>
-                        )}
-                    </Pressable>
+                        <Text style={styles.updateButtonText}>
+                            {isLoading ? t('profile.editProfile.saving') : t('home.changePassword.updateButton')}
+                        </Text>
+                    </TouchableOpacity>
 
                 </ScrollView >
             </View >

@@ -176,7 +176,7 @@ export default function PremiumScreen() {
 
                 {/* Subscribe Button */}
                 <TouchableOpacity style={styles.subscribeButton}>
-                    <Text style={styles.subscribeButtonText}>{t('premiumpaywall.cta')}</Text>
+                    <Text style={[styles.subscribeButtonText, { color: activeTheme === 'light' ? '#FFFFFF' : '#000000' }]}>{t('premiumpaywall.cta')}</Text>
                 </TouchableOpacity>
 
                 {/* Footer Links */}
@@ -334,7 +334,6 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     subscribeButtonText: {
-        color: '#000000',
         fontSize: 18,
         fontWeight: 'bold',
     },

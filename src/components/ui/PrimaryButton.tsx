@@ -1,5 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet, TouchableOpacityProps, StyleProp, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '@/constants/colors';
+import { useTheme } from '@/contexts/ThemeContext';
 
 interface PrimaryButtonProps extends TouchableOpacityProps {
     title: string;
@@ -8,9 +9,11 @@ interface PrimaryButtonProps extends TouchableOpacityProps {
 }
 
 export function PrimaryButton({ title, style, textStyle, ...props }: PrimaryButtonProps) {
+    const { activeTheme } = useTheme();
+
     return (
         <TouchableOpacity style={[styles.button, style]} activeOpacity={0.8} {...props}>
-            <Text style={[styles.text, textStyle]}>{title}</Text>
+            <Text style={[styles.text, { color: activeTheme === 'light' ? '#FFFFFF' : '#000000' }, textStyle]}>{title}</Text>
         </TouchableOpacity>
     );
 }
@@ -31,7 +34,6 @@ const styles = StyleSheet.create({
         elevation: 6,
     },
     text: {
-        color: '#000000', // Black text on Orange for high contrast (Premium style)
         fontSize: 18,
         fontWeight: 'bold',
     },

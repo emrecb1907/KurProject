@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
+import { useTranslation } from 'react-i18next';
 import { GameScreen } from '@components/game';
 import { GameQuestion } from '@/types/game.types';
 
 export default function QuizGamePlayScreen() {
     const { id } = useLocalSearchParams();
+    const { t } = useTranslation();
 
     // Mock Islamic Questions
     const initialQuestions: GameQuestion[] = [
@@ -55,6 +57,7 @@ export default function QuizGamePlayScreen() {
             questions={questions}
             timerDuration={10}
             hasLatinToggle={false}
+            title={t('games.quiz.title', 'Dini Bilgiler')}
         />
     );
 }

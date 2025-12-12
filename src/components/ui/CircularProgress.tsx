@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 interface CircularProgressProps {
     size: number;
@@ -14,6 +15,7 @@ interface CircularProgressProps {
 
 export function CircularProgress({ size, strokeWidth, progress, correct, total }: CircularProgressProps) {
     const { themeVersion } = useTheme();
+    const { t } = useTranslation();
     // Re-calculate styles when theme changes
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
@@ -50,7 +52,7 @@ export function CircularProgress({ size, strokeWidth, progress, correct, total }
             </Svg>
             <View style={styles.contentContainer}>
                 <Text style={styles.scoreText}>{correct}/{total}</Text>
-                <Text style={styles.labelText}>Doğru</Text>
+                <Text style={styles.labelText}>{t('gameUI.correct')}</Text>
             </View>
         </View>
     );

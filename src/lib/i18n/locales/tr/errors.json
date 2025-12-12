@@ -4,5 +4,93 @@
     "authRequired": "Giriş Gerekli",
     "tryAgainLater": "Lütfen daha sonra tekrar deneyin",
     "noConnection": "İnternet Bağlantısı Yok",
-    "noConnectionDesc": "Şu an internet bağlantın yok gibi görünüyor. Lütfen bağlantını kontrol edip tekrar dene. 📶"
+    "noConnectionDesc": "Şu an internet bağlantın yok gibi görünüyor. Lütfen bağlantını kontrol edip tekrar dene.",
+    "rateLimit": {
+        "auth": {
+            "title": "Çok Fazla Deneme",
+            "message": "Çok fazla giriş denemesi yaptınız. Lütfen birkaç dakika bekleyin."
+        },
+        "game": {
+            "title": "İşlem Başarısız",
+            "message": "Çok hızlı! Lütfen birkaç saniye bekleyin."
+        },
+        "session": {
+            "title": "Oturum Hatası",
+            "message": "Geçersiz oturum. Lütfen testi yeniden başlatın."
+        }
+    },
+    "database": {
+        "duplicate": "Bu bilgi zaten kullanımda.",
+        "connection": "Bağlantı sorunu. İnternet bağlantınızı kontrol edin.",
+        "validation": "Geçersiz bilgi girdiniz. Lütfen kontrol edin.",
+        "general": "İşlem tamamlanamadı. Lütfen tekrar deneyin.",
+        "notFound": "Aradığınız kayıt bulunamadı.",
+        "timeout": "İşlem çok uzun sürdü. Lütfen tekrar deneyin."
+    },
+    "boundary": {
+        "generic": {
+            "title": "Beklenmedik Hata",
+            "message": "Bir sorun oluştu. Endişelenme, verilerini kaybetmedin.",
+            "retry": "Tekrar Dene",
+            "goHome": "Ana Sayfaya Dön"
+        },
+        "network": {
+            "title": "Bağlantı Hatası",
+            "message": "Sunucuya bağlanılamadı. İnternet bağlantını kontrol et ve tekrar dene."
+        },
+        "timeout": {
+            "title": "Zaman Aşımı",
+            "message": "Sunucu yanıt vermedi. Lütfen birkaç dakika sonra tekrar dene."
+        },
+        "audio": {
+            "title": "Ses Yüklenemedi",
+            "message": "Ses dosyası yüklenirken bir hata oluştu. Cihazının sesinin açık olduğundan emin ol."
+        },
+        "data": {
+            "title": "Veri Yüklenemedi",
+            "message": "İçerik yüklenirken bir sorun oluştu. Sayfayı yenileyerek tekrar dene."
+        },
+        "auth": {
+            "title": "Oturum Hatası",
+            "message": "Oturumun sona ermiş olabilir. Lütfen tekrar giriş yap."
+        },
+        "permission": {
+            "title": "İzin Gerekli",
+            "message": "Bu özelliği kullanmak için gerekli izinleri ver."
+        },
+        "storage": {
+            "title": "Depolama Hatası",
+            "message": "Cihazında yeterli alan olmayabilir. Biraz yer açmayı dene."
+        }
+    },
+    "screen": {
+        "game": {
+            "title": "Oyun Yüklenemedi",
+            "message": "Oyun başlatılırken bir hata oluştu. Ana sayfaya dönüp tekrar deneyebilirsin."
+        },
+        "lesson": {
+            "title": "Ders Yüklenemedi",
+            "message": "Ders içeriği yüklenirken bir sorun oluştu."
+        },
+        "chat": {
+            "title": "Sohbet Kullanılamıyor",
+            "message": "Yapay zeka asistanına şu an ulaşılamıyor. Lütfen daha sonra tekrar dene."
+        },
+        "settings": {
+            "title": "Ayarlar Açılamadı",
+            "message": "Ayarlar yüklenirken bir hata oluştu."
+        },
+        "premium": {
+            "title": "Satın Alma Hatası",
+            "message": "Ödeme işlemi tamamlanamadı. Hiçbir ücret alınmadı."
+        }
+    },
+    "action": {
+        "retry": "Tekrar Dene",
+        "goBack": "Geri Dön",
+        "goHome": "Ana Sayfaya Dön",
+        "refresh": "Yenile",
+        "login": "Giriş Yap",
+        "contactSupport": "Destek"
+    }
 }

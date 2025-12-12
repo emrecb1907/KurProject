@@ -20,8 +20,12 @@ export function Button({
   style,
   ...props
 }: ButtonProps) {
-  const { themeVersion } = useTheme();
+  const { themeVersion, activeTheme } = useTheme();
   const styles = useMemo(() => getStyles(), [themeVersion]);
+
+  // Light theme: white text for primary, Dark theme: use default
+  const isLight = activeTheme === 'light';
+  const primaryTextColor = isLight ? '#FFFFFF' : colors.textLight;
 
   const buttonStyle: ViewStyle[] = [
     styles.button,
@@ -35,7 +39,7 @@ export function Button({
   const textStyle: TextStyle[] = [
     styles.text,
     styles[`text_${size}`],
-    styles[`text_${variant}`],
+    variant === 'primary' ? { color: primaryTextColor } : styles[`text_${variant}`],
     disabled && styles.textDisabled,
   ];
 

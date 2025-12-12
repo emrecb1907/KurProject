@@ -73,6 +73,7 @@ export default function PeygamberlerTarihiGamePlayScreen() {
             questions={questions}
             timerDuration={15}
             hasLatinToggle={false}
+            title={t('games.peygamberler_tarihi.title', 'Peygamberler Tarihi')}
         />
     );
 }

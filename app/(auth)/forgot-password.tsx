@@ -7,6 +7,7 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '@/lib/supabase/client';
 import { Envelope, ArrowLeft, CheckCircle, WarningCircle } from 'phosphor-react-native';
+import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
 
 export default function ForgotPasswordScreen() {
     const { t } = useTranslation();
@@ -42,7 +43,8 @@ export default function ForgotPasswordScreen() {
             setSuccess(true);
         } catch (err: any) {
             console.error('Password reset error:', err);
-            setError(err.message || 'Şifre sıfırlama bağlantısı gönderilemedi.');
+            // 🛡️ Kullanıcı dostu hata mesajı
+            setError(mapDatabaseError(err.message, t, t('errors.database.general')));
         } finally {
             setLoading(false);
         }

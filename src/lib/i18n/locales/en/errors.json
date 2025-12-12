@@ -4,5 +4,93 @@
     "authRequired": "Login Required",
     "tryAgainLater": "Please try again later",
     "noConnection": "No Internet Connection",
-    "noConnectionDesc": "It looks like you're not connected to the internet. Please check your connection and try again. 📶"
+    "noConnectionDesc": "It looks like you're not connected to the internet. Please check your connection and try again.",
+    "rateLimit": {
+        "auth": {
+            "title": "Too Many Attempts",
+            "message": "You've made too many login attempts. Please wait a few minutes."
+        },
+        "game": {
+            "title": "Action Failed",
+            "message": "Too fast! Please wait a few seconds."
+        },
+        "session": {
+            "title": "Session Error",
+            "message": "Invalid session. Please restart the test."
+        }
+    },
+    "database": {
+        "duplicate": "This information is already in use.",
+        "connection": "Connection issue. Please check your internet.",
+        "validation": "Invalid input. Please check and try again.",
+        "general": "Action couldn't be completed. Please try again.",
+        "notFound": "The requested record was not found.",
+        "timeout": "The operation took too long. Please try again."
+    },
+    "boundary": {
+        "generic": {
+            "title": "Unexpected Error",
+            "message": "Something went wrong. Don't worry, your data is safe.",
+            "retry": "Try Again",
+            "goHome": "Go to Home"
+        },
+        "network": {
+            "title": "Connection Error",
+            "message": "Unable to connect to the server. Please check your internet connection and try again."
+        },
+        "timeout": {
+            "title": "Request Timeout",
+            "message": "The server took too long to respond. Please try again in a few moments."
+        },
+        "audio": {
+            "title": "Audio Failed to Load",
+            "message": "There was an error loading the audio file. Make sure your device volume is on."
+        },
+        "data": {
+            "title": "Failed to Load Content",
+            "message": "There was a problem loading the content. Try refreshing the page."
+        },
+        "auth": {
+            "title": "Session Error",
+            "message": "Your session may have expired. Please log in again."
+        },
+        "permission": {
+            "title": "Permission Required",
+            "message": "Please grant the necessary permissions to use this feature."
+        },
+        "storage": {
+            "title": "Storage Error",
+            "message": "Your device may be running low on storage. Try freeing up some space."
+        }
+    },
+    "screen": {
+        "game": {
+            "title": "Game Failed to Load",
+            "message": "An error occurred while starting the game. You can return to home and try again."
+        },
+        "lesson": {
+            "title": "Lesson Failed to Load",
+            "message": "There was a problem loading the lesson content."
+        },
+        "chat": {
+            "title": "Chat Unavailable",
+            "message": "The AI assistant is currently unavailable. Please try again later."
+        },
+        "settings": {
+            "title": "Settings Error",
+            "message": "An error occurred while loading settings."
+        },
+        "premium": {
+            "title": "Purchase Error",
+            "message": "The payment could not be completed. You have not been charged."
+        }
+    },
+    "action": {
+        "retry": "Try Again",
+        "goBack": "Go Back",
+        "goHome": "Go to Home",
+        "refresh": "Refresh",
+        "login": "Log In",
+        "contactSupport": "Support"
+    }
 }

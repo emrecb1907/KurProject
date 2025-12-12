@@ -4,12 +4,21 @@
     "congratulations": "Congratulations!",
     "totalScore": "Total Score",
     "correctAnswers": "Correct Answers",
+    "correct": "Correct",
     "score": "Score",
     "xpEarned": "XP Earned",
     "accuracy": "Accuracy",
     "timeSpent": "Time Spent",
     "question": "Question",
     "playAgain": "Play Again",
+    "finishTest": "Finish Test",
+    "totalTime": "Total Time",
+    "level": "Level",
+    "levelWithXP": "Level {{level}} (+{{xp}} XP)",
+    "levelReached": "Congratulations! You reached Level {{level}}!",
+    "correctOutOf": "{{correct}}/{{total}} correct",
+    "summary": "SUMMARY",
+    "loadingTest": "LOADING TEST...",
     "feedback": {
         "low": {
             "correct": [

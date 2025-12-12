@@ -36,15 +36,20 @@ export default function LoginScreen() {
     const { error: signInError } = await signInWithEmailOrUsername(emailOrUsername, password);
 
     if (signInError) {
-      // Translate error messages to user-friendly Turkish
+      // Translate error messages to user-friendly messages
       let errorMessage = t('auth.errors.loginFailed');
 
-      if (signInError.message.includes('Invalid login credentials')) {
+      // 🛡️ Rate Limit kontrolü (429 Too Many Requests)
+      if (signInError.message.includes('Too many requests') ||
+        signInError.message.includes('rate limit') ||
+        signInError.message.includes('Request rate limit')) {
+        errorMessage = t('errors.rateLimit.auth.message');
+      } else if (signInError.message.includes('Invalid login credentials')) {
         errorMessage = t('auth.errors.invalidCredentials');
       } else if (signInError.message.includes('Email not confirmed')) {
         errorMessage = t('auth.errors.emailNotConfirmed');
       } else if (signInError.message.includes('User not found') || signInError.message.includes('Kullanıcı adı bulunamadı')) {
-        errorMessage = 'Kullanıcı adı veya email bulunamadı.';
+        errorMessage = t('auth.errors.userNotFound', 'Kullanıcı adı veya email bulunamadı.');
       }
 
       setError(errorMessage);

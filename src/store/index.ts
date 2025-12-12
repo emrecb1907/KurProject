@@ -74,6 +74,7 @@ export const useAuth = () => useStore(
     setIsLoading: state.setIsLoading,
     logout: state.logout,
     signInAnonymously: state.signInAnonymously,
+    refreshUser: state.refreshUser,
   }))
 );
 

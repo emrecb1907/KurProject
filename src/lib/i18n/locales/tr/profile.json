@@ -83,5 +83,14 @@
             "confirm": "Sil"
         },
         "version": "Sürüm"
+    },
+    "editProfile": {
+        "title": "Profili Düzenle",
+        "username": "Kullanıcı Adı",
+        "usernamePlaceholder": "Kullanıcı adı",
+        "usernameHelper": "Kullanıcı adınız benzersiz olmalıdır. Sadece harf, rakam ve alt çizgi (_) kullanabilirsiniz. Uygunsuz, hakaret içeren veya dini değerlere saygısızlık eden kullanıcı adları yasaktır.",
+        "invalidUsername": "Geçersiz kullanıcı adı.",
+        "successMessage": "Profiliniz başarıyla güncellendi!",
+        "saving": "Kaydediliyor..."
     }
 }

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, TextInput, ScrollView, Pressable, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TextInput, ScrollView, Pressable, Alert, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@constants/colors';
@@ -8,9 +8,11 @@ import { useAuth } from '@/store';
 import { database } from '@/lib/supabase/database';
 import { supabase } from '@/lib/supabase/client';
 import { validateText } from '@/utils/profanityFilter';
-import { X, User, Check, Warning } from 'phosphor-react-native';
+import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
+import { User, Check, Warning } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
+import { HeaderButton } from '@components/ui';
 
 export default function EditProfileScreen() {
     const { t } = useTranslation();
@@ -119,19 +121,18 @@ export default function EditProfileScreen() {
             fontSize: 14,
         },
         saveButton: {
-            backgroundColor: colors.primary,
+            backgroundColor: '#FF9600',
+            borderRadius: 30,
             paddingVertical: 16,
-            borderRadius: 12,
             alignItems: 'center',
-            justifyContent: 'center',
-            marginTop: 8,
+            marginTop: 16,
         },
         saveButtonDisabled: {
             opacity: 0.7,
         },
         saveButtonText: {
-            color: colors.textOnPrimary,
-            fontSize: 16,
+            color: '#000000',
+            fontSize: 18,
             fontWeight: 'bold',
         },
     }), [themeVersion]);
@@ -144,7 +145,7 @@ export default function EditProfileScreen() {
 
         if (!validation.isValid) {
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            setError(validation.error || 'Geçersiz kullanıcı adı.');
+            setError(validation.error || t('profile.editProfile.invalidUsername'));
             return;
         }
 
@@ -176,7 +177,7 @@ export default function EditProfileScreen() {
             }
 
             // 3. Update User in Database
-            const { error: updateError } = await database.users.update(user.id, {
+            const { error: updateError } = await database.users.updateProfile(user.id, {
                 username: username.trim(),
             });
 
@@ -186,7 +187,7 @@ export default function EditProfileScreen() {
             setUser({ ...user, username: username.trim() });
 
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-            setSuccess('Profiliniz başarıyla güncellendi!');
+            setSuccess(t('profile.editProfile.successMessage'));
 
             // Go back after a short delay
             setTimeout(() => {
@@ -194,13 +195,10 @@ export default function EditProfileScreen() {
             }, 1500);
 
         } catch (err: any) {
-            // Only log unexpected errors to console
-            if (err.message !== 'Bu kullanıcı adı zaten kullanılıyor.') {
-                console.error('Update profile error:', err);
-            }
-
+            console.error('Update profile error:', err);
             Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
-            setError(err.message || 'Profil güncellenirken bir hata oluştu.');
+            // 🛡️ Kullanıcı dostu hata mesajı (ham SQL hatalarını gizle)
+            setError(mapDatabaseError(err.message, t));
         } finally {
             setLoading(false);
         }
@@ -210,22 +208,20 @@ export default function EditProfileScreen() {
         <SafeAreaView style={styles.container} edges={['top']}>
             {/* Header */}
             <View style={styles.header}>
-                <Pressable
-                    style={styles.backButton}
+                <HeaderButton
                     onPress={() => {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                         router.back();
                     }}
-                >
-                    <X size={24} color={colors.textPrimary} weight="bold" />
-                </Pressable>
-                <Text style={styles.headerTitle}>Profili Düzenle</Text>
+                    title={t('common.back')}
+                />
+                <Text style={styles.headerTitle}>{t('profile.editProfile.title')}</Text>
                 <View style={styles.headerSpacer} />
             </View>
 
             <ScrollView contentContainerStyle={styles.content}>
                 <View style={styles.inputGroup}>
-                    <Text style={styles.label}>Kullanıcı Adı</Text>
+                    <Text style={styles.label}>{t('profile.editProfile.username')}</Text>
                     <View style={styles.inputContainer}>
                         <User size={20} color={colors.textSecondary} style={styles.inputIcon} />
                         <TextInput
@@ -235,7 +231,7 @@ export default function EditProfileScreen() {
                                 setUsername(text);
                                 setError('');
                             }}
-                            placeholder="Kullanıcı adı"
+                            placeholder={t('profile.editProfile.usernamePlaceholder')}
                             placeholderTextColor={colors.textDisabled}
                             autoCapitalize="none"
                             autoCorrect={false}
@@ -243,8 +239,7 @@ export default function EditProfileScreen() {
                         />
                     </View>
                     <Text style={styles.helperText}>
-                        Kullanıcı adınız benzersiz olmalıdır. Sadece harf, rakam ve alt çizgi (_) kullanabilirsiniz.
-                        Uygunsuz, hakaret içeren veya dini değerlere saygısızlık eden kullanıcı adları yasaktır.
+                        {t('profile.editProfile.usernameHelper')}
                     </Text>
                 </View>
 
@@ -262,17 +257,15 @@ export default function EditProfileScreen() {
                     </View>
                 ) : null}
 
-                <Pressable
+                <TouchableOpacity
                     style={[styles.saveButton, loading && styles.saveButtonDisabled]}
                     onPress={handleSave}
                     disabled={loading}
                 >
-                    {loading ? (
-                        <ActivityIndicator color={colors.textOnPrimary} />
-                    ) : (
-                        <Text style={styles.saveButtonText}>Kaydet</Text>
-                    )}
-                </Pressable>
+                    <Text style={styles.saveButtonText}>
+                        {loading ? t('profile.editProfile.saving') : t('common.save')}
+                    </Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );

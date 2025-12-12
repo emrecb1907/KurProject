@@ -74,8 +74,14 @@ export function useCompleteGameMutation() {
                     if (!error) {
                         // Check for application-level error returned in data
                         if (data && (data as any).success === false) {
-                            dbError = new Error((data as any).error || 'Unknown RPC error');
-                            // If specific error code provided, maybe helpful to log or alert
+                            const errorCode = (data as any).error || 'UNKNOWN_ERROR';
+                            const errorMessage = (data as any).message || 'Bir hata oluştu';
+
+                            // 🛡️ Güvenlik hatalarını özel olarak işle
+                            const securityError = new Error(errorMessage) as any;
+                            securityError.code = errorCode;
+                            securityError.isSecurityError = true;
+                            dbError = securityError;
                         } else {
                             // Capture streak from response if available
                             if (data && (data as any).new_streak) {

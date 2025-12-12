@@ -14,6 +14,7 @@ import { supabase } from '@/lib/supabase/client';
 import { Modal } from '@components/ui/Modal';
 import { HeaderButton } from '@components/ui';
 import { getCurrentLanguage } from '@/lib/i18n';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
 interface SettingsOption {
   id: string;
@@ -26,7 +27,7 @@ interface SettingsSection {
   options: SettingsOption[];
 }
 
-export default function SettingsScreen() {
+function SettingsContent() {
   const { t } = useTranslation();
   const router = useRouter();
   const { themeVersion, themeMode, activeTheme, setThemeMode } = useTheme();
@@ -35,6 +36,7 @@ export default function SettingsScreen() {
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
+  const [triggerError, setTriggerError] = useState(false); // 🧪 Test için
 
   // Animation values for logout modal
   const [logoutScaleAnim] = useState(new Animated.Value(0));
@@ -325,7 +327,7 @@ export default function SettingsScreen() {
       gap: 8,
       paddingVertical: 12,
       paddingHorizontal: 16,
-      borderRadius: 12,
+      borderRadius: 30,
       backgroundColor: colors.surface,
       borderWidth: 2,
       borderColor: colors.border,
@@ -675,6 +677,24 @@ export default function SettingsScreen() {
           <Text style={styles.versionText}>
             {t('profile.settings.version')} {Constants.expoConfig?.version || '1.0.0'}
           </Text>
+
+          {/* 🧪 TEST BUTTON - Remove in production */}
+          {__DEV__ && (
+            <Pressable
+              style={{
+                marginTop: 16,
+                backgroundColor: colors.error,
+                paddingVertical: 12,
+                paddingHorizontal: 24,
+                borderRadius: 12,
+              }}
+              onPress={() => setTriggerError(true)}
+            >
+              <Text style={{ color: '#fff', fontWeight: 'bold' }}>🧪 Test ErrorBoundary</Text>
+            </Pressable>
+          )}
+          {/* This will throw during render, which ErrorBoundary CAN catch */}
+          {triggerError && (() => { throw new Error('Network request failed: connection refused'); })()}
         </View>
 
         {/* Bottom Spacing */}
@@ -787,5 +807,19 @@ export default function SettingsScreen() {
         </Animated.View>
       </Modal>
     </View>
+  );
+}
+
+// Wrap with ErrorBoundary
+export default function SettingsScreen() {
+  const router = useRouter();
+
+  return (
+    <ErrorBoundary
+      fallbackScreen="settings"
+      onGoHome={() => router.replace('/')}
+    >
+      <SettingsContent />
+    </ErrorBoundary>
   );
 }

@@ -38,7 +38,7 @@ function RootLayout() {
     Amiri_700Bold,
   });
 
-  const { checkLifeRegeneration } = useUser();
+  const { checkLifeRegeneration, setBoundUserId } = useUser();
 
   useEffect(() => {
     checkLifeRegeneration();
@@ -56,7 +56,20 @@ function RootLayout() {
   // Global Auth Guard
   const segments = useSegments();
   const router = useRouter();
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user, refreshUser } = useAuth();
+
+  // 🔄 Bind User ID to User Store whenever Auth state changes
+  useEffect(() => {
+    if (user?.id) {
+      console.log('🔗 Binding User ID:', user.id);
+      setBoundUserId(user.id);
+      // Fetch fresh profile data (username, XP, etc.) from DB
+      refreshUser();
+    } else {
+      setBoundUserId(null);
+    }
+  }, [user?.id]);
+
 
   useEffect(() => {
     const checkAuth = async () => {

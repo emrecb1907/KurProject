@@ -8,3 +8,5 @@ export { CarouselCard } from './CarouselCard';
 export type { CarouselCardProps } from './CarouselCard';
 
 export { CircularProgress } from './CircularProgress';
+export { LoadingOverlay } from './LoadingOverlay';
+export { LoadingSpinner } from './LoadingSpinner';

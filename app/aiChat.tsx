@@ -13,8 +13,9 @@ import { MessageBubble } from '@/components/chat/MessageBubble';
 import { ChatInput } from '@/components/chat/ChatInput';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 
-export default function AIChatScreen() {
+function AIChatContent() {
     const router = useRouter();
     const { statusBarStyle } = useStatusBar();
     const { activeTheme, themeVersion } = useTheme();
@@ -329,3 +330,17 @@ const getStyles = () => StyleSheet.create({
         textAlign: 'center',
     },
 });
+
+// Wrap with ErrorBoundary
+export default function AIChatScreen() {
+    const router = useRouter();
+
+    return (
+        <ErrorBoundary
+            fallbackScreen="chat"
+            onGoHome={() => router.replace('/')}
+        >
+            <AIChatContent />
+        </ErrorBoundary>
+    );
+}

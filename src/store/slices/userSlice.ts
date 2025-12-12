@@ -354,7 +354,11 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
       const result = data as any;
       if (result.success) {
-        set({ currentLives: result.current_energy });
+        // 🔐 Session ID'yi kaydet (sunucu artık bunu dönüyor)
+        set({
+          currentLives: result.current_energy,
+          sessionToken: result.session_id || null
+        });
         return { success: true };
       } else {
         if (result.current_energy !== undefined) set({ currentLives: result.current_energy });

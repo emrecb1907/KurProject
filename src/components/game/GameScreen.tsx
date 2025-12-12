@@ -4,10 +4,11 @@ import { useRouter, useNavigation } from 'expo-router';
 import { BackHandler } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from 'react-native-reanimated';
 import { QuestionCard } from './QuestionCard';
+import { TestPreparationOverlay } from './TestPreparationOverlay';
 import { OptionButton } from './OptionButton';
 import { Timer } from './Timer';
 import { LifeIndicator } from './LifeIndicator';
-import { Button, CircularProgress } from '@components/ui';
+import { Button, CircularProgress, LoadingOverlay } from '@components/ui';
 import { useStore, useUser } from '@/store';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -32,6 +33,7 @@ import { getFeedbackPath, getCompletionFeedbackPath, FeedbackMessage } from '@/c
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import * as Network from 'expo-network';
+import { Clock } from 'phosphor-react-native';
 
 interface GameScreenProps {
     lessonId: string;
@@ -40,7 +42,9 @@ interface GameScreenProps {
     timerDuration?: number;
     hasLatinToggle?: boolean;
     onComplete?: () => void;
+
     source?: 'lesson' | 'test'; // Track where the game was started from
+    title?: string;
 }
 
 export function GameScreen({
@@ -50,12 +54,14 @@ export function GameScreen({
     timerDuration = 10,
     hasLatinToggle = false,
     onComplete,
+
     source = 'lesson', // Default to lesson for backward compatibility
+    title = 'Test'
 }: GameScreenProps) {
     const { t } = useTranslation();
     const router = useRouter();
     const { currentLives, maxLives } = useStore();
-    const { totalXP, startTestSession } = useUser();
+    const { totalXP } = useUser();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
     const navigation = useNavigation();
@@ -77,6 +83,10 @@ export function GameScreen({
 
         return () => backHandler.remove();
     }, [navigation]);
+
+    const isTest = source === 'test';
+    // Start with isStarting=true only for tests
+    const [isStarting, setIsStarting] = useState(isTest);
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -153,12 +163,15 @@ export function GameScreen({
         // Log game load
         logger.game(`${gameType} game loaded - Using generic GameScreen component`);
 
-        // Start Session (Security)
+        // Start Session (Security) & Countdown Logic
+        // 🔐 Session artık consumeEnergy'de oluşturuluyor, burada sadece minimum bekleme süresi var
         if (source === 'test') {
-            startTestSession();
-        }
+            const minDurationPromise = new Promise(resolve => setTimeout(resolve, 3000));
 
-        // Energy consumption is handled at the entry point (CarouselCard)
+            minDurationPromise.then(() => {
+                setIsStarting(false);
+            });
+        }
     }, []);
 
     const handleTimeUp = () => {
@@ -315,7 +328,7 @@ export function GameScreen({
 
         try {
             // Use the centralized completion hook
-            await completeGame({
+            const result = await completeGame({
                 lessonId,
                 gameType,
                 correctAnswers: correctAnswersCount,
@@ -327,10 +340,17 @@ export function GameScreen({
                 timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
             });
 
-            if (onComplete) {
-                onComplete();
+            // 🛡️ Sadece başarılı ise çık, hata varsa ekranda kal
+            if (result.success) {
+                if (onComplete) {
+                    onComplete();
+                }
+                handleExit();
+            } else {
+                // Hata durumunda kullanıcı Alert gördü, ekranda kalsın
+                // Retry yapabilmesi için kilidi aç
+                isSubmittingRef.current = false;
             }
-            handleExit();
         } catch (error) {
             console.error('Game completion error:', error);
             // Unlock on error so user can retry
@@ -561,6 +581,9 @@ export function GameScreen({
         return (
             <View style={styles.container}>
                 <View style={styles.completeContainer}>
+                    {/* Summary Header */}
+                    <Text style={styles.summaryHeader}>{t('gameUI.summary')}</Text>
+
                     {/* Circular Progress & New Header */}
                     <View style={{ marginBottom: 24, alignItems: 'center' }}>
                         <CircularProgress
@@ -570,21 +593,30 @@ export function GameScreen({
                             correct={correctAnswersCount}
                             total={questions.length}
                         />
-                        {/* Duration Display */}
-                        <Text style={[styles.completeText, { marginTop: 16, marginBottom: 0, fontSize: 16 }]}>
-                            Toplam Süre: {durationString}
-                        </Text>
                     </View>
 
+                    {/* Motivation Text */}
                     <Text style={styles.completeTitle}>{completionMessage?.title || "Harika İş!"}</Text>
                     <Text style={styles.completeText}>
                         {completionMessage?.message || "Beklenenden çok daha iyisini yaptın."}
                     </Text>
 
+                    {/* Duration Display - Container */}
+                    <View style={styles.durationContainer}>
+                        <Clock size={18} color={colors.primary} weight="fill" style={{ marginRight: 8 }} />
+                        <Text style={styles.durationText}>
+                            {t('gameUI.totalTime')}: {durationString}
+                        </Text>
+                    </View>
+
+
                     {/* XP Progress Bar */}
                     <View style={styles.xpBarContainer}>
                         <Text style={styles.xpBarLabel}>
-                            Seviye {displayedLevel} {xpEarned > 0 && `(+${xpEarned} XP)`}
+                            {xpEarned > 0
+                                ? t('gameUI.levelWithXP', { level: displayedLevel, xp: xpEarned })
+                                : `${t('gameUI.level')} ${displayedLevel}`
+                            }
                         </Text>
                         <View style={styles.xpBarBackground}>
                             <Animated.View style={[styles.xpBarFill, animatedXPStyle]} />
@@ -636,9 +668,9 @@ export function GameScreen({
                                 onPress={(e) => e.stopPropagation()}
                             >
                                 <Text style={styles.levelUpEmoji}>🎉</Text>
-                                <Text style={styles.levelUpTitle}>Level Atladınız!</Text>
+                                <Text style={styles.levelUpTitle}>{t('gameUI.congratulations')}</Text>
                                 <Text style={styles.levelUpMessage}>
-                                    Tebrikler! Seviye {newXPProgress.currentLevel}'e ulaştınız!
+                                    {t('gameUI.levelReached', { level: newXPProgress.currentLevel })}
                                 </Text>
                                 <Pressable
                                     style={styles.levelUpButton}
@@ -672,7 +704,7 @@ export function GameScreen({
                 key={currentQuestionIndex}
                 duration={timerDuration}
                 onTimeUp={handleTimeUp}
-                isActive={!isAnswered}
+                isActive={!isAnswered && !isStarting} // Pause timer while starting
             />
 
             {/* Main Content Area - Top Anchored with Spacer */}
@@ -751,6 +783,14 @@ export function GameScreen({
                     </View>
                 )
             }
+
+            <LoadingOverlay visible={isSubmitting} message={t('common.saving', 'Kaydediliyor...')} />
+            <TestPreparationOverlay
+                visible={isStarting}
+                title={title}
+                questionCount={questions.length}
+                duration={timerDuration}
+            />
         </View >
     );
 }
@@ -841,6 +881,15 @@ const getStyles = () =>
             justifyContent: 'center',
             alignItems: 'center',
             padding: 20,
+            marginTop: -100,
+        },
+        summaryHeader: {
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: colors.textPrimary,
+            marginTop: 10,
+            marginBottom: 60,
+            letterSpacing: 2,
         },
         completeTitle: {
             fontSize: 32,
@@ -851,7 +900,8 @@ const getStyles = () =>
         completeText: {
             fontSize: 18,
             color: colors.textSecondary,
-            marginBottom: 32,
+            marginBottom: 96,
+            textAlign: 'center',
         },
         statsContainer: {
             backgroundColor: colors.surface,
@@ -884,9 +934,37 @@ const getStyles = () =>
             fontSize: 18,
             fontWeight: 'bold',
         },
+        durationContainer: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: colors.surface,
+            paddingVertical: 12,
+            paddingHorizontal: 20,
+            borderRadius: 20,
+            marginTop: 16,
+            marginBottom: 20,
+            borderWidth: 1,
+            borderColor: colors.border,
+        },
+        durationText: {
+            fontSize: 16,
+            color: colors.textSecondary,
+            fontWeight: '600',
+        },
+        motivationContainer: {
+            backgroundColor: colors.surface,
+            paddingVertical: 16,
+            paddingHorizontal: 24,
+            borderRadius: 20,
+            marginBottom: 24,
+            borderWidth: 1,
+            borderColor: colors.border,
+            alignItems: 'center',
+            width: '100%',
+        },
         xpBarContainer: {
             width: '100%',
-            marginBottom: 24,
+            marginBottom: 96,
             paddingHorizontal: 20,
         },
         xpBarBackground: {

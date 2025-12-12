@@ -1,6 +1,7 @@
 import { StateCreator } from 'zustand';
 import { User } from '@/types/user.types';
 import { supabase } from '@/lib/supabase/client';
+import { database } from '@/lib/supabase/database';
 
 export interface AuthSlice {
   // State
@@ -16,6 +17,7 @@ export interface AuthSlice {
   setIsLoading: (isLoading: boolean) => void;
   logout: () => void;
   signInAnonymously: () => Promise<{ success: boolean; error?: any }>;
+  refreshUser: () => Promise<void>;
 }
 
 export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
@@ -40,6 +42,29 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
     isAnonymous: true,
   }),
 
+  refreshUser: async () => {
+    try {
+      const { data: { user: authUser } } = await supabase.auth.getUser();
+      if (!authUser) return;
+
+      const { data: profile } = await database.users.getProfile(authUser.id);
+
+      if (profile) {
+        set((state) => ({
+          user: {
+            ...state.user,
+            ...profile,
+            id: authUser.id,
+            email: authUser.email,
+            is_anonymous: authUser.is_anonymous || false,
+          } as User
+        }));
+      }
+    } catch (error) {
+      console.error('Failed to refresh user profile:', error);
+    }
+  },
+
   // Anonymous Sign In
   signInAnonymously: async () => {
     set({ isLoading: true });
@@ -54,13 +79,29 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
       const user = data.user;
 
       if (user) {
-        // Map Supabase user to App user type if needed, or just store essential info
+        // Initial set with basic info
         set({
           user: user as any,
           isAuthenticated: true,
           isAnonymous: true,
           isLoading: false
         });
+
+        // Immediately fetch FULL profile (username etc.) from DB
+        // Wait a bit for trigger to complete
+        setTimeout(async () => {
+          const { data: profile } = await database.users.getProfile(user.id);
+          if (profile) {
+            set((state) => ({
+              user: {
+                ...state.user, // keep existing
+                ...profile,    // overwrite with DB data (username)
+                id: user.id,
+                is_anonymous: true
+              } as User
+            }));
+          }
+        }, 1000);
       }
       return { success: true };
     } catch (error) {
@@ -70,3 +111,4 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
     }
   },
 });
+

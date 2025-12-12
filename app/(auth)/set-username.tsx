@@ -5,10 +5,13 @@ import { Button, Card } from '@components/ui';
 import { useAuthHook } from '../../src/hooks';
 import { colors } from '@constants/colors';
 import { supabase } from '@/lib/supabase/client';
+import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
+import { useTranslation } from 'react-i18next';
 
 export default function SetUsernameScreen() {
     const router = useRouter();
     const { user, signOut } = useAuthHook();
+    const { t } = useTranslation();
 
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(false);
@@ -68,7 +71,8 @@ export default function SetUsernameScreen() {
             router.replace('/(tabs)');
         } catch (err: any) {
             console.error('Error creating user:', err);
-            setError(err.message || 'Bir hata oluştu');
+            // 🛡️ Kullanıcı dostu hata mesajı
+            setError(mapDatabaseError(err.message, t));
         } finally {
             setLoading(false);
         }

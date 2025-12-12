@@ -33,7 +33,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 export default function AhlakEdepGamePlayScreen() {
   const { id } = useLocalSearchParams();
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Select questions based on language
   const questionsSource = useMemo(() => {
@@ -71,6 +71,7 @@ export default function AhlakEdepGamePlayScreen() {
       questions={questions}
       timerDuration={15}
       hasLatinToggle={false}
+      title={t('games.verses.title', 'Ahlak ve Edep')}
     />
   );
 }

@@ -4,12 +4,21 @@
     "congratulations": "Tebrikler!",
     "totalScore": "Toplam Puan",
     "correctAnswers": "Doğru Cevaplar",
+    "correct": "Doğru",
     "score": "Puan",
     "xpEarned": "Kazanılan XP",
     "accuracy": "Doğruluk",
     "timeSpent": "Geçen Süre",
     "question": "Soru",
     "playAgain": "Tekrar Oyna",
+    "finishTest": "Testi Bitir",
+    "totalTime": "Toplam Süre",
+    "level": "Seviye",
+    "levelWithXP": "Seviye {{level}} (+{{xp}} XP)",
+    "levelReached": "Tebrikler! Seviye {{level}}'e ulaştınız!",
+    "correctOutOf": "{{correct}}/{{total}} doğru",
+    "summary": "ÖZET",
+    "loadingTest": "TEST YÜKLENİYOR...",
     "feedback": {
         "low": {
             "correct": [

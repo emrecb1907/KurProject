@@ -83,5 +83,14 @@
             "confirm": "Delete"
         },
         "version": "Version"
+    },
+    "editProfile": {
+        "title": "Edit Profile",
+        "username": "Username",
+        "usernamePlaceholder": "Username",
+        "usernameHelper": "Your username must be unique. You can only use letters, numbers and underscores (_). Inappropriate, offensive or disrespectful usernames are prohibited.",
+        "invalidUsername": "Invalid username.",
+        "successMessage": "Your profile has been updated successfully!",
+        "saving": "Saving..."
     }
 }

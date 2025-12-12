@@ -5,12 +5,14 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { colors } from '@constants/colors';
 import { Button } from '@components/ui';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 export default function WelcomeScreen() {
     const { t } = useTranslation();
     const router = useRouter();
     const { activeTheme } = useTheme();
+
+    const styles = useMemo(() => getStyles(activeTheme), [activeTheme]);
 
     // Prevent going back
     useFocusEffect(
@@ -26,10 +28,8 @@ export default function WelcomeScreen() {
         }, [])
     );
 
-    const isDark = activeTheme === 'dark';
-
     return (
-        <View style={[styles.container, { backgroundColor: colors.background }]}>
+        <View style={styles.container}>
             <View style={styles.content}>
 
                 {/* Spacer to push content down significantly, or center it. 
@@ -70,10 +70,11 @@ export default function WelcomeScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (activeTheme: string) => StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 24,
+        backgroundColor: colors.background,
     },
     content: {
         flex: 1,
@@ -106,11 +107,12 @@ const styles = StyleSheet.create({
     registerButton: {
         height: 56,
         borderRadius: 28, // Pill shape
-        backgroundColor: '#1F2024', // Dark background for secondary button in dark mode
-        borderColor: 'transparent',
+        backgroundColor: activeTheme === 'light' ? colors.surface : '#1F2024',
+        borderColor: activeTheme === 'light' ? colors.border : 'transparent',
+        borderWidth: activeTheme === 'light' ? 1 : 0,
     },
     registerButtonText: {
-        color: '#FFFFFF',
+        color: activeTheme === 'light' ? colors.textPrimary : '#FFFFFF',
         fontWeight: 'bold',
     },
     safetyNote: {
