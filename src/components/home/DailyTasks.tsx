@@ -184,6 +184,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             alignItems: 'center',
             backgroundColor: colors.surfaceLight,
             marginRight: 4,
+            marginBottom: 3,
         },
         taskIconBoxCompleted: {
             backgroundColor: colors.success,
@@ -228,6 +229,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             backgroundColor: colors.surfaceLight,
             borderWidth: 1,
             borderColor: 'transparent',
+            marginBottom: 3,
         },
         xpButtonActive: {
             backgroundColor: colors.primary,

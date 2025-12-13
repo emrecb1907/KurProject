@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -19,7 +19,9 @@ import {
   Lightbulb,
   Lock,
   PencilSimple,
-  Gear
+  Gear,
+  UserCircle,
+  Camera
 } from 'phosphor-react-native';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
@@ -27,13 +29,14 @@ import { database } from '@/lib/supabase/database';
 import { useUserStats } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
+import { getAvatarSource } from '@/constants/avatars';
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
   // Get user data from Zustand store (UI state)
-  const { totalXP, streak, setStreak, setUserStats } = useUser();
+  const { totalXP, streak, setStreak, setUserStats, selectedAvatar } = useUser();
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
 
@@ -42,6 +45,9 @@ export default function ProfileScreen() {
 
   // ScrollView ref for resetting scroll position
   const scrollViewRef = useRef<ScrollView>(null);
+
+  // Edit menu dropdown state
+  const [showEditMenu, setShowEditMenu] = useState(false);
 
   // Reset scroll position when screen comes into focus
   useFocusEffect(
@@ -174,11 +180,17 @@ export default function ProfileScreen() {
       alignItems: 'center',
       borderWidth: 4,
       borderColor: colors.warning,
+      overflow: 'hidden',
+    },
+    avatarImage: {
+      width: '108%',
+      height: '100%',
+      transform: [{ translateX: -3 }],
     },
     levelBadge: {
       position: 'absolute',
-      bottom: 0,
-      right: 0,
+      bottom: -10,
+      right: -10,
       backgroundColor: colors.warning,
       borderRadius: 15,
       width: 35,
@@ -359,7 +371,7 @@ export default function ProfileScreen() {
       position: 'absolute',
       top: 16,
       left: 16,
-      zIndex: 10,
+      zIndex: 20,
       padding: 8,
       backgroundColor: colors.surface,
       borderRadius: 20,
@@ -368,6 +380,48 @@ export default function ProfileScreen() {
       shadowOpacity: 0.1,
       shadowRadius: 4,
       elevation: 3,
+    },
+    editMenuDropdown: {
+      position: 'absolute',
+      top: 56,
+      left: 16,
+      zIndex: 30,
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      paddingVertical: 8,
+      minWidth: 180,
+      shadowColor: '#000',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.15,
+      shadowRadius: 8,
+      elevation: 8,
+      borderWidth: 1,
+      borderColor: colors.border,
+    },
+    editMenuItem: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      gap: 12,
+    },
+    editMenuItemText: {
+      fontSize: 15,
+      color: colors.textPrimary,
+      fontWeight: '500',
+    },
+    editMenuOverlay: {
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      right: 0,
+      bottom: 0,
+      zIndex: 15,
+    },
+    menuDivider: {
+      height: 1,
+      backgroundColor: colors.border,
+      marginHorizontal: 16,
     },
   }), [themeVersion]); // Re-create styles when theme changes
 
@@ -399,14 +453,55 @@ export default function ProfileScreen() {
               style={styles.editButton}
               onPress={() => {
                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                router.push('/edit-profile');
+                setShowEditMenu(!showEditMenu);
               }}
             >
               <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
             </Pressable>
+
+            {/* Edit Menu Overlay */}
+            {showEditMenu && (
+              <Pressable
+                style={styles.editMenuOverlay}
+                onPress={() => setShowEditMenu(false)}
+              />
+            )}
+
+            {/* Edit Menu Dropdown */}
+            {showEditMenu && (
+              <View style={styles.editMenuDropdown}>
+                <Pressable
+                  style={styles.editMenuItem}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setShowEditMenu(false);
+                    router.push('/edit-profile');
+                  }}
+                >
+                  <UserCircle size={22} color={colors.textPrimary} weight="fill" />
+                  <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeUsername', 'Kullanıcı Adı Değiştir')}</Text>
+                </Pressable>
+                <View style={styles.menuDivider} />
+                <Pressable
+                  style={styles.editMenuItem}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setShowEditMenu(false);
+                    router.push('/avatar-select' as any);
+                  }}
+                >
+                  <Camera size={22} color={colors.textPrimary} weight="fill" />
+                  <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeAvatar')}</Text>
+                </Pressable>
+              </View>
+            )}
             <View style={styles.avatarContainer}>
               <View style={styles.avatar}>
-                <User size={50} color={colors.textPrimary} weight="fill" />
+                <Image
+                  source={getAvatarSource(selectedAvatar)}
+                  style={styles.avatarImage}
+                  resizeMode="cover"
+                />
               </View>
 
 

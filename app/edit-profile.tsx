@@ -9,7 +9,7 @@ import { database } from '@/lib/supabase/database';
 import { supabase } from '@/lib/supabase/client';
 import { validateText } from '@/utils/profanityFilter';
 import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
-import { User, Check, Warning } from 'phosphor-react-native';
+import { User, Check, Warning, Camera } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { HeaderButton } from '@components/ui';
@@ -119,6 +119,27 @@ export default function EditProfileScreen() {
             flex: 1,
             color: colors.success,
             fontSize: 14,
+        },
+        avatarSection: {
+            alignItems: 'center',
+            marginBottom: 32,
+        },
+        avatarButton: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: 8,
+            backgroundColor: colors.surface,
+            borderWidth: 1,
+            borderColor: colors.border,
+            borderRadius: 30,
+            paddingVertical: 14,
+            paddingHorizontal: 24,
+        },
+        avatarButtonText: {
+            color: colors.textPrimary,
+            fontSize: 16,
+            fontWeight: '600',
         },
         saveButton: {
             backgroundColor: '#FF9600',

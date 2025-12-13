@@ -1,6 +1,7 @@
 import { StateCreator } from 'zustand';
 import { User, UserProgress, UserStreak, LeaderboardEntry } from '@/types/user.types';
 import { database } from '@/lib/supabase/database';
+import { DEFAULT_AVATAR_ID } from '@/constants/avatars';
 
 export interface UserSlice {
   // State
@@ -11,6 +12,7 @@ export interface UserSlice {
   maxLives: number;
   streak: number;
   progress: UserProgress[];
+  selectedAvatar: string;
 
   streakData: UserStreak | null;
   lastReplenishTime: number | null;
@@ -47,6 +49,7 @@ export interface UserSlice {
   updateGameStats: (xp: number, level: number, completedTests: number, successRate: number, streak?: number) => void;
   resetUserData: () => void;
   setBoundUserId: (id: string | null) => void;
+  setSelectedAvatar: (avatarId: string) => void;
 
   // Sync & Logic
   checkDailyReset: () => void;
@@ -72,6 +75,7 @@ const initialState = {
   maxLives: 6,
   streak: 0,
   progress: [],
+  selectedAvatar: DEFAULT_AVATAR_ID,
   streakData: null,
   lastReplenishTime: Date.now(),
   adWatchTimes: [],
@@ -166,6 +170,8 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
       get().checkLifeRegeneration();
     }
   },
+
+  setSelectedAvatar: (avatarId) => set({ selectedAvatar: avatarId }),
 
   checkDailyReset: () => {
     const state = get();

@@ -91,6 +91,14 @@
         "usernameHelper": "Your username must be unique. You can only use letters, numbers and underscores (_). Inappropriate, offensive or disrespectful usernames are prohibited.",
         "invalidUsername": "Invalid username.",
         "successMessage": "Your profile has been updated successfully!",
-        "saving": "Saving..."
+        "saving": "Saving...",
+        "changeAvatar": "Change Avatar",
+        "changeUsername": "Change Username"
+    },
+    "avatarSelect": {
+        "title": "Choose Your Avatar",
+        "description1": "Select a character for your profile.",
+        "description2": "Find the one that best represents you!",
+        "continue": "Save"
     }
 }

@@ -91,6 +91,14 @@
         "usernameHelper": "Kullanıcı adınız benzersiz olmalıdır. Sadece harf, rakam ve alt çizgi (_) kullanabilirsiniz. Uygunsuz, hakaret içeren veya dini değerlere saygısızlık eden kullanıcı adları yasaktır.",
         "invalidUsername": "Geçersiz kullanıcı adı.",
         "successMessage": "Profiliniz başarıyla güncellendi!",
-        "saving": "Kaydediliyor..."
+        "saving": "Kaydediliyor...",
+        "changeAvatar": "Avatar Değiştir",
+        "changeUsername": "Kullanıcı Adı Değiştir"
+    },
+    "avatarSelect": {
+        "title": "Avatarını Seç",
+        "description1": "Profilinde görünecek bir karakter seç.",
+        "description2": "Tarzını en iyi yansıtanı bul!",
+        "continue": "Kaydet"
     }
 }

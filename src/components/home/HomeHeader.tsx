@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import Animated, {
     useAnimatedStyle,
     useSharedValue,
@@ -14,11 +14,12 @@ import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useUser, useAuth } from '@/store';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
+import { getAvatarSource } from '@/constants/avatars';
 
 export const HomeHeader = () => {
     const { t } = useTranslation();
     const { themeVersion, activeTheme } = useTheme();
-    const { totalXP, currentLives, maxLives } = useUser();
+    const { totalXP, currentLives, maxLives, selectedAvatar } = useUser();
     const { user } = useAuth();
 
     // Calculate XP progress
@@ -56,14 +57,20 @@ export const HomeHeader = () => {
             gap: 12,
         },
         avatarContainer: {
-            width: 48,
-            height: 48,
-            borderRadius: 24,
+            width: 58,
+            height: 58,
+            borderRadius: 29,
             backgroundColor: colors.primary, // Orange circle
             justifyContent: 'center',
             alignItems: 'center',
             borderWidth: 2,
             borderColor: colors.primaryDark,
+            overflow: 'hidden',
+        },
+        avatarImage: {
+            width: '100%',
+            height: '100%',
+            transform: [{ scale: 1.2 }, { translateX: -2 }],
         },
         greetingContainer: {
             justifyContent: 'center',
@@ -155,8 +162,11 @@ export const HomeHeader = () => {
             <View style={styles.header}>
                 <View style={styles.userInfo}>
                     <View style={styles.avatarContainer}>
-                        {/* Placeholder for avatar - can be replaced with Image if available */}
-                        <User size={24} color="#000" weight="fill" style={{ opacity: 0.5 }} />
+                        <Image
+                            source={getAvatarSource(selectedAvatar)}
+                            style={styles.avatarImage}
+                            resizeMode="cover"
+                        />
                     </View>
                     <View style={styles.greetingContainer}>
                         <Text style={styles.greetingText}>{t('home.welcome')},</Text>

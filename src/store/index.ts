@@ -46,6 +46,7 @@ export const useStore = create<StoreState>()(
         successRate: state.successRate,
         dailyProgress: state.dailyProgress,
         completedLessons: state.completedLessons,
+        selectedAvatar: state.selectedAvatar,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
@@ -117,6 +118,8 @@ export const useUser = () => useStore(
     syncCompletedLessons: state.syncCompletedLessons,
     startTestSession: state.startTestSession,
     sessionToken: state.sessionToken,
+    selectedAvatar: state.selectedAvatar,
+    setSelectedAvatar: state.setSelectedAvatar,
   }))
 );
 
