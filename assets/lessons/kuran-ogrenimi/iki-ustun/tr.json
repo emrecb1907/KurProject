@@ -1,4 +1,8 @@
 {
+    "lessonInfo": [
+        "Tenvin, kelimenin sonuna cezimli nun sesi veren iki üstün ( ً ), iki esre ( ٍ ) ve iki ötre ( ٌ ) işaretleridir. Arapçada sadece isimlerin sonunda bulunur.",
+        "İki üstün: Harfin üzerine yazılır ( ً ). Yuvarlak te ( ة ) ve hemze ( ء ) dışındaki harflerde elif ( ا ) desteği üzerine yazılır. İnce harflerin 'en' sesiyle, kalın harflerin 'an' sesiyle okunmasını sağlar."
+    ],
     "description": "İki üstün (tenvin) öğrenimi",
     "symbol": "ً",
     "sound": "en"

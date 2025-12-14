@@ -1,4 +1,11 @@
 {
+    "lessonInfo": [
+        "Kur'an harfleri, Türkçemizdeki el yazısında olduğu gibi, önceki ve sonraki harfe bitiştirilerek yazılır. Kelime içindeki konumuna göre harflerin yazılış biçimleri değişir.",
+        "Not: ا د ذ ر ز و harfleri kendinden sonraki harfle bitişmez. Bu harflerin ortada ve sondaki yazılışları aynıdır.",
+        "İnce ve Kalın Sesli Harfler\nKur'an harfleri, kalın ve ince olmak üzere iki gruba ayrılır. Bu harflerin 18'i ince, 10'u kalın sesle okunur.",
+        "İnce sesli harfler: ى ه و ن م ل ك ف ش س ز ذ د ج ث ت ب ا",
+        "Kalın sesli harfler:\nق غ ظ ط ض ص خ harfleri kalın sesle okunur.\nع ve ح harfleri kalına yakın bir sesle okunur.\nر harfi ise bazen kalın bazen ince okunur."
+    ],
     "positions": [
         "baş",
         "orta",

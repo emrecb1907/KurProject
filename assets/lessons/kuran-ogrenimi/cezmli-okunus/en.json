@@ -1,4 +1,9 @@
 {
+    "lessonInfo": [
+        "Sukūn: A small circular sign written above a letter ( ْ ). This sign is called Sukūn in Arabic.",
+        "Sukūn indicates that a letter is pronounced without a vowel sound. When a letter with a vowel is followed by a letter with Sukūn, it forms a closed syllable.",
+        "For example, when a Hamza with Fatha is followed by a Lam with Sukūn, it is read as al (اَلْ)."
+    ],
     "words": [
         {
             "id": 1,

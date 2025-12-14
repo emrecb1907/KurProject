@@ -1,3 +1,8 @@
 {
+    "lessonInfo": [
+        "Elif Lam Takısı: Arapçada isimleri belirli (marife) yapma yollarından biri, ismin başına elif lam ( ال ) takısı getirmektir.",
+        "ا ب ج ح خ ع غ ف ق ك م و ه ى harflerinden biriyle başlayan kelimelerin başına elif lam takısı gelirse lam harfi cezimli olarak okunur. Örnek: قَمَرٌ → اَلْقَمَرُ",
+        "ت ث د ذ ر ز س ش ص ض ط ظ ل ن harflerinden biriyle başlayan kelimelerin başına elif lam takısı gelirse lam harfi yazılır, fakat okunmaz. Sonraki harf şeddeli okunur. Örnek: شَمْسٌ → اَلشَّمْسُ"
+    ],
     "description": "El takısı ve kullanımı"
 }

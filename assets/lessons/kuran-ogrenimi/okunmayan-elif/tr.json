@@ -1,3 +1,7 @@
 {
+    "lessonInfo": [
+        "Okunmayan Elif: Elif harfi, bazen yazıldığı hâlde okunmaz. Örneğin, قَالُوا kelimesindeki birinci elif ( ا ), kaf ( ق ) harfinin uzatılmasını sağlar. Fakat kelimenin sonundaki elifin okunuşa herhangi bir etkisi yoktur.",
+        "Elif lam takısının hemzesi, kendisinden önce harekeli bir harf geldiğinde okunmaz. Örnek: بِالْكِتَابِ → اَلْكِتَابُ ve يَوْمِ الدّ۪ينِ → اَلدّ۪ينِ"
+    ],
     "description": "Okunmayan Elif ve Elif Lam kuralları"
 }

@@ -1,3 +1,7 @@
 {
+    "lessonInfo": [
+        "Silent Alif: In Qur'anic writing, the letter Alif is sometimes written but not pronounced. For example, in the word قَالُوا, the first Alif (ا) lengthens the sound of the letter Qaf (ق). However, the Alif at the end of the word has no effect on pronunciation.",
+        "The Hamza of the Alif-Lam definite article is not pronounced when it is preceded by a vowelled letter. Examples: بِالْكِتَابِ → اَلْكِتَابُ and يَوْمِ الدِّينِ → اَلدِّينِ"
+    ],
     "description": "Silent Alif and Alif Lam rules"
 }

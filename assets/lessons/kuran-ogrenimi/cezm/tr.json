@@ -1,4 +1,9 @@
 {
+    "lessonInfo": [
+        "Cezim, harfin üzerine küçük bir daire şeklinde yazılan işarettir ( ْ ).",
+        "Cezim, harflerin harekesiz olarak okunmasını sağlar. Harekeli bir harf cezimli bir harfle birleşince Türkçedeki sessiz harfle biten kapalı hece biçimi oluşur.",
+        "Örneğin, üstünlü hemze ile cezimli lam birleşince اَلْ (el) şeklinde okunur."
+    ],
     "description": "Cezm işareti sessiz harfleri gösterir",
     "words": [
         {

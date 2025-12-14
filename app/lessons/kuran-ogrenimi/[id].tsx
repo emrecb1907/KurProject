@@ -3,7 +3,7 @@ import { useMemo, useEffect, useRef, useState } from 'react';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@constants/colors';
-import { ArrowLeft, PlayCircle, CheckCircle } from 'phosphor-react-native';
+import { ArrowLeft, PlayCircle, CheckCircle, Info } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { playSound, releaseAudioPlayer } from '@/utils/audio';
@@ -13,11 +13,106 @@ import { getLessonData } from '@/data/kuran';
 import { KuranLessonContent } from '@/data/kuran/types';
 import { useTranslation } from 'react-i18next';
 
+// Lesson JSON imports for lessonInfo
 import elifBaTr from '../../../assets/lessons/kuran-ogrenimi/elif-ba/tr.json';
 import elifBaEn from '../../../assets/lessons/kuran-ogrenimi/elif-ba/en.json';
+import harekelerTr from '../../../assets/lessons/kuran-ogrenimi/harekeler/tr.json';
+import harekelerEn from '../../../assets/lessons/kuran-ogrenimi/harekeler/en.json';
+import harflerinKonumuTr from '../../../assets/lessons/kuran-ogrenimi/harflerin-konumu/tr.json';
+import harflerinKonumuEn from '../../../assets/lessons/kuran-ogrenimi/harflerin-konumu/en.json';
+import ustun1Tr from '../../../assets/lessons/kuran-ogrenimi/ustun-1/tr.json';
+import ustun1En from '../../../assets/lessons/kuran-ogrenimi/ustun-1/en.json';
+import ustun2Tr from '../../../assets/lessons/kuran-ogrenimi/ustun-2/tr.json';
+import ustun2En from '../../../assets/lessons/kuran-ogrenimi/ustun-2/en.json';
+import ustun3Tr from '../../../assets/lessons/kuran-ogrenimi/ustun-3/tr.json';
+import ustun3En from '../../../assets/lessons/kuran-ogrenimi/ustun-3/en.json';
+import esreTr from '../../../assets/lessons/kuran-ogrenimi/esre/tr.json';
+import esreEn from '../../../assets/lessons/kuran-ogrenimi/esre/en.json';
+import otreTr from '../../../assets/lessons/kuran-ogrenimi/otre/tr.json';
+import otreEn from '../../../assets/lessons/kuran-ogrenimi/otre/en.json';
+import cezmliOkunusTr from '../../../assets/lessons/kuran-ogrenimi/cezmli-okunus/tr.json';
+import cezmliOkunusEn from '../../../assets/lessons/kuran-ogrenimi/cezmli-okunus/en.json';
+import cezmTr from '../../../assets/lessons/kuran-ogrenimi/cezm/tr.json';
+import cezmEn from '../../../assets/lessons/kuran-ogrenimi/cezm/en.json';
+import alistirmalar1Tr from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-1/tr.json';
+import alistirmalar1En from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-1/en.json';
+import uzatilarakOkunusTr from '../../../assets/lessons/kuran-ogrenimi/uzatilarak-okunus/tr.json';
+import uzatilarakOkunusEn from '../../../assets/lessons/kuran-ogrenimi/uzatilarak-okunus/en.json';
+import medElifTr from '../../../assets/lessons/kuran-ogrenimi/med-elif/tr.json';
+import medElifEn from '../../../assets/lessons/kuran-ogrenimi/med-elif/en.json';
+import medYaTr from '../../../assets/lessons/kuran-ogrenimi/med-ya/tr.json';
+import medYaEn from '../../../assets/lessons/kuran-ogrenimi/med-ya/en.json';
+import medVavTr from '../../../assets/lessons/kuran-ogrenimi/med-vav/tr.json';
+import medVavEn from '../../../assets/lessons/kuran-ogrenimi/med-vav/en.json';
+import alistirmalar2Tr from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-2/tr.json';
+import alistirmalar2En from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-2/en.json';
+import seddeTr from '../../../assets/lessons/kuran-ogrenimi/sedde/tr.json';
+import seddeEn from '../../../assets/lessons/kuran-ogrenimi/sedde/en.json';
+import seddeliOkunusTr from '../../../assets/lessons/kuran-ogrenimi/seddeli-okunus/tr.json';
+import seddeliOkunusEn from '../../../assets/lessons/kuran-ogrenimi/seddeli-okunus/en.json';
+import alistirmalar3Tr from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-3/tr.json';
+import alistirmalar3En from '../../../assets/lessons/kuran-ogrenimi/alistirmalar-3/en.json';
+import ikiUstunTr from '../../../assets/lessons/kuran-ogrenimi/iki-ustun/tr.json';
+import ikiUstunEn from '../../../assets/lessons/kuran-ogrenimi/iki-ustun/en.json';
+import ikiEsreTr from '../../../assets/lessons/kuran-ogrenimi/iki-esre/tr.json';
+import ikiEsreEn from '../../../assets/lessons/kuran-ogrenimi/iki-esre/en.json';
+import ikiOtreTr from '../../../assets/lessons/kuran-ogrenimi/iki-otre/tr.json';
+import ikiOtreEn from '../../../assets/lessons/kuran-ogrenimi/iki-otre/en.json';
+import cekerTr from '../../../assets/lessons/kuran-ogrenimi/ceker/tr.json';
+import cekerEn from '../../../assets/lessons/kuran-ogrenimi/ceker/en.json';
+import vavYaElifTr from '../../../assets/lessons/kuran-ogrenimi/vav-ya-elif/tr.json';
+import vavYaElifEn from '../../../assets/lessons/kuran-ogrenimi/vav-ya-elif/en.json';
+import zamirTr from '../../../assets/lessons/kuran-ogrenimi/zamir/tr.json';
+import zamirEn from '../../../assets/lessons/kuran-ogrenimi/zamir/en.json';
+import elTakisiTr from '../../../assets/lessons/kuran-ogrenimi/el-takisi/tr.json';
+import elTakisiEn from '../../../assets/lessons/kuran-ogrenimi/el-takisi/en.json';
+import okunmayanElifTr from '../../../assets/lessons/kuran-ogrenimi/okunmayan-elif/tr.json';
+import okunmayanElifEn from '../../../assets/lessons/kuran-ogrenimi/okunmayan-elif/en.json';
+import lafzatullahTr from '../../../assets/lessons/kuran-ogrenimi/lafzatullah/tr.json';
+import lafzatullahEn from '../../../assets/lessons/kuran-ogrenimi/lafzatullah/en.json';
 
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import { HeaderButton } from '@/components/ui/HeaderButton';
+
+// Helper to get lessonInfo based on lesson ID
+const getLessonInfoData = (lessonId: number, isEnglish: boolean): string[] | null => {
+    const lessonDataMap: Record<number, { tr: { lessonInfo?: string[] }, en: { lessonInfo?: string[] } }> = {
+        101: { tr: elifBaTr, en: elifBaEn },
+        102: { tr: harekelerTr, en: harekelerEn },
+        103: { tr: harflerinKonumuTr, en: harflerinKonumuEn },
+        104: { tr: ustun1Tr, en: ustun1En },
+        105: { tr: ustun2Tr, en: ustun2En },
+        106: { tr: ustun3Tr, en: ustun3En },
+        107: { tr: esreTr, en: esreEn },
+        108: { tr: otreTr, en: otreEn },
+        109: { tr: cezmliOkunusTr, en: cezmliOkunusEn },
+        110: { tr: cezmTr, en: cezmEn },
+        111: { tr: alistirmalar1Tr, en: alistirmalar1En },
+        112: { tr: uzatilarakOkunusTr, en: uzatilarakOkunusEn },
+        113: { tr: medElifTr, en: medElifEn },
+        114: { tr: medYaTr, en: medYaEn },
+        115: { tr: medVavTr, en: medVavEn },
+        116: { tr: alistirmalar2Tr, en: alistirmalar2En },
+        117: { tr: seddeTr, en: seddeEn },
+        118: { tr: seddeliOkunusTr, en: seddeliOkunusEn },
+        119: { tr: alistirmalar3Tr, en: alistirmalar3En },
+        120: { tr: ikiUstunTr, en: ikiUstunEn },
+        121: { tr: ikiEsreTr, en: ikiEsreEn },
+        122: { tr: ikiOtreTr, en: ikiOtreEn },
+        123: { tr: cekerTr, en: cekerEn },
+        124: { tr: vavYaElifTr, en: vavYaElifEn },
+        125: { tr: zamirTr, en: zamirEn },
+        126: { tr: elTakisiTr, en: elTakisiEn },
+        127: { tr: okunmayanElifTr, en: okunmayanElifEn },
+        128: { tr: lafzatullahTr, en: lafzatullahEn },
+    };
+
+    const lessonData = lessonDataMap[lessonId];
+    if (!lessonData) return null;
+
+    const data = isEnglish ? lessonData.en : lessonData.tr;
+    return data?.lessonInfo || null;
+};
 
 export default function UnifiedKuranLessonScreen() {
     const { id } = useLocalSearchParams();
@@ -32,11 +127,9 @@ export default function UnifiedKuranLessonScreen() {
 
     const { t, i18n } = useTranslation();
 
-    // Explanation Content (Specific to Lesson 101)
+    // Explanation Content (Dynamic for any lesson with lessonInfo)
     const explanationData = useMemo(() => {
-        if (lessonId !== 101) return null;
-        const data = i18n.language.startsWith('en') ? elifBaEn : elifBaTr;
-        return data.lessonInfo;
+        return getLessonInfoData(lessonId, i18n.language.startsWith('en'));
     }, [lessonId, i18n.language]);
 
     // Derived Data
@@ -191,6 +284,22 @@ export default function UnifiedKuranLessonScreen() {
             lineHeight: 26,
             color: colors.textPrimary,
             marginBottom: 12,
+        },
+        instructionCard: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            backgroundColor: colors.surface,
+            borderRadius: 12,
+            padding: 12,
+            marginBottom: 16,
+            gap: 10,
+            borderWidth: 1,
+            borderColor: colors.border,
+        },
+        instructionText: {
+            fontSize: 14,
+            color: colors.primary,
+            flex: 1,
         }
     }), [themeVersion]);
 
@@ -333,6 +442,14 @@ export default function UnifiedKuranLessonScreen() {
                         ))}
                     </View>
                 )}
+                <View style={styles.instructionCard}>
+                    <Info size={20} color={colors.primary} weight="fill" />
+                    <Text style={styles.instructionText}>
+                        {i18n.language.startsWith('en')
+                            ? 'Tap the cards to listen to the sounds.'
+                            : 'Kartlara dokunarak sesleri dinleyebilirsin.'}
+                    </Text>
+                </View>
                 <View style={styles.grid}>
                     {lessonData.map((item) => (
                         <Pressable

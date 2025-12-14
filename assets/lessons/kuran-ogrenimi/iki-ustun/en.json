@@ -1,4 +1,8 @@
 {
+    "lessonInfo": [
+        "Tanwīn: Tanwīn consists of the signs double Fatha ( ً ), double Kasra ( ٍ ), and double Damma ( ٌ ), which add a final \"n\" sound to a word. In Arabic, Tanwīn appears only at the end of nouns.",
+        "Double Fatha ( ً ): Written above the letter. For letters other than Tāʾ Marbūṭa (ة) and Hamza (ء), it is written on a supporting Alif (ا). It is pronounced as \"-an\"."
+    ],
     "description": "Double Fatha (Tanween) learning",
     "symbol": "ً",
     "sound": "an"

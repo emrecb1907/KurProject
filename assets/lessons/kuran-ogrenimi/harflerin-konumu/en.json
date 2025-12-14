@@ -1,4 +1,11 @@
 {
+    "lessonInfo": [
+        "Quranic letters are written by connecting to adjacent letters, similar to cursive handwriting. The shape of each letter changes depending on its position within a word.",
+        "Note: The letters ا د ذ ر ز و do not connect to the following letter. These letters have identical forms in the medial and final positions.",
+        "Thin and Thick Letters\nQuranic letters are divided into two groups: thin (light) and thick (heavy). Of these letters, 18 are pronounced with a thin sound and 10 with a thick sound.",
+        "Thin-sounding letters: ى ه و ن م ل ك ف ش س ز ذ د ج ث ت ب ا",
+        "Thick-sounding letters:\nThe letters ق غ ظ ط ض ص خ are always pronounced with a thick, heavy sound.\nThe letters ع and ح are pronounced with a near-thick sound.\nThe letter ر is sometimes thick and sometimes thin, depending on its context."
+    ],
     "positions": [
         "initial",
         "medial",

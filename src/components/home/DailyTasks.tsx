@@ -169,12 +169,19 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         },
         taskItem: {
             flexDirection: 'row',
-            alignItems: 'flex-end',
+            alignItems: 'center',
             backgroundColor: colors.backgroundLighter,
-            padding: 10,
+            paddingHorizontal: 10,
+            paddingTop: 8,
+            paddingBottom: 4,
             borderRadius: 16,
-            gap: 12,
-            marginBottom: 8,
+            marginBottom: 0,
+        },
+        // Column 1: Icon (fixed width)
+        taskIconColumn: {
+            width: 52,
+            alignItems: 'center',
+            justifyContent: 'center',
         },
         taskIconBox: {
             width: 40,
@@ -183,8 +190,6 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: colors.surfaceLight,
-            marginRight: 4,
-            marginBottom: 3,
         },
         taskIconBoxCompleted: {
             backgroundColor: colors.success,
@@ -195,8 +200,18 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             fontWeight: '600',
             marginBottom: 6,
         },
-        taskInfo: {
+        // Column 2: Task info (flexible width)
+        taskInfoColumn: {
             flex: 1,
+            paddingHorizontal: 8,
+        },
+        // Column 3: Button (fixed width)
+        taskButtonColumn: {
+            width: 80,
+            alignItems: 'center',
+            justifyContent: 'flex-end',  // Push button to bottom
+            alignSelf: 'stretch',  // Take full height of row
+            paddingBottom: 2,  // Fine-tune vertical position
         },
         progressRow: {
             flexDirection: 'row',
@@ -229,7 +244,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
             backgroundColor: colors.surfaceLight,
             borderWidth: 1,
             borderColor: 'transparent',
-            marginBottom: 3,
+            marginTop: 20,
         },
         xpButtonActive: {
             backgroundColor: colors.primary,
@@ -379,20 +394,22 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
 
                     return (
                         <View key={task.id} style={styles.taskItem}>
-                            {/* Icon Box */}
-                            <View style={[
-                                styles.taskIconBox,
-                                task.completed && styles.taskIconBoxCompleted
-                            ]}>
-                                {task.completed ? (
-                                    <Check size={20} color={colors.textOnPrimary} weight="bold" />
-                                ) : (
-                                    <TaskIcon size={20} color={colors.warning} weight="fill" />
-                                )}
+                            {/* Column 1: Icon */}
+                            <View style={styles.taskIconColumn}>
+                                <View style={[
+                                    styles.taskIconBox,
+                                    task.completed && styles.taskIconBoxCompleted
+                                ]}>
+                                    {task.completed ? (
+                                        <Check size={20} color={colors.textOnPrimary} weight="bold" />
+                                    ) : (
+                                        <TaskIcon size={20} color={colors.warning} weight="fill" />
+                                    )}
+                                </View>
                             </View>
 
-                            {/* Task Info & Progress */}
-                            <View style={styles.taskInfo}>
+                            {/* Column 2: Task Info & Progress */}
+                            <View style={styles.taskInfoColumn}>
                                 <Text style={styles.taskText}>{task.text}</Text>
 
                                 <View style={styles.progressRow}>
@@ -405,33 +422,35 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                                 </View>
                             </View>
 
-                            {/* XP Button - aligned at bottom with progress bar */}
-                            <Pressable
-                                style={({ pressed }) => [
-                                    styles.xpButton,
-                                    task.completed && !task.claimed && styles.xpButtonActive,
-                                    task.claimed && styles.xpButtonClaimed,
-                                    pressed && task.completed && !task.claimed && { opacity: 0.8 }
-                                ]}
-                                onPress={() => handleClaimTaskReward(task)}
-                                disabled={!task.completed || task.claimed}
-                            >
-                                {task.claimed ? (
-                                    <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
-                                        <CheckCircle size={14} color={colors.success} weight="fill" />
-                                        <Text style={styles.xpButtonTextClaimed}>
-                                            {t('home.dailyTasks.claimed')}
+                            {/* Column 3: XP Button */}
+                            <View style={styles.taskButtonColumn}>
+                                <Pressable
+                                    style={({ pressed }) => [
+                                        styles.xpButton,
+                                        task.completed && !task.claimed && styles.xpButtonActive,
+                                        task.claimed && styles.xpButtonClaimed,
+                                        pressed && task.completed && !task.claimed && { opacity: 0.8 }
+                                    ]}
+                                    onPress={() => handleClaimTaskReward(task)}
+                                    disabled={!task.completed || task.claimed}
+                                >
+                                    {task.claimed ? (
+                                        <View style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                                            <CheckCircle size={14} color={colors.success} weight="fill" />
+                                            <Text style={styles.xpButtonTextClaimed}>
+                                                {t('home.dailyTasks.claimed')}
+                                            </Text>
+                                        </View>
+                                    ) : (
+                                        <Text style={[
+                                            styles.xpButtonText,
+                                            task.completed && styles.xpButtonTextActive,
+                                        ]}>
+                                            +{task.xp} XP
                                         </Text>
-                                    </View>
-                                ) : (
-                                    <Text style={[
-                                        styles.xpButtonText,
-                                        task.completed && styles.xpButtonTextActive,
-                                    ]}>
-                                        +{task.xp} XP
-                                    </Text>
-                                )}
-                            </Pressable>
+                                    )}
+                                </Pressable>
+                            </View>
                         </View>
                     );
                 })}

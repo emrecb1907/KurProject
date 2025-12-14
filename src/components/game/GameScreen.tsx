@@ -93,7 +93,11 @@ export function GameScreen({
     const [isAnswered, setIsAnswered] = useState(false);
     const [correctAnswersCount, setCorrectAnswersCount] = useState(0);
     const [isGameComplete, setIsGameComplete] = useState(false);
-    const [gameCompletedRef, setGameCompletedRef] = useState(false);
+
+    // 🔐 Auto-save: XP snapshot at test start (prevents store update from affecting XP bar)
+    const initialTotalXPRef = useRef<number>(totalXP);
+    // 🔐 Auto-save: Track save status for UI and retry logic
+    const [hasSaved, setHasSaved] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
     const [isTimeUp, setIsTimeUp] = useState(false); // New state for timeout
@@ -287,74 +291,146 @@ export function GameScreen({
 
     // Ref to prevent double submission (more reliable than state for rapid taps)
     const isSubmittingRef = useRef(false);
+    // 🔐 Track if we've already attempted to save (prevents auto-retry loops)
+    const hasAttemptedSaveRef = useRef(false);
+    // 🔐 Track save error for UI display
+    const [saveError, setSaveError] = useState<string | null>(null);
+    // 🔐 Track if retry is in progress
+    const [isRetrying, setIsRetrying] = useState(false);
 
-    const handleComplete = async () => {
-        // Check both state and ref
-        if (isSubmitting || isSubmittingRef.current) return;
+    // 🔐 AUTO-SAVE: Automatically save result when game completes (isGameComplete becomes true)
+    // Note: Only runs ONCE when isGameComplete becomes true (hasAttemptedSaveRef prevents re-runs)
+    useEffect(() => {
+        if (!isGameComplete || hasAttemptedSaveRef.current) return;
 
-        // Lock immediately
-        isSubmittingRef.current = true;
+        const autoSaveResult = async () => {
+            // Lock immediately
+            isSubmittingRef.current = true;
+            hasAttemptedSaveRef.current = true;
+            setSaveError(null);
+
+            // 🛡️ NETWORK CHECK (Offline Protection)
+            try {
+                const networkState = await Network.getNetworkStateAsync();
+                if (!networkState.isConnected) {
+                    isSubmittingRef.current = false;
+                    setSaveError('offline');
+                    setHasSaved(false);
+                    return;
+                }
+            } catch (netError) {
+                console.warn("Network check verification failed:", netError);
+                // Proceed - actual error will be caught in completeGame
+            }
+
+            // Calculate Duration for API
+            const endTime = Date.now();
+            const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
+
+            try {
+                console.log('🔄 Auto-saving game result...');
+                const result = await completeGame({
+                    lessonId,
+                    gameType,
+                    correctAnswers: correctAnswersCount,
+                    totalQuestions: questions.length,
+                    source,
+                    duration: durationSeconds,
+                    timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
+                });
+
+                if (result.success) {
+                    console.log('✅ Auto-save successful');
+                    setHasSaved(true);
+                    if (onComplete) {
+                        onComplete();
+                    }
+                } else {
+                    console.error('❌ Auto-save failed:', result.error);
+                    isSubmittingRef.current = false;
+                    setSaveError('server');
+                    setHasSaved(false);
+                }
+            } catch (error) {
+                console.error('❌ Auto-save error:', error);
+                isSubmittingRef.current = false;
+                setSaveError('server');
+                setHasSaved(false);
+            }
+        };
+
+        autoSaveResult();
+    }, [isGameComplete, correctAnswersCount, questions.length, lessonId, gameType, source, completeGame, onComplete]);
+
+    // 🔐 Manual retry function (called when user presses retry button)
+    const handleRetrySubmit = async () => {
+        if (isSubmittingRef.current || isRetrying) return;
+
         hapticLight();
+        setIsRetrying(true);
+        isSubmittingRef.current = true;
 
-        // 🛡️ NETWORK CHECK (Offline Protection)
+        // Check network first
         try {
             const networkState = await Network.getNetworkStateAsync();
             if (!networkState.isConnected) {
-                Alert.alert(
-                    "Bağlantı Hatası",
-                    "İnternet bağlantısı kesildi. Lütfen internet bağlantınızı kontrol edin."
-                );
-                isSubmittingRef.current = false; // Unlock
-                return; // Stop execution
+                isSubmittingRef.current = false;
+                setIsRetrying(false);
+                setSaveError('offline');
+                return;
             }
         } catch (netError) {
-            console.warn("Network check verification failed:", netError);
-            // Proceed cautiously if network check fails itself, or block? 
-            // Better to let it try or block. Let's block to be safe if check fails strictly.
-            // But usually getNetworkStateAsync is reliable locally. 
-            // We proceed if we can't check, catching the actual error in completeGame.
+            console.warn("Network check failed:", netError);
         }
 
-        // Mark game as completed (this will trigger sound in useEffect)
-        setGameCompletedRef(true);
-
-        // Calculate Duration again for API (since we might have waited on completion screen)
-        // Note: Ideally we should store the duration from handleNext, but re-calculating or using current diff is effectively "total time until submit".
-        // HOWEVER, anti-cheat usually cares about "time spent solving".
-        // The duration calculated in handleNext isn't stored in a ref variable accessible here easily without state.
-        // Let's rely on the start time.
         const endTime = Date.now();
         const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
 
         try {
-            // Use the centralized completion hook
+            console.log('🔄 Retrying save...');
             const result = await completeGame({
                 lessonId,
                 gameType,
                 correctAnswers: correctAnswersCount,
                 totalQuestions: questions.length,
-                source, // Pass source to track lesson vs test
-                duration: durationSeconds, // Pass duration for anti-cheat
-                // 🌍 FIX: Send LOCAL time, not UTC. ToISOString() shifts to UTC (e.g. 01:00 -> 22:00 prev day)
-                // We want the server to see the User's "Day".
+                source,
+                duration: durationSeconds,
                 timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
             });
 
-            // 🛡️ Sadece başarılı ise çık, hata varsa ekranda kal
             if (result.success) {
+                console.log('✅ Retry successful');
+                setSaveError(null);
+                setHasSaved(true);
+                setIsRetrying(false);
                 if (onComplete) {
                     onComplete();
                 }
-                handleExit();
             } else {
-                // Hata durumunda kullanıcı Alert gördü, ekranda kalsın
-                // Retry yapabilmesi için kilidi aç
+                console.error('❌ Retry failed:', result.error);
                 isSubmittingRef.current = false;
+                setIsRetrying(false);
+                setSaveError('server');
             }
         } catch (error) {
-            console.error('Game completion error:', error);
-            // Unlock on error so user can retry
+            console.error('❌ Retry error:', error);
             isSubmittingRef.current = false;
+            setIsRetrying(false);
+            setSaveError('server');
+        }
+    };
+
+    // 🔐 handleComplete - exits if saved, otherwise shows error
+    const handleComplete = () => {
+        hapticLight();
+        if (hasSaved) {
+            handleExit();
+        } else if (saveError) {
+            // Error state - retry button handles this
+            handleRetrySubmit();
+        } else {
+            // Still saving
+            return;
         }
     };
 
@@ -429,10 +505,12 @@ export function GameScreen({
     };
 
     // Calculate XP progress for completion screen
+    // 🔐 Use initialTotalXPRef to prevent store updates from affecting XP bar animation
     const xpEarned = correctAnswersCount;
     const { currentXPProgress, newXPProgress, leveledUp } = useMemo(() => {
-        const current = getXPProgress(totalXP);
-        const newXP = totalXP + xpEarned;
+        const snapshotXP = initialTotalXPRef.current;
+        const current = getXPProgress(snapshotXP);
+        const newXP = snapshotXP + xpEarned;
         const newProgress = getXPProgress(newXP);
         const leveled = newProgress.currentLevel > current.currentLevel;
         return {
@@ -440,7 +518,7 @@ export function GameScreen({
             newXPProgress: newProgress,
             leveledUp: leveled,
         };
-    }, [totalXP, xpEarned]);
+    }, [xpEarned]); // 🔐 Removed totalXP dependency - uses ref snapshot
     const [showLevelUpModal, setShowLevelUpModal] = useState(false);
 
     // Track current displayed level for XP bar
@@ -628,20 +706,44 @@ export function GameScreen({
                         </View>
                     </View>
 
-                    <Pressable
-                        style={[styles.completeButton, isSubmitting && { opacity: 0.7 }]}
-                        onPress={handleComplete}
-                        disabled={isSubmitting}
-                    >
-                        {isSubmitting && (
-                            <ActivityIndicator
-                                size="small"
-                                color={colors.textOnPrimary}
-                                style={{ marginRight: 8 }}
-                            />
+                    {/* Error Message - Fixed height to prevent layout shift */}
+                    <View style={{ minHeight: 24, marginBottom: 12, justifyContent: 'center' }}>
+                        {saveError && (
+                            <Text style={{ color: colors.error, textAlign: 'center', fontSize: 14 }}>
+                                {saveError === 'offline'
+                                    ? t('errors.offline', 'İnternet bağlantısı yok. Sonucunuz kaydedilemedi.')
+                                    : t('errors.serverError', 'Bir hata oluştu. Lütfen tekrar deneyin.')}
+                            </Text>
                         )}
+                    </View>
+
+                    <Pressable
+                        style={[
+                            styles.completeButton,
+                            (!hasSaved && !saveError) && { opacity: 0.7 },
+                            (saveError && !isRetrying) && { backgroundColor: colors.error },
+                            isRetrying && { opacity: 0.7 }
+                        ]}
+                        onPress={saveError ? handleRetrySubmit : handleComplete}
+                        disabled={(!hasSaved && !saveError) || isRetrying}
+                    >
+                        {/* Fixed width container for ActivityIndicator to prevent layout shift */}
+                        <View style={{ width: 28, height: 20, justifyContent: 'center', alignItems: 'center' }}>
+                            {((!hasSaved && !saveError) || isRetrying) && (
+                                <ActivityIndicator
+                                    size="small"
+                                    color={colors.textOnPrimary}
+                                />
+                            )}
+                        </View>
                         <Text style={styles.completeButtonText}>
-                            {isSubmitting ? t('common.loading') : t('common.finish')}
+                            {isRetrying
+                                ? t('common.saving', 'Kaydediliyor...')
+                                : (!hasSaved && !saveError)
+                                    ? t('common.saving', 'Kaydediliyor...')
+                                    : saveError
+                                        ? t('common.retry', 'Tekrar Dene')
+                                        : t('common.finish')}
                         </Text>
                     </Pressable>
 

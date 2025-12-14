@@ -7,6 +7,7 @@ import { ArrowLeft } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage, getCurrentLanguage } from '@/lib/i18n';
+import { PrimaryButton } from '@/components/ui/PrimaryButton';
 
 type Language = 'tr' | 'en';
 
@@ -110,24 +111,6 @@ export default function LanguageSettingsScreen() {
             padding: 16,
             paddingBottom: 32,
         },
-        confirmButton: {
-            backgroundColor: colors.primary,
-            paddingVertical: 16,
-            paddingHorizontal: 24,
-            borderRadius: 12,
-            alignItems: 'center',
-            borderBottomWidth: 4,
-            borderBottomColor: colors.primaryDark,
-        },
-        confirmButtonPressed: {
-            transform: [{ translateY: 2 }],
-            borderBottomWidth: 2,
-        },
-        confirmButtonText: {
-            fontSize: 18,
-            fontWeight: 'bold',
-            color: colors.textOnPrimary,
-        },
     }), [themeVersion]);
 
     return (
@@ -177,15 +160,10 @@ export default function LanguageSettingsScreen() {
 
             {/* Footer with Confirm Button */}
             <View style={styles.footer}>
-                <Pressable
-                    style={({ pressed }) => [
-                        styles.confirmButton,
-                        pressed && styles.confirmButtonPressed
-                    ]}
+                <PrimaryButton
+                    title={t('profile.settings.language.save')}
                     onPress={handleConfirm}
-                >
-                    <Text style={styles.confirmButtonText}>{t('profile.settings.language.save')}</Text>
-                </Pressable>
+                />
             </View>
         </View>
     );

@@ -1,4 +1,9 @@
 {
+    "lessonInfo": [
+        "Şedde, harfin üzerine birleşmiş iki küçük \"u\" harfine benzer şekilde yazılan işarettir ( ّ ). Üzerinde bulunduğu harfin iki defa okunmasını sağlar.",
+        "Dolayısıyla şeddeli harf, aslında iki harftir. Bunlardan birincisi cezimli, ikincisi harekelidir.",
+        "Örneğin, اِنَّ şeklinde yazılan kelime اِنْ نَ (inne) diye okunur."
+    ],
     "description": "Şedde harfi iki kez okutma işareti",
     "symbol": "ّ"
 }

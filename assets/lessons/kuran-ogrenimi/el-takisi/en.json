@@ -1,3 +1,8 @@
 {
+    "lessonInfo": [
+        "Definite Article (Al-): In Arabic, one way to make nouns definite (maʿrifa) is by adding the definite article al- (ال) to the beginning of the word.",
+        "If al- is added to words beginning with ا ب ج ح خ ع غ ف ق ك م و ه ي, the lām is pronounced with sukūn. Example: قَمَرٌ → اَلْقَمَرُ (qamarun → al-qamaru)",
+        "If al- is added to words beginning with ت ث د ذ ر ز س ش ص ض ط ظ ل ن, the lām is written but not pronounced, and the following letter is read with shadda. Example: شَمْسٌ → اَلشَّمْسُ (shamsun → ash-shamsu)"
+    ],
     "description": "The definite article (Al) and its usage"
 }
