@@ -9,10 +9,11 @@
         "completedTests": "Completed Tests"
     },
     "sections": {
-        "badges": "Badges",
+        "badges": "Achievements",
         "settings": "Settings",
         "achievements": "Achievements"
     },
+    "seeAll": "See All",
     "theme": {
         "label": "Theme",
         "light": "Light",

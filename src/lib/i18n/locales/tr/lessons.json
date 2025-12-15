@@ -124,7 +124,159 @@
     },
     "namazDualari": {
         "groupTitle": "Namaz Duaları",
-        "groupDescription": "Sübhaneke, Ettehiyyatü..."
+        "groupDescription": "Sübhaneke, Ettehiyyatü...",
+        "2001": {
+            "title": "Namazın Temel Duaları",
+            "description": "Namaz Duaları"
+        },
+        "2002": {
+            "title": "Namazda Okunan Kısa Sureler",
+            "description": "Kısa Sureler"
+        },
+        "2003": {
+            "title": "Tamamlayıcı ve İleri Düzey Namaz Metinleri",
+            "description": "İleri Düzey"
+        },
+        "2004": {
+            "title": "Kısa Sureler (Ezber ve Pekiştirme)",
+            "description": "Ezber ve Pekiştirme"
+        },
+        "201": {
+            "title": "Sübhaneke Duası",
+            "description": "Sübhaneke Duası"
+        },
+        "202": {
+            "title": "Fâtiha Suresi",
+            "description": "Fâtiha Suresi"
+        },
+        "203": {
+            "title": "Ettehiyyatü Duası",
+            "description": "Ettehiyyatü Duası"
+        },
+        "204": {
+            "title": "Allahümme Salli Duası",
+            "description": "Allahümme Salli Duası"
+        },
+        "205": {
+            "title": "Allahümme Barik Duası",
+            "description": "Allahümme Barik Duası"
+        },
+        "206": {
+            "title": "Rabbena Atina Duası",
+            "description": "Rabbena Atina Duası"
+        },
+        "207": {
+            "title": "İhlâs Suresi",
+            "description": "İhlâs Suresi"
+        },
+        "208": {
+            "title": "Felak Suresi",
+            "description": "Felak Suresi"
+        },
+        "209": {
+            "title": "Nâs Suresi",
+            "description": "Nâs Suresi"
+        },
+        "210": {
+            "title": "Kevser Suresi",
+            "description": "Kevser Suresi"
+        },
+        "211": {
+            "title": "Kâfirûn Suresi",
+            "description": "Kâfirûn Suresi"
+        },
+        "212": {
+            "title": "Nasr Suresi",
+            "description": "Nasr Suresi"
+        },
+        "213": {
+            "title": "Amentü Duası",
+            "description": "Amentü Duası"
+        },
+        "214": {
+            "title": "Ayetel Kürsî",
+            "description": "Ayetel Kürsî"
+        },
+        "215": {
+            "title": "Kunut Duası (1)",
+            "description": "Kunut Duası (1)"
+        },
+        "216": {
+            "title": "Kunut Duası (2)",
+            "description": "Kunut Duası (2)"
+        },
+        "217": {
+            "title": "Âmenerrasûlü",
+            "description": "Âmenerrasûlü"
+        },
+        "218": {
+            "title": "Bakara Suresi (İlk Sayfa)",
+            "description": "Bakara Suresi (İlk Sayfa)"
+        },
+        "219": {
+            "title": "Mâûn Suresi",
+            "description": "Mâûn Suresi"
+        },
+        "220": {
+            "title": "Kureyş Suresi",
+            "description": "Kureyş Suresi"
+        },
+        "221": {
+            "title": "Fil Suresi",
+            "description": "Fil Suresi"
+        },
+        "222": {
+            "title": "Tebbet (Mesed) Suresi",
+            "description": "Tebbet (Mesed) Suresi"
+        },
+        "223": {
+            "title": "Hümeze Suresi",
+            "description": "Hümeze Suresi"
+        },
+        "224": {
+            "title": "Tekâsür Suresi",
+            "description": "Tekâsür Suresi"
+        },
+        "225": {
+            "title": "Kâria Suresi",
+            "description": "Kâria Suresi"
+        },
+        "226": {
+            "title": "Asr Suresi",
+            "description": "Asr Suresi"
+        },
+        "227": {
+            "title": "Tîn Suresi",
+            "description": "Tîn Suresi"
+        },
+        "228": {
+            "title": "Duhâ Suresi",
+            "description": "Duhâ Suresi"
+        },
+        "229": {
+            "title": "İnşirâh (Şerh) Suresi",
+            "description": "İnşirâh (Şerh) Suresi"
+        },
+        "230": {
+            "title": "Zilzâl Suresi",
+            "description": "Zilzâl Suresi"
+        },
+        "231": {
+            "title": "Beyyine Suresi",
+            "description": "Beyyine Suresi"
+        },
+        "232": {
+            "title": "Kadir Suresi",
+            "description": "Kadir Suresi"
+        },
+        "233": {
+            "title": "Alak Suresi",
+            "description": "Alak Suresi"
+        },
+        "234": {
+            "title": "Adiyât Suresi",
+            "description": "Adiyât Suresi"
+        }
     },
     "sureler": {
         "groupTitle": "Sureler",

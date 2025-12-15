@@ -52,6 +52,7 @@ export function useUserStats(userId: string | undefined) {
         completedTests: userData.total_lessons_completed || 0,
         total_tests_completed: userData.total_tests_completed || 0, // Add this line
         lessonsCompleted: userData.total_lessons_completed || 0,
+        total_lessons_completed: userData.total_lessons_completed || 0, // Add this for useBadges strict check
         successRate: calculateSuccessRate(userData),
         totalQuestions: userData.total_questions_solved || 0,
         correctAnswers: userData.total_correct_answers || 0,

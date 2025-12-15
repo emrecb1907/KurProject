@@ -11,25 +11,22 @@ import {
   Check,
   BookBookmark,
   Trophy,
-  Star,
   Target,
-  Rocket,
-  User,
   Medal,
   Lightbulb,
-  Lock,
-  PencilSimple,
   Gear,
+  PencilSimple,
   UserCircle,
   Camera
 } from 'phosphor-react-native';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
-import { database } from '@/lib/supabase/database';
 import { useUserStats } from '@hooks';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { getAvatarSource } from '@/constants/avatars';
+import { useBadges } from '@/hooks/useBadges';
+import { BadgeItem } from '@/components/profile/BadgeItem';
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -40,6 +37,10 @@ export default function ProfileScreen() {
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
 
+
+  // Calculate XP progress using the formula
+  const xpProgress = getXPProgress(totalXP);
+
   // 🚀 React Query: Fetch user data with auto-cache and retry
   const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
 
@@ -48,6 +49,9 @@ export default function ProfileScreen() {
 
   // Edit menu dropdown state
   const [showEditMenu, setShowEditMenu] = useState(false);
+
+  // Use custom hook to get badges status
+  const { badges } = useBadges(userStats, xpProgress.currentLevel);
 
   // Reset scroll position when screen comes into focus
   useFocusEffect(
@@ -125,8 +129,7 @@ export default function ProfileScreen() {
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || t('profile.anonymous');
 
-  // Calculate XP progress using the formula
-  const xpProgress = getXPProgress(totalXP);
+
 
   const stats = [
     { icon: Diamond, value: formatXP(totalXP), label: t('profile.stats.totalXP'), color: colors.secondary },
@@ -135,14 +138,58 @@ export default function ProfileScreen() {
     { icon: BookBookmark, value: completedTests.toString(), label: t('profile.stats.completedTests'), color: colors.pink },
   ];
 
-  const badges = [
-    { icon: Trophy, color: colors.warning },
-    { icon: Star, color: colors.warning },
-    { icon: Target, color: colors.error },
-    { icon: Rocket, color: colors.secondary },
-    { icon: Medal, color: colors.success },
-    { icon: Medal, color: colors.pink },
-  ];
+  // Memoize badge elements to avoid hook nesting issues
+  const badgeElements = useMemo(() => {
+    // Function to get top 2 earned or next locked
+    const getBadgesByType = (type: string, limit: number) => {
+      const typeBadges = badges.filter(b => b.requirement_type === type);
+      const earned = typeBadges.filter(b => b.user_progress?.is_claimed)
+        .sort((a, b) => b.requirement_value - a.requirement_value); // Descending for earned (highest first)
+
+      const locked = typeBadges.filter(b => !b.user_progress?.is_claimed)
+        .sort((a, b) => a.requirement_value - b.requirement_value); // Ascending for locked (easiest first)
+
+      let result = [...earned];
+      if (result.length < limit) {
+        result = [...result, ...locked.slice(0, limit - result.length)];
+      }
+      return result.slice(0, limit);
+    };
+
+    // 1. Level Badges (Top 2)
+    const levelBadges = getBadgesByType('level_reached', 2);
+
+    // 2. Lesson Badges (Top 2)
+    const lessonBadges = getBadgesByType('lessons_completed', 2);
+
+    // 3. Test Badges (Top 2)
+    const testBadges = getBadgesByType('tests_completed', 2);
+
+    // Collect IDs to exclude for "Extra"
+    const usedIds = new Set([
+      ...levelBadges.map(b => b.id),
+      ...lessonBadges.map(b => b.id),
+      ...testBadges.map(b => b.id)
+    ]);
+
+    // 4. Extra Locked Badges (Next 2 available from any category)
+    const extraBadges = badges
+      .filter(b => !usedIds.has(b.id) && !b.user_progress?.is_claimed)
+      .sort((a, b) => (b.user_progress?.progress_percentage || 0) - (a.user_progress?.progress_percentage || 0))
+      .slice(0, 2);
+
+    // Combine all
+    const finalBadges = [
+      ...levelBadges,
+      ...lessonBadges,
+      ...testBadges,
+      ...extraBadges
+    ];
+
+    return finalBadges.map((badge) => (
+      <BadgeItem key={badge.id} badge={badge} />
+    ));
+  }, [badges]);
 
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => StyleSheet.create({
@@ -247,7 +294,7 @@ export default function ProfileScreen() {
     sectionTitleContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: 8,
+      justifyContent: 'space-between',
       marginBottom: 16,
     },
     sectionTitle: {
@@ -258,17 +305,8 @@ export default function ProfileScreen() {
     badgesContainer: {
       flexDirection: 'row',
       flexWrap: 'wrap',
-      gap: 12,
-    },
-    badgeSlot: {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
-      backgroundColor: colors.surface,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderWidth: 2,
-      borderColor: colors.border,
+      gap: 0,
+      justifyContent: 'center', // Center badges in the container
     },
     badgeHint: {
       fontSize: 12,
@@ -276,39 +314,7 @@ export default function ProfileScreen() {
       textAlign: 'center',
       marginTop: 12,
     },
-    achievementCard: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      backgroundColor: colors.surface,
-      borderRadius: 12,
-      padding: 16,
-      marginBottom: 12,
-      gap: 12,
-    },
-    achievementInfo: {
-      flex: 1,
-    },
-    achievementTitle: {
-      fontSize: 16,
-      fontWeight: 'bold',
-      color: colors.textPrimary,
-      marginBottom: 4,
-    },
-    achievementDesc: {
-      fontSize: 12,
-      color: colors.textSecondary,
-    },
-    achievementProgress: {
-      backgroundColor: colors.backgroundLighter,
-      paddingHorizontal: 12,
-      paddingVertical: 6,
-      borderRadius: 12,
-    },
-    progressText: {
-      fontSize: 14,
-      fontWeight: 'bold',
-      color: colors.textPrimary,
-    },
+
     loginPrompt: {
       margin: 16,
       padding: 24,
@@ -532,50 +538,37 @@ export default function ProfileScreen() {
           {/* Badges Section */}
           <View style={styles.section}>
             <View style={styles.sectionTitleContainer}>
-              <Trophy size={24} color={colors.textPrimary} weight="fill" />
-              <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Trophy size={24} color={colors.textPrimary} weight="fill" />
+                <Text style={styles.sectionTitle}>{t('profile.sections.badges')}</Text>
+              </View>
+              <Pressable
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push('/badges' as any);
+                }}
+                style={({ pressed }) => ({ opacity: pressed ? 0.7 : 1 })}
+              >
+                <Text style={{ color: colors.primary, fontWeight: '600', fontSize: 14 }}>
+                  {t('profile.seeAll', 'Tümünü Gör')}
+                </Text>
+              </Pressable>
             </View>
-            <View style={styles.badgesContainer}>
-              {badges.map((badge, index) => (
-                <View key={index} style={styles.badgeSlot}>
-                  <Lock size={32} color={colors.textDisabled} weight="fill" />
-                </View>
-              ))}
-            </View>
+
+            {isLoadingStats ? (
+              <View style={{ minHeight: 100 }} />
+            ) : (
+              <View style={styles.badgesContainer}>
+                {badgeElements}
+              </View>
+            )}
             <Text style={styles.badgeHint}>
               {t('profile.badgesHint')}
             </Text>
           </View>
 
 
-          {/* Achievements Section */}
-          <View style={styles.section}>
-            <View style={styles.sectionTitleContainer}>
-              <Target size={24} color={colors.textPrimary} weight="fill" />
-              <Text style={styles.sectionTitle}>{t('profile.sections.achievements')}</Text>
-            </View>
-            <View style={styles.achievementCard}>
-              <Medal size={36} color={colors.warning} weight="fill" />
-              <View style={styles.achievementInfo}>
-                <Text style={styles.achievementTitle}>{t('profile.achievements.firstStep.title')}</Text>
-                <Text style={styles.achievementDesc}>{t('profile.achievements.firstStep.description')}</Text>
-              </View>
-              <View style={styles.achievementProgress}>
-                <Text style={styles.progressText}>0/1</Text>
-              </View>
-            </View>
 
-            <View style={styles.achievementCard}>
-              <Fire size={36} color={colors.primary} weight="fill" />
-              <View style={styles.achievementInfo}>
-                <Text style={styles.achievementTitle}>{t('profile.achievements.streakStarter.title')}</Text>
-                <Text style={styles.achievementDesc}>{t('profile.achievements.streakStarter.description')}</Text>
-              </View>
-              <View style={styles.achievementProgress}>
-                <Text style={styles.progressText}>0/7</Text>
-              </View>
-            </View>
-          </View>
 
           {/* Login Prompt - Show if not authenticated OR is anonymous */}
           {(!isAuthenticated || isAnonymous) && (

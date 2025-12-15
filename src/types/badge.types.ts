@@ -1,7 +1,8 @@
 export type BadgeType = 'achievement' | 'milestone' | 'streak' | 'special';
 
-export type RequirementType = 
+export type RequirementType =
   | 'lessons_completed'
+  | 'tests_completed'
   | 'questions_correct'
   | 'streak_days'
   | 'level_reached'
@@ -32,6 +33,7 @@ export interface UserBadge {
 export interface BadgeWithProgress extends Badge {
   user_progress?: {
     progress_percentage: number;
+    current_value: number;
     is_claimed: boolean;
     earned_at?: string;
   };

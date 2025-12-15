@@ -9,10 +9,11 @@
         "completedTests": "Tamamlanan Testler"
     },
     "sections": {
-        "badges": "Rozetler",
+        "badges": "Başarımlar",
         "settings": "Ayarlar",
         "achievements": "Başarılar"
     },
+    "seeAll": "Tümünü Gör",
     "theme": {
         "label": "Tema",
         "light": "Açık",

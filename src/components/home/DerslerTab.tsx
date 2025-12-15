@@ -17,6 +17,10 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { CarouselCard } from '@/components/ui/CarouselCard';
 import { useUser } from '@/store';
 import { islamicHistory } from '@/data/islamicHistory';
+import { namazTemelDualar } from '@/data/namazTemelDualar';
+import { namazKisaSureler } from '@/data/namazKisaSureler';
+import { namazIleriDuzey } from '@/data/namazIleriDuzey';
+import { namazEzberPekistirme } from '@/data/namazEzberPekistirme';
 
 interface DerslerTabProps {
     screenWidth: number;
@@ -69,6 +73,18 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     const kuranTotal = kuranIds.length;
     const kuranCompleted = completedLessons.filter((id: string) => kuranIds.includes(id)).length;
 
+    // Calculate Namaz Duaları progress
+    const namazIds = useMemo(() => {
+        return [
+            ...namazTemelDualar.map(l => l.id.toString()),
+            ...namazKisaSureler.map(l => l.id.toString()),
+            ...namazIleriDuzey.map(l => l.id.toString()),
+            ...namazEzberPekistirme.map(l => l.id.toString())
+        ];
+    }, []);
+    const namazTotal = namazIds.length;
+    const namazCompleted = completedLessons.filter((id: string) => namazIds.includes(id)).length;
+
     // Calculate İslam Tarihi progress
     // IDs: 401-413 (from islamicHistory data)
     const historyIds = islamicHistory.map((l: { id: number }) => l.id.toString());
@@ -94,12 +110,13 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             id: '2',
             title: t('lessons.namazDualari.groupTitle', { defaultValue: "Namaz Duaları" }),
             subtitle: t('lessons.namazDualari.groupDescription', { defaultValue: "Sübhaneke, Ettehiyyatü..." }),
-            count: 0,
-            totalCount: 10,
-            progress: 0,
+            count: namazCompleted,
+            totalCount: namazTotal,
+            progress: namazTotal > 0 ? namazCompleted / namazTotal : 0,
             icon: HandPalm,
             color: colors.secondary,
             borderColor: colors.buttonBlueBorder,
+            route: '/lessons/namazDualari',
             unlocked: true,
             level: 1
         },
@@ -216,6 +233,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             </ScrollView>
         </View>
     );
+
 });
 
 const getStyles = (gap: number, padding: number) => StyleSheet.create({

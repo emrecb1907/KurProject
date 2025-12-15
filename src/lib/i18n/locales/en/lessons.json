@@ -124,7 +124,159 @@
     },
     "namazDualari": {
         "groupTitle": "Prayer Duas",
-        "groupDescription": "Subhaneke, Ettehiyyatu..."
+        "groupDescription": "Subhaneke, Ettehiyyatu...",
+        "2001": {
+            "title": "Essential Prayers of Salah",
+            "description": "Salah Prayers"
+        },
+        "2002": {
+            "title": "Short Surahs Recited in Salah",
+            "description": "Short Surahs"
+        },
+        "2003": {
+            "title": "Supplementary and Advanced Salah Texts",
+            "description": "Advanced Level"
+        },
+        "2004": {
+            "title": "Short Surahs for Memorization and Practice",
+            "description": "Memorization and Practice"
+        },
+        "201": {
+            "title": "Subḥānakah Supplication",
+            "description": "Subḥānakah Supplication"
+        },
+        "202": {
+            "title": "Surah Al-Fātiḥah",
+            "description": "Surah Al-Fātiḥah"
+        },
+        "203": {
+            "title": "At-Tahiyyāt Supplication",
+            "description": "At-Tahiyyāt Supplication"
+        },
+        "204": {
+            "title": "Allāhumma Ṣalli Supplication",
+            "description": "Allāhumma Ṣalli Supplication"
+        },
+        "205": {
+            "title": "Allāhumma Bārik Supplication",
+            "description": "Allāhumma Bārik Supplication"
+        },
+        "206": {
+            "title": "Rabbana Ātinā Supplication",
+            "description": "Rabbana Ātinā Supplication"
+        },
+        "207": {
+            "title": "Surah Al-Ikhlāṣ",
+            "description": "Surah Al-Ikhlāṣ"
+        },
+        "208": {
+            "title": "Surah Al-Falaq",
+            "description": "Surah Al-Falaq"
+        },
+        "209": {
+            "title": "Surah An-Nās",
+            "description": "Surah An-Nās"
+        },
+        "210": {
+            "title": "Surah Al-Kawthar",
+            "description": "Surah Al-Kawthar"
+        },
+        "211": {
+            "title": "Surah Al-Kāfirūn",
+            "description": "Surah Al-Kāfirūn"
+        },
+        "212": {
+            "title": "Surah An-Naṣr",
+            "description": "Surah An-Naṣr"
+        },
+        "213": {
+            "title": "Āmantu Supplication",
+            "description": "Āmantu Supplication"
+        },
+        "214": {
+            "title": "Āyat Al-Kursī",
+            "description": "Āyat Al-Kursī"
+        },
+        "215": {
+            "title": "Qunūt Supplication (1)",
+            "description": "Qunūt Supplication (1)"
+        },
+        "216": {
+            "title": "Qunūt Supplication (2)",
+            "description": "Qunūt Supplication (2)"
+        },
+        "217": {
+            "title": "Āmanar-Rasūlu",
+            "description": "Āmanar-Rasūlu"
+        },
+        "218": {
+            "title": "Surah Al-Baqarah (Opening Verses)",
+            "description": "Surah Al-Baqarah (Opening Verses)"
+        },
+        "219": {
+            "title": "Surah Al-Māʿūn",
+            "description": "Surah Al-Māʿūn"
+        },
+        "220": {
+            "title": "Surah Quraysh",
+            "description": "Surah Quraysh"
+        },
+        "221": {
+            "title": "Surah Al-Fīl",
+            "description": "Surah Al-Fīl"
+        },
+        "222": {
+            "title": "Surah Al-Masad",
+            "description": "Surah Al-Masad"
+        },
+        "223": {
+            "title": "Surah Al-Humazah",
+            "description": "Surah Al-Humazah"
+        },
+        "224": {
+            "title": "Surah At-Takāthur",
+            "description": "Surah At-Takāthur"
+        },
+        "225": {
+            "title": "Surah Al-Qāriʿah",
+            "description": "Surah Al-Qāriʿah"
+        },
+        "226": {
+            "title": "Surah Al-ʿAṣr",
+            "description": "Surah Al-ʿAṣr"
+        },
+        "227": {
+            "title": "Surah At-Tīn",
+            "description": "Surah At-Tīn"
+        },
+        "228": {
+            "title": "Surah Aḍ-Ḍuḥā",
+            "description": "Surah Aḍ-Ḍuḥā"
+        },
+        "229": {
+            "title": "Surah Ash-Sharḥ",
+            "description": "Surah Ash-Sharḥ"
+        },
+        "230": {
+            "title": "Surah Az-Zalzalah",
+            "description": "Surah Az-Zalzalah"
+        },
+        "231": {
+            "title": "Surah Al-Bayyinah",
+            "description": "Surah Al-Bayyinah"
+        },
+        "232": {
+            "title": "Surah Al-Qadr",
+            "description": "Surah Al-Qadr"
+        },
+        "233": {
+            "title": "Surah Al-ʿAlaq",
+            "description": "Surah Al-ʿAlaq"
+        },
+        "234": {
+            "title": "Surah Al-ʿĀdiyāt",
+            "description": "Surah Al-ʿĀdiyāt"
+        }
     },
     "sureler": {
         "groupTitle": "Surahs",
