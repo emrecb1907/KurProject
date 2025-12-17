@@ -52,20 +52,16 @@ const getStyles = () => StyleSheet.create({
     borderColor: colors.border,
   },
   button_correct: {
-    borderColor: colors.successDark,
+    borderColor: colors.buttonGreenBorder,
     backgroundColor: colors.success,
-    borderBottomWidth: 4, // Add 3D effect
-    marginBottom: 10, // Compensate for increased border width (12 - 2)
   },
   button_incorrect: {
     borderColor: colors.errorDark,
     backgroundColor: colors.error,
-    borderBottomWidth: 4, // Add 3D effect
-    marginBottom: 10, // Compensate for increased border width (12 - 2)
   },
   button_selected: {
-    borderColor: colors.primary,
-    backgroundColor: `${colors.primary}20`,
+    borderColor: colors.buttonOrangeBorder,
+    backgroundColor: colors.primary,
   },
   text: {
     fontSize: 18,
@@ -84,7 +80,8 @@ const getStyles = () => StyleSheet.create({
     fontWeight: 'bold',
   },
   text_selected: {
-    color: colors.primary,
+    color: colors.textOnPrimary,
+    fontWeight: 'bold',
   },
   pressed: {
     opacity: 0.8,

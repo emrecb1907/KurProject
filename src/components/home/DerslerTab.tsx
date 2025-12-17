@@ -21,6 +21,8 @@ import { namazTemelDualar } from '@/data/namazTemelDualar';
 import { namazKisaSureler } from '@/data/namazKisaSureler';
 import { namazIleriDuzey } from '@/data/namazIleriDuzey';
 import { namazEzberPekistirme } from '@/data/namazEzberPekistirme';
+import { namazBilgisi } from '@/data/namazBilgisi';
+import { abdestVeTemizlik } from '@/data/abdestVeTemizlik';
 
 interface DerslerTabProps {
     screenWidth: number;
@@ -87,6 +89,18 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
 
     // Calculate İslam Tarihi progress
     // IDs: 401-413 (from islamicHistory data)
+    // Calculate Namaz Bilgisi progress
+    // IDs: 301-313
+    const namazBilgisiIds = namazBilgisi.map(l => l.id.toString());
+    const namazBilgisiTotal = namazBilgisiIds.length;
+    const namazBilgisiCompleted = completedLessons.filter((id: string) => namazBilgisiIds.includes(id)).length;
+
+    // Calculate Abdest ve Temizlik progress
+    // IDs: 501+
+    const abdestIds = abdestVeTemizlik.map((l: { id: number }) => l.id.toString());
+    const abdestTotal = abdestIds.length;
+    const abdestCompleted = completedLessons.filter((id: string) => abdestIds.includes(id)).length;
+
     const historyIds = islamicHistory.map((l: { id: number }) => l.id.toString());
     const historyTotal = historyIds.length;
     const historyCompleted = completedLessons.filter((id: string) => historyIds.includes(id)).length;
@@ -122,16 +136,17 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '3',
-            title: t('lessons.sureler.groupTitle', { defaultValue: "Sureler" }),
-            subtitle: t('lessons.sureler.groupDescription', { defaultValue: "Kısa surelerden başlayarak" }),
-            count: 0,
-            totalCount: 15,
-            progress: 0,
-            icon: BookBookmark,
+            title: t('lessons.namazBilgisi.groupTitle', { defaultValue: 'Namaz Bilgisi' }),
+            subtitle: t('lessons.namazBilgisi.groupDescription', { defaultValue: 'İbadetin temeli ve huşû' }),
+            count: namazBilgisiCompleted,
+            totalCount: namazBilgisiTotal,
+            progress: namazBilgisiTotal > 0 ? namazBilgisiCompleted / namazBilgisiTotal : 0,
+            icon: HandPalm,
             color: colors.success,
             borderColor: colors.buttonGreenBorder,
+            route: '/lessons/namaz-bilgisi',
             unlocked: true,
-            level: 1
+            level: 1,
         },
         {
             id: '4',
@@ -149,6 +164,20 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '5',
+            title: t('lessons.abdestVeTemizlik.groupTitle', { defaultValue: 'Abdest ve Temizlik' }),
+            subtitle: t('lessons.abdestVeTemizlik.groupDescription', { defaultValue: 'Maddi ve manevi arınma' }),
+            count: abdestCompleted,
+            totalCount: abdestTotal,
+            progress: abdestTotal > 0 ? abdestCompleted / abdestTotal : 0,
+            icon: HandPalm,
+            color: colors.secondary,
+            borderColor: colors.buttonBlueBorder,
+            route: '/lessons/abdest-ve-temizlik',
+            unlocked: true,
+            level: 1,
+        },
+        {
+            id: '6',
             title: t('lessons.islamiKavramlar.groupTitle', { defaultValue: "İslami Kavramlar" }),
             subtitle: t('lessons.islamiKavramlar.groupDescription', { defaultValue: "Temel kavramlar, terimler" }),
             count: 0,

@@ -164,6 +164,7 @@ const getStyles = () => StyleSheet.create({
     fontSize: 16,
     color: colors.textSecondary,
     textAlign: 'center',
+    marginTop: 10,
     marginBottom: 8,
   },
 });

@@ -278,9 +278,9 @@
             "description": "Surah Al-ʿĀdiyāt"
         }
     },
-    "sureler": {
-        "groupTitle": "Surahs",
-        "groupDescription": "Starting with short Surahs"
+    "namazBilgisi": {
+        "groupTitle": "Salah Guide",
+        "groupDescription": "Importance, conditions, and practice of Salah"
     },
     "islamiKavramlar": {
         "groupTitle": "Islamic Concepts",
@@ -344,6 +344,22 @@
     },
     "islamicHistory": {
         "title": "Islamic History",
+        "completeLesson": "Complete Lesson",
+        "summary": "Summary",
+        "lessonSummary": "Lesson Summary"
+    },
+    "namazBilgisiUI": {
+        "title": "Salah Guide",
+        "completeLesson": "Complete Lesson",
+        "summary": "Summary",
+        "lessonSummary": "Lesson Summary"
+    },
+    "abdestVeTemizlik": {
+        "groupTitle": "Ablution and Cleanliness",
+        "groupDescription": "Physical and spiritual purification"
+    },
+    "abdestVeTemizlikUI": {
+        "title": "Ablution and Cleanliness",
         "completeLesson": "Complete Lesson",
         "summary": "Summary",
         "lessonSummary": "Lesson Summary"

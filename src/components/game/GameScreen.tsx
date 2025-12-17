@@ -8,7 +8,8 @@ import { TestPreparationOverlay } from './TestPreparationOverlay';
 import { OptionButton } from './OptionButton';
 import { Timer } from './Timer';
 import { LifeIndicator } from './LifeIndicator';
-import { Button, CircularProgress, LoadingOverlay } from '@components/ui';
+import { Button, CircularProgress, LoadingOverlay, PrimaryButton } from '@components/ui';
+import LottieView from 'lottie-react-native';
 import { useStore, useUser } from '@/store';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -33,7 +34,7 @@ import { getFeedbackPath, getCompletionFeedbackPath, FeedbackMessage } from '@/c
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import * as Network from 'expo-network';
-import { Clock } from 'phosphor-react-native';
+import { Clock, CheckCircle } from 'phosphor-react-native';
 
 interface GameScreenProps {
     lessonId: string;
@@ -662,14 +663,13 @@ export function GameScreen({
                     {/* Summary Header */}
                     <Text style={styles.summaryHeader}>{t('gameUI.summary')}</Text>
 
-                    {/* Circular Progress & New Header */}
-                    <View style={{ marginBottom: 24, alignItems: 'center' }}>
-                        <CircularProgress
-                            size={200}
-                            strokeWidth={20}
-                            progress={questions.length > 0 ? correctAnswersCount / questions.length : 0}
-                            correct={correctAnswersCount}
-                            total={questions.length}
+                    {/* Complete Animation */}
+                    <View style={{ marginBottom: 4, alignItems: 'center' }}>
+                        <LottieView
+                            source={require('@assets/images/lottie/Complete.json')}
+                            autoPlay
+                            loop={false}
+                            style={{ width: 300, height: 300 }}
                         />
                     </View>
 
@@ -679,12 +679,21 @@ export function GameScreen({
                         {completionMessage?.message || "Beklenenden çok daha iyisini yaptın."}
                     </Text>
 
-                    {/* Duration Display - Container */}
-                    <View style={styles.durationContainer}>
-                        <Clock size={18} color={colors.primary} weight="fill" style={{ marginRight: 8 }} />
-                        <Text style={styles.durationText}>
-                            {t('gameUI.totalTime')}: {durationString}
-                        </Text>
+                    {/* Stats Cards Row */}
+                    <View style={styles.statsCardsRow}>
+                        {/* Duration Display */}
+                        <View style={styles.statsCard}>
+                            <Clock size={18} color={colors.primary} weight="fill" style={{ marginBottom: 4 }} />
+                            <Text style={styles.statsLabel}>{t('gameUI.totalTime')}</Text>
+                            <Text style={styles.statsValue}>{durationString}</Text>
+                        </View>
+
+                        {/* Correct Answers Display */}
+                        <View style={styles.statsCard}>
+                            <CheckCircle size={18} color={colors.success} weight="fill" style={{ marginBottom: 4 }} />
+                            <Text style={styles.statsValue}>{correctAnswersCount}/{questions.length}</Text>
+                            <Text style={styles.statsLabel}>{t('gameUI.correct')}</Text>
+                        </View>
                     </View>
 
 
@@ -717,35 +726,22 @@ export function GameScreen({
                         )}
                     </View>
 
-                    <Pressable
-                        style={[
-                            styles.completeButton,
-                            (!hasSaved && !saveError) && { opacity: 0.7 },
-                            (saveError && !isRetrying) && { backgroundColor: colors.error },
-                            isRetrying && { opacity: 0.7 }
-                        ]}
+                    <PrimaryButton
+                        title={isRetrying
+                            ? t('common.saving', 'Kaydediliyor...')
+                            : (!hasSaved && !saveError)
+                                ? t('common.saving', 'Kaydediliyor...')
+                                : saveError
+                                    ? t('common.retry', 'Tekrar Dene')
+                                    : t('common.finish')}
                         onPress={saveError ? handleRetrySubmit : handleComplete}
                         disabled={(!hasSaved && !saveError) || isRetrying}
-                    >
-                        {/* Fixed width container for ActivityIndicator to prevent layout shift */}
-                        <View style={{ width: 28, height: 20, justifyContent: 'center', alignItems: 'center' }}>
-                            {((!hasSaved && !saveError) || isRetrying) && (
-                                <ActivityIndicator
-                                    size="small"
-                                    color={colors.textOnPrimary}
-                                />
-                            )}
-                        </View>
-                        <Text style={styles.completeButtonText}>
-                            {isRetrying
-                                ? t('common.saving', 'Kaydediliyor...')
-                                : (!hasSaved && !saveError)
-                                    ? t('common.saving', 'Kaydediliyor...')
-                                    : saveError
-                                        ? t('common.retry', 'Tekrar Dene')
-                                        : t('common.finish')}
-                        </Text>
-                    </Pressable>
+                        isLoading={(!hasSaved && !saveError) || isRetrying}
+                        style={[
+                            { width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark },
+                            (saveError && !isRetrying) && { backgroundColor: colors.error, borderBottomColor: colors.errorDark }
+                        ]}
+                    />
 
 
                 </View>
@@ -869,19 +865,16 @@ export function GameScreen({
                                 <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bir sonraki soruya geçelim!"}</Text>
                             </>
                         )}
-                        <Pressable
-                            style={[
-                                styles.nextButton,
-                                !isCorrect && styles.nextButtonError
-                            ]}
+                        <PrimaryButton
+                            title={currentQuestionIndex < questions.length - 1
+                                ? t('common.nextQuestion')
+                                : t('common.finish')}
                             onPress={handleNext}
-                        >
-                            <Text style={styles.nextButtonText}>
-                                {currentQuestionIndex < questions.length - 1
-                                    ? t('common.nextQuestion')
-                                    : t('common.finish')}
-                            </Text>
-                        </Pressable>
+                            style={[
+                                { backgroundColor: colors.success, marginHorizontal: 20, borderBottomColor: colors.successDark },
+                                !isCorrect && { backgroundColor: colors.error, borderBottomColor: colors.errorDark }
+                            ]}
+                        />
                     </View>
                 )
             }
@@ -960,37 +953,21 @@ const getStyles = () =>
             textAlign: 'center',
             marginBottom: 12,
         },
-        nextButton: {
-            backgroundColor: colors.success,
-            paddingVertical: 16,
-            borderRadius: 30,
-            alignItems: 'center',
-            borderBottomWidth: 4,
-            borderBottomColor: colors.successDark,
-            marginHorizontal: 20,
-        },
-        nextButtonError: {
-            backgroundColor: colors.error,
-            borderBottomColor: colors.errorDark,
-        },
-        nextButtonText: {
-            color: colors.textOnPrimary,
-            fontSize: 18,
-            fontWeight: 'bold',
-        },
+
         completeContainer: {
             flex: 1,
-            justifyContent: 'center',
+            justifyContent: 'space-between',
             alignItems: 'center',
             padding: 20,
-            marginTop: -100,
+            paddingTop: 90,
+            paddingBottom: 60,
         },
         summaryHeader: {
-            fontSize: 24,
+            position: 'absolute',
+            top: 10,
+            fontSize: 28,
             fontWeight: 'bold',
             color: colors.textPrimary,
-            marginTop: 10,
-            marginBottom: 60,
             letterSpacing: 2,
         },
         completeTitle: {
@@ -1002,7 +979,7 @@ const getStyles = () =>
         completeText: {
             fontSize: 18,
             color: colors.textSecondary,
-            marginBottom: 96,
+            marginBottom: 30,
             textAlign: 'center',
         },
         statsContainer: {
@@ -1019,39 +996,35 @@ const getStyles = () =>
             fontWeight: '600',
             color: colors.textPrimary,
         },
-        completeButton: {
-            backgroundColor: colors.success,
-            height: 64, // Fixed height to prevent layout shift when toggling activity indicator
-            paddingHorizontal: 48,
-            borderRadius: 30,
-            width: '100%',
-            alignItems: 'center',
+
+        statsCardsRow: {
+            flexDirection: 'row',
             justifyContent: 'center',
-            flexDirection: 'row',
-            borderBottomWidth: 4,
-            borderBottomColor: colors.successDark,
+            gap: 12,
+            marginTop: 16,
+            marginBottom: 20,
         },
-        completeButtonText: {
-            color: '#FFFFFF', // Changed from black to white as requested
-            fontSize: 18,
-            fontWeight: 'bold',
-        },
-        durationContainer: {
-            flexDirection: 'row',
+        statsCard: {
+            flexDirection: 'column',
             alignItems: 'center',
             backgroundColor: colors.surface,
             paddingVertical: 12,
             paddingHorizontal: 20,
             borderRadius: 20,
-            marginTop: 16,
-            marginBottom: 20,
             borderWidth: 1,
             borderColor: colors.border,
+            minWidth: 120,
         },
-        durationText: {
-            fontSize: 16,
+        statsLabel: {
+            fontSize: 12,
             color: colors.textSecondary,
-            fontWeight: '600',
+            fontWeight: '500',
+            marginTop: 2,
+        },
+        statsValue: {
+            fontSize: 18,
+            color: colors.textPrimary,
+            fontWeight: 'bold',
         },
         motivationContainer: {
             backgroundColor: colors.surface,
@@ -1066,7 +1039,7 @@ const getStyles = () =>
         },
         xpBarContainer: {
             width: '100%',
-            marginBottom: 96,
+            marginBottom: 20,
             paddingHorizontal: 20,
         },
         xpBarBackground: {

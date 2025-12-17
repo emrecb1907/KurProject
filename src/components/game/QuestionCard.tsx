@@ -103,7 +103,6 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 20,
     borderWidth: 2,
     borderColor: colors.borderDark,
-    borderBottomWidth: 4,
     width: '100%',
     minHeight: 140, // Reduced minHeight for small screens
     justifyContent: 'center',
@@ -130,8 +129,7 @@ const getStyles = () => StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 16,
     borderWidth: 2,
-    borderColor: colors.secondaryDark,
-    borderBottomWidth: 4,
+    borderColor: colors.secondary,
   },
   audioIcon: {
     fontSize: 20,

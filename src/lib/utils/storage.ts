@@ -1,13 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const STORAGE_KEYS = {
-  USER_DATA: '@quranlearn:user_data',
-  PROGRESS: '@quranlearn:progress',
-  SETTINGS: '@quranlearn:settings',
-  AD_REWARDS: '@quranlearn:ad_rewards',
-  LAST_SYNC: '@quranlearn:last_sync',
-} as const;
-
 /**
  * Generic storage utility
  */
@@ -59,7 +51,7 @@ export const storage = {
     try {
       const pairs = await AsyncStorage.multiGet(keys);
       const result: Record<string, any> = {};
-      
+
       pairs.forEach(([key, value]) => {
         if (value) {
           try {
@@ -69,7 +61,7 @@ export const storage = {
           }
         }
       });
-      
+
       return result;
     } catch (error) {
       console.error('Error getting multiple items:', error);
@@ -84,7 +76,7 @@ export const storage = {
         key,
         JSON.stringify(value),
       ]) as [string, string][];
-      
+
       await AsyncStorage.multiSet(pairs);
     } catch (error) {
       console.error('Error setting multiple items:', error);
@@ -92,85 +84,3 @@ export const storage = {
     }
   },
 };
-
-/**
- * User data storage
- */
-export const userStorage = {
-  async save(userData: any): Promise<void> {
-    return storage.setItem(STORAGE_KEYS.USER_DATA, userData);
-  },
-
-  async get(): Promise<any> {
-    return storage.getItem(STORAGE_KEYS.USER_DATA);
-  },
-
-  async clear(): Promise<void> {
-    return storage.removeItem(STORAGE_KEYS.USER_DATA);
-  },
-};
-
-/**
- * Progress storage
- */
-export const progressStorage = {
-  async save(progress: any): Promise<void> {
-    return storage.setItem(STORAGE_KEYS.PROGRESS, progress);
-  },
-
-  async get(): Promise<any> {
-    return storage.getItem(STORAGE_KEYS.PROGRESS);
-  },
-
-  async clear(): Promise<void> {
-    return storage.removeItem(STORAGE_KEYS.PROGRESS);
-  },
-};
-
-/**
- * Settings storage
- */
-export const settingsStorage = {
-  async save(settings: any): Promise<void> {
-    return storage.setItem(STORAGE_KEYS.SETTINGS, settings);
-  },
-
-  async get(): Promise<any> {
-    return storage.getItem(STORAGE_KEYS.SETTINGS);
-  },
-
-  async clear(): Promise<void> {
-    return storage.removeItem(STORAGE_KEYS.SETTINGS);
-  },
-};
-
-/**
- * Ad rewards storage (for tracking daily ad watches)
- */
-export const adRewardsStorage = {
-  async save(rewards: any): Promise<void> {
-    return storage.setItem(STORAGE_KEYS.AD_REWARDS, rewards);
-  },
-
-  async get(): Promise<any> {
-    return storage.getItem(STORAGE_KEYS.AD_REWARDS);
-  },
-
-  async clear(): Promise<void> {
-    return storage.removeItem(STORAGE_KEYS.AD_REWARDS);
-  },
-};
-
-/**
- * Last sync timestamp
- */
-export const syncStorage = {
-  async setLastSync(timestamp: string): Promise<void> {
-    return storage.setItem(STORAGE_KEYS.LAST_SYNC, timestamp);
-  },
-
-  async getLastSync(): Promise<string | null> {
-    return storage.getItem(STORAGE_KEYS.LAST_SYNC);
-  },
-};
-
