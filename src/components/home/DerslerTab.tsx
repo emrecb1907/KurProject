@@ -9,6 +9,11 @@ import {
     Bank,
     Star,
     MagnifyingGlass,
+    Sparkle,
+    Sun,
+    Scroll,
+    Heart,
+    Mosque,
     IconProps
 } from 'phosphor-react-native';
 
@@ -21,7 +26,12 @@ import {
     NAMAZ_DUALARI_IDS,
     NAMAZ_BILGISI_IDS,
     ISLAM_TARIHI_IDS,
-    ABDEST_VE_TEMIZLIK_IDS
+    ABDEST_VE_TEMIZLIK_IDS,
+    SIYER_IDS,
+    IMAN_ESASLARI_IDS,
+    ORUC_BILGISI_IDS,
+    PEYGAMBERLER_TARIHI_IDS,
+    AHLAK_ADAP_IDS
 } from '@/constants/lessonIds';
 
 interface DerslerTabProps {
@@ -88,6 +98,26 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     // Calculate İslam Tarihi progress
     const historyTotal = ISLAM_TARIHI_IDS.length;
     const historyCompleted = completedLessons.filter((id: string) => ISLAM_TARIHI_IDS.includes(id)).length;
+
+    // Calculate Siyer progress
+    const siyerTotal = SIYER_IDS.length;
+    const siyerCompleted = completedLessons.filter((id: string) => SIYER_IDS.includes(id)).length;
+
+    // Calculate İman Esasları progress
+    const imanTotal = IMAN_ESASLARI_IDS.length;
+    const imanCompleted = completedLessons.filter((id: string) => IMAN_ESASLARI_IDS.includes(id)).length;
+
+    // Calculate Oruç Bilgisi progress
+    const orucTotal = ORUC_BILGISI_IDS.length;
+    const orucCompleted = completedLessons.filter((id: string) => ORUC_BILGISI_IDS.includes(id)).length;
+
+    // Calculate Peygamberler Tarihi progress
+    const peygamberlerTotal = PEYGAMBERLER_TARIHI_IDS.length;
+    const peygamberlerCompleted = completedLessons.filter((id: string) => PEYGAMBERLER_TARIHI_IDS.includes(id)).length;
+
+    // Calculate Ahlak & Adap progress
+    const ahlakTotal = AHLAK_ADAP_IDS.length;
+    const ahlakCompleted = completedLessons.filter((id: string) => AHLAK_ADAP_IDS.includes(id)).length;
 
     const categories: CategoryItem[] = [
         {
@@ -162,14 +192,71 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
         {
             id: '6',
-            title: t('lessons.islamiKavramlar.groupTitle', { defaultValue: "İslami Kavramlar" }),
-            subtitle: t('lessons.islamiKavramlar.groupDescription', { defaultValue: "Temel kavramlar, terimler" }),
-            count: 0,
-            totalCount: 20,
-            progress: 0,
-            icon: Star,
-            color: colors.warning,
-            borderColor: colors.buttonOrangeBorder,
+            title: t('lessons.siyer.groupTitle', { defaultValue: "Siyer" }),
+            subtitle: t('lessons.siyer.groupDescription', { defaultValue: "Life of the Prophet" }),
+            count: siyerCompleted,
+            totalCount: siyerTotal,
+            progress: siyerTotal > 0 ? siyerCompleted / siyerTotal : 0,
+            icon: Mosque,
+            color: colors.softpurple,
+            borderColor: colors.buttonSoftpurpleBorder,
+            route: '/lessons/siyer',
+            unlocked: true,
+            level: 1
+        },
+        {
+            id: '7',
+            title: t('lessons.imanEsaslari.groupTitle', { defaultValue: "İman Esasları" }),
+            subtitle: t('lessons.imanEsaslari.groupDescription', { defaultValue: "The six pillars of belief" }),
+            count: imanCompleted,
+            totalCount: imanTotal,
+            progress: imanTotal > 0 ? imanCompleted / imanTotal : 0,
+            icon: Sparkle,
+            color: colors.lightred,
+            borderColor: colors.buttonLightredBorder,
+            route: '/lessons/iman-esaslari',
+            unlocked: true,
+            level: 1
+        },
+        {
+            id: '8',
+            title: t('lessons.orucBilgisi.groupTitle', { defaultValue: "Oruç Bilgisi" }),
+            subtitle: t('lessons.orucBilgisi.groupDescription', { defaultValue: "Rules and wisdom of fasting" }),
+            count: orucCompleted,
+            totalCount: orucTotal,
+            progress: orucTotal > 0 ? orucCompleted / orucTotal : 0,
+            icon: Sun,
+            color: colors.caramel,
+            borderColor: colors.buttonCaramelBorder,
+            route: '/lessons/oruc-bilgisi',
+            unlocked: true,
+            level: 1
+        },
+        {
+            id: '9',
+            title: t('lessons.peygamberlerTarihi.groupTitle', { defaultValue: "Peygamberler Tarihi" }),
+            subtitle: t('lessons.peygamberlerTarihi.groupDescription', { defaultValue: "Stories of the prophets" }),
+            count: peygamberlerCompleted,
+            totalCount: peygamberlerTotal,
+            progress: peygamberlerTotal > 0 ? peygamberlerCompleted / peygamberlerTotal : 0,
+            icon: Scroll,
+            color: colors.gray,
+            borderColor: colors.buttonGrayBorder,
+            route: '/lessons/peygamberler-tarihi',
+            unlocked: true,
+            level: 1
+        },
+        {
+            id: '10',
+            title: t('lessons.ahlakAdap.groupTitle', { defaultValue: "Ahlak & Adap Bilgisi" }),
+            subtitle: t('lessons.ahlakAdap.groupDescription', { defaultValue: "Character and etiquette" }),
+            count: ahlakCompleted,
+            totalCount: ahlakTotal,
+            progress: ahlakTotal > 0 ? ahlakCompleted / ahlakTotal : 0,
+            icon: Heart,
+            color: colors.deepblue,
+            borderColor: colors.buttonDeepblueBorder,
+            route: '/lessons/ahlak-adap',
             unlocked: true,
             level: 1
         }

@@ -363,5 +363,30 @@
         "completeLesson": "Complete Lesson",
         "summary": "Summary",
         "lessonSummary": "Lesson Summary"
+    },
+    "siyer": {
+        "groupTitle": "Life of Prophet Muhammad (Sirah)",
+        "groupDescription": "The biography of Prophet Muhammad (PBUH)",
+        "title": "Life of Prophet Muhammad (Sirah)"
+    },
+    "imanEsaslari": {
+        "groupTitle": "Articles of Faith",
+        "groupDescription": "The six pillars of belief",
+        "title": "Articles of Faith"
+    },
+    "orucBilgisi": {
+        "groupTitle": "Fasting Knowledge",
+        "groupDescription": "Rules and wisdom of fasting",
+        "title": "Fasting Knowledge"
+    },
+    "peygamberlerTarihi": {
+        "groupTitle": "History of Prophets",
+        "groupDescription": "Stories of the prophets",
+        "title": "History of Prophets"
+    },
+    "ahlakAdap": {
+        "groupTitle": "Morals & Manners",
+        "groupDescription": "Character and etiquette",
+        "title": "Morals & Manners"
     }
 }

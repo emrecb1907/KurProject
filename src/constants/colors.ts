@@ -49,6 +49,16 @@ const darkThemeColors = {
   warmyellowDark: '#D9AE2B',
   warmyellowGlow: 'rgba(241, 194, 50, 0.3)',
 
+  // Gray
+  gray: '#999999',
+  grayDark: '#777777',
+  grayGlow: 'rgba(153, 153, 153, 0.3)',
+
+  // Deep Blue
+  deepblue: '#0763B5',
+  deepblueDark: '#054E8F',
+  deepblueGlow: 'rgba(7, 99, 181, 0.3)',
+
   // Error - Red
   error: '#FF4B4B',
   errorDark: '#EA2B2B',
@@ -95,6 +105,7 @@ const darkThemeColors = {
   buttonLightredBorder: '#E04545',
   buttonWarmyellowBorder: '#D9AE2B',
   buttonGrayBorder: '#4B5563',
+  buttonDeepblueBorder: '#054E8F',
 
   // Progress & XP
   xpGold: '#FF9600',
@@ -164,6 +175,16 @@ const lightThemeColors = {
   warmyellowDark: '#D9AE2B',
   warmyellowGlow: 'rgba(241, 194, 50, 0.2)',
 
+  // Gray
+  gray: '#999999',
+  grayDark: '#777777',
+  grayGlow: 'rgba(153, 153, 153, 0.2)',
+
+  // Deep Blue
+  deepblue: '#0763B5',
+  deepblueDark: '#054E8F',
+  deepblueGlow: 'rgba(7, 99, 181, 0.2)',
+
   // Error - Red
   error: '#FF4B4B',
   errorDark: '#EA2B2B',
@@ -210,6 +231,7 @@ const lightThemeColors = {
   buttonLightredBorder: '#E04545',
   buttonWarmyellowBorder: '#D9AE2B',
   buttonGrayBorder: '#D1D5DB',
+  buttonDeepblueBorder: '#054E8F',
 
   // Progress & XP
   xpGold: '#FF9600',

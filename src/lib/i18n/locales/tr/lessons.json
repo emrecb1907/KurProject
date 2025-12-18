@@ -353,5 +353,35 @@
         "completeLesson": "Dersi Tamamla",
         "summary": "Özet",
         "lessonSummary": "Ders Özeti"
+    },
+    "siyer": {
+        "groupTitle": "Siyer",
+        "groupDescription": "Hz. Muhammed'in (s.a.v.) Hayatı",
+        "title": "Siyer"
+    },
+    "imanEsaslari": {
+        "groupTitle": "İman Esasları",
+        "groupDescription": "İmanın altı şartı",
+        "title": "İman Esasları"
+    },
+    "orucBilgisi": {
+        "groupTitle": "Oruç Bilgisi",
+        "groupDescription": "Orucun kuralları ve hikmeti",
+        "title": "Oruç Bilgisi"
+    },
+    "peygamberlerTarihi": {
+        "groupTitle": "Peygamberler Tarihi",
+        "groupDescription": "Peygamberlerin kıssaları",
+        "title": "Peygamberler Tarihi"
+    },
+    "ahlakAdap": {
+        "groupTitle": "Ahlak & Adap Bilgisi",
+        "groupDescription": "Karakter ve görgü kuralları",
+        "title": "Ahlak & Adap Bilgisi"
+    },
+    "abdestVeTemizlik": {
+        "groupTitle": "Abdest ve Temizlik",
+        "groupDescription": "Fiziksel ve manevi arınma",
+        "title": "Abdest ve Temizlik"
     }
 }
