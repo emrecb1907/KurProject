@@ -34,9 +34,11 @@ export function useUserData(userId: string | undefined) {
             };
         },
         enabled: !!userId, // Only run if userId exists
-        staleTime: 0, // Always fetch fresh data
-        refetchOnMount: true, // Refetch when component mounts
+        staleTime: 5 * 60 * 1000, // 5 minutes - show cached data, refetch in background
+        gcTime: 10 * 60 * 1000, // Keep cache for 10 minutes
+        refetchOnMount: true, // Refetch when component mounts (in background if cached)
         refetchOnWindowFocus: true, // Refetch when window focused
+        placeholderData: (previousData) => previousData, // Keep showing old data while fetching new
     });
 }
 

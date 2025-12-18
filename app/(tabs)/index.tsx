@@ -8,7 +8,7 @@ import { useStatusBar } from '@/hooks/useStatusBar';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useUser, useAuth } from '@/store';
+import { useUser, useAuth, useStore } from '@/store';
 import { database } from '@/lib/supabase/database';
 
 // Import new tab components
@@ -49,21 +49,24 @@ export default function HomePage() {
                             // Map DB stats to local variables
                             const dbXP = userProfile.stats.total_score || 0; // total_score is used as XP
 
-                            const xpDifference = Math.abs(dbXP - totalXP);
-                            const xpIncreased = totalXP > lastTotalXPRef.current;
+                            // Get latest local XP directly from store to avoid dependency cycle
+                            const currentTotalXP = useStore.getState().totalXP;
 
-                            if (dbXP > totalXP) {
+                            const xpDifference = Math.abs(dbXP - currentTotalXP);
+                            const xpIncreased = currentTotalXP > lastTotalXPRef.current;
+
+                            if (dbXP > currentTotalXP) {
                                 setTotalXP(dbXP);
                                 lastTotalXPRef.current = dbXP;
-                            } else if (dbXP < totalXP) {
+                            } else if (dbXP < currentTotalXP) {
                                 // Only sync if difference is significant (more than 100 XP) to avoid cache timing issues
                                 // OR if XP didn't just increase (meaning it's a real sync issue, not cache)
                                 if (xpDifference > 100 || !xpIncreased) {
                                     const { calculateLevel } = require('@constants/xp');
-                                    const newLevel = calculateLevel(totalXP);
+                                    const newLevel = calculateLevel(currentTotalXP);
 
                                     const { error } = await database.users.updateStats(user.id, {
-                                        total_score: totalXP,
+                                        total_score: currentTotalXP,
                                         current_level: newLevel,
                                     });
 
@@ -71,11 +74,11 @@ export default function HomePage() {
                                         console.error('❌ Failed to sync local XP to DB:', error);
                                     } else {
                                         lastXPUpdateRef.current = Date.now();
-                                        lastTotalXPRef.current = totalXP;
+                                        lastTotalXPRef.current = currentTotalXP;
                                     }
                                 }
                             } else {
-                                lastTotalXPRef.current = totalXP;
+                                lastTotalXPRef.current = currentTotalXP;
                             }
                         }
                     } catch (error) {
@@ -101,7 +104,7 @@ export default function HomePage() {
                     clearTimeout(syncTimeoutRef.current);
                 }
             };
-        }, [isAuthenticated, user?.id, totalXP, syncCompletedLessons])
+        }, [isAuthenticated, user?.id, syncCompletedLessons])
     );
 
     // Page Navigation State

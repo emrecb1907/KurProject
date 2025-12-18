@@ -34,13 +34,22 @@ async function ensureTimezoneSet(userId: string): Promise<void> {
   }
 }
 
+// 🔒 Global flag to prevent re-initialization across all hook instances
+let hasInitialized = false;
+
 export function useAuthHook() {
   const [isInitialized, setIsInitialized] = useState(false);
   const { user, setUser, setIsAuthenticated, setIsAnonymous, setIsLoading, logout } = useStore();
 
-  // Initialize auth state
+  // Initialize auth state - only ONCE per app session
   useEffect(() => {
-    initializeAuth();
+    if (!hasInitialized) {
+      hasInitialized = true;
+      initializeAuth();
+    } else {
+      // Already initialized, just mark local state
+      setIsInitialized(true);
+    }
   }, []);
 
   async function initializeAuth() {

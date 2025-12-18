@@ -203,11 +203,12 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
         // Column 2: Task info (flexible width)
         taskInfoColumn: {
             flex: 1,
-            paddingHorizontal: 8,
+            paddingHorizontal: 4,
+            marginRight: 8,
         },
         // Column 3: Button (fixed width)
         taskButtonColumn: {
-            width: 80,
+            width: 90,
             alignItems: 'center',
             justifyContent: 'flex-end',  // Push button to bottom
             alignSelf: 'stretch',  // Take full height of row

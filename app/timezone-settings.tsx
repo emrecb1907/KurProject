@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Alert, ActivityIndicator } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -146,8 +147,8 @@ export default function TimezoneSettingsScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingHorizontal: 16,
-            paddingTop: 60,
+            paddingHorizontal: 20,
+            paddingTop: 20,
             paddingBottom: 16,
             backgroundColor: colors.backgroundDarker,
             borderBottomWidth: 1,
@@ -159,10 +160,17 @@ export default function TimezoneSettingsScreen() {
             justifyContent: 'center',
             alignItems: 'center',
         },
+        headerTitleContainer: {
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            alignItems: 'center',
+        },
         headerTitle: {
             fontSize: 20,
             fontWeight: 'bold',
             color: colors.textPrimary,
+            textAlign: 'center',
         },
         headerSpacer: {
             width: 40,
@@ -262,36 +270,40 @@ export default function TimezoneSettingsScreen() {
 
     if (!isAuthenticated) {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <View style={styles.header}>
                     <HeaderButton title={t('common.back')} onPress={() => router.back()} />
-                    <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
+                    <View style={styles.headerTitleContainer}>
+                        <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
+                    </View>
                     <View style={styles.headerSpacer} />
                 </View>
                 <View style={styles.loadingContainer}>
                     <Text style={{ color: colors.textSecondary }}>{t('profile.settings.timezone.loginRequired')}</Text>
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 
     if (isLoading) {
         return (
-            <View style={styles.container}>
+            <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <View style={styles.header}>
                     <HeaderButton title={t('common.back')} onPress={() => router.back()} />
-                    <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
+                    <View style={styles.headerTitleContainer}>
+                        <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
+                    </View>
                     <View style={styles.headerSpacer} />
                 </View>
                 <View style={styles.loadingContainer}>
                     <ActivityIndicator size="large" color={colors.primary} />
                 </View>
-            </View>
+            </SafeAreaView>
         );
     }
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
             {/* Header */}
             <View style={styles.header}>
                 <HeaderButton
@@ -301,7 +313,9 @@ export default function TimezoneSettingsScreen() {
                         router.back();
                     }}
                 />
-                <Text style={styles.headerTitle}>{t('profile.settings.timezone.title')}</Text>
+                <View style={styles.headerTitleContainer}>
+                    <Text style={styles.headerTitle}>{t('profile.settings.timezone.title')}</Text>
+                </View>
                 <View style={styles.headerSpacer} />
             </View>
 
@@ -386,6 +400,6 @@ export default function TimezoneSettingsScreen() {
 
                 <View style={{ height: 40 }} />
             </ScrollView>
-        </View>
+        </SafeAreaView>
     );
 }

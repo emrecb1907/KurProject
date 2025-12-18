@@ -43,5 +43,6 @@
     "viewAll": "View All",
     "questions": "Questions",
     "seconds": "Seconds",
-    "completeLesson": "Complete Lesson"
+    "completeLesson": "Complete Lesson",
+    "noInternet": "No internet connection"
 }

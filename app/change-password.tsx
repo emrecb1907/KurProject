@@ -1,5 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -125,8 +126,8 @@ export default function ChangePasswordScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingHorizontal: 16,
-            paddingTop: 60,
+            paddingHorizontal: 20,
+            paddingTop: 20,
             paddingBottom: 16,
             backgroundColor: colors.backgroundDarker,
             borderBottomWidth: 1,
@@ -138,10 +139,17 @@ export default function ChangePasswordScreen() {
             justifyContent: 'center',
             alignItems: 'center',
         },
+        headerTitleContainer: {
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            alignItems: 'center',
+        },
         headerTitle: {
             fontSize: 20,
             fontWeight: 'bold',
             color: colors.textPrimary,
+            textAlign: 'center',
         },
         headerSpacer: {
             width: 40,
@@ -245,149 +253,153 @@ export default function ChangePasswordScreen() {
     });
 
     return (
-        <KeyboardAvoidingView
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-            style={[styles.container, { flex: 1 }]}
-        >
-            <View style={{ flex: 1 }}>
-                {/* Header */}
-                <View style={styles.header}>
-                    <HeaderButton
-                        title={t('common.back')}
-                        onPress={() => {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                            router.back();
-                        }}
-                    />
-                    <Text style={styles.headerTitle}>{t('home.changePassword.title')}</Text>
-                    <View style={styles.headerSpacer} />
-                </View>
-
-                <ScrollView
-                    ref={scrollViewRef}
-                    style={styles.content}
-                    contentContainerStyle={styles.scrollContent}
-                    keyboardShouldPersistTaps="handled"
-                >
-                    {/* Error Message */}
-                    {error && (
-                        <View style={styles.errorContainer}>
-                            <WarningCircle size={20} color="#D32F2F" weight="fill" />
-                            <Text style={styles.errorText}>{error}</Text>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+            <KeyboardAvoidingView
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                style={{ flex: 1 }}
+            >
+                <View style={{ flex: 1 }}>
+                    {/* Header */}
+                    <View style={styles.header}>
+                        <HeaderButton
+                            title={t('common.back')}
+                            onPress={() => {
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                router.back();
+                            }}
+                        />
+                        <View style={styles.headerTitleContainer}>
+                            <Text style={styles.headerTitle}>{t('home.changePassword.title')}</Text>
                         </View>
-                    )}
-
-                    {/* Success Message */}
-                    {
-                        success && (
-                            <View style={styles.successContainer}>
-                                <Check size={20} color="#2E7D32" weight="fill" />
-                                <Text style={styles.successText}>{t('home.changePassword.success')}</Text>
-                            </View>
-                        )
-                    }
-
-                    {/* Old Password */}
-                    <View style={styles.formGroup}>
-                        <Text style={styles.label}>{t('home.changePassword.currentPassword')}</Text>
-                        <View style={styles.inputContainer}>
-                            <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                value={oldPassword}
-                                onChangeText={setOldPassword}
-                                placeholder={t('home.changePassword.currentPasswordPlaceholder')}
-                                placeholderTextColor={colors.textDisabled}
-                                secureTextEntry={!showOldPassword}
-                                autoCapitalize="none"
-                            />
-                            <Pressable
-                                style={styles.eyeButton}
-                                onPress={() => setShowOldPassword(!showOldPassword)}
-                            >
-                                {showOldPassword ? (
-                                    <EyeSlash size={20} color={colors.textSecondary} />
-                                ) : (
-                                    <Eye size={20} color={colors.textSecondary} />
-                                )}
-                            </Pressable>
-                        </View>
+                        <View style={styles.headerSpacer} />
                     </View>
 
-                    {/* New Password */}
-                    <View style={styles.formGroup}>
-                        <Text style={styles.label}>{t('home.changePassword.newPassword')}</Text>
-                        <View style={styles.inputContainer}>
-                            <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                value={newPassword}
-                                onChangeText={setNewPassword}
-                                placeholder={t('home.changePassword.newPasswordPlaceholder')}
-                                placeholderTextColor={colors.textDisabled}
-                                secureTextEntry={!showNewPassword}
-                                autoCapitalize="none"
-                            />
-                            <Pressable
-                                style={styles.eyeButton}
-                                onPress={() => setShowNewPassword(!showNewPassword)}
-                            >
-                                {showNewPassword ? (
-                                    <EyeSlash size={20} color={colors.textSecondary} />
-                                ) : (
-                                    <Eye size={20} color={colors.textSecondary} />
-                                )}
-                            </Pressable>
-                        </View>
-                    </View>
-
-                    <View style={styles.requirements}>
-                        <Text style={styles.requirementText}>• {t('home.changePassword.requirement')}</Text>
-                    </View>
-
-                    {/* Confirm Password */}
-                    <View style={styles.formGroup}>
-                        <Text style={styles.label}>{t('home.changePassword.confirmPassword')}</Text>
-                        <View style={styles.inputContainer}>
-                            <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
-                            <TextInput
-                                style={styles.input}
-                                value={confirmPassword}
-                                onChangeText={setConfirmPassword}
-                                placeholder={t('home.changePassword.confirmPasswordPlaceholder')}
-                                placeholderTextColor={colors.textDisabled}
-                                secureTextEntry={!showConfirmPassword}
-                                autoCapitalize="none"
-                            />
-                            <Pressable
-                                style={styles.eyeButton}
-                                onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                            >
-                                {showConfirmPassword ? (
-                                    <EyeSlash size={20} color={colors.textSecondary} />
-                                ) : (
-                                    <Eye size={20} color={colors.textSecondary} />
-                                )}
-                            </Pressable>
-                        </View>
-                    </View>
-
-                    {/* Update Button */}
-                    <TouchableOpacity
-                        style={[
-                            styles.updateButton,
-                            (isLoading || !oldPassword || !newPassword || !confirmPassword) && styles.updateButtonDisabled
-                        ]}
-                        onPress={handleUpdatePassword}
-                        disabled={isLoading || !oldPassword || !newPassword || !confirmPassword}
+                    <ScrollView
+                        ref={scrollViewRef}
+                        style={styles.content}
+                        contentContainerStyle={styles.scrollContent}
+                        keyboardShouldPersistTaps="handled"
                     >
-                        <Text style={styles.updateButtonText}>
-                            {isLoading ? t('profile.editProfile.saving') : t('home.changePassword.updateButton')}
-                        </Text>
-                    </TouchableOpacity>
+                        {/* Error Message */}
+                        {error && (
+                            <View style={styles.errorContainer}>
+                                <WarningCircle size={20} color="#D32F2F" weight="fill" />
+                                <Text style={styles.errorText}>{error}</Text>
+                            </View>
+                        )}
 
-                </ScrollView >
-            </View >
-        </KeyboardAvoidingView >
+                        {/* Success Message */}
+                        {
+                            success && (
+                                <View style={styles.successContainer}>
+                                    <Check size={20} color="#2E7D32" weight="fill" />
+                                    <Text style={styles.successText}>{t('home.changePassword.success')}</Text>
+                                </View>
+                            )
+                        }
+
+                        {/* Old Password */}
+                        <View style={styles.formGroup}>
+                            <Text style={styles.label}>{t('home.changePassword.currentPassword')}</Text>
+                            <View style={styles.inputContainer}>
+                                <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
+                                <TextInput
+                                    style={styles.input}
+                                    value={oldPassword}
+                                    onChangeText={setOldPassword}
+                                    placeholder={t('home.changePassword.currentPasswordPlaceholder')}
+                                    placeholderTextColor={colors.textDisabled}
+                                    secureTextEntry={!showOldPassword}
+                                    autoCapitalize="none"
+                                />
+                                <Pressable
+                                    style={styles.eyeButton}
+                                    onPress={() => setShowOldPassword(!showOldPassword)}
+                                >
+                                    {showOldPassword ? (
+                                        <EyeSlash size={20} color={colors.textSecondary} />
+                                    ) : (
+                                        <Eye size={20} color={colors.textSecondary} />
+                                    )}
+                                </Pressable>
+                            </View>
+                        </View>
+
+                        {/* New Password */}
+                        <View style={styles.formGroup}>
+                            <Text style={styles.label}>{t('home.changePassword.newPassword')}</Text>
+                            <View style={styles.inputContainer}>
+                                <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
+                                <TextInput
+                                    style={styles.input}
+                                    value={newPassword}
+                                    onChangeText={setNewPassword}
+                                    placeholder={t('home.changePassword.newPasswordPlaceholder')}
+                                    placeholderTextColor={colors.textDisabled}
+                                    secureTextEntry={!showNewPassword}
+                                    autoCapitalize="none"
+                                />
+                                <Pressable
+                                    style={styles.eyeButton}
+                                    onPress={() => setShowNewPassword(!showNewPassword)}
+                                >
+                                    {showNewPassword ? (
+                                        <EyeSlash size={20} color={colors.textSecondary} />
+                                    ) : (
+                                        <Eye size={20} color={colors.textSecondary} />
+                                    )}
+                                </Pressable>
+                            </View>
+                        </View>
+
+                        <View style={styles.requirements}>
+                            <Text style={styles.requirementText}>• {t('home.changePassword.requirement')}</Text>
+                        </View>
+
+                        {/* Confirm Password */}
+                        <View style={styles.formGroup}>
+                            <Text style={styles.label}>{t('home.changePassword.confirmPassword')}</Text>
+                            <View style={styles.inputContainer}>
+                                <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
+                                <TextInput
+                                    style={styles.input}
+                                    value={confirmPassword}
+                                    onChangeText={setConfirmPassword}
+                                    placeholder={t('home.changePassword.confirmPasswordPlaceholder')}
+                                    placeholderTextColor={colors.textDisabled}
+                                    secureTextEntry={!showConfirmPassword}
+                                    autoCapitalize="none"
+                                />
+                                <Pressable
+                                    style={styles.eyeButton}
+                                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                                >
+                                    {showConfirmPassword ? (
+                                        <EyeSlash size={20} color={colors.textSecondary} />
+                                    ) : (
+                                        <Eye size={20} color={colors.textSecondary} />
+                                    )}
+                                </Pressable>
+                            </View>
+                        </View>
+
+                        {/* Update Button */}
+                        <TouchableOpacity
+                            style={[
+                                styles.updateButton,
+                                (isLoading || !oldPassword || !newPassword || !confirmPassword) && styles.updateButtonDisabled
+                            ]}
+                            onPress={handleUpdatePassword}
+                            disabled={isLoading || !oldPassword || !newPassword || !confirmPassword}
+                        >
+                            <Text style={styles.updateButtonText}>
+                                {isLoading ? t('profile.editProfile.saving') : t('home.changePassword.updateButton')}
+                            </Text>
+                        </TouchableOpacity>
+
+                    </ScrollView >
+                </View >
+            </KeyboardAvoidingView >
+        </SafeAreaView>
     );
 }

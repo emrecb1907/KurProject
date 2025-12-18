@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -8,6 +9,7 @@ import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { changeLanguage, getCurrentLanguage } from '@/lib/i18n';
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
+import { HeaderButton } from '@/components/ui';
 
 type Language = 'tr' | 'en';
 
@@ -41,8 +43,9 @@ export default function LanguageSettingsScreen() {
         header: {
             flexDirection: 'row',
             alignItems: 'center',
-            paddingHorizontal: 16,
-            paddingTop: 60,
+            justifyContent: 'space-between',
+            paddingHorizontal: 20,
+            paddingTop: 20,
             paddingBottom: 16,
             backgroundColor: colors.backgroundDarker,
             borderBottomWidth: 1,
@@ -54,13 +57,20 @@ export default function LanguageSettingsScreen() {
             justifyContent: 'center',
             alignItems: 'center',
         },
+        headerTitleContainer: {
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            alignItems: 'center',
+        },
         headerTitle: {
-            flex: 1,
             fontSize: 20,
             fontWeight: 'bold',
             color: colors.textPrimary,
             textAlign: 'center',
-            marginRight: 40, // To center the title accounting for back button
+        },
+        headerSpacer: {
+            width: 40,
         },
         content: {
             flex: 1,
@@ -114,19 +124,20 @@ export default function LanguageSettingsScreen() {
     }), [themeVersion]);
 
     return (
-        <View style={styles.container}>
+        <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
             {/* Header */}
             <View style={styles.header}>
-                <Pressable
-                    style={styles.backButton}
+                <HeaderButton
+                    title={t('common.back')}
                     onPress={() => {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                         router.back();
                     }}
-                >
-                    <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-                </Pressable>
-                <Text style={styles.headerTitle}>{t('profile.settings.language.select')}</Text>
+                />
+                <View style={styles.headerTitleContainer}>
+                    <Text style={styles.headerTitle}>{t('profile.settings.language.select')}</Text>
+                </View>
+                <View style={styles.headerSpacer} />
             </View>
 
             {/* Content */}
@@ -165,6 +176,6 @@ export default function LanguageSettingsScreen() {
                     onPress={handleConfirm}
                 />
             </View>
-        </View>
+        </SafeAreaView>
     );
 }

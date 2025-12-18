@@ -294,10 +294,6 @@ export function GameScreen({
     const isSubmittingRef = useRef(false);
     // 🔐 Track if we've already attempted to save (prevents auto-retry loops)
     const hasAttemptedSaveRef = useRef(false);
-    // 🔐 Track save error for UI display
-    const [saveError, setSaveError] = useState<string | null>(null);
-    // 🔐 Track if retry is in progress
-    const [isRetrying, setIsRetrying] = useState(false);
 
     // 🔐 AUTO-SAVE: Automatically save result when game completes (isGameComplete becomes true)
     // Note: Only runs ONCE when isGameComplete becomes true (hasAttemptedSaveRef prevents re-runs)
@@ -308,15 +304,18 @@ export function GameScreen({
             // Lock immediately
             isSubmittingRef.current = true;
             hasAttemptedSaveRef.current = true;
-            setSaveError(null);
 
             // 🛡️ NETWORK CHECK (Offline Protection)
             try {
                 const networkState = await Network.getNetworkStateAsync();
                 if (!networkState.isConnected) {
                     isSubmittingRef.current = false;
-                    setSaveError('offline');
-                    setHasSaved(false);
+                    // Show offline alert
+                    Alert.alert(
+                        t('errors.offlineTitle', 'Bağlantı Yok'),
+                        t('errors.offlineMessage', 'İnternet bağlantısı yok. Sonucunuz kaydedilemedi.'),
+                        [{ text: t('common.ok', 'Tamam') }]
+                    );
                     return;
                 }
             } catch (netError) {
@@ -349,90 +348,33 @@ export function GameScreen({
                 } else {
                     console.error('❌ Auto-save failed:', result.error);
                     isSubmittingRef.current = false;
-                    setSaveError('server');
-                    setHasSaved(false);
+                    // Show alert if user is still on screen
+                    Alert.alert(
+                        t('errors.saveFailedTitle', 'Kayıt Başarısız'),
+                        t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
+                        [{ text: t('common.ok', 'Tamam') }]
+                    );
                 }
             } catch (error) {
                 console.error('❌ Auto-save error:', error);
                 isSubmittingRef.current = false;
-                setSaveError('server');
-                setHasSaved(false);
+                // Show alert if user is still on screen
+                Alert.alert(
+                    t('errors.saveFailedTitle', 'Kayıt Başarısız'),
+                    t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
+                    [{ text: t('common.ok', 'Tamam') }]
+                );
             }
         };
 
         autoSaveResult();
     }, [isGameComplete, correctAnswersCount, questions.length, lessonId, gameType, source, completeGame, onComplete]);
 
-    // 🔐 Manual retry function (called when user presses retry button)
-    const handleRetrySubmit = async () => {
-        if (isSubmittingRef.current || isRetrying) return;
 
-        hapticLight();
-        setIsRetrying(true);
-        isSubmittingRef.current = true;
-
-        // Check network first
-        try {
-            const networkState = await Network.getNetworkStateAsync();
-            if (!networkState.isConnected) {
-                isSubmittingRef.current = false;
-                setIsRetrying(false);
-                setSaveError('offline');
-                return;
-            }
-        } catch (netError) {
-            console.warn("Network check failed:", netError);
-        }
-
-        const endTime = Date.now();
-        const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
-
-        try {
-            console.log('🔄 Retrying save...');
-            const result = await completeGame({
-                lessonId,
-                gameType,
-                correctAnswers: correctAnswersCount,
-                totalQuestions: questions.length,
-                source,
-                duration: durationSeconds,
-                timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
-            });
-
-            if (result.success) {
-                console.log('✅ Retry successful');
-                setSaveError(null);
-                setHasSaved(true);
-                setIsRetrying(false);
-                if (onComplete) {
-                    onComplete();
-                }
-            } else {
-                console.error('❌ Retry failed:', result.error);
-                isSubmittingRef.current = false;
-                setIsRetrying(false);
-                setSaveError('server');
-            }
-        } catch (error) {
-            console.error('❌ Retry error:', error);
-            isSubmittingRef.current = false;
-            setIsRetrying(false);
-            setSaveError('server');
-        }
-    };
-
-    // 🔐 handleComplete - exits if saved, otherwise shows error
+    // 🔐 handleComplete - exits immediately, save continues in background
     const handleComplete = () => {
         hapticLight();
-        if (hasSaved) {
-            handleExit();
-        } else if (saveError) {
-            // Error state - retry button handles this
-            handleRetrySubmit();
-        } else {
-            // Still saving
-            return;
-        }
+        handleExit();
     };
 
     const getCurrentOptions = () => {
@@ -715,32 +657,11 @@ export function GameScreen({
                         </View>
                     </View>
 
-                    {/* Error Message - Fixed height to prevent layout shift */}
-                    <View style={{ minHeight: 24, marginBottom: 12, justifyContent: 'center' }}>
-                        {saveError && (
-                            <Text style={{ color: colors.error, textAlign: 'center', fontSize: 14 }}>
-                                {saveError === 'offline'
-                                    ? t('errors.offline', 'İnternet bağlantısı yok. Sonucunuz kaydedilemedi.')
-                                    : t('errors.serverError', 'Bir hata oluştu. Lütfen tekrar deneyin.')}
-                            </Text>
-                        )}
-                    </View>
 
                     <PrimaryButton
-                        title={isRetrying
-                            ? t('common.saving', 'Kaydediliyor...')
-                            : (!hasSaved && !saveError)
-                                ? t('common.saving', 'Kaydediliyor...')
-                                : saveError
-                                    ? t('common.retry', 'Tekrar Dene')
-                                    : t('common.finish')}
-                        onPress={saveError ? handleRetrySubmit : handleComplete}
-                        disabled={(!hasSaved && !saveError) || isRetrying}
-                        isLoading={(!hasSaved && !saveError) || isRetrying}
-                        style={[
-                            { width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark },
-                            (saveError && !isRetrying) && { backgroundColor: colors.error, borderBottomColor: colors.errorDark }
-                        ]}
+                        title={t('common.finish')}
+                        onPress={handleComplete}
+                        style={{ width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark }}
                     />
 
 

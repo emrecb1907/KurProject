@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Alert, DeviceEventEmitter } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -135,14 +136,16 @@ export default function ChestScreen() {
   };
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       {/* Header */}
       <View style={styles.header}>
         <HeaderButton
           title={t('common.back')}
           onPress={() => router.back()}
         />
-        <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
+        <View style={styles.headerTitleContainer}>
+          <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
+        </View>
         <View style={{ width: 40 }} />
       </View>
 
@@ -305,7 +308,7 @@ export default function ChestScreen() {
         {/* Bottom Spacing */}
         <View style={{ height: 40 }} />
       </ScrollView>
-    </View>
+    </SafeAreaView>
   );
 }
 
@@ -318,16 +321,23 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 60,
+    paddingHorizontal: 20,
+    paddingTop: 20,
     paddingBottom: 12,
     backgroundColor: colors.backgroundDarker,
   },
 
+  headerTitleContainer: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+  },
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     color: colors.textPrimary,
+    textAlign: 'center',
   },
   content: {
     flex: 1,
@@ -456,6 +466,15 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
   },
   adCardDescription: {
     fontSize: 12,
+    color: colors.textSecondary,
+  },
+  adButtonUsed: {
+    backgroundColor: colors.backgroundLighter,
+  },
+  adButtonDisabled: {
+    opacity: 0.5,
+  },
+  adButtonUsedText: {
     color: colors.textSecondary,
   },
 

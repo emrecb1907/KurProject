@@ -47,6 +47,8 @@ export const useStore = create<StoreState>()(
         dailyProgress: state.dailyProgress,
         completedLessons: state.completedLessons,
         selectedAvatar: state.selectedAvatar,
+        hapticsEnabled: state.hapticsEnabled,
+        soundsEnabled: state.soundsEnabled,
 
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
@@ -120,6 +122,10 @@ export const useUser = () => useStore(
     sessionToken: state.sessionToken,
     selectedAvatar: state.selectedAvatar,
     setSelectedAvatar: state.setSelectedAvatar,
+    hapticsEnabled: state.hapticsEnabled,
+    soundsEnabled: state.soundsEnabled,
+    setHapticsEnabled: state.setHapticsEnabled,
+    setSoundsEnabled: state.setSoundsEnabled,
   }))
 );
 

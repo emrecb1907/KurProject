@@ -34,6 +34,10 @@ export interface UserSlice {
   completedLessons: string[];
   sessionToken: string | null;
 
+  // Preferences
+  hapticsEnabled: boolean;
+  soundsEnabled: boolean;
+
   // Actions
   setTotalXP: (xp: number) => void;
   addXP: (xp: number) => void;
@@ -63,6 +67,10 @@ export interface UserSlice {
   consumeEnergy: () => Promise<{ success: boolean; error?: string }>;
   checkLifeRegeneration: () => Promise<void>;
   watchAd: () => Promise<boolean>;
+
+  // Preferences
+  setHapticsEnabled: (enabled: boolean) => void;
+  setSoundsEnabled: (enabled: boolean) => void;
 }
 
 const getTodayDateString = () => new Date().toISOString().split('T')[0];
@@ -91,6 +99,8 @@ const initialState = {
   },
   completedLessons: [],
   sessionToken: null,
+  hapticsEnabled: true,
+  soundsEnabled: true,
 };
 
 export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
@@ -386,5 +396,9 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
     await state.addLives(1);
     set({ adWatchTimes: [...validWatches, now] });
     return true;
-  }
+  },
+
+  // Preferences
+  setHapticsEnabled: (enabled) => set({ hapticsEnabled: enabled }),
+  setSoundsEnabled: (enabled) => set({ soundsEnabled: enabled }),
 });

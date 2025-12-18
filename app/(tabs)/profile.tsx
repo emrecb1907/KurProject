@@ -555,13 +555,9 @@ export default function ProfileScreen() {
               </Pressable>
             </View>
 
-            {isLoadingStats ? (
-              <View style={{ minHeight: 100 }} />
-            ) : (
-              <View style={styles.badgesContainer}>
-                {badgeElements}
-              </View>
-            )}
+            <View style={styles.badgesContainer}>
+              {badgeElements}
+            </View>
             <Text style={styles.badgeHint}>
               {t('profile.badgesHint')}
             </Text>

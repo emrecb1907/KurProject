@@ -1,5 +1,6 @@
 import React, { useMemo, useRef, useCallback, useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, Animated } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
@@ -166,7 +167,7 @@ function SettingsContent() {
           title: t('profile.settings.account.preferences'),
           onPress: () => {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to preferences page
+            router.push('/preferences');
           },
         },
         {
@@ -235,8 +236,8 @@ function SettingsContent() {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: 16,
-      paddingTop: 60,
+      paddingHorizontal: 20,
+      paddingTop: 20,
       paddingBottom: 16,
       backgroundColor: colors.backgroundDarker,
       borderBottomWidth: 1,
@@ -253,10 +254,17 @@ function SettingsContent() {
       fontWeight: 'bold',
       color: colors.textPrimary,
     },
+    headerTitleContainer: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      alignItems: 'center',
+    },
     headerTitle: {
       fontSize: 20,
       fontWeight: 'bold',
       color: colors.textPrimary,
+      textAlign: 'center',
     },
     headerSpacer: {
       width: 40,
@@ -503,7 +511,7 @@ function SettingsContent() {
   }), [themeVersion]);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
       {/* Header */}
       <View style={styles.header}>
         <HeaderButton
@@ -513,7 +521,9 @@ function SettingsContent() {
             router.back();
           }}
         />
-        <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
+        <View style={styles.headerTitleContainer}>
+          <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
+        </View>
         <View style={styles.headerSpacer} />
       </View>
 
@@ -806,7 +816,7 @@ function SettingsContent() {
           </View>
         </Animated.View>
       </Modal>
-    </View>
+    </SafeAreaView>
   );
 }
 

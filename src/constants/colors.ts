@@ -29,6 +29,26 @@ const darkThemeColors = {
   pinkDark: '#E6568A',
   pinkGlow: 'rgba(255, 107, 157, 0.3)',
 
+  // Caramel
+  caramel: '#C58B59',
+  caramelDark: '#A67244',
+  caramelGlow: 'rgba(197, 139, 89, 0.3)',
+
+  // Soft Purple
+  softpurple: '#C3B9FF',
+  softpurpleDark: '#A89BE0',
+  softpurpleGlow: 'rgba(195, 185, 255, 0.3)',
+
+  // Light Red
+  lightred: '#FF5454',
+  lightredDark: '#E04545',
+  lightredGlow: 'rgba(255, 84, 84, 0.3)',
+
+  // Warm Yellow
+  warmyellow: '#F1C232',
+  warmyellowDark: '#D9AE2B',
+  warmyellowGlow: 'rgba(241, 194, 50, 0.3)',
+
   // Error - Red
   error: '#FF4B4B',
   errorDark: '#EA2B2B',
@@ -70,6 +90,10 @@ const darkThemeColors = {
   buttonBlueBorder: '#1389B8',
   buttonGreenBorder: '#42A500',
   buttonPinkBorder: '#CC5678',
+  buttonCaramelBorder: '#A67244',
+  buttonSoftpurpleBorder: '#A89BE0',
+  buttonLightredBorder: '#E04545',
+  buttonWarmyellowBorder: '#D9AE2B',
   buttonGrayBorder: '#4B5563',
 
   // Progress & XP
@@ -120,6 +144,26 @@ const lightThemeColors = {
   pinkDark: '#E6568A',
   pinkGlow: 'rgba(255, 107, 157, 0.2)',
 
+  // Caramel
+  caramel: '#C58B59',
+  caramelDark: '#A67244',
+  caramelGlow: 'rgba(197, 139, 89, 0.2)',
+
+  // Soft Purple
+  softpurple: '#C3B9FF',
+  softpurpleDark: '#A89BE0',
+  softpurpleGlow: 'rgba(195, 185, 255, 0.2)',
+
+  // Light Red
+  lightred: '#FF5454',
+  lightredDark: '#E04545',
+  lightredGlow: 'rgba(255, 84, 84, 0.2)',
+
+  // Warm Yellow
+  warmyellow: '#F1C232',
+  warmyellowDark: '#D9AE2B',
+  warmyellowGlow: 'rgba(241, 194, 50, 0.2)',
+
   // Error - Red
   error: '#FF4B4B',
   errorDark: '#EA2B2B',
@@ -161,6 +205,10 @@ const lightThemeColors = {
   buttonBlueBorder: '#1389B8',
   buttonGreenBorder: '#42A500',
   buttonPinkBorder: '#CC5678',
+  buttonCaramelBorder: '#A67244',
+  buttonSoftpurpleBorder: '#A89BE0',
+  buttonLightredBorder: '#E04545',
+  buttonWarmyellowBorder: '#D9AE2B',
   buttonGrayBorder: '#D1D5DB',
 
   // Progress & XP

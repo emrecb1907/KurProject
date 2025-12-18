@@ -43,5 +43,6 @@
     "viewAll": "Tümünü Gör",
     "questions": "Soru",
     "seconds": "Saniye",
-    "completeLesson": "Dersi Tamamla"
+    "completeLesson": "Dersi Tamamla",
+    "noInternet": "İnternet bağlantısı yok"
 }

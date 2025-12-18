@@ -101,5 +101,12 @@
         "description1": "Profilinde görünecek bir karakter seç.",
         "description2": "Tarzını en iyi yansıtanı bul!",
         "continue": "Kaydet"
+    },
+    "preferences": {
+        "title": "Tercihler",
+        "disableHaptics": "Titreşimleri Kapat",
+        "disableHapticsDesc": "Tüm dokunsal geri bildirimleri kapatır",
+        "disableSounds": "Sesleri Kapat",
+        "disableSoundsDesc": "Tüm uygulama seslerini kapatır"
     }
 }

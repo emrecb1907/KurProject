@@ -101,7 +101,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
             const dbXP = userData?.stats?.total_score || 0;
             const localXP = totalXP;
 
-            console.log('🔄 Syncing XP:', { dbXP, localXP });
+            if (__DEV__) console.log('🔄 Syncing XP:', { dbXP, localXP });
 
             if (localXP > dbXP) {
                 // Update database with local XP
@@ -114,7 +114,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                     t('home.xpSynced'),
                     `Database: ${formatXP(dbXP)} XP\nLocal: ${formatXP(localXP)} XP`
                 );
-                console.log('✅ XP synced successfully');
+                if (__DEV__) console.log('✅ XP synced successfully');
             } else if (dbXP > localXP) {
                 // Database has more XP than local
                 setTotalXP(dbXP);
@@ -122,12 +122,12 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                     'ℹ️ Local XP Updated',
                     `Local: ${formatXP(localXP)} XP\nDatabase: ${formatXP(dbXP)} XP`
                 );
-                console.log('✅ Local XP updated from database');
+                if (__DEV__) console.log('✅ Local XP updated from database');
             } else {
                 Alert.alert('ℹ️ Synced', t('home.xpSynced'));
             }
         } catch (error) {
-            console.error('❌ Sync error:', error);
+            if (__DEV__) console.error('❌ Sync error:', error);
             Alert.alert(t('common.error'), 'Sync failed');
         }
     };
@@ -145,7 +145,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                     style: 'destructive',
                     onPress: async () => {
                         try {
-                            console.log('🗑️ Resetting user progress...');
+                            if (__DEV__) console.log('🗑️ Resetting user progress...');
 
                             // 1. Reset database user data (if authenticated)
                             if (isAuthenticated && user?.id) {
@@ -177,7 +177,7 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                 },
                             ]);
                         } catch (error) {
-                            console.error('❌ Reset progress error:', error);
+                            if (__DEV__) console.error('❌ Reset progress error:', error);
                             Alert.alert(t('common.error'), 'Reset failed');
                         }
                     },
@@ -199,88 +199,90 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                     <WeeklyActivity />
                     <DailyTasks
                         devToolsContent={
-                            <View style={styles.testContainer}>
-                                {/* Add XP Buttons */}
-                                <View style={styles.testButtonRow}>
-                                    <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
-                                        <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
+                            __DEV__ ? (
+                                <View style={styles.testContainer}>
+                                    {/* Add XP Buttons */}
+                                    <View style={styles.testButtonRow}>
+                                        <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAddXP}>
+                                            <Text style={styles.testButtonText}>➕ +100 {t('home.xp')}</Text>
+                                        </Pressable>
+
+                                        <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
+                                            <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
+                                        </Pressable>
+                                    </View>
+
+                                    {/* Lives Debug Buttons */}
+                                    <View style={styles.testButtonRow}>
+                                        <Pressable
+                                            style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
+                                            onPress={() => {
+                                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                                consumeEnergy();
+                                            }}
+                                        >
+                                            <Text style={styles.testButtonText}>⚡ -1 Enerji</Text>
+                                        </Pressable>
+
+                                        <Pressable
+                                            style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
+                                            onPress={() => {
+                                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                                addLives(1);
+                                            }}
+                                        >
+                                            <Text style={styles.testButtonText}>⚡ +1 Enerji</Text>
+                                        </Pressable>
+                                    </View>
+
+                                    {/* Sync XP Button */}
+                                    <Pressable style={styles.testButtonSync} onPress={handleSyncXP}>
+                                        <Text style={styles.testButtonText}>🔄 {t('home.syncXP')}</Text>
                                     </Pressable>
 
-                                    <Pressable style={[styles.testButton, styles.testButtonHalf]} onPress={handleAdd1000XP}>
-                                        <Text style={styles.testButtonText}>⚡ +1000 {t('home.xp')}</Text>
-                                    </Pressable>
-                                </View>
-
-                                {/* Lives Debug Buttons */}
-                                <View style={styles.testButtonRow}>
-                                    <Pressable
-                                        style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
-                                        onPress={() => {
-                                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                            consumeEnergy();
-                                        }}
-                                    >
-                                        <Text style={styles.testButtonText}>⚡ -1 Enerji</Text>
+                                    {/* Reset Progress Button */}
+                                    <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
+                                        <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
                                     </Pressable>
 
-                                    <Pressable
-                                        style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
-                                        onPress={() => {
-                                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                            addLives(1);
-                                        }}
-                                    >
-                                        <Text style={styles.testButtonText}>⚡ +1 Enerji</Text>
-                                    </Pressable>
-                                </View>
-
-                                {/* Sync XP Button */}
-                                <Pressable style={styles.testButtonSync} onPress={handleSyncXP}>
-                                    <Text style={styles.testButtonText}>🔄 {t('home.syncXP')}</Text>
-                                </Pressable>
-
-                                {/* Reset Progress Button */}
-                                <Pressable style={styles.testButtonDanger} onPress={handleClearData}>
-                                    <Text style={styles.testButtonText}>🔄 {t('home.resetProgress')}</Text>
-                                </Pressable>
-
-                                {/* Reset XP Only Button */}
-                                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                                    try {
-                                        setTotalXP(0);
-                                        if (isAuthenticated && user?.id) {
-                                            await database.users.update(user.id, {
-                                                total_xp: 0,
-                                                current_level: 1,
-                                            });
+                                    {/* Reset XP Only Button */}
+                                    <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
+                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                                        try {
+                                            setTotalXP(0);
+                                            if (isAuthenticated && user?.id) {
+                                                await database.users.update(user.id, {
+                                                    total_xp: 0,
+                                                    current_level: 1,
+                                                });
+                                            }
+                                            Alert.alert(t('common.success'), 'XP reset.');
+                                        } catch (error) {
+                                            if (__DEV__) console.error('❌ Reset XP error:', error);
                                         }
-                                        Alert.alert(t('common.success'), 'XP reset.');
-                                    } catch (error) {
-                                        console.error('❌ Reset XP error:', error);
-                                    }
-                                }}>
-                                    <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
-                                </Pressable>
+                                    }}>
+                                        <Text style={styles.testButtonText}>🔄 Reset XP Only</Text>
+                                    </Pressable>
 
-                                {/* Logout Button */}
-                                <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
-                                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
-                                    try {
-                                        const { logout } = useStore.getState();
-                                        await supabase.auth.signOut();
-                                        logout();
-                                        resetUserData();
-                                        Alert.alert(t('common.success'), t('home.logout'));
-                                        router.replace('/(auth)/login');
-                                    } catch (error) {
-                                        console.error('❌ Logout error:', error);
-                                        Alert.alert(t('common.error'), 'Logout failed');
-                                    }
-                                }}>
-                                    <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
-                                </Pressable>
-                            </View>
+                                    {/* Logout Button */}
+                                    <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.textSecondary }]} onPress={async () => {
+                                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+                                        try {
+                                            const { logout } = useStore.getState();
+                                            await supabase.auth.signOut();
+                                            logout();
+                                            resetUserData();
+                                            Alert.alert(t('common.success'), t('home.logout'));
+                                            router.replace('/(auth)/login');
+                                        } catch (error) {
+                                            if (__DEV__) console.error('❌ Logout error:', error);
+                                            Alert.alert(t('common.error'), 'Logout failed');
+                                        }
+                                    }}>
+                                        <Text style={styles.testButtonText}>🚪 {t('home.logout')}</Text>
+                                    </Pressable>
+                                </View>
+                            ) : null
                         }
                     />
                 </View>

@@ -101,5 +101,12 @@
         "description1": "Select a character for your profile.",
         "description2": "Find the one that best represents you!",
         "continue": "Save"
+    },
+    "preferences": {
+        "title": "Preferences",
+        "disableHaptics": "Disable Vibrations",
+        "disableHapticsDesc": "Turn off all haptic feedback",
+        "disableSounds": "Disable Sounds",
+        "disableSoundsDesc": "Turn off all app sounds"
     }
 }

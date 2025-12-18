@@ -14,6 +14,7 @@ import { loadSavedLanguage } from '@/lib/i18n';
 
 // Error Handling
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { OfflineBanner } from '@/components/ui/OfflineBanner';
 import { errorHandler } from '@/lib/errorHandler';
 import * as Sentry from '@sentry/react-native';
 
@@ -109,6 +110,7 @@ function RootLayout() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider>
+            <OfflineBanner />
             <Stack
               screenOptions={{
                 headerShown: false,

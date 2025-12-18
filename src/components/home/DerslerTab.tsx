@@ -16,13 +16,13 @@ import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { CarouselCard } from '@/components/ui/CarouselCard';
 import { useUser } from '@/store';
-import { islamicHistory } from '@/data/islamicHistory';
-import { namazTemelDualar } from '@/data/namazTemelDualar';
-import { namazKisaSureler } from '@/data/namazKisaSureler';
-import { namazIleriDuzey } from '@/data/namazIleriDuzey';
-import { namazEzberPekistirme } from '@/data/namazEzberPekistirme';
-import { namazBilgisi } from '@/data/namazBilgisi';
-import { abdestVeTemizlik } from '@/data/abdestVeTemizlik';
+import {
+    KURAN_LESSON_IDS,
+    NAMAZ_DUALARI_IDS,
+    NAMAZ_BILGISI_IDS,
+    ISLAM_TARIHI_IDS,
+    ABDEST_VE_TEMIZLIK_IDS
+} from '@/constants/lessonIds';
 
 interface DerslerTabProps {
     screenWidth: number;
@@ -70,40 +70,24 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     const { completedLessons } = useUser();
 
     // Calculate Kur'an Öğrenimi progress
-    // IDs: 101-118 (Elif-Ba and initial lessons)
-    const kuranIds = ['101', '102', '103', '104', '105', '106', '107', '108', '109', '110', '111', '112', '113', '114', '115', '116', '117', '118', '119', '120', '121', '122', '123', '124', '125', '126', '127', '128'];
-    const kuranTotal = kuranIds.length;
-    const kuranCompleted = completedLessons.filter((id: string) => kuranIds.includes(id)).length;
+    const kuranTotal = KURAN_LESSON_IDS.length;
+    const kuranCompleted = completedLessons.filter((id: string) => KURAN_LESSON_IDS.includes(id)).length;
 
     // Calculate Namaz Duaları progress
-    const namazIds = useMemo(() => {
-        return [
-            ...namazTemelDualar.map(l => l.id.toString()),
-            ...namazKisaSureler.map(l => l.id.toString()),
-            ...namazIleriDuzey.map(l => l.id.toString()),
-            ...namazEzberPekistirme.map(l => l.id.toString())
-        ];
-    }, []);
-    const namazTotal = namazIds.length;
-    const namazCompleted = completedLessons.filter((id: string) => namazIds.includes(id)).length;
+    const namazTotal = NAMAZ_DUALARI_IDS.length;
+    const namazCompleted = completedLessons.filter((id: string) => NAMAZ_DUALARI_IDS.includes(id)).length;
 
-    // Calculate İslam Tarihi progress
-    // IDs: 401-413 (from islamicHistory data)
     // Calculate Namaz Bilgisi progress
-    // IDs: 301-313
-    const namazBilgisiIds = namazBilgisi.map(l => l.id.toString());
-    const namazBilgisiTotal = namazBilgisiIds.length;
-    const namazBilgisiCompleted = completedLessons.filter((id: string) => namazBilgisiIds.includes(id)).length;
+    const namazBilgisiTotal = NAMAZ_BILGISI_IDS.length;
+    const namazBilgisiCompleted = completedLessons.filter((id: string) => NAMAZ_BILGISI_IDS.includes(id)).length;
 
     // Calculate Abdest ve Temizlik progress
-    // IDs: 501+
-    const abdestIds = abdestVeTemizlik.map((l: { id: number }) => l.id.toString());
-    const abdestTotal = abdestIds.length;
-    const abdestCompleted = completedLessons.filter((id: string) => abdestIds.includes(id)).length;
+    const abdestTotal = ABDEST_VE_TEMIZLIK_IDS.length;
+    const abdestCompleted = completedLessons.filter((id: string) => ABDEST_VE_TEMIZLIK_IDS.includes(id)).length;
 
-    const historyIds = islamicHistory.map((l: { id: number }) => l.id.toString());
-    const historyTotal = historyIds.length;
-    const historyCompleted = completedLessons.filter((id: string) => historyIds.includes(id)).length;
+    // Calculate İslam Tarihi progress
+    const historyTotal = ISLAM_TARIHI_IDS.length;
+    const historyCompleted = completedLessons.filter((id: string) => ISLAM_TARIHI_IDS.includes(id)).length;
 
     const categories: CategoryItem[] = [
         {
@@ -170,8 +154,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
             totalCount: abdestTotal,
             progress: abdestTotal > 0 ? abdestCompleted / abdestTotal : 0,
             icon: HandPalm,
-            color: colors.secondary,
-            borderColor: colors.buttonBlueBorder,
+            color: colors.warmyellow,
+            borderColor: colors.buttonWarmyellowBorder,
             route: '/lessons/abdest-ve-temizlik',
             unlocked: true,
             level: 1,
