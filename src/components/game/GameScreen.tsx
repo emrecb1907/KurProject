@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert, ActivityIndicator, Modal } from 'react-native';
+import { View, Text, StyleSheet, Pressable, Alert, ActivityIndicator, Modal } from 'react-native';
 import { useRouter, useNavigation } from 'expo-router';
 import { BackHandler } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, Easing, runOnJS } from 'react-native-reanimated';
@@ -8,30 +8,20 @@ import { TestPreparationOverlay } from './TestPreparationOverlay';
 import { OptionButton } from './OptionButton';
 import { Timer } from './Timer';
 import { LifeIndicator } from './LifeIndicator';
-import { Button, CircularProgress, LoadingOverlay, PrimaryButton } from '@components/ui';
+import { Button, LoadingOverlay, PrimaryButton } from '@components/ui';
 import LottieView from 'lottie-react-native';
-import { useStore, useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useEnergy, useUserData } from '@/hooks/queries';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { hapticSuccess, hapticError, hapticLight } from '@/utils/haptics';
 import * as Haptics from 'expo-haptics';
 import { GameQuestion, GameType } from '@/types/game.types';
-import { useGameCompletion } from '@/hooks';
+import { useGameCompletion, useGameAudio, useGameTimer } from '@/hooks';
 import { GAME_UI_CONFIG } from '@constants/game';
 import { logger } from '@/lib/logger';
-import { playSound, releaseAudioPlayer } from '@/utils/audio';
-import {
-    playGameSound,
-    releaseGameAudioPlayer,
-    initGameSounds,
-    CORRECT_CHOICE_SOUND,
-    WRONG_CHOICE_SOUND,
-    GAME_COMPLETE_SOUND,
-    LEVEL_UP_SOUND
-} from '@/utils/gameSound';
 import { getFeedbackPath, getCompletionFeedbackPath, FeedbackMessage } from '@/constants/feedbackMessages';
-import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import * as Network from 'expo-network';
 import { Clock, CheckCircle } from 'phosphor-react-native';
@@ -43,7 +33,6 @@ interface GameScreenProps {
     timerDuration?: number;
     hasLatinToggle?: boolean;
     onComplete?: () => void;
-
     source?: 'lesson' | 'test'; // Track where the game was started from
     title?: string;
 }
@@ -55,17 +44,22 @@ export function GameScreen({
     timerDuration = 10,
     hasLatinToggle = false,
     onComplete,
-
     source = 'lesson', // Default to lesson for backward compatibility
     title = 'Test'
 }: GameScreenProps) {
     const { t } = useTranslation();
     const router = useRouter();
-    const { currentLives, maxLives } = useStore();
-    const { totalXP } = useUser();
+    const { user } = useAuth();
     const { themeVersion } = useTheme();
     const { completeGame, isSubmitting } = useGameCompletion();
     const navigation = useNavigation();
+
+    // Get energy and user data from React Query
+    const { data: energyData } = useEnergy(user?.id);
+    const { data: userData } = useUserData(user?.id);
+    const currentLives = energyData?.current_energy ?? 6;
+    const maxLives = energyData?.max_energy ?? 6;
+    const totalXP = userData?.total_xp ?? 0;
 
     // Disable gestures and hardware back button
     useEffect(() => {
@@ -85,9 +79,17 @@ export function GameScreen({
         return () => backHandler.remove();
     }, [navigation]);
 
+    // Use extracted audio hook
+    const { playFeedbackSound, playCompletionSound, playLetterAudio, stopCurrentSound } = useGameAudio(gameType);
+
+    // Use extracted timer hook
+    const { startTimeRef, durationString, isTimeUp, setIsTimeUp, resetTimer, calculateDuration } = useGameTimer();
+
     const isTest = source === 'test';
-    // Start with isStarting=true only for tests
-    const [isStarting, setIsStarting] = useState(isTest);
+    // Wait for both countdown AND data to load before starting test
+    const [isCountdownComplete, setIsCountdownComplete] = useState(false);
+    const isDataReady = totalXP >= 0 && userData !== undefined; // Data is loaded when userData exists
+    const isStarting = isTest && (!isCountdownComplete || !isDataReady);
 
     const [selectedOption, setSelectedOption] = useState<string | null>(null);
     const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
@@ -97,18 +99,33 @@ export function GameScreen({
 
     // 🔐 Auto-save: XP snapshot at test start (prevents store update from affecting XP bar)
     const initialTotalXPRef = useRef<number>(totalXP);
+    const hasInitializedXPRef = useRef<boolean>(false);
+
+    // Update ref when React Query data first loads (before game starts)
+    useEffect(() => {
+        if (!hasInitializedXPRef.current && totalXP > 0) {
+            initialTotalXPRef.current = totalXP;
+            hasInitializedXPRef.current = true;
+        }
+    }, [totalXP]);
+
     // 🔐 Auto-save: Track save status for UI and retry logic
     const [hasSaved, setHasSaved] = useState(false);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
     const [showLatin, setShowLatin] = useState(false);
-    const [isTimeUp, setIsTimeUp] = useState(false); // New state for timeout
-    const stopSoundRef = useRef<(() => void) | null>(null);
-    const stopEffectSoundRef = useRef<(() => void) | null>(null);
-    const stopGameCompleteSoundRef = useRef<(() => void) | null>(null);
 
-    // Duration Tracking
-    const startTimeRef = useRef<number>(Date.now());
-    const [durationString, setDurationString] = useState<string>("00:00");
+    // ⏳ Cooldown for Rate Limiting
+    const [cooldownSeconds, setCooldownSeconds] = useState(0);
+
+    // Countdown effect for cooldown
+    useEffect(() => {
+        if (cooldownSeconds > 0) {
+            const timer = setInterval(() => {
+                setCooldownSeconds((prev) => prev - 1);
+            }, 1000);
+            return () => clearInterval(timer);
+        }
+    }, [cooldownSeconds]);
 
     // XP bar animation
     const animatedXPWidth = useSharedValue(0);
@@ -143,38 +160,25 @@ export function GameScreen({
     // Cleanup audio when component unmounts
     useEffect(() => {
         return () => {
-            if (stopSoundRef.current) stopSoundRef.current();
-            if (stopEffectSoundRef.current) stopEffectSoundRef.current();
-            if (stopGameCompleteSoundRef.current) stopGameCompleteSoundRef.current();
-            // Release the global audio players when leaving game screen
-            releaseAudioPlayer();
-            releaseGameAudioPlayer();
+            // Release the global audio players when leaving game screen is handled in useGameAudio hook
         };
     }, []);
 
     // Stop audio when question changes
     useEffect(() => {
-        if (stopSoundRef.current) {
-            stopSoundRef.current();
-            stopSoundRef.current = null;
-        }
-    }, [currentQuestionIndex]);
+        stopCurrentSound();
+    }, [currentQuestionIndex, stopCurrentSound]);
 
     // Check lives on mount
     useEffect(() => {
-        // Initialize game sounds for instant playback
-        initGameSounds();
-
         // Log game load
         logger.game(`${gameType} game loaded - Using generic GameScreen component`);
 
         // Start Session (Security) & Countdown Logic
-        // 🔐 Session artık consumeEnergy'de oluşturuluyor, burada sadece minimum bekleme süresi var
         if (source === 'test') {
             const minDurationPromise = new Promise(resolve => setTimeout(resolve, 3000));
-
             minDurationPromise.then(() => {
-                setIsStarting(false);
+                setIsCountdownComplete(true);
             });
         }
     }, []);
@@ -184,24 +188,7 @@ export function GameScreen({
         setIsAnswered(true);
         setIsCorrect(false); // Time up counts as incorrect/missed
         hapticError();
-        playSoundEffect(false); // Play wrong/timeout sound
-    };
-
-    // Play sound effect (correct or wrong)
-    // Note: Sounds will not play if device is in silent mode (playsInSilentModeIOS: false)
-    const playSoundEffect = (isCorrect: boolean) => {
-        try {
-            // Get the appropriate sound file
-            const soundFile = isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND;
-
-            // Play the sound effect using game sound manager
-            // Note: No need to stop previous sound - playGameSound handles seekTo(0) internally
-            const stop = playGameSound(soundFile);
-            stopEffectSoundRef.current = stop;
-        } catch (error) {
-            console.error('Error playing sound effect:', error);
-            stopEffectSoundRef.current = null;
-        }
+        playFeedbackSound(false); // Play wrong/timeout sound
     };
 
     const handleAnswer = async (answer: string, timeTaken: number) => {
@@ -216,7 +203,6 @@ export function GameScreen({
         setIsAnswered(true);
 
         // Calculate success percentage including this question
-        // correctAnswersCount is not updated yet, so we add 1 if current answer is correct
         const currentCorrectCount = correct ? correctAnswersCount + 1 : correctAnswersCount;
         const currentQuestionCount = currentQuestionIndex + 1;
         const percentage = (currentCorrectCount / currentQuestionCount) * 100;
@@ -229,7 +215,7 @@ export function GameScreen({
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
             setFeedbackMessage(randomMessage);
         } else {
-            // Fallback if translation fails or returns string
+            // Fallback
             setFeedbackMessage({
                 title: correct ? t('gameUI.congratulations') : t('gameUI.wrongAnswer', "Yanlış Cevap"),
                 message: correct ? t('gameUI.goodJob') : t('gameUI.tryAgain', "Bir sonraki soruya geçelim!")
@@ -239,12 +225,10 @@ export function GameScreen({
         if (correct) {
             hapticSuccess();
             setCorrectAnswersCount((prev) => prev + 1);
-            // Play correct answer sound
-            playSoundEffect(true);
+            playFeedbackSound(true);
         } else {
             hapticError();
-            // Play wrong answer sound
-            playSoundEffect(false);
+            playFeedbackSound(false);
         }
     };
 
@@ -259,12 +243,7 @@ export function GameScreen({
             setCurrentQuestionIndex(currentQuestionIndex + 1);
         } else {
             // Calculate Duration when game ends
-            const endTime = Date.now();
-            const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
-            const minutes = Math.floor(durationSeconds / 60);
-            const seconds = durationSeconds % 60;
-            setDurationString(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
-
+            calculateDuration();
             setIsGameComplete(true);
         }
     };
@@ -285,9 +264,7 @@ export function GameScreen({
         setIsAnswered(false);
         setSelectedOption(null);
         setIsCorrect(null);
-        setIsTimeUp(false);
-        // Reset start time on retry
-        startTimeRef.current = Date.now();
+        resetTimer();
     };
 
     // Ref to prevent double submission (more reliable than state for rapid taps)
@@ -295,86 +272,116 @@ export function GameScreen({
     // 🔐 Track if we've already attempted to save (prevents auto-retry loops)
     const hasAttemptedSaveRef = useRef(false);
 
-    // 🔐 AUTO-SAVE: Automatically save result when game completes (isGameComplete becomes true)
-    // Note: Only runs ONCE when isGameComplete becomes true (hasAttemptedSaveRef prevents re-runs)
-    useEffect(() => {
-        if (!isGameComplete || hasAttemptedSaveRef.current) return;
-
-        const autoSaveResult = async () => {
-            // Lock immediately
-            isSubmittingRef.current = true;
-            hasAttemptedSaveRef.current = true;
-
-            // 🛡️ NETWORK CHECK (Offline Protection)
-            try {
-                const networkState = await Network.getNetworkStateAsync();
-                if (!networkState.isConnected) {
-                    isSubmittingRef.current = false;
-                    // Show offline alert
-                    Alert.alert(
-                        t('errors.offlineTitle', 'Bağlantı Yok'),
-                        t('errors.offlineMessage', 'İnternet bağlantısı yok. Sonucunuz kaydedilemedi.'),
-                        [{ text: t('common.ok', 'Tamam') }]
-                    );
-                    return;
-                }
-            } catch (netError) {
-                console.warn("Network check verification failed:", netError);
-                // Proceed - actual error will be caught in completeGame
-            }
-
-            // Calculate Duration for API
-            const endTime = Date.now();
-            const durationSeconds = Math.floor((endTime - startTimeRef.current) / 1000);
-
-            try {
-                console.log('🔄 Auto-saving game result...');
-                const result = await completeGame({
-                    lessonId,
-                    gameType,
-                    correctAnswers: correctAnswersCount,
-                    totalQuestions: questions.length,
-                    source,
-                    duration: durationSeconds,
-                    timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
-                });
-
-                if (result.success) {
-                    console.log('✅ Auto-save successful');
-                    setHasSaved(true);
-                    if (onComplete) {
-                        onComplete();
-                    }
-                } else {
-                    console.error('❌ Auto-save failed:', result.error);
-                    isSubmittingRef.current = false;
-                    // Show alert if user is still on screen
-                    Alert.alert(
-                        t('errors.saveFailedTitle', 'Kayıt Başarısız'),
-                        t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
-                        [{ text: t('common.ok', 'Tamam') }]
-                    );
-                }
-            } catch (error) {
-                console.error('❌ Auto-save error:', error);
-                isSubmittingRef.current = false;
-                // Show alert if user is still on screen
-                Alert.alert(
-                    t('errors.saveFailedTitle', 'Kayıt Başarısız'),
-                    t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
-                    [{ text: t('common.ok', 'Tamam') }]
-                );
-            }
-        };
-
-        autoSaveResult();
-    }, [isGameComplete, correctAnswersCount, questions.length, lessonId, gameType, source, completeGame, onComplete]);
-
-
     // 🔐 handleComplete - exits immediately, save continues in background
     const handleComplete = () => {
         hapticLight();
         handleExit();
+    };
+
+    // Manual Retry Button Handler
+    const handleManualRetrySave = () => {
+        hapticLight();
+        saveGameResult();
+    };
+
+    // 🔐 AUTO-SAVE: Automatically save result when game completes (isGameComplete becomes true)
+    useEffect(() => {
+        if (!isGameComplete || hasAttemptedSaveRef.current) return;
+        saveGameResult();
+    }, [isGameComplete]);
+
+    const saveGameResult = async () => {
+        // Lock immediately
+        isSubmittingRef.current = true;
+        hasAttemptedSaveRef.current = true;
+
+        // 🛡️ NETWORK CHECK (Offline Protection)
+        try {
+            const networkState = await Network.getNetworkStateAsync();
+            if (!networkState.isConnected) {
+                isSubmittingRef.current = false;
+                hasAttemptedSaveRef.current = false; // Allow retry
+                Alert.alert(
+                    t('errors.offlineTitle', 'Bağlantı Yok'),
+                    t('errors.offlineMessage', 'İnternet bağlantısı yok. Sonucunuz kaydedilemedi.'),
+                    [
+                        { text: t('common.cancel', 'Vazgeç'), style: 'cancel' },
+                        { text: t('common.retry', 'Tekrar Dene'), onPress: () => saveGameResult() }
+                    ]
+                );
+                return;
+            }
+        } catch (netError) {
+            console.warn("Network check verification failed:", netError);
+        }
+
+        // Calculate Duration for API
+        const durationSeconds = calculateDuration();
+
+        try {
+            console.log('🔄 Auto-saving game result...');
+            const result = await completeGame({
+                lessonId,
+                gameType,
+                correctAnswers: correctAnswersCount,
+                totalQuestions: questions.length,
+                source,
+                duration: durationSeconds,
+                timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
+            });
+
+            if (result.success) {
+                console.log('✅ Auto-save successful');
+                setHasSaved(true);
+                if (onComplete) {
+                    onComplete();
+                }
+            } else {
+                console.error('❌ Auto-save failed:', result.error);
+                isSubmittingRef.current = false;
+                hasAttemptedSaveRef.current = false; // Allow retry
+
+                // 🛑 RATE LIMIT HANDLING
+                const isRateLimit = result.error?.message?.includes('RATE_LIMITED') ||
+                    result.error?.message?.includes('wait') ||
+                    (result.error as any)?.code === 'RATE_LIMITED';
+
+                if (isRateLimit) {
+                    setCooldownSeconds(10); // Start 10s cooldown
+                } else {
+                    Alert.alert(
+                        t('errors.saveFailedTitle', 'Kayıt Başarısız'),
+                        t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
+                        [
+                            { text: t('common.cancel', 'Vazgeç'), style: 'cancel' },
+                            { text: t('common.retry', 'Tekrar Dene'), onPress: () => saveGameResult() }
+                        ]
+                    );
+                }
+            }
+        } catch (error: any) {
+            console.error('❌ Auto-save error:', error);
+            isSubmittingRef.current = false;
+            hasAttemptedSaveRef.current = false; // Allow retry
+
+            // 🛑 RATE LIMIT HANDLING (Catch Block)
+            const isRateLimit = error?.message?.includes('RATE_LIMITED') ||
+                error?.message?.includes('wait') ||
+                error?.code === 'RATE_LIMITED';
+
+            if (isRateLimit) {
+                setCooldownSeconds(10); // Start 10s cooldown
+            } else {
+                Alert.alert(
+                    t('errors.saveFailedTitle', 'Kayıt Başarısız'),
+                    t('errors.saveFailedMessage', 'Sonucunuz kaydedilemedi. Lütfen internet bağlantınızı kontrol edin.'),
+                    [
+                        { text: t('common.cancel', 'Vazgeç'), style: 'cancel' },
+                        { text: t('common.retry', 'Tekrar Dene'), onPress: () => saveGameResult() }
+                    ]
+                );
+            }
+        }
     };
 
     const getCurrentOptions = () => {
@@ -391,67 +398,31 @@ export function GameScreen({
         return currentQuestion.question;
     };
 
-    // Handle audio playback for letters game
     const handlePlayAudio = () => {
         if (gameType !== 'letters' || !currentQuestion.audioFileId) {
             return;
         }
-
         hapticLight();
-
-        try {
-            // Stop previous sound
-            if (stopSoundRef.current) {
-                stopSoundRef.current();
-                stopSoundRef.current = null;
-            }
-
-            // Get audio file
-            const audioFile = LETTER_AUDIO_FILES[currentQuestion.audioFileId];
-            if (!audioFile) {
-                console.warn(`Audio file not found for letter ${currentQuestion.audioFileId}`);
-                return;
-            }
-
-            // Play audio
-            const stop = playSound(audioFile);
-            stopSoundRef.current = stop;
-        } catch (error) {
-            console.error('Error playing audio:', error);
-            stopSoundRef.current = null;
-        }
+        playLetterAudio(currentQuestion.audioFileId);
     };
 
     const getOptionState = (option: string) => {
         if (!isAnswered) {
             return selectedOption === option ? 'selected' : 'default';
         }
-
         const correctAnswer = hasLatinToggle && showLatin
             ? currentQuestion.correctAnswerLatin
             : currentQuestion.correctAnswer;
-
-        if (option === correctAnswer) {
-            return 'correct';
-        }
-
-        // If time is up, don't mark any option as 'incorrect' (user didn't choose)
-        if (isTimeUp) {
-            return 'default';
-        }
-
-        if (option === selectedOption && !isCorrect) {
-            return 'incorrect';
-        }
-
+        if (option === correctAnswer) return 'correct';
+        if (isTimeUp) return 'default';
+        if (option === selectedOption && !isCorrect) return 'incorrect';
         return 'default';
     };
 
     // Calculate XP progress for completion screen
-    // 🔐 Use initialTotalXPRef to prevent store updates from affecting XP bar animation
     const xpEarned = correctAnswersCount;
     const { currentXPProgress, newXPProgress, leveledUp } = useMemo(() => {
-        const snapshotXP = initialTotalXPRef.current;
+        const snapshotXP = totalXP;
         const current = getXPProgress(snapshotXP);
         const newXP = snapshotXP + xpEarned;
         const newProgress = getXPProgress(newXP);
@@ -461,15 +432,15 @@ export function GameScreen({
             newXPProgress: newProgress,
             leveledUp: leveled,
         };
-    }, [xpEarned]); // 🔐 Removed totalXP dependency - uses ref snapshot
+    }, [xpEarned, totalXP]);
+
     const [showLevelUpModal, setShowLevelUpModal] = useState(false);
 
     // Track current displayed level for XP bar
-    const [displayedLevel, setDisplayedLevel] = useState(() => currentXPProgress.currentLevel);
-    const [displayedXP, setDisplayedXP] = useState(() => currentXPProgress.currentLevelXP);
-    const [displayedRequiredXP, setDisplayedRequiredXP] = useState(() => currentXPProgress.requiredXP);
+    const [displayedLevel, setDisplayedLevel] = useState(1);
+    const [displayedXP, setDisplayedXP] = useState(0);
+    const [displayedRequiredXP, setDisplayedRequiredXP] = useState(100);
 
-    // Helper functions for state updates in animation callbacks
     const updateDisplayedLevel = (level: number, xp: number, requiredXP: number) => {
         setDisplayedLevel(level);
         setDisplayedXP(xp);
@@ -480,94 +451,49 @@ export function GameScreen({
         setShowLevelUpModal(true);
     };
 
-    // Play game complete or level up sound based on modal visibility
-    // Note: Sound will not play if device is in silent mode (playsInSilentModeIOS: false)
-    // If level up modal is shown, play LevelUp sound, otherwise play GameComplete sound
-    // Play game complete or level up sound based on modal visibility
     useEffect(() => {
         if (isGameComplete) {
-            const playCompletionSound = () => {
-                try {
-                    // Stop previous sound
-                    if (stopGameCompleteSoundRef.current) {
-                        stopGameCompleteSoundRef.current();
-                        stopGameCompleteSoundRef.current = null;
-                    }
-
-                    // Choose sound based on level up status (not modal, to prevent double play)
-                    const soundFile = leveledUp ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
-
-                    // Play sound using game sound manager
-                    const stop = playGameSound(soundFile);
-                    stopGameCompleteSoundRef.current = stop;
-                } catch (error) {
-                    console.error('Error playing completion sound:', error);
-                    stopGameCompleteSoundRef.current = null;
-                }
-            };
-
-            // Wait a bit for state to settle
             const timer = setTimeout(() => {
-                playCompletionSound();
+                playCompletionSound(leveledUp);
             }, 100);
-
             return () => clearTimeout(timer);
         }
+    }, [isGameComplete, leveledUp, playCompletionSound]);
 
-        // Cleanup when component unmounts or game is not complete
-        return () => {
-            if (stopGameCompleteSoundRef.current && !isGameComplete) {
-                stopGameCompleteSoundRef.current();
-                stopGameCompleteSoundRef.current = null;
-            }
-        };
-    }, [isGameComplete, leveledUp]);
-
-    // Animate XP bar when game completes
     useEffect(() => {
         if (isGameComplete && !xpBarInitialized) {
-            // Set initial value
             animatedXPWidth.value = currentXPProgress.progressPercentage;
             setXpBarInitialized(true);
             setDisplayedLevel(currentXPProgress.currentLevel);
             setDisplayedXP(currentXPProgress.currentLevelXP);
             setDisplayedRequiredXP(currentXPProgress.requiredXP);
 
-            // Store values for animation callbacks
             const newLevel = newXPProgress.currentLevel;
             const newXP = newXPProgress.currentLevelXP;
             const newRequired = newXPProgress.requiredXP;
             const newProgress = newXPProgress.progressPercentage;
             const isLeveledUp = leveledUp;
 
-            // Start animation after a small delay
             const timer = setTimeout(() => {
                 if (isLeveledUp) {
-                    // Two-stage animation: first fill current level to 100%, then fill new level
-                    // Stage 1: Fill current level to 100%
                     animatedXPWidth.value = withTiming(100, {
                         duration: 400,
                         easing: Easing.out(Easing.quad),
                     }, (finished) => {
                         if (finished) {
-                            // Update displayed values to new level
                             runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
-
-                            // Stage 2: Reset to 0% and fill new level
                             animatedXPWidth.value = 0;
                             animatedXPWidth.value = withTiming(newProgress, {
                                 duration: 400,
                                 easing: Easing.out(Easing.quad),
                             }, (finished2) => {
                                 if (finished2) {
-                                    // Show level up modal after animation completes
                                     runOnJS(showLevelUp)();
                                 }
                             });
                         }
                     });
                 } else {
-                    // Single animation: just fill to new percentage
                     animatedXPWidth.value = withTiming(newProgress, {
                         duration: 500,
                         easing: Easing.out(Easing.quad),
@@ -575,37 +501,25 @@ export function GameScreen({
                     runOnJS(updateDisplayedLevel)(newLevel, newXP, newRequired);
                 }
             }, 100);
-
             return () => clearTimeout(timer);
         }
-
-        // Reset when game is not complete
         if (!isGameComplete) {
             setXpBarInitialized(false);
             animatedXPWidth.value = 0;
             setShowLevelUpModal(false);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isGameComplete]);
 
-    const animatedXPStyle = useAnimatedStyle(() => {
-        return {
-            width: `${animatedXPWidth.value}%`,
-        };
-    });
-
-    // Level up modal is controlled by showLevelUpModal state
+    const animatedXPStyle = useAnimatedStyle(() => ({
+        width: `${animatedXPWidth.value}%`,
+    }));
 
     if (isGameComplete) {
-        const isExcellent = correctAnswersCount >= GAME_UI_CONFIG.EXCELLENT_SCORE_THRESHOLD;
-
         return (
             <View style={styles.container}>
                 <View style={styles.completeContainer}>
-                    {/* Summary Header */}
                     <Text style={styles.summaryHeader}>{t('gameUI.summary')}</Text>
 
-                    {/* Complete Animation */}
                     <View style={{ marginBottom: 4, alignItems: 'center' }}>
                         <LottieView
                             source={require('@assets/images/lottie/Complete.json')}
@@ -615,22 +529,17 @@ export function GameScreen({
                         />
                     </View>
 
-                    {/* Motivation Text */}
                     <Text style={styles.completeTitle}>{completionMessage?.title || "Harika İş!"}</Text>
                     <Text style={styles.completeText}>
                         {completionMessage?.message || "Beklenenden çok daha iyisini yaptın."}
                     </Text>
 
-                    {/* Stats Cards Row */}
                     <View style={styles.statsCardsRow}>
-                        {/* Duration Display */}
                         <View style={styles.statsCard}>
                             <Clock size={18} color={colors.primary} weight="fill" style={{ marginBottom: 4 }} />
                             <Text style={styles.statsLabel}>{t('gameUI.totalTime')}</Text>
                             <Text style={styles.statsValue}>{durationString}</Text>
                         </View>
-
-                        {/* Correct Answers Display */}
                         <View style={styles.statsCard}>
                             <CheckCircle size={18} color={colors.success} weight="fill" style={{ marginBottom: 4 }} />
                             <Text style={styles.statsValue}>{correctAnswersCount}/{questions.length}</Text>
@@ -638,8 +547,6 @@ export function GameScreen({
                         </View>
                     </View>
 
-
-                    {/* XP Progress Bar */}
                     <View style={styles.xpBarContainer}>
                         <Text style={styles.xpBarLabel}>
                             {xpEarned > 0
@@ -657,17 +564,48 @@ export function GameScreen({
                         </View>
                     </View>
 
+                    {isSubmitting ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center', padding: 12 }}>
+                            <ActivityIndicator size="small" color={colors.primary} style={{ marginRight: 8 }} />
+                            <Text style={styles.statsLabel}>{t('common.saving', 'Kaydediliyor...')}</Text>
+                        </View>
+                    ) : !hasSaved ? (
+                        <View style={{ gap: 12, width: '100%' }}>
+                            {cooldownSeconds > 0 ? (
+                                <View style={{
+                                    width: '100%',
+                                    padding: 16,
+                                    backgroundColor: colors.surfaceLight,
+                                    borderRadius: 12,
+                                    alignItems: 'center',
+                                    borderWidth: 1,
+                                    borderColor: colors.border
+                                }}>
+                                    <Text style={{ fontSize: 14, color: colors.textSecondary, marginBottom: 4 }}>
+                                        {t('errors.rateLimitWait', 'Çok hızlı gittin! Puanlar hesaplanıyor...')}
+                                    </Text>
+                                    <Text style={{ fontSize: 18, fontWeight: 'bold', color: colors.primary }}>
+                                        ⏳ {cooldownSeconds}s
+                                    </Text>
+                                </View>
+                            ) : (
+                                <PrimaryButton
+                                    title={t('common.retrySave', 'Tekrar Kaydet ↻')}
+                                    onPress={handleManualRetrySave}
+                                    style={{ width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark }}
+                                />
+                            )}
 
-                    <PrimaryButton
-                        title={t('common.finish')}
-                        onPress={handleComplete}
-                        style={{ width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark }}
-                    />
-
-
+                        </View>
+                    ) : (
+                        <PrimaryButton
+                            title={t('common.finish')}
+                            onPress={handleComplete}
+                            style={{ width: '100%', backgroundColor: colors.success, borderBottomColor: colors.successDark }}
+                        />
+                    )}
                 </View>
 
-                {/* Level Up Modal */}
                 {showLevelUpModal && leveledUp && (
                     <Modal
                         visible={true}
@@ -710,7 +648,6 @@ export function GameScreen({
 
     return (
         <View style={styles.container}>
-            {/* Header */}
             <View style={styles.header}>
                 <Pressable onPress={handleExit}>
                     <Text style={styles.backButton}>✕</Text>
@@ -718,26 +655,21 @@ export function GameScreen({
                 <LifeIndicator currentLives={currentLives} maxLives={maxLives} />
             </View>
 
-            {/* Timer */}
             <Timer
                 key={currentQuestionIndex}
                 duration={timerDuration}
                 onTimeUp={handleTimeUp}
-                isActive={!isAnswered && !isStarting} // Pause timer while starting
+                isActive={!isAnswered && !isStarting}
             />
 
-            {/* Main Content Area - Top Anchored with Spacer */}
             <View style={styles.content}>
                 <View style={styles.questionContainer}>
-                    {/* Question */}
                     <QuestionCard
                         questionNumber={currentQuestionIndex + 1}
                         totalQuestions={questions.length}
                         question={getCurrentQuestion()}
                         onPlayAudio={gameType === 'letters' && currentQuestion.audioFileId ? handlePlayAudio : undefined}
                     />
-
-                    {/* Latin Toggle Button */}
                     {hasLatinToggle && (
                         <Button
                             title={showLatin ? t('common.showArabic') : t('common.showLatin')}
@@ -749,7 +681,6 @@ export function GameScreen({
                     )}
                 </View>
 
-                {/* Options */}
                 <View style={styles.options}>
                     {getCurrentOptions().map((option, index) => (
                         <OptionButton
@@ -762,43 +693,39 @@ export function GameScreen({
                     ))}
                 </View>
 
-                {/* Spacer to absorb vertical space change */}
                 <View style={{ flex: 1 }} />
             </View>
 
-            {/* Footer - Pinned to bottom */}
-            {
-                isAnswered && (
-                    <View style={styles.footer}>
-                        {isCorrect ? (
-                            <>
-                                <Text style={styles.footerTitle}>{feedbackMessage?.title || "Tebrikler!"}</Text>
-                                <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bravo, böyle devam et!"}</Text>
-                            </>
-                        ) : isTimeUp ? (
-                            <>
-                                <Text style={styles.footerTitle}>Süre Doldu</Text>
-                                <Text style={styles.footerMessage}>Doğru cevap yukarıda işaretlendi.</Text>
-                            </>
-                        ) : (
-                            <>
-                                <Text style={styles.footerTitle}>{feedbackMessage?.title || "Yanlış Cevap"}</Text>
-                                <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bir sonraki soruya geçelim!"}</Text>
-                            </>
-                        )}
-                        <PrimaryButton
-                            title={currentQuestionIndex < questions.length - 1
-                                ? t('common.nextQuestion')
-                                : t('common.finish')}
-                            onPress={handleNext}
-                            style={[
-                                { backgroundColor: colors.success, marginHorizontal: 20, borderBottomColor: colors.successDark },
-                                !isCorrect && { backgroundColor: colors.error, borderBottomColor: colors.errorDark }
-                            ]}
-                        />
-                    </View>
-                )
-            }
+            {isAnswered && (
+                <View style={styles.footer}>
+                    {isCorrect ? (
+                        <>
+                            <Text style={styles.footerTitle}>{feedbackMessage?.title || "Tebrikler!"}</Text>
+                            <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bravo, böyle devam et!"}</Text>
+                        </>
+                    ) : isTimeUp ? (
+                        <>
+                            <Text style={styles.footerTitle}>Süre Doldu</Text>
+                            <Text style={styles.footerMessage}>Doğru cevap yukarıda işaretlendi.</Text>
+                        </>
+                    ) : (
+                        <>
+                            <Text style={styles.footerTitle}>{feedbackMessage?.title || "Yanlış Cevap"}</Text>
+                            <Text style={styles.footerMessage}>{feedbackMessage?.message || "Bir sonraki soruya geçelim!"}</Text>
+                        </>
+                    )}
+                    <PrimaryButton
+                        title={currentQuestionIndex < questions.length - 1
+                            ? t('common.nextQuestion')
+                            : t('common.finish')}
+                        onPress={handleNext}
+                        style={[
+                            { backgroundColor: colors.success, marginHorizontal: 20, borderBottomColor: colors.successDark },
+                            !isCorrect && { backgroundColor: colors.error, borderBottomColor: colors.errorDark }
+                        ]}
+                    />
+                </View>
+            )}
 
             <LoadingOverlay visible={isSubmitting} message={t('common.saving', 'Kaydediliyor...')} />
             <TestPreparationOverlay
@@ -807,7 +734,7 @@ export function GameScreen({
                 questionCount={questions.length}
                 duration={timerDuration}
             />
-        </View >
+        </View>
     );
 }
 
@@ -834,12 +761,9 @@ const getStyles = () =>
             flex: 1,
             paddingHorizontal: 16,
         },
-        // contentScroll Removed
-        // questionScroll Removed
-
         questionContainer: {
             width: '100%',
-            marginTop: 10, // Small top margin, no flexing
+            marginTop: 10,
             marginBottom: 0,
         },
         toggleButton: {
@@ -874,7 +798,6 @@ const getStyles = () =>
             textAlign: 'center',
             marginBottom: 12,
         },
-
         completeContainer: {
             flex: 1,
             justifyContent: 'space-between',
@@ -917,7 +840,6 @@ const getStyles = () =>
             fontWeight: '600',
             color: colors.textPrimary,
         },
-
         statsCardsRow: {
             flexDirection: 'row',
             justifyContent: 'center',

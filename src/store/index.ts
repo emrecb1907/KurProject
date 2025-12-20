@@ -23,43 +23,26 @@ export const useStore = create<StoreState>()(
     {
       name: 'quranlearn-storage',
       storage: createJSONStorage(() => AsyncStorage),
-      // Only persist certain slices
+      // Only persist UI state - server state comes from React Query
       partialize: (state) => ({
-        // Auth state - MUST persist user object!
+        // Auth state
         user: state.user,
         isAuthenticated: state.isAuthenticated,
         isAnonymous: state.isAnonymous,
 
-        // User state
-        totalXP: state.totalXP,
-        currentLevel: state.currentLevel,
-        totalScore: state.totalScore,
-        currentLives: state.currentLives,
-        maxLives: state.maxLives,
-        streak: state.streak,
-        progress: state.progress,
-        streakData: state.streakData,
-        lastReplenishTime: state.lastReplenishTime,
-        adWatchTimes: state.adWatchTimes,
-        boundUserId: state.boundUserId,
-        completedTests: state.completedTests,
-        successRate: state.successRate,
-        dailyProgress: state.dailyProgress,
-        completedLessons: state.completedLessons,
+        // UI preferences
         selectedAvatar: state.selectedAvatar,
         hapticsEnabled: state.hapticsEnabled,
         soundsEnabled: state.soundsEnabled,
 
+        // Auth references
+        boundUserId: state.boundUserId,
+        adWatchTimes: state.adWatchTimes,
+
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
+        // Don't persist server state (comes from React Query)
       }),
-      onRehydrateStorage: () => (state) => {
-        // Check daily reset when storage is rehydrated (app opens)
-        if (state) {
-          state.checkDailyReset();
-          state.checkLifeRegeneration();
-        }
-      },
     }
   )
 );
@@ -71,6 +54,7 @@ export const useAuth = () => useStore(
     isAuthenticated: state.isAuthenticated,
     isAnonymous: state.isAnonymous,
     isLoading: state.isLoading,
+    isProfileReady: state.isProfileReady, // NEW: Track if profile is ready
     setUser: state.setUser,
     setIsAuthenticated: state.setIsAuthenticated,
     setIsAnonymous: state.setIsAnonymous,
@@ -81,51 +65,37 @@ export const useAuth = () => useStore(
   }))
 );
 
+/**
+ * useUser - UI State Only
+ * 
+ * For server data, use React Query hooks:
+ * - useUserData() for XP, level, streak, stats
+ * - useEnergy() for energy/lives
+ * - useDailyProgress() for daily task progress
+ * - useCompletedLessons() for completed lessons list
+ */
 export const useUser = () => useStore(
   useShallow((state) => ({
-    totalXP: state.totalXP,
-    currentLevel: state.currentLevel,
-    totalScore: state.totalScore,
-    currentLives: state.currentLives,
-    maxLives: state.maxLives,
-    streak: state.streak,
-    progress: state.progress,
-    streakData: state.streakData,
-    lastReplenishTime: state.lastReplenishTime,
-    adWatchTimes: state.adWatchTimes,
-    completedTests: state.completedTests,
-    successRate: state.successRate,
-    setTotalXP: state.setTotalXP,
-    addXP: state.addXP,
-    setCurrentLevel: state.setCurrentLevel,
-    setTotalScore: state.setTotalScore,
-    setCurrentLives: state.setCurrentLives,
-    addLives: state.addLives,
-    removeLives: state.removeLives,
-    setStreak: state.setStreak,
-    setProgress: state.setProgress,
-    setStreakData: state.setStreakData,
-    setUserStats: state.setUserStats,
-    updateGameStats: state.updateGameStats,
-    resetUserData: state.resetUserData,
-    checkLifeRegeneration: state.checkLifeRegeneration,
-    watchAd: state.watchAd,
-    boundUserId: state.boundUserId,
-    setBoundUserId: state.setBoundUserId,
-    dailyProgress: state.dailyProgress,
-    checkDailyReset: state.checkDailyReset,
-    claimDailyTask: state.claimDailyTask,
-    completedLessons: state.completedLessons,
-    completeLesson: state.completeLesson,
-    syncCompletedLessons: state.syncCompletedLessons,
-    startTestSession: state.startTestSession,
-    sessionToken: state.sessionToken,
+    // UI preferences
     selectedAvatar: state.selectedAvatar,
-    setSelectedAvatar: state.setSelectedAvatar,
     hapticsEnabled: state.hapticsEnabled,
     soundsEnabled: state.soundsEnabled,
+    setSelectedAvatar: state.setSelectedAvatar,
     setHapticsEnabled: state.setHapticsEnabled,
     setSoundsEnabled: state.setSoundsEnabled,
+
+    // Auth references
+    boundUserId: state.boundUserId,
+    sessionToken: state.sessionToken,
+    setBoundUserId: state.setBoundUserId,
+    setSessionToken: state.setSessionToken,
+
+    // Local tracking
+    adWatchTimes: state.adWatchTimes,
+    watchAd: state.watchAd,
+
+    // Reset
+    resetUserData: state.resetUserData,
   }))
 );
 
@@ -158,4 +128,3 @@ export const useUI = () => useStore(
     clearMessages: state.clearMessages,
   }))
 );
-

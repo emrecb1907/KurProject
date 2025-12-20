@@ -16,13 +16,17 @@
             "title": "All Lessons",
             "subtitle": "Unlimited access"
         },
-        "unlimitedPractice": {
-            "title": "Unlimited Practice",
-            "subtitle": "Improve yourself"
+        "energyCapacity": {
+            "title": "2x Energy Capacity",
+            "subtitle": "12 energy storage for more practice"
         },
-        "offlineMode": {
-            "title": "Offline Mode",
-            "subtitle": "Learn without internet"
+        "energyRegen": {
+            "title": "2x Faster Energy Regen",
+            "subtitle": "Full energy in half the time"
+        },
+        "adFree": {
+            "title": "Ad-Free Experience",
+            "subtitle": "Uninterrupted learning"
         }
     },
     "analysis": {

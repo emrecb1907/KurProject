@@ -150,82 +150,91 @@ function SettingsContent() {
   };
 
   // Settings sections and options
-  const settingsSections: SettingsSection[] = useMemo(() => [
-    {
-      title: t('profile.settings.account.title'),
-      options: [
-        {
-          id: 'change-password',
-          title: t('profile.settings.account.changePassword'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/change-password');
-          },
+  const settingsSections: SettingsSection[] = useMemo(() => {
+    // Base account options (always shown)
+    const accountOptions: SettingsOption[] = [
+      {
+        id: 'preferences',
+        title: t('profile.settings.account.preferences'),
+        onPress: () => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          router.push('/preferences');
         },
-        {
-          id: 'preferences',
-          title: t('profile.settings.account.preferences'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/preferences');
-          },
+      },
+      {
+        id: 'notifications',
+        title: t('profile.settings.account.notifications'),
+        onPress: () => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          // TODO: Navigate to notifications page
         },
-        {
-          id: 'notifications',
-          title: t('profile.settings.account.notifications'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to notifications page
-          },
+      },
+      {
+        id: 'timezone',
+        title: t('profile.settings.account.timezone', 'Saat Dilimi'),
+        onPress: () => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          router.push('/timezone-settings');
         },
-        {
-          id: 'timezone',
-          title: t('profile.settings.account.timezone', 'Saat Dilimi'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.push('/timezone-settings');
-          },
+      },
+    ];
+
+    // Add change-password option only for non-anonymous users
+    if (!isAnonymous) {
+      accountOptions.unshift({
+        id: 'change-password',
+        title: t('profile.settings.account.changePassword'),
+        onPress: () => {
+          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          router.push('/change-password');
         },
-      ],
-    },
-    {
-      title: t('profile.settings.general.title'),
-      options: [
-        {
-          id: 'subscription',
-          title: t('profile.settings.general.subscription'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to subscription page
+      });
+    }
+
+    return [
+      {
+        title: t('profile.settings.account.title'),
+        options: accountOptions,
+      },
+      {
+        title: t('profile.settings.general.title'),
+        options: [
+          {
+            id: 'subscription',
+            title: t('profile.settings.general.subscription'),
+            onPress: () => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              // TODO: Navigate to subscription page
+            },
           },
-        },
-        {
-          id: 'terms',
-          title: t('profile.settings.general.terms'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to terms page
+          {
+            id: 'terms',
+            title: t('profile.settings.general.terms'),
+            onPress: () => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              // TODO: Navigate to terms page
+            },
           },
-        },
-        {
-          id: 'privacy',
-          title: t('profile.settings.general.privacy'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to privacy policy page
+          {
+            id: 'privacy',
+            title: t('profile.settings.general.privacy'),
+            onPress: () => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              // TODO: Navigate to privacy policy page
+            },
           },
-        },
-        {
-          id: 'credits',
-          title: t('profile.settings.general.credits'),
-          onPress: () => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            // TODO: Navigate to credits page
+          {
+            id: 'credits',
+            title: t('profile.settings.general.credits'),
+            onPress: () => {
+              Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+              // TODO: Navigate to credits page
+            },
           },
-        },
-      ],
-    },
-  ], [t]);
+        ],
+      },
+    ];
+  }, [t, isAnonymous]);
 
   const styles = useMemo(() => StyleSheet.create({
     container: {

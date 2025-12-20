@@ -32,17 +32,20 @@ export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
-  // Get user data from Zustand store (UI state)
-  const { totalXP, streak, setStreak, setUserStats, selectedAvatar } = useUser();
+  // Get UI state from Zustand (only persisted UI preferences)
+  const { selectedAvatar } = useUser();
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
 
+  // 🚀 React Query: Fetch user data with auto-cache and retry
+  const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
+
+  // Get totalXP from React Query data with fallback
+  const totalXP = userData?.total_xp ?? 0;
+  const streak = userData?.streak ?? userData?.streak_count ?? 0;
 
   // Calculate XP progress using the formula
   const xpProgress = getXPProgress(totalXP);
-
-  // 🚀 React Query: Fetch user data with auto-cache and retry
-  const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
 
   // ScrollView ref for resetting scroll position
   const scrollViewRef = useRef<ScrollView>(null);
@@ -69,62 +72,9 @@ export default function ProfileScreen() {
   }, []);
 
   // Use React Query data if available, fallback to Zustand cache
-  // Use total_tests_completed from DB stats if available, otherwise fallback to completedTests
   const completedTests = userStats?.total_tests_completed ?? userStats?.completedTests ?? 0;
   const successRate = userStats?.successRate ?? 0;
   const currentStreak = streak;
-
-  // 🔄 Sync streak to Zustand store when data changes
-  useEffect(() => {
-    if (userData) {
-
-      // Update streak in store
-      if (userData.streak !== undefined) {
-        // Calculate displayed streak based on last activity
-        let lastActivityDate = userData.last_activity_date;
-        const weeklyActivity = (userData.weekly_activity as string[]) || [];
-
-        // Fallback: If last_activity_date is missing (legacy data), try to get it from weekly_activity
-        if (!lastActivityDate && weeklyActivity.length > 0) {
-          const sortedDates = [...weeklyActivity].sort();
-          lastActivityDate = sortedDates[sortedDates.length - 1];
-        }
-
-        let displayedStreak = userData.streak || 0;
-
-        if (lastActivityDate) {
-          const lastDate = new Date(lastActivityDate);
-          const todayDate = new Date();
-          todayDate.setHours(0, 0, 0, 0);
-          lastDate.setHours(0, 0, 0, 0);
-
-          const diffTime = Math.abs(todayDate.getTime() - lastDate.getTime());
-          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-          // If last activity was more than 1 day ago (yesterday), streak is broken
-          if (diffDays > 1) {
-            displayedStreak = 0;
-          }
-        } else {
-          displayedStreak = 0;
-        }
-
-        // Only update if different to prevent infinite loop
-        if (displayedStreak !== streak) {
-          setStreak(displayedStreak);
-        }
-      } else if (userData.streak_count !== undefined) {
-        if (userData.streak_count !== streak) {
-          setStreak(userData.streak_count);
-        }
-      }
-
-      // Update stats cache in store
-      if (userStats?.completedTests !== undefined && userStats?.successRate !== undefined) {
-        setUserStats(userStats.completedTests, userStats.successRate);
-      }
-    }
-  }, [userData?.streak, userData?.last_activity_date, userData?.streak_count, userStats?.completedTests, userStats?.successRate, streak]);
 
   // Get username
   const username = user?.username || user?.email?.split('@')[0] || t('profile.anonymous');
@@ -476,18 +426,23 @@ export default function ProfileScreen() {
             {/* Edit Menu Dropdown */}
             {showEditMenu && (
               <View style={styles.editMenuDropdown}>
-                <Pressable
-                  style={styles.editMenuItem}
-                  onPress={() => {
-                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                    setShowEditMenu(false);
-                    router.push('/edit-profile');
-                  }}
-                >
-                  <UserCircle size={22} color={colors.textPrimary} weight="fill" />
-                  <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeUsername', 'Kullanıcı Adı Değiştir')}</Text>
-                </Pressable>
-                <View style={styles.menuDivider} />
+                {/* Change Username - Only for non-anonymous users */}
+                {!isAnonymous && (
+                  <>
+                    <Pressable
+                      style={styles.editMenuItem}
+                      onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        setShowEditMenu(false);
+                        router.push('/edit-profile');
+                      }}
+                    >
+                      <UserCircle size={22} color={colors.textPrimary} weight="fill" />
+                      <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeUsername', 'Kullanıcı Adı Değiştir')}</Text>
+                    </Pressable>
+                    <View style={styles.menuDivider} />
+                  </>
+                )}
                 <Pressable
                   style={styles.editMenuItem}
                   onPress={() => {

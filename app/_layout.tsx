@@ -39,10 +39,9 @@ function RootLayout() {
     Amiri_700Bold,
   });
 
-  const { checkLifeRegeneration, setBoundUserId } = useUser();
+  const { setBoundUserId } = useUser();
 
   useEffect(() => {
-    checkLifeRegeneration();
     loadSavedLanguage();
   }, [fontsLoaded]);
 

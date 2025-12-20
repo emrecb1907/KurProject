@@ -16,7 +16,8 @@ import {
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useCompletedLessons } from '@/hooks/queries';
 import { orucBilgisi } from '@/data/orucBilgisi';
 import { HomeHeader } from '@/components/home/HomeHeader';
 
@@ -27,7 +28,10 @@ export default function OrucBilgisiListScreen() {
     const { themeVersion, activeTheme } = useTheme();
 
     // Get user data from Zustand store
-    const { completedLessons, syncCompletedLessons } = useUser();
+    const { user } = useAuth();
+
+    // Get completed lessons from React Query
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
     // Use data from file
     const lessons = orucBilgisi;
@@ -35,11 +39,7 @@ export default function OrucBilgisiListScreen() {
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
 
     // Force sync when screen comes into focus
-    useFocusEffect(
-        React.useCallback(() => {
-            syncCompletedLessons();
-        }, [])
-    );
+    // React Query auto-refetches on focus
 
     return (
         <SafeAreaView style={styles.container} edges={['top']}>
@@ -237,3 +237,4 @@ const getStyles = (activeTheme: 'light' | 'dark') => StyleSheet.create({
         color: colors.textPrimary,
     },
 });
+

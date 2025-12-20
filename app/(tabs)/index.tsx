@@ -8,8 +8,8 @@ import { useStatusBar } from '@/hooks/useStatusBar';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useUser, useAuth, useStore } from '@/store';
-import { database } from '@/lib/supabase/database';
+import { useAuth } from '@/store';
+import { queryClient } from '@/lib/queryClient';
 
 // Import new tab components
 import { GenelTab, GenelTabRef } from '@/components/home/GenelTab';
@@ -22,89 +22,17 @@ export default function HomePage() {
     const { statusBarStyle } = useStatusBar();
     const { themeVersion, activeTheme } = useTheme();
 
-    // Get user data from Zustand store
-    const { totalXP, setTotalXP, syncCompletedLessons } = useUser();
     const { isAuthenticated, user } = useAuth();
 
-    // Track last XP update time to avoid race conditions
-    const lastXPUpdateRef = useRef<number>(0);
-    const syncTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-    const lastTotalXPRef = useRef<number>(totalXP);
-
-    // 🔄 Sync XP from database for authenticated users (on focus)
+    // 🔄 Invalidate React Query caches on focus to ensure fresh data
     useFocusEffect(
         useCallback(() => {
-            async function syncXPFromDB() {
-                if (isAuthenticated && user?.id) {
-                    try {
-                        // Skip sync if we just updated XP (within last 2 seconds) to avoid race conditions
-                        const timeSinceLastUpdate = Date.now() - lastXPUpdateRef.current;
-                        if (timeSinceLastUpdate < 2000) {
-                            return;
-                        }
-
-                        const { data: userProfile } = await database.users.getProfile(user.id);
-
-                        if (userProfile && userProfile.stats) {
-                            // Map DB stats to local variables
-                            const dbXP = userProfile.stats.total_score || 0; // total_score is used as XP
-
-                            // Get latest local XP directly from store to avoid dependency cycle
-                            const currentTotalXP = useStore.getState().totalXP;
-
-                            const xpDifference = Math.abs(dbXP - currentTotalXP);
-                            const xpIncreased = currentTotalXP > lastTotalXPRef.current;
-
-                            if (dbXP > currentTotalXP) {
-                                setTotalXP(dbXP);
-                                lastTotalXPRef.current = dbXP;
-                            } else if (dbXP < currentTotalXP) {
-                                // Only sync if difference is significant (more than 100 XP) to avoid cache timing issues
-                                // OR if XP didn't just increase (meaning it's a real sync issue, not cache)
-                                if (xpDifference > 100 || !xpIncreased) {
-                                    const { calculateLevel } = require('@constants/xp');
-                                    const newLevel = calculateLevel(currentTotalXP);
-
-                                    const { error } = await database.users.updateStats(user.id, {
-                                        total_score: currentTotalXP,
-                                        current_level: newLevel,
-                                    });
-
-                                    if (error) {
-                                        console.error('❌ Failed to sync local XP to DB:', error);
-                                    } else {
-                                        lastXPUpdateRef.current = Date.now();
-                                        lastTotalXPRef.current = currentTotalXP;
-                                    }
-                                }
-                            } else {
-                                lastTotalXPRef.current = currentTotalXP;
-                            }
-                        }
-                    } catch (error) {
-                        console.error('❌ Failed to sync XP from DB:', error);
-                    }
-                }
+            if (isAuthenticated && user?.id) {
+                // Invalidate user data caches - React Query will auto-refetch
+                queryClient.invalidateQueries({ queryKey: ['user', user.id] });
+                queryClient.invalidateQueries({ queryKey: ['completedLessons', user.id] });
             }
-
-            // Clear any pending sync
-            if (syncTimeoutRef.current) {
-                clearTimeout(syncTimeoutRef.current);
-            }
-
-            // Debounce sync by 500ms to avoid rapid calls
-            syncTimeoutRef.current = setTimeout(() => {
-                syncXPFromDB();
-                // Sync completed lessons
-                syncCompletedLessons();
-            }, 500);
-
-            return () => {
-                if (syncTimeoutRef.current) {
-                    clearTimeout(syncTimeoutRef.current);
-                }
-            };
-        }, [isAuthenticated, user?.id, syncCompletedLessons])
+        }, [isAuthenticated, user?.id])
     );
 
     // Page Navigation State

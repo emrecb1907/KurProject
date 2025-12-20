@@ -18,7 +18,9 @@ import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useLessonComplete } from '@/hooks/mutations/useLessonComplete';
+import { useCompletedLessons } from '@/hooks/queries';
 import { HeaderButton } from '@/components/ui/HeaderButton';
 import { PrimaryButton } from '@/components/ui/PrimaryButton';
 
@@ -44,7 +46,9 @@ export default function NamazDualiDetailScreen() {
     const { themeVersion, activeTheme } = useTheme();
 
     // User progress
-    const { completedLessons, completeLesson } = useUser();
+    const { user } = useAuth();
+    const { mutate: completeLesson } = useLessonComplete();
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
     // Find Lesson
     const lessonId = Number(id);

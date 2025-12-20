@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { database } from '@/lib/supabase/database';
-import { useAuth, useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useUserData } from './useUserQuery';
 
 interface LeaderboardEntry {
     id: string;
@@ -16,6 +17,7 @@ interface OptimisticLeaderboardResult {
     isLoading: boolean;
     error: Error | null;
     yourOptimisticRank: number | null;
+    totalXP: number; // User's current XP for display
 }
 
 /**
@@ -31,7 +33,10 @@ interface OptimisticLeaderboardResult {
  */
 export function useOptimisticLeaderboard(limit: number = 50): OptimisticLeaderboardResult {
     const { user } = useAuth();
-    const { totalXP } = useUser();
+
+    // Get XP from React Query (server data)
+    const { data: userData } = useUserData(user?.id);
+    const totalXP = userData?.total_xp ?? userData?.stats?.total_score ?? 0;
 
     // Fetch leaderboard every 5 minutes
     const { data: leaderboard, isLoading, error } = useQuery({
@@ -90,5 +95,6 @@ export function useOptimisticLeaderboard(limit: number = 50): OptimisticLeaderbo
         isLoading,
         error: error as Error | null,
         yourOptimisticRank,
+        totalXP,
     };
 }

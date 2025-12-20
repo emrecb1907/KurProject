@@ -16,31 +16,23 @@ export const database = {
   users: {
     // Get full user profile (User + Stats + Streak)
     async getProfile(userId: string) {
-      const { data: user, error: userError } = await supabase
+      const { data, error } = await supabase
         .from('users')
-        .select('*')
+        .select(`
+          *,
+          user_stats (*),
+          user_streaks (*)
+        `)
         .eq('id', userId)
         .single();
 
-      if (userError) return { data: null, error: userError };
-
-      const { data: stats } = await supabase
-        .from('user_stats')
-        .select('*')
-        .eq('user_id', userId)
-        .single();
-
-      const { data: streak } = await supabase
-        .from('user_streaks')
-        .select('*')
-        .eq('user_id', userId)
-        .single();
+      if (error) return { data: null, error };
 
       return {
         data: {
-          ...user,
-          stats: stats || {},
-          streak: streak || {}
+          ...data,
+          stats: data.user_stats || {},
+          streak: data.user_streaks || {}
         },
         error: null
       };
@@ -187,14 +179,35 @@ export const database = {
       if (!data) return { data: [], error: null };
 
       // Transform to expected format
-      const leaderboardData = data.map((item: any) => ({
-        id: item.users?.id || item.user_id,
-        username: item.users?.username || item.users?.email?.split('@')[0] || 'Unknown User',
-        email: item.users?.email,
-        total_xp: item.total_score, // Map total_score to total_xp
-        league: item.league || 'Bronze',
-        avatar_url: item.users?.avatar_url
-      }));
+      interface LeaderboardRawItem {
+        user_id: string;
+        total_score: number;
+        league?: string;
+        users?: {
+          id: string;
+          username?: string;
+          email?: string;
+          avatar_url?: string;
+        } | {
+          id: string;
+          username?: string;
+          email?: string;
+          avatar_url?: string;
+        }[];
+      }
+
+      const leaderboardData = data.map((item: LeaderboardRawItem) => {
+        // Handle both single object and array from Supabase join
+        const user = Array.isArray(item.users) ? item.users[0] : item.users;
+        return {
+          id: user?.id || item.user_id,
+          username: user?.username || user?.email?.split('@')[0] || 'Unknown User',
+          email: user?.email,
+          total_xp: item.total_score,
+          league: item.league || 'Bronze',
+          avatar_url: user?.avatar_url
+        };
+      });
 
       return { data: leaderboardData, error: null };
     },
@@ -422,6 +435,43 @@ export const database = {
         p_user_id: userId,
         p_new_timezone: newTimezone
       });
+      return { data, error };
+    }
+  },
+
+  // ==================== DAILY LOGS (Premium Analytics) ====================
+  dailyLogs: {
+    // Get last 28 days of activity for weekly graph
+    async getMonth(userId: string) {
+      const fourWeeksAgo = new Date();
+      fourWeeksAgo.setDate(fourWeeksAgo.getDate() - 28);
+      const startDate = fourWeeksAgo.toISOString().split('T')[0];
+
+      const { data, error } = await supabase
+        .from('user_daily_logs')
+        .select('log_date, tests_completed, questions_solved, correct_answers, xp_earned, lessons_completed')
+        .eq('user_id', userId)
+        .gte('log_date', startDate)
+        .order('log_date', { ascending: true });
+
+      return { data, error };
+    },
+
+    // Get specific week's data
+    async getWeek(userId: string, weekStartDate: Date) {
+      const startDate = weekStartDate.toISOString().split('T')[0];
+      const endDate = new Date(weekStartDate);
+      endDate.setDate(endDate.getDate() + 6);
+      const endDateStr = endDate.toISOString().split('T')[0];
+
+      const { data, error } = await supabase
+        .from('user_daily_logs')
+        .select('log_date, tests_completed, questions_solved, correct_answers, xp_earned, lessons_completed')
+        .eq('user_id', userId)
+        .gte('log_date', startDate)
+        .lte('log_date', endDateStr)
+        .order('log_date', { ascending: true });
+
       return { data, error };
     }
   }

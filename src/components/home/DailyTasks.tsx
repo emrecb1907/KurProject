@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, StyleSheet, Pressable, ScrollView, Modal as RNModal } from 'react-native';
 import { colors } from '@constants/colors';
 import { Gift, Check, Gear, X, BookOpen, Lightning, CheckCircle } from 'phosphor-react-native';
@@ -6,9 +6,11 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { Modal } from '@components/ui/Modal';
-import { useUser, useAuth } from '@/store';
-import { database } from '@/lib/supabase/database';
+import { useAuth } from '@/store';
 import { useFocusEffect } from '@react-navigation/native';
+import { useDailyProgress } from '@/hooks/queries';
+import { useClaimDailyTask } from '@/hooks/mutations';
+import { queryClient } from '@/lib/queryClient';
 
 interface DailyTasksProps {
     devToolsContent?: React.ReactNode;
@@ -36,48 +38,27 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
     const [showRewardModal, setShowRewardModal] = useState(false);
     const [claimedReward, setClaimedReward] = useState<{ xp: number; taskName: string } | null>(null);
 
-    // 🛡️ SERVER-SIDE PROGRESS STATE
-    const [serverProgress, setServerProgress] = useState<{
-        lessons_today: number;
-        tests_today: number;
-        lesson_claimed: boolean;
-        test_claimed: boolean;
-    } | null>(null);
+    // 🛡️ SERVER-SIDE PROGRESS via React Query
+    const { data: serverProgress, refetch: refetchProgress } = useDailyProgress(user?.id);
 
-    // Get user state and actions from store
-    const {
-        dailyProgress,
-        claimDailyTask,
-        checkDailyReset
-    } = useUser();
+    // Claim mutation
+    const claimMutation = useClaimDailyTask();
 
-    // Fetch server progress for authenticated users
-    const fetchServerProgress = useCallback(async () => {
-        if (!isAuthenticated || !user?.id) return;
-        try {
-            const { data, error } = await database.dailySnapshots.getProgress(user.id);
-            if (data && !error) {
-                setServerProgress(data as any);
-            }
-        } catch (e) {
-            console.error('Failed to fetch server progress:', e);
-        }
-    }, [isAuthenticated, user?.id]);
-
-    // Fetch on focus
+    // Refetch on focus
     useFocusEffect(
         useCallback(() => {
-            checkDailyReset();
-            fetchServerProgress();
-        }, [checkDailyReset, fetchServerProgress])
+            if (user?.id) {
+                refetchProgress();
+            }
+        }, [user?.id, refetchProgress])
     );
 
-    // Derive tasks - prefer server data for authenticated users
+    // Derive tasks from server data
     const tasks: Task[] = useMemo(() => {
-        const lessonsCompleted = serverProgress?.lessons_today ?? dailyProgress.lessonsCompleted;
-        const testsCompleted = serverProgress?.tests_today ?? dailyProgress.testsCompleted;
-        const lessonClaimed = serverProgress?.lesson_claimed ?? dailyProgress.claimedTasks.includes('lesson');
-        const testClaimed = serverProgress?.test_claimed ?? dailyProgress.claimedTasks.includes('test');
+        const lessonsCompleted = serverProgress?.lessons_today ?? 0;
+        const testsCompleted = serverProgress?.tests_today ?? 0;
+        const lessonClaimed = serverProgress?.lesson_claimed ?? false;
+        const testClaimed = serverProgress?.test_claimed ?? false;
 
         return [
             {
@@ -99,26 +80,32 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                 claimed: testClaimed
             }
         ];
-    }, [dailyProgress, serverProgress, t]);
+    }, [serverProgress, t]);
 
     const handleClaimTaskReward = async (task: Task) => {
-        if (task.completed && !task.claimed) {
-            // Determine type based on ID (1=lesson, 2=test)
-            const type = task.id === 1 ? 'lesson' : 'test';
+        if (!task.completed || task.claimed || !user?.id) return;
 
-            // Call server-first claim and check result
-            const success = await claimDailyTask(type, task.xp);
+        // Determine type based on ID (1=lesson, 2=test)
+        const type = task.id === 1 ? 'lesson' : 'test';
 
-            // Refresh server progress
-            await fetchServerProgress();
+        try {
+            const result = await claimMutation.mutateAsync({
+                userId: user.id,
+                taskType: type,
+            });
 
-            // Only show reward modal if claim was successful
-            if (success) {
+            if (result.success) {
                 Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-                setClaimedReward({ xp: task.xp, taskName: task.text });
+                setClaimedReward({ xp: result.xp_awarded || task.xp, taskName: task.text });
                 setShowRewardModal(true);
             }
+        } catch (error) {
+            console.error('Failed to claim reward:', error);
         }
+    };
+
+    const handleRefreshProgress = () => {
+        refetchProgress();
     };
 
     // Dynamic styles
@@ -514,7 +501,7 @@ export function DailyTasks({ devToolsContent }: DailyTasksProps) {
                     <Pressable
                         style={styles.devToolButton}
                         onPress={() => {
-                            checkDailyReset();
+                            refetchProgress();
                             setShowDevToolsModal(false);
                         }}
                     >

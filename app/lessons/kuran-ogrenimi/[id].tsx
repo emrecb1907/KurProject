@@ -7,7 +7,7 @@ import { ArrowLeft, PlayCircle, CheckCircle, Info } from 'phosphor-react-native'
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { playSound, releaseAudioPlayer } from '@/utils/audio';
-import { useUser } from '@/store';
+import { useLessonComplete } from '@/hooks/mutations/useLessonComplete';
 import { lessons } from '@/data/lessons';
 import { getLessonData } from '@/data/kuran';
 import { KuranLessonContent } from '@/data/kuran/types';
@@ -119,7 +119,7 @@ export default function UnifiedKuranLessonScreen() {
     const lessonId = parseInt(id as string, 10);
     const router = useRouter();
     const { themeVersion } = useTheme();
-    const { completeLesson } = useUser();
+    const { mutate: completeLesson } = useLessonComplete();
 
     // State
     const stopSoundRef = useRef<(() => void) | null>(null);

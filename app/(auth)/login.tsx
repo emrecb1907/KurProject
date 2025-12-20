@@ -95,10 +95,10 @@ export default function LoginScreen() {
 
           <View style={styles.form}>
             <View style={styles.inputGroup}>
-              <Text style={styles.label}>E-posta veya Kullanıcı Adı</Text>
+              <Text style={styles.label}>{t('auth.login.emailOrUsername')}</Text>
               <TextInput
                 style={styles.input}
-                placeholder="kullanici@mail.com"
+                placeholder={t('auth.login.emailPlaceholder')}
                 placeholderTextColor={colors.textDisabled}
                 value={emailOrUsername}
                 onChangeText={setEmailOrUsername}

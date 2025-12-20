@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 import { colors } from '@constants/colors';
 import { Trophy, Check, LockKey, Student, Medal } from 'phosphor-react-native';
 import { useTranslation } from 'react-i18next';
-import { useUser, useAuth } from '@/store';
+import { useAuth } from '@/store';
 import { useUserStats } from '@hooks';
 import { useBadges } from '@/hooks/useBadges';
 import { getXPProgress } from '@/lib/utils/levelCalculations';
@@ -22,10 +22,12 @@ export default function BadgesScreen() {
     // Dynamic styles
     const styles = useMemo(() => getStyles(), [themeVersion]);
 
-    // Get user data
-    const { totalXP } = useUser();
+    // Get user data from React Query (correct source of truth)
     const { user } = useAuth();
-    const { data: userStats } = useUserStats(user?.id);
+    const { data: userStats, userData } = useUserStats(user?.id);
+
+    // Get totalXP from React Query, not Zustand!
+    const totalXP = userData?.total_xp ?? 0;
     const xpProgress = getXPProgress(totalXP);
 
     // Custom hook to get fresh badge data
@@ -163,9 +165,14 @@ export default function BadgesScreen() {
                                 {/* Icon Column */}
                                 <View style={styles.iconColumn}>
                                     <View style={[styles.iconCircle, !isClaimed && styles.iconCircleLocked]}>
-                                        <Image source={iconSource} style={[styles.badgeIcon, !isClaimed && { opacity: 0.5 }]} resizeMode="contain" />
+                                        {isClaimed ? (
+                                            <Image source={iconSource} style={styles.badgeIcon} resizeMode="contain" />
+                                        ) : (
+                                            <View style={styles.lockedBadgePlaceholder}>
+                                                <LockKey size={28} color={colors.textSecondary} weight="fill" />
+                                            </View>
+                                        )}
                                     </View>
-
                                 </View>
 
                                 {/* Info Column */}
@@ -314,7 +321,14 @@ const getStyles = () => StyleSheet.create({
         borderColor: colors.border, // Was #2E3A59
     },
     iconCircleLocked: {
-        backgroundColor: colors.background, // Was #1A2138
+        backgroundColor: colors.border, // Gray background for locked
+    },
+    lockedBadgePlaceholder: {
+        width: '100%',
+        height: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: colors.border,
     },
     badgeIcon: {
         width: 60,

@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useAuth, useUser } from '@/store';
 import { database } from '@/lib/supabase/database';
 import { GameType } from '@/types/game.types';
-import { useUserData } from '../useUserData';
+import { SubmitTestResultResponse } from '@/types/rpc.types';
 import { logger } from '@/lib/logger';
 import { queryClient } from '@/lib/queryClient';
 
@@ -24,8 +24,8 @@ interface CompleteGameResult {
 }
 
 export function useCompleteGameMutation() {
-    const { isAuthenticated, user } = useAuth();
-    const { setUserStats, updateGameStats, completeLesson, sessionToken } = useUser();
+    const { isAuthenticated, user, refreshUser } = useAuth();
+    const { sessionToken } = useUser();
 
     return useMutation({
         mutationFn: async ({
@@ -72,22 +72,24 @@ export function useCompleteGameMutation() {
                     dbError = error;
 
                     if (!error) {
+                        // Cast response to typed RPC response
+                        const result = data as SubmitTestResultResponse | null;
+
                         // Check for application-level error returned in data
-                        if (data && (data as any).success === false) {
-                            const errorCode = (data as any).error || 'UNKNOWN_ERROR';
-                            const errorMessage = (data as any).message || 'Bir hata oluştu';
+                        if (result && result.success === false) {
+                            const errorCode = result.error || 'UNKNOWN_ERROR';
+                            const errorMessage = result.message || 'Bir hata oluştu';
 
                             // 🛡️ Güvenlik hatalarını özel olarak işle
-                            const securityError = new Error(errorMessage) as any;
+                            const securityError = new Error(errorMessage) as Error & { code: string; isSecurityError: boolean };
                             securityError.code = errorCode;
                             securityError.isSecurityError = true;
                             dbError = securityError;
-                        } else {
+                        } else if (result) {
                             // Capture streak from response if available
-                            if (data && (data as any).new_streak) {
-                                newStreak = (data as any).new_streak;
+                            if (result.new_streak) {
+                                newStreak = result.new_streak;
                             }
-                            // incrementDailyTests(); Removed - Handled by updateGameStats in userSlice
                             logger.info(`Daily test count handled by updateGameStats (Test ID: ${lessonId})`);
                         }
                     }
@@ -113,26 +115,6 @@ export function useCompleteGameMutation() {
                 console.log('🔄 Fetched Profile after update:', userProfile?.stats);
 
                 if (userProfile && userProfile.stats) {
-                    // Use total_tests_completed if available (DB source of truth)
-                    const newCompletedTests = userProfile.stats.total_tests_completed || userProfile.stats.total_lessons_completed || 0;
-                    const totalQuestionsDB = userProfile.stats.total_questions_solved || 0;
-                    const correctAnswersDB = userProfile.stats.total_correct_answers || 0;
-                    const newSuccessRate = totalQuestionsDB > 0
-                        ? Math.round((correctAnswersDB / totalQuestionsDB) * 100)
-                        : 0;
-
-                    // Update local state with fresh DB data
-                    // Update local state with fresh DB data
-
-
-                    updateGameStats(
-                        userProfile.stats.total_score || 0, // XP
-                        userProfile.stats.current_level || 1,
-                        newCompletedTests,
-                        newSuccessRate,
-                        newStreak // Pass new streak
-                    );
-
                     // Check for level up based on DB response
                     if (userProfile.stats.current_level > (user.current_level || 0)) {
                         leveledUp = true;
@@ -141,10 +123,16 @@ export function useCompleteGameMutation() {
                     }
                 }
 
-                // 🚀 CRITICAL: Invalidate React Query caches
+                // 🚀 CRITICAL: Invalidate React Query caches - this is the ONLY state update needed
+                // React Query will refetch and components will get fresh data automatically
                 queryClient.invalidateQueries({ queryKey: ['user', user.id] });
                 queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
+                queryClient.invalidateQueries({ queryKey: ['dailyProgress', user.id] });
+                queryClient.invalidateQueries({ queryKey: ['completedLessons', user.id] });
                 logger.info('React Query caches invalidated');
+
+                // Sync Zustand store with fresh data to prevent stale level checks in next run
+                refreshUser();
 
                 logger.game(`${gameType} game completed successfully`);
             }

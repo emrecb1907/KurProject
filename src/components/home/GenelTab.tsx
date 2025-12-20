@@ -11,6 +11,8 @@ import { database } from '@/lib/supabase/database';
 import { supabase } from '@/lib/supabase/client';
 import { formatXP } from '@/lib/utils/levelCalculations';
 import { useUserData } from '@/hooks/useUserData';
+import { useConsumeEnergy } from '@/hooks/mutations';
+import { queryClient } from '@/lib/queryClient';
 
 import { WeeklyActivity } from './WeeklyActivity';
 import { DailyHadith } from './DailyHadith';
@@ -28,16 +30,9 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
     const { t } = useTranslation();
     const router = useRouter();
     const { user, isAuthenticated } = useAuth();
-    const {
-        totalXP,
-        addXP,
-        setTotalXP,
-        resetUserData,
-        addLives,
-        removeLives,
-        consumeEnergy
-    } = useStore();
-    const { earnXP } = useUserData();
+    const { resetUserData } = useUser();
+    const { totalXP, earnXP, gainLives } = useUserData();
+    const consumeEnergyMutation = useConsumeEnergy();
     const scrollViewRef = useRef<ScrollView>(null);
 
     useImperativeHandle(ref, () => ({
@@ -116,13 +111,13 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                 );
                 if (__DEV__) console.log('✅ XP synced successfully');
             } else if (dbXP > localXP) {
-                // Database has more XP than local
-                setTotalXP(dbXP);
+                // Database has more XP - just invalidate cache to refetch
+                queryClient.invalidateQueries({ queryKey: ['user', user.id] });
                 Alert.alert(
                     'ℹ️ Local XP Updated',
                     `Local: ${formatXP(localXP)} XP\nDatabase: ${formatXP(dbXP)} XP`
                 );
-                if (__DEV__) console.log('✅ Local XP updated from database');
+                if (__DEV__) console.log('✅ Cache invalidated to refetch from database');
             } else {
                 Alert.alert('ℹ️ Synced', t('home.xpSynced'));
             }
@@ -216,9 +211,9 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                     <View style={styles.testButtonRow}>
                                         <Pressable
                                             style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.error }]}
-                                            onPress={() => {
+                                            onPress={async () => {
                                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                                consumeEnergy();
+                                                if (user?.id) consumeEnergyMutation.mutate(user.id);
                                             }}
                                         >
                                             <Text style={styles.testButtonText}>⚡ -1 Enerji</Text>
@@ -226,9 +221,9 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
 
                                         <Pressable
                                             style={[styles.testButton, styles.testButtonHalf, { backgroundColor: colors.success }]}
-                                            onPress={() => {
+                                            onPress={async () => {
                                                 Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                                                addLives(1);
+                                                if (user?.id) await gainLives(1);
                                             }}
                                         >
                                             <Text style={styles.testButtonText}>⚡ +1 Enerji</Text>
@@ -249,12 +244,12 @@ export const GenelTab = forwardRef<GenelTabRef, GenelTabProps>(({ screenWidth },
                                     <Pressable style={[styles.testButtonDanger, { backgroundColor: colors.warning }]} onPress={async () => {
                                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
                                         try {
-                                            setTotalXP(0);
                                             if (isAuthenticated && user?.id) {
                                                 await database.users.update(user.id, {
                                                     total_xp: 0,
                                                     current_level: 1,
                                                 });
+                                                queryClient.invalidateQueries({ queryKey: ['user', user.id] });
                                             }
                                             Alert.alert(t('common.success'), 'XP reset.');
                                         } catch (error) {

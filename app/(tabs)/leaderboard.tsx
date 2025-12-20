@@ -11,7 +11,7 @@ import {
   Lightbulb,
   ArrowsClockwise
 } from 'phosphor-react-native';
-import { useAuth, useUser } from '@/store';
+import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { useOptimisticLeaderboard, useUserRank } from '@hooks';
@@ -31,7 +31,6 @@ interface LeaderboardItem {
 export default function LeaderboardScreen() {
   const { t } = useTranslation();
   const { isAuthenticated, user } = useAuth();
-  const { totalXP } = useUser();
   const { activeTheme, themeVersion } = useTheme();
   const scrollViewRef = useRef<ScrollView>(null);
 
@@ -40,7 +39,8 @@ export default function LeaderboardScreen() {
     leaderboard: leaderboardRawData,
     isLoading: loading,
     error: queryError,
-    yourOptimisticRank
+    yourOptimisticRank,
+    totalXP // Get current user's XP from the hook
   } = useOptimisticLeaderboard(50);
 
   // Transform raw data to LeaderboardItem format
@@ -244,7 +244,7 @@ export default function LeaderboardScreen() {
             {/* Total XP */}
             <View style={styles.scoreContainer}>
               <Text style={styles.score}>
-                {item.isYou ? totalXP.toLocaleString() : item.totalXP.toLocaleString()}
+                {item.isYou ? (totalXP ?? 0).toLocaleString() : (item.totalXP ?? 0).toLocaleString()}
               </Text>
               <Text style={styles.scoreLabel}>XP</Text>
             </View>
@@ -288,7 +288,7 @@ export default function LeaderboardScreen() {
 
               {/* Total XP */}
               <View style={styles.scoreContainer}>
-                <Text style={styles.score}>{userRankItem.item.totalXP.toLocaleString()}</Text>
+                <Text style={styles.score}>{(userRankItem.item.totalXP ?? 0).toLocaleString()}</Text>
                 <Text style={styles.scoreLabel}>XP</Text>
               </View>
             </View>

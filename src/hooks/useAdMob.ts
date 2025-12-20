@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
 import { AdService } from '@services/admob';
 import { useUserData } from './useUserData';
-import { useStore } from '@store';
+import { useAuth } from '@/store';
+import { useEnergy } from './queries';
 
-const MAX_LIVES = 5;
+const MAX_LIVES = 6;
 const LIVES_PER_AD = 1;
 
 export function useAdMob() {
@@ -11,7 +12,11 @@ export function useAdMob() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { gainLives } = useUserData();
-  const { currentLives } = useStore();
+  const { user } = useAuth();
+
+  // Get energy from React Query
+  const { data: energyData } = useEnergy(user?.id);
+  const currentLives = energyData?.current_energy ?? MAX_LIVES;
 
   // Check if ad is ready
   useEffect(() => {
@@ -70,7 +75,7 @@ export function useAdMob() {
         // Give lives to user
         await gainLives(LIVES_PER_AD);
         setIsAdReady(false);
-        
+
         // Pre-load next ad
         loadAd();
 

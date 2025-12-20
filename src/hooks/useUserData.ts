@@ -1,30 +1,38 @@
-import { useStore } from '@store';
-import { database } from '@lib/supabase/database';
+import { useAuth } from '@/store';
+import { database } from '@/lib/supabase/database';
 import { calculateUserLevel, getXPProgress } from '@/lib/utils/levelCalculations';
+import { useUserData as useUserDataQuery, useEnergy, useCompletedLessons } from './queries';
+import { queryClient } from '@/lib/queryClient';
 
+/**
+ * useUserData - Convenience hook for user data and mutations
+ * 
+ * This hook combines React Query data with mutation helpers.
+ * For direct data access, prefer using individual query hooks:
+ * - useUserDataQuery() for XP, level, streak, stats
+ * - useEnergy() for energy/lives
+ * - useCompletedLessons() for completed lessons list
+ */
 export function useUserData() {
-  const {
-    totalXP,
-    currentLevel,
-    totalScore,
-    currentLives,
-    maxLives,
-    streak,
-    progress,
-    setTotalXP,
-    addXP,
-    setCurrentLevel,
-    setTotalScore,
-    setCurrentLives,
-    addLives,
-    removeLives,
-    setStreak,
-    setProgress,
-  } = useStore();
+  const { user } = useAuth();
 
-  const { user } = useStore();
+  // Get server data from React Query
+  const { data: userData, isLoading: isUserLoading } = useUserDataQuery(user?.id);
+  const { data: energyData, isLoading: isEnergyLoading } = useEnergy(user?.id);
+  const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
-  // Earn XP and update level
+  // Extract values with fallbacks
+  const totalXP = userData?.total_xp ?? userData?.stats?.total_score ?? 0;
+  const currentLevel = userData?.current_level ?? userData?.stats?.current_level ?? 1;
+  const totalScore = userData?.total_score ?? userData?.stats?.total_score ?? 0;
+  const currentLives = energyData?.current_energy ?? 6;
+  const maxLives = energyData?.max_energy ?? 6;
+  const streak = userData?.streak ?? 0;
+
+  // Calculate XP progress
+  const xpProgress = getXPProgress(totalXP);
+
+  // Earn XP (updates database and invalidates cache)
   async function earnXP(xp: number) {
     if (!user) return;
 
@@ -32,22 +40,17 @@ export function useUserData() {
     const newLevel = calculateUserLevel(newTotalXP);
     const leveledUp = newLevel > currentLevel;
 
-    // Update local state
-    addXP(xp);
-    setCurrentLevel(newLevel);
+    // Update database
+    const { error } = await database.users.updateXP(user.id, xp);
 
-    // Update database - ONLY if not anonymous
-    if (!user.is_anonymous) {
-      const { error } = await database.users.update(user.id, {
-        total_xp: newTotalXP,
-        total_score: newTotalXP,
-        current_level: newLevel,
-      });
-
-      if (error) {
-        console.error('❌ Failed to update XP in database:', error);
-      }
+    if (error) {
+      console.error('❌ Failed to update XP in database:', error);
+      return null;
     }
+
+    // Invalidate cache to refetch
+    queryClient.invalidateQueries({ queryKey: ['user', user.id] });
+    queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
 
     return {
       leveledUp,
@@ -56,27 +59,19 @@ export function useUserData() {
     };
   }
 
-  // Add lives
+  // Add lives via database
   async function gainLives(amount: number) {
     if (!user) return;
 
-    addLives(amount);
+    const { error } = await database.energy.add(user.id, amount);
 
-    // Update database - ONLY if not anonymous
-    if (!user.is_anonymous) {
-      const { error } = await database.users.update(user.id, {
-        current_lives: Math.min(currentLives + amount, maxLives)
-      });
-
-      if (error) {
-        console.error('❌ Failed to update lives in database:', error);
-      }
+    if (error) {
+      console.error('❌ Failed to update lives in database:', error);
+      return;
     }
-  }
 
-  // Get XP progress to next level
-  function getXPProgressResult() {
-    return getXPProgress(totalXP);
+    // Invalidate cache to refetch
+    queryClient.invalidateQueries({ queryKey: ['energy', user.id] });
   }
 
   // Check if lesson is unlocked
@@ -84,41 +79,30 @@ export function useUserData() {
     return currentLevel >= requiredLevel;
   }
 
-  // Get completion rate for a lesson
-  function getLessonCompletion(lessonId: string): number {
-    const lessonProgress = progress.find((p) => p.lesson_id === lessonId);
-    return lessonProgress?.completion_rate || 0;
-  }
-
   // Check if lesson is completed
   function isLessonCompleted(lessonId: string): boolean {
-    const lessonProgress = progress.find((p) => p.lesson_id === lessonId);
-    return lessonProgress?.is_completed || false;
-  }
-
-  // Check if lesson is mastered
-  function isLessonMastered(lessonId: string): boolean {
-    const lessonProgress = progress.find((p) => p.lesson_id === lessonId);
-    return lessonProgress?.is_mastered || false;
+    return completedLessons.includes(lessonId);
   }
 
   return {
-    // State
+    // State (from React Query)
     totalXP,
     currentLevel,
     totalScore,
     currentLives,
     maxLives,
     streak,
-    progress,
+    xpProgress,
+    completedLessons,
+
+    // Loading states
+    isLoading: isUserLoading || isEnergyLoading,
 
     // Actions
     earnXP,
     gainLives,
-    getXPProgress: getXPProgressResult,
     isLessonUnlocked,
-    getLessonCompletion,
     isLessonCompleted,
-    isLessonMastered,
+    getXPProgress: () => xpProgress,
   };
 }

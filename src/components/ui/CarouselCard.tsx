@@ -11,7 +11,8 @@ import type { IconProps } from 'phosphor-react-native';
 import { colors } from '@/constants/colors';
 import { HoverCard } from '@/components/ui/HoverCard';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useStore } from '@/store';
+import { useAuth } from '@/store';
+import { useConsumeEnergy } from '@/hooks/mutations';
 
 export interface CarouselCardProps {
     icon: React.ComponentType<IconProps>;
@@ -56,6 +57,9 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
     const [isSelected, setIsSelected] = useState(false);
     const isNavigatingRef = useRef(false); // Prevent double-tap navigation
 
+    const { user } = useAuth();
+    const consumeEnergyMutation = useConsumeEnergy();
+
     const styles = useMemo(() => getStyles(size), [themeVersion, size]);
 
     // Calculate actual card width and height
@@ -88,8 +92,6 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
             router.push(route as any);
         }
     };
-
-    const { consumeEnergy } = useStore();
 
     const handleStart = async () => {
         // Prevent double-tap from opening multiple tests
@@ -124,19 +126,33 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
             console.warn('Network check failed:', e);
         }
 
-        // Attempt to consume energy
-        const result = await consumeEnergy();
+        // Attempt to consume energy via mutation
+        if (!user?.id) {
+            setIsSelected(false);
+            isNavigatingRef.current = false;
+            Alert.alert(t('common.error'), t('errors.authRequired'), [{ text: t('common.ok') }]);
+            return;
+        }
 
-        if (!result.success) {
-            setIsSelected(false); // Close the modal
-            isNavigatingRef.current = false; // Reset navigation lock
-            setTimeout(() => {
-                Alert.alert(
-                    t('errors.insufficientLives'),
-                    result.error || t('errors.insufficientLivesDesc'),
-                    [{ text: t('common.ok') }]
-                );
-            }, 300);
+        try {
+            const result = await consumeEnergyMutation.mutateAsync(user.id);
+
+            if (!result.success) {
+                setIsSelected(false);
+                isNavigatingRef.current = false;
+                setTimeout(() => {
+                    Alert.alert(
+                        t('errors.insufficientLives'),
+                        result.error || t('errors.insufficientLivesDesc'),
+                        [{ text: t('common.ok') }]
+                    );
+                }, 300);
+                return;
+            }
+        } catch (error) {
+            setIsSelected(false);
+            isNavigatingRef.current = false;
+            Alert.alert(t('common.error'), 'Failed to consume energy', [{ text: t('common.ok') }]);
             return;
         }
 

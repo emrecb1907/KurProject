@@ -4,13 +4,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useStatusBar } from '@/hooks/useStatusBar';
 import { useTheme } from '@/contexts/ThemeContext';
-import { ArrowLeft, Trash, Sparkle } from 'phosphor-react-native';
+import { Trash, Sparkle } from 'phosphor-react-native';
 import { colors } from '@/constants/colors';
 import { StatusBar } from 'expo-status-bar';
 import { useChatStore } from '@/store/chatStore';
 import { sendMessage, ChatMessage } from '@/lib/ai/gemini';
 import { MessageBubble } from '@/components/chat/MessageBubble';
 import { ChatInput } from '@/components/chat/ChatInput';
+import { HeaderButton } from '@/components/ui';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
@@ -127,15 +128,17 @@ function AIChatContent() {
 
             {/* Header */}
             <View style={[styles.header, { borderBottomColor: colors.border }]}>
-                <TouchableOpacity
-                    onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        router.back();
-                    }}
-                    style={styles.headerButton}
-                >
-                    <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-                </TouchableOpacity>
+                <View style={styles.backButtonContainer}>
+                    <HeaderButton
+                        title={t('common.back')}
+                        showIcon={true}
+                        onPress={() => {
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                            router.back();
+                        }}
+                        style={{ paddingHorizontal: 12, paddingVertical: 8 }}
+                    />
+                </View>
 
                 <View style={styles.headerCenter}>
                     <View style={styles.headerTitleContainer}>
@@ -150,12 +153,14 @@ function AIChatContent() {
                 </View>
 
                 {messages.length > 0 && (
-                    <TouchableOpacity
-                        onPress={handleClearChat}
-                        style={styles.headerButton}
-                    >
-                        <Trash size={20} color={colors.textSecondary} />
-                    </TouchableOpacity>
+                    <View style={styles.clearButtonContainer}>
+                        <TouchableOpacity
+                            onPress={handleClearChat}
+                            style={styles.headerButton}
+                        >
+                            <Trash size={20} color={colors.textSecondary} />
+                        </TouchableOpacity>
+                    </View>
                 )}
             </View>
 
@@ -240,9 +245,21 @@ const getStyles = () => StyleSheet.create({
     header: {
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'center',
         paddingHorizontal: 16,
-        paddingVertical: 12,
+        paddingVertical: 8,
         borderBottomWidth: 1,
+        position: 'relative',
+    },
+    backButtonContainer: {
+        position: 'absolute',
+        left: 16,
+        zIndex: 10,
+    },
+    clearButtonContainer: {
+        position: 'absolute',
+        right: 16,
+        zIndex: 10,
     },
     headerButton: {
         width: 40,

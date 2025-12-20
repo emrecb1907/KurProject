@@ -16,7 +16,8 @@ import {
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useCompletedLessons } from '@/hooks/queries';
 import { HomeHeader } from '@/components/home/HomeHeader';
 import { lessons as lessonsData } from '@/data/lessons';
 
@@ -31,16 +32,10 @@ export default function ElifBaLessonsListScreen() {
     const router = useRouter();
     const { statusBarStyle } = useStatusBar();
     const { themeVersion, activeTheme } = useTheme();
+    const { user } = useAuth();
 
-    // Get user data from Zustand store
-    const { completedLessons, syncCompletedLessons } = useUser();
-
-    // Force sync when screen comes into focus
-    useFocusEffect(
-        React.useCallback(() => {
-            syncCompletedLessons();
-        }, [])
-    );
+    // Get completed lessons from React Query
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
 

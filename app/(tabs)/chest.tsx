@@ -5,7 +5,8 @@ import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { useUser } from '@/store';
+import { useUser, useAuth } from '@/store';
+import { useEnergy } from '@/hooks/queries';
 import { Heart, Lightbulb, Video, ArrowLeft, Play, Gift, Calendar, Star, CaretDown, CaretUp } from 'phosphor-react-native';
 
 import { useTranslation } from 'react-i18next';
@@ -16,7 +17,16 @@ export default function ChestScreen() {
   const { t } = useTranslation();
   const router = useRouter();
   const { themeVersion, activeTheme } = useTheme();
-  const { currentLives, maxLives, watchAd, adWatchTimes, lastReplenishTime, checkLifeRegeneration } = useUser();
+  const { user } = useAuth();
+  const { watchAd, adWatchTimes } = useUser();
+
+  // Get energy data from React Query
+  const { data: energyData, refetch: refetchEnergy } = useEnergy(user?.id);
+  const currentLives = energyData?.current_energy ?? 6;
+  const maxLives = energyData?.max_energy ?? 6;
+  const lastReplenishTime = energyData?.last_replenish_time
+    ? new Date(energyData.last_replenish_time).getTime()
+    : null;
 
   // Dynamic styles that update when theme changes
   const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
@@ -30,7 +40,8 @@ export default function ChestScreen() {
   useFocusEffect(
     useCallback(() => {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
-    }, [])
+      refetchEnergy(); // Refetch energy data on focus
+    }, [refetchEnergy])
   );
 
   // Scroll to top listener
@@ -41,12 +52,11 @@ export default function ChestScreen() {
     return () => subscription.remove();
   }, []);
 
-  // Update timer every minute
+  // Update timer every second
   useEffect(() => {
     const interval = setInterval(() => {
       setNow(Date.now());
-      checkLifeRegeneration(); // Check for regeneration every minute
-    }, 1000); // Update every second for smooth countdown
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -57,9 +67,9 @@ export default function ChestScreen() {
     const diff = nextReplenishTime - now;
 
     if (diff <= 0) {
-      // Timer expired - trigger a sync to get updated energy from server
-      checkLifeRegeneration();
-      return '⏳'; // Show loading indicator while syncing
+      // Timer expired - refetch energy from server
+      refetchEnergy();
+      return '⏳';
     }
 
     const hours = Math.floor(diff / (1000 * 60 * 60));

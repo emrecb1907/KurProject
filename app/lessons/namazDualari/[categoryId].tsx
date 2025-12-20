@@ -15,7 +15,8 @@ import {
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useCompletedLessons } from '@/hooks/queries';
 import { HomeHeader } from '@/components/home/HomeHeader';
 
 // Data imports
@@ -30,9 +31,10 @@ export default function NamazDualariCategoryScreen() {
     const { categoryId } = useLocalSearchParams();
     const { statusBarStyle } = useStatusBar();
     const { themeVersion, activeTheme } = useTheme();
+    const { user } = useAuth();
 
-    // Get user data from Zustand store
-    const { completedLessons, syncCompletedLessons } = useUser();
+    // Get completed lessons from React Query
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
     // Determine content based on categoryId
     const { lessons, titleId } = useMemo(() => {
@@ -51,13 +53,6 @@ export default function NamazDualariCategoryScreen() {
     }, [categoryId]);
 
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
-
-    // Force sync when screen comes into focus
-    useFocusEffect(
-        React.useCallback(() => {
-            syncCompletedLessons();
-        }, [])
-    );
 
     if (!lessons.length) {
         // Fallback for unknown category

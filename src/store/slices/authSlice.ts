@@ -9,6 +9,7 @@ export interface AuthSlice {
   isAuthenticated: boolean;
   isAnonymous: boolean;
   isLoading: boolean;
+  isProfileReady: boolean; // NEW: Track if profile is fully loaded
 
   // Actions
   setUser: (user: User | null) => void;
@@ -26,6 +27,7 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
   isAuthenticated: false,
   isAnonymous: true,
   isLoading: true,
+  isProfileReady: false, // NEW: Initially false
 
   // Actions
   setUser: (user) => set({ user }),
@@ -40,6 +42,7 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
     user: null,
     isAuthenticated: false,
     isAnonymous: true,
+    isProfileReady: false, // Reset on logout
   }),
 
   refreshUser: async () => {
@@ -57,7 +60,8 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
             id: authUser.id,
             email: authUser.email,
             is_anonymous: authUser.is_anonymous || false,
-          } as User
+          } as User,
+          isProfileReady: true, // Profile is ready
         }));
       }
     } catch (error) {
@@ -65,9 +69,9 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
     }
   },
 
-  // Anonymous Sign In
+  // Anonymous Sign In - BLOCKING until profile is ready
   signInAnonymously: async () => {
-    set({ isLoading: true });
+    set({ isLoading: true, isProfileReady: false });
     try {
       const { data, error } = await supabase.auth.signInAnonymously();
 
@@ -79,34 +83,79 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
       const user = data.user;
 
       if (user) {
-        // Initial set with basic info
+        // Initial set with basic info from Supabase Auth (profile not ready yet)
+        // Map Supabase Auth user to our User type with defaults
+        const initialUser: User = {
+          id: user.id,
+          device_id: 'unknown',
+          email: user.email,
+          is_anonymous: user.is_anonymous || true,
+          // Default values until profile loads
+          total_xp: 0,
+          current_level: 1,
+          total_score: 0,
+          current_lives: 5,
+          max_lives: 6,
+          streak_count: 0,
+          last_active: new Date().toISOString(),
+          created_at: user.created_at || new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          league: 'Bronze',
+        };
+
         set({
-          user: user as any,
+          user: initialUser,
           isAuthenticated: true,
           isAnonymous: true,
-          isLoading: false
+          isLoading: false,
+          isProfileReady: false, // Not ready yet!
         });
 
-        // Immediately fetch FULL profile (username etc.) from DB
-        // Wait a bit for trigger to complete
-        setTimeout(async () => {
-          const { data: profile } = await database.users.getProfile(user.id);
-          if (profile) {
-            set((state) => ({
-              user: {
-                ...state.user, // keep existing
-                ...profile,    // overwrite with DB data (username)
-                id: user.id,
-                is_anonymous: true
-              } as User
-            }));
+        // Fetch profile with retry logic (BLOCKING - await result)
+        const fetchProfileWithRetry = async (userId: string, maxRetries = 5): Promise<boolean> => {
+          let delay = 500; // Start with 500ms
+
+          for (let attempt = 1; attempt <= maxRetries; attempt++) {
+            await new Promise(resolve => setTimeout(resolve, delay));
+
+            const { data: profile } = await database.users.getProfile(userId);
+
+            if (profile) {
+              console.log(`✅ Profile fetched on attempt ${attempt}`);
+              set((state) => ({
+                user: {
+                  ...state.user,
+                  ...profile,
+                  id: userId,
+                  is_anonymous: true
+                } as User,
+                isProfileReady: true, // NOW it's ready!
+              }));
+              return true;
+            }
+
+            console.log(`⏳ Profile not ready, attempt ${attempt}/${maxRetries}`);
+            delay = Math.min(delay * 1.5, 3000); // Exponential backoff, max 3s
           }
-        }, 1000);
+
+          console.warn('⚠️ Profile fetch failed after max retries');
+          return false;
+        };
+
+        // BLOCKING: Wait for profile before returning success
+        const profileFetched = await fetchProfileWithRetry(user.id);
+
+        if (!profileFetched) {
+          // Profile couldn't be fetched - still allow auth but mark profile not ready
+          console.error('❌ Could not fetch profile after all retries');
+          return { success: true, error: 'Profile creation timeout - please try again' };
+        }
       }
+
       return { success: true };
     } catch (error) {
       console.error('Anonymous sign-in failed:', error);
-      set({ isLoading: false });
+      set({ isLoading: false, isProfileReady: false });
       return { success: false, error };
     }
   },

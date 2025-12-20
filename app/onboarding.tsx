@@ -25,8 +25,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Lightning, ArrowRight, Warning, X } from 'phosphor-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useStore } from '@/store'; // useStore for auth?
-import { useUser } from '@/store/userSlice'; // userSlice for completion?
+import { useStore, useUser } from '@/store';
 import { QuestionCard } from '@/components/game/QuestionCard';
 import { OptionButton } from '@/components/game/OptionButton';
 import { colors } from '@/constants/colors';
@@ -141,7 +140,7 @@ export default function OnboardingScreen() {
     // Modal State
     const [showSkipModal, setShowSkipModal] = useState(false);
 
-    const { signInAnonymously, isAuthenticated } = useStore();
+    const { signInAnonymously, isAuthenticated, isProfileReady } = useStore();
 
     // 1. Immediate Anonymous Auth
     useEffect(() => {
@@ -417,8 +416,14 @@ export default function OnboardingScreen() {
                         <Text style={styles.primaryButtonText}>Hesap Oluştur</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.textButton} onPress={() => setShowSkipModal(true)}>
-                        <Text style={[styles.textButtonText, { color: colors.textSecondary }]}>Kayıt Olmadan Devam Et</Text>
+                    <TouchableOpacity
+                        style={[styles.textButton, !isProfileReady && { opacity: 0.5 }]}
+                        onPress={() => setShowSkipModal(true)}
+                        disabled={!isProfileReady}
+                    >
+                        <Text style={[styles.textButtonText, { color: colors.textSecondary }]}>
+                            {isProfileReady ? 'Kayıt Olmadan Devam Et' : 'Profil yükleniyor...'}
+                        </Text>
                     </TouchableOpacity>
                 </View>
 

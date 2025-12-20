@@ -20,7 +20,8 @@ import {
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { CarouselCard } from '@/components/ui/CarouselCard';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
+import { useCompletedLessons } from '@/hooks/queries';
 import {
     KURAN_LESSON_IDS,
     NAMAZ_DUALARI_IDS,
@@ -62,6 +63,7 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
     const router = useRouter();
     const { themeVersion } = useTheme();
     const scrollViewRef = useRef<ScrollView>(null);
+    const { user } = useAuth();
 
     // Calculate card width for 2-column grid
     const gap = 16;
@@ -77,7 +79,8 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
         },
     }));
 
-    const { completedLessons } = useUser();
+    // Get completed lessons from React Query (server data)
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
 
     // Calculate Kur'an Öğrenimi progress
     const kuranTotal = KURAN_LESSON_IDS.length;

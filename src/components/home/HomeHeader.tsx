@@ -15,15 +15,34 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { useUser, useAuth } from '@/store';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { getAvatarSource } from '@/constants/avatars';
+import { useUserData, useEnergy } from '@/hooks/queries';
 
 export const HomeHeader = () => {
     const { t } = useTranslation();
     const { themeVersion, activeTheme } = useTheme();
-    const { totalXP, currentLives, maxLives, selectedAvatar } = useUser();
-    const { user } = useAuth();
+    const { user, isProfileReady } = useAuth();
 
-    // Calculate XP progress
+    // UI State from Zustand
+    const { selectedAvatar } = useUser();
+
+    // Server data from React Query
+    const { data: userData, isLoading: isUserDataLoading } = useUserData(user?.id);
+    const { data: energyData, isLoading: isEnergyLoading } = useEnergy(user?.id);
+
+    // Show skeleton if profile not ready or data is loading for first time
+    const isLoading = !isProfileReady || (isUserDataLoading && !userData) || (isEnergyLoading && !energyData);
+
+    // Extract values - use auth store user data as initial fallback, then React Query data
+    // This prevents showing 0 values while React Query fetches
+    const totalXP = userData?.total_xp ?? userData?.stats?.total_score ?? user?.total_xp ?? user?.total_score ?? 0;
+    const currentLevel = userData?.current_level ?? user?.current_level ?? 1;
+    const currentLives = energyData?.current_energy ?? user?.current_lives ?? 5;
+    const maxLives = energyData?.max_energy ?? user?.max_lives ?? 6;
+
+    // Calculate XP progress using the best available data
     const xpProgress = getXPProgress(totalXP);
+    // Override level if we have direct data
+    const displayLevel = userData?.current_level ?? currentLevel;
 
     // Animated XP bar width
     const animatedXPWidth = useSharedValue(xpProgress.progressPercentage);
@@ -182,7 +201,7 @@ export const HomeHeader = () => {
             <View style={styles.statsRow}>
                 <View style={styles.statBadge}>
                     <GraduationCap size={20} color={colors.primary} weight="fill" />
-                    <Text style={styles.statValue}>Level {xpProgress.currentLevel}</Text>
+                    <Text style={styles.statValue}>Level {displayLevel}</Text>
                 </View>
                 <View style={[styles.statBadge, { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
                     <View style={{

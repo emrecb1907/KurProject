@@ -16,13 +16,17 @@
             "title": "Tüm Dersler",
             "subtitle": "Sınırsız erişim"
         },
-        "unlimitedPractice": {
-            "title": "Sınırsız Pratik",
-            "subtitle": "Kendini geliştir"
+        "energyCapacity": {
+            "title": "2x Enerji Kapasitesi",
+            "subtitle": "12 enerji stoğu ile daha fazla pratik"
         },
-        "offlineMode": {
-            "title": "Çevrimdışı Mod",
-            "subtitle": "İnternetsiz öğren"
+        "energyRegen": {
+            "title": "2x Hızlı Enerji Dolumu",
+            "subtitle": "Yarı sürede tam enerji"
+        },
+        "adFree": {
+            "title": "Reklamsız Deneyim",
+            "subtitle": "Kesintisiz öğrenme keyfi"
         }
     },
     "analysis": {

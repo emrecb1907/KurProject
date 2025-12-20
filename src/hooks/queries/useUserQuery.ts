@@ -27,10 +27,12 @@ export function useUserData(userId: string | undefined) {
             return {
                 ...userProfile,
                 ...userProfile.stats,
+                // Map total_score to total_xp for XP calculations
+                total_xp: userProfile.stats?.total_score ?? 0,
                 streak: userProfile.streak?.streak || 0,
+                streak_count: userProfile.streak?.streak || 0, // Alias for compatibility
                 last_activity_date: userProfile.streak?.last_activity_date,
                 weekly_activity: userProfile.streak?.activity_days || [],
-                // last_game_completion: ... // Removed or needs mapping if critical
             };
         },
         enabled: !!userId, // Only run if userId exists

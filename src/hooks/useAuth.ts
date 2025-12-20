@@ -113,22 +113,7 @@ export function useAuthHook() {
 
           console.log(`✅ Authenticated user set: ${fullUser.username || fullUser.email} (Anonymous: ${isAnon})`);
 
-          // Auto-sync: If local XP > database XP, update database
-          const localXP = useStore.getState().totalXP;
-          const dbXP = fullUser.total_xp || 0;
-
-          if (localXP > dbXP) {
-            console.log('🔄 Auto-syncing XP: local', localXP, '> db', dbXP);
-
-            // Update stats
-            await database.users.updateStats(fullUser.id, {
-              total_score: localXP,
-              // We might want to sync level here too if local calculation is trusted
-            });
-          } else if (dbXP > localXP) {
-            console.log('🔄 Database XP higher, updating local:', dbXP);
-            useStore.getState().setTotalXP(dbXP);
-          }
+          // XP is now handled by React Query - no Zustand sync needed
 
           // 🌍 Ensure user timezone is set
           await ensureTimezoneSet(fullUser.id);
@@ -137,34 +122,12 @@ export function useAuthHook() {
           // Ideally we should retry or show a loading state, but for now we wait
         }
       } else {
-        // No session - user is anonymous
-        // Data is stored locally in AsyncStorage (via Zustand persist)
-        // No database record for anonymous users
-        console.log('👤 Anonymous user - using local storage only');
+        // No session - user is not authenticated
+        // All data is server-side via React Query, no local fallback needed
+        console.log('👤 No session - user not authenticated');
+        setUser(null);
         setIsAuthenticated(false);
         setIsAnonymous(true);
-
-        // Ensure user object in store reflects anonymous state if it exists
-        // or create a temporary anonymous user object if missing
-        if (user) {
-          setUser({ ...user, is_anonymous: true });
-        } else {
-          // Create a default anonymous user so local XP/Lives work
-          setUser({
-            id: 'anon_' + Date.now(),
-            is_anonymous: true,
-            total_xp: 0,
-            current_level: 1,
-            total_score: 0,
-            current_lives: 5,
-            max_lives: 5,
-            streak_count: 0,
-            league: 'Bronze',
-            created_at: new Date().toISOString(),
-            updated_at: new Date().toISOString(),
-            device_id: 'unknown'
-          } as User);
-        }
       }
 
       setIsInitialized(true);

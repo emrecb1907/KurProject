@@ -5,10 +5,10 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { Sparkle, CaretRight, X, ChartBar, GraduationCap, ArrowsClockwise, WifiSlash, ArrowLeft, Crown, CheckCircle } from 'phosphor-react-native';
+import { Sparkle, CaretRight, X, ChartBar, GraduationCap, BatteryFull, Lightning, ArrowLeft, Crown, CheckCircle, ProhibitInset } from 'phosphor-react-native';
 import { colors } from '@/constants/colors';
 import * as Haptics from 'expo-haptics';
-
+import { HeaderButton } from '@/components/ui';
 import { useTranslation } from 'react-i18next';
 
 export default function PremiumCenterScreen() {
@@ -42,17 +42,24 @@ export default function PremiumCenterScreen() {
             navigable: false,
         },
         {
-            id: 'unlimited-practice',
-            icon: <ArrowsClockwise size={28} weight="fill" color={colors.warning} />,
-            title: t('premiumCenter.features.unlimitedPractice.title'),
-            subtitle: t('premiumCenter.features.unlimitedPractice.subtitle'),
+            id: 'energy-capacity',
+            icon: <BatteryFull size={28} weight="fill" color={colors.warning} />,
+            title: t('premiumCenter.features.energyCapacity.title'),
+            subtitle: t('premiumCenter.features.energyCapacity.subtitle'),
             navigable: false,
         },
         {
-            id: 'offline-mode',
-            icon: <WifiSlash size={28} weight="fill" color={colors.warning} />,
-            title: t('premiumCenter.features.offlineMode.title'),
-            subtitle: t('premiumCenter.features.offlineMode.subtitle'),
+            id: 'energy-regen',
+            icon: <Lightning size={28} weight="fill" color={colors.warning} />,
+            title: t('premiumCenter.features.energyRegen.title'),
+            subtitle: t('premiumCenter.features.energyRegen.subtitle'),
+            navigable: false,
+        },
+        {
+            id: 'ad-free',
+            icon: <ProhibitInset size={28} weight="fill" color={colors.warning} />,
+            title: t('premiumCenter.features.adFree.title'),
+            subtitle: t('premiumCenter.features.adFree.subtitle'),
             navigable: false,
         },
     ];
@@ -71,22 +78,28 @@ export default function PremiumCenterScreen() {
     };
 
     return (
-        <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
+        <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
             <StatusBar style={statusBarStyle} />
-            <ScrollView contentContainerStyle={styles.scrollContent}>
 
-                {/* Header */}
-                <View style={styles.header}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                            router.back();
-                        }}
-                        style={styles.backButton}
-                    >
-                        <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-                    </TouchableOpacity>
-                </View>
+            {/* Header - outside ScrollView like analysis page */}
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingVertical: 10,
+                paddingHorizontal: 16,
+            }}>
+                <HeaderButton
+                    title={t('common.back')}
+                    showIcon={true}
+                    onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        router.back();
+                    }}
+                    style={{ paddingHorizontal: 12, paddingVertical: 8 }}
+                />
+            </View>
+
+            <ScrollView contentContainerStyle={styles.scrollContent}>
 
                 {/* Premium Badge */}
                 <View style={styles.badgeContainer}>
@@ -130,38 +143,69 @@ export default function PremiumCenterScreen() {
                     />
                 </TouchableOpacity>
 
-                {/* Feature Grid */}
+                {/* Main Feature Card - Detailed Analysis */}
+                <TouchableOpacity
+                    style={[styles.mainFeatureCard, {
+                        backgroundColor: colors.surface,
+                        borderColor: isDark ? 'transparent' : colors.border,
+                    }]}
+                    onPress={() => handleFeaturePress('detailed-analysis')}
+                    activeOpacity={0.7}
+                >
+                    <View style={[styles.mainFeatureIconContainer, { backgroundColor: isDark ? '#3A2510' : '#FFF9C4' }]}>
+                        <ChartBar size={32} weight="fill" color={colors.warning} />
+                    </View>
+                    <View style={styles.mainFeatureTextContainer}>
+                        <Text style={[styles.mainFeatureTitle, { color: colors.textPrimary }]}>
+                            {t('premiumCenter.features.detailedAnalysis.title')}
+                        </Text>
+                        <Text style={[styles.mainFeatureSubtitle, { color: colors.textSecondary }]}>
+                            {t('premiumCenter.features.detailedAnalysis.subtitle')}
+                        </Text>
+                    </View>
+                    <ArrowLeft
+                        size={20}
+                        color={colors.textSecondary}
+                        weight="bold"
+                        style={{ transform: [{ rotate: '180deg' }] }}
+                    />
+                </TouchableOpacity>
+
+                {/* Feature Grid - Skip first 2 (main features) */}
                 <View style={styles.featureGrid}>
-                    {features.slice(1).map((feature, index) => (
-                        <TouchableOpacity
-                            key={feature.id}
-                            style={[styles.featureCard, {
-                                backgroundColor: colors.surface,
-                                borderColor: isDark ? 'transparent' : colors.border,
-                            }]}
-                            onPress={() => handleFeaturePress(feature.id)}
-                            activeOpacity={0.7}
-                        >
-                            <View style={[styles.featureIconContainer, { backgroundColor: isDark ? '#3A2510' : '#FFF9C4' }]}>
-                                {feature.icon}
-                            </View>
-                            <Text style={[styles.featureTitle, { color: colors.textPrimary }]}>
-                                {feature.title}
-                            </Text>
-                            <Text style={[styles.featureSubtitle, { color: colors.textSecondary }]}>
-                                {feature.subtitle}
-                            </Text>
-                        </TouchableOpacity>
-                    ))}
+                    {features.slice(2).map((feature, index) => {
+                        const CardComponent = feature.navigable ? TouchableOpacity : View;
+                        return (
+                            <CardComponent
+                                key={feature.id}
+                                style={[styles.featureCard, {
+                                    backgroundColor: colors.surface,
+                                    borderColor: isDark ? 'transparent' : colors.border,
+                                }]}
+                                {...(feature.navigable && {
+                                    onPress: () => handleFeaturePress(feature.id),
+                                    activeOpacity: 0.7,
+                                })}
+                            >
+                                <View style={[styles.featureIconContainer, { backgroundColor: isDark ? '#3A2510' : '#FFF9C4' }]}>
+                                    {feature.icon}
+                                </View>
+                                <Text style={[styles.featureTitle, { color: colors.textPrimary }]}>
+                                    {feature.title}
+                                </Text>
+                                <Text style={[styles.featureSubtitle, { color: colors.textSecondary }]}>
+                                    {feature.subtitle}
+                                </Text>
+                                {feature.navigable && (
+                                    <View style={styles.navigableIndicator}>
+                                        <CaretRight size={18} weight="bold" color={colors.primary} />
+                                    </View>
+                                )}
+                            </CardComponent>
+                        );
+                    })}
                 </View>
 
-                {/* Footer Badge */}
-                <View style={styles.footerBadge}>
-                    <CheckCircle size={20} weight="fill" color={colors.success} />
-                    <Text style={[styles.footerBadgeText, { color: colors.textSecondary }]}>
-                        {t('premiumCenter.footer')}
-                    </Text>
-                </View>
 
             </ScrollView>
         </SafeAreaView>
@@ -299,5 +343,10 @@ const styles = StyleSheet.create({
     footerBadgeText: {
         fontSize: 14,
         fontWeight: '500',
+    },
+    navigableIndicator: {
+        position: 'absolute',
+        top: 12,
+        right: 12,
     },
 });

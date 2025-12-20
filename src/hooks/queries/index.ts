@@ -1,4 +1,6 @@
 // Query hooks
-export { useUserData, useUserStats } from './useUserQuery';
+export { useUserData, useUserStats, useCompletedLessons } from './useUserQuery';
 export { useLeaderboard, useUserRank } from './useLeaderboardQuery';
 export { useOptimisticLeaderboard } from './useOptimisticLeaderboard';
+export { useEnergy } from './useEnergy';
+export { useDailyProgress } from './useDailyProgress';
