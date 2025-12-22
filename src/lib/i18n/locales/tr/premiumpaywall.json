@@ -41,5 +41,11 @@
     "cta": "Premium'a Geç",
     "restore": "Satın Alımları Geri Yükle",
     "terms": "Kullanım Koşulları",
-    "privacy": "Gizlilik Politikası"
+    "privacy": "Gizlilik Politikası",
+    "authModal": {
+        "title": "Premium'a geçmeden önce",
+        "description": "Premium özellikleri hesabına tanımlamak için kısa bir hesap oluşturman gerekir.",
+        "registerButton": "Hesap Oluştur ve Devam Et",
+        "loginButton": "Giriş Yap"
+    }
 }

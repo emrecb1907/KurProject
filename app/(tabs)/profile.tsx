@@ -274,7 +274,7 @@ export default function ProfileScreen() {
       gap: 12,
     },
     promptTitle: {
-      fontSize: 22,
+      fontSize: 20,
       fontWeight: 'bold',
       color: colors.textOnPrimary,
     },
@@ -478,6 +478,27 @@ export default function ProfileScreen() {
 
 
 
+          {/* Login Prompt - Show if not authenticated OR is anonymous */}
+          {(!isAuthenticated || isAnonymous) && (
+            <View style={styles.loginPrompt}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Lightbulb size={28} color={colors.textOnPrimary} weight="fill" />
+                <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
+              </View>
+              <Text style={styles.promptText}>
+                {t('profile.loginPrompt.description')}
+              </Text>
+              <Pressable
+                style={styles.loginButton}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push('/(auth)/login');
+                }}
+              >
+                <Text style={styles.loginButtonText}>{t('profile.loginPrompt.button')}</Text>
+              </Pressable>
+            </View>
+          )}
 
           {/* Stats Grid */}
           <View style={styles.statsContainer}>
@@ -517,29 +538,6 @@ export default function ProfileScreen() {
               {t('profile.badgesHint')}
             </Text>
           </View>
-
-
-
-
-          {/* Login Prompt - Show if not authenticated OR is anonymous */}
-          {(!isAuthenticated || isAnonymous) && (
-            <View style={styles.loginPrompt}>
-              <Lightbulb size={40} color={colors.textOnPrimary} weight="fill" />
-              <Text style={styles.promptTitle}>{t('profile.loginPrompt.title')}</Text>
-              <Text style={styles.promptText}>
-                {t('profile.loginPrompt.description')}
-              </Text>
-              <Pressable
-                style={styles.loginButton}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  router.push('/(auth)/login');
-                }}
-              >
-                <Text style={styles.loginButtonText}>{t('profile.loginPrompt.button')}</Text>
-              </Pressable>
-            </View>
-          )}
 
           <View style={{ height: 40 }} />
         </ScrollView>

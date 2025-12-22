@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback, useEffect, useMemo } from 'react';
-import { View, Text, ScrollView, StyleSheet, DeviceEventEmitter, TouchableOpacity, Platform, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, DeviceEventEmitter, TouchableOpacity, Platform, Alert, ActivityIndicator, Modal, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useFocusEffect } from 'expo-router';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { useStatusBar } from '@/hooks/useStatusBar';
 import * as Haptics from 'expo-haptics';
 import { StatusBar } from 'expo-status-bar';
 import { HeaderButton } from '@/components/ui/HeaderButton';
+import { useAuth } from '@/store';
 
 export default function PremiumScreen() {
     const { activeTheme } = useTheme();
@@ -16,7 +17,9 @@ export default function PremiumScreen() {
     const { t } = useTranslation();
     const { statusBarStyle } = useStatusBar();
     const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
+    const [showAuthModal, setShowAuthModal] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
+    const { isAnonymous, isAuthenticated } = useAuth();
 
     // Reset scroll position when screen comes into focus
     useFocusEffect(
@@ -96,13 +99,7 @@ export default function PremiumScreen() {
                         onPress={() => router.back()}
                     />
                     <Text style={[styles.headerTitle, { color: premiumColors.text }]}>{t('premiumpaywall.headerTitle')}</Text>
-                    <HeaderButton
-                        title={t('premiumpaywall.cta')}
-                        onPress={() => {
-                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                            router.push('/premiumCenter');
-                        }}
-                    />
+                    <View style={{ width: 60 }} />
                 </View>
 
                 {/* Hero Title */}
@@ -175,7 +172,17 @@ export default function PremiumScreen() {
                 </View>
 
                 {/* Subscribe Button */}
-                <TouchableOpacity style={styles.subscribeButton}>
+                <TouchableOpacity
+                    style={styles.subscribeButton}
+                    onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        if (!isAuthenticated || isAnonymous) {
+                            setShowAuthModal(true);
+                        } else {
+                            router.push('/premiumCenter');
+                        }
+                    }}
+                >
                     <Text style={[styles.subscribeButtonText, { color: activeTheme === 'light' ? '#FFFFFF' : '#000000' }]}>{t('premiumpaywall.cta')}</Text>
                 </TouchableOpacity>
 
@@ -193,6 +200,57 @@ export default function PremiumScreen() {
                 </View>
 
             </ScrollView>
+
+            {/* Auth Required Modal for Anonymous Users */}
+            <Modal
+                visible={showAuthModal}
+                transparent={true}
+                animationType="fade"
+                onRequestClose={() => setShowAuthModal(false)}
+            >
+                <Pressable
+                    style={styles.modalOverlay}
+                    onPress={() => setShowAuthModal(false)}
+                >
+                    <Pressable
+                        style={[styles.modalContent, { backgroundColor: premiumColors.cardBg }]}
+                        onPress={(e) => e.stopPropagation()}
+                    >
+                        <Text style={[styles.modalTitle, { color: premiumColors.text }]}>
+                            {t('premiumpaywall.authModal.title')}
+                        </Text>
+                        <Text style={[styles.modalDescription, { color: premiumColors.textSecondary }]}>
+                            {t('premiumpaywall.authModal.description')}
+                        </Text>
+
+                        <TouchableOpacity
+                            style={styles.modalPrimaryButton}
+                            onPress={() => {
+                                setShowAuthModal(false);
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                router.push('/(auth)/register');
+                            }}
+                        >
+                            <Text style={styles.modalPrimaryButtonText}>
+                                {t('premiumpaywall.authModal.registerButton')}
+                            </Text>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity
+                            style={[styles.modalSecondaryButton, { borderColor: premiumColors.gold }]}
+                            onPress={() => {
+                                setShowAuthModal(false);
+                                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                                router.push('/(auth)/login');
+                            }}
+                        >
+                            <Text style={[styles.modalSecondaryButtonText, { color: premiumColors.gold }]}>
+                                {t('premiumpaywall.authModal.loginButton')}
+                            </Text>
+                        </TouchableOpacity>
+                    </Pressable>
+                </Pressable>
+            </Modal>
         </SafeAreaView>
     );
 }
@@ -372,5 +430,56 @@ const styles = StyleSheet.create({
         height: 16,
         borderRadius: 8,
         backgroundColor: '#FF9600',
-    }
+    },
+    // Modal Styles
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.6)',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+    },
+    modalContent: {
+        width: '100%',
+        maxWidth: 340,
+        borderRadius: 20,
+        padding: 24,
+        alignItems: 'center',
+    },
+    modalTitle: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: 12,
+    },
+    modalDescription: {
+        fontSize: 15,
+        textAlign: 'center',
+        lineHeight: 22,
+        marginBottom: 24,
+    },
+    modalPrimaryButton: {
+        width: '100%',
+        backgroundColor: '#FF9600',
+        paddingVertical: 14,
+        borderRadius: 12,
+        alignItems: 'center',
+        marginBottom: 12,
+    },
+    modalPrimaryButtonText: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#000000',
+    },
+    modalSecondaryButton: {
+        width: '100%',
+        paddingVertical: 14,
+        borderRadius: 12,
+        alignItems: 'center',
+        borderWidth: 2,
+    },
+    modalSecondaryButtonText: {
+        fontSize: 16,
+        fontWeight: '600',
+    },
 });

@@ -33,9 +33,9 @@
         }
     },
     "loginPrompt": {
-        "title": "Create Account",
-        "description": "Save your progress, join the leaderboard, and unlock all features!",
-        "button": "Login / Register"
+        "title": "Secure Your Progress",
+        "description": "Sign in to save your progress, badges, and streaks.",
+        "button": "Sign In"
     },
     "badgesHint": "Earn badges by completing lessons!",
     "settings": {

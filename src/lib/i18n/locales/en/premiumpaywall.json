@@ -41,5 +41,11 @@
     "cta": "Go Premium",
     "restore": "Restore Purchases",
     "terms": "Terms of Use",
-    "privacy": "Privacy Policy"
+    "privacy": "Privacy Policy",
+    "authModal": {
+        "title": "Before going Premium",
+        "description": "You need to create a quick account to link Premium features to your profile.",
+        "registerButton": "Create Account & Continue",
+        "loginButton": "Log In"
+    }
 }
