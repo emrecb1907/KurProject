@@ -302,7 +302,7 @@ export const database = {
         p_correct: result.correct_answer,
         p_total: result.total_question,
         p_duration: result.duration || 10,
-        p_client_timestamp: result.client_timestamp || new Date().toISOString(), // Pass client time
+        p_client_timestamp: result.client_timestamp, // undefined ise RPC NOW() kullanır
         p_session_id: result.session_id // Pass session ID
       });
       return { data, error };
@@ -336,6 +336,14 @@ export const database = {
           error
         };
       }
+      return { data, error };
+    },
+
+    // 🌍 Timezone-aware streak - doğru streak değerini döndürür
+    async getAccurateStreak(userId: string) {
+      const { data, error } = await supabase.rpc('get_user_streak', {
+        p_user_id: userId
+      });
       return { data, error };
     }
   },

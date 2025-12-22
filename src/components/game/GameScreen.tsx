@@ -326,8 +326,8 @@ export function GameScreen({
                 correctAnswers: correctAnswersCount,
                 totalQuestions: questions.length,
                 source,
-                duration: durationSeconds,
-                timestamp: new Date(Date.now() - (new Date().getTimezoneOffset() * 60000)).toISOString()
+                duration: durationSeconds
+                // timestamp kaldırıldı - sunucu NOW() kullanacak
             });
 
             if (result.success) {

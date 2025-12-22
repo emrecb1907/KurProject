@@ -25,8 +25,10 @@ import { createAudioPlayer, AudioPlayer } from 'expo-audio';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useStatusBar } from '@/hooks/useStatusBar';
-import { useUser } from '@/store';
+import { useAuth } from '@/store';
 import { HomeHeader } from '@/components/home/HomeHeader';
+import { useCompletedLessons } from '@/hooks/queries';
+import { useLessonComplete } from '@/hooks/mutations';
 
 // Data imports
 import { namazTemelDualar } from '@/data/namazTemelDualar';
@@ -49,8 +51,12 @@ export default function NamazDualiDetailScreen() {
     const { statusBarStyle } = useStatusBar();
     const { themeVersion, activeTheme } = useTheme();
 
-    // User progress
-    const { completedLessons, markLessonAsCompleted, addXP, updateStats } = useUser();
+    // Auth
+    const { user } = useAuth();
+
+    // User progress - React Query hooks
+    const { data: completedLessons = [] } = useCompletedLessons(user?.id);
+    const lessonCompleteMutation = useLessonComplete();
 
     // Find Lesson
     const lessonId = Number(id);
@@ -145,12 +151,15 @@ export default function NamazDualiDetailScreen() {
 
     const handleComplete = async () => {
         if (!completedLessons.includes(String(lessonId))) {
-            const addedXp = await addXP(10); // Standard lesson XP?
-            await updateStats({ lessons_completed: 1 });
-            await markLessonAsCompleted(String(lessonId));
+            try {
+                // Server-side mutation handles XP and stats
+                await lessonCompleteMutation.mutateAsync(String(lessonId));
 
-            Alert.alert(t('common.congratulations'), t('lessons.lessonCompleted', { xp: 10 }));
-            Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                Alert.alert(t('common.congratulations'), t('lessons.lessonCompleted', { xp: 10 }));
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+            } catch (error) {
+                console.error('Failed to complete lesson:', error);
+            }
         }
         router.back();
     };

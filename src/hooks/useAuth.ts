@@ -5,7 +5,7 @@ import { database } from '@lib/supabase/database';
 import { supabase } from '@lib/supabase/client';
 
 import { migrateLocalDataToDatabase } from '@lib/utils/dataMigration';
-import { User } from '@types/user.types';
+import type { User } from '@/types/user.types';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // 🌍 Get device timezone

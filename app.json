@@ -8,9 +8,14 @@
     "userInterfaceStyle": "automatic",
     "scheme": "quranlearn",
     "splash": {
-      "image": "./assets/splash-removebg.png",
+      "image": "./assets/splashlogo.png",
       "resizeMode": "contain",
-      "backgroundColor": "#F5F5F0"
+      "backgroundColor": "#FF9600",
+      "dark": {
+        "image": "./assets/splashlogo.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#050816"
+      }
     },
     "assetBundlePatterns": [
       "**/*"
@@ -25,7 +30,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#F5F5F0"
+        "backgroundColor": "#FF9600"
       },
       "package": "com.quranlearn.app",
       "permissions": [

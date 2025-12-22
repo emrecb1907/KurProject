@@ -1,6 +1,6 @@
 import { StateCreator } from 'zustand';
-import { Question } from '@types/question.types';
-import { GameState, QuestionResult } from '@types/game.types';
+import type { Question } from '@/types/question.types';
+import type { GameState, QuestionResult } from '@/types/game.types';
 
 export interface GameSlice {
   // State
@@ -8,7 +8,7 @@ export interface GameSlice {
   currentQuestion: Question | null;
   questions: Question[];
   isGameActive: boolean;
-  
+
   // Actions
   startGame: (questions: Question[]) => void;
   setCurrentQuestion: (question: Question) => void;
@@ -33,7 +33,7 @@ export const createGameSlice: StateCreator<GameSlice> = (set) => ({
   currentQuestion: null,
   questions: [],
   isGameActive: false,
-  
+
   // Actions
   startGame: (questions) => set({
     gameState: {
@@ -44,19 +44,19 @@ export const createGameSlice: StateCreator<GameSlice> = (set) => ({
     currentQuestion: questions[0] || null,
     isGameActive: true,
   }),
-  
+
   setCurrentQuestion: (question) => set({ currentQuestion: question }),
-  
+
   submitAnswer: (result) => set((state) => {
     if (!state.gameState) return state;
-    
+
     const newResults = [...state.gameState.results, result];
     const newCorrectAnswers = state.gameState.correctAnswers + (result.is_correct ? 1 : 0);
     const newIncorrectAnswers = state.gameState.incorrectAnswers + (result.is_correct ? 0 : 1);
     const newTotalXP = state.gameState.totalXP + result.xp_earned;
     const newCurrentQuestion = state.gameState.currentQuestion + 1;
     const isComplete = newCurrentQuestion >= state.gameState.totalQuestions;
-    
+
     return {
       gameState: {
         ...state.gameState,
@@ -70,12 +70,12 @@ export const createGameSlice: StateCreator<GameSlice> = (set) => ({
       currentQuestion: isComplete ? null : (state.questions[newCurrentQuestion] || null),
     };
   }),
-  
+
   endGame: () => set((state) => ({
     gameState: state.gameState ? { ...state.gameState, isComplete: true } : null,
     isGameActive: false,
   })),
-  
+
   resetGame: () => set({
     gameState: null,
     currentQuestion: null,

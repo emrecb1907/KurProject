@@ -9,7 +9,7 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
-import { useUser, useAuth } from '@/store';
+import { useAuth } from '@/store';
 import { useCompleteGameMutation } from '@/hooks/mutations/useGameMutations';
 
 export interface SectionContent {
@@ -148,10 +148,8 @@ export default function IslamicHistoryLesson({ lesson, lessonId }: IslamicHistor
 
   const { mutate: completeGame, isPending } = useCompleteGameMutation();
   const { user } = useAuth();
-  const { completedTests } = useUser(); // Assuming completedTests tracks completed lessons too, or we need a new selector
-  // Actually, useUser doesn't seem to expose completedLessons array directly. 
-  // We might need to fetch it or check against a list.
-  // For now, let's just implement the completion logic.
+  // Note: Completed lesson tracking would use useCompletedLessons(user?.id) from '@/hooks/queries' if needed
+  // For now, we rely on the button action.
 
   const isCompleted = useMemo(() => {
     // This logic needs to be robust. For now, we rely on the button action.

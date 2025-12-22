@@ -1,10 +1,11 @@
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
+import { useQueryClient } from '@tanstack/react-query';
 import { colors } from '@constants/colors';
 import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
-import { useAuth, useUser } from '@/store';
+import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
 import { RewardModal } from './RewardModal';
@@ -20,7 +21,7 @@ interface DayActivity {
 export const WeeklyActivity = memo(function WeeklyActivity() {
     const { t } = useTranslation();
     const { user, isAuthenticated } = useAuth();
-    const { addXP } = useUser();
+    const queryClient = useQueryClient();
     const { themeVersion, activeTheme } = useTheme();
 
     // Light theme specific border color
@@ -255,17 +256,19 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             const now = new Date();
             now.setHours(0, 0, 0, 0);
 
-            // Get user's stats from users table
-            const { data: stats } = await database.dailyActivity.getStats(user.id);
+            // 🌍 Get timezone-aware streak from RPC
+            const { data: streakData } = await database.dailyActivity.getAccurateStreak(user.id);
 
-            if (!stats) {
+            if (!streakData) {
                 setWeekData(getEmptyWeek());
+                setStreak(0);
                 return;
             }
 
-            const currentStreak = stats.streak || 0;
+            // RPC returns accurate streak considering timezone
+            const currentStreak = streakData.streak || 0;
             setStreak(currentStreak);
-            const weeklyActivity = (stats.weekly_activity as string[]) || [];
+            const weeklyActivity = (streakData.activity_days as string[]) || [];
 
             // Calculate Start Date
             const todayStr = toLocalISOString(now);
@@ -363,8 +366,8 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                 return;
             }
 
-            // Update local XP state
-            addXP(result.xp_awarded || 1000);
+            // Invalidate queries to refresh XP from server (server already added XP)
+            queryClient.invalidateQueries({ queryKey: ['user', user.id] });
 
             setRewardClaimed(true);
             setShowRewardModal(true);
