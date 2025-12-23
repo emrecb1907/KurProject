@@ -81,24 +81,6 @@ export default function PremiumCenterScreen() {
         <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
             <StatusBar style={statusBarStyle} />
 
-            {/* Header - outside ScrollView like analysis page */}
-            <View style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                paddingVertical: 10,
-                paddingHorizontal: 16,
-            }}>
-                <HeaderButton
-                    title={t('common.back')}
-                    showIcon={true}
-                    onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        router.back();
-                    }}
-                    style={{ paddingHorizontal: 12, paddingVertical: 8 }}
-                />
-            </View>
-
             <ScrollView contentContainerStyle={styles.scrollContent}>
 
                 {/* Premium Badge */}

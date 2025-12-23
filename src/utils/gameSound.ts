@@ -1,8 +1,8 @@
 import { createAudioPlayer, AudioPlayer } from 'expo-audio';
 
 /**
- * Game Sound Manager - Separate from lesson audio (audio.ts)
- * Uses pre-created players for each sound type with proper replay handling.
+ * Game Sound Manager - Uses replace() instead of seekTo() to avoid native crash.
+ * Each sound type has its own player that is completely recreated for each play.
  */
 
 // Sound effect files
@@ -12,52 +12,44 @@ const CLOCK_TICKING_SOUND = require('../../assets/audio/effects/clockTicking.mp3
 const GAME_COMPLETE_SOUND = require('../../assets/audio/effects/GameComplete.mp3');
 const LEVEL_UP_SOUND = require('../../assets/audio/effects/LevelUp.mp3');
 
-// Pre-created players for each sound type
-let correctPlayer: AudioPlayer | null = null;
-let wrongPlayer: AudioPlayer | null = null;
-let tickingPlayer: AudioPlayer | null = null;
-let completePlayer: AudioPlayer | null = null;
-let levelUpPlayer: AudioPlayer | null = null;
-
-// Track if sounds are initialized
-let isInitialized = false;
+// Single player instance - recreated for each sound
+let activePlayer: AudioPlayer | null = null;
 
 /**
- * Initialize all game sound players. Call this once when game starts.
+ * Initialize game sounds - no-op since we create on demand
  */
 export const initGameSounds = () => {
-    if (isInitialized) return;
-
-    try {
-        correctPlayer = createAudioPlayer(CORRECT_CHOICE_SOUND);
-        wrongPlayer = createAudioPlayer(WRONG_CHOICE_SOUND);
-        tickingPlayer = createAudioPlayer(CLOCK_TICKING_SOUND);
-        completePlayer = createAudioPlayer(GAME_COMPLETE_SOUND);
-        levelUpPlayer = createAudioPlayer(LEVEL_UP_SOUND);
-        isInitialized = true;
-    } catch (error) {
-        console.error('Error initializing game sounds:', error);
-    }
+    // No initialization needed - we create players on demand
 };
 
 /**
- * Helper to play a pre-loaded player with proper replay handling.
- * Uses the expo-audio recommended pattern: seekTo(0) then play()
+ * Plays a game sound effect.
+ * Creates a fresh player for each sound to avoid seekTo crash.
+ * 
+ * @param source The audio source (require(...))
+ * @returns A cleanup function to pause playback
  */
-const playPreloadedPlayer = (player: AudioPlayer | null) => {
-    if (!player) {
-        console.warn('Player not initialized');
-        return () => { };
-    }
-
+export const playGameSound = (source: any) => {
     try {
-        // Reset to beginning and play - this is the expo-audio recommended pattern
-        player.seekTo(0);
+        // Don't clean up immediately - let it play
+        // Just create a new player for this sound
+        const player = createAudioPlayer(source);
         player.play();
+
+        // Track this as active for cleanup
+        activePlayer = player;
 
         return () => {
             try {
                 player.pause();
+                // Don't remove immediately - defer it
+                setTimeout(() => {
+                    try {
+                        player.remove();
+                    } catch (e) {
+                        // Ignore
+                    }
+                }, 500);
             } catch (e) {
                 // Ignore
             }
@@ -69,72 +61,24 @@ const playPreloadedPlayer = (player: AudioPlayer | null) => {
 };
 
 /**
- * Plays a game sound effect using pre-loaded players.
- * 
- * @param source The audio source (require(...))
- * @returns A cleanup function to pause playback
- */
-export const playGameSound = (source: any) => {
-    // Initialize players if not already done
-    if (!isInitialized) {
-        initGameSounds();
-    }
-
-    // Match source to pre-loaded player
-    if (source === CORRECT_CHOICE_SOUND) {
-        return playPreloadedPlayer(correctPlayer);
-    } else if (source === WRONG_CHOICE_SOUND) {
-        return playPreloadedPlayer(wrongPlayer);
-    } else if (source === CLOCK_TICKING_SOUND) {
-        return playPreloadedPlayer(tickingPlayer);
-    } else if (source === GAME_COMPLETE_SOUND) {
-        return playPreloadedPlayer(completePlayer);
-    } else if (source === LEVEL_UP_SOUND) {
-        return playPreloadedPlayer(levelUpPlayer);
-    } else {
-        // Fallback for unknown sources
-        console.warn('Unknown sound source, creating temporary player');
-        try {
-            const tempPlayer = createAudioPlayer(source);
-            tempPlayer.play();
-            return () => {
-                try {
-                    tempPlayer.pause();
-                    tempPlayer.remove();
-                } catch (e) {
-                    // Ignore
-                }
-            };
-        } catch (error) {
-            console.error('Error playing unknown sound:', error);
-            return () => { };
-        }
-    }
-};
-
-/**
  * Releases all game audio players. Call this when leaving game screens.
  */
 export const releaseGameAudioPlayer = () => {
-    const players = [correctPlayer, wrongPlayer, tickingPlayer, completePlayer, levelUpPlayer];
+    if (activePlayer) {
+        try {
+            activePlayer.pause();
+        } catch (e) { }
 
-    players.forEach(player => {
-        if (player) {
+        // Defer removal to avoid crash
+        const playerToRemove = activePlayer;
+        setTimeout(() => {
             try {
-                player.pause();
-                player.remove();
-            } catch (e) {
-                // Ignore cleanup errors
-            }
-        }
-    });
+                playerToRemove.remove();
+            } catch (e) { }
+        }, 500);
 
-    correctPlayer = null;
-    wrongPlayer = null;
-    tickingPlayer = null;
-    completePlayer = null;
-    levelUpPlayer = null;
-    isInitialized = false;
+        activePlayer = null;
+    }
 };
 
 // Export sound constants for use in other files

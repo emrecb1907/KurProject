@@ -18,6 +18,10 @@ import { OfflineBanner } from '@/components/ui/OfflineBanner';
 import { errorHandler } from '@/lib/errorHandler';
 import * as Sentry from '@sentry/react-native';
 
+// Adapty Provider for Premium/Subscriptions
+import { AdaptyProvider } from '@/contexts/AdaptyProvider';
+import { adapty } from 'react-native-adapty';
+
 // Prevent the splash screen from auto-hiding
 SplashScreen.preventAutoHideAsync();
 
@@ -63,6 +67,12 @@ function RootLayout() {
     if (user?.id) {
       console.log('🔗 Binding User ID:', user.id);
       setBoundUserId(user.id);
+
+      // 🔐 Adapty: Kullanıcıyı tanımla (premium durumunu kullanıcıya bağla)
+      adapty.identify(user.id)
+        .then(() => console.log('✅ Adapty: Kullanıcı tanımlandı:', user.id))
+        .catch((err) => console.warn('⚠️ Adapty identify hatası:', err));
+
       // Fetch fresh profile data (username, XP, etc.) from DB
       refreshUser();
     } else {
@@ -109,27 +119,29 @@ function RootLayout() {
       <GestureHandlerRootView style={{ flex: 1 }}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider>
-            <OfflineBanner />
-            <Stack
-              screenOptions={{
-                headerShown: false,
-                animation: 'fade',
-              }}
-            >
-              <Stack.Screen name="index" />
-              <Stack.Screen name="onboarding" />
-              <Stack.Screen name="(tabs)" />
-              <Stack.Screen name="(auth)" />
-              <Stack.Screen name="settings" />
-              <Stack.Screen name="change-password" />
-              <Stack.Screen
-                name="games"
-                options={{
-                  gestureEnabled: false,
-                  fullScreenGestureEnabled: false,
+            <AdaptyProvider>
+              <OfflineBanner />
+              <Stack
+                screenOptions={{
+                  headerShown: false,
+                  animation: 'fade',
                 }}
-              />
-            </Stack>
+              >
+                <Stack.Screen name="index" />
+                <Stack.Screen name="onboarding" />
+                <Stack.Screen name="(tabs)" />
+                <Stack.Screen name="(auth)" />
+                <Stack.Screen name="settings" />
+                <Stack.Screen name="change-password" />
+                <Stack.Screen
+                  name="games"
+                  options={{
+                    gestureEnabled: false,
+                    fullScreenGestureEnabled: false,
+                  }}
+                />
+              </Stack>
+            </AdaptyProvider>
           </ThemeProvider>
         </QueryClientProvider>
       </GestureHandlerRootView>

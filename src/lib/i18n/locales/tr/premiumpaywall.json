@@ -34,12 +34,16 @@
             "title": "Yıllık Plan",
             "price": "₺399.99",
             "period": "/yıl",
-            "save": "%33 Tasarruf",
+            "save": "Tasarruf",
             "bestValue": "En İyi Fiyat"
         }
     },
+    "trial": {
+        "days": "gün",
+        "free": "ücretsiz deneme"
+    },
     "cta": "Premium'a Geç",
-    "restore": "Satın Alımları Geri Yükle",
+    "restore": "Satın Alma Geri Yükle",
     "terms": "Kullanım Koşulları",
     "privacy": "Gizlilik Politikası",
     "authModal": {
@@ -47,5 +51,26 @@
         "description": "Premium özellikleri hesabına tanımlamak için kısa bir hesap oluşturman gerekir.",
         "registerButton": "Hesap Oluştur ve Devam Et",
         "loginButton": "Giriş Yap"
+    },
+    "success": {
+        "title": "Tebrikler! 🎉",
+        "message": "Premium'a başarıyla geçtin! Tüm özelliklere artık erişebilirsin."
+    },
+    "errors": {
+        "noProducts": "Ürünler yüklenemedi. Lütfen daha sonra tekrar dene.",
+        "purchaseFailed": "Satın alma işlemi başarısız oldu. Lütfen tekrar dene.",
+        "restoreFailed": "Geri yükleme işlemi başarısız oldu. Lütfen tekrar dene.",
+        "subscriptionConflictTitle": "Abonelik Başka Hesaba Bağlı",
+        "subscriptionConflictMessage": "Bu Apple ID ile yapılan abonelik farklı bir uygulama hesabına kayıtlı. Lütfen o hesaba giriş yapın veya \"Satın Alımları Geri Yükle\" seçeneğini deneyin."
+    },
+    "restoreResult": {
+        "success": {
+            "title": "Geri Yükleme Başarılı! ✅",
+            "message": "Premium aboneliğin başarıyla geri yüklendi."
+        },
+        "noSubscription": {
+            "title": "Abonelik Bulunamadı",
+            "message": "Bu hesaba bağlı aktif bir abonelik bulunamadı."
+        }
     }
 }

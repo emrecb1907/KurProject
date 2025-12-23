@@ -1,92 +1,79 @@
 import { useRef, useEffect, useCallback } from 'react';
-import {
-    playGameSound,
-    releaseGameAudioPlayer,
-    initGameSounds,
-    CORRECT_CHOICE_SOUND,
-    WRONG_CHOICE_SOUND,
-    GAME_COMPLETE_SOUND,
-    LEVEL_UP_SOUND
-} from '@/utils/gameSound';
-import { playSound, releaseAudioPlayer } from '@/utils/audio';
+import { useAudioPlayer } from 'expo-audio';
 import { LETTER_AUDIO_FILES } from '@/data/elifBaLetters';
-import { logger } from '@/lib/logger';
 
+// Sound effect files
+const CORRECT_CHOICE_SOUND = require('../../assets/audio/effects/CorrectChoice.mp3');
+const WRONG_CHOICE_SOUND = require('../../assets/audio/effects/WrongChoice.mp3');
+const GAME_COMPLETE_SOUND = require('../../assets/audio/effects/GameComplete.mp3');
+const LEVEL_UP_SOUND = require('../../assets/audio/effects/LevelUp.mp3');
+
+/**
+ * Game Audio Hook using expo-audio's useAudioPlayer hook.
+ * Each sound type has its own dedicated player with a fixed source.
+ */
 export const useGameAudio = (gameType: string) => {
-    const stopSoundRef = useRef<(() => void) | null>(null);
-    const stopEffectSoundRef = useRef<(() => void) | null>(null);
-    const stopGameCompleteSoundRef = useRef<(() => void) | null>(null);
+    // Create dedicated players for each sound type - dokümandaki önerilen yöntem
+    const correctPlayer = useAudioPlayer(CORRECT_CHOICE_SOUND);
+    const wrongPlayer = useAudioPlayer(WRONG_CHOICE_SOUND);
+    const completePlayer = useAudioPlayer(GAME_COMPLETE_SOUND);
+    const levelUpPlayer = useAudioPlayer(LEVEL_UP_SOUND);
 
-    // Initialize sounds on mount
-    useEffect(() => {
-        initGameSounds();
-        return () => {
-            // Cleanup all sounds on unmount
-            if (stopSoundRef.current) stopSoundRef.current();
-            if (stopEffectSoundRef.current) stopEffectSoundRef.current();
-            if (stopGameCompleteSoundRef.current) stopGameCompleteSoundRef.current();
+    // For letter audio, we'll use replace() method
+    // Start with a default letter audio
+    const defaultLetterAudio = LETTER_AUDIO_FILES[1] || CORRECT_CHOICE_SOUND;
+    const letterPlayer = useAudioPlayer(defaultLetterAudio);
 
-            releaseAudioPlayer();
-            releaseGameAudioPlayer();
-        };
-    }, []);
-
-    // Stop current question sound (e.g. letter audio)
+    // Stop current question sound
     const stopCurrentSound = useCallback(() => {
-        if (stopSoundRef.current) {
-            stopSoundRef.current();
-            stopSoundRef.current = null;
+        try {
+            letterPlayer.pause();
+        } catch (e) {
+            // Ignore errors
         }
-    }, []);
+    }, [letterPlayer]);
 
     // Play feedback sound (correct/wrong)
     const playFeedbackSound = useCallback((isCorrect: boolean) => {
         try {
-            const soundFile = isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND;
-            const stop = playGameSound(soundFile);
-            stopEffectSoundRef.current = stop;
+            const player = isCorrect ? correctPlayer : wrongPlayer;
+            // Use replace to replay from start, then play
+            player.replace(isCorrect ? CORRECT_CHOICE_SOUND : WRONG_CHOICE_SOUND);
+            player.play();
         } catch (error) {
-            console.error('Error playing sound effect:', error);
-            stopEffectSoundRef.current = null;
+            console.warn('Error playing sound effect:', error);
         }
-    }, []);
+    }, [correctPlayer, wrongPlayer]);
 
     // Play completion sound (level up or finish)
     const playCompletionSound = useCallback((leveledUp: boolean) => {
         try {
-            if (stopGameCompleteSoundRef.current) {
-                stopGameCompleteSoundRef.current();
-                stopGameCompleteSoundRef.current = null;
-            }
-
-            const soundFile = leveledUp ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
-            const stop = playGameSound(soundFile);
-            stopGameCompleteSoundRef.current = stop;
+            const player = leveledUp ? levelUpPlayer : completePlayer;
+            const source = leveledUp ? LEVEL_UP_SOUND : GAME_COMPLETE_SOUND;
+            player.replace(source);
+            player.play();
         } catch (error) {
-            console.error('Error playing completion sound:', error);
-            stopGameCompleteSoundRef.current = null;
+            console.warn('Error playing completion sound:', error);
         }
-    }, []);
+    }, [levelUpPlayer, completePlayer]);
 
     // Play letter audio (specific to letters game)
     const playLetterAudio = useCallback((audioFileId: number) => {
         try {
-            // Stop previous sound first
-            stopCurrentSound();
-
             const audioFile = LETTER_AUDIO_FILES[audioFileId];
             if (!audioFile) {
                 console.warn(`Audio file not found for letter ${audioFileId}`);
                 return;
             }
 
-            const stop = playSound(audioFile);
-            stopSoundRef.current = stop;
+            // Stop previous and play new
+            letterPlayer.pause();
+            letterPlayer.replace(audioFile);
+            letterPlayer.play();
         } catch (error) {
-            console.error('Error playing audio:', error);
-            stopSoundRef.current = null;
+            console.warn('Error playing audio:', error);
         }
-    }, [stopCurrentSound]);
+    }, [letterPlayer]);
 
     return {
         playFeedbackSound,

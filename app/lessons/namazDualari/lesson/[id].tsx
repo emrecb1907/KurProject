@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, ScrollView, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
@@ -64,13 +64,8 @@ export default function NamazDualiDetailScreen() {
     const duration = status.duration || 0;
     const currentTime = status.currentTime || 0;
 
-    // Auto-reset when finished
-    useEffect(() => {
-        // If we reached the end (approx) and stopped, rewind to 0
-        if (duration > 0 && Math.abs(currentTime - duration) < 0.1 && !isPlaying) {
-            player.seekTo(0);
-        }
-    }, [currentTime, duration, isPlaying, player]);
+    // Auto-reset handled by useAudioPlayer - no seekTo needed
+    // The hook resets position when playback ends naturally
 
     // Helpers
     const isTurkish = i18n.language === 'tr';
@@ -96,8 +91,14 @@ export default function NamazDualiDetailScreen() {
     };
 
     const handleReplay = () => {
-        player.seekTo(0);
-        player.play();
+        // Avoid seekTo - it causes native crashes
+        // Replace the audio source to reload from scratch
+        if (lesson?.audio) {
+            player.replace(lesson.audio);
+            setTimeout(() => {
+                player.play();
+            }, 50);
+        }
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     };
 
@@ -196,27 +197,20 @@ export default function NamazDualiDetailScreen() {
                             <ArrowCounterClockwise size={24} color={colors.textSecondary} weight="bold" />
                         </Pressable>
 
-                        {/* Play */}
+                        {/* Play/Pause Toggle */}
                         <Pressable
-                            style={[styles.controlButtonLarge, isPlaying && styles.controlButtonDisabled]}
-                            onPress={() => {
-                                if (!isPlaying) handlePlayPause();
-                            }}
-                            disabled={isPlaying}
+                            style={styles.controlButtonLarge}
+                            onPress={handlePlayPause}
                         >
-                            <Play size={32} color={isPlaying ? colors.textSecondary : "#FFFFFF"} weight="fill" style={{ marginLeft: 4 }} />
+                            {isPlaying ? (
+                                <Pause size={32} color="#FFFFFF" weight="fill" />
+                            ) : (
+                                <Play size={32} color="#FFFFFF" weight="fill" style={{ marginLeft: 4 }} />
+                            )}
                         </Pressable>
 
-                        {/* Pause */}
-                        <Pressable
-                            style={[styles.controlButtonLarge, !isPlaying && styles.controlButtonDisabled]}
-                            onPress={() => {
-                                if (isPlaying) handlePlayPause();
-                            }}
-                            disabled={!isPlaying}
-                        >
-                            <Pause size={32} color={!isPlaying ? colors.textSecondary : "#FFFFFF"} weight="fill" />
-                        </Pressable>
+                        {/* Placeholder for symmetry */}
+                        <View style={{ width: 40 }} />
                     </View>
                 </View>
 

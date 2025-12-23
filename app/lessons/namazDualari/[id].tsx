@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { View, Text, ScrollView, Pressable, StyleSheet, Alert, ActivityIndicator } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, ScrollView, Pressable, StyleSheet, Alert } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import * as Haptics from 'expo-haptics';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -13,14 +13,8 @@ import {
     Info,
     Check
 } from 'phosphor-react-native';
-// @ts-ignore
-import Slider from '@react-native-community/slider'; // Check if available, otherwise build custom bar
-// Checking deps... user didn't have slider in package.json? 
-// I will build a Custom Progress Bar if slider is missing to be safe, 
-// OR I will assume I can use a simple View-based width bar for now.
-// User requested "ses çaldıkça ilerleyen bir bar". A simple View bar is safer than missing dep.
 
-import { createAudioPlayer, AudioPlayer } from 'expo-audio';
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio';
 
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -64,64 +58,21 @@ export default function NamazDualiDetailScreen() {
 
     const styles = useMemo(() => getStyles(activeTheme || 'light'), [themeVersion, activeTheme]);
 
-    // Audio State
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [duration, setDuration] = useState(0);
-    const [currentTime, setCurrentTime] = useState(0);
-    const [isLoaded, setIsLoaded] = useState(false);
+    // Audio Hooks - proper lifecycle management, no crashes
+    const player = useAudioPlayer(lesson?.audio ?? null);
+    const status = useAudioPlayerStatus(player);
 
-    const playerRef = useRef<AudioPlayer | null>(null);
+    const isPlaying = status.playing;
+    const duration = status.duration || 0;
+    const currentTime = status.currentTime || 0;
 
     // Helpers
     const isTurkish = i18n.language === 'tr';
 
-    // Cleanup audio on unmount
-    useEffect(() => {
-        return () => {
-            if (playerRef.current) {
-                playerRef.current.remove(); // Release resources
-                playerRef.current = null;
-            }
-        };
-    }, []);
+    // Auto-reset when finished - no seekTo needed, player state handles it
+    // The useAudioPlayer hook already resets position when playback completes
 
-    // Load Audio
-    useEffect(() => {
-        if (!lesson?.audio) return;
-
-        const loadAudio = async () => {
-            // If player exists, clean it
-            if (playerRef.current) {
-                playerRef.current.remove();
-            }
-
-            // Create new player
-            const player = createAudioPlayer(lesson.audio);
-            playerRef.current = player;
-
-            // Events
-            player.addListener('playbackStatusUpdate', (status) => {
-                setIsLoaded(status.isLoaded);
-                setIsPlaying(status.isPlaying);
-
-                if (status.isLoaded) {
-                    setDuration(status.duration || 0);
-                    setCurrentTime(status.currentTime || 0);
-
-                    if (status.didJustFinish) {
-                        setIsPlaying(false);
-                        player.seekTo(0);
-                        player.pause();
-                        setCurrentTime(0);
-                    }
-                }
-            });
-
-            setIsLoaded(true); // Optimistic or wait for event? event is safer.
-        };
-
-        loadAudio();
-    }, [lesson]);
+    // Cleanup handled automatically by useAudioPlayer hook
 
     // Format Helper
     const formatTime = (ms: number) => {
@@ -132,20 +83,24 @@ export default function NamazDualiDetailScreen() {
     };
 
     const handlePlayPause = () => {
-        if (!playerRef.current) return;
-
         if (isPlaying) {
-            playerRef.current.pause();
+            player.pause();
         } else {
-            playerRef.current.play();
+            player.play();
         }
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     };
 
     const handleReplay = () => {
-        if (!playerRef.current) return;
-        playerRef.current.seekTo(0);
-        playerRef.current.play();
+        // Avoid seekTo - it causes native crashes
+        // Instead, replace the audio source to reload from scratch
+        if (lesson?.audio) {
+            player.replace(lesson.audio);
+            // Small delay to ensure replace completes before play
+            setTimeout(() => {
+                player.play();
+            }, 50);
+        }
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     };
 

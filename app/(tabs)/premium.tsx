@@ -10,6 +10,8 @@ import * as Haptics from 'expo-haptics';
 import { StatusBar } from 'expo-status-bar';
 import { HeaderButton } from '@/components/ui/HeaderButton';
 import { useAuth } from '@/store';
+import { usePremium } from '@/contexts/AdaptyProvider';
+import PremiumCenterScreen from './premiumCenter';
 
 export default function PremiumScreen() {
     const { activeTheme } = useTheme();
@@ -18,8 +20,39 @@ export default function PremiumScreen() {
     const { statusBarStyle } = useStatusBar();
     const [selectedPlan, setSelectedPlan] = useState<'monthly' | 'yearly'>('yearly');
     const [showAuthModal, setShowAuthModal] = useState(false);
+    const [isPurchasing, setIsPurchasing] = useState(false);
     const scrollViewRef = useRef<ScrollView>(null);
     const { isAnonymous, isAuthenticated } = useAuth();
+
+    // Adapty Premium Hook
+    const { isPremium, isLoading: isPremiumLoading, products, purchase, restore } = usePremium();
+
+    // Dinamik ürün bilgileri - TÜM HOOKLAR CONDITIONAL RETURN'DEN ÖNCE OLMALI
+    const { monthlyProduct, yearlyProduct, savingsPercent, trialInfo } = useMemo(() => {
+        // Ürünleri ID'ye göre bul
+        const monthly = products.find(p => p.vendorProductId === 'monthlyy_4_99');
+        const yearly = products.find(p => p.vendorProductId === 'yearly_49_99');
+
+        // Tasarruf yüzdesini hesapla
+        let savings = 0;
+        if (monthly?.price?.amount && yearly?.price?.amount) {
+            const monthlyAnnual = monthly.price.amount * 12;
+            savings = Math.round((1 - yearly.price.amount / monthlyAnnual) * 100);
+        }
+
+        // Trial bilgisini al - any type cast ile güvenli erişim
+        const monthlyAny = monthly as any;
+        const yearlyAny = yearly as any;
+        const introOffer = monthlyAny?.subscription?.offer || yearlyAny?.subscription?.offer;
+        const trialDays = introOffer?.phases?.[0]?.subscriptionPeriod?.numberOfUnits || 0;
+
+        return {
+            monthlyProduct: monthly,
+            yearlyProduct: yearly,
+            savingsPercent: savings,
+            trialInfo: trialDays > 0 ? { days: trialDays } : null
+        };
+    }, [products]);
 
     // Reset scroll position when screen comes into focus
     useFocusEffect(
@@ -53,6 +86,12 @@ export default function PremiumScreen() {
             closeIcon: isDark ? '#FFFFFF' : '#1F2937',
         };
     }, [activeTheme]);
+
+    // Premium kullanıcıysa doğrudan Premium Center göster
+    // NOT: Bu return TÜM HOOKLARDAN SONRA olmalı (Rules of Hooks)
+    if (isPremium && !isPremiumLoading) {
+        return <PremiumCenterScreen />;
+    }
 
     const features = [
         {
@@ -126,6 +165,15 @@ export default function PremiumScreen() {
                 {/* Subscription Options */}
                 <View style={styles.plansContainer}>
 
+                    {/* Trial Info Banner */}
+                    {trialInfo && (
+                        <View style={[styles.trialBanner, { backgroundColor: premiumColors.gold + '20' }]}>
+                            <Text style={[styles.trialBannerText, { color: premiumColors.gold }]}>
+                                🎁 {trialInfo.days} {t('premiumpaywall.trial.days')} {t('premiumpaywall.trial.free')}
+                            </Text>
+                        </View>
+                    )}
+
                     {/* Monthly Plan */}
                     <TouchableOpacity
                         style={[
@@ -134,13 +182,16 @@ export default function PremiumScreen() {
                             selectedPlan === 'monthly' && { borderColor: premiumColors.gold, backgroundColor: premiumColors.selectedPlanBg }
                         ]}
                         onPress={() => setSelectedPlan('monthly')}
+                        disabled={!monthlyProduct}
                     >
                         <View style={[styles.radioButton, selectedPlan === 'monthly' && styles.radioButtonChecked]}>
                             {selectedPlan === 'monthly' && <View style={styles.radioButtonInner} />}
                         </View>
                         <View style={styles.planInfo}>
                             <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.monthly.title')}</Text>
-                            <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.monthly.price')} {t('premiumpaywall.plans.monthly.period')}</Text>
+                            <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>
+                                {monthlyProduct?.price?.localizedString || t('premiumpaywall.plans.monthly.price')} {t('premiumpaywall.plans.monthly.period')}
+                            </Text>
                         </View>
                     </TouchableOpacity>
 
@@ -153,9 +204,12 @@ export default function PremiumScreen() {
                             selectedPlan === 'yearly' && { borderColor: premiumColors.gold, backgroundColor: activeTheme === 'dark' ? '#2D2410' : '#FFF9C4' }
                         ]}
                         onPress={() => setSelectedPlan('yearly')}
+                        disabled={!yearlyProduct}
                     >
                         <View style={styles.saveBadge}>
-                            <Text style={styles.saveBadgeText}>{t('premiumpaywall.plans.yearly.save')}</Text>
+                            <Text style={styles.saveBadgeText}>
+                                {savingsPercent > 0 ? `%${savingsPercent} ${t('premiumpaywall.plans.yearly.save')}` : t('premiumpaywall.plans.yearly.save')}
+                            </Text>
                         </View>
 
                         <View style={styles.planContentRow}>
@@ -164,7 +218,9 @@ export default function PremiumScreen() {
                             </View>
                             <View style={styles.planInfo}>
                                 <Text style={[styles.planName, { color: premiumColors.text }]}>{t('premiumpaywall.plans.yearly.title')}</Text>
-                                <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.plans.yearly.price')} {t('premiumpaywall.plans.yearly.period')}</Text>
+                                <Text style={[styles.planPrice, { color: premiumColors.textSecondary }]}>
+                                    {yearlyProduct?.price?.localizedString || t('premiumpaywall.plans.yearly.price')} {t('premiumpaywall.plans.yearly.period')}
+                                </Text>
                             </View>
                         </View>
                     </TouchableOpacity>
@@ -173,17 +229,77 @@ export default function PremiumScreen() {
 
                 {/* Subscribe Button */}
                 <TouchableOpacity
-                    style={styles.subscribeButton}
-                    onPress={() => {
+                    style={[styles.subscribeButton, isPurchasing && styles.subscribeButtonDisabled]}
+                    disabled={isPurchasing}
+                    onPress={async () => {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+                        // Kullanıcı giriş yapmamışsa auth modal göster
                         if (!isAuthenticated || isAnonymous) {
                             setShowAuthModal(true);
-                        } else {
+                            return;
+                        }
+
+                        // Zaten premium ise Premium Center'a yönlendir
+                        if (isPremium) {
                             router.push('/premiumCenter');
+                            return;
+                        }
+
+                        // Seçili plana göre ürün al
+                        const selectedProduct = selectedPlan === 'yearly' ? yearlyProduct : monthlyProduct;
+
+                        if (!selectedProduct) {
+                            Alert.alert(
+                                t('common.error'),
+                                t('premiumpaywall.errors.noProducts')
+                            );
+                            return;
+                        }
+
+                        // Satın alma işlemini başlat
+                        setIsPurchasing(true);
+                        try {
+                            const result = await purchase(selectedProduct);
+
+                            if (result === 'success') {
+                                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                                Alert.alert(
+                                    t('premiumpaywall.success.title'),
+                                    t('premiumpaywall.success.message'),
+                                    [{
+                                        text: t('common.ok'),
+                                        onPress: () => router.push('/premiumCenter')
+                                    }]
+                                );
+                            } else if (result === 'conflict') {
+                                // Satın alma başarılı ama premium aktif değil
+                                // Bu durum aboneliğin başka hesaba bağlı olduğunda oluşur
+                                Alert.alert(
+                                    t('premiumpaywall.errors.subscriptionConflictTitle'),
+                                    t('premiumpaywall.errors.subscriptionConflictMessage'),
+                                    [{ text: t('common.ok') }]
+                                );
+                            }
+                            // 'cancelled' ve 'pending' için uyarı göstermiyoruz
+                        } catch (error) {
+                            console.error('Purchase error:', error);
+                            Alert.alert(
+                                t('common.error'),
+                                t('premiumpaywall.errors.purchaseFailed')
+                            );
+                        } finally {
+                            setIsPurchasing(false);
                         }
                     }}
                 >
-                    <Text style={[styles.subscribeButtonText, { color: activeTheme === 'light' ? '#FFFFFF' : '#000000' }]}>{t('premiumpaywall.cta')}</Text>
+                    {isPurchasing ? (
+                        <ActivityIndicator color={activeTheme === 'light' ? '#FFFFFF' : '#000000'} />
+                    ) : (
+                        <Text style={[styles.subscribeButtonText, { color: activeTheme === 'light' ? '#FFFFFF' : '#000000' }]}>
+                            {isPremium ? t('premiumCenter.title') : t('premiumpaywall.cta')}
+                        </Text>
+                    )}
                 </TouchableOpacity>
 
                 {/* Footer Links */}
@@ -194,7 +310,39 @@ export default function PremiumScreen() {
                     <TouchableOpacity>
                         <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.terms')}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                        onPress={async () => {
+                            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                            setIsPurchasing(true);
+                            try {
+                                const success = await restore();
+                                if (success) {
+                                    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                                    Alert.alert(
+                                        t('premiumpaywall.restoreResult.success.title'),
+                                        t('premiumpaywall.restoreResult.success.message'),
+                                        [{
+                                            text: t('common.ok'),
+                                            onPress: () => router.push('/premiumCenter')
+                                        }]
+                                    );
+                                } else {
+                                    Alert.alert(
+                                        t('premiumpaywall.restoreResult.noSubscription.title'),
+                                        t('premiumpaywall.restoreResult.noSubscription.message')
+                                    );
+                                }
+                            } catch (error) {
+                                console.error('Restore error:', error);
+                                Alert.alert(
+                                    t('common.error'),
+                                    t('premiumpaywall.errors.restoreFailed')
+                                );
+                            } finally {
+                                setIsPurchasing(false);
+                            }
+                        }}
+                    >
                         <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.restore')}</Text>
                     </TouchableOpacity>
                 </View>
@@ -251,7 +399,7 @@ export default function PremiumScreen() {
                     </Pressable>
                 </Pressable>
             </Modal>
-        </SafeAreaView>
+        </SafeAreaView >
     );
 }
 
@@ -391,6 +539,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 20,
     },
+    subscribeButtonDisabled: {
+        opacity: 0.7,
+    },
     subscribeButtonText: {
         fontSize: 18,
         fontWeight: 'bold',
@@ -480,6 +631,18 @@ const styles = StyleSheet.create({
     },
     modalSecondaryButtonText: {
         fontSize: 16,
+        fontWeight: '600',
+    },
+    // Trial Banner Styles
+    trialBanner: {
+        paddingVertical: 12,
+        paddingHorizontal: 16,
+        borderRadius: 12,
+        marginBottom: 16,
+        alignItems: 'center',
+    },
+    trialBannerText: {
+        fontSize: 15,
         fontWeight: '600',
     },
 });

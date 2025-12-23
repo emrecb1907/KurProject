@@ -180,6 +180,13 @@ export default function TabLayout() {
           },
         })}
       />
+      <Tabs.Screen
+        name="premiumCenter"
+        options={{
+          href: null, // Tab bar'da görünmesin
+          headerShown: false,
+        }}
+      />
     </Tabs>
   );
 }

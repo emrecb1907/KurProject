@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, BackHandler, Pressable } from 'react-native';
+import { View, Text, StyleSheet, BackHandler, Pressable, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -36,6 +36,13 @@ export default function WelcomeScreen() {
             The image suggests content is vertically centered but slightly top-heavy.
         */}
                 <View style={{ flex: 1 }} />
+
+                {/* Logo */}
+                <Image
+                    source={require('../../assets/splashlogo.png')}
+                    style={styles.logo}
+                    resizeMode="contain"
+                />
 
                 <Text style={styles.title}>{t('auth.welcome.title')}</Text>
                 <Text style={styles.subtitle}>{t('auth.welcome.subtitle')}</Text>
@@ -81,6 +88,11 @@ const getStyles = (activeTheme: string) => StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingVertical: 40,
+    },
+    logo: {
+        width: 120,
+        height: 120,
+        marginBottom: 24,
     },
     title: {
         fontSize: 28, // Large title

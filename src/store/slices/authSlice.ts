@@ -2,6 +2,7 @@ import { StateCreator } from 'zustand';
 import { User } from '@/types/user.types';
 import { supabase } from '@/lib/supabase/client';
 import { database } from '@/lib/supabase/database';
+import { adapty } from 'react-native-adapty';
 
 export interface AuthSlice {
   // State
@@ -38,12 +39,19 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
 
   setIsLoading: (isLoading) => set({ isLoading }),
 
-  logout: () => set({
-    user: null,
-    isAuthenticated: false,
-    isAnonymous: true,
-    isProfileReady: false, // Reset on logout
-  }),
+  logout: () => {
+    // 🔐 Adapty: Kullanıcı profili sıfırla (anonim profile dön)
+    adapty.logout()
+      .then(() => console.log('✅ Adapty: Kullanıcı çıkışı yapıldı'))
+      .catch((err) => console.warn('⚠️ Adapty logout hatası:', err));
+
+    set({
+      user: null,
+      isAuthenticated: false,
+      isAnonymous: true,
+      isProfileReady: false, // Reset on logout
+    });
+  },
 
   refreshUser: async () => {
     try {

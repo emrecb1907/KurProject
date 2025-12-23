@@ -27,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { getAvatarSource } from '@/constants/avatars';
 import { useBadges } from '@/hooks/useBadges';
 import { BadgeItem } from '@/components/profile/BadgeItem';
+import { usePremium } from '@/contexts/AdaptyProvider';
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
@@ -36,6 +37,7 @@ export default function ProfileScreen() {
   const { selectedAvatar } = useUser();
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
+  const { isPremium } = usePremium();
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
   const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
@@ -379,6 +381,22 @@ export default function ProfileScreen() {
       backgroundColor: colors.border,
       marginHorizontal: 16,
     },
+    premiumBadge: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: '#22C55E',
+      paddingHorizontal: 12,
+      paddingVertical: 6,
+      borderRadius: 20,
+      gap: 6,
+      marginTop: 8,
+      marginBottom: 4,
+    },
+    premiumBadgeText: {
+      color: '#FFFFFF',
+      fontSize: 13,
+      fontWeight: '600',
+    },
   }), [themeVersion]); // Re-create styles when theme changes
 
   return (
@@ -471,6 +489,15 @@ export default function ProfileScreen() {
               </View>
             </View>
             <Text style={styles.username}>{username}</Text>
+
+            {/* Premium Badge */}
+            {isPremium && (
+              <View style={styles.premiumBadge}>
+                <Diamond size={14} color="#FFFFFF" weight="fill" />
+                <Text style={styles.premiumBadgeText}>{t('profile.premiumMember', 'Premium Üye')}</Text>
+              </View>
+            )}
+
             <Text style={styles.subtitle}>
               {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
             </Text>

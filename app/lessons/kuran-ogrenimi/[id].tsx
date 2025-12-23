@@ -6,7 +6,7 @@ import { colors } from '@constants/colors';
 import { ArrowLeft, PlayCircle, CheckCircle, Info } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTheme } from '@/contexts/ThemeContext';
-import { playSound, releaseAudioPlayer } from '@/utils/audio';
+import { playSound, releaseAudioPlayer, useLessonAudio } from '@/utils/audio';
 import { useLessonComplete } from '@/hooks/mutations/useLessonComplete';
 import { lessons } from '@/data/lessons';
 import { getLessonData } from '@/data/kuran';
@@ -122,10 +122,12 @@ export default function UnifiedKuranLessonScreen() {
     const { mutate: completeLesson } = useLessonComplete();
 
     // State
-    const stopSoundRef = useRef<(() => void) | null>(null);
     const [playedItems, setPlayedItems] = useState<Set<number>>(new Set());
 
     const { t, i18n } = useTranslation();
+
+    // Use the new audio hook for lesson sounds
+    const { playAudio, stopAudio } = useLessonAudio();
 
     // Explanation Content (Dynamic for any lesson with lessonInfo)
     const explanationData = useMemo(() => {
@@ -137,12 +139,7 @@ export default function UnifiedKuranLessonScreen() {
     const lessonInfo = useMemo(() => lessons.find(l => l.id === lessonId), [lessonId]);
     const allItemsPlayed = lessonData.length > 0 && playedItems.size === lessonData.length;
 
-    // Cleanup audio on unmount - release the singleton player
-    useEffect(() => {
-        return () => {
-            releaseAudioPlayer();
-        };
-    }, []);
+    // No cleanup needed - useAudioPlayer handles it automatically
 
     const styles = useMemo(() => StyleSheet.create({
         container: {
@@ -307,12 +304,8 @@ export default function UnifiedKuranLessonScreen() {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
 
         try {
-            // Let playSound handle the interruption for better overlap performance
-            // if (stopSoundRef.current) ...
-
             if (item.audio) {
-                const stop = playSound(item.audio);
-                stopSoundRef.current = stop;
+                playAudio(item.audio);
             } else {
                 console.log(`No audio for item ${item.id}`);
             }
@@ -320,7 +313,6 @@ export default function UnifiedKuranLessonScreen() {
             setPlayedItems(prev => new Set(prev).add(item.id));
         } catch (error) {
             console.error('Error playing audio:', error);
-            stopSoundRef.current = null;
         }
     };
 

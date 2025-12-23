@@ -34,9 +34,13 @@
             "title": "Yearly Plan",
             "price": "$39.99",
             "period": "/yr",
-            "save": "Save 33%",
+            "save": "Save",
             "bestValue": "Best Value"
         }
+    },
+    "trial": {
+        "days": "days",
+        "free": "free trial"
     },
     "cta": "Go Premium",
     "restore": "Restore Purchases",
@@ -47,5 +51,26 @@
         "description": "You need to create a quick account to link Premium features to your profile.",
         "registerButton": "Create Account & Continue",
         "loginButton": "Log In"
+    },
+    "success": {
+        "title": "Congratulations! 🎉",
+        "message": "You're now Premium! You can access all features."
+    },
+    "errors": {
+        "noProducts": "Products couldn't be loaded. Please try again later.",
+        "purchaseFailed": "Purchase failed. Please try again.",
+        "restoreFailed": "Restore failed. Please try again.",
+        "subscriptionConflictTitle": "Subscription Linked to Another Account",
+        "subscriptionConflictMessage": "The subscription for this Apple ID is linked to a different app account. Please sign in to that account or try \"Restore Purchases\"."
+    },
+    "restoreResult": {
+        "success": {
+            "title": "Restore Successful! ✅",
+            "message": "Your premium subscription has been restored."
+        },
+        "noSubscription": {
+            "title": "No Subscription Found",
+            "message": "No active subscription found for this account."
+        }
     }
 }

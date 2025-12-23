@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "QuranLearn",
+    "name": "Nurio",
     "slug": "quran-learn",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -44,7 +44,12 @@
     },
     "plugins": [
       "expo-router",
-      "expo-secure-store",
+      [
+        "expo-secure-store",
+        {
+          "configureAndroidBackup": false
+        }
+      ],
       "expo-font",
       "expo-audio",
       [
@@ -54,7 +59,21 @@
           "project": "react-native"
         }
       ],
-      "expo-localization"
+      "expo-localization",
+      [
+        "react-native-adapty",
+        {
+          "replaceAndroidBackupConfig": true
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.1"
+          }
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
