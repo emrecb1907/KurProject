@@ -1,7 +1,9 @@
-import React, { createContext, useContext, useEffect, useState, useCallback, ReactNode } from 'react';
+import React, { createContext, useContext, useEffect, useState, useCallback, ReactNode, useRef } from 'react';
 import { adapty, AdaptyProfile, AdaptyPaywall, AdaptyPaywallProduct } from 'react-native-adapty';
 import { Platform } from 'react-native';
 import * as Device from 'expo-device';
+import { useAuth } from '@/store';
+import { supabase } from '@/lib/supabase/client';
 
 // Adapty SDK Key - .env dosyasından okunuyor
 const ADAPTY_SDK_KEY = process.env.EXPO_PUBLIC_ADAPTY_SDK_KEY || '';
@@ -30,7 +32,7 @@ const activateAdapty = async () => {
         const isSimulator = !Device.isDevice;
 
         await adapty.activate(ADAPTY_SDK_KEY, {
-            logLevel: __DEV__ ? 'verbose' : 'error',
+            logLevel: __DEV__ ? 'warn' : 'error',
             // Fast Refresh hatalarını önle
             __ignoreActivationOnFastRefresh: __DEV__,
             // Simulator'da gereksiz StoreKit promptlarını engelle
@@ -58,6 +60,7 @@ interface AdaptyContextType {
     purchase: (product: AdaptyPaywallProduct) => Promise<'success' | 'cancelled' | 'conflict' | 'pending'>;
     restore: () => Promise<boolean>;
     refreshProfile: () => Promise<void>;
+    resetPremiumState: () => void;
 }
 
 const AdaptyContext = createContext<AdaptyContextType | undefined>(undefined);
@@ -73,7 +76,12 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
     const [paywall, setPaywall] = useState<AdaptyPaywall | null>(null);
     const [products, setProducts] = useState<AdaptyPaywallProduct[]>([]);
 
-    // Profil ve paywall bilgilerini yükle (SDK modül seviyesinde aktive edildi)
+    // Auth state'i izle (logout/login durumunu takip etmek için)
+    const { user } = useAuth();
+    const prevUserIdRef = useRef<string | null>(null);
+
+    // Paywall ve ürünleri yükle (SDK modül seviyesinde aktive edildi)
+    // NOT: refreshProfile() burada çağrılmaz, user değişikliği useEffect'i halleder
     useEffect(() => {
         const loadInitialData = async () => {
             try {
@@ -85,9 +93,6 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
 
                 // Kısa bir gecikme - SDK aktivasyonunun tamamlanması için
                 await new Promise(resolve => setTimeout(resolve, 500));
-
-                // Profil bilgisini al
-                await refreshProfile();
 
                 // Paywall ve ürünleri yükle
                 await loadPaywallAndProducts();
@@ -108,19 +113,72 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
 
         // Adapty profil güncellemelerini dinle
         const unsubscribe = adapty.addEventListener('onLatestProfileLoad', (profile) => {
-            console.log('🔄 Adapty: Profil güncellendi (listener)');
             setProfile(profile);
 
             // Premium durumunu güncelle
             const accessLevel = profile.accessLevels?.[PREMIUM_ACCESS_LEVEL];
             const hasPremium = accessLevel?.isActive ?? false;
             setIsPremium(hasPremium);
-            console.log('👤 Yeni Premium durumu:', hasPremium);
         });
 
         return () => {
             unsubscribe.remove();
         };
+    }, []);
+
+    // 🔄 User değişikliğini izle (login/logout sonrası premium state'i güncelle)
+    useEffect(() => {
+        const currentUserId = user?.id || null;
+        const prevUserId = prevUserIdRef.current;
+
+        // İlk render'ı atla
+        if (prevUserId === undefined) {
+            prevUserIdRef.current = currentUserId;
+            return;
+        }
+
+        // User değişti mi?
+        if (currentUserId !== prevUserId) {
+            console.log('🔄 Adapty: User değişti:', prevUserId, '→', currentUserId);
+
+            if (currentUserId === null) {
+                // Logout oldu - premium state'i sıfırla
+                console.log('🔄 Adapty: Logout algılandı, premium state sıfırlanıyor...');
+                setIsPremium(false);
+                setProfile(null);
+            } else {
+                // Yeni user ile giriş yapıldı - profili yenile
+                console.log('🔄 Adapty: Yeni user algılandı, profil yenileniyor...');
+                // Kısa gecikme - adapty.identify() için bekle
+                setTimeout(() => {
+                    refreshProfile();
+                }, 1000);
+            }
+
+            prevUserIdRef.current = currentUserId;
+        }
+    }, [user?.id]);
+
+    // 🔄 Premium durumunu Supabase Edge Function ile DB'ye senkronize et
+    const syncPremiumToDatabase = useCallback(async (userId: string, customerUserId: string) => {
+        try {
+            console.log('🔄 Supabase Edge Function çağrılıyor...');
+
+            const { data, error } = await supabase.functions.invoke('verify-premium', {
+                body: {
+                    user_id: userId,
+                    customer_user_id: customerUserId
+                }
+            });
+
+            if (error) {
+                console.error('❌ Premium sync hatası:', error);
+            } else {
+                console.log('✅ Premium DB\'ye senkronize edildi:', data);
+            }
+        } catch (error) {
+            console.error('❌ Premium sync başarısız:', error);
+        }
     }, []);
 
     // Profil bilgisini yenile
@@ -129,17 +187,39 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
             const userProfile = await adapty.getProfile();
             setProfile(userProfile);
 
+            // Debug: Profil detaylarını logla
+            console.log('📊 Adapty Profil Detayları:');
+            console.log('   - Profile ID:', userProfile.profileId);
+            console.log('   - Customer User ID:', userProfile.customerUserId);
+            console.log('   - Logged-in User ID:', user?.id);
+            console.log('   - Access Levels:', JSON.stringify(userProfile.accessLevels));
+
             // Premium erişim durumunu kontrol et
             const accessLevel = userProfile.accessLevels?.[PREMIUM_ACCESS_LEVEL];
             const hasPremium = accessLevel?.isActive ?? false;
 
-            setIsPremium(hasPremium);
+            // ÖNEMLI: customerUserId kontrol et - eğer farklıysa premium değil!
+            const profileOwnerId = userProfile.customerUserId;
+            const currentUserId = user?.id;
+
+            if (hasPremium && profileOwnerId && currentUserId && profileOwnerId !== currentUserId) {
+                console.log('⚠️ Premium başka kullanıcıya ait! Profil:', profileOwnerId, 'Mevcut:', currentUserId);
+                setIsPremium(false);
+            } else {
+                setIsPremium(hasPremium);
+            }
+
             console.log('👤 Profil güncellendi, Premium:', hasPremium);
+
+            // 🔄 Premium durumunu Supabase'e senkronize et (Edge Function ile)
+            if (currentUserId && profileOwnerId) {
+                syncPremiumToDatabase(currentUserId, profileOwnerId);
+            }
 
         } catch (error) {
             console.error('❌ Profil yükleme hatası:', error);
         }
-    }, []);
+    }, [user?.id]);
 
     // Paywall ve ürünleri yükle
     const loadPaywallAndProducts = useCallback(async () => {
@@ -200,6 +280,13 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
         }
     }, []);
 
+    // Premium state'i sıfırla (logout sonrası çağrılır)
+    const resetPremiumState = useCallback(() => {
+        console.log('🔄 Adapty: Premium state sıfırlanıyor...');
+        setIsPremium(false);
+        setProfile(null);
+    }, []);
+
     // Satın alma geri yükleme
     const restore = useCallback(async (): Promise<boolean> => {
         try {
@@ -235,6 +322,7 @@ export function AdaptyProvider({ children }: AdaptyProviderProps) {
                 purchase,
                 restore,
                 refreshProfile,
+                resetPremiumState,
             }}
         >
             {children}
@@ -253,6 +341,6 @@ export function useAdapty() {
 
 // Kısayol hook - sadece premium durumu için
 export function usePremium() {
-    const { isPremium, isLoading, purchase, restore, products, refreshProfile } = useAdapty();
-    return { isPremium, isLoading, purchase, restore, products, refreshProfile };
+    const { isPremium, isLoading, purchase, restore, products, refreshProfile, profile } = useAdapty();
+    return { isPremium, isLoading, purchase, restore, products, refreshProfile, profile };
 }

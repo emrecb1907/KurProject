@@ -1,6 +1,7 @@
 {
     "student": "Öğrenci",
     "anonymous": "Misafir",
+    "premiumMember": "Premium Üye",
     "logout": "Çıkış Yap",
     "stats": {
         "totalXP": "Toplam XP",
@@ -83,6 +84,7 @@
             "cancel": "İptal",
             "confirm": "Sil"
         },
+        "restorePurchases": "Satın Alımları Geri Yükle",
         "version": "Sürüm"
     },
     "editProfile": {

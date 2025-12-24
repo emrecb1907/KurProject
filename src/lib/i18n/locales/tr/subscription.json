@@ -1,0 +1,21 @@
+{
+    "title": "Abonelik",
+    "premiumActive": "Premium Aktif",
+    "planType": "Plan Tipi",
+    "monthly": "Aylık Plan",
+    "yearly": "Yıllık Plan",
+    "lifetime": "Ömür Boyu",
+    "startDate": "Başlangıç Tarihi",
+    "expiryDate": "Bitiş Tarihi",
+    "renewalDate": "Yenileme Tarihi",
+    "autoRenewal": "Otomatik Yenileme",
+    "active": "Aktif",
+    "inactive": "İptal Edildi",
+    "on": "Açık",
+    "off": "Kapalı",
+    "notApplicable": "Geçerli Değil",
+    "manage": "Aboneliği Yönet",
+    "manageNote": "Aboneliğinizi App Store veya Google Play üzerinden iptal edebilir veya düzenleyebilirsiniz.",
+    "noSubscription": "Aktif bir aboneliğiniz bulunmuyor.",
+    "cancelledWarning": "Aboneliğiniz iptal edildi. Premium erişiminiz {{date}} tarihine kadar devam edecektir."
+}

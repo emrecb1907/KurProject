@@ -311,36 +311,53 @@ export default function PremiumScreen() {
                         <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.terms')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
-                        onPress={async () => {
+                        onPress={() => {
                             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                            setIsPurchasing(true);
-                            try {
-                                const success = await restore();
-                                if (success) {
-                                    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-                                    Alert.alert(
-                                        t('premiumpaywall.restoreResult.success.title'),
-                                        t('premiumpaywall.restoreResult.success.message'),
-                                        [{
-                                            text: t('common.ok'),
-                                            onPress: () => router.push('/premiumCenter')
-                                        }]
-                                    );
-                                } else {
-                                    Alert.alert(
-                                        t('premiumpaywall.restoreResult.noSubscription.title'),
-                                        t('premiumpaywall.restoreResult.noSubscription.message')
-                                    );
-                                }
-                            } catch (error) {
-                                console.error('Restore error:', error);
-                                Alert.alert(
-                                    t('common.error'),
-                                    t('premiumpaywall.errors.restoreFailed')
-                                );
-                            } finally {
-                                setIsPurchasing(false);
-                            }
+
+                            // Apple-safe onay dialogu göster
+                            Alert.alert(
+                                t('premiumpaywall.restoreConfirm.title'),
+                                t('premiumpaywall.restoreConfirm.message'),
+                                [
+                                    {
+                                        text: t('premiumpaywall.restoreConfirm.cancel'),
+                                        style: 'cancel'
+                                    },
+                                    {
+                                        text: t('premiumpaywall.restoreConfirm.continue'),
+                                        onPress: async () => {
+                                            setIsPurchasing(true);
+                                            try {
+                                                const success = await restore();
+                                                if (success) {
+                                                    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                                                    Alert.alert(
+                                                        t('premiumpaywall.restoreResult.success.title'),
+                                                        t('premiumpaywall.restoreResult.success.message'),
+                                                        [{
+                                                            text: t('common.ok'),
+                                                            onPress: () => router.push('/premiumCenter')
+                                                        }]
+                                                    );
+                                                } else {
+                                                    Alert.alert(
+                                                        t('premiumpaywall.restoreResult.noSubscription.title'),
+                                                        t('premiumpaywall.restoreResult.noSubscription.message')
+                                                    );
+                                                }
+                                            } catch (error) {
+                                                console.error('Restore error:', error);
+                                                Alert.alert(
+                                                    t('common.error'),
+                                                    t('premiumpaywall.errors.restoreFailed')
+                                                );
+                                            } finally {
+                                                setIsPurchasing(false);
+                                            }
+                                        }
+                                    }
+                                ]
+                            );
                         }}
                     >
                         <Text style={[styles.footerLinkText, { color: premiumColors.textSecondary }]}>{t('premiumpaywall.restore')}</Text>

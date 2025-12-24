@@ -60,17 +60,23 @@
         "noProducts": "Ürünler yüklenemedi. Lütfen daha sonra tekrar dene.",
         "purchaseFailed": "Satın alma işlemi başarısız oldu. Lütfen tekrar dene.",
         "restoreFailed": "Geri yükleme işlemi başarısız oldu. Lütfen tekrar dene.",
-        "subscriptionConflictTitle": "Abonelik Başka Hesaba Bağlı",
-        "subscriptionConflictMessage": "Bu Apple ID ile yapılan abonelik farklı bir uygulama hesabına kayıtlı. Lütfen o hesaba giriş yapın veya \"Satın Alımları Geri Yükle\" seçeneğini deneyin."
+        "subscriptionConflictTitle": "Bu Hesaba Bağlanamadı",
+        "subscriptionConflictMessage": "Bu Apple ID ile bir abonelik var, ancak farklı bir uygulama hesabına kayıtlı. Aboneliği kullanmak için o hesaba giriş yap veya \"Satın Alımları Geri Yükle\" seçeneğini dene."
+    },
+    "restoreConfirm": {
+        "title": "Satın Alımları Geri Yükle",
+        "message": "Bu Apple ID'ye bağlı aktif bir abonelik bulunursa, Premium özelliklere erişebilmen için bu hesaba bağlanacaktır.\n\nPremium erişim aynı anda yalnızca bir hesapta kullanılabilir.",
+        "cancel": "İptal",
+        "continue": "Devam Et"
     },
     "restoreResult": {
         "success": {
-            "title": "Geri Yükleme Başarılı! ✅",
-            "message": "Premium aboneliğin başarıyla geri yüklendi."
+            "title": "Premium Aktif! ✅",
+            "message": "Aboneliğin bu hesaba başarıyla bağlandı."
         },
         "noSubscription": {
             "title": "Abonelik Bulunamadı",
-            "message": "Bu hesaba bağlı aktif bir abonelik bulunamadı."
+            "message": "Bu Apple ID için aktif bir abonelik bulunamadı."
         }
     }
 }

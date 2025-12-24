@@ -1,5 +1,5 @@
 import React, { useMemo, useRef, useCallback, useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, Pressable, Animated } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, Animated, Alert, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -16,6 +16,7 @@ import { Modal } from '@components/ui/Modal';
 import { HeaderButton } from '@components/ui';
 import { getCurrentLanguage } from '@/lib/i18n';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
+import { usePremium } from '@/contexts/AdaptyProvider';
 
 interface SettingsOption {
   id: string;
@@ -38,6 +39,8 @@ function SettingsContent() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [triggerError, setTriggerError] = useState(false); // 🧪 Test için
+  const [isRestoring, setIsRestoring] = useState(false);
+  const { restore } = usePremium();
 
   // Animation values for logout modal
   const [logoutScaleAnim] = useState(new Animated.Value(0));
@@ -204,7 +207,7 @@ function SettingsContent() {
             title: t('profile.settings.general.subscription'),
             onPress: () => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              // TODO: Navigate to subscription page
+              router.push('/subscription');
             },
           },
           {
@@ -422,6 +425,24 @@ function SettingsContent() {
     },
     accountButtons: {
       gap: 12,
+    },
+    restoreButton: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      borderRadius: 30,
+    },
+    restoreButtonDisabled: {
+      opacity: 0.6,
+    },
+    restoreButtonText: {
+      color: colors.textPrimary,
+      fontSize: 15,
+      fontWeight: '500',
     },
     logoutButton: {
       flexDirection: 'row',
@@ -672,6 +693,44 @@ function SettingsContent() {
         {isAuthenticated && !isAnonymous && (
           <View style={styles.accountSection}>
             <View style={styles.accountButtons}>
+              {/* Restore Purchases Button - Apple Requirement */}
+              <Pressable
+                style={[styles.restoreButton, isRestoring && styles.restoreButtonDisabled]}
+                onPress={async () => {
+                  if (isRestoring) return;
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setIsRestoring(true);
+                  try {
+                    const restored = await restore();
+                    if (restored) {
+                      Alert.alert(
+                        t('premiumpaywall.restoreResult.success.title'),
+                        t('premiumpaywall.restoreResult.success.message')
+                      );
+                    } else {
+                      Alert.alert(
+                        t('premiumpaywall.restoreResult.notFound.title'),
+                        t('premiumpaywall.restoreResult.notFound.message')
+                      );
+                    }
+                  } catch (error) {
+                    Alert.alert(
+                      t('premiumpaywall.restoreResult.error.title'),
+                      t('premiumpaywall.restoreResult.error.message')
+                    );
+                  } finally {
+                    setIsRestoring(false);
+                  }
+                }}
+                disabled={isRestoring}
+              >
+                {isRestoring ? (
+                  <ActivityIndicator size="small" color={colors.textPrimary} />
+                ) : (
+                  <Text style={styles.restoreButtonText}>{t('profile.settings.restorePurchases')}</Text>
+                )}
+              </Pressable>
+
               <Pressable
                 style={styles.logoutButton}
                 onPress={handleLogout}

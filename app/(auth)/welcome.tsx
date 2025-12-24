@@ -1,11 +1,13 @@
-import { View, Text, StyleSheet, BackHandler, Pressable, Image } from 'react-native';
+import { View, Text, StyleSheet, BackHandler, Pressable, Image, Alert, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/contexts/ThemeContext';
 import { colors } from '@constants/colors';
 import { Button } from '@components/ui';
 import { useFocusEffect } from '@react-navigation/native';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
+import { usePremium } from '@/contexts/AdaptyProvider';
+import * as Haptics from 'expo-haptics';
 
 export default function WelcomeScreen() {
     const { t } = useTranslation();
@@ -13,6 +15,41 @@ export default function WelcomeScreen() {
     const { activeTheme } = useTheme();
 
     const styles = useMemo(() => getStyles(activeTheme), [activeTheme]);
+    const { restore } = usePremium();
+    const [isRestoring, setIsRestoring] = useState(false);
+
+    // Restore handler - direkt sorgu yap, onay isteme
+    const handleRestore = useCallback(async () => {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+        setIsRestoring(true);
+
+        try {
+            const success = await restore();
+            if (success) {
+                // Abonelik bulundu - giriş yapması gerektiğini söyle
+                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                Alert.alert(
+                    t('auth.welcome.subscriptionFound.title'),
+                    t('auth.welcome.subscriptionFound.message'),
+                    [{ text: t('common.ok') }]
+                );
+            } else {
+                // Abonelik bulunamadı
+                Alert.alert(
+                    t('premiumpaywall.restoreResult.noSubscription.title'),
+                    t('premiumpaywall.restoreResult.noSubscription.message')
+                );
+            }
+        } catch (error) {
+            console.error('Restore error:', error);
+            Alert.alert(
+                t('common.error'),
+                t('premiumpaywall.errors.restoreFailed')
+            );
+        } finally {
+            setIsRestoring(false);
+        }
+    }, [restore, t]);
 
     // Prevent going back
     useFocusEffect(
@@ -69,9 +106,21 @@ export default function WelcomeScreen() {
 
                 <View style={{ flex: 1 }} />
 
-                <Pressable style={styles.footer}>
-                    <Text style={styles.footerText}>{t('auth.welcome.policies')}</Text>
-                </Pressable>
+                <View style={styles.footer}>
+                    <View style={styles.footerLinks}>
+                        <Pressable>
+                            <Text style={styles.footerText}>{t('auth.welcome.policies')}</Text>
+                        </Pressable>
+                        <Text style={styles.footerDivider}>•</Text>
+                        <Pressable onPress={handleRestore} disabled={isRestoring}>
+                            {isRestoring ? (
+                                <ActivityIndicator size="small" color={colors.textDisabled} />
+                            ) : (
+                                <Text style={styles.footerText}>{t('premiumpaywall.restore')}</Text>
+                            )}
+                        </Pressable>
+                    </View>
+                </View>
             </View>
         </View>
     );
@@ -136,6 +185,15 @@ const getStyles = (activeTheme: string) => StyleSheet.create({
     },
     footer: {
         marginBottom: 20,
+    },
+    footerLinks: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+    },
+    footerDivider: {
+        fontSize: 12,
+        color: colors.textDisabled,
     },
     footerText: {
         fontSize: 12,

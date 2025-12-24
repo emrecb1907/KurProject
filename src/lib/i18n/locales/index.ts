@@ -13,6 +13,7 @@ import premiumpaywall from './tr/premiumpaywall.json';
 import premiumCenter from './tr/premiumCenter.json';
 import aiChat from './tr/aiChat.json';
 import badges from './tr/badges.json';
+import subscription from './tr/subscription.json';
 
 // Import all English translation modules
 import enCommon from './en/common.json';
@@ -29,6 +30,7 @@ import enPremiumpaywall from './en/premiumpaywall.json';
 import enPremiumCenter from './en/premiumCenter.json';
 import enAiChat from './en/aiChat.json';
 import enBadges from './en/badges.json';
+import enSubscription from './en/subscription.json';
 
 // Merge all Turkish translations into a single object
 // home.json already contains home, tabs, weeklyActivity objects (spread them)
@@ -48,6 +50,7 @@ export const tr = {
     premiumCenter,
     aiChat,
     badges,
+    subscription,
 };
 
 // Merge all English translations into a single object
@@ -66,6 +69,7 @@ const en = {
     premiumCenter: enPremiumCenter,
     aiChat: enAiChat,
     badges: enBadges,
+    subscription: enSubscription,
 };
 
 export { tr as default, en };

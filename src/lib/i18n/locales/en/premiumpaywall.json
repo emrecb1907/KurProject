@@ -60,17 +60,23 @@
         "noProducts": "Products couldn't be loaded. Please try again later.",
         "purchaseFailed": "Purchase failed. Please try again.",
         "restoreFailed": "Restore failed. Please try again.",
-        "subscriptionConflictTitle": "Subscription Linked to Another Account",
-        "subscriptionConflictMessage": "The subscription for this Apple ID is linked to a different app account. Please sign in to that account or try \"Restore Purchases\"."
+        "subscriptionConflictTitle": "Couldn't Link to This Account",
+        "subscriptionConflictMessage": "This Apple ID has an active subscription, but it's linked to a different app account. Sign in to that account or try \"Restore Purchases\" to use your subscription."
+    },
+    "restoreConfirm": {
+        "title": "Restore Purchases",
+        "message": "If an active subscription is found for this Apple ID, it will be linked to this account so you can access Premium features.\n\nPremium access can only be used on one account at a time.",
+        "cancel": "Cancel",
+        "continue": "Continue"
     },
     "restoreResult": {
         "success": {
-            "title": "Restore Successful! ✅",
-            "message": "Your premium subscription has been restored."
+            "title": "Premium Active! ✅",
+            "message": "Your subscription has been successfully linked to this account."
         },
         "noSubscription": {
             "title": "No Subscription Found",
-            "message": "No active subscription found for this account."
+            "message": "No active subscription was found for this Apple ID."
         }
     }
 }

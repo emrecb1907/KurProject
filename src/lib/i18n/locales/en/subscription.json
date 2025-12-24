@@ -1,0 +1,21 @@
+{
+    "title": "Subscription",
+    "premiumActive": "Premium Active",
+    "planType": "Plan Type",
+    "monthly": "Monthly Plan",
+    "yearly": "Yearly Plan",
+    "lifetime": "Lifetime",
+    "startDate": "Start Date",
+    "expiryDate": "Expiry Date",
+    "renewalDate": "Renewal Date",
+    "autoRenewal": "Auto Renewal",
+    "active": "Active",
+    "inactive": "Cancelled",
+    "on": "On",
+    "off": "Off",
+    "notApplicable": "N/A",
+    "manage": "Manage Subscription",
+    "manageNote": "You can cancel or manage your subscription through App Store or Google Play.",
+    "noSubscription": "You don't have an active subscription.",
+    "cancelledWarning": "Your subscription has been cancelled. Your Premium access will continue until {{date}}."
+}

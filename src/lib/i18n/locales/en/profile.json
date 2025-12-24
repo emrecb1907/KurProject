@@ -1,6 +1,7 @@
 {
     "student": "QuranLearn Student",
     "anonymous": "Anonymous User",
+    "premiumMember": "Premium Member",
     "logout": "Log Out",
     "stats": {
         "totalXP": "Total XP",
@@ -83,6 +84,7 @@
             "cancel": "Cancel",
             "confirm": "Delete"
         },
+        "restorePurchases": "Restore Purchases",
         "version": "Version"
     },
     "editProfile": {
