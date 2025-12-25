@@ -17,7 +17,8 @@ import {
   Gear,
   PencilSimple,
   UserCircle,
-  Camera
+  Camera,
+  Crown
 } from 'phosphor-react-native';
 import { getXPProgress, formatXP } from '@/lib/utils/levelCalculations';
 import { useUser, useAuth } from '@/store';
@@ -159,9 +160,32 @@ export default function ProfileScreen() {
     scrollContent: {
       paddingTop: 0,
     },
-    header: {
+    headerBar: {
+      width: '100%',
+      flexDirection: 'row',
       alignItems: 'center',
-      padding: 24,
+      justifyContent: 'space-between',
+      paddingHorizontal: 20,
+      paddingTop: 10,
+      paddingBottom: 12,
+      backgroundColor: colors.backgroundDarker,
+    },
+    headerTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      textAlign: 'center',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      zIndex: -1,
+    },
+    userInfo: {
+      alignItems: 'center',
+      paddingHorizontal: 0,
+      paddingBottom: 24,
+      paddingTop: 0,
+      width: '100%',
       backgroundColor: colors.backgroundDarker,
       borderBottomWidth: 1,
       borderBottomColor: colors.border,
@@ -169,6 +193,7 @@ export default function ProfileScreen() {
     avatarContainer: {
       position: 'relative',
       marginBottom: 12,
+      marginTop: -12,
     },
     avatar: {
       width: 100,
@@ -298,19 +323,8 @@ export default function ProfileScreen() {
       fontSize: 16,
       fontWeight: 'bold',
     },
-    settingsButton: {
-      position: 'absolute',
-      top: 16,
-      right: 16,
-      zIndex: 10,
-      padding: 8,
-      backgroundColor: colors.surface,
-      borderRadius: 20,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
+    headerButton: {
+      padding: 4,
     },
     editBadge: {
       position: 'absolute',
@@ -325,20 +339,7 @@ export default function ProfileScreen() {
       borderWidth: 3,
       borderColor: colors.backgroundDarker,
     },
-    editButton: {
-      position: 'absolute',
-      top: 16,
-      left: 16,
-      zIndex: 20,
-      padding: 8,
-      backgroundColor: colors.surface,
-      borderRadius: 20,
-      shadowColor: '#000',
-      shadowOffset: { width: 0, height: 2 },
-      shadowOpacity: 0.1,
-      shadowRadius: 4,
-      elevation: 3,
-    },
+
     editMenuDropdown: {
       position: 'absolute',
       top: 56,
@@ -404,34 +405,43 @@ export default function ProfileScreen() {
       <View style={styles.container}>
 
 
+
+
+
+
         <ScrollView
           ref={scrollViewRef}
           style={styles.content}
           contentContainerStyle={styles.scrollContent}
         >
-          {/* Header */}
-          <View style={styles.header}>
-            {/* Settings Button */}
-            <Pressable
-              style={styles.settingsButton}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                router.push('/settings');
-              }}
-            >
-              <Gear size={24} color={colors.textPrimary} weight="fill" />
-            </Pressable>
+          {/* User Info Section */}
+          <View style={styles.userInfo}>
+            {/* Header Bar */}
+            <View style={styles.headerBar}>
+              {/* Edit Profile Button */}
+              <Pressable
+                style={styles.headerButton}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setShowEditMenu(!showEditMenu);
+                }}
+              >
+                <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
+              </Pressable>
 
-            {/* Edit Profile Button (Top Left) */}
-            <Pressable
-              style={styles.editButton}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                setShowEditMenu(!showEditMenu);
-              }}
-            >
-              <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
-            </Pressable>
+              <Text style={styles.headerTitle}>{t('profile.screenTitle')}</Text>
+
+              {/* Settings Button */}
+              <Pressable
+                style={styles.headerButton}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  router.push('/settings');
+                }}
+              >
+                <Gear size={24} color={colors.textPrimary} weight="fill" />
+              </Pressable>
+            </View>
 
             {/* Edit Menu Overlay */}
             {showEditMenu && (
@@ -459,6 +469,18 @@ export default function ProfileScreen() {
                       <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeUsername', 'Kullanıcı Adı Değiştir')}</Text>
                     </Pressable>
                     <View style={styles.menuDivider} />
+                    <Pressable
+                      style={styles.editMenuItem}
+                      onPress={() => {
+                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                        setShowEditMenu(false);
+                        router.push('/title-select');
+                      }}
+                    >
+                      <Crown size={22} color={colors.textPrimary} weight="fill" />
+                      <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeTitle')}</Text>
+                    </Pressable>
+                    <View style={styles.menuDivider} />
                   </>
                 )}
                 <Pressable
@@ -474,6 +496,8 @@ export default function ProfileScreen() {
                 </Pressable>
               </View>
             )}
+
+
             <View style={styles.avatarContainer}>
               <View style={styles.avatar}>
                 <Image
@@ -499,7 +523,9 @@ export default function ProfileScreen() {
             )}
 
             <Text style={styles.subtitle}>
-              {isAuthenticated ? t('profile.student') : t('profile.anonymous')}
+              {userData?.active_title && !isAnonymous
+                ? t(`rewards.titles.${userData.active_title}`, { defaultValue: userData.active_title }) as string
+                : (isAuthenticated ? t('profile.student') : t('profile.anonymous'))}
             </Text>
           </View>
 

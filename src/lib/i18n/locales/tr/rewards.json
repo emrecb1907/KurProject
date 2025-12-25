@@ -1,26 +1,33 @@
 {
-    "title": "Sandık",
+    "soon": "Çok Yakında",
+    "claim": "Al",
+    "unlockedTitle": "Açılan ünvan",
+    "titleToUnlock": "Açılacak Ünvan",
+    "congratulations": "Tebrikler!",
+    "testsTab": {
+        "groupTitle": "Test Grubu",
+        "test": "Test",
+        "title": "Ünvan",
+        "professor": "Profesör",
+        "totalProgress": "Toplam İlerleme",
+        "description": "Testleri tamamla, yıldızları topla ve ödüllerini kazan."
+    },
+    "lessonsTab": {
+        "lesson": "Ders",
+        "totalProgress": "Toplam İlerleme",
+        "description": "Dersleri tamamla, yıldızları topla ve ödüllerini kazan."
+    },
+    "tabs": {
+        "energy": "Enerji",
+        "lessons": "Dersler",
+        "tests": "Testler"
+    },
     "title": "Sandık",
     "lives": "Enerji",
     "livesStatus": "Enerji Durumu",
     "livesMax": "Enerjin dolu! ⚡",
     "livesCount": "{{current}} / {{max}} Enerji",
     "nextLife": "Sonraki enerji:",
-    "infoBanner": "Her reklam izlediğinde +1 enerji kazanırsın.",
-    "howItWorks": {
-        "title": "Nasıl Çalışır?",
-        "text": "• Her reklam izlediğinde +1 enerji kazanırsın\n• Günde maksimum 3 reklam izleyebilirsin\n• Enerjin maksimuma ulaştığında reklam izleyemezsin\n• Kullanılan haklar 24 saat sonra yenilenir"
-    },
-    "dailyFreeLives": "Günlük Ücretsiz Enerji Hakları",
-    "adSlots": "Reklam Slotları",
-    "watchAd": "İzle",
-    "used": "Kullanıldı",
-    "cooldown": "Bekleme Süresi",
-    "earnLife": "Enerji Kazan",
-    "watchAdDesc": "+1 Enerji kazanmak için reklam izle",
-    "cooldownDesc": "{{time}} sonra yenilenir",
-    "renewsTomorrow": "Yarın yenilenir",
-    "available": "Hakkın mevcut",
     "bonusTasks": "Ek Görevler & Bonuslar",
     "inviteFriend": {
         "title": "Arkadaşını Davet Et",
@@ -40,5 +47,41 @@
     "alerts": {
         "adWatched": "Reklam izlendi! +1 Enerji kazandın.",
         "cantWatch": "Şu an reklam izleyemezsin."
+    },
+    "quests": {
+        "test_quest_1": "İlk Adımlar",
+        "test_quest_2": "Isınma Turu",
+        "test_quest_3": "Disiplin",
+        "test_quest_4": "Alışkanlık",
+        "test_quest_5": "Odaklanma",
+        "test_quest_6": "Ustalık",
+        "test_quest_7": "Uzmanlık",
+        "test_quest_8": "Efsanevi Testçi",
+        "lesson_quest_1": "İlk Adım",
+        "lesson_quest_2": "Isınma",
+        "lesson_quest_3": "İstikrar",
+        "lesson_quest_4": "Alışkanlık",
+        "lesson_quest_5": "Derinleşme",
+        "lesson_quest_6": "Son Hazırlık",
+        "lesson_quest_7": "Tamamlama",
+        "lesson_quest_8": "Sürekli Okur"
+    },
+    "titles": {
+        "test_title_1": "Başlangıç Yolcusu",
+        "test_title_2": "Kararlı Öğrenci",
+        "test_title_3": "İstikrarlı",
+        "test_title_4": "Alışkanlık Sahibi",
+        "test_title_5": "Odaklı Zihin",
+        "test_title_6": "Usta Çözücü",
+        "test_title_7": "Test Uzmanı",
+        "test_title_8": "Efsanevi Testçi",
+        "lesson_title_1": "Meraklı Okur",
+        "lesson_title_2": "İlgili Öğrenci",
+        "lesson_title_3": "Düzenli Takipçi",
+        "lesson_title_4": "Alışkanlık Sahibi",
+        "lesson_title_5": "Derinleşen Okur",
+        "lesson_title_6": "Son Hazırlık",
+        "lesson_title_7": "İçerik Tamamlayıcı",
+        "lesson_title_8": ""
     }
 }

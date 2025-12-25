@@ -142,6 +142,7 @@ const getStyles = (activeTheme: string) => StyleSheet.create({
         width: 120,
         height: 120,
         marginBottom: 24,
+        tintColor: activeTheme === 'light' ? '#000000' : undefined,
     },
     title: {
         fontSize: 28, // Large title

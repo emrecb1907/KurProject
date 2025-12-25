@@ -1,4 +1,5 @@
 {
+    "screenTitle": "Profile",
     "student": "QuranLearn Student",
     "anonymous": "Anonymous User",
     "premiumMember": "Premium Member",
@@ -96,7 +97,13 @@
         "successMessage": "Your profile has been updated successfully!",
         "saving": "Saving...",
         "changeAvatar": "Change Avatar",
-        "changeUsername": "Change Username"
+        "changeUsername": "Change Username",
+        "changeTitle": "Change Title",
+        "selectTitlePage": "Title Selection",
+        "defaultTitle": "Default (Student)",
+        "select": "Select",
+        "selected": "Selected",
+        "noTitles": "No titles earned yet."
     },
     "avatarSelect": {
         "title": "Choose Your Avatar",

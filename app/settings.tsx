@@ -248,10 +248,8 @@ function SettingsContent() {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      paddingHorizontal: 20,
-      paddingTop: 20,
-      paddingBottom: 16,
-      backgroundColor: colors.backgroundDarker,
+      paddingHorizontal: 16,
+      paddingVertical: 16,
       borderBottomWidth: 1,
       borderBottomColor: colors.border,
     },
@@ -277,6 +275,10 @@ function SettingsContent() {
       fontWeight: 'bold',
       color: colors.textPrimary,
       textAlign: 'center',
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      zIndex: -1,
     },
     headerSpacer: {
       width: 40,
@@ -550,11 +552,9 @@ function SettingsContent() {
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
             router.back();
           }}
+          style={{ marginLeft: -8 }}
         />
-        <View style={styles.headerTitleContainer}>
-          <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
-        </View>
-        <View style={styles.headerSpacer} />
+        <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
       </View>
 
       {/* Content */}
@@ -696,31 +696,48 @@ function SettingsContent() {
               {/* Restore Purchases Button - Apple Requirement */}
               <Pressable
                 style={[styles.restoreButton, isRestoring && styles.restoreButtonDisabled]}
-                onPress={async () => {
+                onPress={() => {
                   if (isRestoring) return;
                   Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setIsRestoring(true);
-                  try {
-                    const restored = await restore();
-                    if (restored) {
-                      Alert.alert(
-                        t('premiumpaywall.restoreResult.success.title'),
-                        t('premiumpaywall.restoreResult.success.message')
-                      );
-                    } else {
-                      Alert.alert(
-                        t('premiumpaywall.restoreResult.notFound.title'),
-                        t('premiumpaywall.restoreResult.notFound.message')
-                      );
-                    }
-                  } catch (error) {
-                    Alert.alert(
-                      t('premiumpaywall.restoreResult.error.title'),
-                      t('premiumpaywall.restoreResult.error.message')
-                    );
-                  } finally {
-                    setIsRestoring(false);
-                  }
+
+                  Alert.alert(
+                    t('premiumpaywall.restoreConfirm.title'),
+                    t('premiumpaywall.restoreConfirm.message'),
+                    [
+                      {
+                        text: t('premiumpaywall.restoreConfirm.cancel'),
+                        style: 'cancel'
+                      },
+                      {
+                        text: t('premiumpaywall.restoreConfirm.continue'),
+                        onPress: async () => {
+                          setIsRestoring(true);
+                          try {
+                            const restored = await restore();
+                            if (restored) {
+                              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                              Alert.alert(
+                                t('premiumpaywall.restoreResult.success.title'),
+                                t('premiumpaywall.restoreResult.success.message')
+                              );
+                            } else {
+                              Alert.alert(
+                                t('premiumpaywall.restoreResult.noSubscription.title'),
+                                t('premiumpaywall.restoreResult.noSubscription.message')
+                              );
+                            }
+                          } catch (error) {
+                            Alert.alert(
+                              t('common.error', 'Hata'),
+                              t('premiumpaywall.errors.restoreFailed')
+                            );
+                          } finally {
+                            setIsRestoring(false);
+                          }
+                        }
+                      }
+                    ]
+                  );
                 }}
                 disabled={isRestoring}
               >
@@ -755,24 +772,6 @@ function SettingsContent() {
           <Text style={styles.versionText}>
             {t('profile.settings.version')} {Constants.expoConfig?.version || '1.0.0'}
           </Text>
-
-          {/* 🧪 TEST BUTTON - Remove in production */}
-          {__DEV__ && (
-            <Pressable
-              style={{
-                marginTop: 16,
-                backgroundColor: colors.error,
-                paddingVertical: 12,
-                paddingHorizontal: 24,
-                borderRadius: 12,
-              }}
-              onPress={() => setTriggerError(true)}
-            >
-              <Text style={{ color: '#fff', fontWeight: 'bold' }}>🧪 Test ErrorBoundary</Text>
-            </Pressable>
-          )}
-          {/* This will throw during render, which ErrorBoundary CAN catch */}
-          {triggerError && (() => { throw new Error('Network request failed: connection refused'); })()}
         </View>
 
         {/* Bottom Spacing */}
@@ -884,7 +883,7 @@ function SettingsContent() {
           </View>
         </Animated.View>
       </Modal>
-    </SafeAreaView>
+    </SafeAreaView >
   );
 }
 

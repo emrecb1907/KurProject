@@ -482,5 +482,45 @@ export const database = {
 
       return { data, error };
     }
+  },
+
+  // ==================== MISSIONS (Quest System) ====================
+  missions: {
+    // Get user's missions and milestones with progress
+    async getMissions(userId: string, type: 'test' | 'lesson') {
+      const { data, error } = await supabase.rpc('get_user_missions', {
+        p_user_id: userId,
+        p_type: type
+      });
+      return { data, error };
+    },
+
+    // Claim milestone reward
+    async claimReward(userId: string, milestoneId: string) {
+      const { data, error } = await supabase.rpc('claim_milestone_reward', {
+        p_user_id: userId,
+        p_milestone_id: milestoneId
+      });
+      return { data, error };
+    },
+
+    // Get user's earned titles
+    async getUserTitles(userId: string) {
+      const { data, error } = await supabase
+        .from('user_titles')
+        .select('*')
+        .eq('user_id', userId)
+        .order('earned_at', { ascending: false });
+      return { data, error };
+    },
+
+    // Set active title
+    async setActiveTitle(userId: string, titleName: string | null) {
+      const { data, error } = await supabase.rpc('set_active_title', {
+        p_user_id: userId,
+        p_title_name: titleName
+      });
+      return { data, error };
+    }
   }
 };

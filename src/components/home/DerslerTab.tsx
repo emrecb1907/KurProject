@@ -279,17 +279,6 @@ export const DerslerTab = forwardRef<DerslerTabRef, DerslerTabProps>(({ screenWi
                 contentContainerStyle={{ paddingBottom: 100 }}
                 showsVerticalScrollIndicator={false}
             >
-                {/* Search Bar */}
-                <View style={styles.searchContainer}>
-                    <View style={styles.searchBar}>
-                        <MagnifyingGlass size={20} color={colors.textSecondary} weight="bold" />
-                        <TextInput
-                            placeholder={t('lessons.common.searchPlaceholder', { defaultValue: "Ders ara..." })}
-                            placeholderTextColor={colors.textSecondary}
-                            style={styles.searchInput}
-                        />
-                    </View>
-                </View>
 
                 {/* Section Title */}
                 <View style={styles.sectionHeader}>

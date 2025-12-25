@@ -55,7 +55,8 @@
       [
         "@sentry/react-native/expo",
         {
-          "organization": "kurlearn",
+          "url": "https://sentry.io/",
+          "organization": "quran-learn",
           "project": "react-native"
         }
       ],

@@ -129,17 +129,13 @@ export default function PremiumScreen() {
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: premiumColors.background }]} edges={['top', 'left', 'right']}>
             <StatusBar style={statusBarStyle} />
-            <ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollContent}>
 
-                {/* Header */}
-                <View style={styles.header}>
-                    <HeaderButton
-                        title={t('common.back')}
-                        onPress={() => router.back()}
-                    />
-                    <Text style={[styles.headerTitle, { color: premiumColors.text }]}>{t('premiumpaywall.headerTitle')}</Text>
-                    <View style={{ width: 60 }} />
-                </View>
+            {/* Header */}
+            <View style={styles.header}>
+                <Text style={[styles.headerTitle, { color: premiumColors.text }]}>{t('premiumpaywall.headerTitle')}</Text>
+            </View>
+
+            <ScrollView ref={scrollViewRef} contentContainerStyle={styles.scrollContent}>
 
                 {/* Hero Title */}
                 <View style={styles.heroSection}>
@@ -425,14 +421,17 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     scrollContent: {
-        padding: 20,
+        paddingHorizontal: 20,
+        paddingTop: 4,
         paddingBottom: 40,
     },
     header: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        width: '100%',
         alignItems: 'center',
-        marginBottom: 30,
+        justifyContent: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 10,
+        paddingBottom: 12,
     },
     closeButton: {
         padding: 4,
@@ -441,8 +440,9 @@ const styles = StyleSheet.create({
         gap: 6,
     },
     headerTitle: {
-        fontSize: 16,
-        fontWeight: '600',
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
     heroSection: {
         marginBottom: 30,

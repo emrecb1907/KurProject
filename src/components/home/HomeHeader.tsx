@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { View, Text, StyleSheet, Pressable, Image } from 'react-native';
 import Animated, {
     useAnimatedStyle,
@@ -27,7 +27,7 @@ export const HomeHeader = () => {
 
     // Server data from React Query
     const { data: userData, isLoading: isUserDataLoading } = useUserData(user?.id);
-    const { data: energyData, isLoading: isEnergyLoading } = useEnergy(user?.id);
+    const { data: energyData, isLoading: isEnergyLoading, refetch: refetchEnergy } = useEnergy(user?.id);
 
     // Show skeleton if profile not ready or data is loading for first time
     const isLoading = !isProfileReady || (isUserDataLoading && !userData) || (isEnergyLoading && !energyData);
@@ -38,6 +38,42 @@ export const HomeHeader = () => {
     const currentLevel = userData?.current_level ?? user?.current_level ?? 1;
     const currentLives = energyData?.current_energy ?? user?.current_lives ?? 5;
     const maxLives = energyData?.max_energy ?? user?.max_lives ?? 6;
+    const lastReplenishTime = energyData?.last_replenish_time
+        ? new Date(energyData.last_replenish_time).getTime()
+        : null;
+
+    // Timer state for energy countdown
+    const [now, setNow] = useState(Date.now());
+
+    // Update timer every second only when energy is not full
+    useEffect(() => {
+        if (currentLives >= maxLives) return;
+
+        const interval = setInterval(() => {
+            setNow(Date.now());
+        }, 1000);
+        return () => clearInterval(interval);
+    }, [currentLives, maxLives]);
+
+    // Get next life countdown time
+    const getNextLifeTime = () => {
+        if (!lastReplenishTime || currentLives >= maxLives) return '';
+
+        const nextReplenishTime = lastReplenishTime + (4 * 60 * 60 * 1000);
+        const diff = nextReplenishTime - now;
+
+        if (diff <= 0) {
+            // Timer expired - refetch energy from server
+            refetchEnergy();
+            return '⏳';
+        }
+
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    };
 
     // Calculate XP progress using the best available data
     const xpProgress = getXPProgress(totalXP);
@@ -123,9 +159,10 @@ export const HomeHeader = () => {
         statsRow: {
             flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'flex-end',
             paddingHorizontal: 16,
             marginBottom: 8,
-            marginTop: 8,
+            marginTop: 0,
         },
         statBadge: {
             flexDirection: 'row',
@@ -203,20 +240,49 @@ export const HomeHeader = () => {
                     <GraduationCap size={20} color={colors.primary} weight="fill" />
                     <Text style={styles.statValue}>Level {displayLevel}</Text>
                 </View>
-                <View style={[styles.statBadge, { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
-                    <View style={{
-                        position: 'absolute',
-                        left: 0,
-                        top: 0,
-                        bottom: 0,
-                        width: `${Math.min((currentLives / (maxLives || 6)) * 100, 100)}%`,
-                        backgroundColor: colors.primary,
-                        opacity: 0.3,
-                    }} />
-                    <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
-                        <Lightning size={20} color={colors.primary} weight="fill" />
-                        <Text style={styles.statValue}>{currentLives}/{maxLives || 6}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-end', gap: 4 }}>
+                    <View style={[styles.statBadge, { paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
+                        <View style={{
+                            position: 'absolute',
+                            left: 0,
+                            top: 0,
+                            bottom: 0,
+                            width: `${Math.min((currentLives / (maxLives || 6)) * 100, 100)}%`,
+                            backgroundColor: colors.primary,
+                            opacity: 0.3,
+                        }} />
+                        <View style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, gap: 8 }}>
+                            <Lightning size={20} color={colors.primary} weight="fill" />
+                            <Text style={styles.statValue}>{currentLives}/{maxLives || 6}</Text>
+                        </View>
                     </View>
+                    {currentLives < maxLives && getNextLifeTime() && (
+                        <View style={{ alignItems: 'center' }}>
+                            <Text style={{ fontSize: 10, color: colors.textSecondary, marginBottom: 2 }}>{t('home.nextEnergy', 'Sonraki Enerji:')}</Text>
+                            <View style={[styles.statBadge, { width: 80, height: 32, paddingHorizontal: 0, paddingVertical: 0, overflow: 'hidden', position: 'relative' }]}>
+                                <View style={{
+                                    position: 'absolute',
+                                    left: 0,
+                                    top: 0,
+                                    bottom: 0,
+                                    right: 0,
+                                    backgroundColor: colors.primary,
+                                    opacity: 0.3,
+                                }} />
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={{
+                                        fontSize: 14,
+                                        color: activeTheme === 'light' ? '#000000' : '#FFFFFF',
+                                        fontWeight: 'bold',
+                                        textAlign: 'center',
+                                        fontVariant: ['tabular-nums'],
+                                    }}>
+                                        {getNextLifeTime()}
+                                    </Text>
+                                </View>
+                            </View>
+                        </View>
+                    )}
                 </View>
             </View>
 

@@ -147,10 +147,8 @@ export default function TimezoneSettingsScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingHorizontal: 20,
-            paddingTop: 20,
-            paddingBottom: 16,
-            backgroundColor: colors.backgroundDarker,
+            paddingHorizontal: 16,
+            paddingVertical: 16,
             borderBottomWidth: 1,
             borderBottomColor: colors.border,
         },
@@ -171,6 +169,10 @@ export default function TimezoneSettingsScreen() {
             fontWeight: 'bold',
             color: colors.textPrimary,
             textAlign: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            zIndex: -1,
         },
         headerSpacer: {
             width: 40,
@@ -272,11 +274,8 @@ export default function TimezoneSettingsScreen() {
         return (
             <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <View style={styles.header}>
-                    <HeaderButton title={t('common.back')} onPress={() => router.back()} />
-                    <View style={styles.headerTitleContainer}>
-                        <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
-                    </View>
-                    <View style={styles.headerSpacer} />
+                    <HeaderButton title={t('common.back')} onPress={() => router.back()} style={{ marginLeft: -8 }} />
+                    <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
                 </View>
                 <View style={styles.loadingContainer}>
                     <Text style={{ color: colors.textSecondary }}>{t('profile.settings.timezone.loginRequired')}</Text>
@@ -289,11 +288,8 @@ export default function TimezoneSettingsScreen() {
         return (
             <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
                 <View style={styles.header}>
-                    <HeaderButton title={t('common.back')} onPress={() => router.back()} />
-                    <View style={styles.headerTitleContainer}>
-                        <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
-                    </View>
-                    <View style={styles.headerSpacer} />
+                    <HeaderButton title={t('common.back')} onPress={() => router.back()} style={{ marginLeft: -8 }} />
+                    <Text style={styles.headerTitle}>{t('profile.settings.account.timezone', 'Saat Dilimi')}</Text>
                 </View>
                 <View style={styles.loadingContainer}>
                     <ActivityIndicator size="large" color={colors.primary} />
@@ -312,11 +308,9 @@ export default function TimezoneSettingsScreen() {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                         router.back();
                     }}
+                    style={{ marginLeft: -8 }}
                 />
-                <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitle}>{t('profile.settings.timezone.title')}</Text>
-                </View>
-                <View style={styles.headerSpacer} />
+                <Text style={styles.headerTitle}>{t('profile.settings.timezone.title')}</Text>
             </View>
 
             <ScrollView style={styles.content}>

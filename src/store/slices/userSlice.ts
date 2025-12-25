@@ -20,8 +20,7 @@ export interface UserSlice {
   boundUserId: string | null;
   sessionToken: string | null;
 
-  // Local tracking (rate limiting)
-  adWatchTimes: number[];
+
 
   // Actions
   setSelectedAvatar: (avatarId: string) => void;
@@ -30,14 +29,14 @@ export interface UserSlice {
   setBoundUserId: (id: string | null) => void;
   setSessionToken: (token: string | null) => void;
   resetUserData: () => void;
-  watchAd: () => Promise<boolean>;
+
 }
 
 const initialState = {
   selectedAvatar: DEFAULT_AVATAR_ID,
   boundUserId: null,
   sessionToken: null,
-  adWatchTimes: [],
+
   hapticsEnabled: true,
   soundsEnabled: true,
 };
@@ -57,14 +56,5 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
 
   resetUserData: () => set(initialState),
 
-  watchAd: async () => {
-    const state = get();
-    const now = Date.now();
-    const validWatches = state.adWatchTimes.filter(time => now - time < 24 * 60 * 60 * 1000);
 
-    if (validWatches.length >= 3) return false;
-
-    set({ adWatchTimes: [...validWatches, now] });
-    return true;
-  },
 });

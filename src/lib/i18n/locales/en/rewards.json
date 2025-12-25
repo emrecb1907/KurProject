@@ -1,26 +1,33 @@
 {
-    "title": "Chest",
+    "soon": "Coming Soon",
+    "claim": "Claim",
+    "unlockedTitle": "Unlocked title",
+    "titleToUnlock": "Title to Unlock",
+    "congratulations": "Congratulations!",
+    "testsTab": {
+        "groupTitle": "Test Group",
+        "test": "Test",
+        "title": "Title",
+        "professor": "Professor",
+        "totalProgress": "Total Progress",
+        "description": "Complete tests, collect stars and earn your rewards."
+    },
+    "lessonsTab": {
+        "lesson": "Lesson",
+        "totalProgress": "Total Progress",
+        "description": "Complete lessons, collect stars and earn your rewards."
+    },
+    "tabs": {
+        "energy": "Energy",
+        "lessons": "Lessons",
+        "tests": "Tests"
+    },
     "title": "Chest",
     "lives": "Energy",
     "livesStatus": "Energy Status",
     "livesMax": "Energy is full! ⚡",
     "livesCount": "{{current}} / {{max}} Energy",
     "nextLife": "Next energy:",
-    "infoBanner": "Earn +1 energy every time you watch an ad.",
-    "howItWorks": {
-        "title": "How It Works?",
-        "text": "• Earn +1 energy every time you watch an ad\n• Watch up to 3 ads per day\n• Cannot watch ads when energy is full\n• Used slots refresh after 24 hours"
-    },
-    "dailyFreeLives": "Daily Free Energy",
-    "adSlots": "Ad Slots",
-    "watchAd": "Watch",
-    "used": "Used",
-    "cooldown": "Cooldown",
-    "earnLife": "Earn Energy",
-    "watchAdDesc": "Watch ad, earn +1 energy",
-    "cooldownDesc": "Renews in {{time}}",
-    "renewsTomorrow": "Renews tomorrow",
-    "available": "Available",
     "bonusTasks": "Bonus Tasks & Rewards",
     "inviteFriend": {
         "title": "Invite a Friend",
@@ -40,5 +47,41 @@
     "alerts": {
         "adWatched": "Ad watched! +1 Energy earned.",
         "cantWatch": "You cannot watch ads right now."
+    },
+    "quests": {
+        "test_quest_1": "First Steps",
+        "test_quest_2": "Warm-Up",
+        "test_quest_3": "Discipline",
+        "test_quest_4": "Habit",
+        "test_quest_5": "Focus",
+        "test_quest_6": "Mastery",
+        "test_quest_7": "Expertise",
+        "test_quest_8": "Legendary Tester",
+        "lesson_quest_1": "First Step",
+        "lesson_quest_2": "Warm-Up",
+        "lesson_quest_3": "Consistency",
+        "lesson_quest_4": "Habit",
+        "lesson_quest_5": "Deepening",
+        "lesson_quest_6": "Final Prep",
+        "lesson_quest_7": "Completion",
+        "lesson_quest_8": "Continuous Reader"
+    },
+    "titles": {
+        "test_title_1": "Beginner Voyager",
+        "test_title_2": "Determined Student",
+        "test_title_3": "Consistent",
+        "test_title_4": "Habit Builder",
+        "test_title_5": "Focused Mind",
+        "test_title_6": "Master Solver",
+        "test_title_7": "Test Expert",
+        "test_title_8": "Legendary Tester",
+        "lesson_title_1": "Curious Reader",
+        "lesson_title_2": "Engaged Student",
+        "lesson_title_3": "Regular Follower",
+        "lesson_title_4": "Habit Builder",
+        "lesson_title_5": "Deep Reader",
+        "lesson_title_6": "Final Prep",
+        "lesson_title_7": "Content Completer",
+        "lesson_title_8": ""
     }
 }

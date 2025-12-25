@@ -299,37 +299,38 @@ export default function AnalysisScreen() {
         // Tab styles
         tabContainer: {
             flexDirection: 'row',
-            paddingHorizontal: 20,
-            gap: 10,
-            marginTop: 8,
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingVertical: 8,
+            marginHorizontal: 16,
             marginBottom: 12,
+            gap: 8,
         },
         tab: {
             flex: 1,
             paddingVertical: 10,
-            paddingHorizontal: 14,
+            paddingHorizontal: 4,
             borderRadius: 20,
+            backgroundColor: colors.surface,
+            borderWidth: 1,
+            borderColor: colors.border,
             alignItems: 'center',
             justifyContent: 'center',
         },
-        tabActive: {
+        activeTab: {
             backgroundColor: colors.primary,
-        },
-        tabInactive: {
-            backgroundColor: isDark ? colors.surface : colors.backgroundDarker,
-            borderWidth: 1,
-            borderColor: colors.border,
+            borderColor: colors.primary,
         },
         tabText: {
-            fontSize: 13,
+            fontSize: 14,
             fontWeight: '600',
+            color: colors.textPrimary,
         },
-        tabTextActive: {
-            color: isDark ? '#000' : '#FFF',
+        activeTabText: {
+            color: '#FFFFFF',
+            fontWeight: 'bold',
         },
-        tabTextInactive: {
-            color: colors.textSecondary,
-        },
+
         content: {
             padding: 20,
         },
@@ -909,20 +910,20 @@ export default function AnalysisScreen() {
             {/* Tabs */}
             <View style={styles.tabContainer}>
                 <TouchableOpacity
-                    style={[styles.tab, activeTab === 'general' ? styles.tabActive : styles.tabInactive]}
+                    style={[styles.tab, activeTab === 'general' && styles.activeTab]}
                     onPress={() => handleTabPress('general')}
                     activeOpacity={0.7}
                 >
-                    <Text style={[styles.tabText, activeTab === 'general' ? styles.tabTextActive : styles.tabTextInactive]}>
+                    <Text style={[styles.tabText, activeTab === 'general' && styles.activeTabText]}>
                         {lang === 'tr' ? 'Genel' : 'General'}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    style={[styles.tab, activeTab === 'tests' ? styles.tabActive : styles.tabInactive]}
+                    style={[styles.tab, activeTab === 'tests' && styles.activeTab]}
                     onPress={() => handleTabPress('tests')}
                     activeOpacity={0.7}
                 >
-                    <Text style={[styles.tabText, activeTab === 'tests' ? styles.tabTextActive : styles.tabTextInactive]}>
+                    <Text style={[styles.tabText, activeTab === 'tests' && styles.activeTabText]}>
                         {lang === 'tr' ? 'Testler' : 'Tests'}
                     </Text>
                 </TouchableOpacity>

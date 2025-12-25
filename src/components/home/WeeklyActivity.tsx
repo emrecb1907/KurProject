@@ -3,7 +3,7 @@ import { useEffect, useState, useCallback, useMemo, memo, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
 import { useQueryClient } from '@tanstack/react-query';
 import { colors } from '@constants/colors';
-import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey } from 'phosphor-react-native';
+import { Target, TreasureChest, Check, Fire, CheckCircle, LockKey, X } from 'phosphor-react-native';
 import { database } from '@/lib/supabase/database';
 import { useAuth } from '@/store';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -121,6 +121,9 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
             opacity: 0.8, // Slightly faded but still visible
             borderWidth: 1,
             borderColor: colors.border, // Add subtle border for definition
+        },
+        dayCircleIncomplete: {
+            backgroundColor: '#EF4444', // Red background for incomplete days
         },
         // Reward Day Styles
         rewardDayCircle: {
@@ -406,6 +409,8 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                                     styles.dayCircle,
                                     dayData.isFuture && styles.dayCircleFuture,
                                     dayData.completed && styles.dayCircleCompleted,
+                                    // Incomplete past/today days get red background
+                                    (!dayData.completed && !dayData.isFuture && index !== 6) && styles.dayCircleIncomplete,
                                     dayData.isToday && styles.dayCircleToday,
                                     (dayData.isToday && dayData.completed) && styles.dayCircleTodayCompleted,
                                     // 7th Day Overrides
@@ -428,11 +433,17 @@ export const WeeklyActivity = memo(function WeeklyActivity() {
                                         />
                                     )
                                 ) : (
-                                    index === 6 && (
+                                    index === 6 ? (
                                         <TreasureChest
                                             size={20}
                                             color={dayData.isFuture ? colors.textDisabled : colors.textSecondary}
                                             weight="regular"
+                                        />
+                                    ) : !dayData.isFuture && (
+                                        <X
+                                            size={18}
+                                            color="#FFFFFF"
+                                            weight="bold"
                                         />
                                     )
                                 )}

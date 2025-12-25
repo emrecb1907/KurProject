@@ -120,15 +120,12 @@ const getStyles = (screenWidth: number, gap: number, padding: number) => {
             flex: 1,
         },
         sectionHeader: {
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             paddingHorizontal: padding,
-            paddingTop: 20,
-            paddingBottom: 16,
+            paddingTop: 16,
+            paddingBottom: 12,
         },
         sectionTitle: {
-            fontSize: 24,
+            fontSize: 18,
             fontWeight: 'bold',
             color: colors.textPrimary,
         },

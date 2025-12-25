@@ -1,6 +1,6 @@
 /**
  * Level Calculation Utilities
- * Formula: XP_required(level) = round( (10 * level) + (0.4 * level^2) / 10 ) * 10
+ * Formula: Required XP = 10 * Level
  * 
  * Level 1 starts at 0 XP
  * No level cap - infinite progression
@@ -17,68 +17,50 @@ export interface XPProgress {
 
 /**
  * Calculate required XP for a specific level
- * Formula: XP_required(level) = round( (10 * level) + (0.4 * level^2) / 10 ) * 10
- * @param level - Target level (must be >= 1)
- * @returns Required XP to complete that level
+ * Formula: Required XP = 10 * Level
+ * Example: Level 1 needs 10 XP, Level 2 needs 20 XP...
  */
 export function calculateRequiredXP(level: number): number {
   if (level < 1) return 0;
-  return Math.round((10 * level + 0.4 * Math.pow(level, 2)) / 10) * 10;
+  return 10 * level;
 }
 
 /**
  * Calculate user's current level based on total XP
- * @param totalXP - User's total XP
- * @returns Current level (minimum 1)
+ * Inverse Formula derived from Sum = 5 * n * (n-1)
+ * n = (1 + sqrt(1 + 4 * (TotalXP / 5))) / 2
  */
 export function calculateUserLevel(totalXP: number): number {
-  let currentLevel = 1;
-  let cumulativeXP = 0;
-
-  // Safety limit to prevent infinite loops (max level 10000)
-  const MAX_LEVEL = 10000;
-
-  while (currentLevel <= MAX_LEVEL) {
-    const requiredXP = calculateRequiredXP(currentLevel);
-
-    // Check if user has enough XP for next level
-    if (cumulativeXP + requiredXP > totalXP) {
-      break;
-    }
-
-    cumulativeXP += requiredXP;
-    currentLevel++;
-  }
-
-  return currentLevel;
+  if (totalXP <= 0) return 1;
+  // Using quadratic formula solution for TotalXP = 5 * (L^2 - L)
+  // L^2 - L - (TotalXP/5) = 0
+  // L = (1 + sqrt(1 + 4*(TotalXP/5))) / 2
+  const level = Math.floor((1 + Math.sqrt(1 + 4 * (totalXP / 5))) / 2);
+  return Math.max(1, level);
 }
 
 /**
  * Get detailed XP progress information for UI
- * @param totalXP - User's total XP
- * @returns XPProgress object with all progression details
  */
 export function getXPProgress(totalXP: number): XPProgress {
-  // Calculate current level
   const currentLevel = calculateUserLevel(totalXP);
 
-  // Calculate cumulative XP up to current level (start of current level)
-  let cumulativeXP = 0;
-  for (let i = 1; i < currentLevel; i++) {
-    cumulativeXP += calculateRequiredXP(i);
-  }
+  // Calculate cumulative XP required to REACH the START of this current level
+  // Formula: Sum(10*i) for i=1 to level-1
+  // Sum = 10 * (L-1)*L / 2 = 5 * L * (L-1)
+  const cumulativeXP = 5 * currentLevel * (currentLevel - 1);
 
-  // Calculate XP within current level
-  const currentLevelXP = totalXP - cumulativeXP;
+  // XP gained WITHIN this current level
+  const currentLevelXP = Math.max(0, totalXP - cumulativeXP);
 
-  // Calculate required XP for current level to reach next level
+  // XP required to finish this current level
   const requiredXP = calculateRequiredXP(currentLevel);
 
-  // Calculate progress percentage
-  const progressPercentage = Math.round((currentLevelXP / requiredXP) * 100);
+  // Progress percentage
+  const progressPercentage = Math.min(100, Math.round((currentLevelXP / requiredXP) * 100));
 
-  // Calculate XP needed to reach next level
-  const xpToNextLevel = requiredXP - currentLevelXP;
+  // XP remaining for next level
+  const xpToNextLevel = Math.max(0, requiredXP - currentLevelXP);
 
   return {
     currentLevel,
@@ -92,15 +74,10 @@ export function getXPProgress(totalXP: number): XPProgress {
 
 /**
  * Get cumulative XP needed to reach a specific level
- * @param targetLevel - Target level
- * @returns Total XP needed from level 1 to reach that level
  */
 export function getCumulativeXP(targetLevel: number): number {
-  let cumulativeXP = 0;
-  for (let i = 1; i < targetLevel; i++) {
-    cumulativeXP += calculateRequiredXP(i);
-  }
-  return cumulativeXP;
+  // Sum of required XP up to targetLevel-1
+  return 5 * targetLevel * (targetLevel - 1);
 }
 
 /**

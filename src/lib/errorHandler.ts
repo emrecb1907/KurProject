@@ -47,8 +47,7 @@ class ErrorHandler {
         try {
             Sentry.init({
                 dsn: dsn,
-                debug: __DEV__, // Only debug in development
-                enableInExpoDevelopment: true,
+                debug: false, // Silence verbose logs
                 tracesSampleRate: 0.2, // Adjust for production (e.g., 0.2)
             });
 

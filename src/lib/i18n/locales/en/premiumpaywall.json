@@ -77,6 +77,10 @@
         "noSubscription": {
             "title": "No Subscription Found",
             "message": "No active subscription was found for this Apple ID."
+        },
+        "error": {
+            "title": "Restore Error",
+            "message": "An error occurred during restore. Please try again."
         }
     }
 }

@@ -65,9 +65,7 @@ export default function AvatarSelectScreen() {
                     alignItems: 'center',
                     justifyContent: 'space-between',
                     paddingHorizontal: 16,
-                    paddingTop: 16,
-                    paddingBottom: 16,
-                    backgroundColor: colors.backgroundDarker,
+                    paddingVertical: 16,
                     borderBottomWidth: 1,
                     borderBottomColor: colors.border,
                 },
@@ -81,9 +79,14 @@ export default function AvatarSelectScreen() {
                     fontSize: 20,
                     fontWeight: 'bold',
                     color: colors.textPrimary,
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    textAlign: 'center',
+                    zIndex: -1,
                 },
                 headerSpacer: {
-                    width: 40,
+                    width: 80,
                 },
                 content: {
                     flex: 1,
@@ -225,11 +228,12 @@ export default function AvatarSelectScreen() {
                         router.back();
                     }}
                     title={t('common.back')}
+                    style={{ marginLeft: -8 }}
                 />
                 <Text style={styles.headerTitle}>
                     {t('profile.avatarSelect.title')}
                 </Text>
-                <View style={styles.headerSpacer} />
+
             </View>
 
             {/* Content */}

@@ -1,4 +1,5 @@
 {
+    "screenTitle": "Profil",
     "student": "Öğrenci",
     "anonymous": "Misafir",
     "premiumMember": "Premium Üye",
@@ -96,7 +97,13 @@
         "successMessage": "Profiliniz başarıyla güncellendi!",
         "saving": "Kaydediliyor...",
         "changeAvatar": "Avatar Değiştir",
-        "changeUsername": "Kullanıcı Adı Değiştir"
+        "changeUsername": "Kullanıcı Adı Değiştir",
+        "changeTitle": "Ünvan Değiştir",
+        "selectTitlePage": "Ünvan Seçimi",
+        "defaultTitle": "Varsayılan (Öğrenci)",
+        "select": "Seç",
+        "selected": "Seçili",
+        "noTitles": "Henüz ünvan kazanmadınız."
     },
     "avatarSelect": {
         "title": "Avatarını Seç",

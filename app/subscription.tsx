@@ -95,10 +95,8 @@ export default function SubscriptionScreen() {
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
-            paddingHorizontal: 20,
-            paddingTop: 20,
-            paddingBottom: 16,
-            backgroundColor: colors.backgroundDarker,
+            paddingHorizontal: 16,
+            paddingVertical: 16,
             borderBottomWidth: 1,
             borderBottomColor: colors.border,
         },
@@ -113,6 +111,10 @@ export default function SubscriptionScreen() {
             fontWeight: 'bold',
             color: colors.textPrimary,
             textAlign: 'center',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+            zIndex: -1,
         },
         headerSpacer: {
             width: 40,
@@ -290,11 +292,9 @@ export default function SubscriptionScreen() {
                         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
                         router.back();
                     }}
+                    style={{ marginLeft: -8 }}
                 />
-                <View style={styles.headerTitleContainer}>
-                    <Text style={styles.headerTitle}>{t('subscription.title')}</Text>
-                </View>
-                <View style={styles.headerSpacer} />
+                <Text style={styles.headerTitle}>{t('subscription.title')}</Text>
             </View>
 
             <ScrollView
