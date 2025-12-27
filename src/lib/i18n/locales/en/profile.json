@@ -77,7 +77,8 @@
             "title": "Log Out",
             "message": "Are you sure you want to log out?",
             "cancel": "Cancel",
-            "confirm": "Log Out"
+            "confirm": "Log Out",
+            "loadingOverlay": "Logging out..."
         },
         "deleteAccount": {
             "button": "Delete My Account",

@@ -1,9 +1,10 @@
 -- ═══════════════════════════════════════════════════════════════════════════
--- submit_test_result_secure: Güncelleme v2
+-- submit_test_result_secure: v4 (Auth Check Added)
 -- ═══════════════════════════════════════════════════════════════════════════
--- Değişiklikler:
--- 1. Timezone-aware tarih hesaplaması (get_user_streak ile uyumlu)
--- 2. activity_days son 7 gün ile sınırlandırıldı
+-- Güvenlik Güncellemeleri:
+-- 1. auth.uid() kontrolü eklendi
+-- 2. Session doğrulama
+-- 3. Rate limiting (15s)
 -- ═══════════════════════════════════════════════════════════════════════════
 
 CREATE OR REPLACE FUNCTION submit_test_result_secure(
@@ -33,6 +34,13 @@ DECLARE
   v_user_exists BOOLEAN;
   v_last_submit TIMESTAMP;
 BEGIN
+
+  -- ══════════════════════════════════════════════════════════
+  -- 🔐 AUTH KONTROLU (EN BAŞTA!)
+  -- ══════════════════════════════════════════════════════════
+  IF p_user_id != auth.uid() THEN
+    RETURN jsonb_build_object('success', false, 'error', 'UNAUTHORIZED');
+  END IF;
 
   -- ══════════════════════════════════════════════════════════
   -- 🌍 TIMEZONE-AWARE BUGÜN TARİHİ
@@ -224,6 +232,25 @@ BEGIN
            updated_at = now() 
        WHERE user_id = p_user_id;
     END IF;
+  END IF;
+
+  -- ══════════════════════════════════════════════════════════
+  -- 🎯 TEKRARLANAN GÖREV SAYACI (Mission System)
+  -- ══════════════════════════════════════════════════════════
+  
+  IF (
+    SELECT COUNT(*) = SUM(CASE WHEN umc.milestone_id IS NOT NULL THEN 1 ELSE 0 END)
+    FROM milestones m
+    JOIN mission_groups mg ON m.mission_group_id = mg.id
+    LEFT JOIN user_milestone_claims umc ON umc.milestone_id = m.id AND umc.user_id = p_user_id
+    WHERE mg.type = 'test' AND mg.is_repeatable = false
+  ) THEN
+    INSERT INTO user_repeatable_progress (user_id, mission_group_id, incremental_count)
+    SELECT p_user_id, id, 1
+    FROM mission_groups
+    WHERE type = 'test' AND is_repeatable = true
+    ON CONFLICT (user_id, mission_group_id)
+    DO UPDATE SET incremental_count = user_repeatable_progress.incremental_count + 1;
   END IF;
 
   -- ══════════════════════════════════════════════════════════

@@ -77,7 +77,8 @@
             "title": "Çıkış Yap",
             "message": "Hesabınızdan çıkmak istediğinize emin misiniz?",
             "cancel": "İptal",
-            "confirm": "Çıkış Yap"
+            "confirm": "Çıkış Yap",
+            "loadingOverlay": "Çıkış yapılıyor..."
         },
         "deleteAccount": {
             "button": "Hesabımı Sil",

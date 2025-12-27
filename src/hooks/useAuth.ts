@@ -382,9 +382,11 @@ export function useAuthHook() {
             // Apple email already has an account - sign in to that account
             console.log('📧 Apple email exists, signing in to existing account');
 
-            // Delete the anonymous user first
-            await supabase.from('users').delete().eq('id', currentUserId);
-            console.log('🗑️ Deleted anonymous user record');
+            // Delete the anonymous user safely via RPC
+            await supabase.rpc('delete_anonymous_user_safe', {
+              anonymous_user_id: currentUserId
+            });
+            console.log('🗑️ Deleted anonymous user record via RPC');
 
             // Sign in to existing Apple account
             const { data, error } = await supabase.auth.signInWithIdToken({

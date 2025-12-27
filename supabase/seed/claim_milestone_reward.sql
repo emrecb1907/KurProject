@@ -1,5 +1,10 @@
 -- ═══════════════════════════════════════════════════════════════════════════
--- claim_milestone_reward: Milestone ödülünü talep et (v2 - Sequential Check)
+-- claim_milestone_reward: Milestone ödülünü talep et (v3 - Secure)
+-- ═══════════════════════════════════════════════════════════════════════════
+-- Güvenlik Güncellemeleri:
+-- 1. auth.uid() kontrolü eklendi
+-- 2. Race condition koruması (pg_advisory_xact_lock)
+-- 3. ON CONFLICT ile double-claim engeli
 -- ═══════════════════════════════════════════════════════════════════════════
 
 CREATE OR REPLACE FUNCTION claim_milestone_reward(
@@ -22,6 +27,16 @@ DECLARE
   v_cycle_number INTEGER;
   v_previous_claimed BOOLEAN;
 BEGIN
+  -- AUTH KONTROLU
+  IF p_user_id != auth.uid() THEN
+    RETURN jsonb_build_object('success', false, 'error', 'UNAUTHORIZED');
+  END IF;
+
+  -- RACE CONDITION KORUMASI
+  PERFORM pg_advisory_xact_lock(
+    hashtext(p_user_id::text || '_milestone_' || p_milestone_id::text)
+  );
+
   -- Milestone bilgilerini al
   SELECT m.*, mg.type, mg.is_repeatable, mg.id as group_id
   INTO v_milestone
@@ -43,10 +58,7 @@ BEGIN
     RETURN jsonb_build_object('success', false, 'error', 'ALREADY_CLAIMED');
   END IF;
 
-  -- ══════════════════════════════════════════════════════════
-  -- 🔒 SIRALI CLAIM KONTROLÜ (Sequential Check)
-  -- ══════════════════════════════════════════════════════════
-  -- İlk milestone değilse, önceki milestone claim edilmiş olmalı
+  -- SIRALI CLAIM KONTROLU
   IF v_milestone.order_in_group > 1 THEN
     SELECT EXISTS(
       SELECT 1 FROM user_milestone_claims umc
@@ -97,7 +109,12 @@ BEGIN
 
   -- Claim kaydı oluştur
   INSERT INTO user_milestone_claims (user_id, milestone_id)
-  VALUES (p_user_id, p_milestone_id);
+  VALUES (p_user_id, p_milestone_id)
+  ON CONFLICT (user_id, milestone_id) DO NOTHING;
+
+  IF NOT FOUND THEN
+    RETURN jsonb_build_object('success', false, 'error', 'ALREADY_CLAIMED');
+  END IF;
 
   -- Son milestone mı kontrol et
   SELECT v_milestone.order_in_group = MAX(order_in_group)
@@ -105,7 +122,7 @@ BEGIN
   FROM milestones
   WHERE mission_group_id = v_milestone.group_id;
 
-  -- Ünvan varsa ve daha önce kazanılmadıysa ekle
+  -- Unvan varsa ve daha önce kazanılmadıysa ekle
   IF v_milestone.title_reward IS NOT NULL THEN
     SELECT EXISTS(
       SELECT 1 FROM user_titles 
@@ -114,9 +131,9 @@ BEGIN
 
     IF NOT v_title_already_earned THEN
       INSERT INTO user_titles (user_id, title_name)
-      VALUES (p_user_id, v_milestone.title_reward);
+      VALUES (p_user_id, v_milestone.title_reward)
+      ON CONFLICT DO NOTHING;
 
-      -- İlk ünvansa aktif yap
       UPDATE users 
       SET active_title = v_milestone.title_reward
       WHERE id = p_user_id AND active_title IS NULL;
@@ -129,7 +146,6 @@ BEGIN
     SET incremental_count = 0, cycle_number = cycle_number + 1
     WHERE user_id = p_user_id AND mission_group_id = v_milestone.group_id;
 
-    -- Claim kayıtlarını sil (tekrar claim edilebilsin)
     DELETE FROM user_milestone_claims
     WHERE user_id = p_user_id AND milestone_id IN (
       SELECT id FROM milestones WHERE mission_group_id = v_milestone.group_id

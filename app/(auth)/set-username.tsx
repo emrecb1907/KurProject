@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Alert, BackHandler, Image } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button, Card } from '@components/ui';
+import { Button, Card, LoadingOverlay } from '@components/ui';
 import { useAuthHook } from '../../src/hooks';
 import { colors } from '@constants/colors';
 import { supabase } from '@/lib/supabase/client';
@@ -138,67 +138,70 @@ export default function SetUsernameScreen() {
     };
 
     return (
-        <KeyboardAvoidingView
-            style={styles.container}
-            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        >
-            <ScrollView
-                contentContainerStyle={styles.scrollContent}
-                keyboardShouldPersistTaps="handled"
+        <>
+            <LoadingOverlay visible={loading} message={t('auth.setUsername.creating')} />
+            <KeyboardAvoidingView
+                style={styles.container}
+                behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             >
-                <View style={styles.content}>
-                    {/* Logo */}
-                    <Image
-                        source={require('../../assets/splashlogo.png')}
-                        style={styles.logo}
-                        resizeMode="contain"
-                    />
+                <ScrollView
+                    contentContainerStyle={styles.scrollContent}
+                    keyboardShouldPersistTaps="handled"
+                >
+                    <View style={styles.content}>
+                        {/* Logo */}
+                        <Image
+                            source={require('../../assets/splashlogo.png')}
+                            style={styles.logo}
+                            resizeMode="contain"
+                        />
 
-                    <Text style={styles.title}>{t('auth.setUsername.title')}</Text>
-                    <Text style={styles.subtitle}>
-                        {t('auth.setUsername.subtitle')}
-                    </Text>
+                        <Text style={styles.title}>{t('auth.setUsername.title')}</Text>
+                        <Text style={styles.subtitle}>
+                            {t('auth.setUsername.subtitle')}
+                        </Text>
 
-                    <Card style={styles.formCard}>
-                        <View style={styles.inputGroup}>
-                            <Text style={styles.label}>{t('auth.setUsername.usernameLabel')}</Text>
-                            <TextInput
-                                style={styles.input}
-                                placeholder={t('auth.setUsername.usernamePlaceholder')}
-                                placeholderTextColor={colors.textDisabled}
-                                value={username}
-                                onChangeText={setUsername}
-                                autoCapitalize="none"
-                                autoCorrect={false}
-                            />
-                        </View>
-
-                        {error ? (
-                            <View style={styles.errorBox}>
-                                <Text style={styles.errorText}>{error}</Text>
+                        <Card style={styles.formCard}>
+                            <View style={styles.inputGroup}>
+                                <Text style={styles.label}>{t('auth.setUsername.usernameLabel')}</Text>
+                                <TextInput
+                                    style={styles.input}
+                                    placeholder={t('auth.setUsername.usernamePlaceholder')}
+                                    placeholderTextColor={colors.textDisabled}
+                                    value={username}
+                                    onChangeText={setUsername}
+                                    autoCapitalize="none"
+                                    autoCorrect={false}
+                                />
                             </View>
-                        ) : null}
 
-                        <Button
-                            title={loading ? t('auth.setUsername.creating') : t('auth.setUsername.createButton')}
-                            onPress={handleCreate}
-                            disabled={loading}
-                            fullWidth
-                            style={styles.submitButton}
-                        />
+                            {error ? (
+                                <View style={styles.errorBox}>
+                                    <Text style={styles.errorText}>{error}</Text>
+                                </View>
+                            ) : null}
 
-                        <Button
-                            title={t('auth.setUsername.cancelButton')}
-                            onPress={handleCancel}
-                            disabled={loading}
-                            variant="outline"
-                            fullWidth
-                            style={styles.cancelButton}
-                        />
-                    </Card>
-                </View>
-            </ScrollView>
-        </KeyboardAvoidingView>
+                            <Button
+                                title={loading ? t('auth.setUsername.creating') : t('auth.setUsername.createButton')}
+                                onPress={handleCreate}
+                                disabled={loading}
+                                fullWidth
+                                style={styles.submitButton}
+                            />
+
+                            <Button
+                                title={t('auth.setUsername.cancelButton')}
+                                onPress={handleCancel}
+                                disabled={loading}
+                                variant="outline"
+                                fullWidth
+                                style={styles.cancelButton}
+                            />
+                        </Card>
+                    </View>
+                </ScrollView>
+            </KeyboardAvoidingView>
+        </>
     );
 }
 

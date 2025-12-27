@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button } from '@components/ui';
+import { Button, LoadingOverlay } from '@components/ui';
 import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
 import { useAuth } from '@/store';
@@ -22,6 +22,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState('');
 
   // Re-calculate styles when theme changes
   const styles = useMemo(() => getStyles(activeTheme), [themeVersion, activeTheme]);
@@ -33,6 +34,7 @@ export default function LoginScreen() {
     }
 
     setLoading(true);
+    setLoadingMessage(t('auth.login.loadingOverlay'));
     setError('');
 
     const { error: signInError } = await signInWithEmailOrUsername(emailOrUsername, password);
@@ -64,156 +66,160 @@ export default function LoginScreen() {
   const isDark = activeTheme === 'dark';
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
+    <>
+      <LoadingOverlay visible={loading} message={loadingMessage} />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <View style={styles.header}>
-          <Pressable
-            onPress={() => {
-              if (router.canGoBack()) {
-                router.back();
-              } else {
-                router.replace('/(tabs)');
-              }
-            }}
-            style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
-          >
-            <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-          </Pressable>
-          <Text style={styles.headerTitle}>{t('auth.login.title')}</Text>
-          <View style={{ width: 40 }} />
-        </View>
-
-        <View style={styles.content}>
-          <View style={styles.iconContainer}>
-            <BookOpen size={48} color={colors.primary} weight="fill" />
-          </View>
-
-          <View style={styles.form}>
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.login.emailOrUsername')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.login.emailPlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={emailOrUsername}
-                onChangeText={setEmailOrUsername}
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
-            </View>
-
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.login.password')}</Text>
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  style={styles.passwordInput}
-                  placeholder="••••••••"
-                  placeholderTextColor={colors.textDisabled}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                  autoCapitalize="none"
-                />
-                <Pressable
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.eyeIcon}
-                >
-                  {showPassword ? (
-                    <Eye size={20} color={colors.textDisabled} />
-                  ) : (
-                    <EyeSlash size={20} color={colors.textDisabled} />
-                  )}
-                </Pressable>
-              </View>
-            </View>
-
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.header}>
             <Pressable
-              onPress={() => router.push('/(auth)/forgot-password')}
-              style={styles.forgotPasswordContainer}
+              onPress={() => {
+                if (router.canGoBack()) {
+                  router.back();
+                } else {
+                  router.replace('/(tabs)');
+                }
+              }}
+              style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
             >
-              <Text style={styles.forgotPasswordText}>
-                {t('auth.login.forgotPassword') || 'Şifremi Unuttum?'}
-              </Text>
+              <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
             </Pressable>
+            <Text style={styles.headerTitle}>{t('auth.login.title')}</Text>
+            <View style={{ width: 40 }} />
+          </View>
 
-            {error ? (
-              <View style={styles.errorBox}>
-                <Text style={styles.errorText}>{error}</Text>
+          <View style={styles.content}>
+            <View style={styles.iconContainer}>
+              <BookOpen size={48} color={colors.primary} weight="fill" />
+            </View>
+
+            <View style={styles.form}>
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.login.emailOrUsername')}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder={t('auth.login.emailPlaceholder')}
+                  placeholderTextColor={colors.textDisabled}
+                  value={emailOrUsername}
+                  onChangeText={setEmailOrUsername}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
               </View>
-            ) : null}
 
-            <Button
-              title={loading ? t('auth.login.loggingIn') : t('auth.login.loginButton')}
-              onPress={handleLogin}
-              disabled={loading}
-              fullWidth
-              style={styles.submitButton}
-            />
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.login.password')}</Text>
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder="••••••••"
+                    placeholderTextColor={colors.textDisabled}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                  />
+                  <Pressable
+                    onPress={() => setShowPassword(!showPassword)}
+                    style={styles.eyeIcon}
+                  >
+                    {showPassword ? (
+                      <Eye size={20} color={colors.textDisabled} />
+                    ) : (
+                      <EyeSlash size={20} color={colors.textDisabled} />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
 
-            <View style={styles.socialSection}>
-              <SocialLoginButtons
-                onGooglePress={() => {
-                  Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
-                }}
-                onApplePress={async () => {
-                  // Show warning for anonymous users
-                  const proceedWithAppleSignIn = async () => {
-                    setLoading(true);
-                    setError('');
-                    try {
-                      const { error: appleError, isNew } = await signInWithApple();
-                      if (appleError) {
-                        setError(appleError.message || t('auth.errors.loginFailed'));
-                      } else if (isNew) {
-                        router.replace('/(auth)/set-username');
-                      } else {
-                        router.replace('/(tabs)');
-                      }
-                    } catch (err: any) {
-                      setError(err.message || t('auth.errors.loginFailed'));
-                    } finally {
-                      setLoading(false);
-                    }
-                  };
+              <Pressable
+                onPress={() => router.push('/(auth)/forgot-password')}
+                style={styles.forgotPasswordContainer}
+              >
+                <Text style={styles.forgotPasswordText}>
+                  {t('auth.login.forgotPassword') || 'Şifremi Unuttum?'}
+                </Text>
+              </Pressable>
 
-                  if (isAnonymous) {
-                    Alert.alert(
-                      t('auth.login.anonymousWarning.title'),
-                      t('auth.login.anonymousWarning.message'),
-                      [
-                        { text: t('common.cancel'), style: 'cancel' },
-                        {
-                          text: t('common.continue'),
-                          onPress: proceedWithAppleSignIn
-                        }
-                      ]
-                    );
-                  } else {
-                    proceedWithAppleSignIn();
-                  }
-                }}
-                loading={loading}
-                variant="circular"
+              {error ? (
+                <View style={styles.errorBox}>
+                  <Text style={styles.errorText}>{error}</Text>
+                </View>
+              ) : null}
+
+              <Button
+                title={loading ? t('auth.login.loggingIn') : t('auth.login.loginButton')}
+                onPress={handleLogin}
+                disabled={loading}
+                fullWidth
+                style={styles.submitButton}
               />
+
+              <View style={styles.socialSection}>
+                <SocialLoginButtons
+                  onGooglePress={() => {
+                    Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
+                  }}
+                  onApplePress={async () => {
+                    // Show warning for anonymous users
+                    const proceedWithAppleSignIn = async () => {
+                      setLoading(true);
+                      setLoadingMessage(t('auth.login.appleLoadingOverlay'));
+                      setError('');
+                      try {
+                        const { error: appleError, isNew } = await signInWithApple();
+                        if (appleError) {
+                          setError(appleError.message || t('auth.errors.loginFailed'));
+                        } else if (isNew) {
+                          router.replace('/(auth)/set-username');
+                        } else {
+                          router.replace('/(tabs)');
+                        }
+                      } catch (err: any) {
+                        setError(err.message || t('auth.errors.loginFailed'));
+                      } finally {
+                        setLoading(false);
+                      }
+                    };
+
+                    if (isAnonymous) {
+                      Alert.alert(
+                        t('auth.login.anonymousWarning.title'),
+                        t('auth.login.anonymousWarning.message'),
+                        [
+                          { text: t('common.cancel'), style: 'cancel' },
+                          {
+                            text: t('common.continue'),
+                            onPress: proceedWithAppleSignIn
+                          }
+                        ]
+                      );
+                    } else {
+                      proceedWithAppleSignIn();
+                    }
+                  }}
+                  loading={loading}
+                  variant="circular"
+                />
+              </View>
+            </View>
+
+            <View style={styles.footer}>
+              <Text style={styles.footerText}>{t('auth.login.noAccount')}</Text>
+              <Pressable onPress={() => router.push('/(auth)/register')}>
+                <Text style={styles.linkText}> {t('auth.login.register')}</Text>
+              </Pressable>
             </View>
           </View>
-
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>{t('auth.login.noAccount')}</Text>
-            <Pressable onPress={() => router.push('/(auth)/register')}>
-              <Text style={styles.linkText}> {t('auth.login.register')}</Text>
-            </Pressable>
-          </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </>
   );
 }
 

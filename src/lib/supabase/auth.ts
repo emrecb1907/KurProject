@@ -322,14 +322,12 @@ export const authService = {
         throw new Error('Could not get email from Apple');
       }
 
-      // Check if this email already exists in users table
-      const { data: existingUser } = await supabase
-        .from('users')
-        .select('id')
-        .eq('email', appleEmail)
-        .single();
+      // Check if this email already exists in users table (server-side for security)
+      const { data: emailExists } = await supabase.rpc('check_email_exists', {
+        email_to_check: appleEmail
+      });
 
-      if (existingUser) {
+      if (emailExists) {
         console.log('📧 Email already registered, need to use signIn + migration');
         // Return special error to trigger fallback to signInWithApple + migration
         return {

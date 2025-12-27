@@ -13,7 +13,7 @@ import { useAuthHook } from '@/hooks';
 import { useAuth } from '@/store';
 import { supabase } from '@/lib/supabase/client';
 import { Modal } from '@components/ui/Modal';
-import { HeaderButton } from '@components/ui';
+import { HeaderButton, LoadingOverlay } from '@components/ui';
 import { getCurrentLanguage } from '@/lib/i18n';
 import { ErrorBoundary } from '@/components/ErrorBoundary';
 import { usePremium } from '@/contexts/AdaptyProvider';
@@ -40,10 +40,13 @@ function SettingsContent() {
   const [showDeleteAccountModal, setShowDeleteAccountModal] = useState(false);
   const [triggerError, setTriggerError] = useState(false); // 🧪 Test için
   const [isRestoring, setIsRestoring] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const [isDeletingAccount, setIsDeletingAccount] = useState(false);
   const { restore } = usePremium();
 
   // Check if user has a password (email provider)
   const [hasPassword, setHasPassword] = useState(true);
+  const [isRelayEmail, setIsRelayEmail] = useState(false);
 
   // Animation values for logout modal
   const [logoutScaleAnim] = useState(new Animated.Value(0));
@@ -117,6 +120,10 @@ function SettingsContent() {
             // If has_password is explicitly false or undefined, user doesn't have password
             // even if they have email identity (e.g., anonymous converted via updateUser)
             setHasPassword(hasPasswordMeta);
+
+            // Check if user has Apple relay email (Hide My Email)
+            const userEmail = authUser.email || '';
+            setIsRelayEmail(userEmail.endsWith('@privaterelay.appleid.com'));
           }
         } catch (err) {
           console.error('Error checking password status:', err);
@@ -135,7 +142,9 @@ function SettingsContent() {
   const confirmLogout = async () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
     setShowLogoutModal(false);
+    setIsLoggingOut(true);
     await signOut();
+    setIsLoggingOut(false);
     router.replace('/(auth)/welcome');
   };
 
@@ -152,6 +161,9 @@ function SettingsContent() {
         return;
       }
 
+      setShowDeleteAccountModal(false);
+      setIsDeletingAccount(true);
+
       // Delete user data from database
       const { error: dbError } = await supabase
         .from('users')
@@ -160,18 +172,18 @@ function SettingsContent() {
 
       if (dbError) {
         console.error('Error deleting user data:', dbError);
-        setShowDeleteAccountModal(false);
+        setIsDeletingAccount(false);
         return;
       }
 
       // Sign out (auth user deletion requires admin API)
       // In production, you might want to use a server-side function for complete deletion
       await signOut();
-      setShowDeleteAccountModal(false);
+      setIsDeletingAccount(false);
       router.replace('/(auth)/welcome');
     } catch (error) {
       console.error('Error deleting account:', error);
-      setShowDeleteAccountModal(false);
+      setIsDeletingAccount(false);
     }
   };
 
@@ -205,8 +217,9 @@ function SettingsContent() {
       },
     ];
 
-    // Add change-password option only for non-anonymous users
-    if (!isAnonymous) {
+    // Add change-password option only for non-anonymous users who don't have relay email
+    // Relay email users can't use email/password login (they don't know their relay email)
+    if (!isAnonymous && !isRelayEmail) {
       accountOptions.unshift({
         id: 'change-password',
         title: hasPassword
@@ -568,347 +581,351 @@ function SettingsContent() {
   }), [themeVersion]);
 
   return (
-    <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
-      {/* Header */}
-      <View style={styles.header}>
-        <HeaderButton
-          title={t('common.back')}
-          onPress={() => {
-            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-            router.back();
-          }}
-          style={{ marginLeft: -8 }}
-        />
-        <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
-      </View>
-
-      {/* Content */}
-      <ScrollView
-        ref={scrollViewRef}
-        style={styles.content}
-        contentContainerStyle={styles.scrollContent}
-      >
-        {/* Theme Section */}
-        <View style={styles.themeSection}>
-          <View style={styles.themeSectionHeader}>
-            <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.themeSectionTitle}>{t('profile.theme.label')}</Text>
-          </View>
-
-          <View style={styles.themeContainer}>
-            <View style={styles.themeButtons}>
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'light' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('light');
-                }}
-              >
-                <Sun
-                  size={20}
-                  color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'light' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.light')}
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'dark' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('dark');
-                }}
-              >
-                <Moon
-                  size={20}
-                  color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'dark' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.dark')}
-                </Text>
-              </Pressable>
-
-              <Pressable
-                style={[
-                  styles.themeButton,
-                  themeMode === 'system' && styles.themeButtonActive
-                ]}
-                onPress={() => {
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                  setThemeMode('system');
-                }}
-              >
-                <Desktop
-                  size={20}
-                  color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary}
-                  weight="fill"
-                />
-                <Text style={[
-                  styles.themeButtonText,
-                  themeMode === 'system' && styles.themeButtonTextActive
-                ]}>
-                  {t('profile.theme.system')}
-                </Text>
-              </Pressable>
-            </View>
-            <Text style={styles.themeHint}>
-              {themeMode === 'system'
-                ? `${t('profile.theme.activeTheme')}: ${activeTheme === 'light' ? t('profile.theme.light') : t('profile.theme.dark')} (${t('profile.theme.systemSettings')})`
-                : `${t('profile.theme.activeTheme')}: ${themeMode === 'light' ? t('profile.theme.light') : t('profile.theme.dark')}`}
-            </Text>
-          </View>
-        </View>
-
-        {/* Language Section */}
-        <View style={styles.languageSection}>
-          <View style={styles.languageSectionHeader}>
-            <Globe size={24} color={colors.textPrimary} weight="fill" />
-            <Text style={styles.languageSectionTitle}>{t('profile.settings.language.title')}</Text>
-          </View>
-
-          <Pressable
-            style={styles.languageItem}
+    <>
+      <LoadingOverlay visible={isLoggingOut} message={t('profile.settings.logout.loadingOverlay')} />
+      <LoadingOverlay visible={isDeletingAccount} message={t('profile.settings.deleteAccount.loadingOverlay', 'Hesap siliniyor...')} />
+      <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
+        {/* Header */}
+        <View style={styles.header}>
+          <HeaderButton
+            title={t('common.back')}
             onPress={() => {
               Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-              router.push('/language-settings');
+              router.back();
             }}
-          >
-            <Text style={styles.languageItemText}>{t('profile.settings.language.select')}</Text>
-            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-              <Text style={styles.languageItemValue}>
-                {selectedLanguage === 'tr' ? t('profile.settings.language.turkish') : t('profile.settings.language.english')}
-              </Text>
-              <CaretRight size={20} color={colors.textSecondary} weight="bold" />
-            </View>
-          </Pressable>
+            style={{ marginLeft: -8 }}
+          />
+          <Text style={styles.headerTitle}>{t('profile.settings.title')}</Text>
         </View>
 
-        {settingsSections.map((section, sectionIndex) => (
-          <View key={sectionIndex} style={styles.section}>
-            <Text style={styles.sectionTitle}>{section.title}</Text>
-            {section.options.map((option, optionIndex) => (
-              <Pressable
-                key={option.id}
-                style={styles.optionItem}
-                onPress={option.onPress}
-              >
-                <Text style={styles.optionText}>{option.title}</Text>
-                <CaretRight size={20} color={colors.textSecondary} weight="bold" />
-              </Pressable>
-            ))}
+        {/* Content */}
+        <ScrollView
+          ref={scrollViewRef}
+          style={styles.content}
+          contentContainerStyle={styles.scrollContent}
+        >
+          {/* Theme Section */}
+          <View style={styles.themeSection}>
+            <View style={styles.themeSectionHeader}>
+              <Lightbulb size={24} color={colors.textPrimary} weight="fill" />
+              <Text style={styles.themeSectionTitle}>{t('profile.theme.label')}</Text>
+            </View>
+
+            <View style={styles.themeContainer}>
+              <View style={styles.themeButtons}>
+                <Pressable
+                  style={[
+                    styles.themeButton,
+                    themeMode === 'light' && styles.themeButtonActive
+                  ]}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setThemeMode('light');
+                  }}
+                >
+                  <Sun
+                    size={20}
+                    color={themeMode === 'light' ? colors.textOnPrimary : colors.textSecondary}
+                    weight="fill"
+                  />
+                  <Text style={[
+                    styles.themeButtonText,
+                    themeMode === 'light' && styles.themeButtonTextActive
+                  ]}>
+                    {t('profile.theme.light')}
+                  </Text>
+                </Pressable>
+
+                <Pressable
+                  style={[
+                    styles.themeButton,
+                    themeMode === 'dark' && styles.themeButtonActive
+                  ]}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setThemeMode('dark');
+                  }}
+                >
+                  <Moon
+                    size={20}
+                    color={themeMode === 'dark' ? colors.textOnPrimary : colors.textSecondary}
+                    weight="fill"
+                  />
+                  <Text style={[
+                    styles.themeButtonText,
+                    themeMode === 'dark' && styles.themeButtonTextActive
+                  ]}>
+                    {t('profile.theme.dark')}
+                  </Text>
+                </Pressable>
+
+                <Pressable
+                  style={[
+                    styles.themeButton,
+                    themeMode === 'system' && styles.themeButtonActive
+                  ]}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setThemeMode('system');
+                  }}
+                >
+                  <Desktop
+                    size={20}
+                    color={themeMode === 'system' ? colors.textOnPrimary : colors.textSecondary}
+                    weight="fill"
+                  />
+                  <Text style={[
+                    styles.themeButtonText,
+                    themeMode === 'system' && styles.themeButtonTextActive
+                  ]}>
+                    {t('profile.theme.system')}
+                  </Text>
+                </Pressable>
+              </View>
+              <Text style={styles.themeHint}>
+                {themeMode === 'system'
+                  ? `${t('profile.theme.activeTheme')}: ${activeTheme === 'light' ? t('profile.theme.light') : t('profile.theme.dark')} (${t('profile.theme.systemSettings')})`
+                  : `${t('profile.theme.activeTheme')}: ${themeMode === 'light' ? t('profile.theme.light') : t('profile.theme.dark')}`}
+              </Text>
+            </View>
           </View>
-        ))}
 
-        {/* Account Actions - Only show if authenticated AND not anonymous */}
-        {isAuthenticated && !isAnonymous && (
-          <View style={styles.accountSection}>
-            <View style={styles.accountButtons}>
-              {/* Restore Purchases Button - Apple Requirement */}
-              <Pressable
-                style={[styles.restoreButton, isRestoring && styles.restoreButtonDisabled]}
-                onPress={() => {
-                  if (isRestoring) return;
-                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+          {/* Language Section */}
+          <View style={styles.languageSection}>
+            <View style={styles.languageSectionHeader}>
+              <Globe size={24} color={colors.textPrimary} weight="fill" />
+              <Text style={styles.languageSectionTitle}>{t('profile.settings.language.title')}</Text>
+            </View>
 
-                  Alert.alert(
-                    t('premiumpaywall.restoreConfirm.title'),
-                    t('premiumpaywall.restoreConfirm.message'),
-                    [
-                      {
-                        text: t('premiumpaywall.restoreConfirm.cancel'),
-                        style: 'cancel'
-                      },
-                      {
-                        text: t('premiumpaywall.restoreConfirm.continue'),
-                        onPress: async () => {
-                          setIsRestoring(true);
-                          try {
-                            const restored = await restore();
-                            if (restored) {
-                              Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+            <Pressable
+              style={styles.languageItem}
+              onPress={() => {
+                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                router.push('/language-settings');
+              }}
+            >
+              <Text style={styles.languageItemText}>{t('profile.settings.language.select')}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                <Text style={styles.languageItemValue}>
+                  {selectedLanguage === 'tr' ? t('profile.settings.language.turkish') : t('profile.settings.language.english')}
+                </Text>
+                <CaretRight size={20} color={colors.textSecondary} weight="bold" />
+              </View>
+            </Pressable>
+          </View>
+
+          {settingsSections.map((section, sectionIndex) => (
+            <View key={sectionIndex} style={styles.section}>
+              <Text style={styles.sectionTitle}>{section.title}</Text>
+              {section.options.map((option, optionIndex) => (
+                <Pressable
+                  key={option.id}
+                  style={styles.optionItem}
+                  onPress={option.onPress}
+                >
+                  <Text style={styles.optionText}>{option.title}</Text>
+                  <CaretRight size={20} color={colors.textSecondary} weight="bold" />
+                </Pressable>
+              ))}
+            </View>
+          ))}
+
+          {/* Account Actions - Only show if authenticated AND not anonymous */}
+          {isAuthenticated && !isAnonymous && (
+            <View style={styles.accountSection}>
+              <View style={styles.accountButtons}>
+                {/* Restore Purchases Button - Apple Requirement */}
+                <Pressable
+                  style={[styles.restoreButton, isRestoring && styles.restoreButtonDisabled]}
+                  onPress={() => {
+                    if (isRestoring) return;
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+
+                    Alert.alert(
+                      t('premiumpaywall.restoreConfirm.title'),
+                      t('premiumpaywall.restoreConfirm.message'),
+                      [
+                        {
+                          text: t('premiumpaywall.restoreConfirm.cancel'),
+                          style: 'cancel'
+                        },
+                        {
+                          text: t('premiumpaywall.restoreConfirm.continue'),
+                          onPress: async () => {
+                            setIsRestoring(true);
+                            try {
+                              const restored = await restore();
+                              if (restored) {
+                                Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+                                Alert.alert(
+                                  t('premiumpaywall.restoreResult.success.title'),
+                                  t('premiumpaywall.restoreResult.success.message')
+                                );
+                              } else {
+                                Alert.alert(
+                                  t('premiumpaywall.restoreResult.noSubscription.title'),
+                                  t('premiumpaywall.restoreResult.noSubscription.message')
+                                );
+                              }
+                            } catch (error) {
                               Alert.alert(
-                                t('premiumpaywall.restoreResult.success.title'),
-                                t('premiumpaywall.restoreResult.success.message')
+                                t('common.error', 'Hata'),
+                                t('premiumpaywall.errors.restoreFailed')
                               );
-                            } else {
-                              Alert.alert(
-                                t('premiumpaywall.restoreResult.noSubscription.title'),
-                                t('premiumpaywall.restoreResult.noSubscription.message')
-                              );
+                            } finally {
+                              setIsRestoring(false);
                             }
-                          } catch (error) {
-                            Alert.alert(
-                              t('common.error', 'Hata'),
-                              t('premiumpaywall.errors.restoreFailed')
-                            );
-                          } finally {
-                            setIsRestoring(false);
                           }
                         }
-                      }
-                    ]
-                  );
-                }}
-                disabled={isRestoring}
-              >
-                {isRestoring ? (
-                  <ActivityIndicator size="small" color={colors.textPrimary} />
-                ) : (
-                  <Text style={styles.restoreButtonText}>{t('profile.settings.restorePurchases')}</Text>
-                )}
-              </Pressable>
+                      ]
+                    );
+                  }}
+                  disabled={isRestoring}
+                >
+                  {isRestoring ? (
+                    <ActivityIndicator size="small" color={colors.textPrimary} />
+                  ) : (
+                    <Text style={styles.restoreButtonText}>{t('profile.settings.restorePurchases')}</Text>
+                  )}
+                </Pressable>
 
-              <Pressable
-                style={styles.logoutButton}
-                onPress={handleLogout}
-              >
-                <SignOut size={20} color={colors.textOnPrimary} weight="fill" />
-                <Text style={styles.logoutButtonText}>{t('profile.settings.logout.button')}</Text>
-              </Pressable>
+                <Pressable
+                  style={styles.logoutButton}
+                  onPress={handleLogout}
+                >
+                  <SignOut size={20} color={colors.textOnPrimary} weight="fill" />
+                  <Text style={styles.logoutButtonText}>{t('profile.settings.logout.button')}</Text>
+                </Pressable>
 
-              <Pressable
-                style={styles.deleteAccountButton}
-                onPress={handleDeleteAccount}
-              >
-                <Trash size={20} color={colors.textOnPrimary} weight="fill" />
-                <Text style={styles.deleteAccountButtonText}>{t('profile.settings.deleteAccount.button')}</Text>
-              </Pressable>
+                <Pressable
+                  style={styles.deleteAccountButton}
+                  onPress={handleDeleteAccount}
+                >
+                  <Trash size={20} color={colors.textOnPrimary} weight="fill" />
+                  <Text style={styles.deleteAccountButtonText}>{t('profile.settings.deleteAccount.button')}</Text>
+                </Pressable>
+              </View>
             </View>
+          )}
+
+          {/* App Version */}
+          <View style={styles.versionContainer}>
+            <Text style={styles.versionText}>
+              {t('profile.settings.version')} {Constants.expoConfig?.version || '1.0.0'}
+            </Text>
           </View>
-        )}
 
-        {/* App Version */}
-        <View style={styles.versionContainer}>
-          <Text style={styles.versionText}>
-            {t('profile.settings.version')} {Constants.expoConfig?.version || '1.0.0'}
-          </Text>
-        </View>
+          {/* Bottom Spacing */}
+          <View style={{ height: 40 }} />
+        </ScrollView>
 
-        {/* Bottom Spacing */}
-        <View style={{ height: 40 }} />
-      </ScrollView>
-
-      {/* Logout Confirmation Modal */}
-      <Modal
-        visible={showLogoutModal}
-        onClose={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          setShowLogoutModal(false);
-        }}
-        showCloseButton={false}
-        transparent
-      >
-        <Animated.View
-          style={[
-            styles.modalContent,
-            {
-              opacity: logoutFadeAnim,
-              transform: [{ scale: logoutScaleAnim }],
-            },
-          ]}
+        {/* Logout Confirmation Modal */}
+        <Modal
+          visible={showLogoutModal}
+          onClose={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            setShowLogoutModal(false);
+          }}
+          showCloseButton={false}
+          transparent
         >
           <Animated.View
             style={[
-              styles.modalEmojiContainer,
+              styles.modalContent,
               {
+                opacity: logoutFadeAnim,
                 transform: [{ scale: logoutScaleAnim }],
               },
             ]}
           >
-            <Text style={styles.modalEmoji}>🚪</Text>
+            <Animated.View
+              style={[
+                styles.modalEmojiContainer,
+                {
+                  transform: [{ scale: logoutScaleAnim }],
+                },
+              ]}
+            >
+              <Text style={styles.modalEmoji}>🚪</Text>
+            </Animated.View>
+            <Text style={styles.modalTitle}>{t('profile.settings.logout.title')}</Text>
+            <Text style={styles.modalMessage}>
+              {t('profile.settings.logout.message')}
+            </Text>
+            <View style={styles.modalButtons}>
+              <Pressable
+                style={[styles.modalButton, styles.modalButtonCancel]}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setShowLogoutModal(false);
+                }}
+              >
+                <Text style={styles.modalButtonCancelText}>{t('profile.settings.logout.cancel')}</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.modalButton, styles.modalButtonConfirm]}
+                onPress={confirmLogout}
+              >
+                <Text style={styles.modalButtonConfirmText}>{t('profile.settings.logout.confirm')}</Text>
+              </Pressable>
+            </View>
           </Animated.View>
-          <Text style={styles.modalTitle}>{t('profile.settings.logout.title')}</Text>
-          <Text style={styles.modalMessage}>
-            {t('profile.settings.logout.message')}
-          </Text>
-          <View style={styles.modalButtons}>
-            <Pressable
-              style={[styles.modalButton, styles.modalButtonCancel]}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                setShowLogoutModal(false);
-              }}
-            >
-              <Text style={styles.modalButtonCancelText}>{t('profile.settings.logout.cancel')}</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.modalButton, styles.modalButtonConfirm]}
-              onPress={confirmLogout}
-            >
-              <Text style={styles.modalButtonConfirmText}>{t('profile.settings.logout.confirm')}</Text>
-            </Pressable>
-          </View>
-        </Animated.View>
-      </Modal>
+        </Modal>
 
-      {/* Delete Account Confirmation Modal */}
-      <Modal
-        visible={showDeleteAccountModal}
-        onClose={() => {
-          Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          setShowDeleteAccountModal(false);
-        }}
-        showCloseButton={false}
-        transparent
-      >
-        <Animated.View
-          style={[
-            styles.modalContent,
-            {
-              opacity: deleteFadeAnim,
-              transform: [{ scale: deleteScaleAnim }],
-            },
-          ]}
+        {/* Delete Account Confirmation Modal */}
+        <Modal
+          visible={showDeleteAccountModal}
+          onClose={() => {
+            Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+            setShowDeleteAccountModal(false);
+          }}
+          showCloseButton={false}
+          transparent
         >
           <Animated.View
             style={[
-              styles.modalEmojiContainer,
+              styles.modalContent,
               {
+                opacity: deleteFadeAnim,
                 transform: [{ scale: deleteScaleAnim }],
               },
             ]}
           >
-            <Text style={styles.modalEmoji}>⚠️</Text>
+            <Animated.View
+              style={[
+                styles.modalEmojiContainer,
+                {
+                  transform: [{ scale: deleteScaleAnim }],
+                },
+              ]}
+            >
+              <Text style={styles.modalEmoji}>⚠️</Text>
+            </Animated.View>
+            <Text style={styles.modalTitle}>{t('profile.settings.deleteAccount.title')}</Text>
+            <Text style={styles.modalMessage}>
+              {t('profile.settings.deleteAccount.message')}
+            </Text>
+            <View style={styles.modalButtons}>
+              <Pressable
+                style={[styles.modalButton, styles.modalButtonCancel]}
+                onPress={() => {
+                  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                  setShowDeleteAccountModal(false);
+                }}
+              >
+                <Text style={styles.modalButtonCancelText}>{t('profile.settings.deleteAccount.cancel')}</Text>
+              </Pressable>
+              <Pressable
+                style={[styles.modalButton, styles.modalButtonDelete]}
+                onPress={confirmDeleteAccount}
+              >
+                <Text style={styles.modalButtonDeleteText}>{t('profile.settings.deleteAccount.confirm')}</Text>
+              </Pressable>
+            </View>
           </Animated.View>
-          <Text style={styles.modalTitle}>{t('profile.settings.deleteAccount.title')}</Text>
-          <Text style={styles.modalMessage}>
-            {t('profile.settings.deleteAccount.message')}
-          </Text>
-          <View style={styles.modalButtons}>
-            <Pressable
-              style={[styles.modalButton, styles.modalButtonCancel]}
-              onPress={() => {
-                Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                setShowDeleteAccountModal(false);
-              }}
-            >
-              <Text style={styles.modalButtonCancelText}>{t('profile.settings.deleteAccount.cancel')}</Text>
-            </Pressable>
-            <Pressable
-              style={[styles.modalButton, styles.modalButtonDelete]}
-              onPress={confirmDeleteAccount}
-            >
-              <Text style={styles.modalButtonDeleteText}>{t('profile.settings.deleteAccount.confirm')}</Text>
-            </Pressable>
-          </View>
-        </Animated.View>
-      </Modal>
-    </SafeAreaView >
+        </Modal>
+      </SafeAreaView>
+    </>
   );
 }
 

@@ -43,6 +43,14 @@ export default function ChangePasswordScreen() {
             try {
                 const { data: { user } } = await supabase.auth.getUser();
                 if (user) {
+                    // Check for Apple relay email - these users can't use email/password
+                    const userEmail = user.email || '';
+                    if (userEmail.endsWith('@privaterelay.appleid.com')) {
+                        console.log('🚫 Relay email user cannot set password, redirecting...');
+                        router.back();
+                        return;
+                    }
+
                     // has_password metadata is the definitive source
                     // When user sets a password, this flag is set to true
                     const hasPasswordMeta = user.user_metadata?.has_password === true;

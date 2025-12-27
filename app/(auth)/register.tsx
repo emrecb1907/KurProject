@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Button, Card } from '@components/ui';
+import { Button, Card, LoadingOverlay } from '@components/ui';
 import { useAuthHook } from '@hooks';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
@@ -101,158 +101,161 @@ export default function RegisterScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
-      <ScrollView
-        contentContainerStyle={styles.scrollContent}
-        keyboardShouldPersistTaps="handled"
-        showsVerticalScrollIndicator={false}
+    <>
+      <LoadingOverlay visible={loading} message={t('auth.register.loadingOverlay')} />
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       >
-        <View style={styles.header}>
-          <Pressable onPress={() => {
-            if (router.canGoBack()) {
-              router.back();
-            } else {
-              router.replace('/(auth)/login');
-            }
-          }}
-            style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
-          >
-            <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
-          </Pressable>
-          <Text style={styles.headerTitle}>{t('auth.register.title')}</Text>
-          <View style={{ width: 40 }} />
-        </View>
-
-        <View style={styles.content}>
-          <Card style={styles.formCard}>
-            {/* Email Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.register.email')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.register.emailPlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={email}
-                onChangeText={setEmail}
-                autoCapitalize="none"
-                keyboardType="email-address"
-                autoCorrect={false}
-              />
-            </View>
-
-            {/* Username Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.register.username')}</Text>
-              <TextInput
-                style={styles.input}
-                placeholder={t('auth.register.usernamePlaceholder')}
-                placeholderTextColor={colors.textDisabled}
-                value={username}
-                onChangeText={setUsername}
-                autoCapitalize="none"
-                autoCorrect={false}
-              />
-            </View>
-
-            {/* Password Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.register.password')}</Text>
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  style={styles.passwordInput}
-                  placeholder={t('auth.register.passwordPlaceholder')}
-                  placeholderTextColor={colors.textDisabled}
-                  value={password}
-                  onChangeText={setPassword}
-                  secureTextEntry={!showPassword}
-                  autoCapitalize="none"
-                />
-                <Pressable
-                  onPress={() => setShowPassword(!showPassword)}
-                  style={styles.eyeIcon}
-                >
-                  {showPassword ? (
-                    <Eye size={20} color={colors.textDisabled} />
-                  ) : (
-                    <EyeSlash size={20} color={colors.textDisabled} />
-                  )}
-                </Pressable>
-              </View>
-            </View>
-
-            {/* Confirm Password Input */}
-            <View style={styles.inputGroup}>
-              <Text style={styles.label}>{t('auth.register.confirmPassword')}</Text>
-              <View style={styles.passwordContainer}>
-                <TextInput
-                  style={styles.passwordInput}
-                  placeholder={t('auth.register.confirmPasswordPlaceholder')}
-                  placeholderTextColor={colors.textDisabled}
-                  value={confirmPassword}
-                  onChangeText={setConfirmPassword}
-                  secureTextEntry={!showConfirmPassword}
-                  autoCapitalize="none"
-                />
-                <Pressable
-                  onPress={() => setShowConfirmPassword(!showConfirmPassword)}
-                  style={styles.eyeIcon}
-                >
-                  {showConfirmPassword ? (
-                    <Eye size={20} color={colors.textDisabled} />
-                  ) : (
-                    <EyeSlash size={20} color={colors.textDisabled} />
-                  )}
-                </Pressable>
-              </View>
-            </View>
-          </Card>
-
-          {/* Terms Checkbox */}
-          <Pressable
-            style={styles.checkboxContainer}
-            onPress={() => setTermsAccepted(!termsAccepted)}
-          >
-            {termsAccepted ? (
-              <CheckCircle size={24} color={colors.primary} weight="fill" />
-            ) : (
-              <View style={{ width: 24, height: 24, borderRadius: 12, borderWidth: 2, borderColor: colors.textSecondary }} />
-            )}
-            <Text style={[styles.checkboxText, { color: termsAccepted ? colors.textPrimary : colors.textSecondary }]}>
-              {t('auth.register.termsAndPrivacy')}
-            </Text>
-          </Pressable>
-
-          {error ? (
-            <View style={styles.errorBox}>
-              <Text style={styles.errorText}>{error}</Text>
-            </View>
-          ) : null}
-
-          <Button
-            title={loading ? t('auth.register.registering') : t('auth.register.registerButton')}
-            onPress={handleRegister}
-            disabled={loading}
-            fullWidth
-            style={styles.submitButton}
-          />
-
-          {/* Progress Note */}
-          <Text style={styles.progressNote}>
-            {t('auth.register.progressNote')}
-          </Text>
-
-          <View style={styles.footer}>
-            <Text style={styles.footerText}>{t('auth.register.hasAccount')}</Text>
-            <Pressable onPress={() => router.push('/(auth)/login')}>
-              <Text style={styles.linkText}> {t('auth.register.login')}</Text>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.header}>
+            <Pressable onPress={() => {
+              if (router.canGoBack()) {
+                router.back();
+              } else {
+                router.replace('/(auth)/login');
+              }
+            }}
+              style={({ pressed }) => [styles.backButton, pressed && styles.backButtonPressed]}
+            >
+              <ArrowLeft size={24} color={colors.textPrimary} weight="bold" />
             </Pressable>
+            <Text style={styles.headerTitle}>{t('auth.register.title')}</Text>
+            <View style={{ width: 40 }} />
           </View>
-        </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+
+          <View style={styles.content}>
+            <Card style={styles.formCard}>
+              {/* Email Input */}
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.register.email')}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder={t('auth.register.emailPlaceholder')}
+                  placeholderTextColor={colors.textDisabled}
+                  value={email}
+                  onChangeText={setEmail}
+                  autoCapitalize="none"
+                  keyboardType="email-address"
+                  autoCorrect={false}
+                />
+              </View>
+
+              {/* Username Input */}
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.register.username')}</Text>
+                <TextInput
+                  style={styles.input}
+                  placeholder={t('auth.register.usernamePlaceholder')}
+                  placeholderTextColor={colors.textDisabled}
+                  value={username}
+                  onChangeText={setUsername}
+                  autoCapitalize="none"
+                  autoCorrect={false}
+                />
+              </View>
+
+              {/* Password Input */}
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.register.password')}</Text>
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder={t('auth.register.passwordPlaceholder')}
+                    placeholderTextColor={colors.textDisabled}
+                    value={password}
+                    onChangeText={setPassword}
+                    secureTextEntry={!showPassword}
+                    autoCapitalize="none"
+                  />
+                  <Pressable
+                    onPress={() => setShowPassword(!showPassword)}
+                    style={styles.eyeIcon}
+                  >
+                    {showPassword ? (
+                      <Eye size={20} color={colors.textDisabled} />
+                    ) : (
+                      <EyeSlash size={20} color={colors.textDisabled} />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+
+              {/* Confirm Password Input */}
+              <View style={styles.inputGroup}>
+                <Text style={styles.label}>{t('auth.register.confirmPassword')}</Text>
+                <View style={styles.passwordContainer}>
+                  <TextInput
+                    style={styles.passwordInput}
+                    placeholder={t('auth.register.confirmPasswordPlaceholder')}
+                    placeholderTextColor={colors.textDisabled}
+                    value={confirmPassword}
+                    onChangeText={setConfirmPassword}
+                    secureTextEntry={!showConfirmPassword}
+                    autoCapitalize="none"
+                  />
+                  <Pressable
+                    onPress={() => setShowConfirmPassword(!showConfirmPassword)}
+                    style={styles.eyeIcon}
+                  >
+                    {showConfirmPassword ? (
+                      <Eye size={20} color={colors.textDisabled} />
+                    ) : (
+                      <EyeSlash size={20} color={colors.textDisabled} />
+                    )}
+                  </Pressable>
+                </View>
+              </View>
+            </Card>
+
+            {/* Terms Checkbox */}
+            <Pressable
+              style={styles.checkboxContainer}
+              onPress={() => setTermsAccepted(!termsAccepted)}
+            >
+              {termsAccepted ? (
+                <CheckCircle size={24} color={colors.primary} weight="fill" />
+              ) : (
+                <View style={{ width: 24, height: 24, borderRadius: 12, borderWidth: 2, borderColor: colors.textSecondary }} />
+              )}
+              <Text style={[styles.checkboxText, { color: termsAccepted ? colors.textPrimary : colors.textSecondary }]}>
+                {t('auth.register.termsAndPrivacy')}
+              </Text>
+            </Pressable>
+
+            {error ? (
+              <View style={styles.errorBox}>
+                <Text style={styles.errorText}>{error}</Text>
+              </View>
+            ) : null}
+
+            <Button
+              title={loading ? t('auth.register.registering') : t('auth.register.registerButton')}
+              onPress={handleRegister}
+              disabled={loading}
+              fullWidth
+              style={styles.submitButton}
+            />
+
+            {/* Progress Note */}
+            <Text style={styles.progressNote}>
+              {t('auth.register.progressNote')}
+            </Text>
+
+            <View style={styles.footer}>
+              <Text style={styles.footerText}>{t('auth.register.hasAccount')}</Text>
+              <Pressable onPress={() => router.push('/(auth)/login')}>
+                <Text style={styles.linkText}> {t('auth.register.login')}</Text>
+              </Pressable>
+            </View>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </>
   );
 }
 
