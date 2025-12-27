@@ -31,17 +31,17 @@ export function Button({
     styles.button,
     styles[`button_${size}`],
     styles[`button_${variant}`],
-    fullWidth && styles.fullWidth,
-    disabled && styles.disabled,
+    fullWidth ? styles.fullWidth : {},
+    disabled ? styles.disabled : {},
     style as ViewStyle,
-  ];
+  ].filter(Boolean) as ViewStyle[];
 
   const textStyle: TextStyle[] = [
     styles.text,
     styles[`text_${size}`],
     variant === 'primary' ? { color: primaryTextColor } : styles[`text_${variant}`],
-    disabled && styles.textDisabled,
-  ];
+    disabled ? styles.textDisabled : {},
+  ].filter(Boolean) as TextStyle[];
 
   return (
     <Pressable
@@ -62,7 +62,7 @@ const getStyles = () => StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: colors.shadowMedium,
+    shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
@@ -137,7 +137,7 @@ const getStyles = () => StyleSheet.create({
     transform: [{ scale: 0.98 }],
   },
   disabled: {
-    backgroundColor: colors.surfaceVariant,
+    backgroundColor: colors.surfaceLight,
     opacity: 0.5,
   },
   textDisabled: {

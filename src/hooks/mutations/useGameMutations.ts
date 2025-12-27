@@ -129,6 +129,7 @@ export function useCompleteGameMutation() {
                 queryClient.invalidateQueries({ queryKey: ['leaderboard'] });
                 queryClient.invalidateQueries({ queryKey: ['dailyProgress', user.id] });
                 queryClient.invalidateQueries({ queryKey: ['completedLessons', user.id] });
+                queryClient.invalidateQueries({ queryKey: ['missions', user.id] }); // 🎯 For chest notification dot
                 logger.info('React Query caches invalidated');
 
                 // Sync Zustand store with fresh data to prevent stale level checks in next run

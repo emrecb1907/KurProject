@@ -1,0 +1,56 @@
+{
+    "slides": {
+        "slide1": {
+            "title": "A fresh start. Your first step in learning the Quran.",
+            "description": "Modern and comprehensible Quran lessons await you."
+        },
+        "slide2": {
+            "title": "Fun learning. A simplified system even for kids.",
+            "description": "Tests after each lesson, XP points, leveling up."
+        },
+        "slide3": {
+            "title": "Learning together. A structure that supports family learning culture.",
+            "description": "Track your progress, level up, and join the leaderboard."
+        }
+    },
+    "startScreen": {
+        "title": "Ready? Let's Start with a Quick Test!",
+        "description": "5 quick questions to see your level. Short time, high fun.",
+        "startButton": "Start Test",
+        "disclaimer": "You can try without signing up.\nProgress is saved anonymously."
+    },
+    "quiz": {
+        "questions": {
+            "q1": "How many juz are in the Quran?",
+            "q2": "Which surah was revealed first?",
+            "q3": "Which surah is called the heart of the Quran?",
+            "q4": "In which surah is Ayat al-Kursi?",
+            "q5": "Which surah is read without Basmala?"
+        },
+        "feedback": {
+            "correct": "Congratulations!",
+            "correctMessage": "Great, keep going!",
+            "incorrect": "Wrong Answer",
+            "incorrectMessage": "The correct answer is marked above."
+        },
+        "nextQuestion": "Next Question",
+        "finish": "Finish"
+    },
+    "result": {
+        "title": "Congratulations! You\nCompleted the Test 🎉",
+        "subtitle": "You did great!",
+        "correct": "Correct",
+        "authPrompt": "Create an account to securely save your progress and continue from any device.",
+        "loginButton": "Sign In",
+        "signupButton": "Create Account",
+        "skipButton": "Continue Without Signing Up",
+        "loadingProfile": "Loading profile..."
+    },
+    "skipModal": {
+        "title": "You're continuing anonymously.",
+        "message": "In anonymous mode, progress is stored locally on this device.\nProgress may not be preserved if you delete the app or switch devices.\n\nCreate an account to secure your progress.",
+        "cancel": "Cancel",
+        "confirm": "I Understand, Continue"
+    },
+    "skip": "Skip"
+}

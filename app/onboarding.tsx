@@ -30,6 +30,7 @@ import { QuestionCard } from '@/components/game/QuestionCard';
 import { OptionButton } from '@/components/game/OptionButton';
 import { colors } from '@/constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
+import { useTranslation } from 'react-i18next';
 
 const { width } = Dimensions.get('window');
 
@@ -38,20 +39,20 @@ const SLIDES = [
     {
         id: 1,
         animation: require('../assets/images/onboarding/Quran.json'),
-        title: 'Temiz bir başlangıç. Kur’an öğrenmeye ilk adım.',
-        description: 'Modern ve anlaşılır Kur’an dersleri seni bekliyor.',
+        titleKey: 'onboarding.slides.slide1.title',
+        descriptionKey: 'onboarding.slides.slide1.description',
     },
     {
         id: 2,
         animation: require('../assets/images/onboarding/QuranChild.json'),
-        title: 'Eğlenceli öğrenme. Çocuklar için bile kolaylaştırılmış sistem.',
-        description: 'Her ders sonrası testler, XP puanı, level atlama.',
+        titleKey: 'onboarding.slides.slide2.title',
+        descriptionKey: 'onboarding.slides.slide2.description',
     },
     {
         id: 3,
         animation: require('../assets/images/onboarding/QuranLearn.json'),
-        title: 'Birlikte öğrenme. Aile ile öğrenme kültürünü destekleyen yapı.',
-        description: 'Gelişimini izle, seviyeni yükselt ve liderlik sıralamasına gir.',
+        titleKey: 'onboarding.slides.slide3.title',
+        descriptionKey: 'onboarding.slides.slide3.description',
     },
     {
         id: 4,
@@ -61,27 +62,27 @@ const SLIDES = [
 
 const QUESTIONS = [
     {
-        question: "Kuran-ı Kerim kaç cüzdür?",
+        questionKey: "onboarding.quiz.questions.q1",
         options: ["10", "20", "30", "40"],
         correctIndex: 2 // 30
     },
     {
-        question: "İlk inen sure hangisidir?",
+        questionKey: "onboarding.quiz.questions.q2",
         options: ["Fatiha", "Alak", "Bakara", "Yasin"],
         correctIndex: 1 // Alak
     },
     {
-        question: "Kuran-ı Kerim'in kalbi hangi suredir?",
+        questionKey: "onboarding.quiz.questions.q3",
         options: ["Yasin", "Rahman", "Mülk", "Nebe"],
         correctIndex: 0 // Yasin
     },
     {
-        question: "Ayet-el Kürsi hangi surenin içindedir?",
+        questionKey: "onboarding.quiz.questions.q4",
         options: ["Ali İmran", "Bakara", "Nisa", "Maide"],
         correctIndex: 1 // Bakara
     },
     {
-        question: "Besmele çekilmeden okunan sure hangisidir?",
+        questionKey: "onboarding.quiz.questions.q5",
         options: ["Tevbe", "Enfal", "Mücadele", "Talak"],
         correctIndex: 0 // Tevbe
     }
@@ -123,6 +124,7 @@ const PaginationDot = ({ index, scrollX }: { index: number, scrollX: SharedValue
 
 export default function OnboardingScreen() {
     const router = useRouter();
+    const { t } = useTranslation();
     const { activeTheme } = useTheme();
     const colorScheme = useColorScheme();
     const isDark = activeTheme === 'dark';
@@ -254,22 +256,21 @@ export default function OnboardingScreen() {
                         </View>
 
                         <Text style={[styles.startTitle, { color: colors.textPrimary }]}>
-                            Hazırsan Küçük Bir Testle Başlayalım!
+                            {t('onboarding.startScreen.title')}
                         </Text>
 
                         <Text style={[styles.startDescription, { color: colors.textSecondary }]}>
-                            5 hızlı soruyla seviyeni görelim. Süre kısa, eğlence yüksek.
+                            {t('onboarding.startScreen.description')}
                         </Text>
 
                         <View style={{ height: 40 }} />
 
                         <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.primary }]} onPress={handleStartTest}>
-                            <Text style={styles.primaryButtonText}>Teste Başla</Text>
+                            <Text style={styles.primaryButtonText}>{t('onboarding.startScreen.startButton')}</Text>
                         </TouchableOpacity>
 
                         <Text style={[styles.disclaimerText, { color: colors.textSecondary }]}>
-                            Kaydolmadan deneyebilirsin.{'\n'}
-                            İlerleme anonim olarak kaydediliyor.
+                            {t('onboarding.startScreen.disclaimer')}
                         </Text>
                     </View>
                 </View>
@@ -289,8 +290,8 @@ export default function OnboardingScreen() {
                     />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style={[styles.title, { color: colors.textPrimary }]}>{item.title}</Text>
-                    <Text style={[styles.description, { color: colors.textSecondary }]}>{item.description}</Text>
+                    <Text style={[styles.title, { color: colors.textPrimary }]}>{t(item.titleKey || '')}</Text>
+                    <Text style={[styles.description, { color: colors.textSecondary }]}>{t(item.descriptionKey || '')}</Text>
                 </View>
             </View>
         );
@@ -326,7 +327,7 @@ export default function OnboardingScreen() {
                         <QuestionCard
                             questionNumber={currentQuestionIndex + 1}
                             totalQuestions={QUESTIONS.length}
-                            question={question.question}
+                            question={t(question.questionKey)}
                         />
                     </View>
 
@@ -349,13 +350,13 @@ export default function OnboardingScreen() {
                     <View style={styles.quizFooter}>
                         {isAnswerCorrect ? (
                             <>
-                                <Text style={styles.footerTitle}>Tebrikler!</Text>
-                                <Text style={styles.footerMessage}>Bravo, böyle devam et!</Text>
+                                <Text style={styles.footerTitle}>{t('onboarding.quiz.feedback.correct')}</Text>
+                                <Text style={styles.footerMessage}>{t('onboarding.quiz.feedback.correctMessage')}</Text>
                             </>
                         ) : (
                             <>
-                                <Text style={styles.footerTitle}>Yanlış Cevap</Text>
-                                <Text style={styles.footerMessage}>Doğru cevap yukarıda işaretlendi.</Text>
+                                <Text style={styles.footerTitle}>{t('onboarding.quiz.feedback.incorrect')}</Text>
+                                <Text style={styles.footerMessage}>{t('onboarding.quiz.feedback.incorrectMessage')}</Text>
                             </>
                         )}
 
@@ -367,7 +368,7 @@ export default function OnboardingScreen() {
                             onPress={handleNextQuestion}
                         >
                             <Text style={styles.nextButtonText}>
-                                {currentQuestionIndex < QUESTIONS.length - 1 ? 'Sonraki Soru' : 'Bitir'}
+                                {currentQuestionIndex < QUESTIONS.length - 1 ? t('onboarding.quiz.nextQuestion') : t('onboarding.quiz.finish')}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -381,13 +382,13 @@ export default function OnboardingScreen() {
         return (
             <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]}>
                 <View style={styles.resultContainer}>
-                    <Text style={[styles.resultTitle, { color: colors.textPrimary }]}>Tebrikler! Testi{'\n'}Tamamladın 🎉</Text>
-                    <Text style={[styles.resultSubtitle, { color: colors.textSecondary }]}>Çok iyi iş çıkardın!</Text>
+                    <Text style={[styles.resultTitle, { color: colors.textPrimary }]}>{t('onboarding.result.title')}</Text>
+                    <Text style={[styles.resultSubtitle, { color: colors.textSecondary }]}>{t('onboarding.result.subtitle')}</Text>
 
                     <View style={styles.scoreCircle}>
                         <View style={styles.scoreInner}>
                             <Text style={[styles.scoreText, { color: colors.textPrimary }]}>{quizScore}/{QUESTIONS.length}</Text>
-                            <Text style={[styles.scoreLabel, { color: colors.textSecondary }]}>Doğru</Text>
+                            <Text style={[styles.scoreLabel, { color: colors.textSecondary }]}>{t('onboarding.result.correct')}</Text>
                         </View>
                         {/* Simple SVG ring mockup with border since we don't have SVG lib imported handy */}
                         <View style={[styles.scoreRing, {
@@ -405,15 +406,15 @@ export default function OnboardingScreen() {
                     <View style={{ flex: 1 }} />
 
                     <Text style={styles.authPromptText}>
-                        Hesap açarak ilerlemeni kaybetmez, her cihazdan devam edebilirsin.
+                        {t('onboarding.result.authPrompt')}
                     </Text>
 
                     <TouchableOpacity style={[styles.loginButton, { borderColor: colors.textSecondary }]} onPress={handleLogin}>
-                        <Text style={[styles.loginButtonText, { color: colors.textPrimary }]}>Giriş Yap</Text>
+                        <Text style={[styles.loginButtonText, { color: colors.textPrimary }]}>{t('onboarding.result.loginButton')}</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity style={[styles.primaryButton, { backgroundColor: colors.primary }]} onPress={handleSignup}>
-                        <Text style={styles.primaryButtonText}>Hesap Oluştur</Text>
+                        <Text style={styles.primaryButtonText}>{t('onboarding.result.signupButton')}</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
@@ -422,7 +423,7 @@ export default function OnboardingScreen() {
                         disabled={!isProfileReady}
                     >
                         <Text style={[styles.textButtonText, { color: colors.textSecondary }]}>
-                            {isProfileReady ? 'Kayıt Olmadan Devam Et' : 'Profil yükleniyor...'}
+                            {isProfileReady ? t('onboarding.result.skipButton') : t('onboarding.result.loadingProfile')}
                         </Text>
                     </TouchableOpacity>
                 </View>
@@ -439,12 +440,9 @@ export default function OnboardingScreen() {
                             <View style={[styles.modalIconBg, { backgroundColor: colors.primary + '20' }]}>
                                 <Warning size={32} color={colors.primary} weight="fill" />
                             </View>
-                            <Text style={[styles.modalTitle, { color: colors.textPrimary }]}>Emin misin?</Text>
+                            <Text style={[styles.modalTitle, { color: colors.textPrimary }]}>{t('onboarding.skipModal.title')}</Text>
                             <Text style={[styles.modalText, { color: colors.textSecondary }]}>
-                                Anonim olarak devam ediyorsun. İlerlemelerin uygulamayı silersen veya cihaz değişikliği yaparsan kaybolacaktır.
-                            </Text>
-                            <Text style={[styles.modalText, { marginTop: 4, fontWeight: 'bold', color: colors.textSecondary }]}>
-                                Bu yüzden kayıt olmanı öneririz.
+                                {t('onboarding.skipModal.message')}
                             </Text>
 
                             <View style={styles.modalActions}>
@@ -452,13 +450,13 @@ export default function OnboardingScreen() {
                                     style={styles.modalSecondaryButton}
                                     onPress={() => setShowSkipModal(false)}
                                 >
-                                    <Text style={[styles.modalSecondaryText, { color: colors.textSecondary }]}>Vazgeç</Text>
+                                    <Text style={[styles.modalSecondaryText, { color: colors.textSecondary }]}>{t('onboarding.skipModal.cancel')}</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={[styles.modalPrimaryButton, { backgroundColor: colors.primary }]}
                                     onPress={handleContinueAnonymous}
                                 >
-                                    <Text style={styles.modalPrimaryText}>Anladım, Devam Et</Text>
+                                    <Text style={styles.modalPrimaryText}>{t('onboarding.skipModal.confirm')}</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -477,7 +475,7 @@ export default function OnboardingScreen() {
             {currentIndex < 3 && (
                 <View style={styles.header}>
                     <TouchableOpacity onPress={() => flatListRef.current?.scrollToIndex({ index: 3 })}>
-                        <Text style={[styles.skipText, { color: colors.textSecondary }]}>Geç</Text>
+                        <Text style={[styles.skipText, { color: colors.textSecondary }]}>{t('onboarding.skip')}</Text>
                     </TouchableOpacity>
                 </View>
             )}

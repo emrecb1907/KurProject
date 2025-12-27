@@ -20,7 +20,8 @@ export interface UserSlice {
   boundUserId: string | null;
   sessionToken: string | null;
 
-
+  // Title notification tracking
+  lastSeenTitleCount: number;
 
   // Actions
   setSelectedAvatar: (avatarId: string) => void;
@@ -28,6 +29,7 @@ export interface UserSlice {
   setSoundsEnabled: (enabled: boolean) => void;
   setBoundUserId: (id: string | null) => void;
   setSessionToken: (token: string | null) => void;
+  setLastSeenTitleCount: (count: number) => void;
   resetUserData: () => void;
 
 }
@@ -36,7 +38,7 @@ const initialState = {
   selectedAvatar: DEFAULT_AVATAR_ID,
   boundUserId: null,
   sessionToken: null,
-
+  lastSeenTitleCount: 0,
   hapticsEnabled: true,
   soundsEnabled: true,
 };
@@ -53,6 +55,8 @@ export const createUserSlice: StateCreator<UserSlice> = (set, get) => ({
   setBoundUserId: (id) => set({ boundUserId: id }),
 
   setSessionToken: (token) => set({ sessionToken: token }),
+
+  setLastSeenTitleCount: (count) => set({ lastSeenTitleCount: count }),
 
   resetUserData: () => set(initialState),
 

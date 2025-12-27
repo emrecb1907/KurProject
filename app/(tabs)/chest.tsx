@@ -1,5 +1,5 @@
 import React, { useMemo, useState, useEffect, useRef, useCallback } from 'react';
-import { View, Text, StyleSheet, Pressable, ScrollView, Alert, DeviceEventEmitter, Modal } from 'react-native';
+import { View, Text, StyleSheet, Pressable, ScrollView, Alert, DeviceEventEmitter, Modal, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
@@ -43,6 +43,65 @@ export default function ChestScreen() {
   const { data: lessonMissions, refetch: refetchLessonMissions } = useMissions(user?.id, 'lesson');
   const claimMilestone = useClaimMilestone();
 
+  // Check for claimable milestones
+  const checkGroupsForClaimable = useCallback((missions: typeof testMissions) => {
+    if (!missions?.groups) return false;
+    return missions.groups.some(group =>
+      group.milestones?.some((milestone, index) => {
+        const isReached = group.is_repeatable
+          ? group.current_count >= milestone.target_count
+          : missions.total_count >= milestone.target_count;
+        const isPreviousClaimed = index === 0 || group.milestones[index - 1]?.is_claimed;
+        return isReached && !milestone.is_claimed && isPreviousClaimed;
+      })
+    );
+  }, []);
+
+  const hasTestClaimable = useMemo(() => checkGroupsForClaimable(testMissions), [testMissions, checkGroupsForClaimable]);
+  const hasLessonClaimable = useMemo(() => checkGroupsForClaimable(lessonMissions), [lessonMissions, checkGroupsForClaimable]);
+
+  // Pulsing Dot Component
+  const PulsingDot = useCallback(() => {
+    const pulseAnim = useRef(new Animated.Value(1)).current;
+
+    useEffect(() => {
+      const pulse = Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1.8,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      pulse.start();
+      return () => pulse.stop();
+    }, []);
+
+    return (
+      <View style={styles.pulseDotContainer}>
+        <Animated.View
+          style={[
+            styles.pulseRing,
+            {
+              transform: [{ scale: pulseAnim }],
+              opacity: pulseAnim.interpolate({
+                inputRange: [1, 1.8],
+                outputRange: [0.6, 0],
+              }),
+            },
+          ]}
+        />
+        <View style={styles.pulseDot} />
+      </View>
+    );
+  }, [styles]);
+
   // Claim modal state
   const [claimModalVisible, setClaimModalVisible] = useState(false);
   const [claimResult, setClaimResult] = useState<{ xp: number; title: string | null } | null>(null);
@@ -51,7 +110,7 @@ export default function ChestScreen() {
   const handleClaim = async (milestoneId: string, isPreviousClaimed: boolean) => {
     if (!user?.id) return;
     if (!isPreviousClaimed) {
-      Alert.alert(t('rewards.error', 'Hata'), t('rewards.claimPreviousFirst', 'Önce önceki ödülü alın!'));
+      Alert.alert(t('rewards.errors.error'), t('rewards.errors.claimPreviousFirst'));
       return;
     }
 
@@ -60,8 +119,15 @@ export default function ChestScreen() {
       setClaimResult({ xp: result.xp_earned, title: result.title_earned });
       setClaimModalVisible(true);
     } catch (error: any) {
-      if (error?.message?.includes('PREVIOUS_NOT_CLAIMED')) {
-        Alert.alert(t('rewards.error', 'Hata'), t('rewards.claimPreviousFirst', 'Önce önceki ödülü alın!'));
+      const errorMessage = error?.message || '';
+      if (errorMessage.includes('PREVIOUS_NOT_CLAIMED')) {
+        Alert.alert(t('rewards.errors.error'), t('rewards.errors.claimPreviousFirst'));
+      } else if (errorMessage.includes('RATE_LIMITED')) {
+        Alert.alert(t('rewards.errors.error'), t('rewards.errors.tooFast'));
+      } else if (errorMessage.includes('UNAUTHORIZED')) {
+        Alert.alert(t('rewards.errors.error'), t('rewards.errors.sessionError'));
+      } else {
+        Alert.alert(t('rewards.errors.error'), t('rewards.errors.genericError'));
       }
     }
   };
@@ -125,7 +191,7 @@ export default function ChestScreen() {
         <View style={{ width: 40 }} />
         <Text style={styles.headerTitle}>{t('rewards.title')}</Text>
         <View style={styles.headerBadge}>
-          <Star weight="fill" color="#FFD700" size={16} />
+          <Star weight="fill" color="#FF9600" size={16} />
           <Text style={styles.headerBadgeText}>
             {(testMissions?.groups?.reduce((acc, g) => acc + (g.milestones?.filter(m => m.is_claimed)?.length || 0), 0) || 0) +
               (lessonMissions?.groups?.reduce((acc, g) => acc + (g.milestones?.filter(m => m.is_claimed)?.length || 0), 0) || 0)}
@@ -146,14 +212,20 @@ export default function ChestScreen() {
           style={[styles.tab, activeTab === 'lessons' && styles.activeTab]}
           onPress={() => setActiveTab('lessons')}
         >
-          <Text style={[styles.tabText, activeTab === 'lessons' && styles.activeTabText]}>{t('rewards.tabs.lessons')}</Text>
+          <View style={styles.tabContent}>
+            <Text style={[styles.tabText, activeTab === 'lessons' && styles.activeTabText]}>{t('rewards.tabs.lessons')}</Text>
+            {hasLessonClaimable && activeTab !== 'lessons' && <PulsingDot />}
+          </View>
         </Pressable>
 
         <Pressable
           style={[styles.tab, activeTab === 'tests' && styles.activeTab]}
           onPress={() => setActiveTab('tests')}
         >
-          <Text style={[styles.tabText, activeTab === 'tests' && styles.activeTabText]}>{t('rewards.tabs.tests')}</Text>
+          <View style={styles.tabContent}>
+            <Text style={[styles.tabText, activeTab === 'tests' && styles.activeTabText]}>{t('rewards.tabs.tests')}</Text>
+            {hasTestClaimable && activeTab !== 'tests' && <PulsingDot />}
+          </View>
         </Pressable>
       </View>
 
@@ -323,7 +395,7 @@ export default function ChestScreen() {
                             <View style={canClaim && isPreviousClaimed ? styles.starGlow : undefined}>
                               <Star
                                 weight={!isReached && !milestone.is_claimed ? "regular" : "fill"}
-                                color={milestone.is_claimed ? '#22C55E' : isReached ? '#FFA500' : colors.textSecondary}
+                                color={milestone.is_claimed ? colors.success : isReached ? '#FFA500' : colors.textSecondary}
                                 size={32}
                                 style={{ opacity: isReached || milestone.is_claimed ? 1 : 0.6 }}
                               />
@@ -337,7 +409,7 @@ export default function ChestScreen() {
 
                   {/* Unlocked Title - centered above progress */}
                   {lastMilestone?.title_reward && (
-                    <Text style={[styles.groupTitleReward, { color: allClaimed ? '#22C55E' : colors.textPrimary }]}>
+                    <Text style={[styles.groupTitleReward, { color: allClaimed ? colors.success : colors.textPrimary }]}>
                       {t('rewards.titleToUnlock', 'Açılacak Ünvan')}: {t(`rewards.titles.${lastMilestone.title_reward}`, lastMilestone.title_reward)}
                     </Text>
                   )}
@@ -346,12 +418,12 @@ export default function ChestScreen() {
                   <View style={styles.totalProgressContainer}>
                     <View style={styles.totalProgressHeader}>
                       <Text style={styles.totalProgressLabel}>{t('rewards.testsTab.totalProgress')}</Text>
-                      <Text style={[styles.totalProgressValue, allClaimed && { color: '#22C55E' }]}>
+                      <Text style={[styles.totalProgressValue, allClaimed && { color: colors.success }]}>
                         {group.is_repeatable ? group.current_count : testMissions.total_count}/{maxTarget}
                       </Text>
                     </View>
                     <View style={styles.totalProgressBarBg}>
-                      <View style={[styles.totalProgressBarFill, { width: `${Math.min(progress, 100)}%`, backgroundColor: allClaimed ? '#22C55E' : '#FFA500' }]} />
+                      <View style={[styles.totalProgressBarFill, { width: `${Math.min(progress, 100)}%`, backgroundColor: allClaimed ? colors.success : '#FFA500' }]} />
                     </View>
                   </View>
                 </View>
@@ -421,7 +493,7 @@ export default function ChestScreen() {
                             <View style={canClaim && isPreviousClaimed ? styles.starGlow : undefined}>
                               <Star
                                 weight={!isReached && !milestone.is_claimed ? "regular" : "fill"}
-                                color={milestone.is_claimed ? '#22C55E' : isReached ? '#FFA500' : colors.textSecondary}
+                                color={milestone.is_claimed ? colors.success : isReached ? '#FFA500' : colors.textSecondary}
                                 size={32}
                                 style={{ opacity: isReached || milestone.is_claimed ? 1 : 0.6 }}
                               />
@@ -435,7 +507,7 @@ export default function ChestScreen() {
 
                   {/* Unlocked Title - centered above progress */}
                   {lastMilestone?.title_reward && (
-                    <Text style={[styles.groupTitleReward, { color: allClaimed ? '#22C55E' : colors.textPrimary }]}>
+                    <Text style={[styles.groupTitleReward, { color: allClaimed ? colors.success : colors.textPrimary }]}>
                       {t('rewards.titleToUnlock', 'Açılacak Ünvan')}: {t(`rewards.titles.${lastMilestone.title_reward}`, lastMilestone.title_reward)}
                     </Text>
                   )}
@@ -443,12 +515,12 @@ export default function ChestScreen() {
                   <View style={styles.totalProgressContainer}>
                     <View style={styles.totalProgressHeader}>
                       <Text style={styles.totalProgressLabel}>{t('rewards.lessonsTab.totalProgress', 'Toplam İlerleme')}</Text>
-                      <Text style={[styles.totalProgressValue, allClaimed && { color: '#22C55E' }]}>
+                      <Text style={[styles.totalProgressValue, allClaimed && { color: colors.success }]}>
                         {group.is_repeatable ? group.current_count : lessonMissions.total_count}/{maxTarget}
                       </Text>
                     </View>
                     <View style={styles.totalProgressBarBg}>
-                      <View style={[styles.totalProgressBarFill, { width: `${Math.min(progress, 100)}%`, backgroundColor: allClaimed ? '#22C55E' : '#FFA500' }]} />
+                      <View style={[styles.totalProgressBarFill, { width: `${Math.min(progress, 100)}%`, backgroundColor: allClaimed ? colors.success : '#FFA500' }]} />
                     </View>
                   </View>
                 </View>
@@ -571,6 +643,35 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     color: '#FFFFFF', // Use white for active text
     fontWeight: 'bold',
   },
+  tabContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    position: 'relative',
+  },
+  pulseDotContainer: {
+    position: 'absolute',
+    right: 4,
+    width: 12,
+    height: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pulseDot: {
+    position: 'absolute',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#FF9600',
+  },
+  pulseRing: {
+    position: 'absolute',
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: '#FF9600',
+  },
   content: {
     flex: 1,
   },
@@ -664,7 +765,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
     marginBottom: 0,
   },
   claimButton: {
-    backgroundColor: '#22C55E',
+    backgroundColor: colors.success,
     paddingHorizontal: 16,
     paddingVertical: 6,
     borderRadius: 12,
@@ -779,7 +880,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#22C55E',
+    backgroundColor: colors.success,
     borderRadius: 4,
   },
   fullBadge: {
@@ -790,7 +891,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
   fullBadgeText: {
     fontSize: 12,
     fontWeight: '600',
-    color: '#22C55E',
+    color: colors.success,
   },
   sectionTitle: {
     fontSize: 18,
@@ -888,7 +989,7 @@ const getStyles = (activeTheme?: string) => StyleSheet.create({
   },
 
   bonusButtonClaimed: {
-    backgroundColor: '#22C55E',
+    backgroundColor: colors.success,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 8,

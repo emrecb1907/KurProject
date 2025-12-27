@@ -39,7 +39,7 @@ let hasInitialized = false;
 
 export function useAuthHook() {
   const [isInitialized, setIsInitialized] = useState(false);
-  const { user, setUser, setIsAuthenticated, setIsAnonymous, setIsLoading, logout } = useStore();
+  const { user, isAnonymous, setUser, setIsAuthenticated, setIsAnonymous, setIsLoading, logout } = useStore();
 
   // Initialize auth state - only ONCE per app session
   useEffect(() => {
@@ -292,7 +292,7 @@ export function useAuthHook() {
   }
 
   // Social Sign In Helper
-  async function handleSocialLogin(loginPromise: Promise<{ user: User | null; error: Error | null }>) {
+  async function handleSocialLogin(loginPromise: Promise<{ user: User | null; error: Error | null }>, anonymousUserId?: string) {
     try {
       setIsLoading(true);
       const { user: authUser, error } = await loginPromise;
@@ -305,16 +305,47 @@ export function useAuthHook() {
         // Clear explicit logout flag
         await AsyncStorage.removeItem('explicitLogout');
 
+        // Check if this is a NEW user by looking at created_at timestamp
+        // If created within last 10 seconds, it's a new account
+        const userCreatedAt = new Date((authUser as any).created_at);
+        const now = new Date();
+        const isNewlyCreatedUser = (now.getTime() - userCreatedAt.getTime()) < 10000; // 10 seconds
+
+        console.log(`📅 User created_at: ${userCreatedAt.toISOString()}, isNewlyCreated: ${isNewlyCreatedUser}`);
+
+        // If this is a newly created user AND we have anonymous data to migrate
+        if (isNewlyCreatedUser && anonymousUserId && anonymousUserId !== authUser.id) {
+          console.log('🔄 Migrating anonymous data to new Apple account...');
+          const migrationResult = await database.migration.migrateAnonymousData(anonymousUserId, authUser.id);
+          if (migrationResult.success) {
+            console.log('✅ Anonymous data migrated successfully');
+          } else {
+            console.warn('⚠️ Migration failed:', migrationResult.error);
+          }
+        }
+
         // Check if user exists in DB
         const { data: userProfile } = await database.users.getProfile(authUser.id);
 
         if (userProfile) {
-          // User exists, proceed as normal
-          await initializeAuth();
-          return { error: null, isNew: false };
+          // User exists - check if they have a valid username
+          // Anonymous users have auto-generated usernames like "User-xxxxxxxx"
+          const hasValidUsername = userProfile.username &&
+            !userProfile.username.startsWith('User-') &&
+            userProfile.username.length > 0;
+
+          if (hasValidUsername) {
+            // User has a proper username, proceed normally
+            await initializeAuth();
+            return { error: null, isNew: false };
+          } else {
+            // User exists but needs to set a username (e.g., converted from anonymous)
+            console.log('📝 User exists but needs username');
+            await initializeAuth();
+            return { error: null, isNew: true };
+          }
         } else {
-          // New user (or no DB record) -> Redirect to set-username
-          // Do NOT initializeAuth yet (it would fail to find user and do nothing)
+          // No DB record yet - redirect to set-username
           return { error: null, isNew: true };
         }
       }
@@ -333,7 +364,62 @@ export function useAuthHook() {
   }
 
   async function signInWithApple() {
-    return handleSocialLogin(authService.signInWithApple());
+    try {
+      setIsLoading(true);
+
+      // Check if current user is anonymous
+      const isCurrentlyAnonymous = isAnonymous;
+      const currentUserId = user?.id;
+
+      if (isCurrentlyAnonymous && currentUserId) {
+        // Anonymous user - link Apple to current account (preserves user_id)
+        console.log('🔗 Linking Apple to anonymous user:', currentUserId);
+
+        const result = await authService.linkAppleToAnonymous();
+
+        if (result.error) {
+          if (result.error.message === 'EMAIL_EXISTS' && (result as any).identityToken) {
+            // Apple email already has an account - sign in to that account
+            console.log('📧 Apple email exists, signing in to existing account');
+
+            // Delete the anonymous user first
+            await supabase.from('users').delete().eq('id', currentUserId);
+            console.log('🗑️ Deleted anonymous user record');
+
+            // Sign in to existing Apple account
+            const { data, error } = await supabase.auth.signInWithIdToken({
+              provider: 'apple',
+              token: (result as any).identityToken,
+            });
+
+            if (error) throw error;
+
+            console.log('✅ Signed in to existing Apple account:', data.user.id);
+            await initializeAuth();
+            setIsLoading(false);
+            return { error: null, isNew: false };
+          }
+          throw result.error;
+        }
+
+        if (result.user) {
+          console.log('✅ Anonymous user converted to Apple user:', result.user.id);
+          await initializeAuth();
+          setIsLoading(false);
+          return { error: null, isNew: true }; // Go to set-username
+        }
+
+        return { error: new Error('Link failed'), isNew: false };
+      } else {
+        // Not anonymous - use normal sign-in flow
+        setIsLoading(false);
+        return handleSocialLogin(authService.signInWithApple(), currentUserId);
+      }
+    } catch (error) {
+      console.error('❌ signInWithApple Error:', error);
+      setIsLoading(false);
+      return { error: error as Error, isNew: false };
+    }
   }
 
   // Sign out

@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Alert } from 'react-native';
+import { useState, useEffect, useCallback, useMemo } from 'react';
+import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, ScrollView, Alert, BackHandler, Image } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Button, Card } from '@components/ui';
 import { useAuthHook } from '../../src/hooks';
@@ -7,24 +7,46 @@ import { colors } from '@constants/colors';
 import { supabase } from '@/lib/supabase/client';
 import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
 import { useTranslation } from 'react-i18next';
+import { useFocusEffect } from '@react-navigation/native';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function SetUsernameScreen() {
     const router = useRouter();
-    const { user, signOut } = useAuthHook();
+    const { user, signOut, initializeAuth } = useAuthHook();
     const { t } = useTranslation();
+    const { activeTheme } = useTheme();
+
+    const styles = useMemo(() => getStyles(activeTheme), [activeTheme]);
 
     const [username, setUsername] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
+    // Prevent back navigation - username is required
+    useFocusEffect(
+        useCallback(() => {
+            const onBackPress = () => {
+                Alert.alert(
+                    t('auth.setUsername.usernameRequired'),
+                    t('auth.setUsername.usernameRequiredMessage'),
+                    [{ text: t('common.ok') }]
+                );
+                return true; // Prevent default back action
+            };
+
+            const subscription = BackHandler.addEventListener('hardwareBackPress', onBackPress);
+            return () => subscription.remove();
+        }, [t])
+    );
+
     const handleCreate = async () => {
         if (!username.trim()) {
-            setError('Lütfen bir kullanıcı adı girin');
+            setError(t('auth.setUsername.errors.enterUsername'));
             return;
         }
 
         if (username.length < 3) {
-            setError('Kullanıcı adı en az 3 karakter olmalı');
+            setError(t('auth.setUsername.errors.minLength'));
             return;
         }
 
@@ -39,39 +61,58 @@ export default function SetUsernameScreen() {
                 .from('users')
                 .select('id')
                 .eq('username', username)
+                .neq('id', user.id) // Exclude current user
                 .single();
 
             if (existingUser) {
-                setError('Bu kullanıcı adı zaten kullanımda');
+                setError(t('auth.setUsername.errors.usernameTaken'));
                 setLoading(false);
                 return;
             }
 
-            // Create user record
-            const { error: dbError } = await supabase.from('users').insert({
-                id: user.id,
-                email: user.email,
-                username: username,
-                is_anonymous: false,
-                current_lives: 5,
-                max_lives: 5,
-                total_xp: 0,
-                current_level: 1,
-                total_score: 0,
-                streak_count: 0,
-                league: 'Bronze',
-                // Use metadata if available
-                avatar_url: user.user_metadata?.avatar_url || null,
-                full_name: user.user_metadata?.full_name || null,
-            });
+            // Check if user already exists in DB (Apple/Google OAuth creates the record)
+            const { data: currentUser } = await supabase
+                .from('users')
+                .select('id')
+                .eq('id', user.id)
+                .single();
 
-            if (dbError) throw dbError;
+            if (currentUser) {
+                // User exists (OAuth flow) - UPDATE username
+                const { error: updateError } = await supabase
+                    .from('users')
+                    .update({ username: username })
+                    .eq('id', user.id);
+
+                if (updateError) throw updateError;
+            } else {
+                // New user - INSERT (legacy flow, shouldn't happen with Apple)
+                const { error: dbError } = await supabase.from('users').insert({
+                    id: user.id,
+                    email: user.email,
+                    username: username,
+                    is_anonymous: false,
+                    current_lives: 5,
+                    max_lives: 5,
+                    total_xp: 0,
+                    current_level: 1,
+                    total_score: 0,
+                    streak_count: 0,
+                    league: 'Bronze',
+                    avatar_url: user.user_metadata?.avatar_url || null,
+                    full_name: user.user_metadata?.full_name || null,
+                });
+
+                if (dbError) throw dbError;
+            }
+
+            // Re-initialize auth to fetch updated user data
+            await initializeAuth();
 
             // Success
             router.replace('/(tabs)');
         } catch (err: any) {
-            console.error('Error creating user:', err);
-            // 🛡️ Kullanıcı dostu hata mesajı
+            console.error('Error creating/updating user:', err);
             setError(mapDatabaseError(err.message, t));
         } finally {
             setLoading(false);
@@ -80,12 +121,12 @@ export default function SetUsernameScreen() {
 
     const handleCancel = async () => {
         Alert.alert(
-            'İptal Et',
-            'İşlemi iptal ederseniz giriş yapamazsınız. Emin misiniz?',
+            t('auth.setUsername.cancel.title'),
+            t('auth.setUsername.cancel.message'),
             [
-                { text: 'Hayır', style: 'cancel' },
+                { text: t('common.no'), style: 'cancel' },
                 {
-                    text: 'Evet',
+                    text: t('common.yes'),
                     style: 'destructive',
                     onPress: async () => {
                         await signOut();
@@ -106,17 +147,25 @@ export default function SetUsernameScreen() {
                 keyboardShouldPersistTaps="handled"
             >
                 <View style={styles.content}>
-                    <Text style={styles.title}>Son Bir Adım! 🚀</Text>
+                    {/* Logo */}
+                    <Image
+                        source={require('../../assets/splashlogo.png')}
+                        style={styles.logo}
+                        resizeMode="contain"
+                    />
+
+                    <Text style={styles.title}>{t('auth.setUsername.title')}</Text>
                     <Text style={styles.subtitle}>
-                        Uygulamada seni tanıyabilmemiz için kendine bir kullanıcı adı seç.
+                        {t('auth.setUsername.subtitle')}
                     </Text>
 
                     <Card style={styles.formCard}>
                         <View style={styles.inputGroup}>
-                            <Text style={styles.label}>Kullanıcı Adı</Text>
+                            <Text style={styles.label}>{t('auth.setUsername.usernameLabel')}</Text>
                             <TextInput
                                 style={styles.input}
-                                placeholder="Kullanıcı adın"
+                                placeholder={t('auth.setUsername.usernamePlaceholder')}
+                                placeholderTextColor={colors.textDisabled}
                                 value={username}
                                 onChangeText={setUsername}
                                 autoCapitalize="none"
@@ -131,7 +180,7 @@ export default function SetUsernameScreen() {
                         ) : null}
 
                         <Button
-                            title={loading ? 'Oluşturuluyor...' : 'Oluştur ve Başla'}
+                            title={loading ? t('auth.setUsername.creating') : t('auth.setUsername.createButton')}
                             onPress={handleCreate}
                             disabled={loading}
                             fullWidth
@@ -139,7 +188,7 @@ export default function SetUsernameScreen() {
                         />
 
                         <Button
-                            title="Vazgeç"
+                            title={t('auth.setUsername.cancelButton')}
                             onPress={handleCancel}
                             disabled={loading}
                             variant="outline"
@@ -153,7 +202,7 @@ export default function SetUsernameScreen() {
     );
 }
 
-const styles = StyleSheet.create({
+const getStyles = (activeTheme: string) => StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: colors.background,
@@ -161,9 +210,17 @@ const styles = StyleSheet.create({
     scrollContent: {
         flexGrow: 1,
         justifyContent: 'center',
+        paddingBottom: 40,
     },
     content: {
         padding: 24,
+        alignItems: 'center',
+    },
+    logo: {
+        width: 120,
+        height: 120,
+        marginBottom: 24,
+        tintColor: activeTheme === 'light' ? '#000000' : undefined,
     },
     title: {
         fontSize: 28,
@@ -181,6 +238,7 @@ const styles = StyleSheet.create({
     },
     formCard: {
         marginBottom: 24,
+        width: '100%',
     },
     inputGroup: {
         marginBottom: 20,
@@ -212,9 +270,15 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     submitButton: {
+        height: 56,
+        borderRadius: 28,
         marginBottom: 12,
     },
     cancelButton: {
-        borderColor: colors.error,
+        height: 56,
+        borderRadius: 28,
+        backgroundColor: activeTheme === 'light' ? colors.surface : '#1F2024',
+        borderColor: activeTheme === 'light' ? colors.border : 'transparent',
+        borderWidth: activeTheme === 'light' ? 1 : 0,
     },
 });

@@ -48,6 +48,13 @@
         "adWatched": "Ad watched! +1 Energy earned.",
         "cantWatch": "You cannot watch ads right now."
     },
+    "errors": {
+        "error": "Error",
+        "claimPreviousFirst": "Claim the previous reward first!",
+        "tooFast": "Too fast! Please wait a few seconds.",
+        "sessionError": "Session error. Please restart the app.",
+        "genericError": "An error occurred. Please try again."
+    },
     "quests": {
         "test_quest_1": "First Steps",
         "test_quest_2": "Warm-Up",
@@ -82,6 +89,6 @@
         "lesson_title_5": "Deep Reader",
         "lesson_title_6": "Final Prep",
         "lesson_title_7": "Content Completer",
-        "lesson_title_8": ""
+        "lesson_title_8": "Legendary Reader"
     }
 }

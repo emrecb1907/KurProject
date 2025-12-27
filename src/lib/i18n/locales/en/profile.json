@@ -52,6 +52,7 @@
         "account": {
             "title": "ACCOUNT",
             "changePassword": "Change Password",
+            "setPassword": "Set Password",
             "preferences": "Preferences",
             "notifications": "Notifications",
             "timezone": "Timezone"

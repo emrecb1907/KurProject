@@ -1,11 +1,11 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, Pressable, TextInput, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
-import { X, Lock, Eye, EyeSlash, Check, WarningCircle } from 'phosphor-react-native';
+import { X, Lock, Eye, EyeSlash, Check, WarningCircle, Info } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/store';
@@ -17,8 +17,9 @@ import { mapDatabaseError } from '@/lib/utils/mapDatabaseError';
 export default function ChangePasswordScreen() {
     const { t } = useTranslation();
     const router = useRouter();
+    const { hasPassword: hasPasswordParam } = useLocalSearchParams<{ hasPassword?: string }>();
     const { themeVersion } = useTheme();
-    const { user } = useAuth();
+    const { user: storeUser } = useAuth();
 
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
@@ -29,10 +30,32 @@ export default function ChangePasswordScreen() {
     const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
     const [isLoading, setIsLoading] = useState(false);
+    const [isChecking, setIsChecking] = useState(!hasPasswordParam); // Skip check if param provided
+    const [hasPassword, setHasPassword] = useState(hasPasswordParam === '1');
     const [error, setError] = useState<string | null>(null);
     const [success, setSuccess] = useState(false);
 
     const scrollViewRef = useRef<ScrollView>(null);
+
+    // Check if user has a password (from user_metadata)
+    useEffect(() => {
+        const checkPasswordStatus = async () => {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                if (user) {
+                    // has_password metadata is the definitive source
+                    // When user sets a password, this flag is set to true
+                    const hasPasswordMeta = user.user_metadata?.has_password === true;
+                    setHasPassword(hasPasswordMeta);
+                }
+            } catch (err) {
+                console.error('Error checking password status:', err);
+            } finally {
+                setIsChecking(false);
+            }
+        };
+        checkPasswordStatus();
+    }, []);
 
     useFocusEffect(
         useCallback(() => {
@@ -50,7 +73,12 @@ export default function ChangePasswordScreen() {
         setSuccess(false);
 
         // Basic validation
-        if (!oldPassword || !newPassword || !confirmPassword) {
+        if (hasPassword && !oldPassword) {
+            setError(t('home.changePassword.errors.fillAll'));
+            return;
+        }
+
+        if (!newPassword || !confirmPassword) {
             setError(t('home.changePassword.errors.fillAll'));
             return;
         }
@@ -65,7 +93,7 @@ export default function ChangePasswordScreen() {
             return;
         }
 
-        if (oldPassword === newPassword) {
+        if (hasPassword && oldPassword === newPassword) {
             setError(t('home.changePassword.errors.sameAsOld'));
             return;
         }
@@ -73,30 +101,39 @@ export default function ChangePasswordScreen() {
         setIsLoading(true);
 
         try {
-            if (!user?.email) {
-                throw new Error(t('home.changePassword.errors.userNotFound'));
+            if (hasPassword) {
+                // MODE: Change Password (user has existing password)
+                const { data: { user } } = await supabase.auth.getUser();
+                if (!user?.email) {
+                    throw new Error(t('home.changePassword.errors.userNotFound'));
+                }
+
+                // 1. Verify old password by attempting to sign in
+                const { error: signInError } = await supabase.auth.signInWithPassword({
+                    email: user.email,
+                    password: oldPassword,
+                });
+
+                if (signInError) {
+                    setError(t('home.changePassword.errors.wrongPassword'));
+                    setIsLoading(false);
+                    return;
+                }
             }
 
-            // 1. Verify old password by attempting to sign in
-            const { error: signInError } = await supabase.auth.signInWithPassword({
-                email: user.email,
-                password: oldPassword,
-            });
-
-            if (signInError) {
-                setError(t('home.changePassword.errors.wrongPassword'));
-                setIsLoading(false);
-                return;
-            }
-
-            // 2. Update to new password
+            // 2. Update to new password (works for both modes)
+            // Also set has_password flag in user metadata for future detection
             const { error: updateError } = await supabase.auth.updateUser({
                 password: newPassword,
+                data: { has_password: true }
             });
 
             if (updateError) {
                 throw updateError;
             }
+
+            // Update local state
+            setHasPassword(true);
 
             setSuccess(true);
             setOldPassword('');
@@ -110,12 +147,26 @@ export default function ChangePasswordScreen() {
 
         } catch (err: any) {
             console.error('Password update error:', err);
-            // 🛡️ Kullanıcı dostu hata mesajı
             setError(mapDatabaseError(err.message, t, t('home.changePassword.errors.general')));
         } finally {
             setIsLoading(false);
         }
     };
+
+    // Dynamic title and button text
+    const pageTitle = isChecking
+        ? t('common.loading')
+        : hasPassword
+            ? t('home.changePassword.title')
+            : t('home.setPassword.title');
+
+    const buttonText = hasPassword
+        ? t('home.changePassword.updateButton')
+        : t('home.setPassword.setButton');
+
+    const successMessage = hasPassword
+        ? t('home.changePassword.success')
+        : t('home.setPassword.success');
 
     const styles = StyleSheet.create({
         container: {
@@ -161,6 +212,21 @@ export default function ChangePasswordScreen() {
         },
         scrollContent: {
             padding: 24,
+        },
+        infoContainer: {
+            flexDirection: 'row',
+            alignItems: 'flex-start',
+            backgroundColor: colors.primary + '15',
+            padding: 16,
+            borderRadius: 12,
+            marginBottom: 24,
+            gap: 12,
+        },
+        infoText: {
+            color: colors.textPrimary,
+            fontSize: 14,
+            flex: 1,
+            lineHeight: 20,
         },
         formGroup: {
             marginBottom: 24,
@@ -254,6 +320,11 @@ export default function ChangePasswordScreen() {
         },
     });
 
+    const isButtonDisabled = isLoading ||
+        (hasPassword && !oldPassword) ||
+        !newPassword ||
+        !confirmPassword;
+
     return (
         <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
             <KeyboardAvoidingView
@@ -271,7 +342,7 @@ export default function ChangePasswordScreen() {
                             }}
                             style={{ marginLeft: -8 }}
                         />
-                        <Text style={styles.headerTitle}>{t('home.changePassword.title')}</Text>
+                        <Text style={styles.headerTitle}>{pageTitle}</Text>
                     </View>
 
                     <ScrollView
@@ -280,6 +351,16 @@ export default function ChangePasswordScreen() {
                         contentContainerStyle={styles.scrollContent}
                         keyboardShouldPersistTaps="handled"
                     >
+                        {/* Info box for OAuth users (no password yet) */}
+                        {!hasPassword && (
+                            <View style={styles.infoContainer}>
+                                <Info size={24} color={colors.primary} weight="fill" />
+                                <Text style={styles.infoText}>
+                                    {t('home.setPassword.info')}
+                                </Text>
+                            </View>
+                        )}
+
                         {/* Error Message */}
                         {error && (
                             <View style={styles.errorContainer}>
@@ -293,37 +374,39 @@ export default function ChangePasswordScreen() {
                             success && (
                                 <View style={styles.successContainer}>
                                     <Check size={20} color="#2E7D32" weight="fill" />
-                                    <Text style={styles.successText}>{t('home.changePassword.success')}</Text>
+                                    <Text style={styles.successText}>{successMessage}</Text>
                                 </View>
                             )
                         }
 
-                        {/* Old Password */}
-                        <View style={styles.formGroup}>
-                            <Text style={styles.label}>{t('home.changePassword.currentPassword')}</Text>
-                            <View style={styles.inputContainer}>
-                                <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
-                                <TextInput
-                                    style={styles.input}
-                                    value={oldPassword}
-                                    onChangeText={setOldPassword}
-                                    placeholder={t('home.changePassword.currentPasswordPlaceholder')}
-                                    placeholderTextColor={colors.textDisabled}
-                                    secureTextEntry={!showOldPassword}
-                                    autoCapitalize="none"
-                                />
-                                <Pressable
-                                    style={styles.eyeButton}
-                                    onPress={() => setShowOldPassword(!showOldPassword)}
-                                >
-                                    {showOldPassword ? (
-                                        <EyeSlash size={20} color={colors.textSecondary} />
-                                    ) : (
-                                        <Eye size={20} color={colors.textSecondary} />
-                                    )}
-                                </Pressable>
+                        {/* Old Password - Only show if user HAS password */}
+                        {hasPassword && (
+                            <View style={styles.formGroup}>
+                                <Text style={styles.label}>{t('home.changePassword.currentPassword')}</Text>
+                                <View style={styles.inputContainer}>
+                                    <Lock size={20} color={colors.textSecondary} weight="fill" style={styles.inputIcon} />
+                                    <TextInput
+                                        style={styles.input}
+                                        value={oldPassword}
+                                        onChangeText={setOldPassword}
+                                        placeholder={t('home.changePassword.currentPasswordPlaceholder')}
+                                        placeholderTextColor={colors.textDisabled}
+                                        secureTextEntry={!showOldPassword}
+                                        autoCapitalize="none"
+                                    />
+                                    <Pressable
+                                        style={styles.eyeButton}
+                                        onPress={() => setShowOldPassword(!showOldPassword)}
+                                    >
+                                        {showOldPassword ? (
+                                            <EyeSlash size={20} color={colors.textSecondary} />
+                                        ) : (
+                                            <Eye size={20} color={colors.textSecondary} />
+                                        )}
+                                    </Pressable>
+                                </View>
                             </View>
-                        </View>
+                        )}
 
                         {/* New Password */}
                         <View style={styles.formGroup}>
@@ -387,13 +470,13 @@ export default function ChangePasswordScreen() {
                         <TouchableOpacity
                             style={[
                                 styles.updateButton,
-                                (isLoading || !oldPassword || !newPassword || !confirmPassword) && styles.updateButtonDisabled
+                                isButtonDisabled && styles.updateButtonDisabled
                             ]}
                             onPress={handleUpdatePassword}
-                            disabled={isLoading || !oldPassword || !newPassword || !confirmPassword}
+                            disabled={isButtonDisabled}
                         >
                             <Text style={styles.updateButtonText}>
-                                {isLoading ? t('profile.editProfile.saving') : t('home.changePassword.updateButton')}
+                                {isLoading ? t('profile.editProfile.saving') : buttonText}
                             </Text>
                         </TouchableOpacity>
 

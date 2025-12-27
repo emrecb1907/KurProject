@@ -39,6 +39,9 @@ export const useStore = create<StoreState>()(
         boundUserId: state.boundUserId,
         adWatchTimes: state.adWatchTimes,
 
+        // Title notification tracking
+        lastSeenTitleCount: state.lastSeenTitleCount,
+
         // Don't persist game state (should be ephemeral)
         // Don't persist UI state (should be ephemeral)
         // Don't persist server state (comes from React Query)
@@ -90,9 +93,9 @@ export const useUser = () => useStore(
     setBoundUserId: state.setBoundUserId,
     setSessionToken: state.setSessionToken,
 
-    // Local tracking
-    adWatchTimes: state.adWatchTimes,
-    watchAd: state.watchAd,
+    // Title notification tracking
+    lastSeenTitleCount: state.lastSeenTitleCount,
+    setLastSeenTitleCount: state.setLastSeenTitleCount,
 
     // Reset
     resetUserData: state.resetUserData,

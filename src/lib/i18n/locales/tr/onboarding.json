@@ -1,0 +1,56 @@
+{
+    "slides": {
+        "slide1": {
+            "title": "Temiz bir başlangıç. Kur'an öğrenmeye ilk adım.",
+            "description": "Modern ve anlaşılır Kur'an dersleri seni bekliyor."
+        },
+        "slide2": {
+            "title": "Eğlenceli öğrenme. Çocuklar için bile kolaylaştırılmış sistem.",
+            "description": "Her ders sonrası testler, XP puanı, level atlama."
+        },
+        "slide3": {
+            "title": "Birlikte öğrenme. Aile ile öğrenme kültürünü destekleyen yapı.",
+            "description": "Gelişimini izle, seviyeni yükselt ve liderlik sıralamasına gir."
+        }
+    },
+    "startScreen": {
+        "title": "Hazırsan Küçük Bir Testle Başlayalım!",
+        "description": "5 hızlı soruyla seviyeni görelim. Süre kısa, eğlence yüksek.",
+        "startButton": "Teste Başla",
+        "disclaimer": "Kaydolmadan deneyebilirsin.\nİlerleme anonim olarak kaydediliyor."
+    },
+    "quiz": {
+        "questions": {
+            "q1": "Kuran-ı Kerim kaç cüzdür?",
+            "q2": "İlk inen sure hangisidir?",
+            "q3": "Kuran-ı Kerim'in kalbi hangi suredir?",
+            "q4": "Ayet-el Kürsi hangi surenin içindedir?",
+            "q5": "Besmele çekilmeden okunan sure hangisidir?"
+        },
+        "feedback": {
+            "correct": "Tebrikler!",
+            "correctMessage": "Bravo, böyle devam et!",
+            "incorrect": "Yanlış Cevap",
+            "incorrectMessage": "Doğru cevap yukarıda işaretlendi."
+        },
+        "nextQuestion": "Sonraki Soru",
+        "finish": "Bitir"
+    },
+    "result": {
+        "title": "Tebrikler! Testi\nTamamladın 🎉",
+        "subtitle": "Çok iyi iş çıkardın!",
+        "correct": "Doğru",
+        "authPrompt": "Hesap oluşturursan ilerlemeni güvenle saklayabilir, her cihazdan kaldığın yerden devam edebilirsin.",
+        "loginButton": "Giriş Yap",
+        "signupButton": "Hesap Oluştur",
+        "skipButton": "Kayıt Olmadan Devam Et",
+        "loadingProfile": "Profil yükleniyor..."
+    },
+    "skipModal": {
+        "title": "Anonim olarak devam ediyorsun.",
+        "message": "Anonim kullanımda ilerleme bu cihaza bağlı olarak saklanır.\nUygulamayı silme veya cihaz değiştirme durumlarında ilerleme korunmayabilir.\n\nHesap oluşturarak ilerlemeni güvence altına alabilirsin.",
+        "cancel": "Vazgeç",
+        "confirm": "Anladım, Devam Et"
+    },
+    "skip": "Geç"
+}

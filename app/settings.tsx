@@ -42,6 +42,9 @@ function SettingsContent() {
   const [isRestoring, setIsRestoring] = useState(false);
   const { restore } = usePremium();
 
+  // Check if user has a password (email provider)
+  const [hasPassword, setHasPassword] = useState(true);
+
   // Animation values for logout modal
   const [logoutScaleAnim] = useState(new Animated.Value(0));
   const [logoutFadeAnim] = useState(new Animated.Value(0));
@@ -100,6 +103,26 @@ function SettingsContent() {
     useCallback(() => {
       scrollViewRef.current?.scrollTo({ y: 0, animated: false });
       setSelectedLanguage(getCurrentLanguage());
+
+      // Check if user has password (from user_metadata or email identity)
+      const checkPasswordStatus = async () => {
+        try {
+          const { data: { user: authUser } } = await supabase.auth.getUser();
+          if (authUser) {
+            // has_password metadata is the definitive source
+            // When user sets a password, this flag is set to true
+            const hasPasswordMeta = authUser.user_metadata?.has_password === true;
+
+            // Only consider email identity if it was from signup (not from updateUser)
+            // If has_password is explicitly false or undefined, user doesn't have password
+            // even if they have email identity (e.g., anonymous converted via updateUser)
+            setHasPassword(hasPasswordMeta);
+          }
+        } catch (err) {
+          console.error('Error checking password status:', err);
+        }
+      };
+      checkPasswordStatus();
     }, [])
   );
 
@@ -186,10 +209,12 @@ function SettingsContent() {
     if (!isAnonymous) {
       accountOptions.unshift({
         id: 'change-password',
-        title: t('profile.settings.account.changePassword'),
+        title: hasPassword
+          ? t('profile.settings.account.changePassword')
+          : t('profile.settings.account.setPassword'),
         onPress: () => {
           Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-          router.push('/change-password');
+          router.push({ pathname: '/change-password', params: { hasPassword: hasPassword ? '1' : '0' } });
         },
       });
     }
@@ -237,7 +262,7 @@ function SettingsContent() {
         ],
       },
     ];
-  }, [t, isAnonymous]);
+  }, [t, isAnonymous, hasPassword]);
 
   const styles = useMemo(() => StyleSheet.create({
     container: {

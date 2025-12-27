@@ -1,12 +1,13 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, ActivityIndicator, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useTranslation } from 'react-i18next';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { useFocusEffect } from '@react-navigation/native';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useUserTitles, useSetActiveTitle } from '@/hooks/queries/useUserTitles';
 import { useUserStats } from '@/hooks';
-import { useAuth } from '@/store';
+import { useAuth, useUser } from '@/store';
 import { colors } from '@/constants/colors';
 import { Crown, Student, ArrowLeft } from 'phosphor-react-native';
 import * as Haptics from 'expo-haptics';
@@ -16,7 +17,8 @@ import { PrimaryButton } from '@/components/ui/PrimaryButton';
 export default function TitleSelectScreen() {
     const router = useRouter();
     const { t } = useTranslation();
-    const { user, isAnonymous } = useAuth();
+    const { user } = useAuth();
+    const { lastSeenTitleCount, setLastSeenTitleCount } = useUser();
     const { activeTheme } = useTheme();
 
     // Styles with theme support
@@ -116,7 +118,19 @@ export default function TitleSelectScreen() {
             padding: 16,
             borderTopWidth: 1,
             borderTopColor: colors.border,
-            backgroundColor: colors.surface, // Now dynamic
+            backgroundColor: colors.surface,
+        },
+        newBadge: {
+            backgroundColor: '#FF9600',
+            paddingHorizontal: 8,
+            paddingVertical: 3,
+            borderRadius: 10,
+            marginLeft: 8,
+        },
+        newBadgeText: {
+            color: '#FFFFFF',
+            fontSize: 10,
+            fontWeight: 'bold',
         },
     }), [activeTheme]);
 
@@ -145,6 +159,14 @@ export default function TitleSelectScreen() {
         setSelectedTitle(titleName);
     }, []);
 
+    // Mark all titles as seen when leaving the page
+    const markTitlesSeen = useCallback(() => {
+        const currentCount = userTitles?.length || 0;
+        if (currentCount > lastSeenTitleCount) {
+            setLastSeenTitleCount(currentCount);
+        }
+    }, [userTitles, lastSeenTitleCount, setLastSeenTitleCount]);
+
     const handleSave = async () => {
         if (!user?.id || selectedTitle === undefined) return;
 
@@ -160,6 +182,7 @@ export default function TitleSelectScreen() {
                 userId: user.id,
                 titleName: selectedTitle
             });
+            markTitlesSeen();
             router.back();
         } catch (error) {
             console.error('Title set error:', error);
@@ -168,11 +191,19 @@ export default function TitleSelectScreen() {
         }
     };
 
-    const renderItem = useCallback(({ item }: { item: any }) => {
+    // Handle back navigation
+    const handleBack = useCallback(() => {
+        markTitlesSeen();
+        router.back();
+    }, [markTitlesSeen, router]);
+
+    const renderItem = useCallback(({ item, index }: { item: any; index: number }) => {
         const isDefault = item.id === 'default';
         // Effective selection (fallback to activeTitle if state undefined)
         const effectiveSelection = selectedTitle !== undefined ? selectedTitle : activeTitle;
         const isSelected = isDefault ? !effectiveSelection : effectiveSelection === item.title_name;
+        // Check if this is a new title (index > lastSeenTitleCount, accounting for default at index 0)
+        const isNewTitle = !isDefault && index > lastSeenTitleCount;
 
         return (
             <TouchableOpacity
@@ -193,14 +224,21 @@ export default function TitleSelectScreen() {
                 </View>
 
                 <View style={styles.titleInfo}>
-                    <Text style={styles.titleName}>
-                        {isDefault ? t('profile.editProfile.defaultTitle') : t(`rewards.titles.${item.title_name}`, { defaultValue: item.title_name }) as string}
-                    </Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Text style={styles.titleName}>
+                            {isDefault ? t('profile.editProfile.defaultTitle') : t(`rewards.titles.${item.title_name}`, { defaultValue: item.title_name }) as string}
+                        </Text>
+                        {isNewTitle && (
+                            <View style={styles.newBadge}>
+                                <Text style={styles.newBadgeText}>{t('common.new', 'YENİ')}</Text>
+                            </View>
+                        )}
+                    </View>
                 </View>
 
             </TouchableOpacity>
         );
-    }, [selectedTitle, activeTitle, setActiveTitleMutation.isPending, handleSelectTitle, styles, t]);
+    }, [selectedTitle, activeTitle, setActiveTitleMutation.isPending, handleSelectTitle, styles, t, lastSeenTitleCount]);
 
     // Combine default option with earned titles
     const data = useMemo(() => [
@@ -208,20 +246,26 @@ export default function TitleSelectScreen() {
         ...(userTitles || [])
     ], [userTitles]);
 
-    if (isAnonymous) {
-        return (
-            <SafeAreaView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-                <Text style={{ color: colors.textPrimary }}>{t('profile.loginPrompt.description')}</Text>
-            </SafeAreaView>
-        );
-    }
+    // FlatList ref for scrolling to bottom
+    const flatListRef = useRef<FlatList>(null);
+
+    // Scroll to bottom when page is focused (newest title at bottom)
+    useFocusEffect(
+        useCallback(() => {
+            if (data.length > 1 && !isTitlesLoading) {
+                setTimeout(() => {
+                    flatListRef.current?.scrollToEnd({ animated: true });
+                }, 150);
+            }
+        }, [data.length, isTitlesLoading])
+    );
 
     return (
         <SafeAreaView style={styles.container} edges={['top', 'left', 'right']}>
             <View style={styles.header}>
                 <HeaderButton
                     title={t('common.back', 'Geri')}
-                    onPress={() => router.back()}
+                    onPress={handleBack}
                     showIcon={true}
                     style={{ marginLeft: -8 }}
                 />
@@ -235,6 +279,7 @@ export default function TitleSelectScreen() {
             ) : (
                 <View style={{ flex: 1 }}>
                     <FlatList
+                        ref={flatListRef}
                         data={data}
                         renderItem={renderItem}
                         keyExtractor={item => item.id}

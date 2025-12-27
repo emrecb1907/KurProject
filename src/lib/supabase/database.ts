@@ -510,7 +510,7 @@ export const database = {
         .from('user_titles')
         .select('*')
         .eq('user_id', userId)
-        .order('earned_at', { ascending: false });
+        .order('earned_at', { ascending: true });
       return { data, error };
     },
 
@@ -521,6 +521,75 @@ export const database = {
         p_title_name: titleName
       });
       return { data, error };
+    }
+  },
+
+  // ==================== MIGRATION ====================
+  migration: {
+    /**
+     * Migrate anonymous user data to new Apple/OAuth user
+     * Updates user_id in all related tables
+     */
+    async migrateAnonymousData(oldUserId: string, newUserId: string): Promise<{ success: boolean; error: string | null }> {
+      console.log(`🔄 Migrating data from ${oldUserId} to ${newUserId}`);
+
+      try {
+        // Tables to migrate (all tables with user_id column)
+        const tablesToMigrate = [
+          'daily_snapshots',
+          'user_daily_logs',
+          'user_energy',
+          'user_lessons',
+          'user_milestone_claims',
+          'user_premium',
+          'user_repeatable_progress',
+          'user_sessions',
+          'user_stats',
+          'user_streaks',
+          'user_test_results',
+          'user_titles'
+        ];
+
+        // STEP 1: Delete trigger-created default records for new user
+        console.log('🗑️ Deleting trigger-created default records for new user...');
+        for (const table of tablesToMigrate) {
+          await supabase.from(table).delete().eq('user_id', newUserId);
+        }
+
+        // STEP 2: Update old user records to new user_id
+        console.log('📦 Migrating anonymous user data...');
+        for (const table of tablesToMigrate) {
+          const { error } = await supabase
+            .from(table)
+            .update({ user_id: newUserId })
+            .eq('user_id', oldUserId);
+
+          if (error) {
+            console.warn(`⚠️ Migration warning for ${table}:`, error.message);
+            // Continue with other tables even if one fails
+          } else {
+            console.log(`✅ Migrated ${table}`);
+          }
+        }
+
+        // Delete old anonymous user from users table
+        const { error: deleteError } = await supabase
+          .from('users')
+          .delete()
+          .eq('id', oldUserId);
+
+        if (deleteError) {
+          console.warn('⚠️ Could not delete old anonymous user:', deleteError.message);
+        } else {
+          console.log('✅ Deleted old anonymous user record');
+        }
+
+        console.log('✅ Migration completed successfully');
+        return { success: true, error: null };
+      } catch (err: any) {
+        console.error('❌ Migration failed:', err);
+        return { success: false, error: err.message };
+      }
     }
   }
 };

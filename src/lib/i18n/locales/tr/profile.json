@@ -52,6 +52,7 @@
         "account": {
             "title": "HESAP",
             "changePassword": "Şifre Değiştir",
+            "setPassword": "Şifre Belirle",
             "preferences": "Tercihler",
             "notifications": "Bildirimler",
             "timezone": "Saat Dilimi"

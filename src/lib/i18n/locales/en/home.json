@@ -50,6 +50,12 @@
                 "wrongPassword": "Current password is incorrect.",
                 "general": "An error occurred while updating password."
             }
+        },
+        "setPassword": {
+            "title": "Set Password",
+            "info": "By setting a password, you can also sign in with your email. This won't remove the Apple sign-in option.",
+            "setButton": "Set Password",
+            "success": "Password set successfully! You can now also sign in with your email."
         }
     },
     "tabs": {

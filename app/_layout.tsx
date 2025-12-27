@@ -60,7 +60,7 @@ function RootLayout() {
   // Global Auth Guard
   const segments = useSegments();
   const router = useRouter();
-  const { isAuthenticated, user, refreshUser } = useAuth();
+  const { isAuthenticated, isAnonymous, user, refreshUser } = useAuth();
 
   // 🔄 Bind User ID to User Store whenever Auth state changes
   useEffect(() => {
@@ -83,8 +83,26 @@ function RootLayout() {
 
   useEffect(() => {
     const checkAuth = async () => {
-      // If user is already authenticated (and state is updated), allow access
-      if (isAuthenticated) return;
+      // Username Check: If authenticated (non-anonymous) but no valid username, redirect to set-username
+      // Anonymous users have auto-generated "User-xxxxxxxx" usernames which is fine for them
+      // Only non-anonymous users (OAuth, email) need proper usernames
+      const hasInvalidUsername = user?.id && !isAnonymous && (
+        user.username === null ||
+        user.username === '' ||
+        user.username?.startsWith('User-')
+      );
+
+      if (isAuthenticated && hasInvalidUsername) {
+        const inSetUsername = segments[0] === '(auth)' && segments[1] === 'set-username';
+        if (!inSetUsername) {
+          console.log('🔒 Auth Guard: Non-anonymous user has no valid username, redirecting to set-username');
+          router.replace('/(auth)/set-username');
+          return;
+        }
+      }
+
+      // If user is already authenticated (and has username), allow access
+      if (isAuthenticated && user?.username) return;
 
       try {
         const AsyncStorage = require('@react-native-async-storage/async-storage').default;
@@ -108,7 +126,7 @@ function RootLayout() {
     };
 
     checkAuth();
-  }, [segments, isAuthenticated]);
+  }, [segments, isAuthenticated, user?.username]);
 
   if (!fontsLoaded) {
     return null;

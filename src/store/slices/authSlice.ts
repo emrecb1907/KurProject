@@ -139,6 +139,14 @@ export const createAuthSlice: StateCreator<AuthSlice> = (set) => ({
                 } as User,
                 isProfileReady: true, // NOW it's ready!
               }));
+
+              // 🌍 Set timezone immediately if not set (UTC or null)
+              if (!profile.timezone || profile.timezone === 'UTC') {
+                const deviceTz = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
+                console.log('🌍 Setting anonymous user timezone:', deviceTz);
+                await database.timezone.set(userId, deviceTz);
+              }
+
               return true;
             }
 

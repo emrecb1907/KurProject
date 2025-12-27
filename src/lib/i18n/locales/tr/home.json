@@ -50,6 +50,12 @@
                 "wrongPassword": "Mevcut şifreniz hatalı.",
                 "general": "Şifre güncellenirken bir hata oluştu."
             }
+        },
+        "setPassword": {
+            "title": "Şifre Belirle",
+            "info": "Şifre belirleyerek e-posta adresin ile de giriş yapabilirsin. Bu, Apple ile giriş seçeneğini kaldırmaz.",
+            "setButton": "Şifreyi Belirle",
+            "success": "Şifren başarıyla belirlendi! Artık e-posta ile de giriş yapabilirsin."
         }
     },
     "tabs": {

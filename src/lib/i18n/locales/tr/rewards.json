@@ -48,6 +48,13 @@
         "adWatched": "Reklam izlendi! +1 Enerji kazandın.",
         "cantWatch": "Şu an reklam izleyemezsin."
     },
+    "errors": {
+        "error": "Hata",
+        "claimPreviousFirst": "Önce önceki ödülü alın!",
+        "tooFast": "Çok hızlı! Birkaç saniye bekleyin.",
+        "sessionError": "Oturum hatası. Uygulamayı yeniden başlatın.",
+        "genericError": "Bir hata oluştu. Tekrar deneyin."
+    },
     "quests": {
         "test_quest_1": "İlk Adımlar",
         "test_quest_2": "Isınma Turu",
@@ -82,6 +89,6 @@
         "lesson_title_5": "Derinleşen Okur",
         "lesson_title_6": "Son Hazırlık",
         "lesson_title_7": "İçerik Tamamlayıcı",
-        "lesson_title_8": ""
+        "lesson_title_8": "Efsanevi Okur"
     }
 }

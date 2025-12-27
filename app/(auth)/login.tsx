@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 import { Button } from '@components/ui';
 import { SocialLoginButtons } from '@components/auth/SocialLoginButtons';
 import { useAuthHook } from '@hooks';
+import { useAuth } from '@/store';
 import { colors } from '@constants/colors';
 import { useTheme } from '@/contexts/ThemeContext';
 import { useTranslation } from 'react-i18next';
@@ -12,7 +13,8 @@ import { ArrowLeft, BookOpen, Eye, EyeSlash } from 'phosphor-react-native';
 export default function LoginScreen() {
   const { t } = useTranslation();
   const router = useRouter();
-  const { signInWithEmailOrUsername } = useAuthHook();
+  const { signInWithEmailOrUsername, signInWithApple } = useAuthHook();
+  const { isAnonymous } = useAuth();
   const { themeVersion, activeTheme } = useTheme();
 
   const [emailOrUsername, setEmailOrUsername] = useState('');
@@ -160,8 +162,42 @@ export default function LoginScreen() {
                 onGooglePress={() => {
                   Alert.alert(t('auth.login.comingSoon'), t('auth.login.googleComingSoon'));
                 }}
-                onApplePress={() => {
-                  Alert.alert(t('auth.login.comingSoon'), t('auth.login.appleComingSoon'));
+                onApplePress={async () => {
+                  // Show warning for anonymous users
+                  const proceedWithAppleSignIn = async () => {
+                    setLoading(true);
+                    setError('');
+                    try {
+                      const { error: appleError, isNew } = await signInWithApple();
+                      if (appleError) {
+                        setError(appleError.message || t('auth.errors.loginFailed'));
+                      } else if (isNew) {
+                        router.replace('/(auth)/set-username');
+                      } else {
+                        router.replace('/(tabs)');
+                      }
+                    } catch (err: any) {
+                      setError(err.message || t('auth.errors.loginFailed'));
+                    } finally {
+                      setLoading(false);
+                    }
+                  };
+
+                  if (isAnonymous) {
+                    Alert.alert(
+                      t('auth.login.anonymousWarning.title'),
+                      t('auth.login.anonymousWarning.message'),
+                      [
+                        { text: t('common.cancel'), style: 'cancel' },
+                        {
+                          text: t('common.continue'),
+                          onPress: proceedWithAppleSignIn
+                        }
+                      ]
+                    );
+                  } else {
+                    proceedWithAppleSignIn();
+                  }
                 }}
                 loading={loading}
                 variant="circular"

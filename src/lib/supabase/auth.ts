@@ -282,5 +282,89 @@ export const authService = {
       return { user: null, error: error as Error };
     }
   },
+
+  /**
+   * Link Apple identity to the current anonymous user
+   * This preserves the user_id and all associated data
+   * Returns error if Apple email already has an account (fallback to signIn)
+   */
+  async linkAppleToAnonymous(): Promise<AuthResponse & { appleEmail?: string; identityToken?: string }> {
+    try {
+      const AppleAuth = require('expo-apple-authentication');
+
+      // Get Apple credentials
+      const credential = await AppleAuth.signInAsync({
+        requestedScopes: [
+          AppleAuth.AppleAuthenticationScope.FULL_NAME,
+          AppleAuth.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+
+      if (!credential.identityToken) {
+        throw new Error('No identity token present!');
+      }
+
+      console.log('📱 Apple credentials received, email:', credential.email);
+
+      // Get Apple email from JWT token if not directly provided
+      let appleEmail = credential.email;
+      if (!appleEmail && credential.identityToken) {
+        // Decode JWT to get email
+        const tokenParts = credential.identityToken.split('.');
+        if (tokenParts.length === 3) {
+          const payload = JSON.parse(atob(tokenParts[1]));
+          appleEmail = payload.email;
+          console.log('📧 Email from token:', appleEmail);
+        }
+      }
+
+      if (!appleEmail) {
+        throw new Error('Could not get email from Apple');
+      }
+
+      // Check if this email already exists in users table
+      const { data: existingUser } = await supabase
+        .from('users')
+        .select('id')
+        .eq('email', appleEmail)
+        .single();
+
+      if (existingUser) {
+        console.log('📧 Email already registered, need to use signIn + migration');
+        // Return special error to trigger fallback to signInWithApple + migration
+        return {
+          user: null,
+          error: new Error('EMAIL_EXISTS'),
+          appleEmail,
+          identityToken: credential.identityToken
+        };
+      }
+
+      // Update the current anonymous user with Apple email
+      // This converts anonymous user to permanent without changing user_id
+      const { data, error } = await supabase.auth.updateUser({
+        email: appleEmail,
+        data: {
+          provider: 'apple',
+          apple_user_id: credential.user,
+          full_name: credential.fullName ?
+            `${credential.fullName.givenName || ''} ${credential.fullName.familyName || ''}`.trim() : null
+        }
+      });
+
+      if (error) throw error;
+
+      console.log('✅ Anonymous user linked to Apple:', data.user.id);
+
+      // IMPORTANT: Also sync email to public.users table
+      await database.users.updateProfile(data.user.id, { email: appleEmail });
+      console.log('📧 Email synced to public.users');
+
+      return { user: data.user as unknown as User, error: null };
+    } catch (error: any) {
+      console.error('❌ Link Apple Error:', error);
+      return { user: null, error: error as Error };
+    }
+  },
 };
 

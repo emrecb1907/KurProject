@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter, Image } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Pressable, DeviceEventEmitter, Image, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useMemo, useCallback, useState, useEffect, useRef } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
@@ -29,16 +29,33 @@ import { getAvatarSource } from '@/constants/avatars';
 import { useBadges } from '@/hooks/useBadges';
 import { BadgeItem } from '@/components/profile/BadgeItem';
 import { usePremium } from '@/contexts/AdaptyProvider';
+import { useUserTitles } from '@/hooks/queries';
 
 export default function ProfileScreen() {
   const { t } = useTranslation();
   const router = useRouter();
 
   // Get UI state from Zustand (only persisted UI preferences)
-  const { selectedAvatar } = useUser();
+  const { selectedAvatar, lastSeenTitleCount, setLastSeenTitleCount } = useUser();
   const { isAuthenticated, isAnonymous, user } = useAuth();
   const { themeVersion } = useTheme();
   const { isPremium } = usePremium();
+
+  // Get user's earned titles for new title notification
+  const { data: userTitles } = useUserTitles(user?.id);
+
+  // Initialize lastSeenTitleCount on first load (if it's 0 and user has titles)
+  useEffect(() => {
+    if (lastSeenTitleCount === 0 && userTitles && userTitles.length > 0) {
+      // First time user - don't show all as new, just future ones
+      setLastSeenTitleCount(userTitles.length);
+    }
+  }, [userTitles, lastSeenTitleCount, setLastSeenTitleCount]);
+
+  const hasNewTitle = useMemo(() => {
+    const earnedCount = userTitles?.length || 0;
+    return earnedCount > lastSeenTitleCount && lastSeenTitleCount > 0;
+  }, [userTitles, lastSeenTitleCount]);
 
   // 🚀 React Query: Fetch user data with auto-cache and retry
   const { data: userStats, userData, isLoading: isLoadingStats } = useUserStats(user?.id);
@@ -324,7 +341,12 @@ export default function ProfileScreen() {
       fontWeight: 'bold',
     },
     headerButton: {
-      padding: 4,
+      width: 46,
+      height: 46,
+      borderRadius: 23,
+      backgroundColor: colors.surface,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
     editBadge: {
       position: 'absolute',
@@ -385,7 +407,7 @@ export default function ProfileScreen() {
     premiumBadge: {
       flexDirection: 'row',
       alignItems: 'center',
-      backgroundColor: '#22C55E',
+      backgroundColor: colors.success,
       paddingHorizontal: 12,
       paddingVertical: 6,
       borderRadius: 20,
@@ -398,7 +420,80 @@ export default function ProfileScreen() {
       fontSize: 13,
       fontWeight: '600',
     },
+    editMenuItemWithBadge: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      flex: 1,
+    },
+    pulseDotContainer: {
+      width: 12,
+      height: 12,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    pulseDot: {
+      position: 'absolute',
+      width: 8,
+      height: 8,
+      borderRadius: 4,
+      backgroundColor: '#FF9600',
+    },
+    pulseRing: {
+      position: 'absolute',
+      width: 12,
+      height: 12,
+      borderRadius: 6,
+      backgroundColor: '#FF9600',
+    },
+    headerDotContainer: {
+      position: 'absolute',
+      top: -7,
+      right: -7,
+    },
   }), [themeVersion]); // Re-create styles when theme changes
+
+  // Pulsing Dot Component for new title notification
+  const PulsingDot = useCallback(() => {
+    const pulseAnim = useRef(new Animated.Value(1)).current;
+
+    useEffect(() => {
+      const pulse = Animated.loop(
+        Animated.sequence([
+          Animated.timing(pulseAnim, {
+            toValue: 1.8,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(pulseAnim, {
+            toValue: 1,
+            duration: 1000,
+            useNativeDriver: true,
+          }),
+        ])
+      );
+      pulse.start();
+      return () => pulse.stop();
+    }, []);
+
+    return (
+      <View style={styles.pulseDotContainer}>
+        <Animated.View
+          style={[
+            styles.pulseRing,
+            {
+              transform: [{ scale: pulseAnim }],
+              opacity: pulseAnim.interpolate({
+                inputRange: [1, 1.8],
+                outputRange: [0.6, 0],
+              }),
+            },
+          ]}
+        />
+        <View style={styles.pulseDot} />
+      </View>
+    );
+  }, [styles]);
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
@@ -426,7 +521,14 @@ export default function ProfileScreen() {
                   setShowEditMenu(!showEditMenu);
                 }}
               >
-                <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
+                <View style={{ position: 'relative' }}>
+                  <PencilSimple size={24} color={colors.textPrimary} weight="fill" />
+                  {hasNewTitle && (
+                    <View style={styles.headerDotContainer}>
+                      <PulsingDot />
+                    </View>
+                  )}
+                </View>
               </Pressable>
 
               <Text style={styles.headerTitle}>{t('profile.screenTitle')}</Text>
@@ -469,20 +571,25 @@ export default function ProfileScreen() {
                       <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeUsername', 'Kullanıcı Adı Değiştir')}</Text>
                     </Pressable>
                     <View style={styles.menuDivider} />
-                    <Pressable
-                      style={styles.editMenuItem}
-                      onPress={() => {
-                        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-                        setShowEditMenu(false);
-                        router.push('/title-select');
-                      }}
-                    >
-                      <Crown size={22} color={colors.textPrimary} weight="fill" />
-                      <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeTitle')}</Text>
-                    </Pressable>
-                    <View style={styles.menuDivider} />
                   </>
                 )}
+                {/* Change Title - Available for all users */}
+                <Pressable
+                  style={styles.editMenuItem}
+                  onPress={() => {
+                    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+                    setShowEditMenu(false);
+                    router.push('/title-select');
+                  }}
+                >
+                  <Crown size={22} color={colors.textPrimary} weight="fill" />
+                  <View style={styles.editMenuItemWithBadge}>
+                    <Text style={styles.editMenuItemText}>{t('profile.editProfile.changeTitle')}</Text>
+                    {hasNewTitle && <PulsingDot />}
+                  </View>
+                </Pressable>
+                <View style={styles.menuDivider} />
+                {/* Change Avatar */}
                 <Pressable
                   style={styles.editMenuItem}
                   onPress={() => {
